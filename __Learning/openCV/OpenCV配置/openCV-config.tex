@@ -1,0 +1,62 @@
+
+\documentclass[UTF8,a4paper,8pt]{ctexart} 
+
+\usepackage{graphicx}%学习插入图
+\usepackage{verbatim}%学习注释多行
+\usepackage{booktabs}%表格
+\usepackage{geometry}%图片
+ \usepackage{amsmath} 
+ \usepackage{amssymb}
+
+%设置文章宽度
+\geometry{textwidth=18cm}
+%设置页面布局
+\pagestyle{plain}
+\author{郑华
+	\small	(西北农林科技大学信息工程学院，杨凌 712100)}
+\title{OpenCV2.4.8 + VisualStudio2010 配置心得}
+
+ %正文排版开始
+ \begin{document} 
+ 	\maketitle
+ 	
+ 	\begin{abstract}
+ 		参考文献：
+ 	http://blog.csdn.net/poem\_qianmo/article/details/19809337
+ 		
+    本文介绍 本人配置OpenCV的过程
+	\end{abstract}
+	
+	
+\section{下载配置所需}
+	\paragraph{1.VisualStudio2010}
+	\paragraph{2.OpenCV2.4.8}
+	
+\section{安装}
+    \paragraph{1.安装位置不影响}
+    \paragraph{2.配置Path系统环境}	
+    
+\section{配置}
+    \paragraph{1.Create Project}建立一个VisualStudio  ConsoleApplication Empty Project
+    \paragraph{2.配置}
+     	\begin{itemize}
+     		\item -右键项目
+     		\item -Properties
+     		\item -VC++ Directories
+     		\item -配置include Directories += 安装目录$ \verb|\|$opencv$ \verb|\|$build$ \verb|\|$include; += 安装目录$ \verb|\|$ opencv$ \verb|\|$build$ \verb|\|$include$ \verb|\|$opencv; +=安装目录$ \verb|\|$opencv$ \verb|\|$build$ \verb|\|$include$ \verb|\|$opencv2;
+     		\item -配置Liberary Directories += 安装目录$ \verb|\|$opencv$ \verb|\|$build$ \verb|\|$x86$ \verb|\|$vc10$ \verb|\|$lib;
+     		\item -Linker选项 -input
+     		\item Additional Dependecies 添加如下库：见参考文献
+     	\end{itemize}
+    
+\section{编程测试}注意：路径中的单杠要换成双杠\verb|\\|
+
+\section{配置全局VC++目录}
+	
+	1. 随便打开一个项目，然后点击菜单中的 视图->其他窗口->属性管理器
+	
+	2. 打开属性管理器，点击项目前的箭头，展开项目，找到debug或者release下面的Microsoft.Cpp.Win32.user这个属性，
+	
+	3. 双击会出现一个跟在项目上右键属性一样的窗口，修改里面的“VC++目录”就是修改了全局的，
+\end{document} 
+		

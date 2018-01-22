@@ -1,0 +1,252 @@
+\documentclass[UTF8,a4paper,8pt]{ctexart} 
+
+\usepackage{graphicx}%学习插入图
+\usepackage{verbatim}%学习注释多行
+\usepackage{booktabs}%表格
+\usepackage{geometry}%图片
+\usepackage{amsmath} 
+\usepackage{amssymb}
+\usepackage{listings}%代码
+\usepackage{xcolor}  %颜色
+\usepackage{enumitem}%列表格式
+\CTEXsetup[format+={\flushleft}]{section}
+
+
+\geometry{left=1.6cm,right=1.8cm,top=2cm,bottom=1.7cm} %设置文章宽度
+  
+%设置页面布局
+\pagestyle{plain}
+\author{郑华}
+\title{Lua 脚本学习}
+ %代码效果定义
+ \definecolor{codegreen}{rgb}{0,0.6,0}
+ \definecolor{codegray}{rgb}{0.5,0.5,0.5}
+ \definecolor{codepurple}{rgb}{0.58,0,0.82}
+ \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+ 
+ \lstdefinestyle{mystyle}{
+ 	language = {[5.1]Lua},%lua 语言指定方法
+ 	backgroundcolor=\color{backcolour},   
+ 	commentstyle=\color{codegreen},
+ 	keywordstyle=\color{magenta},
+ 	numberstyle=\tiny\color{codegray},
+ 	stringstyle=\color{codepurple},
+ 	basicstyle=\footnotesize,
+ 	breakatwhitespace=false,         
+ 	breaklines=true,                 
+ 	captionpos=b,                    
+ 	keepspaces=true,                 
+ 	%numbers=left,                    
+ 	%numbersep=5pt,                  
+ 	showspaces=false,                
+ 	showstringspaces=false,
+ 	showtabs=false,                  
+ 	tabsize=2
+ }
+ \lstset{style=mystyle, escapeinside=``}
+ 
+ %正文排版开始
+\begin{document} 
+ 	\maketitle
+
+\newpage
+\section{变量}
+	\paragraph{赋值与定义}
+		不需要指明类型，系统会根据给出的值进行确定
+		
+		除此之外可以 如下赋值
+		 \begin{lstlisting}
+			  a, b, c = 0, 1, 2    -->a=0, b=1, c=2
+		 \end{lstlisting}
+		 
+	\paragraph{局部变量}
+		局部变量加个 local 关键字，不是则不加
+\newpage  
+
+\section{控制结构}
+	\paragraph{for}
+		 \begin{lstlisting}
+			 for i = 1, 10, 1 do      --初始值   结束值   步长（+x）
+				 print(i)
+			  end
+			  
+			  
+		--范型 for 循环	  
+			 -- print all values of array 'a'
+			 for i,v in ipairs(a) do print(v) end       --i为当前的下标   v为当前下标的临时局部值
+			 
+			 -- print all keys of table 't
+			 for k in pairs(t) do print(k) end
+			 
+			 --[[
+			 1. 控制变量是局部变量
+			 2. 不要修改控制变量的值
+			 --]]
+		 \end{lstlisting}
+
+	\paragraph{while}
+		 \begin{lstlisting}
+			while i<x do
+				print(i)
+			 end
+		 \end{lstlisting}
+	 
+	 \paragraph{if}
+		  \begin{lstlisting}
+			  if i<x then
+				  print(i)
+			   else
+				   print(i+1)
+				end
+		  \end{lstlisting}
+	\paragraph{return}
+		可以返回多个变量
+		 \begin{lstlisting}
+			 function func(valueUsed)  
+			    return  returbValueOne,returnValueTwo... -->有几个返回值写几个
+		 \end{lstlisting}
+		 
+	\paragraph{可变参数}Lua 函数可以接受可变数目的参数，和 C 语言类似在函数参数列表中使用三点（...）
+	表示函数有可变的参数。Lua 将函数的参数放在一个叫 arg 的表中，除了参数以外，arg表中还有一个域 n 表示参数的个数。
+		 \begin{lstlisting}
+			 --有时候我们可能需要几个固定参数加上可变参数
+			 function g (a, b, ...) end
+			 
+			--[[ 
+			 CALL PARAMETERS
+			 g(3) a=3, b=nil, arg={n=0}
+			 g(3, 4) a=3, b=4, arg={n=0}
+			 g(3, 4, 5, 8) a=3, b=4, arg={5, 8; n=2}
+			--]]
+			
+			--重写 print 函数：
+			printResult = ""
+			function print(...)
+				for i,v in ipairs(arg) do
+					printResult = printResult .. tostring(v) .. "\t"
+				end
+				printResult = printResult .. "\n"
+			end
+		 \end{lstlisting}
+\newpage
+\section{字符串}
+ 	 \paragraph{连接 用符号- ..   }
+	 		 \begin{lstlisting}
+	 		 	print("Hello" .. 'HH')    --> HelloHH
+	 		 \end{lstlisting}
+ 		 
+ 	 \paragraph{字符到数字的智能转换}
+	 		  \begin{lstlisting}
+	 		  print("10"+11)    --> HelloHH
+	 		  \end{lstlisting}
+	 		  
+	 \paragraph{字符串查找替换}会全部替换
+			  \begin{lstlisting}
+				a = "one string one"
+				b = string.gsub(a,"one","other")
+				
+				print(a)       -->one string one
+				print(b)	   -->other string other
+		  	  \end{lstlisting}
+	 		  
+	 \paragraph{注释}
+		 单行注释 是“--”
+		 
+		 多行注释 是“--[[      --]]”
+		 
+	 \paragraph{类型函数type}
+		   \begin{lstlisting}
+			   print(type("Hello World"))    --> string
+			   print(type(10.4*3))           --> number
+			   print(type(print))            --> function
+			   print(type(true))             --> boolean
+			   print(type(nil))              --> nil
+		   \end{lstlisting}
+	\paragraph{查找函数 find}
+		 \begin{lstlisting}
+			 s,e = string.find("Hello Lua World!","World")  -->Lua可以返回多个变量
+			 			 
+			 print(s,e)  --->s为目标字符串在给定字符串的起始位置，e则为终止位置   11  15
+		 \end{lstlisting}
+\newpage
+\section{数组或表}
+	\paragraph{下标从1开始不是0}
+			\begin{lstlisting}
+		      days={"Sunday", "Monday", "Tuesday", "Wednesday",
+		      "Thursday", "Friday", "Saturday"}
+		      
+		      print(days[4]) --> Wednesday
+		      
+		      
+		      tab = {sin(1), sin(2), sin(3), sin(4),
+		      sin(5),sin(6), sin(7), sin(8)}
+		      
+		      a = {x=0, y=0} <--> a = {}; a.x=0; a.y=0
+		      
+		      w = {x=0, y=0, label="console"}
+		      x = {sin(0), sin(1), sin(2)}
+		      w[1] = "another field"
+		      
+		      --不管用何种方式创建 table，我们都可以向表中添加或者删除任何类型的域，构造函数仅仅影响表的初始化。
+		      x.f = w							--原来没有的东西如果写出来，则自动会加进到X
+		      
+		      print(w["x"]) 				    --> 0  即访问的是 表中的X项，如果是w[x] -->nil
+		      print(w[1]) --> another field
+		      print(x.f[1]) --> another field
+		      w.x = nil -- remove field "x"X
+			\end{lstlisting}
+	\paragraph{为什么有的东西可以用下标访问，有些不能}
+			原来，只有在表不提供任何关键字时，才会按照下标进行寻找，否则，必须按照提供的关键字访问
+			 \begin{lstlisting}
+				 local a = {x = 12, mutou = 99, [3] = "hello"}
+				 print(a["x"]);
+				 
+				 local a = {x = 12, mutou = 99, [3] = "hello"}
+				 print(a.x);
+				 
+				 
+				 local a = {[1] = 12, [2] = 43, [3] = 45, [4] = 90}
+				 
+				 --如果说，大家习惯了数组，用数字下标，又不想自己一个个数字地定义，比如：
+				 local a = {12, 43, 45, 90}
+				 print(a[1]);
+			  \end{lstlisting}
+\newpage
+\section{Function}
+	\paragraph{定义与使用函数}
+		 \begin{lstlisting}
+	 	 function fact(n)
+				 if n == 0 then
+					 return 1
+				 else
+					 return n*fact(n-1)
+				 end
+			end
+			
+			print("enter a number")
+			
+			a = io.read("*number")
+			print(fact(a))
+		 \end{lstlisting}
+\newpage
+\section{Lua 调用其他文件}
+	\paragraph{调用Lua}
+	 \begin{lstlisting}
+	 --lib.lua file
+	   function norm(x,y)
+		    local n2 = x^2 + y^2
+		    return math.sqrt(n2)
+		 end
+		 
+		 function twice(x)
+			 return 2*x
+		 end
+	    
+	 --lua 调用file
+		 dofile("lib.lua")
+		 n = norm(3.4,1.0)
+		 print(twice(n))
+		 
+	 \end{lstlisting}
+\end{document} 
+ 		    

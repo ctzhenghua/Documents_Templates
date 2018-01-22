@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<!-- saved from url=(0066)http://www.cnblogs.com/biyeymyhjob/archive/2012/07/22/2603525.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C++ STL 一般总结 - as_ - 博客园</title>
+<link type="text/css" rel="stylesheet" href="./C++ STL 一般总结 - as_ - 博客园_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./C++ STL 一般总结 - as_ - 博客园_files/bundle-AnotherEon001.css">
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="./C++ STL 一般总结 - as_ - 博客园_files/bundle-AnotherEon001-mobile.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/biyeymyhjob/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/biyeymyhjob/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/biyeymyhjob/wlwmanifest.xml">
+<script type="text/javascript" src="./C++ STL 一般总结 - as_ - 博客园_files/encoder.js.下载"></script><script src="./C++ STL 一般总结 - as_ - 博客园_files/jquery.js.下载" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'biyeymyhjob', cb_enable_mathjax=false;var isLogined=true;</script>
+<script src="./C++ STL 一般总结 - as_ - 博客园_files/blog-common.js.下载" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<div id="wrapper">
+<div id="header">
+
+<div id="top">
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/biyeymyhjob/">华山大师兄</a></h1>
+<div id="subtitle"></div>
+</div>
+<div id="sub"><div id="blog_stats">
+<div class="BlogStats">随笔 - 150, 文章 - 0, 评论 - 131, 引用 - 0</div>
+</div></div>
+
+
+
+</div>
+<div id="main_container">
+<div id="main_content">
+<div id="content">
+	
+<div id="post_detail">
+	<div class="post">
+		<h2>
+			<a id="cb_post_title_url" href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/22/2603525.html">C++ STL 一般总结</a>
+		</h2>
+		<div class="postbody">
+		<div id="cnblogs_post_body"><p><strong>以下内容来源网上 经过整合而成</strong></p>
+<p><strong>一、一般介绍</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; STL（Standard Template Library），即标准模板库，是一个具有工业强度的，高效的C++程序库。它被容纳于C++标准程序库（C++ Standard Library）中，是ANSI/ISO C++标准中最新的也是极具革命性的一部分。该库包含了诸多在计算机科学领域里所常用的基本数据结构和基本算法。为广大C++程序员们提供了一个可扩展的应用框架，高度体现了软件的可复用性。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 从逻辑层次来看，在STL中体现了泛型化程序设计的思想（generic programming），引入了诸多新的名词，比如像需求（requirements），概念（concept），模型（model），容器（container），算法（algorithmn），迭代子（iterator）等。与OOP（object-oriented programming）中的多态（polymorphism）一样，泛型也是一种软件的复用技术；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 从实现层次看，整个STL是以一种类型参数化（type parameterized）的方式实现的，这种方式基于一个在早先C++标准中没有出现的语言特性--模板（template）。如果查阅任何一个版本的STL源代码，你就会发现，模板作为构成整个STL的基石是一件千真万确的事情。除此之外，还有许多C++的新特性为STL的实现提供了方便；</p>
+<p>&nbsp;</p>
+<p><strong>二、STL的六大组件</strong></p>
+<ul>
+<li><strong>容器（Container），是一种数据结构，如list，vector，和deques ，以模板类的方法提供。为了访问容器中的数据，可以使用由容器类输出的迭代器；</strong></li>
+<li><strong>迭代器（Iterator），提供了访问容器中对象的方法。例如，可以使用一对迭代器指定list或vector中的一定范围的对象。迭代器就如同一个指针。事实上，C++的指针也是一种迭代器。但是，迭代器也可以是那些定义了operator*()以及其他类似于指针的操作符地方法的类对象；</strong></li>
+<li><strong>算法（Algorithm），是用来操作容器中的数据的模板函数。例如，STL用sort()来对一个vector中的数据进行排序，用find()来搜索一个list中的对象，函数本身与他们操作的数据的结构和类型无关，因此他们可以在从简单数组到高度复杂容器的任何数据结构上使用；</strong></li>
+<li><strong>仿函数（Function object，仿函数(functor)又称之为函数对象（function object），其实就是重载了()操作符的struct，没有什么特别的地方</strong></li>
+<li><strong>迭代适配器（Adaptor）</strong></li>
+<li><strong>空间配制器（allocator）其中主要工作包括两部分1.对象的创建与销毁&nbsp;&nbsp;&nbsp; 2.内存的获取与释放</strong></li>
+</ul>
+<p>以下主要讨论：容器，迭代器，算法，适配器。如欲详加了解 参见C++ Primer&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>1.STL容器</strong></p>
+<p><strong>1）序列式容器（Sequence containers</strong>），每个元素都有固定位置－－取决于插入时机和地点，和元素值无关，vector、deque、list；</p>
+<p>&nbsp;&nbsp; <strong>Vectors：</strong>将元素置于一个动态数组中加以管理，可以随机存取元素（用索引直接存取），数组尾部添加或移除元素非常快速。但是在中部或头部安插元素比较费时；</p>
+<p>&nbsp;&nbsp; <strong>Deques</strong>：是“double-ended queue”的缩写，可以随机存取元素（用索引直接存取），数组头部和尾部添加或移除元素都非常快速。但是在中部或头部安插元素比较费时；</p>
+<p>&nbsp;&nbsp;<strong> Lists：</strong>双向链表，不提供随机存取（按顺序走到需存取的元素，O(n)），在任何位置上执行插入或删除动作都非常迅速，内部只需调整一下指针；</p>
+<p><strong>2）关联式容器（Associated containers</strong>），元素位置取决于特定的排序准则，和插入顺序无关，set、multiset、map、multimap；</p>
+<p>&nbsp;&nbsp; <strong>Sets/Multisets</strong>：内部的元素依据其值自动排序，Set内的相同数值的元素只能出现一次，Multisets内可包含多个数值相同的元素，内部由二叉树实现（实际上基于红黑树(RB-tree）实现），便于查找；</p>
+<p>&nbsp;&nbsp; <strong>Maps/Multimaps</strong>：Map的元素是成对的键值/实值，内部的元素依据其值自动排序，Map内的相同数值的元素只能出现一次，Multimaps内可包含多个数值相同的元素，内部由二叉树实现（实际上基于红黑树(RB-tree）实现），便于查找；</p>
+<p>另外有其他容器hash_map,hash_set,hash_multiset,hash_multimap。</p>
+<p>&nbsp; 容器的比较：</p>
+<div align="center">
+<table style="width: 524px;" border="1" cellspacing="0" cellpadding="2" align="center">
+<tbody>
+<tr>
+<td valign="top" width="91"><span style="font-size: 15px;">&nbsp;</span></td>
+<td valign="top" width="60"><span style="font-size: 15px;">Vector</span></td>
+<td valign="top" width="97"><span style="font-size: 15px;">Deque</span></td>
+<td valign="top" width="39"><span style="font-size: 15px;">List</span></td>
+<td valign="top" width="44"><span style="font-size: 15px;">Set</span></td>
+<td valign="top" width="63"><span style="font-size: 15px;">MultiSet</span></td>
+<td valign="top" width="71"><span style="font-size: 15px;">Map</span></td>
+<td valign="top" width="57"><span style="font-size: 15px;">MultiMap</span></td>
+</tr>
+<tr>
+<td valign="top" width="91"><span style="font-size: 15px;">内部结构</span></td>
+<td valign="top" width="60"><span style="font-size: 15px;">dynamic array</span></td>
+<td valign="top" width="97"><span style="font-size: 15px;">array of arrays</span></td>
+<td valign="top" width="39"><span style="font-size: 15px;">double linked list</span></td>
+<td valign="top" width="44"><span style="font-size: 15px;">binary tree</span></td>
+<td valign="top" width="63"><span style="font-size: 15px;">binary tree</span></td>
+<td valign="top" width="71"><span style="font-size: 15px;">binary tree</span></td>
+<td valign="top" width="57"><span style="font-size: 15px;">binary tree</span></td>
+</tr>
+<tr>
+<td valign="top" width="91"><span style="font-size: 15px;">随机存取</span></td>
+<td valign="top" width="60"><span style="font-size: 15px;">Yes</span></td>
+<td valign="top" width="97"><span style="font-size: 15px;">Yes</span></td>
+<td valign="top" width="39"><span style="font-size: 15px;">No</span></td>
+<td valign="top" width="44"><span style="font-size: 15px;">No</span></td>
+<td valign="top" width="63"><span style="font-size: 15px;">No</span></td>
+<td valign="top" width="71"><span style="font-size: 15px;">Yes(key)</span></td>
+<td valign="top" width="57"><span style="font-size: 15px;">No</span></td>
+</tr>
+<tr>
+<td valign="top" width="91"><span style="font-size: 15px;">搜索速度</span></td>
+<td valign="top" width="60"><span style="font-size: 15px;">慢</span></td>
+<td valign="top" width="97"><span style="font-size: 15px;">慢</span></td>
+<td valign="top" width="39"><span style="font-size: 15px;">很慢</span></td>
+<td valign="top" width="44"><span style="font-size: 15px;">快</span></td>
+<td valign="top" width="63"><span style="font-size: 15px;">快</span></td>
+<td valign="top" width="71"><span style="font-size: 15px;">快</span></td>
+<td valign="top" width="57"><span style="font-size: 15px;">快</span></td>
+</tr>
+<tr>
+<td valign="top" width="91"><span style="font-size: 15px;">快速插入移除</span></td>
+<td valign="top" width="60"><span style="font-size: 15px;">尾部</span></td>
+<td valign="top" width="97"><span style="font-size: 15px;">首尾</span></td>
+<td valign="top" width="39"><span style="font-size: 15px;">任何位置</span></td>
+<td valign="top" width="44"><span style="font-size: 15px;">--</span></td>
+<td valign="top" width="63"><span style="font-size: 15px;">--</span></td>
+<td valign="top" width="71"><span style="font-size: 15px;">--</span></td>
+<td valign="top" width="57"><span style="font-size: 15px;">--</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>&nbsp;</p>
+<p><strong>2.STL迭代器&nbsp;</strong></p>
+<p>Iterator（迭代器）模式又称Cursor（游标）模式，用于提供一种方法顺序访问一个聚合对象中各个元素, <br>而又不需暴露该对象的内部表示。或者这样说可能更容易理解：Iterator模式是运用于聚合对象的一种模式，通过运用该模式，使得我们可以在不知道对象内部表示的情况下，按照一定顺序（由iterator提供的方法）访问聚合对象中的各个元素。 </p>
+<p>迭代器的作用：能够让迭代器与算法不干扰的相互发展，最后又能无间隙的粘合起来，重载了*，＋＋，＝＝，！＝，＝运算符。用以操作复杂的数据结构，容器提供迭代器，算法使用迭代器；</p>
+<p>常见的一些迭代器类型：iterator、const_iterator、reverse_iterator和const_reverse_iterator</p>
+<p>迭代器一般声明使用示例</p>
+<div class="cnblogs_code">
+<pre>vector&lt;T&gt;<span style="color: #000000;">::iterator it;
+list</span>&lt;T&gt;<span style="color: #000000;">::iterator it;
+deque</span>&lt;T&gt;::iterator it；</pre>
+</div>
+<p><span><img src="./C++ STL 一般总结 - as_ - 博客园_files/2012072210005964.jpg" alt=""></span></p>
+<p align="left">&nbsp;</p>
+<p align="left"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; input&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; output </span></p>
+<p align="left"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; / &nbsp;</span></p>
+<p align="left"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; forward </span></p>
+<p align="left"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | </span></p>
+<p align="left"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bidirectional </span></p>
+<p align="left"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | </span></p>
+<p align="left"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; random access&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+<p>&nbsp;</p>
+<table border="0" cellspacing="0" cellpadding="0" align="right">
+<tbody>
+<tr>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p align="left"><span style="font-size: 15px;">要注意，上面这图表并不是表明它们之间的继承关系：而只是描述了迭代器的种类和接口。处于图表下层的迭代器都是相对于处于图表上层迭代器的扩张集。例如：forward迭代器不但拥有input和output迭代器的所有功能，还拥有更多的功能。</span></p>
+<p align="left"><span style="font-size: 15px;">各个迭代器的功能如下：</span></p>
+<table style="width: 100%;" border="1" cellpadding="0">
+<tbody>
+<tr>
+<td width="8%">
+<p align="left"><span style="font-size: 15px;">迭代器类别</span></p>
+</td>
+<td width="90%">
+<p align="left"><span style="font-size: 15px;">说明</span></p>
+</td>
+</tr>
+<tr>
+<td width="8%">
+<p align="left"><span style="font-size: 15px;">输入</span></p>
+</td>
+<td width="90%">
+<p align="left"><span style="font-size: 15px;">从容器中读取元素。输入迭代器只能一次读入一个元素向前移动，输入迭代器只支持一遍算法，同一个输入迭代器不能两遍遍历一个序列</span></p>
+</td>
+</tr>
+<tr>
+<td width="8%">
+<p align="left"><span style="font-size: 15px;">输出</span></p>
+</td>
+<td width="90%">
+<p align="left"><span style="font-size: 15px;">向容器中写入元素。输出迭代器只能一次一个元素向前移动。输出迭代器只支持一遍算法，统一输出迭代器不能两次遍历一个序列</span></p>
+</td>
+</tr>
+<tr>
+<td width="8%">
+<p align="left"><span style="font-size: 15px;">正向</span></p>
+</td>
+<td width="90%">
+<p align="left"><span style="font-size: 15px;">组合输入迭代器和输出迭代器的功能，并保留在容器中的位置</span></p>
+</td>
+</tr>
+<tr>
+<td width="8%">
+<p align="left"><span style="font-size: 15px;">双向</span></p>
+</td>
+<td width="90%">
+<p align="left"><span style="font-size: 15px;">组合正向迭代器和逆向迭代器的功能，支持多遍算法</span></p>
+</td>
+</tr>
+<tr>
+<td width="8%">
+<p align="left"><span style="font-size: 15px;">随机访问</span></p>
+</td>
+<td width="90%">
+<p align="left"><span style="font-size: 15px;">组合双向迭代器的功能与直接访问容器中任何元素的功能，即可向前向后跳过任意个元素</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p align="left"><span style="font-size: 15px;">迭代器的操作：</span></p>
+<p align="left"><span style="font-size: 15px;">每种迭代器均可进行包括表中前一种迭代器可进行的操作。</span></p>
+<table style="width: 100%;" border="1" cellpadding="0">
+<tbody>
+<tr>
+<td>
+<p align="left"><span style="font-size: 15px;">迭代器操作</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 15px;">说明</span></p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<p align="left"><span style="font-size: 15px;">所有迭代器</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 15px;">p++</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 15px;">后置自增迭代器</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 15px;">++p</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 15px;">前置自增迭代器</span></p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<p align="left"><span style="font-size: 15px;">输入迭代器</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 15px;">*p</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 15px;">复引用迭代器，作为右值</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 15px;">p=p1</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 15px;">将一个迭代器赋给另一个迭代器</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 15px;">p==p1</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 15px;">比较迭代器的相等性</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 15px;">p!=p1</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 15px;">比较迭代器的不等性</span></p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<p align="left"><span style="font-size: 15px;">输出迭代器</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 15px;">*p</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 15px;">复引用迭代器，作为左值</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 15px;">p=p1</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 15px;">将一个迭代器赋给另一个迭代器</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 15px;">正向迭代器</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 15px;">提供输入输出迭代器的所有功能</span></p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<p align="left"><span style="font-size: 15px;">双向迭代器</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 15px;">--p</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 15px;">前置自减迭代器</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 15px;">p--</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 15px;">后置自减迭代器</span></p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<p align="left"><span style="font-size: 15px;">随机迭代器</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 15px;">p+=i</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 15px;">将迭代器递增i位</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 15px;">p-=i</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 15px;">将迭代器递减i位</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 15px;">p+i</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 15px;">在p位加i位后的迭代器</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 15px;">p-i</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 15px;">在p位减i位后的迭代器</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 15px;">p[i]</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 15px;">返回p位元素偏离i位的元素引用</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 15px;">p&lt;p1</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 15px;">如果迭代器p的位置在p1前，返回true，否则返回false</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 15px;">p&lt;=p1</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 15px;">p的位置在p1的前面或同一位置时返回true，否则返回false</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 15px;">p&gt;p1</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 15px;">如果迭代器p的位置在p1后，返回true，否则返回false</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 15px;">p&gt;=p1</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 15px;">p的位置在p1的后面或同一位置时返回true，否则返回false</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p align="left"><span style="font-size: 15px;">只有顺序容器和关联容器支持迭代器遍历，各容器支持的迭代器的类别如下：</span></p>
+<table style="width: 100%;" border="1" cellpadding="0">
+<tbody>
+<tr>
+<td width="21%">
+<p align="left"><span style="font-size: 15px;">容器</span></p>
+</td>
+<td width="12%">
+<p align="left"><span style="font-size: 15px;">支持的迭代器类别</span></p>
+</td>
+<td valign="top" width="64%">
+<p align="left"><span style="font-size: 15px;">说明</span></p>
+</td>
+</tr>
+<tr>
+<td width="21%">
+<p align="left"><span style="font-size: 15px;">vector</span></p>
+</td>
+<td width="12%">
+<p align="left"><span style="font-size: 15px;">随机访问</span></p>
+</td>
+<td valign="top" width="64%">
+<p align="left"><span style="font-size: 15px;">一种随机访问的数组类型，提供了对数组元素进行快速随机访问以及在序列尾部进行快速的插入和删除操作的功能。可以再需要的时候修改其自身的大小</span></p>
+</td>
+</tr>
+<tr>
+<td width="21%">
+<p align="left"><span style="font-size: 15px;">deque</span></p>
+</td>
+<td width="12%">
+<p align="left"><span style="font-size: 15px;">随机访问</span></p>
+</td>
+<td valign="top" width="64%">
+<p align="left"><span style="font-size: 15px;">一种随机访问的数组类型，提供了序列两端快速进行插入和删除操作的功能。可以再需要的时候修改其自身的大小</span></p>
+</td>
+</tr>
+<tr>
+<td width="21%">
+<p align="left"><span style="font-size: 15px;">list</span></p>
+</td>
+<td width="12%">
+<p align="left"><span style="font-size: 15px;">双向</span></p>
+</td>
+<td valign="top" width="64%">
+<p align="left"><span style="font-size: 15px;">一种不支持随机访问的数组类型，插入和删除所花费的时间是固定的，与位置无关。</span></p>
+</td>
+</tr>
+<tr>
+<td width="21%">
+<p align="left"><span style="font-size: 15px;">set</span></p>
+</td>
+<td width="12%">
+<p align="left"><span style="font-size: 15px;">双向</span></p>
+</td>
+<td valign="top" width="64%">
+<p align="left"><span style="font-size: 15px;">一种随机存取的容器，其关键字和数据元素是同一个值。所有元素都必须具有惟一值。</span></p>
+</td>
+</tr>
+<tr>
+<td width="21%">
+<p align="left"><span style="font-size: 15px;">multiset</span></p>
+</td>
+<td width="12%">
+<p align="left"><span style="font-size: 15px;">双向</span></p>
+</td>
+<td valign="top" width="64%">
+<p align="left"><span style="font-size: 15px;">一种随机存取的容器，其关键字和数据元素是同一个值。可以包含重复的元素。</span></p>
+</td>
+</tr>
+<tr>
+<td width="21%">
+<p align="left"><span style="font-size: 15px;">map</span></p>
+</td>
+<td width="12%">
+<p align="left"><span style="font-size: 15px;">双向</span></p>
+</td>
+<td valign="top" width="64%">
+<p align="left"><span style="font-size: 15px;">一种包含成对数值的容器，一个值是实际数据值，另一个是用来寻找数据的关键字。一个特定的关键字只能与一个元素关联。</span></p>
+</td>
+</tr>
+<tr>
+<td width="21%">
+<p align="left"><span style="font-size: 15px;">multimap</span></p>
+</td>
+<td width="12%">
+<p align="left"><span style="font-size: 15px;">双向</span></p>
+</td>
+<td valign="top" width="64%">
+<p align="left"><span style="font-size: 15px;">一种包含成对数值的容器，一个值是实际数据值，另一个是用来寻找数据的关键字。一个关键字可以与多个数据元素关联。</span></p>
+</td>
+</tr>
+<tr>
+<td width="21%">
+<p align="left"><span style="font-size: 15px;">stack</span></p>
+</td>
+<td width="12%">
+<p align="left"><span style="font-size: 15px;">不支持</span></p>
+</td>
+<td valign="top" width="64%">
+<p align="left"><span style="font-size: 15px;">适配器容器类型，用vector，deque或list对象创建了一个先进后出容器</span></p>
+</td>
+</tr>
+<tr>
+<td width="21%">
+<p align="left"><span style="font-size: 15px;">queue</span></p>
+</td>
+<td width="12%">
+<p align="left"><span style="font-size: 15px;">不支持</span></p>
+</td>
+<td valign="top" width="64%">
+<p align="left"><span style="font-size: 15px;">适配器容器类型，用deque或list对象创建了一个先进先出容器</span></p>
+</td>
+</tr>
+<tr>
+<td width="21%">
+<p align="left"><span style="font-size: 15px;">priority_queue</span></p>
+</td>
+<td width="12%">
+<p align="left"><span style="font-size: 15px;">不支持</span></p>
+</td>
+<td valign="top" width="64%">
+<p align="left"><span style="font-size: 15px;">适配器容器类型，用vector或deque对象创建了一个排序队列</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p><strong>&nbsp;3.STL算法</strong></p>
+<p>STL算法部分主要由头文件&lt;algorithm&gt;,&lt;numeric&gt;,&lt;functional&gt;组成。要使用 STL中的算法函数必须包含头文件&lt;algorithm&gt;，对于数值算法须包含&lt;numeric&gt;，&lt;functional&gt;中则定义了一些模板类，用来声明函数对象。<br>    STL中算法大致分为四类：<br>        1）、非可变序列算法：指不直接修改其所操作的容器内容的算法。<br>        2）、可变序列算法：指可以修改它们所操作的容器内容的算法。<br>        3）、排序算法：包括对序列进行排序和合并的算法、搜索算法以及有序序列上的集合操作。<br>        4）、数值算法：对容器内容进行数值计算。</p>
+<p>&nbsp;</p>
+<p>以下对所有算法进行细致分类并标明功能：<br>&nbsp;&nbsp;&nbsp;<strong> &lt;一&gt;查找算法(13个)：</strong>判断容器中是否包含某个值<br>&nbsp;&nbsp;&nbsp; adjacent_find:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在iterator对标识元素范围内，查找一对相邻重复元素，找到则返回指向这对元素的第一个元素的ForwardIterator。否则返回last。重载版本使用输入的二元操作符代替相等的判断。<br>&nbsp;&nbsp;&nbsp; binary_search:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在有序序列中查找value，找到返回true。重载的版本实用指定的比较函数对象或函数指针来判断相等。<br>&nbsp;&nbsp;&nbsp; count:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 利用等于操作符，把标志范围内的元素与输入值比较，返回相等元素个数。<br>&nbsp;&nbsp;&nbsp; count_if:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 利用输入的操作符，对标志范围内的元素进行操作，返回结果为true的个数。<br>&nbsp;&nbsp;&nbsp; equal_range:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 功能类似equal，返回一对iterator，第一个表示lower_bound，第二个表示upper_bound。<br>&nbsp;&nbsp;&nbsp; find:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 利用底层元素的等于操作符，对指定范围内的元素与输入值进行比较。当匹配时，结束搜索，返回该元素的一个InputIterator。<br>&nbsp;&nbsp;&nbsp; find_end:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在指定范围内查找"由输入的另外一对iterator标志的第二个序列"的最后一次出现。找到则返回最后一对的第一个ForwardIterator，否则返回输入的"另外一对"的第一个ForwardIterator。重载版本使用用户输入的操作符代替等于操作。<br>&nbsp;&nbsp;&nbsp; find_first_of:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在指定范围内查找"由输入的另外一对iterator标志的第二个序列"中任意一个元素的第一次出现。重载版本中使用了用户自定义操作符。<br>&nbsp;&nbsp;&nbsp; find_if:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 使用输入的函数代替等于操作符执行find。<br>&nbsp;&nbsp;&nbsp; lower_bound:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 返回一个ForwardIterator，指向在有序序列范围内的可以插入指定值而不破坏容器顺序的第一个位置。重载函数使用自定义比较操作。<br>&nbsp;&nbsp;&nbsp; upper_bound:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 返回一个ForwardIterator，指向在有序序列范围内插入value而不破坏容器顺序的最后一个位置，该位置标志一个大于value的值。重载函数使用自定义比较操作。<br>&nbsp;&nbsp;&nbsp; search:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 给出两个范围，返回一个ForwardIterator，查找成功指向第一个范围内第一次出现子序列(第二个范围)的位置，查找失败指向last1。重载版本使用自定义的比较操作。<br>&nbsp;&nbsp;&nbsp; search_n:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在指定范围内查找val出现n次的子序列。重载版本使用自定义的比较操作。<br>&nbsp;<br>&nbsp;&nbsp;&nbsp; <strong>&lt;二&gt;排序和通用算法(14个)：</strong>提供元素排序策略<br>&nbsp;&nbsp;&nbsp; inplace_merge:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 合并两个有序序列，结果序列覆盖两端范围。重载版本使用输入的操作进行排序。<br>&nbsp;&nbsp;&nbsp; merge:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 合并两个有序序列，存放到另一个序列。重载版本使用自定义的比较。<br>&nbsp;&nbsp;&nbsp; nth_element:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将范围内的序列重新排序，使所有小于第n个元素的元素都出现在它前面，而大于它的都出现在后面。重载版本使用自定义的比较操作。<br>&nbsp;&nbsp;&nbsp; partial_sort:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 对序列做部分排序，被排序元素个数正好可以被放到范围内。重载版本使用自定义的比较操作。<br>&nbsp;&nbsp;&nbsp; partial_sort_copy:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 与partial_sort类似，不过将经过排序的序列复制到另一个容器。<br>&nbsp;&nbsp;&nbsp; partition:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 对指定范围内元素重新排序，使用输入的函数，把结果为true的元素放在结果为false的元素之前。<br>&nbsp;&nbsp;&nbsp; random_shuffle:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 对指定范围内的元素随机调整次序。重载版本输入一个随机数产生操作。<br>&nbsp;&nbsp;&nbsp; reverse:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将指定范围内元素重新反序排序。<br>&nbsp;&nbsp;&nbsp; reverse_copy:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 与reverse类似，不过将结果写入另一个容器。<br>&nbsp;&nbsp;&nbsp; rotate:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将指定范围内元素移到容器末尾，由middle指向的元素成为容器第一个元素。<br>&nbsp;&nbsp;&nbsp; rotate_copy:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 与rotate类似，不过将结果写入另一个容器。<br>&nbsp;&nbsp;&nbsp; sort:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 以升序重新排列指定范围内的元素。重载版本使用自定义的比较操作。<br>&nbsp;&nbsp;&nbsp; stable_sort:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 与sort类似，不过保留相等元素之间的顺序关系。<br>&nbsp;&nbsp;&nbsp; stable_partition:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 与partition类似，不过不保证保留容器中的相对顺序。<br>&nbsp;<br>&nbsp;&nbsp;&nbsp; <strong>&lt;三&gt;删除和替换算法(15个)</strong><br>&nbsp;&nbsp;&nbsp; copy:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 复制序列<br>&nbsp;&nbsp;&nbsp; copy_backward:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 与copy相同，不过元素是以相反顺序被拷贝。<br>&nbsp;&nbsp;&nbsp; iter_swap:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 交换两个ForwardIterator的值。<br>&nbsp;&nbsp;&nbsp; remove:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 删除指定范围内所有等于指定元素的元素。注意，该函数不是真正删除函数。内置函数不适合使用remove和remove_if函数。<br>&nbsp;&nbsp;&nbsp; remove_copy:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将所有不匹配元素复制到一个制定容器，返回OutputIterator指向被拷贝的末元素的下一个位置。<br>&nbsp;&nbsp;&nbsp; remove_if:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 删除指定范围内输入操作结果为true的所有元素。<br>&nbsp;&nbsp;&nbsp; remove_copy_if:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将所有不匹配元素拷贝到一个指定容器。<br>&nbsp;&nbsp;&nbsp; replace:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将指定范围内所有等于vold的元素都用vnew代替。<br>&nbsp;&nbsp;&nbsp; replace_copy:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 与replace类似，不过将结果写入另一个容器。<br>&nbsp;&nbsp;&nbsp; replace_if:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将指定范围内所有操作结果为true的元素用新值代替。<br>&nbsp;&nbsp;&nbsp; replace_copy_if:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 与replace_if，不过将结果写入另一个容器。<br>&nbsp;&nbsp;&nbsp; swap:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 交换存储在两个对象中的值。<br>&nbsp;&nbsp;&nbsp; swap_range:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将指定范围内的元素与另一个序列元素值进行交换。<br>&nbsp;&nbsp;&nbsp; unique:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 清除序列中重复元素，和remove类似，它也不能真正删除元素。重载版本使用自定义比较操作。<br>&nbsp;&nbsp;&nbsp; unique_copy:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 与unique类似，不过把结果输出到另一个容器。<br>&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>&lt;四&gt;排列组合算法(2个)：</strong>提供计算给定集合按一定顺序的所有可能排列组合<br>&nbsp;&nbsp;&nbsp; next_permutation:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 取出当前范围内的排列，并重新排序为下一个排列。重载版本使用自定义的比较操作。<br>&nbsp;&nbsp;&nbsp; prev_permutation:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 取出指定范围内的序列并将它重新排序为上一个序列。如果不存在上一个序列则返回false。重载版本使用自定义的比较操作。<br>&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;<strong> &lt;五&gt;算术算法(4个)</strong><br>&nbsp;&nbsp;&nbsp; accumulate:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iterator对标识的序列段元素之和，加到一个由val指定的初始值上。重载版本不再做加法，而是传进来的二元操作符被应用到元素上。<br>&nbsp;&nbsp;&nbsp; partial_sum:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 创建一个新序列，其中每个元素值代表指定范围内该位置前所有元素之和。重载版本使用自定义操作代替加法。<br>&nbsp;&nbsp;&nbsp; inner_product:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 对两个序列做内积(对应元素相乘，再求和)并将内积加到一个输入的初始值上。重载版本使用用户定义的操作。<br>&nbsp;&nbsp;&nbsp; adjacent_difference:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 创建一个新序列，新序列中每个新值代表当前元素与上一个元素的差。重载版本用指定二元操作计算相邻元素的差。<br>&nbsp;<br>&nbsp;&nbsp;&nbsp; <strong>&lt;六&gt;生成和异变算法(6个)</strong><br>&nbsp;&nbsp;&nbsp; fill:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将输入值赋给标志范围内的所有元素。<br>&nbsp;&nbsp;&nbsp; fill_n:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将输入值赋给first到first+n范围内的所有元素。<br>&nbsp;&nbsp;&nbsp; for_each:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 用指定函数依次对指定范围内所有元素进行迭代访问，返回所指定的函数类型。该函数不得修改序列中的元素。<br>&nbsp;&nbsp;&nbsp; generate:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 连续调用输入的函数来填充指定的范围。<br>&nbsp;&nbsp;&nbsp; generate_n:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 与generate函数类似，填充从指定iterator开始的n个元素。<br>&nbsp;&nbsp;&nbsp; transform:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将输入的操作作用与指定范围内的每个元素，并产生一个新的序列。重载版本将操作作用在一对元素上，另外一个元素来自输入的另外一个序列。结果输出到指定容器。<br>&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp; <strong>&lt;七&gt;关系算法(8个)</strong><br>&nbsp;&nbsp;&nbsp; equal:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 如果两个序列在标志范围内元素都相等，返回true。重载版本使用输入的操作符代替默认的等于操作符。<br>&nbsp;&nbsp;&nbsp; includes:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 判断第一个指定范围内的所有元素是否都被第二个范围包含，使用底层元素的&lt;操作符，成功返回true。重载版本使用用户输入的函数。<br>&nbsp;&nbsp;&nbsp; lexicographical_compare:&nbsp; 比较两个序列。重载版本使用用户自定义比较操作。<br>&nbsp;&nbsp;&nbsp; max:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 返回两个元素中较大一个。重载版本使用自定义比较操作。<br>&nbsp;&nbsp;&nbsp; max_element:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 返回一个ForwardIterator，指出序列中最大的元素。重载版本使用自定义比较操作。<br>&nbsp;&nbsp;&nbsp; min:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 返回两个元素中较小一个。重载版本使用自定义比较操作。<br>&nbsp;&nbsp;&nbsp; min_element:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 返回一个ForwardIterator，指出序列中最小的元素。重载版本使用自定义比较操作。<br>&nbsp;&nbsp;&nbsp; mismatch:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 并行比较两个序列，指出第一个不匹配的位置，返回一对iterator，标志第一个不匹配元素位置。如果都匹配，返回每个容器的last。重载版本使用自定义的比较操作。<br>&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp; <strong>&lt;八&gt;集合算法(4个)</strong><br>&nbsp;&nbsp;&nbsp; set_union:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 构造一个有序序列，包含两个序列中所有的不重复元素。重载版本使用自定义的比较操作。<br>&nbsp;&nbsp;&nbsp; set_intersection:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 构造一个有序序列，其中元素在两个序列中都存在。重载版本使用自定义的比较操作。<br>&nbsp;&nbsp;&nbsp; set_difference:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 构造一个有序序列，该序列仅保留第一个序列中存在的而第二个中不存在的元素。重载版本使用自定义的比较操作。<br>&nbsp;&nbsp;&nbsp; set_symmetric_difference: 构造一个有序序列，该序列取两个序列的对称差集(并集-交集)。<br>&nbsp;</p>
+<p>&nbsp;&nbsp; <strong>&lt;九&gt;堆算法(4个)</strong><br>&nbsp;&nbsp;&nbsp; make_heap:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 把指定范围内的元素生成一个堆。重载版本使用自定义比较操作。<br>&nbsp;&nbsp;&nbsp; pop_heap:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 并不真正把最大元素从堆中弹出，而是重新排序堆。它把first和last-1交换，然后重新生成一个堆。可使用容器的back来访问被"弹出"的元素或者使用pop_back进行真正的删除。重载版本使用自定义的比较操作。<br>&nbsp;&nbsp;&nbsp; push_heap:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 假设first到last-1是一个有效堆，要被加入到堆的元素存放在位置last-1，重新生成堆。在指向该函数前，必须先把元素插入容器后。重载版本使用指定的比较操作。<br>&nbsp;&nbsp;&nbsp; sort_heap:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 对指定范围内的序列重新排序，它假设该序列是个有序堆。重载版本使用自定义比较操作。</p>
+<p>&nbsp;</p>
+<p><strong>4.适配器</strong></p>
+<p>STL提供了三个容器适配器：queue、priority_queue、stack。这些<span style="color: #0000ff;">适配器都是包装了vector、list、deque中某个顺序容器的包装器</span>。注意：<span style="color: red;">适配器没有提供迭代器，也不能同时插入或删除多个元素。</span>下面对各个适配器进行概括总结。</p>
+<p><br><strong>（1）stack用法</strong></p>
+<div class="cnblogs_code">
+<pre>#include &lt;stack&gt;<span style="color: #000000;">
+template </span>&lt; typename T, typename Container=deque &gt; <span style="color: #0000ff;">class</span> stack;</pre>
+</div>
+<p>可以使用三个标准顺序容器vecotr、deque(默认)、list中的任何一个作为stack的底层模型。</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">bool</span> stack&lt;T&gt;::empty()                               <span style="color: #008000;">//</span><span style="color: #008000;">判断堆栈是否为空</span>
+<span style="color: #0000ff;">void</span> stack&lt;T&gt;::pop()                                 <span style="color: #008000;">//</span><span style="color: #008000;">弹出栈顶数据</span>
+stack&lt;T&gt;::push(T x)                                  <span style="color: #008000;">//</span><span style="color: #008000;">压入一个数据</span>
+stack&lt;T&gt;::size_type stack&lt;T&gt;::size()                 <span style="color: #008000;">//</span><span style="color: #008000;">返回堆栈长度</span>
+T stack&lt;T&gt;::top()                                    <span style="color: #008000;">//</span><span style="color: #008000;">得到栈顶数据</span></pre>
+</div>
+<p>&nbsp;代码示例：</p>
+<div class="cnblogs_code">
+<pre>stack&lt;<span style="color: #0000ff;">int</span>&gt;<span style="color: #000000;"> intDequeStack;  
+stack</span>&lt;<span style="color: #0000ff;">int</span>,vector&lt;<span style="color: #0000ff;">int</span>&gt;&gt;<span style="color: #000000;"> intVectorStack;  
+stack</span>&lt;<span style="color: #0000ff;">int</span>,list&lt;<span style="color: #0000ff;">int</span>&gt;&gt; intListStack; </pre>
+</div>
+<p>&nbsp;</p>
+<p><br><strong>（2）queue用法</strong></p>
+<div class="cnblogs_code">
+<pre>#include &lt;queue&gt;<span style="color: #000000;">
+template</span>&lt;typename T, typename Container = deque&lt;T&gt; &gt; <span style="color: #0000ff;">class</span>  queue;</pre>
+</div>
+<p>第一个参数指定要在queue中存储的类型，第二个参数规定queue适配的底层容器，<span style="color: #0000ff;">可供选择的容器只有dequeue和list。对大多数用途使用默认的dequeue</span>。</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./C++ STL 一般总结 - as_ - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>queue&lt;T&gt;<span style="color: #000000;">::push(T x)
+</span><span style="color: #0000ff;">void</span> queue&lt;T&gt;<span style="color: #000000;">::pop()
+T queue</span>&lt;T&gt;<span style="color: #000000;">::back()
+T queue</span>&lt;T&gt;<span style="color: #000000;">::front()
+queue</span>&lt;T&gt;<span style="color: #000000;">::size_type 
+queue</span>&lt;T&gt;<span style="color: #000000;">::size()
+</span><span style="color: #0000ff;">bool</span> queue&lt;T&gt;::empty()</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./C++ STL 一般总结 - as_ - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>代码示例：</p>
+<div class="cnblogs_code">
+<pre>queue&lt;<span style="color: #0000ff;">int</span>&gt;<span style="color: #000000;"> intDequeQueue;    
+queue</span>&lt;<span style="color: #0000ff;">int</span>,list&lt;<span style="color: #0000ff;">int</span>&gt;&gt; intListQueue;</pre>
+</div>
+<p>&nbsp;</p>
+<p><br><strong>（3）priority_queue用法</strong></p>
+<div class="cnblogs_code">
+<pre>#include &lt;queue&gt;<span style="color: #000000;">
+template </span>&lt;typename T, typename Container = vector&lt;T&gt;, typename Compare = less&lt;T&gt; &gt; <span style="color: #0000ff;">class</span> priority_queue;</pre>
+</div>
+<p>priority_queue也是一个队列，其元素按有序顺序排列。其不采用严格的FIFO顺序，给定时刻位于队头的元素正是有最高优先级的元素。如果两个元素有相同的优先级，那么它们在队列中的顺序就遵循FIFO语义。<span style="color: #0000ff;">默认适配的底层容器是vector，也可以使用deque</span>，<span style="color: #0000ff;">list不能用</span>，因为priority_queue要求能对元素随机访问以便进行排序。</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./C++ STL 一般总结 - as_ - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>priority_queue&lt;T&gt;<span style="color: #000000;">::push(T x)
+</span><span style="color: #0000ff;">void</span> priority_queue&lt;T&gt;<span style="color: #000000;">::pop()
+T priority_queue</span>&lt;T&gt;<span style="color: #000000;">::top()
+priority_queue</span>&lt;T&gt;<span style="color: #000000;">::size_type 
+priority_queue</span>&lt;T&gt;<span style="color: #000000;">::size()
+</span><span style="color: #0000ff;">bool</span> priority_queue&lt;T&gt;::empty()</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./C++ STL 一般总结 - as_ - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>代码示例：</p>
+<div class="cnblogs_code">
+<pre>priority_queue&lt; <span style="color: #0000ff;">int</span>, vector&lt;<span style="color: #0000ff;">int</span>&gt;, greater&lt;<span style="color: #0000ff;">int</span>&gt; &gt;<span style="color: #000000;">
+priority_queue</span>&lt; <span style="color: #0000ff;">int</span>, list&lt;<span style="color: #0000ff;">int</span>&gt;, greater&lt;<span style="color: #0000ff;">int</span>&gt; &gt;</pre>
+</div>
+<p>&nbsp;</p>
+<p>标准库默认使用元素类型的&lt;操作符来确定它们之间的优先级关系，用法有三：（下文转自http://www.cnblogs.com/vvilp/articles/1504436.html）</p>
+<p>优先队列第一种用法，通过默认使用的&lt;操作符可知在整数中元素大的优先级高。</p>
+<div class="cnblogs_code">
+<pre>priority_queue&lt;<span style="color: #0000ff;">int</span>&gt; qi; </pre>
+</div>
+<p>示例中输出结果为：9 6 5 3 2</p>
+<p>优先队列第二种用法，建立priority_queue时传入一个比较函数，使用functional.h函数对象作为比较函数。</p>
+<div class="cnblogs_code">
+<pre>priority_queue&lt;<span style="color: #0000ff;">int</span>, vector&lt;<span style="color: #0000ff;">int</span>&gt;, greater&lt;<span style="color: #0000ff;">int</span>&gt; &gt;qi2;</pre>
+</div>
+<p>示例2中输出结果为：2 3 5 6 9</p>
+<p>优先队列第三种用法，是自定义优先级。</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./C++ STL 一般总结 - as_ - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">struct</span><span style="color: #000000;"> node 
+{
+     friend </span><span style="color: #0000ff;">bool</span> <span style="color: #0000ff;">operator</span>&lt;<span style="color: #000000;"> (node n1, node n2)
+     {
+         </span><span style="color: #0000ff;">return</span> n1.priority &lt;<span style="color: #000000;"> n2.priority;
+     } 
+     </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> priority;
+     </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> value; 
+}; 
+priority_queue</span>&lt;node&gt; qn; </pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./C++ STL 一般总结 - as_ - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>在示例3中输出结果为：</p>
+<p>优先级&nbsp; 值</p>
+<p>9&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5</p>
+<p>8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2</p>
+<p>6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1</p>
+<p>2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3</p>
+<p>1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4</p>
+<p>在该结构中，value为值，priority为优先级。通过自定义operator&lt;操作符来比较元素中的优先级。注意：必须是自定义&lt;操作符才行，把上述的结构中的&lt;操作符改成&gt;编译不通过。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory">分类: <a href="http://www.cnblogs.com/biyeymyhjob/category/395261.html" target="_blank">C/C++</a></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(2603525,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;c874d6d3-41cb-e111-aa3f-842b2b196315&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./C++ STL 一般总结 - as_ - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./C++ STL 一般总结 - as_ - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/biyeymyhjob/" target="_blank"><img src="./C++ STL 一般总结 - as_ - 博客园_files/u426620.jpg" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/biyeymyhjob/">as_</a><br>
+            <a href="http://home.cnblogs.com/u/biyeymyhjob/followees">关注 - 0</a><br>
+            <a href="http://home.cnblogs.com/u/biyeymyhjob/followers">粉丝 - 373</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;c874d6d3-41cb-e111-aa3f-842b2b196315&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(2603525,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">5</span>
+    </div>
+    <div class="buryit" onclick="votePost(2603525,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/21/2602655.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/21/2602655.html" title="发布于2012-07-21 18:44">K-means聚类算法(非MapReduce实现)</a><br><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/22/2603697.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/22/2603697.html" title="发布于2012-07-22 14:39">C语言中的itoa和atoi函数的实现</a><br></div>
+</div>
+
+
+		</div>
+		<p class="postfoot">
+			posted on <span id="post-date">2012-07-22 11:04</span> <a href="http://www.cnblogs.com/biyeymyhjob/">as_</a> 阅读(<span id="post_view_count">32898</span>) 评论(<span id="post_comment_count">2</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=2603525" rel="nofollow">编辑</a> <a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/22/2603525.html#" onclick="AddToWz(2603525);return false;">收藏</a>
+		</p>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=122253,cb_entryId=2603525,cb_blogApp=currentBlogApp,cb_blogUserGuid='c874d6d3-41cb-e111-aa3f-842b2b196315',cb_entryCreatedDate='2012/7/22 11:04:00';loadViewCount(cb_entryId);</script>
+	
+	</div><a name="!comments"></a><div id="blog-comments-placeholder"><div id="comments_pager_top"></div>
+<a name="评论"></a>
+<div id="comments">
+<h3>评论</h3>
+	
+	
+			<div class="post">
+				<h2>
+					<a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/22/2603525.html#3384789" class="layer">#1楼</a><a name="3384789" id="comment_anchor_3384789"></a>
+					&nbsp;&nbsp;<span class="comment_actions"><a href="javascript:void(0);" onclick="return ReplyComment(3384789,&#39;FcBGcycfoVSBTA0gCVVezj99DzfxF/YwDdMJRh+QCjThgnsXTCcMjw==&#39;)">回复</a><a href="javascript:void(0);" onclick="return QuoteComment(3384789,&#39;FcBGcycfoVSBTA0gCVVezj99DzfxF/YwDdMJRh+QCjThgnsXTCcMjw==&#39;)">引用</a></span>
+				</h2>
+				<div id="comment_body_3384789" class="blog_comment_body">请问为什么vector和deque但是在中部或头部安插元素比较费时呢？</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3384789,&#39;Digg&#39;,this)">支持(1)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3384789,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3384789_avatar" style="display:none;">http://pic.cnblogs.com/face/516836/20160223154826.png</span>
+				<div class="postfoot">
+					 <span class="comment_date">2016-03-18 14:45</span> | <a id="a_comment_author_3384789" href="http://www.cnblogs.com/fengyehe/" target="_blank">珞珈風哥</a> <a href="http://msg.cnblogs.com/send/%E7%8F%9E%E7%8F%88%E9%A2%A8%E5%93%A5" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+				</div>
+			</div>
+		
+			<div class="post">
+				<h2>
+					<a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/22/2603525.html#3477601" class="layer">#2楼</a><a name="3477601" id="comment_anchor_3477601"></a><span id="comment-maxId" style="display:none;">3477601</span><span id="comment-maxDate" style="display:none;">2016/7/27 14:28:15</span>
+					&nbsp;&nbsp;<span class="comment_actions"><a href="javascript:void(0);" onclick="return ReplyComment(3477601,&#39;gETI5gyTN2KS8RqDQV1iVKLyvzyWIyJLSCSR3MEL06zzZaSVbE/Z1w==&#39;)">回复</a><a href="javascript:void(0);" onclick="return QuoteComment(3477601,&#39;gETI5gyTN2KS8RqDQV1iVKLyvzyWIyJLSCSR3MEL06zzZaSVbE/Z1w==&#39;)">引用</a></span>
+				</h2>
+				<div id="comment_body_3477601" class="blog_comment_body">需要移动元素</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3477601,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3477601,&#39;Bury&#39;,this)">反对(0)</a></div>
+				<div class="postfoot">
+					 <span class="comment_date">2016-07-27 14:28</span> | <a id="a_comment_author_3477601" href="http://www.cnblogs.com/2011study/" target="_blank">Study_2011</a> <a href="http://msg.cnblogs.com/send/Study_2011" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+				</div>
+			</div>
+		
+</div>
+<div id="comments_pager_bottom"></div></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/22/2603525.html#" onclick="return RefreshPage();">刷新页面</a><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/22/2603525.html#top">返回顶部</a></div>
+<div id="comment_form_container">
+<div id="commentform_title">发表评论</div>
+<span id="tip_comment" style="color:Red"></span>
+<p>
+昵称：<input type="text" id="tbCommentAuthor" class="author" disabled="disabled" size="50" value="zhenghua">
+</p>
+<div class="commentbox_main">
+<div class="commentbox_title">
+<div class="commentbox_title_left">评论内容：</div>
+<div class="commentbox_title_right">
+<img id="ubb_quote" class="comment_icon" src="./C++ STL 一般总结 - as_ - 博客园_files/quote.gif" alt="引用" title="添加引用" onclick="insertUBB(&#39;tbCommentBody&#39;,&#39;quote&#39;)">
+<img id="ubb_bold" class="comment_icon" src="./C++ STL 一般总结 - as_ - 博客园_files/b.png" alt="粗体" title="添加粗体" onclick="insertUBB(&#39;tbCommentBody&#39;,&#39;b&#39;)">
+<img id="ubb_url" class="comment_icon" src="./C++ STL 一般总结 - as_ - 博客园_files/lk.png" alt="链接" title="添加链接" onclick="insertUbbUrl(&#39;tbCommentBody&#39;)">
+<img id="ubb_indent" class="comment_icon" src="./C++ STL 一般总结 - as_ - 博客园_files/indent.png" alt="缩进" title="添加首行缩进" onclick="insertIndent(&#39;tbCommentBody&#39;)">
+<img id="ubb_code" class="comment_icon" src="./C++ STL 一般总结 - as_ - 博客园_files/InsertCode.gif" alt="代码" title="添加代码" onclick="insertUbbCode()">
+<img id="ubb_img" class="comment_icon" src="./C++ STL 一般总结 - as_ - 博客园_files/img.gif" alt="图片" title="上传图片" onclick="OpenImageUploadWindow();">
+</div>
+</div>
+<div class="clear"></div>
+<textarea id="tbCommentBody" class="comment_textarea"></textarea>
+</div>
+<p id="commentbox_opt">
+<input id="btn_comment_submit" type="button" class="comment_btn" value="提交评论">
+<span id="span_comment_canceledit" style="display:none"><a href="javascript:void(0);" onclick="return CancelCommentEdit()">不改了</a></span>
+<a href="javascript:void(0);" onclick="return logout();">退出登录</a>
+        <a id="commentbox_opt_sub" href="javascript:void(0);" title="订阅后有新评论时会邮件通知您" onclick="commentManager.Subscribe()">订阅评论</a>
+</p>
+<div id="tip_comment2" style="color:Red"></div>
+<p>
+[Ctrl+Enter快捷键提交]
+</p>
+<div style="display:none">
+<span id="comment_edit_id"></span><span id="span_parentcomment_id"></span>
+<span id="span_parent_id"></span>
+<span id="span_comment_replyto"></span>
+<span id="span_comment_posted"></span>
+</div>
+</div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】50万行VC++源码: 大型组态工控、电力仿真CAD与GIS源码库</a><br><a href="http://rongcloud.cn/reports/journal2" target="_blank">【推荐】融云发布 App 社交化白皮书 IM 提升活跃超 8 倍</a><br><a href="http://bbs.h3bpm.com/index.php?m=app&amp;app=product_download&amp;a=reg&amp;utm_source=csdn&amp;utm_medium=pic&amp;utm_campaign=show&amp;utm_content=v10&amp;utm_term=%E5%85%8D%E8%B4%B9%E4%B8%8B%E8%BD%BD" target="_blank">【推荐】自开发 零实施的BPM</a><br></div>
+<div id="opt_under_post"></div>
+<div id="ad_c1" class="c_ad_block"><a href="https://cn.udacity.com/course/deep-learning-nanodegree-foundation--nd101/?utm_source=cnblogB3&amp;utm_medium=referral&amp;utm_campaign=nd101launch" target="_blank"><img width="300" height="250" src="./C++ STL 一般总结 - as_ - 博客园_files/24442-20170120162217812-818299692.jpg" alt=""></a></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="http://news.cnblogs.com/n/562061/" target="_blank">Gitlab.com 误删数据，备份恢复失败已宕机10小时</a><br> ·  <a href="http://news.cnblogs.com/n/562060/" target="_blank">Edge浏览器正式支持WebRTC 1.0：开视频暴爽</a><br> ·  <a href="http://news.cnblogs.com/n/562059/" target="_blank">HTC动荡：全球副总裁今日离职</a><br> ·  <a href="http://news.cnblogs.com/n/562058/" target="_blank">Mozilla Firefox 52 Beta 2发布</a><br> ·  <a href="http://news.cnblogs.com/n/562057/" target="_blank">谷歌工程师：微软家的Defender表现得最像一款杀毒软件</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="ad_c2" class="c_ad_block"><a href="http://bbs.h3bpm.com/index.php?m=app&amp;app=product_download&amp;a=reg&amp;utm_source=csdn&amp;utm_medium=pic&amp;utm_campaign=show&amp;utm_content=v10&amp;utm_term=%E5%85%8D%E8%B4%B9%E4%B8%8B%E8%BD%BD" target="_blank"><img width="468" height="60" src="./C++ STL 一般总结 - as_ - 博客园_files/24442-20170118152220281-363324784.jpg" alt=""></a></div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/554260/" target="_blank">「代码家」的学习过程和学习经验分享</a><br> ·  <a href="http://kb.cnblogs.com/page/556770/" target="_blank">写给未来的程序媛</a><br> ·  <a href="http://kb.cnblogs.com/page/558087/" target="_blank">高质量的工程代码为什么难写</a><br> ·  <a href="http://kb.cnblogs.com/page/555750/" target="_blank">循序渐进地代码重构</a><br> ·  <a href="http://kb.cnblogs.com/page/554496/" target="_blank">技术的正宗与野路子</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+</div>
+</div>
+<div id="leftmenu">
+
+
+<h3>导航</h3>
+<ul>
+<li>
+<a id="blog_nav_sitehome" href="http://www.cnblogs.com/">博客园</a></li>
+<li>
+<a id="blog_nav_myhome" class="two_words" href="http://www.cnblogs.com/biyeymyhjob/">首页</a></li>
+<li>
+<a id="blog_nav_newpost" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li>
+<a id="blog_nav_contact" accesskey="9" class="two_words" rel="nofollow" href="https://msg.cnblogs.com/send/as_">联系</a></li>
+<li>
+<a id="blog_nav_rss" class="two_words" href="http://www.cnblogs.com/biyeymyhjob/rss">订阅</a>
+<a id="blog_nav_rss_image" href="http://www.cnblogs.com/biyeymyhjob/rss"><img src="./C++ STL 一般总结 - as_ - 博客园_files/xml.gif" alt="订阅"></a>
+</li>
+<li>
+<a id="blog_nav_admin" class="two_words" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+
+<div id="blog-calendar" style=""><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="Calendar">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2012/06/01&#39;);return false;">&lt;</a></td><td align="center">2012年7月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2012/08/01&#39;);return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">24</td><td class="CalOtherMonthDay" align="center">25</td><td class="CalOtherMonthDay" align="center">26</td><td class="CalOtherMonthDay" align="center">27</td><td class="CalOtherMonthDay" align="center">28</td><td class="CalOtherMonthDay" align="center">29</td><td class="CalOtherMonthDay" align="center">30</td></tr><tr><td class="CalWeekendDay" align="center">1</td><td align="center">2</td><td align="center">3</td><td align="center">4</td><td align="center">5</td><td align="center">6</td><td class="CalWeekendDay" align="center">7</td></tr><tr><td class="CalWeekendDay" align="center">8</td><td align="center">9</td><td align="center">10</td><td align="center">11</td><td align="center"><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/12.html"><u>12</u></a></td><td align="center"><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/13.html"><u>13</u></a></td><td class="CalWeekendDay" align="center"><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/14.html"><u>14</u></a></td></tr><tr><td class="CalWeekendDay" align="center">15</td><td align="center"><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/16.html"><u>16</u></a></td><td align="center"><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/17.html"><u>17</u></a></td><td align="center"><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/18.html"><u>18</u></a></td><td align="center"><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/19.html"><u>19</u></a></td><td align="center"><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/20.html"><u>20</u></a></td><td class="CalWeekendDay" align="center"><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/21.html"><u>21</u></a></td></tr><tr><td class="CalWeekendDay" align="center"><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/22.html"><u>22</u></a></td><td align="center"><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/23.html"><u>23</u></a></td><td align="center"><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/24.html"><u>24</u></a></td><td align="center"><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/25.html"><u>25</u></a></td><td align="center"><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/26.html"><u>26</u></a></td><td align="center"><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/27.html"><u>27</u></a></td><td class="CalWeekendDay" align="center"><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/28.html"><u>28</u></a></td></tr><tr><td class="CalWeekendDay" align="center"><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/29.html"><u>29</u></a></td><td align="center"><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/30.html"><u>30</u></a></td><td align="center"><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/31.html"><u>31</u></a></td><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td></tr>
+</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+<meta name="vs_showGrid" content="False">
+
+<h3>公告</h3>
+<div id="blog-news"><div id="profile_block">昵称：<a href="http://home.cnblogs.com/u/biyeymyhjob/">as_</a><br>园龄：<a href="http://home.cnblogs.com/u/biyeymyhjob/" title="入园时间：2012-07-11">4年6个月</a><br>粉丝：<a href="http://home.cnblogs.com/u/biyeymyhjob/followers/">373</a><br>关注：<a href="http://home.cnblogs.com/u/biyeymyhjob/followees/">0</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow(&#39;c874d6d3-41cb-e111-aa3f-842b2b196315&#39;)">+加关注</a></div></div></div><script type="text/javascript">loadBlogNews();</script>
+
+<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div id="sidebar_search" class="mySearch">
+<h3 class="catListTitle">搜索</h3>
+<div id="sidebar_search_box">
+<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk"></div>
+<div id="widget_my_google" class="div_my_zzk"><input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event)" class="input_my_zzk">&nbsp;<input onclick="google_go()" type="button" value="谷歌搜索" class="btn_my_zzk"></div>
+</div>
+</div>
+
+</div><div id="sidebar_shortcut" class="sidebar-block">
+<h3 class="catListTitle">常用链接</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/biyeymyhjob/p/" title="我的博客的随笔列表">我的随笔</a></li><li><a href="http://www.cnblogs.com/biyeymyhjob/MyComments.html" title="我发表过的评论列表">我的评论</a></li><li><a href="http://www.cnblogs.com/biyeymyhjob/OtherPosts.html" title="我评论过的随笔列表">我的参与</a></li><li><a href="http://www.cnblogs.com/biyeymyhjob/RecentComments.html" title="我的博客的评论列表">最新评论</a></li><li><a href="http://www.cnblogs.com/biyeymyhjob/tag/" title="我的博客的标签列表">我的标签</a></li>
+</ul>
+<div id="itemListLin_con" style="display:none;">
+
+</div></div><div id="sidebar_toptags" class="sidebar-block">
+<h3 class="catListTitle">我的标签</h3>
+<div id="MyTag">
+<ul>
+<li><a href="http://www.cnblogs.com/biyeymyhjob/tag/%E7%AC%94%E8%AF%95/">笔试</a>(4)</li><li><a href="http://www.cnblogs.com/biyeymyhjob/tag/OS/">OS</a>(2)</li><li><a href="http://www.cnblogs.com/biyeymyhjob/tag/SMO/">SMO</a>(1)</li><li><a href="http://www.cnblogs.com/biyeymyhjob/tag/socket/">socket</a>(1)</li><li><a href="http://www.cnblogs.com/biyeymyhjob/tag/static/">static</a>(1)</li><li><a href="http://www.cnblogs.com/biyeymyhjob/tag/SVM/">SVM</a>(1)</li><li><a href="http://www.cnblogs.com/biyeymyhjob/tag/Trie/">Trie</a>(1)</li><li><a href="http://www.cnblogs.com/biyeymyhjob/tag/volatile/">volatile</a>(1)</li><li><a href="http://www.cnblogs.com/biyeymyhjob/tag/bytes/">bytes</a>(1)</li><li><a href="http://www.cnblogs.com/biyeymyhjob/tag/C%20str/">C str</a>(1)</li><li><a href="http://www.cnblogs.com/biyeymyhjob/tag/">更多</a></li>
+</ul>
+</div></div><div id="sidebar_categories">
+		<h3>随笔分类</h3>
+		
+				<ul>
+			
+				<li><a id="CatList_LinkList_0_Link_0" href="http://www.cnblogs.com/biyeymyhjob/category/400821.html">APUE专题(15)</a></li>
+			
+				<li><a id="CatList_LinkList_0_Link_1" href="http://www.cnblogs.com/biyeymyhjob/category/395261.html">C/C++(30)</a></li>
+			
+				<li><a id="CatList_LinkList_0_Link_2" href="http://www.cnblogs.com/biyeymyhjob/category/402609.html">Hadoop/MapReduce(13)</a></li>
+			
+				<li><a id="CatList_LinkList_0_Link_3" href="http://www.cnblogs.com/biyeymyhjob/category/402610.html">Java(1)</a></li>
+			
+				<li><a id="CatList_LinkList_0_Link_4" href="http://www.cnblogs.com/biyeymyhjob/category/395207.html">OS/Linux(15)</a></li>
+			
+				<li><a id="CatList_LinkList_0_Link_5" href="http://www.cnblogs.com/biyeymyhjob/category/395292.html">笔试面试题集锦(16)</a></li>
+			
+				<li><a id="CatList_LinkList_0_Link_6" href="http://www.cnblogs.com/biyeymyhjob/category/395776.html">基础机器学习算法(9)</a></li>
+			
+				<li><a id="CatList_LinkList_0_Link_7" href="http://www.cnblogs.com/biyeymyhjob/category/396014.html">其他(3)</a></li>
+			
+				<li><a id="CatList_LinkList_0_Link_8" href="http://www.cnblogs.com/biyeymyhjob/category/395206.html">数据结构与算法(29)</a></li>
+			
+				<li><a id="CatList_LinkList_0_Link_9" href="http://www.cnblogs.com/biyeymyhjob/category/395365.html">网络及UNP(19)</a></li>
+			
+				</ul>
+			
+	
+		<h3>随笔档案</h3>
+		
+				<ul>
+			
+				<li><a id="CatList_LinkList_1_Link_0" href="http://www.cnblogs.com/biyeymyhjob/archive/2015/07.html">2015年7月 (1)</a></li>
+			
+				<li><a id="CatList_LinkList_1_Link_1" href="http://www.cnblogs.com/biyeymyhjob/archive/2015/03.html">2015年3月 (1)</a></li>
+			
+				<li><a id="CatList_LinkList_1_Link_2" href="http://www.cnblogs.com/biyeymyhjob/archive/2014/11.html">2014年11月 (1)</a></li>
+			
+				<li><a id="CatList_LinkList_1_Link_3" href="http://www.cnblogs.com/biyeymyhjob/archive/2013/05.html">2013年5月 (1)</a></li>
+			
+				<li><a id="CatList_LinkList_1_Link_4" href="http://www.cnblogs.com/biyeymyhjob/archive/2012/11.html">2012年11月 (4)</a></li>
+			
+				<li><a id="CatList_LinkList_1_Link_5" href="http://www.cnblogs.com/biyeymyhjob/archive/2012/10.html">2012年10月 (7)</a></li>
+			
+				<li><a id="CatList_LinkList_1_Link_6" href="http://www.cnblogs.com/biyeymyhjob/archive/2012/09.html">2012年9月 (17)</a></li>
+			
+				<li><a id="CatList_LinkList_1_Link_7" href="http://www.cnblogs.com/biyeymyhjob/archive/2012/08.html">2012年8月 (59)</a></li>
+			
+				<li><a id="CatList_LinkList_1_Link_8" href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07.html">2012年7月 (59)</a></li>
+			
+				</ul>
+			
+	</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<h3 class="catListTitle">最新评论</h3>
+<div class="RecentComment" id="RecentComments">
+	<div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/31/2615833.html#3591452">1. Re:最短路径—Dijkstra算法和Floyd算法</a></li>
+        <li class="recent_comment_body">感谢博主，辛苦了。</li>
+        <li class="recent_comment_author">--Griezmann</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/28/2612910.html#3585545">2. Re:HTTP请求报文和HTTP响应报文</a></li>
+        <li class="recent_comment_body">受教了</li>
+        <li class="recent_comment_author">--追风皇帝</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/21/2602015.html#3584846">3. Re:信号量、互斥体和自旋锁</a></li>
+        <li class="recent_comment_body">赞！</li>
+        <li class="recent_comment_author">--一心只读圣贤书</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/30/2615542.html#3584598">4. Re:最小生成树-Prim算法和Kruskal算法</a></li>
+        <li class="recent_comment_body">邻接矩阵下最小生成树Prim算法复杂度应该是O(n^3)吧？</li>
+        <li class="recent_comment_author">--zdhmeng</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/31/2615833.html#3569020">5. Re:最短路径—Dijkstra算法和Floyd算法</a></li>
+        <li class="recent_comment_body">感谢博主！ 但Dijkstra算法的动画图好像有一个错误：在以3为中间点判断到4的最短路径时应该时22&gt;9+11,动画里好像写反了；）</li>
+        <li class="recent_comment_author">--李秋豪</li>
+</ul>
+</div>
+</div>
+</div></div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<h3 class="catListTitle">阅读排行榜</h3>
+<div class="RecentComment" id="TopViewPosts"> 
+	<div id="TopViewPostsBlock"><ul><li><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/31/2615833.html">1. 最短路径—Dijkstra算法和Floyd算法(218750)</a></li><li><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/30/2615542.html">2. 最小生成树-Prim算法和Kruskal算法(96877)</a></li><li><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/23/2605208.html">3. 决策树算法总结(62361)</a></li><li><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/28/2612910.html">4. HTTP请求报文和HTTP响应报文(61075)</a></li><li><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/18/2595410.html">5. Logistic Regression--逻辑回归算法汇总**(47579)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap">
+<h3 class="catListTitle">评论排行榜</h3>
+<div class="RecentComment" id="TopCommentsPosts">
+	<div id="TopFeedbackPostsBlock"><ul><li><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/31/2615833.html">1. 最短路径—Dijkstra算法和Floyd算法(31)</a></li><li><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/30/2615542.html">2. 最小生成树-Prim算法和Kruskal算法(9)</a></li><li><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/28/2612910.html">3. HTTP请求报文和HTTP响应报文(8)</a></li><li><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/09/12/2674004.html">4. C++ STL中的vector的内存分配与释放(8)</a></li><li><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/17/2595249.html">5. TF-IDF及其算法(6)</a></li></ul></div>
+</div></div></div><div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div class="RecentComment">
+	<div id="TopDiggPostsBlock"><ul><li><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/31/2615833.html">1. 最短路径—Dijkstra算法和Floyd算法(41)</a></li><li><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/30/2615542.html">2. 最小生成树-Prim算法和Kruskal算法(17)</a></li><li><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/28/2612910.html">3. HTTP请求报文和HTTP响应报文(15)</a></li><li><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/21/2602015.html">4. 信号量、互斥体和自旋锁(10)</a></li><li><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/20/2601655.html">5. Linux写时拷贝技术(copy-on-write)(10)</a></li></ul></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+
+</div>
+</div>
+<div class="clear"></div>
+<div id="footer">
+
+<p id="footer">
+	Powered by: 
+	<br>
+	
+	<a id="Footer1_Hyperlink3" name="Hyperlink1" href="http://www.cnblogs.com/" style="font-family:Verdana;font-size:12px;">博客园</a>
+	<br>
+	Copyright © as_
+</p>
+</div>
+</div>
+
+
+
+</body></html>

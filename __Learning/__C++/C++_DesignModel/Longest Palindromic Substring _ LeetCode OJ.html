@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<!-- saved from url=(0073)https://leetcode.com/problems/longest-palindromic-substring/#/description -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;-webkit-transition:0s all!important;}.ng-hide-add-active,.ng-hide-remove{display:block!important;}</style>
+    
+    <title>Longest Palindromic Substring | LeetCode OJ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
+
+Example:
+
+Input: &quot;babad&quot;
+
+Output: &quot;bab&quot;
+
+Note: &quot;aba&quot; is also a valid answer.
+
+
+
+Example:
+
+Input: &quot;cbbd&quot;
+
+Output: &quot;bb&quot;
+
+">
+    <meta property="og:title" content="Longest Palindromic Substring | LeetCode OJ">
+    <meta property="og:image" content="/static/images/logolarge.jpg">
+    <meta property="og:description" content="Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
+
+Example:
+
+Input: &quot;babad&quot;
+
+Output: &quot;bab&quot;
+
+Note: &quot;aba&quot; is also a valid answer.
+
+
+
+Example:
+
+Input: &quot;cbbd&quot;
+
+Output: &quot;bb&quot;
+
+">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="https://leetcode.com/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="https://leetcode.com/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://leetcode.com/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://leetcode.com/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://leetcode.com/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://leetcode.com/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://leetcode.com/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://leetcode.com/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://leetcode.com/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="https://leetcode.com/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="https://leetcode.com/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://leetcode.com/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="https://leetcode.com/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="https://leetcode.com/favicon-192x192.png" sizes="192x192">
+    <meta name="application-name" content="LeetCode Online Judge">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+    <link href="./Longest Palindromic Substring _ LeetCode OJ_files/bootstrap.min.css" rel="stylesheet">
+    <link href="./Longest Palindromic Substring _ LeetCode OJ_files/font-awesome.min.css" rel="stylesheet">
+    <link href="./Longest Palindromic Substring _ LeetCode OJ_files/bootstrap-table.min.css" rel="stylesheet">
+    
+    <style type="text/css">.select2-container{box-sizing:border-box;display:inline-block;margin:0;position:relative;vertical-align:middle}.select2-container .select2-selection--single{box-sizing:border-box;cursor:pointer;display:block;height:28px;user-select:none;-webkit-user-select:none}.select2-container .select2-selection--single .select2-selection__rendered{display:block;padding-left:8px;padding-right:20px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.select2-container .select2-selection--single .select2-selection__clear{position:relative}.select2-container[dir="rtl"] .select2-selection--single .select2-selection__rendered{padding-right:8px;padding-left:20px}.select2-container .select2-selection--multiple{box-sizing:border-box;cursor:pointer;display:block;min-height:32px;user-select:none;-webkit-user-select:none}.select2-container .select2-selection--multiple .select2-selection__rendered{display:inline-block;overflow:hidden;padding-left:8px;text-overflow:ellipsis;white-space:nowrap}.select2-container .select2-search--inline{float:left}.select2-container .select2-search--inline .select2-search__field{box-sizing:border-box;border:0;font-size:100%;margin-top:5px;padding:0}.select2-container .select2-search--inline .select2-search__field::-webkit-search-cancel-button{-webkit-appearance:none}.select2-dropdown{background-color:white;border:1px solid #aaa;border-radius:4px;box-sizing:border-box;display:block;position:absolute;left:-100000px;width:100%;z-index:1051}.select2-results{display:block}.select2-results__options{list-style:none;margin:0;padding:0}.select2-results__option{padding:6px;user-select:none;-webkit-user-select:none}.select2-results__option[aria-selected]{cursor:pointer}.select2-container--open .select2-dropdown{left:0}.select2-container--open .select2-dropdown--above{border-bottom:0;border-bottom-left-radius:0;border-bottom-right-radius:0}.select2-container--open .select2-dropdown--below{border-top:0;border-top-left-radius:0;border-top-right-radius:0}.select2-search--dropdown{display:block;padding:4px}.select2-search--dropdown .select2-search__field{padding:4px;width:100%;box-sizing:border-box}.select2-search--dropdown .select2-search__field::-webkit-search-cancel-button{-webkit-appearance:none}.select2-search--dropdown.select2-search--hide{display:none}.select2-close-mask{border:0;margin:0;padding:0;display:block;position:fixed;left:0;top:0;min-height:100%;min-width:100%;height:auto;width:auto;opacity:0;z-index:99;background-color:#fff;filter:alpha(opacity=0)}.select2-hidden-accessible{border:0 !important;clip:rect(0 0 0 0) !important;height:1px !important;margin:-1px !important;overflow:hidden !important;padding:0 !important;position:absolute !important;width:1px !important}.select2-container--default .select2-selection--single{background-color:#fff;border:1px solid #aaa;border-radius:4px}.select2-container--default .select2-selection--single .select2-selection__rendered{color:#444;line-height:28px}.select2-container--default .select2-selection--single .select2-selection__clear{cursor:pointer;float:right;font-weight:bold}.select2-container--default .select2-selection--single .select2-selection__placeholder{color:#999}.select2-container--default .select2-selection--single .select2-selection__arrow{height:26px;position:absolute;top:1px;right:1px;width:20px}.select2-container--default .select2-selection--single .select2-selection__arrow b{border-color:#888 transparent transparent transparent;border-style:solid;border-width:5px 4px 0 4px;height:0;left:50%;margin-left:-4px;margin-top:-2px;position:absolute;top:50%;width:0}.select2-container--default[dir="rtl"] .select2-selection--single .select2-selection__clear{float:left}.select2-container--default[dir="rtl"] .select2-selection--single .select2-selection__arrow{left:1px;right:auto}.select2-container--default.select2-container--disabled .select2-selection--single{background-color:#eee;cursor:default}.select2-container--default.select2-container--disabled .select2-selection--single .select2-selection__clear{display:none}.select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b{border-color:transparent transparent #888 transparent;border-width:0 4px 5px 4px}.select2-container--default .select2-selection--multiple{background-color:white;border:1px solid #aaa;border-radius:4px;cursor:text}.select2-container--default .select2-selection--multiple .select2-selection__rendered{box-sizing:border-box;list-style:none;margin:0;padding:0 5px;width:100%}.select2-container--default .select2-selection--multiple .select2-selection__rendered li{list-style:none}.select2-container--default .select2-selection--multiple .select2-selection__placeholder{color:#999;margin-top:5px;float:left}.select2-container--default .select2-selection--multiple .select2-selection__clear{cursor:pointer;float:right;font-weight:bold;margin-top:5px;margin-right:10px}.select2-container--default .select2-selection--multiple .select2-selection__choice{background-color:#e4e4e4;border:1px solid #aaa;border-radius:4px;cursor:default;float:left;margin-right:5px;margin-top:5px;padding:0 5px}.select2-container--default .select2-selection--multiple .select2-selection__choice__remove{color:#999;cursor:pointer;display:inline-block;font-weight:bold;margin-right:2px}.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover{color:#333}.select2-container--default[dir="rtl"] .select2-selection--multiple .select2-selection__choice,.select2-container--default[dir="rtl"] .select2-selection--multiple .select2-selection__placeholder,.select2-container--default[dir="rtl"] .select2-selection--multiple .select2-search--inline{float:right}.select2-container--default[dir="rtl"] .select2-selection--multiple .select2-selection__choice{margin-left:5px;margin-right:auto}.select2-container--default[dir="rtl"] .select2-selection--multiple .select2-selection__choice__remove{margin-left:2px;margin-right:auto}.select2-container--default.select2-container--focus .select2-selection--multiple{border:solid black 1px;outline:0}.select2-container--default.select2-container--disabled .select2-selection--multiple{background-color:#eee;cursor:default}.select2-container--default.select2-container--disabled .select2-selection__choice__remove{display:none}.select2-container--default.select2-container--open.select2-container--above .select2-selection--single,.select2-container--default.select2-container--open.select2-container--above .select2-selection--multiple{border-top-left-radius:0;border-top-right-radius:0}.select2-container--default.select2-container--open.select2-container--below .select2-selection--single,.select2-container--default.select2-container--open.select2-container--below .select2-selection--multiple{border-bottom-left-radius:0;border-bottom-right-radius:0}.select2-container--default .select2-search--dropdown .select2-search__field{border:1px solid #aaa}.select2-container--default .select2-search--inline .select2-search__field{background:transparent;border:0;outline:0;box-shadow:none;-webkit-appearance:textfield}.select2-container--default .select2-results>.select2-results__options{max-height:200px;overflow-y:auto}.select2-container--default .select2-results__option[role=group]{padding:0}.select2-container--default .select2-results__option[aria-disabled=true]{color:#999}.select2-container--default .select2-results__option[aria-selected=true]{background-color:#ddd}.select2-container--default .select2-results__option .select2-results__option{padding-left:1em}.select2-container--default .select2-results__option .select2-results__option .select2-results__group{padding-left:0}.select2-container--default .select2-results__option .select2-results__option .select2-results__option{margin-left:-1em;padding-left:2em}.select2-container--default .select2-results__option .select2-results__option .select2-results__option .select2-results__option{margin-left:-2em;padding-left:3em}.select2-container--default .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option{margin-left:-3em;padding-left:4em}.select2-container--default .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option{margin-left:-4em;padding-left:5em}.select2-container--default .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option{margin-left:-5em;padding-left:6em}.select2-container--default .select2-results__option--highlighted[aria-selected]{background-color:#5897fb;color:white}.select2-container--default .select2-results__group{cursor:default;display:block;padding:6px}.select2-container--classic .select2-selection--single{background-color:#f7f7f7;border:1px solid #aaa;border-radius:4px;outline:0;background-image:-webkit-linear-gradient(top,white 50%,#eee 100%);background-image:-o-linear-gradient(top,white 50%,#eee 100%);background-image:linear-gradient(to bottom,white 50%,#eee 100%);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFFFF',endColorstr='#FFEEEEEE',GradientType=0)}.select2-container--classic .select2-selection--single:focus{border:1px solid #5897fb}.select2-container--classic .select2-selection--single .select2-selection__rendered{color:#444;line-height:28px}.select2-container--classic .select2-selection--single .select2-selection__clear{cursor:pointer;float:right;font-weight:bold;margin-right:10px}.select2-container--classic .select2-selection--single .select2-selection__placeholder{color:#999}.select2-container--classic .select2-selection--single .select2-selection__arrow{background-color:#ddd;border:0;border-left:1px solid #aaa;border-top-right-radius:4px;border-bottom-right-radius:4px;height:26px;position:absolute;top:1px;right:1px;width:20px;background-image:-webkit-linear-gradient(top,#eee 50%,#ccc 100%);background-image:-o-linear-gradient(top,#eee 50%,#ccc 100%);background-image:linear-gradient(to bottom,#eee 50%,#ccc 100%);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFEEEEEE',endColorstr='#FFCCCCCC',GradientType=0)}.select2-container--classic .select2-selection--single .select2-selection__arrow b{border-color:#888 transparent transparent transparent;border-style:solid;border-width:5px 4px 0 4px;height:0;left:50%;margin-left:-4px;margin-top:-2px;position:absolute;top:50%;width:0}.select2-container--classic[dir="rtl"] .select2-selection--single .select2-selection__clear{float:left}.select2-container--classic[dir="rtl"] .select2-selection--single .select2-selection__arrow{border:0;border-right:1px solid #aaa;border-radius:0;border-top-left-radius:4px;border-bottom-left-radius:4px;left:1px;right:auto}.select2-container--classic.select2-container--open .select2-selection--single{border:1px solid #5897fb}.select2-container--classic.select2-container--open .select2-selection--single .select2-selection__arrow{background:transparent;border:0}.select2-container--classic.select2-container--open .select2-selection--single .select2-selection__arrow b{border-color:transparent transparent #888 transparent;border-width:0 4px 5px 4px}.select2-container--classic.select2-container--open.select2-container--above .select2-selection--single{border-top:0;border-top-left-radius:0;border-top-right-radius:0;background-image:-webkit-linear-gradient(top,white 0,#eee 50%);background-image:-o-linear-gradient(top,white 0,#eee 50%);background-image:linear-gradient(to bottom,white 0,#eee 50%);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFFFF',endColorstr='#FFEEEEEE',GradientType=0)}.select2-container--classic.select2-container--open.select2-container--below .select2-selection--single{border-bottom:0;border-bottom-left-radius:0;border-bottom-right-radius:0;background-image:-webkit-linear-gradient(top,#eee 50%,white 100%);background-image:-o-linear-gradient(top,#eee 50%,white 100%);background-image:linear-gradient(to bottom,#eee 50%,white 100%);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFEEEEEE',endColorstr='#FFFFFFFF',GradientType=0)}.select2-container--classic .select2-selection--multiple{background-color:white;border:1px solid #aaa;border-radius:4px;cursor:text;outline:0}.select2-container--classic .select2-selection--multiple:focus{border:1px solid #5897fb}.select2-container--classic .select2-selection--multiple .select2-selection__rendered{list-style:none;margin:0;padding:0 5px}.select2-container--classic .select2-selection--multiple .select2-selection__clear{display:none}.select2-container--classic .select2-selection--multiple .select2-selection__choice{background-color:#e4e4e4;border:1px solid #aaa;border-radius:4px;cursor:default;float:left;margin-right:5px;margin-top:5px;padding:0 5px}.select2-container--classic .select2-selection--multiple .select2-selection__choice__remove{color:#888;cursor:pointer;display:inline-block;font-weight:bold;margin-right:2px}.select2-container--classic .select2-selection--multiple .select2-selection__choice__remove:hover{color:#555}.select2-container--classic[dir="rtl"] .select2-selection--multiple .select2-selection__choice{float:right}.select2-container--classic[dir="rtl"] .select2-selection--multiple .select2-selection__choice{margin-left:5px;margin-right:auto}.select2-container--classic[dir="rtl"] .select2-selection--multiple .select2-selection__choice__remove{margin-left:2px;margin-right:auto}.select2-container--classic.select2-container--open .select2-selection--multiple{border:1px solid #5897fb}.select2-container--classic.select2-container--open.select2-container--above .select2-selection--multiple{border-top:0;border-top-left-radius:0;border-top-right-radius:0}.select2-container--classic.select2-container--open.select2-container--below .select2-selection--multiple{border-bottom:0;border-bottom-left-radius:0;border-bottom-right-radius:0}.select2-container--classic .select2-search--dropdown .select2-search__field{border:1px solid #aaa;outline:0}.select2-container--classic .select2-search--inline .select2-search__field{outline:0;box-shadow:none}.select2-container--classic .select2-dropdown{background-color:white;border:1px solid transparent}.select2-container--classic .select2-dropdown--above{border-bottom:0}.select2-container--classic .select2-dropdown--below{border-top:0}.select2-container--classic .select2-results>.select2-results__options{max-height:200px;overflow-y:auto}.select2-container--classic .select2-results__option[role=group]{padding:0}.select2-container--classic .select2-results__option[aria-disabled=true]{color:grey}.select2-container--classic .select2-results__option--highlighted[aria-selected]{background-color:#3875d7;color:white}.select2-container--classic .select2-results__group{cursor:default;display:block;padding:6px}.select2-container--classic.select2-container--open .select2-dropdown{border-color:#5897fb}/*!
+ * Select2 Bootstrap Theme v0.1.0-beta.10 (https://select2.github.io/select2-bootstrap-theme)
+ * Copyright 2015-2017 Florian Kissling and contributors (https://github.com/select2/select2-bootstrap-theme/graphs/contributors)
+ * Licensed under MIT (https://github.com/select2/select2-bootstrap-theme/blob/master/LICENSE)
+ */.select2-container--bootstrap{display:block}.select2-container--bootstrap .select2-selection{-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);background-color:#fff;border:1px solid #ccc;border-radius:4px;color:#555;font-size:14px;outline:0}.select2-container--bootstrap .select2-selection.form-control{border-radius:4px}.select2-container--bootstrap .select2-search--dropdown .select2-search__field{-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);background-color:#fff;border:1px solid #ccc;border-radius:4px;color:#555;font-size:14px}.select2-container--bootstrap .select2-search__field{outline:0}.select2-container--bootstrap .select2-search__field::-webkit-input-placeholder{color:#999}.select2-container--bootstrap .select2-search__field:-moz-placeholder{color:#999}.select2-container--bootstrap .select2-search__field::-moz-placeholder{color:#999;opacity:1}.select2-container--bootstrap .select2-search__field:-ms-input-placeholder{color:#999}.select2-container--bootstrap .select2-results__option{padding:6px 12px}.select2-container--bootstrap .select2-results__option[role=group]{padding:0}.select2-container--bootstrap .select2-results__option[aria-disabled=true]{color:#777;cursor:not-allowed}.select2-container--bootstrap .select2-results__option[aria-selected=true]{background-color:#f5f5f5;color:#262626}.select2-container--bootstrap .select2-results__option--highlighted[aria-selected]{background-color:#337ab7;color:#fff}.select2-container--bootstrap .select2-results__option .select2-results__option{padding:6px 12px}.select2-container--bootstrap .select2-results__option .select2-results__option .select2-results__group{padding-left:0}.select2-container--bootstrap .select2-results__option .select2-results__option .select2-results__option{margin-left:-12px;padding-left:24px}.select2-container--bootstrap .select2-results__option .select2-results__option .select2-results__option .select2-results__option{margin-left:-24px;padding-left:36px}.select2-container--bootstrap .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option{margin-left:-36px;padding-left:48px}.select2-container--bootstrap .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option{margin-left:-48px;padding-left:60px}.select2-container--bootstrap .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option{margin-left:-60px;padding-left:72px}.select2-container--bootstrap .select2-results__group{color:#777;display:block;padding:6px 12px;font-size:12px;line-height:1.42857143;white-space:nowrap}.select2-container--bootstrap.select2-container--focus .select2-selection,.select2-container--bootstrap.select2-container--open .select2-selection{-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6);box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6);-webkit-transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s;-o-transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s;-webkit-transition:border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;transition:border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s;transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;border-color:#66afe9}.select2-container--bootstrap.select2-container--open .select2-selection .select2-selection__arrow b{border-color:transparent transparent #999 transparent;border-width:0 4px 4px 4px}.select2-container--bootstrap.select2-container--open.select2-container--below .select2-selection{border-bottom-right-radius:0;border-bottom-left-radius:0;border-bottom-color:transparent}.select2-container--bootstrap.select2-container--open.select2-container--above .select2-selection{border-top-right-radius:0;border-top-left-radius:0;border-top-color:transparent}.select2-container--bootstrap .select2-selection__clear{color:#999;cursor:pointer;float:right;font-weight:bold;margin-right:10px}.select2-container--bootstrap .select2-selection__clear:hover{color:#333}.select2-container--bootstrap.select2-container--disabled .select2-selection{border-color:#ccc;-webkit-box-shadow:none;box-shadow:none}.select2-container--bootstrap.select2-container--disabled .select2-selection,.select2-container--bootstrap.select2-container--disabled .select2-search__field{cursor:not-allowed}.select2-container--bootstrap.select2-container--disabled .select2-selection,.select2-container--bootstrap.select2-container--disabled .select2-selection--multiple .select2-selection__choice{background-color:#eee}.select2-container--bootstrap.select2-container--disabled .select2-selection__clear,.select2-container--bootstrap.select2-container--disabled .select2-selection--multiple .select2-selection__choice__remove{display:none}.select2-container--bootstrap .select2-dropdown{-webkit-box-shadow:0 6px 12px rgba(0,0,0,0.175);box-shadow:0 6px 12px rgba(0,0,0,0.175);border-color:#66afe9;overflow-x:hidden;margin-top:-1px}.select2-container--bootstrap .select2-dropdown--above{-webkit-box-shadow:0 -6px 12px rgba(0,0,0,0.175);box-shadow:0 -6px 12px rgba(0,0,0,0.175);margin-top:1px}.select2-container--bootstrap .select2-results>.select2-results__options{max-height:200px;overflow-y:auto}.select2-container--bootstrap .select2-selection--single{height:34px;line-height:1.42857143;padding:6px 24px 6px 12px}.select2-container--bootstrap .select2-selection--single .select2-selection__arrow{position:absolute;bottom:0;right:12px;top:0;width:4px}.select2-container--bootstrap .select2-selection--single .select2-selection__arrow b{border-color:#999 transparent transparent transparent;border-style:solid;border-width:4px 4px 0 4px;height:0;left:0;margin-left:-4px;margin-top:-2px;position:absolute;top:50%;width:0}.select2-container--bootstrap .select2-selection--single .select2-selection__rendered{color:#555;padding:0}.select2-container--bootstrap .select2-selection--single .select2-selection__placeholder{color:#999}.select2-container--bootstrap .select2-selection--multiple{min-height:34px;padding:0;height:auto}.select2-container--bootstrap .select2-selection--multiple .select2-selection__rendered{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;display:block;line-height:1.42857143;list-style:none;margin:0;overflow:hidden;padding:0;width:100%;text-overflow:ellipsis;white-space:nowrap}.select2-container--bootstrap .select2-selection--multiple .select2-selection__placeholder{color:#999;float:left;margin-top:5px}.select2-container--bootstrap .select2-selection--multiple .select2-selection__choice{color:#555;background:#fff;border:1px solid #ccc;border-radius:4px;cursor:default;float:left;margin:5px 0 0 6px;padding:0 6px}.select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field{background:transparent;padding:0 12px;height:32px;line-height:1.42857143;margin-top:0;min-width:5em}.select2-container--bootstrap .select2-selection--multiple .select2-selection__choice__remove{color:#999;cursor:pointer;display:inline-block;font-weight:bold;margin-right:3px}.select2-container--bootstrap .select2-selection--multiple .select2-selection__choice__remove:hover{color:#333}.select2-container--bootstrap .select2-selection--multiple .select2-selection__clear{margin-top:6px}.select2-container--bootstrap .select2-selection--single.input-sm,.input-group-sm .select2-container--bootstrap .select2-selection--single,.form-group-sm .select2-container--bootstrap .select2-selection--single{border-radius:3px;font-size:12px;height:30px;line-height:1.5;padding:5px 22px 5px 10px}.select2-container--bootstrap .select2-selection--single.input-sm .select2-selection__arrow b,.input-group-sm .select2-container--bootstrap .select2-selection--single .select2-selection__arrow b,.form-group-sm .select2-container--bootstrap .select2-selection--single .select2-selection__arrow b{margin-left:-5px}.select2-container--bootstrap .select2-selection--multiple.input-sm,.input-group-sm .select2-container--bootstrap .select2-selection--multiple,.form-group-sm .select2-container--bootstrap .select2-selection--multiple{min-height:30px;border-radius:3px}.select2-container--bootstrap .select2-selection--multiple.input-sm .select2-selection__choice,.input-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice,.form-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice{font-size:12px;line-height:1.5;margin:4px 0 0 5px;padding:0 5px}.select2-container--bootstrap .select2-selection--multiple.input-sm .select2-search--inline .select2-search__field,.input-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field,.form-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field{padding:0 10px;font-size:12px;height:28px;line-height:1.5}.select2-container--bootstrap .select2-selection--multiple.input-sm .select2-selection__clear,.input-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-selection__clear,.form-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-selection__clear{margin-top:5px}.select2-container--bootstrap .select2-selection--single.input-lg,.input-group-lg .select2-container--bootstrap .select2-selection--single,.form-group-lg .select2-container--bootstrap .select2-selection--single{border-radius:6px;font-size:18px;height:46px;line-height:1.3333333;padding:10px 31px 10px 16px}.select2-container--bootstrap .select2-selection--single.input-lg .select2-selection__arrow,.input-group-lg .select2-container--bootstrap .select2-selection--single .select2-selection__arrow,.form-group-lg .select2-container--bootstrap .select2-selection--single .select2-selection__arrow{width:5px}.select2-container--bootstrap .select2-selection--single.input-lg .select2-selection__arrow b,.input-group-lg .select2-container--bootstrap .select2-selection--single .select2-selection__arrow b,.form-group-lg .select2-container--bootstrap .select2-selection--single .select2-selection__arrow b{border-width:5px 5px 0 5px;margin-left:-5px;margin-left:-10px;margin-top:-2.5px}.select2-container--bootstrap .select2-selection--multiple.input-lg,.input-group-lg .select2-container--bootstrap .select2-selection--multiple,.form-group-lg .select2-container--bootstrap .select2-selection--multiple{min-height:46px;border-radius:6px}.select2-container--bootstrap .select2-selection--multiple.input-lg .select2-selection__choice,.input-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice,.form-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice{font-size:18px;line-height:1.3333333;border-radius:4px;margin:9px 0 0 8px;padding:0 10px}.select2-container--bootstrap .select2-selection--multiple.input-lg .select2-search--inline .select2-search__field,.input-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field,.form-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field{padding:0 16px;font-size:18px;height:44px;line-height:1.3333333}.select2-container--bootstrap .select2-selection--multiple.input-lg .select2-selection__clear,.input-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-selection__clear,.form-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-selection__clear{margin-top:10px}.select2-container--bootstrap .select2-selection.input-lg.select2-container--open .select2-selection--single .select2-selection__arrow b{border-color:transparent transparent #999 transparent;border-width:0 5px 5px 5px}.input-group-lg .select2-container--bootstrap .select2-selection.select2-container--open .select2-selection--single .select2-selection__arrow b{border-color:transparent transparent #999 transparent;border-width:0 5px 5px 5px}.select2-container--bootstrap[dir="rtl"] .select2-selection--single{padding-left:24px;padding-right:12px}.select2-container--bootstrap[dir="rtl"] .select2-selection--single .select2-selection__rendered{padding-right:0;padding-left:0;text-align:right}.select2-container--bootstrap[dir="rtl"] .select2-selection--single .select2-selection__clear{float:left}.select2-container--bootstrap[dir="rtl"] .select2-selection--single .select2-selection__arrow{left:12px;right:auto}.select2-container--bootstrap[dir="rtl"] .select2-selection--single .select2-selection__arrow b{margin-left:0}.select2-container--bootstrap[dir="rtl"] .select2-selection--multiple .select2-selection__choice,.select2-container--bootstrap[dir="rtl"] .select2-selection--multiple .select2-selection__placeholder,.select2-container--bootstrap[dir="rtl"] .select2-selection--multiple .select2-search--inline{float:right}.select2-container--bootstrap[dir="rtl"] .select2-selection--multiple .select2-selection__choice{margin-left:0;margin-right:6px}.select2-container--bootstrap[dir="rtl"] .select2-selection--multiple .select2-selection__choice__remove{margin-left:2px;margin-right:auto}.has-warning .select2-dropdown,.has-warning .select2-selection{border-color:#8a6d3b}.has-warning .select2-container--focus .select2-selection,.has-warning .select2-container--open .select2-selection{-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 6px #c0a16b;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 6px #c0a16b;border-color:#66512c}.has-warning.select2-drop-active{border-color:#66512c}.has-warning.select2-drop-active.select2-drop.select2-drop-above{border-top-color:#66512c}.has-error .select2-dropdown,.has-error .select2-selection{border-color:#a94442}.has-error .select2-container--focus .select2-selection,.has-error .select2-container--open .select2-selection{-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 6px #ce8483;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 6px #ce8483;border-color:#843534}.has-error.select2-drop-active{border-color:#843534}.has-error.select2-drop-active.select2-drop.select2-drop-above{border-top-color:#843534}.has-success .select2-dropdown,.has-success .select2-selection{border-color:#3c763d}.has-success .select2-container--focus .select2-selection,.has-success .select2-container--open .select2-selection{-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 6px #67b168;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 6px #67b168;border-color:#2b542c}.has-success.select2-drop-active{border-color:#2b542c}.has-success.select2-drop-active.select2-drop.select2-drop-above{border-top-color:#2b542c}.input-group>.select2-hidden-accessible:first-child+.select2-container--bootstrap>.selection>.select2-selection,.input-group>.select2-hidden-accessible:first-child+.select2-container--bootstrap>.selection>.select2-selection.form-control{border-bottom-right-radius:0;border-top-right-radius:0}.input-group>.select2-hidden-accessible:not(:first-child)+.select2-container--bootstrap:not(:last-child)>.selection>.select2-selection,.input-group>.select2-hidden-accessible:not(:first-child)+.select2-container--bootstrap:not(:last-child)>.selection>.select2-selection.form-control{border-radius:0}.input-group>.select2-hidden-accessible:not(:first-child):not(:last-child)+.select2-container--bootstrap:last-child>.selection>.select2-selection,.input-group>.select2-hidden-accessible:not(:first-child):not(:last-child)+.select2-container--bootstrap:last-child>.selection>.select2-selection.form-control{border-bottom-left-radius:0;border-top-left-radius:0}.input-group>.select2-container--bootstrap{display:table;table-layout:fixed;position:relative;z-index:2;width:100%;margin-bottom:0}.input-group>.select2-container--bootstrap>.selection>.select2-selection.form-control{float:none}.input-group>.select2-container--bootstrap.select2-container--open,.input-group>.select2-container--bootstrap.select2-container--focus{z-index:3}.input-group>.select2-container--bootstrap,.input-group>.select2-container--bootstrap .input-group-btn,.input-group>.select2-container--bootstrap .input-group-btn .btn{vertical-align:top}.form-control.select2-hidden-accessible{position:absolute !important;width:1px !important}@media(min-width:768px){.form-inline .select2-container--bootstrap{display:inline-block}}.last-col{overflow:hidden}.ptn,.pvn,.pan{padding-top:0 !important}.ptx,.pvx,.pax{padding-top:3px !important}.pts,.pvs,.pas{padding-top:5px !important}.ptm,.pvm,.pam{padding-top:10px !important}.ptl,.pvl,.pal{padding-top:20px !important}.pth,.pvh,.pah{padding-top:40px !important}.prn,.phn,.pan{padding-right:0 !important}.prx,.phx,.pax{padding-right:3px !important}.prs,.phs,.pas{padding-right:5px !important}.prm,.phm,.pam{padding-right:10px !important}.prl,.phl,.pal{padding-right:20px !important}.prh,.phh,.pah{padding-right:40px !important}.pbn,.pvn,.pan{padding-bottom:0 !important}.pbx,.pvx,.pax{padding-bottom:3px !important}.pbs,.pvs,.pas{padding-bottom:5px !important}.pbm,.pvm,.pam{padding-bottom:10px !important}.pbl,.pvl,.pal{padding-bottom:20px !important}.pbh,.pvh,.pah{padding-bottom:40px !important}.pln,.phn,.pan{padding-left:0 !important}.plx,.phx,.pax{padding-left:3px !important}.pls,.phs,.pas{padding-left:5px !important}.plm,.phm,.pam{padding-left:10px !important}.pll,.phl,.pal{padding-left:20px !important}.plh,.phh,.pah{padding-left:40px !important}.mtn,.mvn,.man{margin-top:0 !important}.mtx,.mvx,.max{margin-top:3px !important}.mts,.mvs,.mas{margin-top:5px !important}.mtm,.mvm,.mam{margin-top:10px !important}.mtl,.mvl,.mal{margin-top:20px !important}.mth,.mvh,.mah{margin-top:40px !important}.mrn,.mhn,.man{margin-right:0 !important}.mrx,.mhx,.max{margin-right:3px !important}.mrs,.mhs,.mas{margin-right:5px !important}.mrm,.mhm,.mam{margin-right:10px !important}.mrl,.mhl,.mal{margin-right:20px !important}.mrh,.mhh,.mah{margin-right:40px !important}.mbn,.mvn,.man{margin-bottom:0 !important}.mbx,.mvx,.max{margin-bottom:3px !important}.mbs,.mvs,.mas{margin-bottom:5px !important}.mbm,.mvm,.mam{margin-bottom:10px !important}.mbl,.mvl,.mal{margin-bottom:20px !important}.mbh,.mvh,.mah{margin-bottom:40px !important}.mln,.mhn,.man{margin-left:0 !important}.mlx,.mhx,.max{margin-left:3px !important}.mls,.mhs,.mas{margin-left:5px !important}.mlm,.mhm,.mam{margin-left:10px !important}.mll,.mhl,.mal{margin-left:20px !important}.mlh,.mhh,.mah{margin-left:40px !important}.select{position:relative;display:inline-block;vertical-align:top;min-width:220px;width:auto}.form-group .select{width:100%}.form-group .select>.select2-choice{width:100%}.select.form-control{border:0;padding:0;height:auto}.select2-container{display:inline-block}.select2-results__option{padding:12px 16px}.callout{padding:20px;margin:20px 0;border:1px solid #eee;border-left-width:5px;border-radius:3px}.callout+.callout{margin-top:-5px}.callout h4{margin-top:0;margin-bottom:8px}.callout p:last-child{margin-bottom:0}.callout code{border-radius:3px}.callout-default{border-left-color:#777}.callout-default h4{color:#777}.callout-primary{border-left-color:#428bca}.callout-primary h4{color:#428bca}.callout-success{border-left-color:#5cb85c}.callout-success h4{color:#5cb85c}.callout-danger{border-left-color:#d9534f}.callout-danger h4{color:#d9534f}.callout-warning{border-left-color:#f0ad4e}.callout-warning h4{color:#f0ad4e}.callout-info{border-left-color:#5bc0de}.callout-info h4{color:#5bc0de}button.icon-btn,a.icon-btn{display:inline-block;margin-bottom:0;text-align:center;vertical-align:middle;touch-action:manipulation;cursor:pointer;background-image:none;border:1px solid #CCC;white-space:nowrap;line-height:20px;border-radius:4px;color:#222;text-decoration:none;font-size:14px;background-color:transparent;padding:8px 16px 8px 16px}@media(max-width:767px){button.icon-btn,a.icon-btn{font-size:12px;padding:8px 8px 8px 8px}}button.icon-btn>i,a.icon-btn>i{padding-right:8px}button.icon-btn:hover,a.icon-btn:hover,button.icon-btn:focus,a.icon-btn:focus,button.icon-btn.focus,a.icon-btn.focus{background-color:#f5f5f5;color:#222;text-decoration:none}button.icon-btn:active,a.icon-btn:active,button.icon-btn.active,a.icon-btn.active{color:#222;outline:0;background-image:none}button.icon-btn.disabled,a.icon-btn.disabled,button.icon-btn[disabled],a.icon-btn[disabled],fieldset[disabled] button.icon-btn,fieldset[disabled] a.icon-btn{cursor:not-allowed;opacity:.6}abutton.icon-btn,aa.icon-btn{text-decoration:none}abutton.icon-btn.disabled,aa.icon-btn.disabled,fieldset[disabled] abutton.icon-btn,fieldset[disabled] aa.icon-btn{pointer-events:none}button.tab-item.icon-btn,a.tab-item.icon-btn{color:#666;border:0;border-bottom-right-radius:0;border-bottom-left-radius:0;margin-bottom:-1px;font-size:16px;padding:15px 16px 15px 16px}@media(max-width:767px){button.tab-item.icon-btn,a.tab-item.icon-btn{font-size:12px;padding:8px 8px 3px 8px;background-color:#f5f5f5;line-height:16px}}@media(max-width:767px){button.tab-item.icon-btn>i,a.tab-item.icon-btn>i{padding-right:0;font-size:16px;display:block;text-align:center;min-width:60px}}button.tab-item.icon-btn.active,a.tab-item.icon-btn.active{color:#222;border:1px solid #9d9d9d;border-bottom-color:white;background-color:white;padding-bottom:17px}@media(max-width:768px){button.tab-item.icon-btn.active,a.tab-item.icon-btn.active{padding-bottom:5px}}.question-section{font-size:16px;margin:40px 0}.question-section img{box-sizing:border-box;margin:10px 0 20px;width:100%;box-shadow:4px 4px 10px #888}.question-section blockquote{font-size:20px;font-style:italic}.question-section p{margin-left:25px}.lower-alpha{margin:20px 0;list-style-type:lower-roman}.lower-alpha pre{margin:10px 0}.status-accepted{color:#3c763d}.favor{color:#f0ad4e}.not-favor{color:grey}.add-favor{cursor:pointer;position:relative;top:-3px}body{overflow-y:scroll}a{color:#08c}a:hover{color:#005580}.form-signin{max-width:300px;padding:19px 29px 29px;margin:0 auto 20px;background-color:#fff;border:1px solid #e5e5e5;border-radius:5px;box-shadow:0 1px 2px rgba(0,0,0,0.05)}.block-center{display:block;margin-left:auto;margin-right:auto}.message{border:1px solid #e6db55;background-color:#ffffe0;padding:15px 30px 15px 15px;margin:20px 0}.navbar-extra{border-radius:0;margin-bottom:30px}#chat-link{position:fixed;right:5px;bottom:10px;background:#fff;border:1px solid #e0e0e0;padding:5px 15px 10px;border-radius:5px 0 0 5px;box-shadow:0 1px 3px rgba(0,0,0,0.1);color:#979faf}@media screen and (max-width:413px){#chat-link{display:none}}.glyphicon-envelope{text-align:center;line-height:26px;margin-right:5px;position:relative}[ng-cloak]{display:none}.editor{font-size:14px !important;border:1px solid #e0e0e0;height:475px}.ac{display:inline-block;height:16px;width:16px;background-image:url('/static/images/correct.png?06b1e3643e79');background-repeat:no-repeat}.notac{display:inline-block;height:16px;width:16px;background-image:url('/static/images/question.png?06b1e3643e79');background-repeat:no-repeat}@media(min-width:992px){#navbar-right li.dropdown a.dropdown-toggle{padding-right:20px;white-space:nowrap;max-width:80px;overflow:hidden;text-overflow:ellipsis !important}#navbar-right li.dropdown a.dropdown-toggle span.caret{position:absolute;right:10px;top:23px}}@media(min-width:1200px){#navbar-right li.dropdown a.dropdown-toggle{white-space:nowrap;max-width:250px;padding-right:20px;overflow:hidden;text-overflow:ellipsis !important}}@media(min-width:768px){ul.nav li.dropdown:hover>ul.dropdown-menu{display:block;margin-top:0;border-top-left-radius:0;border-top-right-radius:0}}#bookNav a:hover font,#storyNav a:hover font,#subscribe a:hover font,#donateNav a:hover font{color:#fbc12a}#subscribe{background-color:#373737}@media(min-width:768px){.container{position:relative}#navbar-right{position:absolute;display:inline-block;right:0}}html,body{height:100%}.content-wrapper{box-sizing:border-box;min-height:100%}.top-buffer{margin-top:20px}.ng-fade{opacity:1}.ng-fade.ng-hide{opacity:0}.ng-fade.ng-hide-remove{-webkit-animation:fadeInLeft 1s;animation:fadeInLeft 1s}.invisible{visibility:hidden}.visible{visibility:visible}.notransition{-webkit-transition:none !important;transition:none !important}a.menu-links{cursor:pointer}p.comment{color:darkgray}p.comment a{color:lightskyblue}.btn.disabled{pointer-events:auto}.form-control-inline{min-width:0;width:auto;display:inline}/*! jQuery UI - v1.12.1 - 2016-09-14
+* http://jqueryui.com
+* Includes: core.css, accordion.css, autocomplete.css, menu.css, button.css, controlgroup.css, checkboxradio.css, datepicker.css, dialog.css, draggable.css, resizable.css, progressbar.css, selectable.css, selectmenu.css, slider.css, sortable.css, spinner.css, tabs.css, tooltip.css, theme.css
+* To view and modify this theme, visit http://jqueryui.com/themeroller/?ffDefault=Arial%2CHelvetica%2Csans-serif&fsDefault=1em&fwDefault=normal&cornerRadius=3px&bgColorHeader=e9e9e9&bgTextureHeader=flat&borderColorHeader=dddddd&fcHeader=333333&iconColorHeader=444444&bgColorContent=ffffff&bgTextureContent=flat&borderColorContent=dddddd&fcContent=333333&iconColorContent=444444&bgColorDefault=f6f6f6&bgTextureDefault=flat&borderColorDefault=c5c5c5&fcDefault=454545&iconColorDefault=777777&bgColorHover=ededed&bgTextureHover=flat&borderColorHover=cccccc&fcHover=2b2b2b&iconColorHover=555555&bgColorActive=007fff&bgTextureActive=flat&borderColorActive=003eff&fcActive=ffffff&iconColorActive=ffffff&bgColorHighlight=fffa90&bgTextureHighlight=flat&borderColorHighlight=dad55e&fcHighlight=777620&iconColorHighlight=777620&bgColorError=fddfdf&bgTextureError=flat&borderColorError=f1a899&fcError=5f3f3f&iconColorError=cc0000&bgColorOverlay=aaaaaa&bgTextureOverlay=flat&bgImgOpacityOverlay=0&opacityOverlay=30&bgColorShadow=666666&bgTextureShadow=flat&bgImgOpacityShadow=0&opacityShadow=30&thicknessShadow=5px&offsetTopShadow=0px&offsetLeftShadow=0px&cornerRadiusShadow=8px
+* Copyright jQuery Foundation and other contributors; Licensed MIT */.ui-helper-hidden{display:none}.ui-helper-hidden-accessible{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.ui-helper-reset{margin:0;padding:0;border:0;outline:0;line-height:1.3;text-decoration:none;font-size:100%;list-style:none}.ui-helper-clearfix:before,.ui-helper-clearfix:after{content:"";display:table;border-collapse:collapse}.ui-helper-clearfix:after{clear:both}.ui-helper-zfix{width:100%;height:100%;top:0;left:0;position:absolute;opacity:0;filter:Alpha(Opacity=0)}.ui-front{z-index:100}.ui-state-disabled{cursor:default !important;pointer-events:none}.ui-icon{display:inline-block;vertical-align:middle;margin-top:-.25em;position:relative;text-indent:-99999px;overflow:hidden;background-repeat:no-repeat}.ui-widget-icon-block{left:50%;margin-left:-8px;display:block}.ui-widget-overlay{position:fixed;top:0;left:0;width:100%;height:100%}.ui-accordion .ui-accordion-header{display:block;cursor:pointer;position:relative;margin:2px 0 0 0;padding:.5em .5em .5em .7em;font-size:100%}.ui-accordion .ui-accordion-content{padding:1em 2.2em;border-top:0;overflow:auto}.ui-autocomplete{position:absolute;top:0;left:0;cursor:default}.ui-menu{list-style:none;padding:0;margin:0;display:block;outline:0}.ui-menu .ui-menu{position:absolute}.ui-menu .ui-menu-item{margin:0;cursor:pointer;list-style-image:url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7")}.ui-menu .ui-menu-item-wrapper{position:relative;padding:3px 1em 3px .4em}.ui-menu .ui-menu-divider{margin:5px 0;height:0;font-size:0;line-height:0;border-width:1px 0 0 0}.ui-menu .ui-state-focus,.ui-menu .ui-state-active{margin:-1px}.ui-menu-icons{position:relative}.ui-menu-icons .ui-menu-item-wrapper{padding-left:2em}.ui-menu .ui-icon{position:absolute;top:0;bottom:0;left:.2em;margin:auto 0}.ui-menu .ui-menu-icon{left:auto;right:0}.ui-button{padding:.4em 1em;display:inline-block;position:relative;line-height:normal;margin-right:.1em;cursor:pointer;vertical-align:middle;text-align:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;overflow:visible}.ui-button,.ui-button:link,.ui-button:visited,.ui-button:hover,.ui-button:active{text-decoration:none}.ui-button-icon-only{width:2em;box-sizing:border-box;text-indent:-9999px;white-space:nowrap}input.ui-button.ui-button-icon-only{text-indent:0}.ui-button-icon-only .ui-icon{position:absolute;top:50%;left:50%;margin-top:-8px;margin-left:-8px}.ui-button.ui-icon-notext .ui-icon{padding:0;width:2.1em;height:2.1em;text-indent:-9999px;white-space:nowrap}input.ui-button.ui-icon-notext .ui-icon{width:auto;height:auto;text-indent:0;white-space:normal;padding:.4em 1em}input.ui-button::-moz-focus-inner,button.ui-button::-moz-focus-inner{border:0;padding:0}.ui-controlgroup{vertical-align:middle;display:inline-block}.ui-controlgroup>.ui-controlgroup-item{float:left;margin-left:0;margin-right:0}.ui-controlgroup>.ui-controlgroup-item:focus,.ui-controlgroup>.ui-controlgroup-item.ui-visual-focus{z-index:9999}.ui-controlgroup-vertical>.ui-controlgroup-item{display:block;float:none;width:100%;margin-top:0;margin-bottom:0;text-align:left}.ui-controlgroup-vertical .ui-controlgroup-item{box-sizing:border-box}.ui-controlgroup .ui-controlgroup-label{padding:.4em 1em}.ui-controlgroup .ui-controlgroup-label span{font-size:80%}.ui-controlgroup-horizontal .ui-controlgroup-label+.ui-controlgroup-item{border-left:0}.ui-controlgroup-vertical .ui-controlgroup-label+.ui-controlgroup-item{border-top:0}.ui-controlgroup-horizontal .ui-controlgroup-label.ui-widget-content{border-right:0}.ui-controlgroup-vertical .ui-controlgroup-label.ui-widget-content{border-bottom:0}.ui-controlgroup-vertical .ui-spinner-input{width:75%;width:calc( 100% - 2.4em )}.ui-controlgroup-vertical .ui-spinner .ui-spinner-up{border-top-style:solid}.ui-checkboxradio-label .ui-icon-background{box-shadow:inset 1px 1px 1px #ccc;border-radius:.12em;border:0}.ui-checkboxradio-radio-label .ui-icon-background{width:16px;height:16px;border-radius:1em;overflow:visible;border:0}.ui-checkboxradio-radio-label.ui-checkboxradio-checked .ui-icon,.ui-checkboxradio-radio-label.ui-checkboxradio-checked:hover .ui-icon{background-image:none;width:8px;height:8px;border-width:4px;border-style:solid}.ui-checkboxradio-disabled{pointer-events:none}.ui-datepicker{width:17em;padding:.2em .2em 0;display:none}.ui-datepicker .ui-datepicker-header{position:relative;padding:.2em 0}.ui-datepicker .ui-datepicker-prev,.ui-datepicker .ui-datepicker-next{position:absolute;top:2px;width:1.8em;height:1.8em}.ui-datepicker .ui-datepicker-prev-hover,.ui-datepicker .ui-datepicker-next-hover{top:1px}.ui-datepicker .ui-datepicker-prev{left:2px}.ui-datepicker .ui-datepicker-next{right:2px}.ui-datepicker .ui-datepicker-prev-hover{left:1px}.ui-datepicker .ui-datepicker-next-hover{right:1px}.ui-datepicker .ui-datepicker-prev span,.ui-datepicker .ui-datepicker-next span{display:block;position:absolute;left:50%;margin-left:-8px;top:50%;margin-top:-8px}.ui-datepicker .ui-datepicker-title{margin:0 2.3em;line-height:1.8em;text-align:center}.ui-datepicker .ui-datepicker-title select{font-size:1em;margin:1px 0}.ui-datepicker select.ui-datepicker-month,.ui-datepicker select.ui-datepicker-year{width:45%}.ui-datepicker table{width:100%;font-size:.9em;border-collapse:collapse;margin:0 0 .4em}.ui-datepicker th{padding:.7em .3em;text-align:center;font-weight:bold;border:0}.ui-datepicker td{border:0;padding:1px}.ui-datepicker td span,.ui-datepicker td a{display:block;padding:.2em;text-align:right;text-decoration:none}.ui-datepicker .ui-datepicker-buttonpane{background-image:none;margin:.7em 0 0 0;padding:0 .2em;border-left:0;border-right:0;border-bottom:0}.ui-datepicker .ui-datepicker-buttonpane button{float:right;margin:.5em .2em .4em;cursor:pointer;padding:.2em .6em .3em .6em;width:auto;overflow:visible}.ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-current{float:left}.ui-datepicker.ui-datepicker-multi{width:auto}.ui-datepicker-multi .ui-datepicker-group{float:left}.ui-datepicker-multi .ui-datepicker-group table{width:95%;margin:0 auto .4em}.ui-datepicker-multi-2 .ui-datepicker-group{width:50%}.ui-datepicker-multi-3 .ui-datepicker-group{width:33.3%}.ui-datepicker-multi-4 .ui-datepicker-group{width:25%}.ui-datepicker-multi .ui-datepicker-group-last .ui-datepicker-header,.ui-datepicker-multi .ui-datepicker-group-middle .ui-datepicker-header{border-left-width:0}.ui-datepicker-multi .ui-datepicker-buttonpane{clear:left}.ui-datepicker-row-break{clear:both;width:100%;font-size:0}.ui-datepicker-rtl{direction:rtl}.ui-datepicker-rtl .ui-datepicker-prev{right:2px;left:auto}.ui-datepicker-rtl .ui-datepicker-next{left:2px;right:auto}.ui-datepicker-rtl .ui-datepicker-prev:hover{right:1px;left:auto}.ui-datepicker-rtl .ui-datepicker-next:hover{left:1px;right:auto}.ui-datepicker-rtl .ui-datepicker-buttonpane{clear:right}.ui-datepicker-rtl .ui-datepicker-buttonpane button{float:left}.ui-datepicker-rtl .ui-datepicker-buttonpane button.ui-datepicker-current,.ui-datepicker-rtl .ui-datepicker-group{float:right}.ui-datepicker-rtl .ui-datepicker-group-last .ui-datepicker-header,.ui-datepicker-rtl .ui-datepicker-group-middle .ui-datepicker-header{border-right-width:0;border-left-width:1px}.ui-datepicker .ui-icon{display:block;text-indent:-99999px;overflow:hidden;background-repeat:no-repeat;left:.5em;top:.3em}.ui-dialog{position:absolute;top:0;left:0;padding:.2em;outline:0}.ui-dialog .ui-dialog-titlebar{padding:.4em 1em;position:relative}.ui-dialog .ui-dialog-title{float:left;margin:.1em 0;white-space:nowrap;width:90%;overflow:hidden;text-overflow:ellipsis}.ui-dialog .ui-dialog-titlebar-close{position:absolute;right:.3em;top:50%;width:20px;margin:-10px 0 0 0;padding:1px;height:20px}.ui-dialog .ui-dialog-content{position:relative;border:0;padding:.5em 1em;background:0;overflow:auto}.ui-dialog .ui-dialog-buttonpane{text-align:left;border-width:1px 0 0 0;background-image:none;margin-top:.5em;padding:.3em 1em .5em .4em}.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset{float:right}.ui-dialog .ui-dialog-buttonpane button{margin:.5em .4em .5em 0;cursor:pointer}.ui-dialog .ui-resizable-n{height:2px;top:0}.ui-dialog .ui-resizable-e{width:2px;right:0}.ui-dialog .ui-resizable-s{height:2px;bottom:0}.ui-dialog .ui-resizable-w{width:2px;left:0}.ui-dialog .ui-resizable-se,.ui-dialog .ui-resizable-sw,.ui-dialog .ui-resizable-ne,.ui-dialog .ui-resizable-nw{width:7px;height:7px}.ui-dialog .ui-resizable-se{right:0;bottom:0}.ui-dialog .ui-resizable-sw{left:0;bottom:0}.ui-dialog .ui-resizable-ne{right:0;top:0}.ui-dialog .ui-resizable-nw{left:0;top:0}.ui-draggable .ui-dialog-titlebar{cursor:move}.ui-draggable-handle{-ms-touch-action:none;touch-action:none}.ui-resizable{position:relative}.ui-resizable-handle{position:absolute;font-size:.1px;display:block;-ms-touch-action:none;touch-action:none}.ui-resizable-disabled .ui-resizable-handle,.ui-resizable-autohide .ui-resizable-handle{display:none}.ui-resizable-n{cursor:n-resize;height:7px;width:100%;top:-5px;left:0}.ui-resizable-s{cursor:s-resize;height:7px;width:100%;bottom:-5px;left:0}.ui-resizable-e{cursor:e-resize;width:7px;right:-5px;top:0;height:100%}.ui-resizable-w{cursor:w-resize;width:7px;left:-5px;top:0;height:100%}.ui-resizable-se{cursor:se-resize;width:12px;height:12px;right:1px;bottom:1px}.ui-resizable-sw{cursor:sw-resize;width:9px;height:9px;left:-5px;bottom:-5px}.ui-resizable-nw{cursor:nw-resize;width:9px;height:9px;left:-5px;top:-5px}.ui-resizable-ne{cursor:ne-resize;width:9px;height:9px;right:-5px;top:-5px}.ui-progressbar{height:2em;text-align:left;overflow:hidden}.ui-progressbar .ui-progressbar-value{margin:-1px;height:100%}.ui-progressbar .ui-progressbar-overlay{background:url("data:image/gif;base64,R0lGODlhKAAoAIABAAAAAP///yH/C05FVFNDQVBFMi4wAwEAAAAh+QQJAQABACwAAAAAKAAoAAACkYwNqXrdC52DS06a7MFZI+4FHBCKoDeWKXqymPqGqxvJrXZbMx7Ttc+w9XgU2FB3lOyQRWET2IFGiU9m1frDVpxZZc6bfHwv4c1YXP6k1Vdy292Fb6UkuvFtXpvWSzA+HycXJHUXiGYIiMg2R6W459gnWGfHNdjIqDWVqemH2ekpObkpOlppWUqZiqr6edqqWQAAIfkECQEAAQAsAAAAACgAKAAAApSMgZnGfaqcg1E2uuzDmmHUBR8Qil95hiPKqWn3aqtLsS18y7G1SzNeowWBENtQd+T1JktP05nzPTdJZlR6vUxNWWjV+vUWhWNkWFwxl9VpZRedYcflIOLafaa28XdsH/ynlcc1uPVDZxQIR0K25+cICCmoqCe5mGhZOfeYSUh5yJcJyrkZWWpaR8doJ2o4NYq62lAAACH5BAkBAAEALAAAAAAoACgAAAKVDI4Yy22ZnINRNqosw0Bv7i1gyHUkFj7oSaWlu3ovC8GxNso5fluz3qLVhBVeT/Lz7ZTHyxL5dDalQWPVOsQWtRnuwXaFTj9jVVh8pma9JjZ4zYSj5ZOyma7uuolffh+IR5aW97cHuBUXKGKXlKjn+DiHWMcYJah4N0lYCMlJOXipGRr5qdgoSTrqWSq6WFl2ypoaUAAAIfkECQEAAQAsAAAAACgAKAAAApaEb6HLgd/iO7FNWtcFWe+ufODGjRfoiJ2akShbueb0wtI50zm02pbvwfWEMWBQ1zKGlLIhskiEPm9R6vRXxV4ZzWT2yHOGpWMyorblKlNp8HmHEb/lCXjcW7bmtXP8Xt229OVWR1fod2eWqNfHuMjXCPkIGNileOiImVmCOEmoSfn3yXlJWmoHGhqp6ilYuWYpmTqKUgAAIfkECQEAAQAsAAAAACgAKAAAApiEH6kb58biQ3FNWtMFWW3eNVcojuFGfqnZqSebuS06w5V80/X02pKe8zFwP6EFWOT1lDFk8rGERh1TTNOocQ61Hm4Xm2VexUHpzjymViHrFbiELsefVrn6XKfnt2Q9G/+Xdie499XHd2g4h7ioOGhXGJboGAnXSBnoBwKYyfioubZJ2Hn0RuRZaflZOil56Zp6iioKSXpUAAAh+QQJAQABACwAAAAAKAAoAAACkoQRqRvnxuI7kU1a1UU5bd5tnSeOZXhmn5lWK3qNTWvRdQxP8qvaC+/yaYQzXO7BMvaUEmJRd3TsiMAgswmNYrSgZdYrTX6tSHGZO73ezuAw2uxuQ+BbeZfMxsexY35+/Qe4J1inV0g4x3WHuMhIl2jXOKT2Q+VU5fgoSUI52VfZyfkJGkha6jmY+aaYdirq+lQAACH5BAkBAAEALAAAAAAoACgAAAKWBIKpYe0L3YNKToqswUlvznigd4wiR4KhZrKt9Upqip61i9E3vMvxRdHlbEFiEXfk9YARYxOZZD6VQ2pUunBmtRXo1Lf8hMVVcNl8JafV38aM2/Fu5V16Bn63r6xt97j09+MXSFi4BniGFae3hzbH9+hYBzkpuUh5aZmHuanZOZgIuvbGiNeomCnaxxap2upaCZsq+1kAACH5BAkBAAEALAAAAAAoACgAAAKXjI8By5zf4kOxTVrXNVlv1X0d8IGZGKLnNpYtm8Lr9cqVeuOSvfOW79D9aDHizNhDJidFZhNydEahOaDH6nomtJjp1tutKoNWkvA6JqfRVLHU/QUfau9l2x7G54d1fl995xcIGAdXqMfBNadoYrhH+Mg2KBlpVpbluCiXmMnZ2Sh4GBqJ+ckIOqqJ6LmKSllZmsoq6wpQAAAh+QQJAQABACwAAAAAKAAoAAAClYx/oLvoxuJDkU1a1YUZbJ59nSd2ZXhWqbRa2/gF8Gu2DY3iqs7yrq+xBYEkYvFSM8aSSObE+ZgRl1BHFZNr7pRCavZ5BW2142hY3AN/zWtsmf12p9XxxFl2lpLn1rseztfXZjdIWIf2s5dItwjYKBgo9yg5pHgzJXTEeGlZuenpyPmpGQoKOWkYmSpaSnqKileI2FAAACH5BAkBAAEALAAAAAAoACgAAAKVjB+gu+jG4kORTVrVhRlsnn2dJ3ZleFaptFrb+CXmO9OozeL5VfP99HvAWhpiUdcwkpBH3825AwYdU8xTqlLGhtCosArKMpvfa1mMRae9VvWZfeB2XfPkeLmm18lUcBj+p5dnN8jXZ3YIGEhYuOUn45aoCDkp16hl5IjYJvjWKcnoGQpqyPlpOhr3aElaqrq56Bq7VAAAOw==");height:100%;filter:alpha(opacity=25);opacity:.25}.ui-progressbar-indeterminate .ui-progressbar-value{background-image:none}.ui-selectable{-ms-touch-action:none;touch-action:none}.ui-selectable-helper{position:absolute;z-index:100;border:1px dotted black}.ui-selectmenu-menu{padding:0;margin:0;position:absolute;top:0;left:0;display:none}.ui-selectmenu-menu .ui-menu{overflow:auto;overflow-x:hidden;padding-bottom:1px}.ui-selectmenu-menu .ui-menu .ui-selectmenu-optgroup{font-size:1em;font-weight:bold;line-height:1.5;padding:2px .4em;margin:.5em 0 0 0;height:auto;border:0}.ui-selectmenu-open{display:block}.ui-selectmenu-text{display:block;margin-right:20px;overflow:hidden;text-overflow:ellipsis}.ui-selectmenu-button.ui-button{text-align:left;white-space:nowrap;width:14em}.ui-selectmenu-icon.ui-icon{float:right;margin-top:0}.ui-slider{position:relative;text-align:left}.ui-slider .ui-slider-handle{position:absolute;z-index:2;width:1.2em;height:1.2em;cursor:default;-ms-touch-action:none;touch-action:none}.ui-slider .ui-slider-range{position:absolute;z-index:1;font-size:.7em;display:block;border:0;background-position:0 0}.ui-slider.ui-state-disabled .ui-slider-handle,.ui-slider.ui-state-disabled .ui-slider-range{filter:inherit}.ui-slider-horizontal{height:.8em}.ui-slider-horizontal .ui-slider-handle{top:-.3em;margin-left:-.6em}.ui-slider-horizontal .ui-slider-range{top:0;height:100%}.ui-slider-horizontal .ui-slider-range-min{left:0}.ui-slider-horizontal .ui-slider-range-max{right:0}.ui-slider-vertical{width:.8em;height:100px}.ui-slider-vertical .ui-slider-handle{left:-.3em;margin-left:0;margin-bottom:-.6em}.ui-slider-vertical .ui-slider-range{left:0;width:100%}.ui-slider-vertical .ui-slider-range-min{bottom:0}.ui-slider-vertical .ui-slider-range-max{top:0}.ui-sortable-handle{-ms-touch-action:none;touch-action:none}.ui-spinner{position:relative;display:inline-block;overflow:hidden;padding:0;vertical-align:middle}.ui-spinner-input{border:0;background:0;color:inherit;padding:.222em 0;margin:.2em 0;vertical-align:middle;margin-left:.4em;margin-right:2em}.ui-spinner-button{width:1.6em;height:50%;font-size:.5em;padding:0;margin:0;text-align:center;position:absolute;cursor:default;display:block;overflow:hidden;right:0}.ui-spinner a.ui-spinner-button{border-top-style:none;border-bottom-style:none;border-right-style:none}.ui-spinner-up{top:0}.ui-spinner-down{bottom:0}.ui-tabs{position:relative;padding:.2em}.ui-tabs .ui-tabs-nav{margin:0;padding:.2em .2em 0}.ui-tabs .ui-tabs-nav li{list-style:none;float:left;position:relative;top:0;margin:1px .2em 0 0;border-bottom-width:0;padding:0;white-space:nowrap}.ui-tabs .ui-tabs-nav .ui-tabs-anchor{float:left;padding:.5em 1em;text-decoration:none}.ui-tabs .ui-tabs-nav li.ui-tabs-active{margin-bottom:-1px;padding-bottom:1px}.ui-tabs .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor,.ui-tabs .ui-tabs-nav li.ui-state-disabled .ui-tabs-anchor,.ui-tabs .ui-tabs-nav li.ui-tabs-loading .ui-tabs-anchor{cursor:text}.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor{cursor:pointer}.ui-tabs .ui-tabs-panel{display:block;border-width:0;padding:1em 1.4em;background:0}.ui-tooltip{padding:8px;position:absolute;z-index:9999;max-width:300px}body .ui-tooltip{border-width:2px}.ui-widget{font-family:Arial,Helvetica,sans-serif;font-size:1em}.ui-widget .ui-widget{font-size:1em}.ui-widget input,.ui-widget select,.ui-widget textarea,.ui-widget button{font-family:Arial,Helvetica,sans-serif;font-size:1em}.ui-widget.ui-widget-content{border:1px solid #c5c5c5}.ui-widget-content{border:1px solid #ddd;background:#fff;color:#333}.ui-widget-content a{color:#333}.ui-widget-header{border:1px solid #ddd;background:#e9e9e9;color:#333;font-weight:bold}.ui-widget-header a{color:#333}.ui-state-default,.ui-widget-content .ui-state-default,.ui-widget-header .ui-state-default,.ui-button,html .ui-button.ui-state-disabled:hover,html .ui-button.ui-state-disabled:active{border:1px solid #c5c5c5;background:#f6f6f6;font-weight:normal;color:#454545}.ui-state-default a,.ui-state-default a:link,.ui-state-default a:visited,a.ui-button,a:link.ui-button,a:visited.ui-button,.ui-button{color:#454545;text-decoration:none}.ui-state-hover,.ui-widget-content .ui-state-hover,.ui-widget-header .ui-state-hover,.ui-state-focus,.ui-widget-content .ui-state-focus,.ui-widget-header .ui-state-focus,.ui-button:hover,.ui-button:focus{border:1px solid #ccc;background:#ededed;font-weight:normal;color:#2b2b2b}.ui-state-hover a,.ui-state-hover a:hover,.ui-state-hover a:link,.ui-state-hover a:visited,.ui-state-focus a,.ui-state-focus a:hover,.ui-state-focus a:link,.ui-state-focus a:visited,a.ui-button:hover,a.ui-button:focus{color:#2b2b2b;text-decoration:none}.ui-visual-focus{box-shadow:0 0 3px 1px #5e9ed6}.ui-state-active,.ui-widget-content .ui-state-active,.ui-widget-header .ui-state-active,a.ui-button:active,.ui-button:active,.ui-button.ui-state-active:hover{border:1px solid #003eff;background:#007fff;font-weight:normal;color:#fff}.ui-icon-background,.ui-state-active .ui-icon-background{border:#003eff;background-color:#fff}.ui-state-active a,.ui-state-active a:link,.ui-state-active a:visited{color:#fff;text-decoration:none}.ui-state-highlight,.ui-widget-content .ui-state-highlight,.ui-widget-header .ui-state-highlight{border:1px solid #dad55e;background:#fffa90;color:#777620}.ui-state-checked{border:1px solid #dad55e;background:#fffa90}.ui-state-highlight a,.ui-widget-content .ui-state-highlight a,.ui-widget-header .ui-state-highlight a{color:#777620}.ui-state-error,.ui-widget-content .ui-state-error,.ui-widget-header .ui-state-error{border:1px solid #f1a899;background:#fddfdf;color:#5f3f3f}.ui-state-error a,.ui-widget-content .ui-state-error a,.ui-widget-header .ui-state-error a{color:#5f3f3f}.ui-state-error-text,.ui-widget-content .ui-state-error-text,.ui-widget-header .ui-state-error-text{color:#5f3f3f}.ui-priority-primary,.ui-widget-content .ui-priority-primary,.ui-widget-header .ui-priority-primary{font-weight:bold}.ui-priority-secondary,.ui-widget-content .ui-priority-secondary,.ui-widget-header .ui-priority-secondary{opacity:.7;filter:Alpha(Opacity=70);font-weight:normal}.ui-state-disabled,.ui-widget-content .ui-state-disabled,.ui-widget-header .ui-state-disabled{opacity:.35;filter:Alpha(Opacity=35);background-image:none}.ui-state-disabled .ui-icon{filter:Alpha(Opacity=35)}.ui-icon{width:16px;height:16px}.ui-icon,.ui-widget-content .ui-icon{background-image:url("/static/jquery-ui/themes/base/images/ui-icons_444444_256x240.png?261becb9e78f")}.ui-widget-header .ui-icon{background-image:url("/static/jquery-ui/themes/base/images/ui-icons_444444_256x240.png?261becb9e78f")}.ui-state-hover .ui-icon,.ui-state-focus .ui-icon,.ui-button:hover .ui-icon,.ui-button:focus .ui-icon{background-image:url("/static/jquery-ui/themes/base/images/ui-icons_555555_256x240.png?06b1e3643e79")}.ui-state-active .ui-icon,.ui-button:active .ui-icon{background-image:url("/static/jquery-ui/themes/base/images/ui-icons_ffffff_256x240.png?261becb9e78f")}.ui-state-highlight .ui-icon,.ui-button .ui-state-highlight.ui-icon{background-image:url("/static/jquery-ui/themes/base/images/ui-icons_777620_256x240.png?06b1e3643e79")}.ui-state-error .ui-icon,.ui-state-error-text .ui-icon{background-image:url("/static/jquery-ui/themes/base/images/ui-icons_cc0000_256x240.png?261becb9e78f")}.ui-button .ui-icon{background-image:url("/static/jquery-ui/themes/base/images/ui-icons_777777_256x240.png?261becb9e78f")}.ui-icon-blank{background-position:16px 16px}.ui-icon-caret-1-n{background-position:0 0}.ui-icon-caret-1-ne{background-position:-16px 0}.ui-icon-caret-1-e{background-position:-32px 0}.ui-icon-caret-1-se{background-position:-48px 0}.ui-icon-caret-1-s{background-position:-65px 0}.ui-icon-caret-1-sw{background-position:-80px 0}.ui-icon-caret-1-w{background-position:-96px 0}.ui-icon-caret-1-nw{background-position:-112px 0}.ui-icon-caret-2-n-s{background-position:-128px 0}.ui-icon-caret-2-e-w{background-position:-144px 0}.ui-icon-triangle-1-n{background-position:0 -16px}.ui-icon-triangle-1-ne{background-position:-16px -16px}.ui-icon-triangle-1-e{background-position:-32px -16px}.ui-icon-triangle-1-se{background-position:-48px -16px}.ui-icon-triangle-1-s{background-position:-65px -16px}.ui-icon-triangle-1-sw{background-position:-80px -16px}.ui-icon-triangle-1-w{background-position:-96px -16px}.ui-icon-triangle-1-nw{background-position:-112px -16px}.ui-icon-triangle-2-n-s{background-position:-128px -16px}.ui-icon-triangle-2-e-w{background-position:-144px -16px}.ui-icon-arrow-1-n{background-position:0 -32px}.ui-icon-arrow-1-ne{background-position:-16px -32px}.ui-icon-arrow-1-e{background-position:-32px -32px}.ui-icon-arrow-1-se{background-position:-48px -32px}.ui-icon-arrow-1-s{background-position:-65px -32px}.ui-icon-arrow-1-sw{background-position:-80px -32px}.ui-icon-arrow-1-w{background-position:-96px -32px}.ui-icon-arrow-1-nw{background-position:-112px -32px}.ui-icon-arrow-2-n-s{background-position:-128px -32px}.ui-icon-arrow-2-ne-sw{background-position:-144px -32px}.ui-icon-arrow-2-e-w{background-position:-160px -32px}.ui-icon-arrow-2-se-nw{background-position:-176px -32px}.ui-icon-arrowstop-1-n{background-position:-192px -32px}.ui-icon-arrowstop-1-e{background-position:-208px -32px}.ui-icon-arrowstop-1-s{background-position:-224px -32px}.ui-icon-arrowstop-1-w{background-position:-240px -32px}.ui-icon-arrowthick-1-n{background-position:1px -48px}.ui-icon-arrowthick-1-ne{background-position:-16px -48px}.ui-icon-arrowthick-1-e{background-position:-32px -48px}.ui-icon-arrowthick-1-se{background-position:-48px -48px}.ui-icon-arrowthick-1-s{background-position:-64px -48px}.ui-icon-arrowthick-1-sw{background-position:-80px -48px}.ui-icon-arrowthick-1-w{background-position:-96px -48px}.ui-icon-arrowthick-1-nw{background-position:-112px -48px}.ui-icon-arrowthick-2-n-s{background-position:-128px -48px}.ui-icon-arrowthick-2-ne-sw{background-position:-144px -48px}.ui-icon-arrowthick-2-e-w{background-position:-160px -48px}.ui-icon-arrowthick-2-se-nw{background-position:-176px -48px}.ui-icon-arrowthickstop-1-n{background-position:-192px -48px}.ui-icon-arrowthickstop-1-e{background-position:-208px -48px}.ui-icon-arrowthickstop-1-s{background-position:-224px -48px}.ui-icon-arrowthickstop-1-w{background-position:-240px -48px}.ui-icon-arrowreturnthick-1-w{background-position:0 -64px}.ui-icon-arrowreturnthick-1-n{background-position:-16px -64px}.ui-icon-arrowreturnthick-1-e{background-position:-32px -64px}.ui-icon-arrowreturnthick-1-s{background-position:-48px -64px}.ui-icon-arrowreturn-1-w{background-position:-64px -64px}.ui-icon-arrowreturn-1-n{background-position:-80px -64px}.ui-icon-arrowreturn-1-e{background-position:-96px -64px}.ui-icon-arrowreturn-1-s{background-position:-112px -64px}.ui-icon-arrowrefresh-1-w{background-position:-128px -64px}.ui-icon-arrowrefresh-1-n{background-position:-144px -64px}.ui-icon-arrowrefresh-1-e{background-position:-160px -64px}.ui-icon-arrowrefresh-1-s{background-position:-176px -64px}.ui-icon-arrow-4{background-position:0 -80px}.ui-icon-arrow-4-diag{background-position:-16px -80px}.ui-icon-extlink{background-position:-32px -80px}.ui-icon-newwin{background-position:-48px -80px}.ui-icon-refresh{background-position:-64px -80px}.ui-icon-shuffle{background-position:-80px -80px}.ui-icon-transfer-e-w{background-position:-96px -80px}.ui-icon-transferthick-e-w{background-position:-112px -80px}.ui-icon-folder-collapsed{background-position:0 -96px}.ui-icon-folder-open{background-position:-16px -96px}.ui-icon-document{background-position:-32px -96px}.ui-icon-document-b{background-position:-48px -96px}.ui-icon-note{background-position:-64px -96px}.ui-icon-mail-closed{background-position:-80px -96px}.ui-icon-mail-open{background-position:-96px -96px}.ui-icon-suitcase{background-position:-112px -96px}.ui-icon-comment{background-position:-128px -96px}.ui-icon-person{background-position:-144px -96px}.ui-icon-print{background-position:-160px -96px}.ui-icon-trash{background-position:-176px -96px}.ui-icon-locked{background-position:-192px -96px}.ui-icon-unlocked{background-position:-208px -96px}.ui-icon-bookmark{background-position:-224px -96px}.ui-icon-tag{background-position:-240px -96px}.ui-icon-home{background-position:0 -112px}.ui-icon-flag{background-position:-16px -112px}.ui-icon-calendar{background-position:-32px -112px}.ui-icon-cart{background-position:-48px -112px}.ui-icon-pencil{background-position:-64px -112px}.ui-icon-clock{background-position:-80px -112px}.ui-icon-disk{background-position:-96px -112px}.ui-icon-calculator{background-position:-112px -112px}.ui-icon-zoomin{background-position:-128px -112px}.ui-icon-zoomout{background-position:-144px -112px}.ui-icon-search{background-position:-160px -112px}.ui-icon-wrench{background-position:-176px -112px}.ui-icon-gear{background-position:-192px -112px}.ui-icon-heart{background-position:-208px -112px}.ui-icon-star{background-position:-224px -112px}.ui-icon-link{background-position:-240px -112px}.ui-icon-cancel{background-position:0 -128px}.ui-icon-plus{background-position:-16px -128px}.ui-icon-plusthick{background-position:-32px -128px}.ui-icon-minus{background-position:-48px -128px}.ui-icon-minusthick{background-position:-64px -128px}.ui-icon-close{background-position:-80px -128px}.ui-icon-closethick{background-position:-96px -128px}.ui-icon-key{background-position:-112px -128px}.ui-icon-lightbulb{background-position:-128px -128px}.ui-icon-scissors{background-position:-144px -128px}.ui-icon-clipboard{background-position:-160px -128px}.ui-icon-copy{background-position:-176px -128px}.ui-icon-contact{background-position:-192px -128px}.ui-icon-image{background-position:-208px -128px}.ui-icon-video{background-position:-224px -128px}.ui-icon-script{background-position:-240px -128px}.ui-icon-alert{background-position:0 -144px}.ui-icon-info{background-position:-16px -144px}.ui-icon-notice{background-position:-32px -144px}.ui-icon-help{background-position:-48px -144px}.ui-icon-check{background-position:-64px -144px}.ui-icon-bullet{background-position:-80px -144px}.ui-icon-radio-on{background-position:-96px -144px}.ui-icon-radio-off{background-position:-112px -144px}.ui-icon-pin-w{background-position:-128px -144px}.ui-icon-pin-s{background-position:-144px -144px}.ui-icon-play{background-position:0 -160px}.ui-icon-pause{background-position:-16px -160px}.ui-icon-seek-next{background-position:-32px -160px}.ui-icon-seek-prev{background-position:-48px -160px}.ui-icon-seek-end{background-position:-64px -160px}.ui-icon-seek-start{background-position:-80px -160px}.ui-icon-seek-first{background-position:-80px -160px}.ui-icon-stop{background-position:-96px -160px}.ui-icon-eject{background-position:-112px -160px}.ui-icon-volume-off{background-position:-128px -160px}.ui-icon-volume-on{background-position:-144px -160px}.ui-icon-power{background-position:0 -176px}.ui-icon-signal-diag{background-position:-16px -176px}.ui-icon-signal{background-position:-32px -176px}.ui-icon-battery-0{background-position:-48px -176px}.ui-icon-battery-1{background-position:-64px -176px}.ui-icon-battery-2{background-position:-80px -176px}.ui-icon-battery-3{background-position:-96px -176px}.ui-icon-circle-plus{background-position:0 -192px}.ui-icon-circle-minus{background-position:-16px -192px}.ui-icon-circle-close{background-position:-32px -192px}.ui-icon-circle-triangle-e{background-position:-48px -192px}.ui-icon-circle-triangle-s{background-position:-64px -192px}.ui-icon-circle-triangle-w{background-position:-80px -192px}.ui-icon-circle-triangle-n{background-position:-96px -192px}.ui-icon-circle-arrow-e{background-position:-112px -192px}.ui-icon-circle-arrow-s{background-position:-128px -192px}.ui-icon-circle-arrow-w{background-position:-144px -192px}.ui-icon-circle-arrow-n{background-position:-160px -192px}.ui-icon-circle-zoomin{background-position:-176px -192px}.ui-icon-circle-zoomout{background-position:-192px -192px}.ui-icon-circle-check{background-position:-208px -192px}.ui-icon-circlesmall-plus{background-position:0 -208px}.ui-icon-circlesmall-minus{background-position:-16px -208px}.ui-icon-circlesmall-close{background-position:-32px -208px}.ui-icon-squaresmall-plus{background-position:-48px -208px}.ui-icon-squaresmall-minus{background-position:-64px -208px}.ui-icon-squaresmall-close{background-position:-80px -208px}.ui-icon-grip-dotted-vertical{background-position:0 -224px}.ui-icon-grip-dotted-horizontal{background-position:-16px -224px}.ui-icon-grip-solid-vertical{background-position:-32px -224px}.ui-icon-grip-solid-horizontal{background-position:-48px -224px}.ui-icon-gripsmall-diagonal-se{background-position:-64px -224px}.ui-icon-grip-diagonal-se{background-position:-80px -224px}.ui-corner-all,.ui-corner-top,.ui-corner-left,.ui-corner-tl{border-top-left-radius:3px}.ui-corner-all,.ui-corner-top,.ui-corner-right,.ui-corner-tr{border-top-right-radius:3px}.ui-corner-all,.ui-corner-bottom,.ui-corner-left,.ui-corner-bl{border-bottom-left-radius:3px}.ui-corner-all,.ui-corner-bottom,.ui-corner-right,.ui-corner-br{border-bottom-right-radius:3px}.ui-widget-overlay{background:#aaa;opacity:.3;filter:Alpha(Opacity=30)}.ui-widget-shadow{-webkit-box-shadow:0 0 5px #666;box-shadow:0 0 5px #666}</style>
+    
+     
+<link rel="stylesheet" href="./Longest Palindromic Substring _ LeetCode OJ_files/9345c23ca727.css" type="text/css">
+
+    <script src="./Longest Palindromic Substring _ LeetCode OJ_files/iubenda.js.下载"></script><script async="" src="./Longest Palindromic Substring _ LeetCode OJ_files/analytics.js.下载"></script><script src="./Longest Palindromic Substring _ LeetCode OJ_files/jquery.min.js.下载"></script>
+    <script src="./Longest Palindromic Substring _ LeetCode OJ_files/angular.min.js.下载"></script>
+    <script src="./Longest Palindromic Substring _ LeetCode OJ_files/jquery-ui.min.js.下载"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="/static/html5shiv/dist/html5shiv.min.js"></script>
+      <script src="/static/respond/dest/respond.min.js"></script>
+    <![endif]-->
+  <style type="text/css">@keyframes rotating{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}.loading{animation:rotating 1s linear infinite}</style><style type="text/css">.loading{position:absolute;top:0;right:0;bottom:0;left:0;margin:auto;width:24px;height:24px;font-size:24px}</style><style id="ace_editor.css">.ace_editor {	position: relative;	overflow: hidden;	font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;	direction: ltr;	text-align: left;	}	.ace_scroller {	position: absolute;	overflow: hidden;	top: 0;	bottom: 0;	background-color: inherit;	-ms-user-select: none;	-moz-user-select: none;	-webkit-user-select: none;	user-select: none;	cursor: text;	}	.ace_content {	position: absolute;	-moz-box-sizing: border-box;	-webkit-box-sizing: border-box;	box-sizing: border-box;	min-width: 100%;	}	.ace_dragging .ace_scroller:before{	position: absolute;	top: 0;	left: 0;	right: 0;	bottom: 0;	content: '';	background: rgba(250, 250, 250, 0.01);	z-index: 1000;	}	.ace_dragging.ace_dark .ace_scroller:before{	background: rgba(0, 0, 0, 0.01);	}	.ace_selecting, .ace_selecting * {	cursor: text !important;	}	.ace_gutter {	position: absolute;	overflow : hidden;	width: auto;	top: 0;	bottom: 0;	left: 0;	cursor: default;	z-index: 4;	-ms-user-select: none;	-moz-user-select: none;	-webkit-user-select: none;	user-select: none;	}	.ace_gutter-active-line {	position: absolute;	left: 0;	right: 0;	}	.ace_scroller.ace_scroll-left {	box-shadow: 17px 0 16px -16px rgba(0, 0, 0, 0.4) inset;	}	.ace_gutter-cell {	padding-left: 19px;	padding-right: 6px;	background-repeat: no-repeat;	}	.ace_gutter-cell.ace_error {	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAABOFBMVEX/////////QRswFAb/Ui4wFAYwFAYwFAaWGAfDRymzOSH/PxswFAb/SiUwFAYwFAbUPRvjQiDllog5HhHdRybsTi3/Tyv9Tir+Syj/UC3////XurebMBIwFAb/RSHbPx/gUzfdwL3kzMivKBAwFAbbvbnhPx66NhowFAYwFAaZJg8wFAaxKBDZurf/RB6mMxb/SCMwFAYwFAbxQB3+RB4wFAb/Qhy4Oh+4QifbNRcwFAYwFAYwFAb/QRzdNhgwFAYwFAbav7v/Uy7oaE68MBK5LxLewr/r2NXewLswFAaxJw4wFAbkPRy2PyYwFAaxKhLm1tMwFAazPiQwFAaUGAb/QBrfOx3bvrv/VC/maE4wFAbRPBq6MRO8Qynew8Dp2tjfwb0wFAbx6eju5+by6uns4uH9/f36+vr/GkHjAAAAYnRSTlMAGt+64rnWu/bo8eAA4InH3+DwoN7j4eLi4xP99Nfg4+b+/u9B/eDs1MD1mO7+4PHg2MXa347g7vDizMLN4eG+Pv7i5evs/v79yu7S3/DV7/498Yv24eH+4ufQ3Ozu/v7+y13sRqwAAADLSURBVHjaZc/XDsFgGIBhtDrshlitmk2IrbHFqL2pvXf/+78DPokj7+Fz9qpU/9UXJIlhmPaTaQ6QPaz0mm+5gwkgovcV6GZzd5JtCQwgsxoHOvJO15kleRLAnMgHFIESUEPmawB9ngmelTtipwwfASilxOLyiV5UVUyVAfbG0cCPHig+GBkzAENHS0AstVF6bacZIOzgLmxsHbt2OecNgJC83JERmePUYq8ARGkJx6XtFsdddBQgZE2nPR6CICZhawjA4Fb/chv+399kfR+MMMDGOQAAAABJRU5ErkJggg==");	background-repeat: no-repeat;	background-position: 2px center;	}	.ace_gutter-cell.ace_warning {	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAmVBMVEX///8AAAD///8AAAAAAABPSzb/5sAAAAB/blH/73z/ulkAAAAAAAD85pkAAAAAAAACAgP/vGz/rkDerGbGrV7/pkQICAf////e0IsAAAD/oED/qTvhrnUAAAD/yHD/njcAAADuv2r/nz//oTj/p064oGf/zHAAAAA9Nir/tFIAAAD/tlTiuWf/tkIAAACynXEAAAAAAAAtIRW7zBpBAAAAM3RSTlMAABR1m7RXO8Ln31Z36zT+neXe5OzooRDfn+TZ4p3h2hTf4t3k3ucyrN1K5+Xaks52Sfs9CXgrAAAAjklEQVR42o3PbQ+CIBQFYEwboPhSYgoYunIqqLn6/z8uYdH8Vmdnu9vz4WwXgN/xTPRD2+sgOcZjsge/whXZgUaYYvT8QnuJaUrjrHUQreGczuEafQCO/SJTufTbroWsPgsllVhq3wJEk2jUSzX3CUEDJC84707djRc5MTAQxoLgupWRwW6UB5fS++NV8AbOZgnsC7BpEAAAAABJRU5ErkJggg==");	background-position: 2px center;	}	.ace_gutter-cell.ace_info {	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAAAAAA6mKC9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAJ0Uk5TAAB2k804AAAAPklEQVQY02NgIB68QuO3tiLznjAwpKTgNyDbMegwisCHZUETUZV0ZqOquBpXj2rtnpSJT1AEnnRmL2OgGgAAIKkRQap2htgAAAAASUVORK5CYII=");	background-position: 2px center;	}	.ace_dark .ace_gutter-cell.ace_info {	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAJFBMVEUAAAChoaGAgIAqKiq+vr6tra1ZWVmUlJSbm5s8PDxubm56enrdgzg3AAAAAXRSTlMAQObYZgAAAClJREFUeNpjYMAPdsMYHegyJZFQBlsUlMFVCWUYKkAZMxZAGdxlDMQBAG+TBP4B6RyJAAAAAElFTkSuQmCC");	}	.ace_scrollbar {	position: absolute;	right: 0;	bottom: 0;	z-index: 6;	}	.ace_scrollbar-inner {	position: absolute;	cursor: text;	left: 0;	top: 0;	}	.ace_scrollbar-v{	overflow-x: hidden;	overflow-y: scroll;	top: 0;	}	.ace_scrollbar-h {	overflow-x: scroll;	overflow-y: hidden;	left: 0;	}	.ace_print-margin {	position: absolute;	height: 100%;	}	.ace_text-input {	position: absolute;	z-index: 0;	width: 0.5em;	height: 1em;	opacity: 0;	background: transparent;	-moz-appearance: none;	appearance: none;	border: none;	resize: none;	outline: none;	overflow: hidden;	font: inherit;	padding: 0 1px;	margin: 0 -1px;	text-indent: -1em;	-ms-user-select: text;	-moz-user-select: text;	-webkit-user-select: text;	user-select: text;	white-space: pre!important;	}	.ace_text-input.ace_composition {	background: inherit;	color: inherit;	z-index: 1000;	opacity: 1;	text-indent: 0;	}	.ace_layer {	z-index: 1;	position: absolute;	overflow: hidden;	word-wrap: normal;	white-space: pre;	height: 100%;	width: 100%;	-moz-box-sizing: border-box;	-webkit-box-sizing: border-box;	box-sizing: border-box;	pointer-events: none;	}	.ace_gutter-layer {	position: relative;	width: auto;	text-align: right;	pointer-events: auto;	}	.ace_text-layer {	font: inherit !important;	}	.ace_cjk {	display: inline-block;	text-align: center;	}	.ace_cursor-layer {	z-index: 4;	}	.ace_cursor {	z-index: 4;	position: absolute;	-moz-box-sizing: border-box;	-webkit-box-sizing: border-box;	box-sizing: border-box;	border-left: 2px solid;	transform: translatez(0);	}	.ace_slim-cursors .ace_cursor {	border-left-width: 1px;	}	.ace_overwrite-cursors .ace_cursor {	border-left-width: 0;	border-bottom: 1px solid;	}	.ace_hidden-cursors .ace_cursor {	opacity: 0.2;	}	.ace_smooth-blinking .ace_cursor {	-webkit-transition: opacity 0.18s;	transition: opacity 0.18s;	}	.ace_editor.ace_multiselect .ace_cursor {	border-left-width: 1px;	}	.ace_marker-layer .ace_step, .ace_marker-layer .ace_stack {	position: absolute;	z-index: 3;	}	.ace_marker-layer .ace_selection {	position: absolute;	z-index: 5;	}	.ace_marker-layer .ace_bracket {	position: absolute;	z-index: 6;	}	.ace_marker-layer .ace_active-line {	position: absolute;	z-index: 2;	}	.ace_marker-layer .ace_selected-word {	position: absolute;	z-index: 4;	-moz-box-sizing: border-box;	-webkit-box-sizing: border-box;	box-sizing: border-box;	}	.ace_line .ace_fold {	-moz-box-sizing: border-box;	-webkit-box-sizing: border-box;	box-sizing: border-box;	display: inline-block;	height: 11px;	margin-top: -2px;	vertical-align: middle;	background-image:	url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),	url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACJJREFUeNpi+P//fxgTAwPDBxDxD078RSX+YeEyDFMCIMAAI3INmXiwf2YAAAAASUVORK5CYII=");	background-repeat: no-repeat, repeat-x;	background-position: center center, top left;	color: transparent;	border: 1px solid black;	border-radius: 2px;	cursor: pointer;	pointer-events: auto;	}	.ace_dark .ace_fold {	}	.ace_fold:hover{	background-image:	url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),	url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACBJREFUeNpi+P//fz4TAwPDZxDxD5X4i5fLMEwJgAADAEPVDbjNw87ZAAAAAElFTkSuQmCC");	}	.ace_tooltip {	background-color: #FFF;	background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.1));	background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.1));	border: 1px solid gray;	border-radius: 1px;	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);	color: black;	max-width: 100%;	padding: 3px 4px;	position: fixed;	z-index: 999999;	-moz-box-sizing: border-box;	-webkit-box-sizing: border-box;	box-sizing: border-box;	cursor: default;	white-space: pre;	word-wrap: break-word;	line-height: normal;	font-style: normal;	font-weight: normal;	letter-spacing: normal;	pointer-events: none;	}	.ace_folding-enabled > .ace_gutter-cell {	padding-right: 13px;	}	.ace_fold-widget {	-moz-box-sizing: border-box;	-webkit-box-sizing: border-box;	box-sizing: border-box;	margin: 0 -12px 0 1px;	display: none;	width: 11px;	vertical-align: top;	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42mWKsQ0AMAzC8ixLlrzQjzmBiEjp0A6WwBCSPgKAXoLkqSot7nN3yMwR7pZ32NzpKkVoDBUxKAAAAABJRU5ErkJggg==");	background-repeat: no-repeat;	background-position: center;	border-radius: 3px;	border: 1px solid transparent;	cursor: pointer;	}	.ace_folding-enabled .ace_fold-widget {	display: inline-block;   	}	.ace_fold-widget.ace_end {	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42m3HwQkAMAhD0YzsRchFKI7sAikeWkrxwScEB0nh5e7KTPWimZki4tYfVbX+MNl4pyZXejUO1QAAAABJRU5ErkJggg==");	}	.ace_fold-widget.ace_closed {	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAGCAYAAAAG5SQMAAAAOUlEQVR42jXKwQkAMAgDwKwqKD4EwQ26sSOkVWjgIIHAzPiCgaqiqnJHZnKICBERHN194O5b9vbLuAVRL+l0YWnZAAAAAElFTkSuQmCCXA==");	}	.ace_fold-widget:hover {	border: 1px solid rgba(0, 0, 0, 0.3);	background-color: rgba(255, 255, 255, 0.2);	box-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);	}	.ace_fold-widget:active {	border: 1px solid rgba(0, 0, 0, 0.4);	background-color: rgba(0, 0, 0, 0.05);	box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);	}	.ace_dark .ace_fold-widget {	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHklEQVQIW2P4//8/AzoGEQ7oGCaLLAhWiSwB146BAQCSTPYocqT0AAAAAElFTkSuQmCC");	}	.ace_dark .ace_fold-widget.ace_end {	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAH0lEQVQIW2P4//8/AxQ7wNjIAjDMgC4AxjCVKBirIAAF0kz2rlhxpAAAAABJRU5ErkJggg==");	}	.ace_dark .ace_fold-widget.ace_closed {	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAFCAYAAACAcVaiAAAAHElEQVQIW2P4//+/AxAzgDADlOOAznHAKgPWAwARji8UIDTfQQAAAABJRU5ErkJggg==");	}	.ace_dark .ace_fold-widget:hover {	box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);	background-color: rgba(255, 255, 255, 0.1);	}	.ace_dark .ace_fold-widget:active {	box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);	}	.ace_fold-widget.ace_invalid {	background-color: #FFB4B4;	border-color: #DE5555;	}	.ace_fade-fold-widgets .ace_fold-widget {	-webkit-transition: opacity 0.4s ease 0.05s;	transition: opacity 0.4s ease 0.05s;	opacity: 0;	}	.ace_fade-fold-widgets:hover .ace_fold-widget {	-webkit-transition: opacity 0.05s ease 0.05s;	transition: opacity 0.05s ease 0.05s;	opacity:1;	}	.ace_underline {	text-decoration: underline;	}	.ace_bold {	font-weight: bold;	}	.ace_nobold .ace_bold {	font-weight: normal;	}	.ace_italic {	font-style: italic;	}	.ace_error-marker {	background-color: rgba(255, 0, 0,0.2);	position: absolute;	z-index: 9;	}	.ace_highlight-marker {	background-color: rgba(255, 255, 0,0.2);	position: absolute;	z-index: 8;	}	.ace_br1 {border-top-left-radius    : 3px;}	.ace_br2 {border-top-right-radius   : 3px;}	.ace_br3 {border-top-left-radius    : 3px; border-top-right-radius:    3px;}	.ace_br4 {border-bottom-right-radius: 3px;}	.ace_br5 {border-top-left-radius    : 3px; border-bottom-right-radius: 3px;}	.ace_br6 {border-top-right-radius   : 3px; border-bottom-right-radius: 3px;}	.ace_br7 {border-top-left-radius    : 3px; border-top-right-radius:    3px; border-bottom-right-radius: 3px;}	.ace_br8 {border-bottom-left-radius : 3px;}	.ace_br9 {border-top-left-radius    : 3px; border-bottom-left-radius:  3px;}	.ace_br10{border-top-right-radius   : 3px; border-bottom-left-radius:  3px;}	.ace_br11{border-top-left-radius    : 3px; border-top-right-radius:    3px; border-bottom-left-radius:  3px;}	.ace_br12{border-bottom-right-radius: 3px; border-bottom-left-radius:  3px;}	.ace_br13{border-top-left-radius    : 3px; border-bottom-right-radius: 3px; border-bottom-left-radius:  3px;}	.ace_br14{border-top-right-radius   : 3px; border-bottom-right-radius: 3px; border-bottom-left-radius:  3px;}	.ace_br15{border-top-left-radius    : 3px; border-top-right-radius:    3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px;}	
+/*# sourceURL=ace/css/ace_editor.css */</style><style id="ace-tm">.ace-tm .ace_gutter {	background: #f0f0f0;	color: #333;	}	.ace-tm .ace_print-margin {	width: 1px;	background: #e8e8e8;	}	.ace-tm .ace_fold {	background-color: #6B72E6;	}	.ace-tm {	background-color: #FFFFFF;	color: black;	}	.ace-tm .ace_cursor {	color: black;	}	.ace-tm .ace_invisible {	color: rgb(191, 191, 191);	}	.ace-tm .ace_storage,	.ace-tm .ace_keyword {	color: blue;	}	.ace-tm .ace_constant {	color: rgb(197, 6, 11);	}	.ace-tm .ace_constant.ace_buildin {	color: rgb(88, 72, 246);	}	.ace-tm .ace_constant.ace_language {	color: rgb(88, 92, 246);	}	.ace-tm .ace_constant.ace_library {	color: rgb(6, 150, 14);	}	.ace-tm .ace_invalid {	background-color: rgba(255, 0, 0, 0.1);	color: red;	}	.ace-tm .ace_support.ace_function {	color: rgb(60, 76, 114);	}	.ace-tm .ace_support.ace_constant {	color: rgb(6, 150, 14);	}	.ace-tm .ace_support.ace_type,	.ace-tm .ace_support.ace_class {	color: rgb(109, 121, 222);	}	.ace-tm .ace_keyword.ace_operator {	color: rgb(104, 118, 135);	}	.ace-tm .ace_string {	color: rgb(3, 106, 7);	}	.ace-tm .ace_comment {	color: rgb(76, 136, 107);	}	.ace-tm .ace_comment.ace_doc {	color: rgb(0, 102, 255);	}	.ace-tm .ace_comment.ace_doc.ace_tag {	color: rgb(128, 159, 191);	}	.ace-tm .ace_constant.ace_numeric {	color: rgb(0, 0, 205);	}	.ace-tm .ace_variable {	color: rgb(49, 132, 149);	}	.ace-tm .ace_xml-pe {	color: rgb(104, 104, 91);	}	.ace-tm .ace_entity.ace_name.ace_function {	color: #0000A2;	}	.ace-tm .ace_heading {	color: rgb(12, 7, 255);	}	.ace-tm .ace_list {	color:rgb(185, 6, 144);	}	.ace-tm .ace_meta.ace_tag {	color:rgb(0, 22, 142);	}	.ace-tm .ace_string.ace_regex {	color: rgb(255, 0, 0)	}	.ace-tm .ace_marker-layer .ace_selection {	background: rgb(181, 213, 255);	}	.ace-tm.ace_multiselect .ace_selection.ace_start {	box-shadow: 0 0 3px 0px white;	}	.ace-tm .ace_marker-layer .ace_step {	background: rgb(252, 255, 0);	}	.ace-tm .ace_marker-layer .ace_stack {	background: rgb(164, 229, 101);	}	.ace-tm .ace_marker-layer .ace_bracket {	margin: -1px 0 0 -1px;	border: 1px solid rgb(192, 192, 192);	}	.ace-tm .ace_marker-layer .ace_active-line {	background: rgba(0, 0, 0, 0.07);	}	.ace-tm .ace_gutter-active-line {	background-color : #dcdcdc;	}	.ace-tm .ace_marker-layer .ace_selected-word {	background: rgb(250, 250, 255);	border: 1px solid rgb(200, 200, 250);	}	.ace-tm .ace_indent-guide {	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y;	}	
+/*# sourceURL=ace/css/ace-tm */</style><style>	    .error_widget_wrapper {	        background: inherit;	        color: inherit;	        border:none	    }	    .error_widget {	        border-top: solid 2px;	        border-bottom: solid 2px;	        margin: 5px 0;	        padding: 10px 40px;	        white-space: pre-wrap;	    }	    .error_widget.ace_error, .error_widget_arrow.ace_error{	        border-color: #ff5a5a	    }	    .error_widget.ace_warning, .error_widget_arrow.ace_warning{	        border-color: #F1D817	    }	    .error_widget.ace_info, .error_widget_arrow.ace_info{	        border-color: #5a5a5a	    }	    .error_widget.ace_ok, .error_widget_arrow.ace_ok{	        border-color: #5aaa5a	    }	    .error_widget_arrow {	        position: absolute;	        border: solid 5px;	        border-top-color: transparent!important;	        border-right-color: transparent!important;	        border-left-color: transparent!important;	        top: -5px;	    }	</style><style type="text/css">.reset-btn+.popover{white-space:nowrap;max-width:none}.reset-btn+.popover>.arrow{top:auto!important}</style><style type="text/css">.data-structure-viewer{width:100%;width:calc(100% - 30px)}.data-structure-viewer svg{width:100%}.data-structure-viewer .title-label{position:absolute;top:4%;left:4%;font-size:1.2em}.data-structure-viewer .error-message{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-width:60%;opacity:0}.data-structure-viewer .tip{position:absolute;bottom:5%;right:4%;max-width:60%;opacity:0}</style><style type="text/css">.data-structure-viewer .node circle{fill:#fff;stroke:#4682b4;stroke-width:3px}.data-structure-viewer .node text{font:1.8em sans-serif}.data-structure-viewer .link{fill:none;stroke:#ccc;stroke-width:2px}</style><style type="text/css">.pad-left{padding-left:10px}.pad-right{padding-right:30px}.text-default{color:#333}.testcase-label{color:#b25150;position:absolute;left:0}.stdout-info,.testcase-info{display:block;font-weight:700;width:100%;text-overflow:ellipsis;overflow:hidden;white-space:pre;cursor:pointer}.testcase-row-expand .testcase-info{max-height:80px;margin:-5px 0;padding:5px 0}.stdout-info,.testcase-row-expand .testcase-info{overflow-y:auto;white-space:pre-wrap;word-break:break-all;word-wrap:break-word}.stdout-info{max-height:200px}.testcase-table-re,.testcase-table-wa{border:1px solid rgba(169,68,66,.5);border-collapse:collapse;border-radius:4px;border-spacing:5px;overflow:hidden;padding:10px 23px 25px;font-family:Menlo,Monaco,Consolas,Courier New,monospace;font-size:14px;line-height:20px;background:transparent;box-shadow:0 0 4px rgba(169,68,66,.5)}.testcase-table-re .testcase-table-row{padding:3px 0 3px 15em}.testcase-table-wa .testcase-table-row{padding:3px 0 3px 8em}.testcase-table-re .testcase-table-row,.testcase-table-wa .testcase-table-row{position:relative;padding-top:10px;border-bottom:1px solid hsla(2,58%,75%,.5);padding-bottom:14px}.btn-outline{border:1px solid #cfcfcf;background:0 0}.btn-alt{border-radius:2em;padding:8px 18px}#reveal-solution{margin-left:15px}.popover{font-size:13px;font-weight:400;line-height:1.2}.fade-in{-webkit-animation:fadeInLeft 1s;animation:fadeInLeft 1s}</style><style type="text/css">.expendable-panel{box-shadow:0 0 5px 0 rgba(0,0,0,.05);background-color:#f6f8f9;border:1px solid #d9dee5;border-radius:5px;margin-top:15px}.expendable-panel .center{cursor:pointer}.expendable-panel .expendable-wapper{-webkit-transition:height .2s;transition:height .2s;overflow:hidden;height:0}.expendable-panel .expend-btn{padding:10px;color:#576069;border-style:none;background:none;font-weight:500}.expendable-panel .line{border-bottom:1px solid #d9dee5}.expendable-panel .content{border-bottom-right-radius:5px;border-bottom-left-radius:5px;padding:10px 15px;margin-right:0;margin-left:0;background:#fff}.expendable-panel:hover{box-shadow:0 0 7px 0 rgba(102,175,233,.3);border:1px solid #89bee9}.expendable-panel:hover .expend-btn{color:#337ab7}</style><style type="text/css">.data-structure-viewer{width:100%;width:calc(100% - 30px)}.data-structure-viewer svg{width:100%}.data-structure-viewer .title-label{position:absolute;top:4%;left:4%;font-size:1.2em}.data-structure-viewer .error-message{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-width:60%;opacity:0}.data-structure-viewer .tip{position:absolute;bottom:5%;right:4%;max-width:60%;opacity:0}</style><style type="text/css">.data-structure-viewer .node circle{fill:#fff;stroke:#4682b4;stroke-width:3px}.data-structure-viewer .node text{font:1.8em sans-serif}.data-structure-viewer .link{fill:none;stroke:#ccc;stroke-width:2px}</style><style type="text/css"></style></head>
+
+  <body>
+    <div class="content-wrapper" style="padding-bottom: 118px;">
+      
+
+      <div class="navbar navbar-inverse navbar-extra">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://leetcode.com/">LeetCode</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              
+              <li id="subscribe">
+                <a href="https://leetcode.com/subscribe/"><font color="orange">Subscribe</font></a>
+              </li>
+              
+              <li class="dropdown">
+                <a href="https://leetcode.com/problems/longest-palindromic-substring/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                  Problems
+                  <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  
+                    
+                      <li><a href="https://leetcode.com/problemset/algorithms/">Algorithms</a></li>
+                    
+                  
+                    
+                      <li><a href="https://leetcode.com/problemset/database/">Database</a></li>
+                    
+                  
+                    
+                      <li><a href="https://leetcode.com/problemset/shell/">Shell</a></li>
+                    
+                  
+                    
+                      <li><a href="https://leetcode.com/problemset/draft/">Draft</a></li>
+                    
+                  
+                    
+                  
+                    
+                      <li><a href="https://leetcode.com/problemset/system-design/">System Design</a></li>
+                    
+                  
+                  <li role="separator" class="divider"></li>
+                  <li><a href="https://leetcode.com/library/application/">Add Question</a></li>
+                </ul>
+              </li>
+              
+                <li class="dropdown">
+                  <a href="https://leetcode.com/problems/longest-palindromic-substring/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    Mock
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="https://leetcode.com/mockinterview/">Mock Interview</a>
+                    </li>
+                    <li>
+                      <a href="https://leetcode.com/mockinterview/session/list/">Past Sessions</a>
+                    </li>
+                  </ul>
+                </li>
+              
+              
+                
+                  <li><a href="https://leetcode.com/contest/">Contest</a></li>
+                
+              
+              
+                <li id="coursesNav"><a href="https://leetcode.com/courses/">Courses</a></li>
+              
+              <li id="articlesNav"><a href="https://leetcode.com/articles/">Articles</a></li>
+              <!-- TODO: not hard code -->
+              
+              <li id=""><a href="https://discuss.leetcode.com/" target="_blank">Discuss</a></li>
+              
+              
+              <li id="bookNav" class="hidden-sm"><a onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;book&#39;, &#39;click&#39;, &#39;nav-bar&#39;);" href="https://leetcode.com/book/"><font color="#ed9c28">Book</font></a></li>
+              
+              
+              <li id="storyNav"><a href="https://leetcode.com/story/" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;story&#39;, &#39;click&#39;, &#39;nav&#39;);"><font color="#ed9c28">Story</font></a></li>
+              
+              
+            </ul>
+            
+            <ul id="navbar-right" class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+              <a href="https://leetcode.com/problems/longest-palindromic-substring/#" class="dropdown-toggle" data-toggle="dropdown">
+                ctzhenghua
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="https://leetcode.com/ctzhenghua">Profile</a></li>
+                
+                  <li><a href="https://leetcode.com/subscription/">My Subscription</a></li>
+                
+                <li class="divider"></li>
+                <li><a href="https://leetcode.com/submissions/">My Submissions</a></li>
+                <li><a href="https://leetcode.com/progress/">My Progress</a></li>
+                <li><a href="https://leetcode.com/list/">My List</a></li>
+                <li><a href="https://leetcode.com/session/">Manage Sessions</a></li>
+                <li><a href="https://leetcode.com/notes/">My Notes</a></li>
+                <!-- TODO:  Dashboard  -->
+                <li><a href="https://leetcode.com/accounts/password/change/">Change Password</a></li>
+                <li class="divider"></li>
+                <li><a href="https://leetcode.com/accounts/logout/">Sign out</a></li>
+              </ul>
+              </li>
+            </ul>
+            
+            <!--
+            <form class="navbar-form pull-right">
+              <input class="col-md-2" type="text" placeholder="Email">
+              <input class="col-md-2" type="password" placeholder="Password">
+              <button type="submit" class="btn">Sign in</button>
+            </form>
+            -->
+          </div><!--/.navbar-collapse -->
+        </div>
+      </div>
+
+       
+  <div class="modal fade" id="schema" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">
+              ×
+            </span>
+            <span class="sr-only">
+              Close
+            </span>
+          </button>
+          <h4 class="modal-title">
+            SQL Schema
+          </h4>
+        </div>
+          <pre style="margin-bottom: 0px; max-height: 500px; overflow: scroll; white-space: nowrap;">            <code class="mysql hljs" style="white-space: nowrap;">
+              
+            </code>
+          </pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="notepad-wrapper">
+    
+    <div class="notepad-toggle-button btn-warning btn">
+      <i class="notepad-icon fa fa-sticky-note-o" aria-hidden="true"></i>Notes
+    </div>
+    
+    <div class="tips" style="bottom: -48px;">Auto Saved.</div>
+    <textarea id="notepad" style="display: none;"></textarea><div class="editor-toolbar"><a title="Bold (Ctrl-B)" tabindex="-1" class="fa fa-bold"></a><a title="Italic (Ctrl-I)" tabindex="-1" class="fa fa-italic"></a><a title="Heading (Ctrl-H)" tabindex="-1" class="fa fa-header"></a><i class="separator">|</i><a title="Code (Ctrl-Alt-C)" tabindex="-1" class="fa fa-code"></a><a title="Generic List (Ctrl-L)" tabindex="-1" class="fa fa-list-ul"></a><a title="Numbered List (Ctrl-Alt-L)" tabindex="-1" class="fa fa-list-ol"></a><i class="separator">|</i><a title="Create Link (Ctrl-K)" tabindex="-1" class="fa fa-link"></a><a title="Insert Image (Ctrl-Alt-I)" tabindex="-1" class="fa fa-picture-o"></a><i class="separator">|</i><a title="Toggle Preview (Ctrl-P)" tabindex="-1" class="fa fa-eye no-disable"></a></div><div class="CodeMirror cm-s-paper CodeMirror-wrap CodeMirror-empty"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 15px; left: 15px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" style="position: absolute; padding: 0px; width: 1000px; height: 1em; outline: none;" tabindex="0"></textarea></div><div class="CodeMirror-vscrollbar" cm-not-content="true"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" cm-not-content="true"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: -17px; border-right-width: 13px; min-height: 28px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines"><div style="position: relative; outline: none;"><pre class="CodeMirror-placeholder" style="height: 0px; overflow: visible;">Type here...(Markdown is enabled)</pre><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 20px;">&nbsp;</div></div><div class="CodeMirror-code"><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 13px; width: 1px; border-bottom: 0px solid transparent; top: 28px;"></div><div class="CodeMirror-gutters" style="display: none; height: 41px;"></div></div></div><div class="editor-preview-side"></div>
+  </div>
+
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-md-12">
+        <div class="question-title clearfix">
+          <h3>
+            5. Longest Palindromic Substring
+          </h3>
+          
+          <div id="add-to-favorite" class="pull-right"><div data-reactroot="" class="dropdown"><button class="icon-btn custom-dropdown-toggle" type="button" id="fav-list-btn" aria-haspopup="true" aria-expanded="true"><i class="fa fa-heart-o" aria-hidden="true"></i><!-- react-text: 4 -->Add to List<!-- /react-text --><span class="caret" style="margin-left: 0.6em;"></span></button><ul class="dropdown-menu" aria-labelledby="fav-list-btn" style="top: initial; width: 18em;"><li class="list-row" style="cursor: pointer;"><a href="https://leetcode.com/problems/longest-palindromic-substring/#"><i class="text-danger fa fa-heart checkmark" style="visibility: hidden;"></i><span style="padding-right: 0.6em;"></span><span class="list-name" title="Favorite">Favorite</span><i class="fa fa-fw fa-lock list-icon" aria-hidden="true" style="float: right;"></i></a></li><li class="divider" role="separator"></li><li class="create-list-list"><a style="cursor: pointer;"><i class="fa fa-plus create-icon"></i><span style="padding-right: 0.8em;"></span><text>Create a New List</text></a></li><li class="divider" role="separator"></li><li class="openlist"><a href="https://leetcode.com/list" target="_blank" style="color: rgb(49, 130, 208);"><i class="fa fa-share-square-o checkmark"></i><span style="padding-right: 0.7em;"></span><!-- react-text: 18 -->Open My List<!-- /react-text --></a></li></ul></div></div>
+          
+        </div>
+        <div id="tab-view-app" data-questiontitleslug="longest-palindromic-substring" data-solutionallowed="" data-notebbcid="13" data-forumurl="https://discuss.leetcode.com/category/13" data-islogin=""><div data-reactroot=""><nav class="tab-view"><a class="tab-item icon-btn active" href="https://leetcode.com/problems/longest-palindromic-substring/#/description"><i class="fa fa-list-alt" aria-hidden="true"></i><!-- react-text: 5 -->Description<!-- /react-text --></a><a class="tab-item icon-btn" href="https://leetcode.com/problems/longest-palindromic-substring/#/hints"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><!-- react-text: 8 -->Hints<!-- /react-text --></a><a class="tab-item icon-btn" href="https://leetcode.com/problems/longest-palindromic-substring/#/submissions"><i class="fa fa-file-code-o" aria-hidden="true"></i><!-- react-text: 11 -->Submissions<!-- /react-text --></a><a class="tab-item icon-btn" href="https://leetcode.com/problems/longest-palindromic-substring/#/solutions"><i class="fa fa-commenting-o" aria-hidden="true"></i><!-- react-text: 14 -->Solutions<!-- /react-text --></a></nav><div class="tab-line"></div><div class="react-content-wrapper"></div></div></div>
+        <!-- this server-side snippet will be captured and controled by a react component -->
+        
+
+<div class="row tab-content" id="descriptionContent">
+  <div class="col-md-12">
+    <div class="question-info text-info">
+      <ul>
+        <li>Total Accepted: <strong>191570</strong></li>
+        <div class="newline-control-xs hide"></div>
+        <li>Total Submissions: <strong>764907</strong></li>
+        <div class="newline-control-xs hide"></div>
+        <li>Difficulty: <strong>Medium</strong></li>
+        <div class="newline-control-sm hide"></div>
+        
+          <li>
+            Contributor:
+            <strong>
+              LeetCode
+            </strong>
+          </li>
+        
+      </ul>
+      <div class="sm-line hide"></div>
+    </div>
+    <div class="question-content">
+      <p></p><p>Given a string <b>s</b>, find the longest palindromic substring in <b>s</b>. You may assume that the maximum length of <b>s</b> is 1000.</p>
+
+<p><b>Example:</b>
+</p><pre><b>Input:</b> "babad"
+
+<b>Output:</b> "bab"
+
+<b>Note:</b> "aba" is also a valid answer.
+</pre>
+<p></p>
+
+<p><b>Example:</b>
+</p><pre><b>Input:</b> "cbbd"
+
+<b>Output:</b> "bb"
+</pre>
+<p></p><p></p>
+      
+        <div>
+          <p><a href="https://leetcode.com/subscribe/">Subscribe</a> to see which companies asked this question.</p>
+        </div>
+      
+
+      
+        <div>
+          <div id="tags" class="btn btn-xs btn-warning">Show Tags</div>
+          <span class="hidebutton">
+            
+            <a class="btn btn-xs btn-primary" href="https://leetcode.com/tag/string/">String</a>
+            
+          </span>
+        </div>
+      
+
+      
+        <div>
+          <div id="similar" class="btn btn-xs btn-warning">Show Similar Problems</div>
+          <span class="hidebutton">
+            
+            <a class="btn btn-xs btn-primary" href="https://leetcode.com/problems/shortest-palindrome/"> (H) Shortest Palindrome</a>
+            
+            <a class="btn btn-xs btn-primary" href="https://leetcode.com/problems/palindrome-permutation/"> (E) Palindrome Permutation</a>
+            
+            <a class="btn btn-xs btn-primary" href="https://leetcode.com/problems/palindrome-pairs/"> (H) Palindrome Pairs</a>
+            
+            <a class="btn btn-xs btn-primary" href="https://leetcode.com/problems/longest-palindromic-subsequence/"> (M) Longest Palindromic Subsequence</a>
+            
+          </span>
+        </div>
+      
+    </div>
+  </div>
+  
+  <div id="interviewed-div" class="col-md-12">
+    <form id="interviewed-form" method="post" action="https://leetcode.com/interviewed/">
+      <input type="hidden" name="csrfmiddlewaretoken" value="VxhdaiB4FPTE0NdvBVtjDbpAmAOSF6lAKFApRMEx3edQTDjp4OxWML41xsvCnFZu">
+      <input type="hidden" name="question_id" value="5">
+      <input type="hidden" name="feedback" value="Thanks for your feedback.">
+      <input type="hidden" name="option">
+      <input type="hidden" name="is_interviewed" value="false">
+      <input type="hidden" name="time_option">
+      <input type="hidden" name="company_id" value="0">
+      <input type="hidden" name="interviewedstats_id" value="0">
+    </form>
+    <div id="survey">
+      <div id="general_questions">
+        <span>Have you met this question in a real interview?</span>
+        <span class="text-info chosen_option text-bold"></span>
+        <span id="yes-or-no-options">
+          <div value="true" name="is_interviewed" id="yes" follow_up="#yes_questions" class="submit btn btn-default btn-xs">
+            Yes
+          </div>
+          <div value="false" name="is_interviewed" id="no" class="submit btn btn-default btn-xs">
+            No
+          </div>
+        </span>
+      </div>
+      <div id="yes_questions" class="hide">
+        <span>When did you meet this question?</span>
+        <span class="text-info chosen_option text-bold"></span>
+        <span>
+          
+            <div value="0" follow_up="#company_questions" name="time_option" class="submit btn btn-default btn-xs">
+              last week
+            </div>
+          
+            <div value="1" follow_up="#company_questions" name="time_option" class="submit btn btn-default btn-xs">
+              last month
+            </div>
+          
+            <div value="2" follow_up="#company_questions" name="time_option" class="submit btn btn-default btn-xs">
+              last 3 month
+            </div>
+          
+            <div value="3" follow_up="#company_questions" name="time_option" class="submit btn btn-default btn-xs">
+              last 6 month
+            </div>
+          
+            <div value="4" follow_up="#company_questions" name="time_option" class="submit btn btn-default btn-xs">
+              more than 6 months
+            </div>
+          
+            <div value="5" follow_up="#company_questions" name="time_option" class="submit btn btn-default btn-xs">
+              other
+            </div>
+          
+        </span>
+      </div>
+
+      <div id="company_questions" class="hide">
+        <span>Which company asked you this question?</span>
+        <span class="text-info chosen_option text-bold"></span>
+        <span id="company_list">
+          
+            <div value="38" name="company_id" class="submit btn btn-default btn-xs">
+              Adobe
+            </div>
+          
+            <div value="118" name="company_id" class="submit btn btn-default btn-xs">
+              Aetion
+            </div>
+          
+            <div value="148" name="company_id" class="submit btn btn-default btn-xs">
+              Affirm
+            </div>
+          
+            <div value="12" name="company_id" class="submit btn btn-default btn-xs">
+              Airbnb
+            </div>
+          
+            <div value="51" name="company_id" class="submit btn btn-default btn-xs">
+              Alation
+            </div>
+          
+            <div value="22" name="company_id" class="submit btn btn-default btn-xs">
+              Alibaba
+            </div>
+          
+            <div value="1" name="company_id" class="submit btn btn-default btn-xs">
+              Amazon
+            </div>
+          
+            <div value="106" name="company_id" class="submit btn btn-default btn-xs">
+              AppDynamics
+            </div>
+          
+            <div value="2" name="company_id" class="submit btn btn-default btn-xs">
+              Apple
+            </div>
+          
+            <div value="44" name="company_id" class="submit btn btn-default btn-xs">
+              Arista
+            </div>
+          
+            <div value="20" name="company_id" class="submit btn btn-default btn-xs">
+              Baidu
+            </div>
+          
+            <div value="170" name="company_id" class="submit btn btn-default btn-xs">
+              Bank of America
+            </div>
+          
+            <div value="120" name="company_id" class="submit btn btn-default btn-xs">
+              BlackRock
+            </div>
+          
+            <div value="71" name="company_id" class="submit btn btn-default btn-xs">
+              Blend Labs
+            </div>
+          
+            <div value="58" name="company_id" class="submit btn btn-default btn-xs">
+              Blizzard
+            </div>
+          
+            <div value="13" name="company_id" class="submit btn btn-default btn-xs">
+              Bloomberg
+            </div>
+          
+            <div value="187" name="company_id" class="submit btn btn-default btn-xs">
+              Booking
+            </div>
+          
+            <div value="52" name="company_id" class="submit btn btn-default btn-xs">
+              Box
+            </div>
+          
+            <div value="30" name="company_id" class="submit btn btn-default btn-xs">
+              Bungie
+            </div>
+          
+            <div value="140" name="company_id" class="submit btn btn-default btn-xs">
+              Capital One
+            </div>
+          
+            <div value="78" name="company_id" class="submit btn btn-default btn-xs">
+              CareerBuilder
+            </div>
+          
+            <div value="18" name="company_id" class="submit btn btn-default btn-xs">
+              Cisco
+            </div>
+          
+            <div value="90" name="company_id" class="submit btn btn-default btn-xs">
+              Citadel
+            </div>
+          
+            <div value="176" name="company_id" class="submit btn btn-default btn-xs">
+              Coinbase
+            </div>
+          
+            <div value="91" name="company_id" class="submit btn btn-default btn-xs">
+              Concur
+            </div>
+          
+            <div value="77" name="company_id" class="submit btn btn-default btn-xs">
+              Conviva
+            </div>
+          
+            <div value="249" name="company_id" class="submit btn btn-default btn-xs">
+              Coupang
+            </div>
+          
+            <div value="73" name="company_id" class="submit btn btn-default btn-xs">
+              Coursera
+            </div>
+          
+            <div value="45" name="company_id" class="submit btn btn-default btn-xs">
+              CreditEase
+            </div>
+          
+            <div value="92" name="company_id" class="submit btn btn-default btn-xs">
+              CVTE
+            </div>
+          
+            <div value="167" name="company_id" class="submit btn btn-default btn-xs">
+              Dell
+            </div>
+          
+            <div value="48" name="company_id" class="submit btn btn-default btn-xs">
+              Deutsche Bank
+            </div>
+          
+            <div value="168" name="company_id" class="submit btn btn-default btn-xs">
+              DoorDash
+            </div>
+          
+            <div value="24" name="company_id" class="submit btn btn-default btn-xs">
+              Dropbox
+            </div>
+          
+            <div value="166" name="company_id" class="submit btn btn-default btn-xs">
+              Duolingo
+            </div>
+          
+            <div value="80" name="company_id" class="submit btn btn-default btn-xs">
+              EasyNet
+            </div>
+          
+            <div value="23" name="company_id" class="submit btn btn-default btn-xs">
+              eBay
+            </div>
+          
+            <div value="19" name="company_id" class="submit btn btn-default btn-xs">
+              Electronic Arts
+            </div>
+          
+            <div value="68" name="company_id" class="submit btn btn-default btn-xs">
+              EMC
+            </div>
+          
+            <div value="39" name="company_id" class="submit btn btn-default btn-xs">
+              Epic Systems
+            </div>
+          
+            <div value="95" name="company_id" class="submit btn btn-default btn-xs">
+              Equinix
+            </div>
+          
+            <div value="82" name="company_id" class="submit btn btn-default btn-xs">
+              Evernote
+            </div>
+          
+            <div value="27" name="company_id" class="submit btn btn-default btn-xs">
+              Expedia
+            </div>
+          
+            <div value="3" name="company_id" class="submit btn btn-default btn-xs">
+              Facebook
+            </div>
+          
+            <div value="99" name="company_id" class="submit btn btn-default btn-xs">
+              FactSet
+            </div>
+          
+            <div value="134" name="company_id" class="submit btn btn-default btn-xs">
+              Fitbit
+            </div>
+          
+            <div value="60" name="company_id" class="submit btn btn-default btn-xs">
+              Flipkart
+            </div>
+          
+            <div value="32" name="company_id" class="submit btn btn-default btn-xs">
+              Fortinet
+            </div>
+          
+            <div value="162" name="company_id" class="submit btn btn-default btn-xs">
+              FourSquare
+            </div>
+          
+            <div value="70" name="company_id" class="submit btn btn-default btn-xs">
+              FreeWheel
+            </div>
+          
+            <div value="87" name="company_id" class="submit btn btn-default btn-xs">
+              GoDaddy
+            </div>
+          
+            <div value="35" name="company_id" class="submit btn btn-default btn-xs">
+              Goldman Sachs
+            </div>
+          
+            <div value="4" name="company_id" class="submit btn btn-default btn-xs">
+              Google
+            </div>
+          
+            <div value="34" name="company_id" class="submit btn btn-default btn-xs">
+              GrabTaxi
+            </div>
+          
+            <div value="65" name="company_id" class="submit btn btn-default btn-xs">
+              Groupon
+            </div>
+          
+            <div value="101" name="company_id" class="submit btn btn-default btn-xs">
+              HBO
+            </div>
+          
+            <div value="64" name="company_id" class="submit btn btn-default btn-xs">
+              Hedvig
+            </div>
+          
+            <div value="86" name="company_id" class="submit btn btn-default btn-xs">
+              HomeAway
+            </div>
+          
+            <div value="141" name="company_id" class="submit btn btn-default btn-xs">
+              HTC
+            </div>
+          
+            <div value="139" name="company_id" class="submit btn btn-default btn-xs">
+              Huawei
+            </div>
+          
+            <div value="62" name="company_id" class="submit btn btn-default btn-xs">
+              Hulu
+            </div>
+          
+            <div value="100" name="company_id" class="submit btn btn-default btn-xs">
+              IBG
+            </div>
+          
+            <div value="104" name="company_id" class="submit btn btn-default btn-xs">
+              IBM
+            </div>
+          
+            <div value="94" name="company_id" class="submit btn btn-default btn-xs">
+              Indeed
+            </div>
+          
+            <div value="85" name="company_id" class="submit btn btn-default btn-xs">
+              InnovatureLabs
+            </div>
+          
+            <div value="17" name="company_id" class="submit btn btn-default btn-xs">
+              Intel
+            </div>
+          
+            <div value="88" name="company_id" class="submit btn btn-default btn-xs">
+              IXL
+            </div>
+          
+            <div value="28" name="company_id" class="submit btn btn-default btn-xs">
+              Jane Street
+            </div>
+          
+            <div value="36" name="company_id" class="submit btn btn-default btn-xs">
+              JPMorgan
+            </div>
+          
+            <div value="37" name="company_id" class="submit btn btn-default btn-xs">
+              Jump Trading
+            </div>
+          
+            <div value="59" name="company_id" class="submit btn btn-default btn-xs">
+              Lending Club
+            </div>
+          
+            <div value="5" name="company_id" class="submit btn btn-default btn-xs">
+              LinkedIn
+            </div>
+          
+            <div value="54" name="company_id" class="submit btn btn-default btn-xs">
+              LiveRamp
+            </div>
+          
+            <div value="84" name="company_id" class="submit btn btn-default btn-xs">
+              Loovee
+            </div>
+          
+            <div value="40" name="company_id" class="submit btn btn-default btn-xs">
+              Marvel
+            </div>
+          
+            <div value="42" name="company_id" class="submit btn btn-default btn-xs">
+              Matlab
+            </div>
+          
+            <div value="49" name="company_id" class="submit btn btn-default btn-xs">
+              McKesson
+            </div>
+          
+            <div value="6" name="company_id" class="submit btn btn-default btn-xs">
+              Microsoft
+            </div>
+          
+            <div value="61" name="company_id" class="submit btn btn-default btn-xs">
+              Morgan Stanley
+            </div>
+          
+            <div value="113" name="company_id" class="submit btn btn-default btn-xs">
+              NetEase
+            </div>
+          
+            <div value="135" name="company_id" class="submit btn btn-default btn-xs">
+              Nintendo
+            </div>
+          
+            <div value="102" name="company_id" class="submit btn btn-default btn-xs">
+              Nutanix
+            </div>
+          
+            <div value="21" name="company_id" class="submit btn btn-default btn-xs">
+              Nvidia
+            </div>
+          
+            <div value="25" name="company_id" class="submit btn btn-default btn-xs">
+              Oracle
+            </div>
+          
+            <div value="67" name="company_id" class="submit btn btn-default btn-xs">
+              Orbitz
+            </div>
+          
+            <div value="53" name="company_id" class="submit btn btn-default btn-xs">
+              Palantir
+            </div>
+          
+            <div value="72" name="company_id" class="submit btn btn-default btn-xs">
+              Paypal
+            </div>
+          
+            <div value="9" name="company_id" class="submit btn btn-default btn-xs">
+              Pinterest
+            </div>
+          
+            <div value="16" name="company_id" class="submit btn btn-default btn-xs">
+              Pocket Gems
+            </div>
+          
+            <div value="98" name="company_id" class="submit btn btn-default btn-xs">
+              Point72
+            </div>
+          
+            <div value="136" name="company_id" class="submit btn btn-default btn-xs">
+              Qualcomm
+            </div>
+          
+            <div value="46" name="company_id" class="submit btn btn-default btn-xs">
+              Qualtrics
+            </div>
+          
+            <div value="75" name="company_id" class="submit btn btn-default btn-xs">
+              Qumulo
+            </div>
+          
+            <div value="76" name="company_id" class="submit btn btn-default btn-xs">
+              Quora
+            </div>
+          
+            <div value="33" name="company_id" class="submit btn btn-default btn-xs">
+              Rackspace
+            </div>
+          
+            <div value="121" name="company_id" class="submit btn btn-default btn-xs">
+              Redfin
+            </div>
+          
+            <div value="107" name="company_id" class="submit btn btn-default btn-xs">
+              Rubrik
+            </div>
+          
+            <div value="69" name="company_id" class="submit btn btn-default btn-xs">
+              Salesforce
+            </div>
+          
+            <div value="131" name="company_id" class="submit btn btn-default btn-xs">
+              Samsung
+            </div>
+          
+            <div value="126" name="company_id" class="submit btn btn-default btn-xs">
+              SAP
+            </div>
+          
+            <div value="165" name="company_id" class="submit btn btn-default btn-xs">
+              ServiceNow
+            </div>
+          
+            <div value="41" name="company_id" class="submit btn btn-default btn-xs">
+              Sina
+            </div>
+          
+            <div value="8" name="company_id" class="submit btn btn-default btn-xs">
+              Snapchat
+            </div>
+          
+            <div value="83" name="company_id" class="submit btn btn-default btn-xs">
+              SoftwareOne
+            </div>
+          
+            <div value="81" name="company_id" class="submit btn btn-default btn-xs">
+              Sony
+            </div>
+          
+            <div value="115" name="company_id" class="submit btn btn-default btn-xs">
+              SoundHound
+            </div>
+          
+            <div value="63" name="company_id" class="submit btn btn-default btn-xs">
+              Square
+            </div>
+          
+            <div value="50" name="company_id" class="submit btn btn-default btn-xs">
+              Sumologic
+            </div>
+          
+            <div value="163" name="company_id" class="submit btn btn-default btn-xs">
+              SurveyMonkey
+            </div>
+          
+            <div value="55" name="company_id" class="submit btn btn-default btn-xs">
+              Symantec
+            </div>
+          
+            <div value="109" name="company_id" class="submit btn btn-default btn-xs">
+              Tableau
+            </div>
+          
+            <div value="26" name="company_id" class="submit btn btn-default btn-xs">
+              Tencent
+            </div>
+          
+            <div value="143" name="company_id" class="submit btn btn-default btn-xs">
+              Tesorio
+            </div>
+          
+            <div value="66" name="company_id" class="submit btn btn-default btn-xs">
+              TinyCo
+            </div>
+          
+            <div value="31" name="company_id" class="submit btn btn-default btn-xs">
+              Tradeshift
+            </div>
+          
+            <div value="56" name="company_id" class="submit btn btn-default btn-xs">
+              TripAdvisor
+            </div>
+          
+            <div value="97" name="company_id" class="submit btn btn-default btn-xs">
+              Twilio
+            </div>
+          
+            <div value="7" name="company_id" class="submit btn btn-default btn-xs">
+              Twitter
+            </div>
+          
+            <div value="47" name="company_id" class="submit btn btn-default btn-xs">
+              Two Sigma
+            </div>
+          
+            <div value="11" name="company_id" class="submit btn btn-default btn-xs">
+              Uber
+            </div>
+          
+            <div value="159" name="company_id" class="submit btn btn-default btn-xs">
+              Veritas
+            </div>
+          
+            <div value="146" name="company_id" class="submit btn btn-default btn-xs">
+              Visa
+            </div>
+          
+            <div value="57" name="company_id" class="submit btn btn-default btn-xs">
+              VMware
+            </div>
+          
+            <div value="74" name="company_id" class="submit btn btn-default btn-xs">
+              Walmart
+            </div>
+          
+            <div value="103" name="company_id" class="submit btn btn-default btn-xs">
+              Wealthfront
+            </div>
+          
+            <div value="132" name="company_id" class="submit btn btn-default btn-xs">
+              Whitepages
+            </div>
+          
+            <div value="152" name="company_id" class="submit btn btn-default btn-xs">
+              Works Applications
+            </div>
+          
+            <div value="14" name="company_id" class="submit btn btn-default btn-xs">
+              Yahoo
+            </div>
+          
+            <div value="43" name="company_id" class="submit btn btn-default btn-xs">
+              Yandex
+            </div>
+          
+            <div value="15" name="company_id" class="submit btn btn-default btn-xs">
+              Yelp
+            </div>
+          
+            <div value="89" name="company_id" class="submit btn btn-default btn-xs">
+              Zappos
+            </div>
+          
+            <div value="10" name="company_id" class="submit btn btn-default btn-xs">
+              Zenefits
+            </div>
+          
+            <div value="142" name="company_id" class="submit btn btn-default btn-xs">
+              Zillow
+            </div>
+          
+            <div value="29" name="company_id" class="submit btn btn-default btn-xs">
+              Zynga
+            </div>
+          
+          <a><span id="show_add_company" class="glyphicon glyphicon-plus" title="Add a new company"></span></a>
+          <span id="add_company_panel">
+            <input id="new_company" type="text" class="ui-autocomplete-input" autocomplete="off">
+            <button id="add_company" class="btn btn-primary btn-xs">Add Company</button>
+          </span>
+        </span>
+      </div>
+    </div>
+    <div id="interviewed-state">
+    </div>
+  </div>
+  
+  
+  <section class="action col-md-12">
+    
+    
+    <a href="https://discuss.leetcode.com/category/13" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;discuss&#39;, &#39;click&#39;, &#39;longest-palindromic-substring&#39;);" class="icon-btn">
+      <i class="fa fa-commenting-o" aria-hidden="true"></i>Discuss
+    </a>
+    
+    <a href="https://leetcode.com/problems/random-one-question/" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;pick-one-detail&#39;, &#39;click&#39;);" class="icon-btn">
+      <i class="fa fa-random" aria-hidden="true"></i>Pick One
+    </a>
+    
+    <button type="button" class="icon-btn" onclick="confirmations.confirm_see_solution(
+              event,
+              &#39;/articles/longest-palindromic-substring/&#39;,
+              false
+              );">
+      <i class="fa fa-book" aria-hidden="true"></i>Editorial Solution
+    </button>
+    
+    
+  </section>
+  
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="container ng-scope" ng-app="app" ng-controller="AceCtrl as aceCtrl" ng-init="aceCtrl.init(
+        [{&#39;value&#39;: &#39;cpp&#39;, &#39;text&#39;: &#39;C++&#39;, &#39;defaultCode&#39;: &#39;class Solution {\u000D\u000Apublic:\u000D\u000A    string longestPalindrome(string s) {\u000D\u000A        \u000D\u000A    }\u000D\u000A}\u003B&#39; },{&#39;value&#39;: &#39;java&#39;, &#39;text&#39;: &#39;Java&#39;, &#39;defaultCode&#39;: &#39;public class Solution {\u000D\u000A    public String longestPalindrome(String s) {\u000D\u000A        \u000D\u000A    }\u000D\u000A}&#39; },{&#39;value&#39;: &#39;python&#39;, &#39;text&#39;: &#39;Python&#39;, &#39;defaultCode&#39;: &#39;class Solution(object):\u000D\u000A    def longestPalindrome(self, s):\u000D\u000A        \u0022\u0022\u0022\u000D\u000A        :type s: str\u000D\u000A        :rtype: str\u000D\u000A        \u0022\u0022\u0022\u000D\u000A        &#39; },{&#39;value&#39;: &#39;c&#39;, &#39;text&#39;: &#39;C&#39;, &#39;defaultCode&#39;: &#39;char* longestPalindrome(char* s) {\u000D\u000A    \u000D\u000A}&#39; },{&#39;value&#39;: &#39;csharp&#39;, &#39;text&#39;: &#39;C#&#39;, &#39;defaultCode&#39;: &#39;public class Solution {\u000D\u000A    public string LongestPalindrome(string s) {\u000D\u000A        \u000D\u000A    }\u000D\u000A}&#39; },{&#39;value&#39;: &#39;javascript&#39;, &#39;text&#39;: &#39;JavaScript&#39;, &#39;defaultCode&#39;: &#39;/**\u000D\u000A * @param {string} s\u000D\u000A * @return {string}\u000D\u000A */\u000D\u000Avar longestPalindrome \u003D function(s) {\u000D\u000A    \u000D\u000A}\u003B&#39; },{&#39;value&#39;: &#39;ruby&#39;, &#39;text&#39;: &#39;Ruby&#39;, &#39;defaultCode&#39;: &#39;# @param {String} s\u000D\u000A# @return {String}\u000D\u000Adef longest_palindrome(s)\u000D\u000A    \u000D\u000Aend&#39; },{&#39;value&#39;: &#39;swift&#39;, &#39;text&#39;: &#39;Swift&#39;, &#39;defaultCode&#39;: &#39;class Solution {\u000D\u000A    func longestPalindrome(_ s: String) \u002D\u003E String {\u000D\u000A        \u000D\u000A    }\u000D\u000A}&#39; },{&#39;value&#39;: &#39;golang&#39;, &#39;text&#39;: &#39;Go&#39;, &#39;defaultCode&#39;: &#39;func longestPalindrome(s string) string {\u000D\u000A    \u000D\u000A}&#39; },],
+        &#39;5_502702&#39;,
+        5,
+        &#39;/problems/longest-palindromic-substring/interpret_solution/&#39;,
+        &#39;/problems/longest-palindromic-substring/submit/&#39;,
+        &#39;/submissions/detail/0/&#39;,
+        &#39;/problems/0/&#39;,
+        &#39;Longest Palindromic Substring&#39;,
+        &#39;\u0022babad\u0022&#39;,
+        &#39;{ \u000D\u000A  \u0022name\u0022: \u0022longestPalindrome\u0022,\u000D\u000A  \u0022params\u0022: [\u000D\u000A    { \u000D\u000A      \u0022name\u0022: \u0022s\u0022,\u000D\u000A      \u0022type\u0022: \u0022string\u0022\u000D\u000A    }\u000D\u000A  ],\u000D\u000A  \u0022return\u0022: {\u000D\u000A    \u0022type\u0022: \u0022string\u0022\u000D\u000A  }\u000D\u000A}&#39;,
+        true,
+        [{&quot;question_title_slug&quot;: &quot;shortest-palindrome&quot;, &quot;question_title&quot;: &quot;Shortest Palindrome&quot;, &quot;difficulty&quot;: &quot;H&quot;}, {&quot;question_title_slug&quot;: &quot;palindrome-permutation&quot;, &quot;question_title&quot;: &quot;Palindrome Permutation&quot;, &quot;difficulty&quot;: &quot;E&quot;}, {&quot;question_title_slug&quot;: &quot;palindrome-pairs&quot;, &quot;question_title&quot;: &quot;Palindrome Pairs&quot;, &quot;difficulty&quot;: &quot;H&quot;}, {&quot;question_title_slug&quot;: &quot;longest-palindromic-subsequence&quot;, &quot;question_title&quot;: &quot;Longest Palindromic Subsequence&quot;, &quot;difficulty&quot;: &quot;M&quot;}],
+        &#39;/articles/longest-palindromic-substring/&#39;,
+        false,
+        &#39;large&#39;
+        );">
+    <input type="hidden" name="csrfmiddlewaretoken" value="VxhdaiB4FPTE0NdvBVtjDbpAmAOSF6lAKFApRMEx3edQTDjp4OxWML41xsvCnFZu">
+    <hr>
+    <div class="row" style="margin-bottom:12px;">
+      <div class="col-md-12">
+        <select class="form-control select mbm ng-pristine ng-valid select2-hidden-accessible" name="lang" ng-model="aceCtrl.selectedLang" ng-options="lang.text for lang in aceCtrl.langs track by lang.value" tabindex="-1" aria-hidden="true"><option value="cpp">C++</option><option value="java">Java</option><option value="python">Python</option><option value="c">C</option><option value="csharp">C#</option><option value="javascript">JavaScript</option><option value="ruby">Ruby</option><option value="swift">Swift</option><option value="golang">Go</option></select><span class="select2 select2-container select2-container--bootstrap" dir="ltr" style="width: 220px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-lang-u1-container"><span class="select2-selection__rendered" id="select2-lang-u1-container" title="C++">C++</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+        <refresh-button><!-- reset button -->
+<style>
+.reset-btn + .popover {
+  white-space: nowrap;
+  max-width: none;
+}
+
+.reset-btn + .popover > .arrow {
+  top: auto !important;
+}
+</style>
+
+<span data-toggle="modal" data-target="#confirmReset">
+  <button class="reset-btn btn btn-default" type="button" data-original-title="" title="">
+    <span class="fa fa-refresh"></span>
+  </button>
+</span>
+<div class="modal fade" id="confirmReset" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Reset to default code
+          definition</h4>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to reset your code?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-primary" ng-click="aceCtrl.resetCode()" data-dismiss="modal">Reset Code
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</refresh-button>
+        <code-button><!-- get latest code -->
+<style>
+.code-btn + .popover {
+  white-space: nowrap;
+  max-width: none;
+}
+
+.code-btn + .popover > .arrow {
+  top: auto !important;
+}
+</style>
+
+<span data-toggle="modal" data-target="#confirmRecent">
+  <button class="code-btn btn btn-primary" type="button" data-original-title="" title="">
+    <span class="fa fa-code"></span>
+  </button>
+</span>
+<span ng-show="aceCtrl.is_error" class="alert alert-danger ng-binding ng-hide">
+  
+</span>
+<span ng-show="aceCtrl.is_alert" class="alert alert-info ng-hide">
+  Already the latest.
+</span>
+<span ng-show="aceCtrl.is_success" class="alert alert-success ng-hide">
+  Load successfully.
+</span>
+<div class="modal fade" id="confirmRecent" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title">Replace current code with last submitted
+          code</h4>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to replace the current code with your last
+        submitted code?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-primary" ng-click="aceCtrl.recentCode()" data-dismiss="modal">Replace
+          Code
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</code-button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div style="float:left; width:100%;">
+          <div ng-switch="" on="aceCtrl.selectedLang.value">
+            
+              <!-- ngSwitchWhen: cpp --><div ui-ace="aceCtrl.aceOption(&#39;cpp&#39;)" ng-model="aceCtrl.code.cpp" ng-switch-when="cpp" class="editor ng-scope ng-valid ace_editor ace-tm ng-dirty ace_focus" style="height: 425px;"><div style="position: absolute;"></div><textarea class="ace_text-input" wrap="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="opacity: 0; height: 17px; width: 7.6975px; left: 222.042px; top: 68px;"></textarea><div class="ace_gutter"><div class="ace_layer ace_gutter-layer ace_folding-enabled" style="margin-top: 0px; height: 459px; width: 41px;"><div class="ace_gutter-cell " style="height: 17px;">1<span class="ace_fold-widget ace_start ace_open" style="height: 17px;"></span></div><div class="ace_gutter-cell " style="height: 17px;">2</div><div class="ace_gutter-cell " style="height: 17px;">3<span class="ace_fold-widget ace_start ace_open" style="height: 17px;"></span></div><div class="ace_gutter-cell " style="height: 17px;">4</div><div class="ace_gutter-cell " style="height: 17px;">5</div><div class="ace_gutter-cell " style="height: 17px;">6</div><div class="ace_gutter-cell " style="height: 17px;">7</div></div><div class="ace_gutter-active-line" style="top: 68px; height: 17px;"></div></div><div class="ace_scroller" style="left: 41px; right: 0px; bottom: 0px;"><div class="ace_content" style="margin-top: 0px; width: 1097px; height: 459px; margin-left: 0px;"><div class="ace_layer ace_print-margin-layer"><div class="ace_print-margin" style="left: 619.8px; visibility: hidden;"></div></div><div class="ace_layer ace_marker-layer"></div><div class="ace_layer ace_text-layer" style="padding: 0px 4px;"><div class="ace_line_group" style="height:17px"><div class="ace_line" style="height:17px"><span class="ace_storage ace_type">class</span> <span class="ace_identifier">Solution</span> <span class="ace_paren ace_lparen">{</span></div></div><div class="ace_line_group" style="height:17px"><div class="ace_line" style="height:17px"><span class="ace_storage ace_modifier">public</span><span class="ace_punctuation ace_operator">:</span></div></div><div class="ace_line_group" style="height:17px"><div class="ace_line" style="height:17px">    <span class="ace_identifier">string</span> <span class="ace_identifier">longestPalindrome</span><span class="ace_paren ace_lparen">(</span><span class="ace_identifier">string</span> <span class="ace_identifier">s</span><span class="ace_paren ace_rparen">)</span> <span class="ace_paren ace_lparen">{</span></div></div><div class="ace_line_group" style="height:17px"><div class="ace_line" style="height:17px">        <span class="ace_storage ace_type">int</span> <span class="ace_identifier">max</span> <span class="ace_keyword ace_operator">=</span><span class="ace_constant ace_numeric">0</span><span class="ace_punctuation ace_operator">;</span></div></div><div class="ace_line_group" style="height:17px"><div class="ace_line" style="height:17px">        <span class="ace_storage ace_type">int</span> <span class="ace_identifier">start</span><span class="ace_punctuation ace_operator">,</span> <span class="ace_identifier">end</span><span class="ace_punctuation ace_operator">;</span></div></div><div class="ace_line_group" style="height:17px"><div class="ace_line" style="height:17px">    <span class="ace_paren ace_rparen">}</span></div></div><div class="ace_line_group" style="height:17px"><div class="ace_line" style="height:17px"><span class="ace_paren ace_rparen">}</span><span class="ace_punctuation ace_operator">;</span></div></div></div><div class="ace_layer ace_marker-layer"></div><div class="ace_layer ace_cursor-layer"><div class="ace_cursor" style="left: 181.042px; top: 68px; width: 7.6975px; height: 17px;"></div></div></div></div><div class="ace_scrollbar ace_scrollbar-v" style="display: none; width: 22px; bottom: 0px;"><div class="ace_scrollbar-inner" style="width: 22px; height: 119px;"></div></div><div class="ace_scrollbar ace_scrollbar-h" style="display: none; height: 22px; left: 41px; right: 0px;"><div class="ace_scrollbar-inner" style="height: 22px; width: 1097px;"></div></div><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; overflow: hidden;"><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; overflow: visible;"></div><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font-style: inherit; font-variant: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; overflow: visible;">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div></div></div>
+            
+              <!-- ngSwitchWhen: java -->
+            
+              <!-- ngSwitchWhen: python -->
+            
+              <!-- ngSwitchWhen: c -->
+            
+              <!-- ngSwitchWhen: csharp -->
+            
+              <!-- ngSwitchWhen: javascript -->
+            
+              <!-- ngSwitchWhen: ruby -->
+            
+              <!-- ngSwitchWhen: swift -->
+            
+              <!-- ngSwitchWhen: golang -->
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="action">
+      
+        <div class="row">
+          <div class="col-md-8 col-sm-7">
+            <div style="margin-top: -3px;" ng-class="(aceCtrl.interpret.enable &amp;&amp; !aceCtrl.interpret.interpretOnly) ? &#39;visible&#39; : &#39;invisible&#39;" class="visible">
+              <input type="hidden" name="typed_code">
+              <!-- interpret_solution -->
+              <label for="custom_testcase">
+                <input type="checkbox" id="custom_testcase" name="custom_testcase" ng-model="aceCtrl.interpret.isCustomTestCase" class="ng-pristine ng-valid">
+                Custom Testcase
+              </label>
+              <div></div>
+              <div class="contribute-btn">
+                <a ng-click="aceCtrl.gotoApplication()">
+                  <span id="ct-tooltip" class="fa fa-exclamation-circle" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Contribute missing testcases and get rewarded!"></span> Contribute Testcase
+                </a>
+              </div>
+              <div data-ng-show="aceCtrl.interpret.isCustomTestCase" class="ng-hide">
+
+                <div class="row">
+                  <div class="ds-viewer-container col-lg-12" style="margin-bottom: 10px;">
+                    <textarea class="form-control ng-pristine ng-valid" rows="5" id="textArea" name="data_input" ng-model="aceCtrl.interpret.testCase" ng-focus="aceCtrl.interpret.showStructure = true;" ng-blur="aceCtrl.interpret.showStructure = false;" ng-keyup="aceCtrl.interpret.renderStructure()" ng-click="aceCtrl.interpret.renderStructure()"></textarea>
+                    <div class="data-structure-viewer ng-hide" ng-show="aceCtrl.interpret.showStructure &amp;&amp;
+                                  aceCtrl.interpret.validStructure &amp;&amp;
+                                  !aceCtrl.interpret.isMobile"></div>
+                  </div>
+                </div>
+                <div class="row" style="margin-bottom: 10px; margin-top: -2px; font-size:90%;">
+                  <div class="col-lg-12">
+                    <div class="dropdown">
+                      <a id="dLabel" class="menu-links" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                        How to create a testcase<span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu pull-right" aria-labelledby="dLabel">
+                        <li><a href="https://leetcode.com/faq/#binary-tree">Binary tree</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          <div class="col-md-4 col-sm-5">
+            <div class="pull-right">
+              <span id="button0" ng-show="aceCtrl.interpret.enable" data-ng-disabled="aceCtrl.interpret.running" class="btn btn-default btn-pad ng-isolate-scope" ng-click="aceCtrl.interpret.runCode()" oj-button="run" data-toggle="tooltip" title="" data-original-title="Shortcut: Ctrl + &#39;">Run Code</span>
+              <button id="button1" ng-show="!aceCtrl.interpret.interpretOnly" ng-disabled="aceCtrl.interpret.running" class="btn btn-primary btn-pad ng-isolate-scope" type="submit" ng-click="aceCtrl.interpret.submitCode()" oj-button="submit" data-toggle="tooltip" title="" data-original-title="Shortcut: Ctrl + enter">
+                
+                  Submit Solution
+                
+              </button>
+            </div>
+          </div>
+        </div>
+        <interpret-result><div class="row ng-hide animated fadeOutRight" data-ng-show="!(aceCtrl.interpret.status | isEmpty)" ng-class="!(aceCtrl.interpret.status | isEmpty) ? &#39;animated&#39; : &#39;animated fadeOutRight&#39;">
+  <div class="col-lg-12">
+    <h4>
+      Run Code Status:
+      <span id="result_state" ng-class="{&#39;blue&#39;: &#39;text-info&#39;, &#39;green&#39;: &#39;text-success&#39;, &#39;red&#39;: &#39;text-danger&#39;}[aceCtrl.interpret.status.color]" class="ng-binding">
+        
+      </span>
+    </h4>
+  </div>
+  <div class="col-lg-12">
+    <div class="text-danger ng-binding ng-hide" data-ng-show="aceCtrl.interpret.info.error">
+      
+    </div>
+  </div>
+</div>
+
+<div class="row top-buffer ng-hide animated fadeOutRight" ng-hide="(aceCtrl.interpret.run_counter &lt;= 1) &amp;&amp; (aceCtrl.interpret.result | isEmpty)" ng-class="!(aceCtrl.interpret.result | isEmpty) ? &#39;animated fadeInLeft&#39; : &#39;animated fadeOutRight&#39;">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h5>
+          Run Code Result:
+          <button type="button" class="close" ng-click="aceCtrl.dismissInterpretResult()" aria-label="Close"><span aria-hidden="true">×</span></button>
+        </h5>
+      </div>
+      <div class="panel-body">
+        <!-- ngIf: !aceCtrl.interpret.interpretOnly --><div class="col-lg-12 ng-scope" ng-if="!aceCtrl.interpret.interpretOnly">
+          <h5>Your input</h5>
+          <pre class="ng-binding"></pre>
+        </div><!-- end ngIf: !aceCtrl.interpret.interpretOnly -->
+
+        <div class="col-lg-12 ng-hide" data-ng-show="!!aceCtrl.interpret.result.code_output.length">
+          <h5>Your stdout</h5>
+          <pre><!-- ngRepeat: val in aceCtrl.interpret.result.code_output track by $index --></pre>
+        </div>
+        <!-- ngIf: aceCtrl.interpret.interpretOnly && aceCtrl.interpret.result.code_answer -->
+
+        <!-- ngIf: !aceCtrl.interpret.interpretOnly --><div ng-controller="DiffCtrl as diffCtrl" ng-if="!aceCtrl.interpret.interpretOnly" class="ng-scope">
+          <div class="col-lg-6">
+            <h5>Your answer</h5>
+            <pre ng-hide="aceCtrl.interpret.show_diff" class=""><!-- ngRepeat: val in aceCtrl.interpret.result.code_answer track by $index --></pre>
+            <pre ng-show="aceCtrl.interpret.show_diff" class="ng-hide"><span ng-bind-html="diffCtrl.actual" class="ng-binding"></span></pre>
+          </div>
+
+          <div class="col-lg-6">
+            <h5>Expected answer</h5>
+            <pre ng-show="!aceCtrl.interpret.isContest" ng-hide="aceCtrl.interpret.show_diff" class=""><!-- ngRepeat: val in aceCtrl.getExpectedAns() track by $index --><span ng-repeat="val in aceCtrl.getExpectedAns() track by $index" class="ng-binding ng-scope"><br></span><!-- end ngRepeat: val in aceCtrl.getExpectedAns() track by $index --></pre>
+            <pre ng-show="aceCtrl.interpret.show_diff" class="ng-hide"><span ng-bind-html="diffCtrl.expect" class="ng-binding"></span></pre>
+            <pre ng-show="aceCtrl.interpret.isContest" class="ng-hide">Not available during contest.</pre>
+          </div>
+
+          <div class="col-lg-12" ng-show="!aceCtrl.interpret.isContest">
+            <a class="btn btn-sm btn-info ng-binding" ng-disabled="!aceCtrl.interpret.diffReady" ng-click="aceCtrl.interpret.toggleDiff()" disabled="disabled">Show Diff</a>
+          </div>
+        </div><!-- end ngIf: !aceCtrl.interpret.interpretOnly -->
+
+        <div class="col-lg-12 ng-hide" data-ng-show="aceCtrl.interpret.result.status_runtime">
+          <h5 class="ng-binding">Runtime: </h5>
+        </div>
+        <div class="col-lg-12">
+          <p class="comment">Note: is Run Code inconsistent with Submit Solution? If you are using global variables or C/C++, check <a href="https://leetcode.com/faq/#different-output">this</a> out.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</interpret-result>
+        <oj-submission><style>
+  .pad-left {
+    padding-left: 10px;
+  }
+  .pad-right {
+    padding-right: 30px;
+  }
+  .text-default {
+    color: #333;
+  }
+  .testcase-label {
+    color: #B25150;
+    position: absolute;
+    left: 0;
+  }
+  .testcase-info, .stdout-info {
+    display: block;
+    font-weight: bold;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: pre;
+    cursor: pointer;
+  }
+  .testcase-row-expand .testcase-info {
+    max-height: 80px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+    word-wrap: break-word;
+    margin: -5px 0;
+    padding: 5px 0;
+  }
+  .stdout-info {
+    max-height: 200px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+    word-wrap: break-word;
+  }
+  .testcase-table-re, .testcase-table-wa {
+    border: 1px solid rgba(169, 68, 66, 0.5);
+    border-collapse: collapse;
+    border-radius: 4px;
+    border-spacing: 5px;
+    overflow: hidden;
+    padding: 10px 23px 25px 23px;
+    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+    font-size: 14px;
+    line-height: 20px;
+    background: transparent;
+    box-shadow: 0 0 4px rgba(169, 68, 66, 0.5);
+  }
+  .testcase-table-re .testcase-table-row {
+    padding: 3px 0px 3px 15em;
+  }
+  .testcase-table-wa .testcase-table-row {
+    padding: 3px 0px 3px 8em;
+  }
+  .testcase-table-wa .testcase-table-row,
+  .testcase-table-re .testcase-table-row {
+    position: relative;
+    padding-top: 10px;
+    border-bottom: 1px solid rgba(228, 154, 152, 0.5);
+    padding-bottom: 14px;
+  }
+  .btn-outline {
+    border: 1px solid #cfcfcf;
+    background: 0 0;
+  }
+  .btn-alt {
+    border-radius: 2em;
+    padding: 8px 18px;
+  }
+  #reveal-solution {
+    margin-left: 15px;
+  }
+  .popover {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+</style>
+
+
+<div>
+  <span ng-show="aceCtrl.interpret.running" id="submit_wait" class="loading-center ng-hide">
+    <img ng-src="/static/images/loading.gif" class="img-rounded" src="./Longest Palindromic Substring _ LeetCode OJ_files/loading.gif">
+  </span>
+  <div ng-show="aceCtrl.interpret.submit_error" id="submit_error" class="btn text-danger ng-binding ng-hide">
+    Submit failed, try again please.
+  </div>
+  <div ng-show="aceCtrl.interpret.submit_warning" id="submit_warning" class="btn text-danger ng-binding ng-hide"></div>
+  <div ng-show="aceCtrl.interpret.submit_result" id="result" class="ng-hide">
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-12">
+            <h4>Submission Result:
+              <a id="result-state" ng-href="" ng-class="{&#39;blue&#39;: &#39;text-info&#39;, &#39;green&#39;: &#39;text-success&#39;, &#39;red&#39;: &#39;text-danger&#39;}[statusColor]" class="ng-binding text-info">
+                Pending
+              </a>
+
+              <i class="fa fa-question-circle text-danger ng-hide" ng-show="statusText === &#39;Time Limit Exceeded&#39;" data-toggle="popover" data-placement="top" data-content="TLE means all your outputs (may be empty) matches the expected output up to the last executed test case. If the last executed test case is large, your algorithm may be correct but not efficient enough. If you believe your code should pass the judge, please raise this issue by posting in Discuss or sending an email to admin." data-trigger="hover" data-original-title="" title=""></i>
+              <i class="fa fa-question-circle text-success ng-hide" ng-show="statusText === &#39;Accepted&#39;" data-toggle="popover" data-placement="top" data-content="Accepted means your program passes all test cases, however it does not necessarily mean your algorithm is optimal. If you believe your code has bugs, please submit a &#39;missing test case&#39; report in Discuss or sending an email to admin." data-trigger="hover" data-original-title="" title=""></i>
+              <i class="fa fa-question-circle text-danger ng-hide" ng-show="statusText === &#39;Timeout&#39;" data-toggle="popover" data-placement="top" data-content="Timeout means the server queue is busy and could not process your submission for the time being. Please wait for about 10 seconds and submit again." data-trigger="hover" data-original-title="" title=""></i>
+              <i class="fa fa-question-circle text-warning ng-hide" ng-show="statusText === &#39;Success&#39;" data-toggle="popover" data-placement="top" data-content="Success means your submission is saved, but not necessarily means that your submission is accepted. The result will be given after contest is over." data-trigger="hover" data-original-title="" title=""></i>
+
+              <span data-ng-show="statusText !== &#39;Pending&#39; &amp;&amp; statusText !== &#39;Judging&#39; &amp;&amp; url_detail" class="ng-hide">
+                <a id="more-details" class="btn-left-space btn btn-outline btn-alt" ng-href="">More Details <i class="fa fa-chevron-right"></i></a>
+              </span>
+            </h4>
+            <!-- Go to www.addthis.com/dashboard to customize your tools -->
+            <div data-ng-show="statusText === &#39;Accepted&#39;" class="ng-fade ng-hide">
+              <div>
+                <!-- unsolved next challenges -->
+                <div ng-show="aceCtrl.interpret.next_challenge_pairs.length" class="">
+                  <div>
+                    <span>Next challenges: </span>
+                    <!-- ngRepeat: pair in aceCtrl.interpret.next_challenge_pairs --><span ng-repeat="pair in aceCtrl.interpret.next_challenge_pairs" class="ng-scope">
+                      <a class="btn btn-xs btn-primary ng-binding" ng-href="/problems/shortest-palindrome" ng-click="ga(&#39;send&#39;, &#39;event&#39;, &#39;next-challenge&#39;, &#39;click&#39;);" href="https://leetcode.com/problems/shortest-palindrome">
+                        (H) Shortest Palindrome
+                      </a>
+                    </span><!-- end ngRepeat: pair in aceCtrl.interpret.next_challenge_pairs --><span ng-repeat="pair in aceCtrl.interpret.next_challenge_pairs" class="ng-scope">
+                      <a class="btn btn-xs btn-primary ng-binding" ng-href="/problems/palindrome-permutation" ng-click="ga(&#39;send&#39;, &#39;event&#39;, &#39;next-challenge&#39;, &#39;click&#39;);" href="https://leetcode.com/problems/palindrome-permutation">
+                        (E) Palindrome Permutation
+                      </a>
+                    </span><!-- end ngRepeat: pair in aceCtrl.interpret.next_challenge_pairs --><span ng-repeat="pair in aceCtrl.interpret.next_challenge_pairs" class="ng-scope">
+                      <a class="btn btn-xs btn-primary ng-binding" ng-href="/problems/palindrome-pairs" ng-click="ga(&#39;send&#39;, &#39;event&#39;, &#39;next-challenge&#39;, &#39;click&#39;);" href="https://leetcode.com/problems/palindrome-pairs">
+                        (H) Palindrome Pairs
+                      </a>
+                    </span><!-- end ngRepeat: pair in aceCtrl.interpret.next_challenge_pairs --><span ng-repeat="pair in aceCtrl.interpret.next_challenge_pairs" class="ng-scope">
+                      <a class="btn btn-xs btn-primary ng-binding" ng-href="/problems/longest-palindromic-subsequence" ng-click="ga(&#39;send&#39;, &#39;event&#39;, &#39;next-challenge&#39;, &#39;click&#39;);" href="https://leetcode.com/problems/longest-palindromic-subsequence">
+                        (M) Longest Palindromic Subsequence
+                      </a>
+                    </span><!-- end ngRepeat: pair in aceCtrl.interpret.next_challenge_pairs -->
+                  </div>
+                </div>
+              </div>
+              <h4>
+                <small>Share your acceptance!</small>
+              </h4>
+              <div class="addthis_sharing_toolbox" data-title="#LeetCode# I have solved Longest Palindromic Substring. Come and join the fun!"></div>
+            </div>
+            <div class="ng-fade ng-hide" data-ng-show="!aceCtrl.interpret.running &amp;&amp; statusText === &#39;Accepted&#39; &amp;&amp; aceCtrl.first_ac_solution_url">
+              <p>Congratulations, you've just <i>unlocked</i> a solution! <a id="reveal-solution" class="btn btn-outline btn-alt" href="https://leetcode.com/articles/longest-palindromic-substring/" target="_blank">Reveal Solution <i class="fa fa-chevron-right"></i></a></p>
+            </div>
+          </div>
+        </div>
+
+        <div id="last_executed_testcase_output_row" ng-show="showLastTestCase()" class="ng-hide">
+          <div class="alert alert-danger col-md-12 testcase-table-re">
+            <div id="runtime_error_row" ng-show="runtimeError" class="testcase-table-row ng-hide">
+              <span class="pad-left testcase-label">Runtime Error Message:</span>
+              <span id="runtime_error_output" class="text-danger ng-binding testcase-info"></span>
+            </div>
+            <div class="testcase-table-row">
+              <span class="pad-left testcase-label">Last executed input:</span>
+              <span id="last_executed_testcase_output" class="text-danger ng-binding testcase-info"></span>
+            </div>
+            <div class="testcase-table-row ng-hide" ng-show="resultStdOutput">
+              <span class="pad-left testcase-label">Stdout:</span>
+              <span id="runtime_error_stdout" class="ng-binding stdout-info text-default"></span>
+            </div>
+          </div>
+        </div>
+
+        <div id="result_code_output_row" ng-show="resultCodeOutput" class="ng-hide">
+          <div id="result_code_output" class="alert alert-danger ng-binding"></div>
+        </div>
+
+        <div id="wa_output" ng-show="showWaTestCase()" class="ng-hide">
+          <div class="alert alert-danger col-md-12 testcase-table-wa">
+            <div class="testcase-table-row">
+              <span class="pad-left testcase-label">Input:</span>
+              <span id="result_wa_testcase_input" class="testcase-info text-default ng-binding"></span>
+            </div>
+            <div class="testcase-table-row">
+              <span class="pad-left testcase-label">Output:</span>
+              <span id="result_wa_testcase_output" class="testcase-info text-danger ng-binding"></span>
+            </div>
+            <div class="testcase-table-row">
+              <span class="pad-left testcase-label">Expected:</span>
+              <span id="result_wa_testcase_expected" class="testcase-info text-success ng-binding"></span>
+            </div>
+            <div class="testcase-table-row ng-hide" ng-show="resultStdOutput">
+              <span class="pad-left testcase-label">Stdout:</span>
+              <span id="result_wa_testcase_std_output" class="stdout-info text-default ng-binding"></span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</oj-submission>
+      
+    </div>
+  </div>
+  
+
+
+    </div>
+
+    
+    <footer class="site-footer" style="margin-top: -118px;">
+      <div class="container">
+        <hr>
+        <p class="text-center">
+          <a href="https://leetcode.com/faq/">Frequently Asked Questions</a> |
+          <a href="https://leetcode.com/tos/">Terms of Service</a>
+        </p>
+        <p class="text-center">
+          <iframe class="iubenda-ibadge" scrolling="no" frameborder="0" allowtransparency="true" style="width:105px; height:22px;" src="./Longest Palindromic Substring _ LeetCode OJ_files/saved_resource.html"></iframe>
+        </p>
+        <p class="text-center">Copyright © 2017 LeetCode</p>
+      </div>
+    </footer>
+    
+
+    <a href="mailto:admin@leetcode.com?subject=Feedback" id="chat-link" target="_blank">
+    <i class="glyphicon glyphicon-envelope"></i>Send Feedback</a>
+
+    <script src="./Longest Palindromic Substring _ LeetCode OJ_files/bootstrap.min.js.下载"></script>
+    <script src="./Longest Palindromic Substring _ LeetCode OJ_files/bootstrap-table.min.js.下载"></script>
+    <script type="text/javascript" src="./Longest Palindromic Substring _ LeetCode OJ_files/8be9ee850f9c.js.下载"></script>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o)
+  ,m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a
+  ,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga'
+  );
+  ga('create', 'UA-6849839-6', 'leetcode.com');
+  ga('require', 'displayfeatures');
+  ga('send', 'pageview');
+</script>
+     
+<script>
+  var pageData = {
+    questionId: '5',
+    questionTitleSlug: 'longest-palindromic-substring',
+    questionTitle: 'Longest Palindromic Substring',
+    payment: true,
+    loginUrl: '/accounts/login/?next=/problems/longest-palindromic-substring/',
+    unpaidUrl: '/unpaid/',
+    isSignedIn: true,
+
+    sessionId: '502702',
+    reverseUrl: {
+      latest_submission: '/submissions/latest/'
+    },
+    enableRunCode:  true ,
+    enableSubmit: true ,
+    submitUrl: '/problems/longest-palindromic-substring/submit/',
+    interpretUrl: '/problems/longest-palindromic-substring/interpret_solution/',
+    judgeType: 'large',
+    nextChallengePairs: JSON.parse('[{\u0022question_title_slug\u0022: \u0022shortest\u002Dpalindrome\u0022, \u0022question_title\u0022: \u0022Shortest Palindrome\u0022, \u0022difficulty\u0022: \u0022H\u0022}, {\u0022question_title_slug\u0022: \u0022palindrome\u002Dpermutation\u0022, \u0022question_title\u0022: \u0022Palindrome Permutation\u0022, \u0022difficulty\u0022: \u0022E\u0022}, {\u0022question_title_slug\u0022: \u0022palindrome\u002Dpairs\u0022, \u0022question_title\u0022: \u0022Palindrome Pairs\u0022, \u0022difficulty\u0022: \u0022H\u0022}, {\u0022question_title_slug\u0022: \u0022longest\u002Dpalindromic\u002Dsubsequence\u0022, \u0022question_title\u0022: \u0022Longest Palindromic Subsequence\u0022, \u0022difficulty\u0022: \u0022M\u0022}]'),
+    codeDefinition: [{'value': 'cpp', 'text': 'C++', 'defaultCode': 'class Solution {\u000D\u000Apublic:\u000D\u000A    string longestPalindrome(string s) {\u000D\u000A        \u000D\u000A    }\u000D\u000A}\u003B' },{'value': 'java', 'text': 'Java', 'defaultCode': 'public class Solution {\u000D\u000A    public String longestPalindrome(String s) {\u000D\u000A        \u000D\u000A    }\u000D\u000A}' },{'value': 'python', 'text': 'Python', 'defaultCode': 'class Solution(object):\u000D\u000A    def longestPalindrome(self, s):\u000D\u000A        \u0022\u0022\u0022\u000D\u000A        :type s: str\u000D\u000A        :rtype: str\u000D\u000A        \u0022\u0022\u0022\u000D\u000A        ' },{'value': 'c', 'text': 'C', 'defaultCode': 'char* longestPalindrome(char* s) {\u000D\u000A    \u000D\u000A}' },{'value': 'csharp', 'text': 'C#', 'defaultCode': 'public class Solution {\u000D\u000A    public string LongestPalindrome(string s) {\u000D\u000A        \u000D\u000A    }\u000D\u000A}' },{'value': 'javascript', 'text': 'JavaScript', 'defaultCode': '/**\u000D\u000A * @param {string} s\u000D\u000A * @return {string}\u000D\u000A */\u000D\u000Avar longestPalindrome \u003D function(s) {\u000D\u000A    \u000D\u000A}\u003B' },{'value': 'ruby', 'text': 'Ruby', 'defaultCode': '# @param {String} s\u000D\u000A# @return {String}\u000D\u000Adef longest_palindrome(s)\u000D\u000A    \u000D\u000Aend' },{'value': 'swift', 'text': 'Swift', 'defaultCode': 'class Solution {\u000D\u000A    func longestPalindrome(_ s: String) \u002D\u003E String {\u000D\u000A        \u000D\u000A    }\u000D\u000A}' },{'value': 'golang', 'text': 'Go', 'defaultCode': 'func longestPalindrome(s string) string {\u000D\u000A    \u000D\u000A}' },],
+    enableTestMode: false ,
+    authenticated:  true ,
+    sampleTestCase: '\u0022babad\u0022',
+    judgerAvailable:  true ,
+    emailVerified:  true ,
+    firstACSolutionUrl: '/articles/longest-palindromic-substring/',
+    mobile: false ,
+  };
+</script>
+<script type="text/javascript" src="./Longest Palindromic Substring _ LeetCode OJ_files/react-vendor.e26bac9f.js.下载"></script>
+<script type="text/javascript" src="./Longest Palindromic Substring _ LeetCode OJ_files/index.entry.181217d8.js.下载"></script>
+
+<script src="./Longest Palindromic Substring _ LeetCode OJ_files/angular-animate.min.js.下载"></script>
+
+<script type="text/javascript" src="./Longest Palindromic Substring _ LeetCode OJ_files/c2a36a69b471.js.下载"></script>
+
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+
+
+
+    <script>
+      (function($, w, d){
+        var loader = function () {
+          var s = d.createElement("script"),
+              tag = d.getElementsByTagName("script")[0];
+          s.src = "//cdn.iubenda.com/iubenda.js";
+          tag.parentNode.insertBefore(s,tag);
+          s.onload = setFooterStyles;
+        };
+        if (w.addEventListener) {
+          w.addEventListener("load", loader, false);
+        } else if (w.attachEvent) {
+          w.attachEvent("onload", loader);
+        } else { w.onload = loader; }
+
+        $(function() {
+          $('#navbar-right img').addClass('img-rounded');
+          setFooterStyles();
+        });
+
+        function setFooterStyles() {
+          var $footer = $('.site-footer'),
+              height = $footer.outerHeight();
+          $footer.css('margin-top', -height);
+          $('.content-wrapper').css('padding-bottom', height);
+        }
+      }(jQuery, window, document));
+      try {
+        ace.config.set("basePath", "/static/ace/src-noconflict/")
+      } catch(err) {}
+    </script>
+  
+
+<ul id="ui-id-1" tabindex="0" class="ui-menu ui-widget ui-widget-content ui-autocomplete ui-front" style="display: none;"></ul><div role="status" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div></body></html>

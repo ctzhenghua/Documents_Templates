@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>10</y>
+      <w>240</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>Thread
+--
++threadId_: pthread_t
+--
++Start():void
++Join():void
+-ThreadRoutine(void* arg):void*
+--
+-Run():void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>80</x>
+      <y>200</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>TestThread</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>120</x>
+      <y>130</y>
+      <w>30</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>260</x>
+      <y>10</y>
+      <w>140</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Note..
+bg=blue
+抽象类
+run为纯虚函数，实现不同的功能</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

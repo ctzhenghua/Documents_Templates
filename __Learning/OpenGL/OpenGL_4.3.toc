@@ -1,0 +1,61 @@
+\contentsline {section}{\numberline {1}安装配置}{3}{section.1}
+\contentsline {subsection}{\numberline {1.1}各种库文件}{3}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}常见错误}{3}{subsection.1.2}
+\contentsline {subsubsection}{\numberline {1.2.1}0x70000000C}{3}{subsubsection.1.2.1}
+\contentsline {subsection}{\numberline {1.3}参考文献}{3}{subsection.1.3}
+\contentsline {section}{\numberline {2}四大变换}{4}{section.2}
+\contentsline {subsection}{\numberline {2.1}参考文献}{4}{subsection.2.1}
+\contentsline {section}{\numberline {3}OpenGL基础编程}{5}{section.3}
+\contentsline {subsection}{\numberline {3.1}渲染管线}{5}{subsection.3.1}
+\contentsline {subparagraph}{参考}{5}{section*.2}
+\contentsline {subsection}{\numberline {3.2}基本结构-框架}{6}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}创建顶点缓存}{6}{subsubsection.3.2.1}
+\contentsline {subparagraph}{- void glGenBuffers(GLsizei n, GLuint* ids)}{6}{section*.3}
+\contentsline {subparagraph}{- void glBindBuffer(GLenum target, GLuint id)}{6}{section*.4}
+\contentsline {subparagraph}{- void glBufferData(GLenum target, GLsizei size, const void* data, GLenum usage)}{6}{section*.5}
+\contentsline {subparagraph}{- void glBufferSubData(GLenum target, GLint offset, GLsizei size, void* data)}{7}{section*.6}
+\contentsline {subparagraph}{- void glDeleteBuffers(GLsizei n, const GLuint* ids)}{7}{section*.7}
+\contentsline {subsubsection}{\numberline {3.2.2}顶点缓存和索引缓存的使用}{7}{subsubsection.3.2.2}
+\contentsline {subparagraph}{1.准备顶点数据与索引数据}{7}{section*.8}
+\contentsline {subparagraph}{2.生成缓存[数据，索引]对象，并拷贝数据}{7}{section*.9}
+\contentsline {subparagraph}{3.使用}{7}{section*.10}
+\contentsline {subparagraph}{4.利用顶点绘图方法}{8}{section*.11}
+\contentsline {subparagraph}{5.将不同类型的数据拷贝到一个缓存对象}{8}{section*.12}
+\contentsline {subparagraph}{6.缓存对象的实时修改}{9}{section*.13}
+\contentsline {subsubsection}{\numberline {3.2.3}顶点缓存和顶点数组的使用:VAO、VBO}{9}{subsubsection.3.2.3}
+\contentsline {subparagraph}{VAO}{9}{section*.14}
+\contentsline {subparagraph}{使用}{9}{section*.15}
+\contentsline {subsubsection}{\numberline {3.2.4}使用VAO Mesh 类示例}{10}{subsubsection.3.2.4}
+\contentsline {subparagraph}{VAO[直接使用图形卡缓存绘图]-代码}{10}{section*.16}
+\contentsline {subparagraph}{结果}{11}{section*.17}
+\contentsline {subsection}{\numberline {3.3}光照添加}{11}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}纹理添加}{11}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}着色器-GLSL}{11}{subsection.3.5}
+\contentsline {subsubsection}{\numberline {3.5.1}顶点着色器}{11}{subsubsection.3.5.1}
+\contentsline {subparagraph}{主要功能}{11}{section*.18}
+\contentsline {subparagraph}{输入内容}{12}{section*.19}
+\contentsline {subparagraph}{输出内容}{12}{section*.20}
+\contentsline {subsubsection}{\numberline {3.5.2}片段着色器}{12}{subsubsection.3.5.2}
+\contentsline {subparagraph}{主要功能}{12}{section*.21}
+\contentsline {subparagraph}{输入内容}{13}{section*.22}
+\contentsline {subparagraph}{输出内容}{13}{section*.23}
+\contentsline {subsubsection}{\numberline {3.5.3}程序组成}{13}{subsubsection.3.5.3}
+\contentsline {subparagraph}{示例}{13}{section*.24}
+\contentsline {subsubsection}{\numberline {3.5.4}参考文献}{18}{subsubsection.3.5.4}
+\contentsline {section}{\numberline {4}MFC with OpenGL}{19}{section.4}
+\contentsline {subsection}{\numberline {4.1}环境配置}{19}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}闪烁解决办法}{19}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}定时器概念与程序}{19}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}坐标确定}{19}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.5}画椭球}{19}{subsection.4.5}
+\contentsline {section}{\numberline {5}OpenGL 读取 OBJ 文件}{20}{section.5}
+\contentsline {subsection}{\numberline {5.1}参考文献}{20}{subsection.5.1}
+\contentsline {subparagraph}{OBJ 文件格式}{20}{section*.25}
+\contentsline {section}{\numberline {6}OpenGL 实现天空盒子}{21}{section.6}
+\contentsline {subsection}{\numberline {6.1}实现}{21}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}错误记录}{21}{subsection.6.2}
+\contentsline {paragraph}{1.error LNK1281}{21}{section*.26}
+\contentsline {subparagraph}{解决方案}{21}{section*.27}
+\contentsline {section}{\numberline {7}PCL 安装}{22}{section.7}
+\contentsline {subsection}{\numberline {7.1}错误记录}{22}{subsection.7.1}
+\contentsline {paragraph}{1.error LNK2019}{22}{section*.28}

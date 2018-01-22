@@ -1,0 +1,93 @@
+\documentclass[UTF8,a4paper,12pt]{ctexbook} 
+
+ \usepackage{graphicx}%学习插入图
+ \usepackage{verbatim}%学习注释多行
+ \usepackage{booktabs}%表格
+ \usepackage{geometry}%图片
+ \usepackage{amsmath}
+ \usepackage{amssymb}
+ \usepackage{listings}%代码
+ \usepackage{xcolor}  %颜色
+ \usepackage{enumitem}%列表格式
+ \usepackage{tcolorbox}
+ \usepackage{algorithm}  %format of the algorithm
+ \usepackage{algorithmic}%format of the algorithm
+ \usepackage{multirow}   %multirow for format of table
+ \usepackage{tabularx} 	%表格排版格式控制
+ \usepackage{array}	%表格排版格式控制
+ \usepackage{hyperref} %超链接 \url{URL}
+ % \setCJKmainfont{方正兰亭黑简体}  %中文字体设置
+ % \setCJKsansfont{华康少女字体} %设置中文字体
+ % \setCJKmonofont{华康少女字体} %设置中文字体
+
+ \CTEXsetup[format+={\flushleft}]{section}
+
+ \geometry{left=1.6cm,right=1.8cm,top=2cm,bottom=1.7cm} %设置文章宽度
+ 
+ \pagestyle{plain} 		  %设置页面布局
+
+ %代码效果定义
+ \definecolor{mygreen}{rgb}{0,0.6,0}
+ \definecolor{mygray}{rgb}{0.5,0.5,0.5}
+ \definecolor{mymauve}{rgb}{0.58,0,0.82}
+ \lstset{ %
+ 	backgroundcolor=\color{white},   % choose the background color
+ 	basicstyle=\footnotesize\ttfamily,      % size of fonts used for the code
+ 	%stringstyle=\color{codepurple},
+ 	%basicstyle=\footnotesize,
+ 	%breakatwhitespace=false,         
+ 	%breaklines=true,                 
+ 	%captionpos=b,                    
+ 	%keepspaces=true,                 
+ 	%numbers=left,                    
+ 	%numbersep=5pt,                  
+ 	%showspaces=false,                
+ 	%showstringspaces=false,
+ 	%showtabs=false,        
+ 	columns=fullflexible,
+ 	breaklines=true,                 % automatic line breaking only at whitespace
+ 	captionpos=b,                    % sets the caption-position to bottom
+ 	tabsize=4,
+ 	commentstyle=\color{mygreen},    % comment style
+ 	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+ 	keywordstyle=\color{blue},       % keyword style
+ 	stringstyle=\color{mymauve}\ttfamily,     % string literal style
+ 	frame=single,
+ 	rulesepcolor=\color{red!20!green!20!blue!20},
+ 	% identifierstyle=\color{red},
+ 	language=c++,
+ }
+ \author{\kaishu 郑华}
+ \title{\heiti MySQL 数据库学习笔记}
+ 
+\begin{document}          %正文排版开始
+ 	\maketitle
+ \chapter{基础概念}
+	 \section{术语}
+		 数据库: 数据库是一些关联表的集合。.
+		 
+		 数据表: 表是数据的矩阵。在一个数据库中的表看起来像一个简单的电子表格。
+		 
+		 列: 一列(数据元素) 包含了相同的数据, 例如邮政编码的数据。
+		 
+		 行：一行（=元组，或记录）是一组相关的数据，例如一条用户订阅的数据。
+		 
+		 冗余：存储两倍数据，冗余降低了性能，但提高了数据的安全性。
+		 
+		 主键：主键是唯一的。一个数据表中只能包含一个主键。你可以使用主键来查询数据。
+		 
+		 外键：外键用于关联两个表。
+		 
+		 复合键：复合键（组合键）将多个列作为一个索引键，一般用于复合索引。
+		 
+		 索引：使用索引可快速访问数据库表中的特定信息。索引是对数据库表中一列或多列的值进行排序的一种结构。类似于书籍的目录。
+		 1
+		 参照完整性: 参照的完整性要求关系中不允许引用不存在的实体。与实体完整性是关系模型必须满足的完整性约束条件，目的是保证数据的一致性。
+	 
+ 
+ \chapter{数据库基本操作}
+ 
+ \chapter{高级操作} 
+		    
+\end{document} 
+ 		    

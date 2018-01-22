@@ -1,0 +1,469 @@
+\documentclass[UTF8,a4paper,12pt]{ctexbook} 
+
+ \usepackage{graphicx}%学习插入图
+ \usepackage{verbatim}%学习注释多行
+ \usepackage{booktabs}%表格
+ \usepackage{geometry}%图片
+ \usepackage{amsmath} 
+ \usepackage{amssymb}
+ \usepackage{listings}%代码
+ \usepackage{xcolor}  %颜色
+ \usepackage{enumitem}%列表格式
+ \CTEXsetup[format+={\flushleft}]{section}
+
+
+\geometry{left=1.6cm,right=1.8cm,top=2cm,bottom=1.7cm} %设置文章宽度
+
+\pagestyle{plain} 		  %设置页面布局
+\author{\kaishu 郑华}
+\title{\textbf{C++ Coding Standards}}
+  %代码效果定义
+  \definecolor{mygreen}{rgb}{0,0.6,0}
+  \definecolor{mygray}{rgb}{0.5,0.5,0.5}
+  \definecolor{mymauve}{rgb}{0.58,0,0.82}
+  \lstset{ %
+  	backgroundcolor=\color{white},   % choose the background color
+  	basicstyle=\footnotesize\ttfamily,        % size of fonts used for the code
+  	columns=fullflexible,
+  	breaklines=true,                 % automatic line breaking only at whitespace
+  	captionpos=b,                    % sets the caption-position to bottom
+  	tabsize=4,
+  	commentstyle=\color{mygreen},    % comment style
+  	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  	keywordstyle=\color{blue},       % keyword style
+  	stringstyle=\color{mymauve}\ttfamily,     % string literal style
+  	frame=single,					%tb top and bottom; L left double line
+  	xleftmargin=.06\textwidth, 
+  	%xrightmargin=.1\textwidth,
+  	rulesepcolor=\color{red!20!green!20!blue!20},
+  	% identifierstyle=\color{red},
+  	language=c++,
+  }
+
+\begin{document}          %正文排版开始
+ 	\maketitle
+	\tableofcontents
+\chapter{代码管理}
+	 \section{Compile Cleanly at High warning levels}
+	 \section{*Use a version Control system (Git)}
+		 \paragraph{Summary}:
+		 
+			 The palest of ink is better than the best memory.
+			 
+			 Use a version cotrol system. 
+			 
+			 Never keep files checked out for long periods. 
+			 
+			 Check in freequently after your updated unit tests pass. 
+			 
+			 Ensure that checked-in code does not break the build.
+	 \section{Invest in code reviews}
+		 \paragraph{Summary}:
+		 
+			 Re-view code:More eyes will help make more quality. Show your code,and read others'.You will all learn and benefit.
+		 
+
+\chapter{设计风格}
+	\section{Give one entity on cohesive responsibility}
+		\paragraph{Summary}:单一职责原则
+		
+			Focus on one thing at a time:Prefer to give each entity(variable, class, function, namespace, module, library) one well-defined responsibility.
+			
+			As an entity grows,its scope of responsiblity naturally increases, but its responsibility should bot diverge.
+	\section{Correctness, simplicity, And clarity come first}
+		\paragraph{Summary}:
+			
+			Keep it Simple Software:
+			
+			Correct is better than fast.
+			
+			Simple is better than Complex.
+			
+			Clear is better than cute.
+			
+			Safe is better than insecure.
+		
+	\section{Know when and how to code for scalability}
+		\paragraph{Summary}:
+			
+			Be aware of explosice datea growth:Without optimizing prematurely, keep an eye on asymptotic complexity.
+			
+			Algorithms that work on user data should take a predictabl and preferably no worse thanlinear,time with the amount of data processed.
+			
+			When optimization is provably necessary and important, and especially if it's because data volumes are growing, focus on improving big-Oh complexity rather than on micro-optimizations like saving that one extra addition.
+			
+			
+	\section{Don't optimize prematurely}
+		\paragraph{Summary}:
+		
+			Spur not a willing horse:Premature optimization is as addictive as it is unproductive.
+			
+			This first rule of optimization is:Don't do it.
+			
+			The second rule of optimization is :Don't do it yet.
+			
+			Measure Twice,Optimize Once.
+		
+	\section{Don't pessimize prematurely}
+		\paragraph{Summary}:
+			
+			Easy on yourself,easy on the code: All other things being equal,notably code complexity and readablility,certain efficient design patterns and coding idioms should just flow naturally from your fingertips and are no harder to write than the pessimized alternatives.
+			
+			It is avoiding gratuitous pessimization.
+		
+	\section{Minimize global and shared data}
+		\paragraph{Summary}:
+		
+			Sharing causes contention: Avoid shared data,especially global data.
+			
+			Shared data increase coupling(耦合),which reduces maintainablility and often performance.
+	\section{Hide information}
+		\paragraph{Summary}:
+		
+			Don't tell:Don't expose internal information from an entity that provides an abstraction.
+		
+	\section{*Know when and how to code for concurrency(并发)}
+		\paragraph{Summary}:
+		
+			Thread safely:If your application uses multiple threads or processes,konw how to minimize sharing objects where possible and share the right ones safely.
+		
+	\section{Ensure resources are owned by objects}
+		\paragraph{Summary}:
+			
+			Don't saw by hand when you have power tools:C++'s "Resouce Acquisition Is Initialization(RAII)" idiom is the power tool for correct resource handing.
+			
+			RAII allows the compiler to provide strong and automated guarantees that in other languages require fragile hand-coded idioms.
+			
+			When allocating a raw resource,Immediately pass it to an owning object.
+			
+			Never allocate more than one resource in a single statement.
+		
+		\paragraph{Use explicit(显式) RAII and smart pointers}
+	
+ 
+\chapter{编程方式}
+	\section{Prefer compile- and link-time errors to run-time errors}
+		\paragraph{Summary}:
+		
+			Don't put off until run time what you can do at build time:Prefer to write code that uses the compiler to check for invariants during compilation,instead of checking them at run time.
+			
+			Run-time checks are control- and data-dependent,which means you will seldom konw whether they are exhausive.
+			
+			In contrast,Compile-time checking is not control- or data-dependent and typically offers higher degrees of confidence.
+			
+	\section{Use const proactively}   
+		\paragraph{Summary}:
+		  
+			const is your friend: Immutable values are easier to understand,track,and reason about,so prefer constants over variables whereever it is sensible and make const your default choice when you define a value:It's safe,it's checked at compile time,and it's intergrated with c++'s type system.
+			
+			Don't cast away const except to call a const-incorrect function.
+			 
+	\section{Avoid macros(宏命令)}
+		\paragraph{Summary}:避免使用宏
+		
+			Macros are the bluntest instrument of C and C++'s abstraction facilities, ravenous wolves in function's clothing , hard to tame, marching to their own beat all over your scopes. Avoid them.
+			
+			Macros remain the only solution for a few important tasks, such as \textbf{\#include} guards,\textbf{\#ifdef} and \textbf{\#if defined} for\underline{ conditional compilation},and implementing assert.
+		
+	\section{Avoid Magic numbers}
+		\paragraph{Summary}:
+		
+			Programming isn't magic,so don't incant it:Avoid spelling literal constants like \textbf{43} or \textbf{3.1415} in Code.
+			
+			They are not self-explanatory and complicate maintenance by adding a hard-to-detect form of duplication.
+			
+			Use symbolic names and expressions instead,such as \textbf{width*aspectRatio}.
+			
+	\section{Declare variables as locally as possible}
+		\paragraph{Summary}:
+		
+			Avoid scope bloat, as withrequirements so too with variables: Variables introduce state, and ou should have to deal with as little state as possible, with lifetimes as short as possible.
+		
+	\section{Always initialize variables}
+		\paragraph{Summary}:
+		
+			Start with a clean slate：Uninitialized variables are a common source of bugs in C and C++ programs.
+			
+			Avoid such bugs by being disciplined about \textbf{cleaning memory before you use it};
+			
+			Initilize variables upon definition.
+			
+	\section{Avoid long functions,Avoid deep nesting}
+		\paragraph{Summary}:
+		
+			Short is better than long, Flat is better than deep: Excessively long functions and nested code blocks are often caused by failing to give one function one cohesive responsibility, and both are usually solved by better refactoring.
+		
+	\section{Avoid initialization dependencies across compilation units}
+		\paragraph{Summary}:
+			
+			keep (initialization) order:Namespace-level objects in different compilation units should never depend on each other for initialization, because their initialization order is undefined.
+			
+			Doing otherwise causes headaches ranging from mysterious crashes when you make small changes in your projects to severe non-portablility even to new releases of the same compiler.
+		
+	\section{Minimize definitional dependencies,Avoid cyclic dependencies(循环依赖)}
+		\paragraph{Summary}:
+		
+			Don't be over-dependent:Don't \#include a definition when a forward declaration will do.
+			
+			Don't be co-dependent:Cyclic dependencies occur when two modules depend directly or indirectly on one another.
+			
+			A module is a cohesive unit of release;
+			
+			Moudules that are interdependent are not really individual modules, but superglued together into what's really a larger module, a larger unit of release.
+			
+			Thus,cyclic dependencies work against modularity and are a bane of large projects. Avoid them
+		
+	\section{Make header files self-sufficient}
+		\paragraph{Summary}:
+			
+			Behave responsibly: Ensure that each header you write is compilable standalone(每个头文件都能够独自的进行编译), by having it include any headers its contents depend upon.
+		
+	\section{Always write internal \#include guards. Never wirte External \#include guards.}
+		\paragraph{Summary}:
+		
+			Weaer head(er) protection: Prevent unintended multiple inclusions by using \#include guards with unique names for all of your header files.
+			
+\chapter{函数与操作符}
+	\section{Take parameters appropriately by value, (smart) pointer, or reference}
+		\paragraph{Summary}:
+			
+			Parameterize well: \textbf{Distinguish} among input,output,and input/output parameters, and \textbf{between} \underline{value} and\underline{ reference} parameters.
+			
+			Take them appropriately.
+			
+	\section{Preserve natural semantics for overloaded operators}
+		\paragraph{Summary}:
+		
+			programmers hate surprises: Overload operators only for good reasons, and preserve natural semantics; if that's difficult,you might be misusing operator overloading.
+	\section{Prefer the canonical forms of arithmatic and assignment operators}
+		\paragraph{Summary}:
+			
+		if you provide A+B, then also A+=B	
+	\section{Prefer the canonical form of ++ and --,Prefer calling the prefix forms}
+		\paragraph{Summary}:
+		
+		if you provide ++c; then also provide c++;
+	\section{Consider overloading to avoid implicit type type conversions}
+		\paragraph{Summary}:
+		
+		
+	\section{Avoid overloading \&\&, ||,or,(comma)}
+		\paragraph{Summary}:
+		
+		
+	\section{Don't write code that depends on the order of evaluation of function arguments}
+		\paragraph{Summary}:
+		
+		Keep evaluation order: The order in which arguments of a function are evaluated is unspecified, so don't rely on a specific ordering.
+		
+		如：Func(++count, ++count); 这两个执行的顺序是不一定的.
+\chapter{类的设计与继承}
+	\section{Be clear what kind of class you're writing}
+		\paragraph{Summary}:
+		
+		
+	\section{Prefer minimal classes to monolithic classes}
+		\paragraph{Summary}:
+		
+		
+	\section{Prefer composition to inheritance}
+		\paragraph{Summary}:
+		
+		
+	\section{Avoid inheriting from classes that were not designed to be base classes}
+		\paragraph{Summary}:
+		
+		
+	\section{Prefer providing abstract interfaces}
+		\paragraph{Summary}:
+		
+		
+	\section{Public inheritance is substitutablity.Inherit,not to reuse,but to be reused.}
+		\paragraph{Summary}:
+		
+		
+	\section{Practice safe overriding}
+		\paragraph{Summary}:
+		
+		
+	\section{Consider making virtual functions nonpublic,and public functions nonvirtual}
+		\paragraph{Summary}:
+		
+		
+	\section{Avoid providing implicit conversions}
+		\paragraph{Summary}:
+		
+		
+	\section{Make data members private,except in behaviorless aggregates(C-style structs)}
+		\paragraph{Summary}:
+		
+		
+	\section{Don't give away your internals}
+		\paragraph{Summary}:
+		
+		
+	\section{Pimpl judiciously}
+		\paragraph{Summary}:
+		
+		
+	\section{Prefer writing nonmember nonfriend functions}
+		\paragraph{Summary}:
+		
+		
+	\section{Always provide new and delete together}
+		\paragraph{Summary}:
+		
+
+\chapter{构造函数、析构函数与拷贝构造}
+	\section{Define and initialize member variables in the same order}
+		\paragraph{Summary}:
+		
+		
+	\section{Prefer initialization to assignment in constructors}
+		\paragraph{Summary}:
+		
+		
+	\section{Avoid calling virtual functions in consturctors and destructors}
+		\paragraph{Summary}:
+		
+		
+	\section{Make base class desturctors public and virtual,or protected and nonvirtual}
+		\paragraph{Summary}:
+	
+	
+	\section{Destructors,deallocation,and swap never fail}
+		\paragraph{Summary}:
+		
+		
+	\section{Copy and destroy consistently}
+		\paragraph{Summary}:
+		
+		
+	\section{Explicitly enable or disable copying}
+		\paragraph{Summary}:
+		
+		
+	\section{Avoid slicing.Consider Clone instead of copying in base classes.}
+		\paragraph{Summary}:
+		
+		
+	\section{Prefer the cannoical form of assignment}
+		\paragraph{Summary}:
+		
+		
+	\section{Whenever it makes sense,provide a no-fail swap(and provide it correctly)}
+		\paragraph{Summary}:
+		
+
+\chapter{命名空间 与 模块}
+	\section{Keep a type and its nonmember function interface in the same namespace}
+		\paragraph{Summary}:
+		
+		
+	\section{Keep types and functions in separate namespaces unless they're specifically intended to work together}
+		\paragraph{Summary}:
+		
+		
+	\section{Don't write namespace usings in a header file or before an \#include}
+		\paragraph{Summary}:
+		
+		
+	\section{Avoid allocationg and deallocating memory in different modules}
+		\paragraph{Summary}:
+		
+		
+	\section{Don't define entities with linkage in a header file}
+		\paragraph{Summary}:
+		
+		
+	\section{Don't allow exceptions to propagate across module boundaries}
+		\paragraph{Summary}:
+		
+		
+	\section{Use sufficiently portable types in a module's interface}
+		\paragraph{Summary}:
+		
+		
+	
+\chapter{错误处理与异常}
+	\section{Assert liberally to ducument internal assumptions and invariants}
+		\paragraph{Summary}:
+		
+		
+	\section{Establish a rational error handling policy,and follow it strictly}
+		\paragraph{Summary}:
+		
+		
+	\section{Distinguish between errors and ono-errors}
+		\paragraph{Summary}:
+		
+		
+	\section{Design and write error-safe code}
+		\paragraph{Summary}:
+		
+		
+	\section{Prefer to use exceptions to report errors}
+		\paragraph{Summary}:
+		
+		
+	\section{Throw by value,catch by reference}
+		\paragraph{Summary}:
+	
+	
+	\section{Report,handle,and translate errors appropriately}
+		\paragraph{Summary}:
+		
+		
+	\section{Avoid exception specifications}
+		\paragraph{Summary}:
+	
+\chapter{类型安全}
+	\section{Avoid tupe switching; prefer polymorphism(多态)}
+		\paragraph{Summary}:
+		
+		
+	\section{Rely on types,not on representations}
+		\paragraph{Summary}:
+		
+		
+	\section{Avoid using reinterpret\_cast}
+		\paragraph{Summary}:
+		
+		
+	\section{Avoid using static\_cast on pointer}
+		\paragraph{Summary}:
+		
+		
+	\section{Avoid casting away const}
+		\paragraph{Summary}:
+		
+		
+	\section{Don't use C-style casts}
+		\paragraph{Summary}:
+		
+		
+	\section{Don't memcpy or  memcmp ono-PODs}
+		\paragraph{Summary}:
+		
+		
+	\section{Don't use unions to reinterpret representation}
+		\paragraph{Summary}:
+		
+		
+	\section{Don't use varargs(可变长参数)}
+		\paragraph{Summary}:
+		
+		
+	\section{Don't use invalid objects}
+		\paragraph{Summary}:
+		
+		
+	\section{Don't use unsafe functions}
+		\paragraph{Summary}:
+		
+		
+	\section{Don't treat arrays polymorphically( 多态的)}
+		\paragraph{Summary}:
+			
+\end{document} 
+ 		    

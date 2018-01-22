@@ -1,0 +1,218 @@
+\documentclass[UTF8,a4paper,8pt]{ctexart} 
+
+ \usepackage{graphicx}%学习插入图
+ \usepackage{verbatim}%学习注释多行
+ \usepackage{booktabs}%表格
+ \usepackage{geometry}%图片
+ \usepackage{amsmath} 
+ \usepackage{amssymb}
+ \usepackage{listings}%代码
+ \usepackage{xcolor}  %颜色
+ \usepackage{enumitem}%列表格式
+ \CTEXsetup[format+={\flushleft}]{section}
+
+
+\geometry{left=1.6cm,right=1.8cm,top=2cm,bottom=1.7cm} %设置文章宽度
+
+\pagestyle{plain} 		  %设置页面布局
+\author{郑华}
+\title{C++  Questions }
+ %代码效果定义
+ \definecolor{codegreen}{rgb}{0,0.6,0}
+ \definecolor{codegray}{rgb}{0.5,0.5,0.5}
+ \definecolor{codepurple}{rgb}{0.58,0,0.82}
+ \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+ 
+ \lstdefinestyle{mystyle}{
+ 	backgroundcolor=\color{backcolour},   
+ 	commentstyle=\color{codegreen},
+ 	keywordstyle=\color{magenta},
+ 	numberstyle=\tiny\color{codegray},
+ 	stringstyle=\color{codepurple},
+ 	basicstyle=\footnotesize,
+ 	breakatwhitespace=false,         
+ 	breaklines=true,                 
+ 	captionpos=b,                    
+ 	keepspaces=true,                 
+ 	%numbers=left,                    
+ 	%numbersep=5pt,                  
+ 	showspaces=false,                
+ 	showstringspaces=false,
+ 	showtabs=false,                  
+ 	tabsize=2
+ }
+\lstset{style=mystyle, escapeinside=``}
+
+\begin{document}          %正文排版开始
+ 	\maketitle
+	
+\section*{面向对象的设计思想}
+	 \paragraph{1.面向对象包含哪些基本概念？}
+	 \paragraph{2.面向对象的基本特征包括哪些？}
+	 \paragraph{3.为什么封装对面向对象来说很重要？}
+	 \paragraph{4.接口与实现的分离有什么好处？}
+	 \paragraph{5.抽象是什么？}
+	 \paragraph{6.封装与抽象有什么联系？}
+	 \paragraph{7.继承是否会消弱封装机制？}
+	 \paragraph{8.组合是怎么定义的，它有什么作用，它包括什么？}
+	 \paragraph{9.如何理解动态特性？}
+	 
+\section*{C++中的类和对象}
+	 \paragraph{1.如何理解对象的初始化？}
+	 \paragraph{2.如何理解对象的生存周期？}
+	 \paragraph{3.如何向函数传递对象？}
+	 \paragraph{4.编写C++ 类时需要注意哪些问题？}
+	 \paragraph{5.如何理解构造函数？}
+	 \paragraph{6.默认构造函数是什么，它有什么特点？}
+	 \paragraph{7.何时调用拷贝构造函数？}
+	 \paragraph{8.深拷贝和浅拷贝的区别是什么？}
+	 \paragraph{9.如何理解析构函数？}
+	 \paragraph{10.程序如何处理静态成员变量及静态成员函数？}
+	 \paragraph{11.为什么使用友元，如何使用？}
+	 \paragraph{12.使用友元的优点}  
+	 
+\section*{继承}
+	 \paragraph{1.C++ 的继承结构是怎样的？}
+	 \paragraph{2.当派生类与基类成员名称冲突时应如何解决？}
+	 \paragraph{3.为什么要使用虚基类？}
+	 \paragraph{4.继承体系中构造函数的调用顺序是怎样的？}
+	 \paragraph{5.类的默认访问权限是什么？为什么使用它作为默认权限？}
+	 \paragraph{6.为什么要使用Protected，如何使用？}
+	 \paragraph{7.为什么派生类不能访问基类的private成员？}
+	 \paragraph{8.struct 与 class 有什么不同？}
+	 \paragraph{9.如何为基类构造函数传递参数？}    
+	 
+\section*{多态}
+	 \paragraph{1.如何理解C++中的捆绑？} 
+	 \paragraph{2.如何理解和使用虚函数？}
+	 \paragraph{3.如何理解和使用纯虚函数？}
+	 \paragraph{4.如何理解和使用抽象类？}
+	 \paragraph{5.多态是如何实现的？}
+	 \paragraph{6.如何理解静态多态和动态多态？}
+	 \paragraph{7.如何理解虚函数和构造函数？}
+	 \paragraph{8.如何理解虚函数和析构函数？}
+
+\section*{指针和字符串}
+	 \paragraph{1.如何理解sizeof关键字？} 
+	 \paragraph{2.指针是什么？}
+	 \paragraph{3.如何理解地址和指针的关系？}
+	 \paragraph{4.指针和取值操作符\&如何结合使用？}
+	 \paragraph{5.指针的运算有哪些？}
+	 \paragraph{6.指针变量和引用有什么区别？}
+	 \paragraph{7.指针变量与变量指针有什么区别？}
+	 \paragraph{8.指针的比较指的是什么？}
+	 \paragraph{9.如何使用函数指针？}  
+	 \paragraph{10.如何理解指针函数？}
+	 \paragraph{11.如何理解指针数组与数组指针？}
+	 \paragraph{12.使用指针有哪些常见的错误？}
+	 \paragraph{13.常用的字符串操作函数有哪些？}
+	 \paragraph{14.如何理解字符数组和字符指针？}
+ 
+\section*{运算符重载}
+ 	 \paragraph{1.为什么使用运算符重载？} 
+ 	 \paragraph{2.使用运算符重载应遵循哪些规则？}
+ 	 \paragraph{3.哪些运算符可以重载，哪些可以重载？}
+ 	 \paragraph{4.为什么要使用友元函数重载运算符？}
+ 	 \paragraph{5.使用友元函数重载“++”“--”运算符可能会出现什么问题？}
+ 	 \paragraph{6.如何实现new 和 delete 运算符的重载？}
+ 	 \paragraph{7.如何重载数组下标运算符？}
+ 	 \paragraph{8.如何将运算符函数作为成员函数使用？}
+ 	 \paragraph{9.成员运算符函数与友元运算符函数有什么区别？} 
+ 	 
+\section*{用户自定义的数据类型和枚举}
+  	 \paragraph{1.什么事枚举，如何使用枚举？} 
+
+\section*{类型转换和RTTl}
+ 	 \paragraph{1.C++预定义的类型转换有哪些方式？} 
+ 	 \paragraph{2.如何实现类这种数据类型与其他数据类型的装换？}
+ 	 \paragraph{3.为什么需要转换函数，如何创建转换函数？}
+ 	 \paragraph{4.c++定义了哪几个强制转换操作符？作用分别是什么？}
+ 	 \paragraph{5.如何区分静态类型检查和动态类型检查？}
+ 	 \paragraph{6.为什么要避免使用动态类型检查？}
+ 	 \paragraph{7.什么事运行时类型标识？}
+ 	 \paragraph{8.为什么向下的类型转换是危险的？}
+ 	 \paragraph{9.dynamic\_cast$\langle T \rangle $()函数的作用是什么？}
+ 	 \paragraph{10.static\_cast$\langle T \rangle $()函数的作用是什么？}
+ 	 \paragraph{11.typeid()的作用是什么？} 
+
+\section*{异常处理}
+	 \paragraph{1.C++ 异常处理的原理是什么？} 
+	 \paragraph{2.异常处理是如何实现的？}
+	 \paragraph{3.使用异常时应该注意哪些方面？}
+	 \paragraph{4.抛出的异常和捕获的异常是否必须匹配？}
+	 \paragraph{5.如何处理Try语句中函数抛出的异常？}
+	 \paragraph{6.程序在何时执行catch语句？}
+	 \paragraph{7.一个try语句是否可以使用多个catch语句？如何使用？}
+	 \paragraph{8.对异常使用省略号有什么作用？}
+	 \paragraph{9.throw 语句具有什么作用？}
+	 \paragraph{10.如何实现重新抛出异常？}
+	 \paragraph{11.构造和析构对象时产生的异常应该如何处理？}
+	 \paragraph{12.如何使用默认函数参数避免异常和错误发生？}
+	 \paragraph{13.处理异常时terminate() 函数和 unexpected()函数分别有什么作用？}
+
+\section*{标准模版库}
+	 \paragraph{1.什么是标准模版库？为什么要使用标准模板库？} 
+	 \paragraph{2.标准模版库包含哪些头文件？}
+	 \paragraph{3.如何理解容器？}
+	 \paragraph{4.标准模版库中容器的存储方式和访问方式}
+	 \paragraph{5.标准模版库中的容器是如何实现的？}
+	 \paragraph{6.关联容器是如何工作的？}
+	 \paragraph{7.迭代器在标准模版库设计中有什么作用？}
+	 \paragraph{8.如何理解输入输出迭代器？}
+	 \paragraph{9.STL 包括哪些算法？}
+	 \paragraph{10.vector,list,deque,set,map的内部实现和使用}
+
+\section*{通用函数及模版}
+  	 \paragraph{1.如何理解模版？} 
+  	 \paragraph{2.如何显式重载通用函数？}
+  	 \paragraph{3.什么情况下不能使用通用函数代替重载函数？}
+  	 \paragraph{4.多个文件之间是否可以编译相同的函数模版定义？}
+  	 \paragraph{5.类模板和模板类之间有什么关系？}
+  	 \paragraph{6.当函数模版与同名非函数模版函数重载时如何进行调用？}
+  	 \paragraph{7.如何使用模版定义通用类？}
+  	 \paragraph{8.是否可以创建含有多个通用数据类型的通用类？}
+  	 \paragraph{9.创建含有参数的操作符需要注意什么？}
+  	 \paragraph{10.在函数模版中如何使用数组作为参数？}
+
+\section*{输入和输出}
+  	 \paragraph{1.} 
+  	 \paragraph{2.}
+  	 \paragraph{3.}
+  	 \paragraph{4.}
+  	 \paragraph{5.}
+  	 \paragraph{6.}
+  	 \paragraph{7.}
+  	 \paragraph{8.}
+
+\section*{内存管理}
+  	 \paragraph{1.} 
+  	 \paragraph{2.}
+  	 \paragraph{3.}
+  	 \paragraph{4.}
+  	 \paragraph{5.}
+  	 \paragraph{6.}
+  	 \paragraph{7.}
+  	 \paragraph{8.}
+ 
+\section*{进程与线程}
+  	 \paragraph{1.} 
+  	 \paragraph{2.}
+  	 \paragraph{3.}
+  	 \paragraph{4.}
+  	 \paragraph{5.}
+  	 \paragraph{6.}
+  	 \paragraph{7.}
+  	 \paragraph{8.}
+
+\section*{关于性能的思考}       
+  	 \paragraph{1.} 
+  	 \paragraph{2.}
+  	 \paragraph{3.}
+  	 \paragraph{4.}
+  	 \paragraph{5.}
+  	 \paragraph{6.}
+  	 \paragraph{7.}
+  	 \paragraph{8.}
+  	 
+\end{document} 
+ 		    

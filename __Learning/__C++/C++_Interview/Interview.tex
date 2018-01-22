@@ -1,0 +1,770 @@
+\documentclass[UTF8,a4paper,8pt]{ctexart} 
+
+ \usepackage{graphicx}%学习插入图
+ \usepackage{verbatim}%学习注释多行
+ \usepackage{booktabs}%表格
+ \usepackage{geometry}%图片
+ \usepackage{amsmath} 
+ \usepackage{amssymb}
+ \usepackage{listings}%代码
+ \usepackage{xcolor}  %颜色
+ \usepackage{enumitem}%列表格式
+ \usepackage{hyperref}
+ \CTEXsetup[format+={\flushleft}]{section}
+
+
+\geometry{left=1.6cm,right=1.8cm,top=2cm,bottom=1.7cm} %设置文章宽度
+
+\pagestyle{plain} 		  %设置页面布局
+\author{郑华}
+\title{Interview 面试}
+ %代码效果定义
+ \definecolor{mygreen}{rgb}{0,0.6,0}
+ \definecolor{mygray}{rgb}{0.5,0.5,0.5}
+ \definecolor{mymauve}{rgb}{0.58,0,0.82}
+\lstset{ %
+	backgroundcolor=\color{white},   % choose the background color
+	basicstyle=\footnotesize\ttfamily,        % size of fonts used for the code
+	%stringstyle=\color{codepurple},
+	%basicstyle=\footnotesize,
+	%breakatwhitespace=false,         
+	%breaklines=true,                 
+	%captionpos=b,                    
+	%keepspaces=true,                 
+	%numbers=left,                    
+	%numbersep=5pt,                  
+	%showspaces=false,                
+	%showstringspaces=false,
+	%showtabs=false,        
+	columns=fullflexible,
+	breaklines=true,                 % automatic line breaking only at whitespace
+	captionpos=b,                    % sets the caption-position to bottom
+	tabsize=4,
+	commentstyle=\color{mygreen},    % comment style
+	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+	keywordstyle=\color{blue},       % keyword style
+	stringstyle=\color{mymauve}\ttfamily,     % string literal style
+	frame=single,					%tb top and bottom; L left double line
+	xleftmargin=.06\textwidth, 
+	%xrightmargin=.1\textwidth,
+	rulesepcolor=\color{red!20!green!20!blue!20},
+	% identifierstyle=\color{red},
+	language=c++,
+}
+
+
+\begin{document}          %正文排版开始
+ 	\maketitle
+	\tableofcontents
+	
+\newpage	
+\section{参考学习网址}
+	\url{http://blog.csdn.net/Hackbuteer1/article/category/1181402}
+	
+	\url{http://blog.csdn.net/qingyuanluofeng/article/category/2544593/4}
+	
+	网络编程过来人：\url{http://blog.csdn.net/Adam040606/article/category/3186109}
+	
+	面试题：\url{http://blog.csdn.net/huaweitman/article/category/1487663}
+	
+	后台开发 同道：\url{http://blog.csdn.net/fycy2010/article/category/5648813}
+	
+\newpage
+\section{Linux}
+	\subsection{题目}
+		\subsubsection{熟练netstat tcpdump ipcs ipcrm}
+		\subsubsection{共享内存段被映射进进程空间之后，存在于进程空间的什么位置？共享内存段}
+			\subparagraph{共享内存定义}：共享内存是最快的可用IPC（进程间通信）形式。它允许多个不相关的进程去访问\textbf{同一部分逻辑内存}。共享内存是由IPC为一个进程创建的一个特殊的地址范围，\textbf{它将出现在进程的地址空间中}。\textbf{其他进程可以把同一段共享内存段“连接到”它们自己的地址空间里去}。所有进程都可以访问共享内存中的地址。如果一个进程向这段共享内存写了数据，所做的改动会立刻被有访问同一段共享内存的其他进程看到。因此共享内存对于数据的传输是非常高效的。
+			
+			共享内存段紧靠在栈之下，最大限制为32M
+			
+			\subparagraph{共享内存的使用实现原理}：
+			要使用一块共享内存，进程必须首先分配它。随后需要访问这个共享内存块的每一个进程都必须将这个共享内存绑定到自己的地址空间中。当完成通信之后，所有进程都将脱离共享内存，并且由一个进程释放该共享内存块。
+			
+			理解 Linux 系统内存模型可以有助于解释这个绑定的过程。在 Linux 系统中，每个进程的虚拟内存是被分为许多页面的。这些内存页面中包含了实际的数据。每个进程都会维护一个从内存地址到虚拟内存页面之间的映射关系。尽管每个进程都有自己的内存地址，不同的进程可以同时将同一个内存页面映射到自己的地址空间中，从而达到共享内存的目的。
+			
+			分配一个新的共享内存块会创建新的内存页面。因为所有进程都希望共享对同一块内存的访问，只应由一个进程创建一块新的共享内存。再次分配一块已经存在的内存块不会创建新的页面，而只是会返回一个标识该内存块的标识符。一个进程如需使用这个共享内存块，则首先需要将它绑定到自己的地址空间中。这样会创建一个从进程本身虚拟地址到共享页面的映射关系。当对共享内存的使用结束之后，这个映射关系将被删除。当再也没有进程需要使用这个共享内存块的时候，必须有一个（且只能是一个）进程负责释放这个被共享的内存页面。
+			
+			
+			所有共享内存块的大小都必须是系统页面大小的整数倍。系统页面大小指的是系统中单个内存页面包含的字节数。在 Linux 系统中，内存页面大小是4KB，不过您仍然应该通过调用 getpagesize 获取这个值。
+		\subsubsection{进程内存空间分布情况}
+			\subparagraph{内核空间和用户空间}\verb|->|
+				
+				所有os分配给每个进程一个独立的，连续的，虚拟的，地址内存空间，该大小一般是4G（32位操作系统，\textbf{即2的32次方}），其中将高地址值的内存空间分配给os占用，\textbf{linux os占用1G}，\textbf{window os占用2G}；\textit{其余内存地址空间分配给进程使用}；分别称作内核空间和用户空间；
+				
+				\textbf{通常情况下，用户进程不能访问内核空间的地址，例外情况是用户进程通过系统调用访问内核空间}；
+			
+			\subparagraph{用户空间布局}\verb|->|
+			
+				用户空间\textbf{被分成几个段(Segment)}，从高地址到低地址分别为：Stack, Heap, BSS, Data, Text;
+				
+					\begin{itemize}[itemindent = 2em]
+						\item \textbf{Stack}:  \verb|local variables|
+						\item \textbf{Heap}:	\verb|dynamically allocated withnew delete malloc free|
+						\item \textbf{BSS}: \verb|unInitialized global and static data|
+						\item \textbf{Data}: \verb|initialized global and static data |
+						\item \textbf{Text}: \verb|编译后的代码段|
+					\end{itemize}
+			
+			\verb|Notice->|
+				\begin{itemize}[itemindent = 2em]
+					\item Text，ro-data，Data，BSS四个段的\textbf{大小是在程序编译时确定的}；
+					\item Text，ro-data，Data三个段的内容存储在可执行文件中；
+					\item Text, ro-data, Data, BSS四个段的内容是\textbf{常驻内存的}，即进程从开始运行到僵死它们都一直存在内存，所以访问它们用的是\textbf{常量地址}
+					
+					\item Stack Segment被放在高地址值是有原因的，原因是：调用函数（加帧）是减esp的，函数返回（减帧）是加esp的，调用在前，所以栈是向低地址扩展的，放在高地址比较合适
+				\end{itemize}
+
+			
+			\subparagraph{多线程程序与普通程序的内存布局的不同}\verb|->|
+			
+				\textbf{多线程程序和普通程序}在内存中的\textbf{不同只要表现在栈的不同}，\textit{每一个线程一个栈，所以线程的局部变量不会受到其他线程的影响}。而\textbf{.text, .data. .bss等部分段是各个线程共享的}，所以线程间通信很简单，可以直接在这些共享内存中存取就可以了；
+				
+				所谓祸福相依，线程内操作这些共享内存的数据时候，要非常小心，以避免有两个或多个线程同时操作同一块内存区域；
+			
+			\subparagraph{其他细节}\verb|->|
+			
+			\begin{itemize}[itemindent = 2em]
+				\item 初始化了的：
+					\begin{itemize}
+						\item 初始化了的全局变量 ： \verb|data segment|
+						\item 初始化了的静态变量 ： \verb|data segment|
+					\end{itemize}
+				\item 未初始化的：
+					\begin{itemize}
+						\item 未初始化的全局变量 ： \verb|bss segment|
+						\item 未初始化的静态变量 ： \verb|bss segment|
+					\end{itemize}
+				
+				\item 类中静态变量 ：\verb|data  segment|
+				\item 字符串常量 ：\verb|ro-data segment|
+				\item 局部变量：\verb|stack segment|
+				\item New/malloc ：\verb|heap Segment|
+			\end{itemize}
+			
+			
+		\subsubsection{ELF是什么？其大小与程序中全局变量的是否初始化有什么关系}
+			\verb|Linux ELF  ELF = Executable and Linkable Format|，可执行连接格式，是UNIX系统实验室（USL）作为应用程序二进制接口（Application Binary Interface，ABI）而开发和发布的。扩展名为\verb|elf|。工具接口标准委员会(TIS)选择了正在发展中的\textbf{ELF标准作为}工作在32位INTEL体系上\textbf{不同操作系统之间可移植的二进制文件格式}。假定开发者定义了一个二进制接口集合，ELF标准用它来支持流线型的软件发展。应该减少不同执行接口的数量。因此\textbf{可以减少重新编程重新编译的代码}。
+			
+		\subsubsection{动态链接和静态链接的区别？}
+			\subparagraph{静态库与动态库}
+			\begin{itemize}[itemindent = 1em]
+				\item \textbf{静态库}：函数和数据被编译进一个二进制文件(通常扩展名为.LIB)。在使用静态库的情况下，在\textbf{编译链接}可执行文件\textbf{时}，链接器从库中复制这些函数和数据并把它们和应用程序的其它模块	\textbf{组合起来创建最终的可执行文件(.EXE文件)}
+				
+				\item \textbf{导入库(动态库)}：在使用动态链接库的时候，往往提供两个文件：\textbf{一个引入库和一个DLL}。引入库包含被DLL导出的函数和变量的符号名，DLL包含实际的函数和数据。\textbf{在编译链接可执行文件时}，只需要链接引入库，DLL中的函数代码和数据并不复制到可执行文件中，\textbf{在运行的时候}，再去加载DLL，访问DLL中导出的函数。
+				
+					\begin{itemize}
+						\item 装入：在运行Windows程序时，它通过一个被称作“\textbf{动态链接}”的进程与Windows相接。一个Windows的.EXE文件拥有它使用不同动态链接库的引用，所使用的函数即在那里。
+						
+						当Windows程序被加载到内存中时，程序中的调用被指向DLL函数的入口，如果DLL不在内存中，系统就将其加载到内存中。当链接Windows程序以产生一个可执行文件时，你必须链接由编程环境提供的专门的“导入库(import library)库”。这些导入库包含了动态链接库名称和所有Windows函数调用的引用信息。
+						
+						链接程序使用该信息在.EXE文件中构造一个表，当加载程序时，Windows使用它将调用转换为Windows函数。
+					\end{itemize}
+			\end{itemize}
+			
+			\subparagraph{静态库与导入库的区别}\verb|->|
+			
+				导入库和静态库的区别很大，他们实质是不一样的东西。\textbf{静态库}本身就包含了实际执行代码、符号表等等，而\textbf{对于导入库而言}，其实际的执行代码位于动态库中，导入库只包含了地址符号表等，确保程序找到对应函数的一些基本地址信息。
+			
+			\subparagraph{动态链接与静态链接}
+				\begin{itemize}[itemindent = 1em]
+					\item 静态链接方法:\verb|#pragma comment(lib, "test.lib")| ，静态链接的时候，\textit{载入代码就会把程序会用到的动态代码或动态代码的地址确定下来}
+					
+					\textbf{静态库的链接}可以使用静态链接，\textbf{动态链接库}也可以使用这种方法链接导入库
+					
+					\item 动态链接方法:\verb|LoadLibrary()/GetProcessAddress()和FreeLibrary()|，使用这种方式的程序并不在一开始就完成动态链接，而是直到真正调用\textbf{动态库}代码时，载入程序才计算(被调用的那部分)动态代码的逻辑地址，然后等到某个时候，程序又需要调用另外某块动态代码时，载入程序又去计算这部分代码的逻辑地址，所以，这种方式使程序初始化时间较短，但运行期间的\textbf{性能比不上静态链接的程序}。
+				\end{itemize}
+			
+				简单的说，\textbf{静态库}和应用程序编译在一起，在任何情况下都能运行，\textbf{而动态库}是动态链接，顾名思义就是在应用程序启动的时候才会链接，所以，当用户的系统上没有该动态库时，应用程序就会运行失败。
+				
+				\textbf{动态库}：
+				\begin{enumerate}[itemindent = 1em]
+					\item 共享：多个应用程序可以使用同一个动态库，\textit{启动多个应用程序的时候，只需要将动态库加载到内存一次即可}；
+					\item 开发模块好：要求设计者对功能划分的比较好。
+				\end{enumerate}
+				
+				\textbf{静态库}：代码的\textit{装载速度快，执行速度也比较快}，因为编译时它只会把你需要的那部分链接进去，应用程序相对比较大。但是如果\textit{多个应用程序使用的话，会被装载多次，浪费内存}。
+				
+		\subsubsection{32位系统一个进程最多有多少堆内存}
+		\subsubsection{写一个c程序辨别系统是大端or小端字节序}
+			\url{https://github.com/ctzhenghua/C-NetworkPractice-Code/blob/Dev/Network/BasicSocket/ByteOder.cc}
+		\subsubsection{信号：列出常见的信号，信号怎么处理？}
+		\subsubsection{i++ 是否原子操作?并解释为什么?}
+			\subparagraph{原子操作}原子操作是\textbf{不可分割的}，\textit{在执行完毕不会被任何其它任务或事件中断}，分为两种情况（两种都应该满足）
+				\begin{enumerate}[itemindent = 2em]
+					\item 在单线程中， 能够在单条指令中完成的操作都可以认为是" 原子操作"，因为中断只能发生于指令之间
+					\item 在多线程中，不能被其它进程（线程）打断的操作就叫原子操作
+				\end{enumerate}
+			i++分为三个阶段：内存到寄存器、寄存器自增、写回内存。这三个阶段中间都可以被中断分离开,所以不是原子操作
+			
+			\url{http://blog.csdn.net/yeyuangen/article/details/19612795}
+		\subsubsection{说出你所知道的各类linux系统的各类同步机制（重点），什么是死锁？如何避免死锁}
+		\subsubsection{如何实现守护进程？}
+		\subsubsection{linux的任务调度机制是什么？}
+		\subsubsection{标准库函数和系统调用的区别？}
+		\subsubsection{系统如何将一个信号通知到进程？}
+		\subsubsection{fork()一子进程程后父进程的全局变量能不能使用？}
+		\subsubsection{多线程与多进程的区别}
+			\subparagraph{线程安全的条件}：要确保函数线程安全，\textbf{主要需要考虑的是线程之间的共享变量}。
+			
+			属于\textbf{同一进程}的\textbf{不同线程}会\textbf{共享进程内存空间中的全局区和堆}，\textbf{而私有的线程空间}则主要\textbf{包括栈和寄存器}。因此，\textit{对于同一进程的不同线程来说}，\textbf{每个线程的局部变量都是私有的}，\textbf{而全局变量、局部静态变量、分配于堆的变量都是共享的}。在对这些共享变量进行访问时，如果要保证线程安全，则必须通过加锁的方式。
+			
+			
+			\subparagraph{关于线程的堆栈}
+			生成子线程后，它会获取一部分该进程的堆栈空间，作为其\textbf{名义上}的独立的私有空间。（为何是名义上的呢？)由于，这些线程属于同一个进程，其他线程\textit{只要获取了你私有堆栈上某些数据的指针，其他线程便可以自由访问你的名义上的私有空间上的数据变量}。（注：而\textbf{多进程}是不可以的，因为不同的进程，\textbf{相同的虚拟地址，基本不可能映射到相同的物理地址}）
+			
+		\subsubsection{多线程的各种锁！}
+			\begin{enumerate}
+				\item \textbf{原子操作}:原子操作比普通操作效率要低，因此必要时才使用
+				\item \textbf{自旋锁}:等待解锁的进程将\textbf{反复检查锁是否释放}，而不会进入睡眠状态(\textbf{忙等待})，所以常用于短期保护某段代码
+				同时，持有自旋锁的进程也不允许睡眠，不然会造成死锁——因为睡眠可能造成持有锁的进程被重新调度，而再次申请自己已持有的锁
+				\item \textbf{互斥量}:用于线程的\textbf{互斥}
+				\item \textbf{信号量}:用于线程的\textbf{同步}
+			\end{enumerate}
+			
+			\textbf{信号量与 mutex}是\verb|sleep-waiting|。 就是说当没有获得\verb|mutex|时，会有上下文切换，\textbf{将自己、加到忙等待队列中}，\textit{直到另外一个线程释放mutex并唤醒它}，而\textbf{这时CPU是空闲的，可以调度别的任务处理}。
+			
+			\textbf{自旋锁spin lock}是\verb|busy-waiting|。就是说\textit{当没有可用的锁时，就一直忙等待并不停的进行锁请求，直到得到这个锁为止}。这个过程中cpu始终处于忙状态，\textbf{不能做别的任务}
+			
+			
+			锁介绍\url{http://blog.csdn.net/wilsonboliu/article/details/19190861}
+			
+			自旋锁\url{https://blog.poxiao.me/p/spinlock-implementation-in-cpp11/}
+		\subsubsection{缓存淘汰算法-LRU}
+			最近最少使用(Least Recently Used)淘汰算法。
+			
+			\url{http://flychao88.iteye.com/blog/1977653}
+		
+		\subsubsection{可重入与不可重入}
+			\textbf{可重入}：概念基本没有比较正式的完整解释，但是它比线程安全要求更严格。根据经验，所谓“重入”，\textbf{常见的情况是}，\textit{程序执行到某个函数foo()时，收到信号}，于是暂停目前正在执行的函数，转到信号处理函数，而这个信号处理函数的执行过程中，又恰恰也会进入到刚刚执行的函数foo()，\textit{这样便发生了所谓的重入}。此时如果foo()能够正确的运行，而且\textit{处理完成后，之前暂停的foo()也能够正确运行，则说明它是可重入的}。
+			
+			\url{http://www.cnblogs.com/simplepaul/p/7361032.html}
+			
+			\url{http://blog.csdn.net/yeyuangen/article/details/38318709}
+		\subsubsection{crontab原理}
+			crontab实际上是启动服务后读取所有配置文件，然后睡一段时间（一般也是一分钟）后运行下一个任务，从链接里看，是\textbf{半小时监控一次crontab文件是否有改动}。对suse而言，crontab服务启动后，会检查\verb|/var/spool/cron/tabs|下所有用户的定时任务，然后加载到内存的队列中，然后每分钟检查一下\verb|crontab文件|是否有改动。
+			
+			\textbf{可以理解为cron服务有2个线程}，一个是调度处理\textbf{定时任务}，一个\textbf{后台线程}，\textit{后台线程检查配置文件是否有变动}，如果有变动，则发送信号到调度进程，调度进程再重新读取配置文件更新内存中的任务队列，同理，\verb|service cron stop|也是发信号到\verb|cron服务|（本次确认cron服务半僵死就是因为无法响应了）导致调度线程不知道变动，没有更新内存中的队列。从\verb|/var/log/messages|观察，依然是修改或删除之前的定时任务在运行。
+			
+			因此，为了保险，在用户里\verb|crontab -r|删除用户的定时任务后，建议重启一下\verb|crontab|服务\textit{（service cron stop后记得service cron status查看一下是否停止成功，如果没有kill -9再service cron start）}，也就是\textbf{清空一下当前定时任务的内存队列}，让cron服务重新加载，更重要的是防止cron服务挂住没重新加载定时任务队列。
+		
+		\subsubsection{*coreDump}
+			\url{http://blog.csdn.net/tenfyguo/article/details/8159176/}
+			\subparagraph{概念}
+				我们经常听到大家说到\textbf{程序core掉}了，需要\textbf{定位解决}，这里说的\textit{大部分是指}对应\textbf{程序由于各种异常或者bug导致在运行过程中异常退出或者中止}，\textit{并且}在满足一定条件下\textbf{会产生一个叫做core的文件}。
+				
+				通常情况下，\textbf{core文件}会\textbf{包含}了\textit{程序运行时的内存，寄存器状态，堆栈指针，内存管理信息还有各种函数调用堆栈信息等}，我们可以理解为是程序工作当前状态存储生成第一个文件，许多的程序出错的时候都会产生一个core文件，通过工具分析这个文件，我们可以定位到程序异常退出的时候对应的堆栈调用等信息，找出问题所在并进行及时解决。
+			
+			\subparagraph{coreDump 文件}
+				 \verb|core|文件\textbf{默认的存储位置与对应的可执行程序在同一目录下}，文件名是\verb|core|，大家可以通过下面的命令看到core文件的存在位置：
+				 \verb|cat  /proc/sys/kernel/core_pattern|
+				 
+				 缺省值是\verb|core|
+
+			\subparagraph{如何判断一个文件是coredump文件}
+				在类unix系统下，\verb|coredump文件|本身主要的格式也是\verb|ELF格式|，因此，我们可以通过\verb|readelf|命令进行判断.
+				
+				可以通过简单的\verb|file|命令进行快速判断 文件是什么类型。
+			
+			\subparagraph{coredump产生的几种可能情况}
+				\begin{enumerate}[itemindent = 1em]
+					\item 内存访问越界
+					\item 多线程程序使用了线程不安全的函数
+					\item 多线程读写的数据未加锁保护
+					\item 非法指针
+					\item 堆栈溢出
+				\end{enumerate}
+			\subparagraph{利用gdb进行coredump的定位}
+			
+				堆错误示例：
+				\begin{itemize}
+					\item 先写一个存在段错误的代码
+					\item 编译成gdb文件，需要-g选项编译
+					\item 运行代码，崩溃，产生core文件
+					\item 利用file core 查看错误信息
+				\end{itemize}
+			
+		\subsubsection{线程达到线程池定义个数，怎么办}
+			首先线程池有一个排队策略
+			
+			\textbf{排队策略}
+				\begin{enumerate}
+					\item \textbf{直接提交}。工作队列的默认选项是 SynchronousQueue，它\textbf{将任务直接提交给线程而不保持它们}。在此，如果不存在可用于立即运行任务的线程，则试图把任务加入队列将失败，因此会构造一个新的线程。此策略可以避免在处理可能具有内部依赖性的请求集时出现锁。直接提交通常要求无界 maximumPoolSizes 以避免拒绝新提交的任务。当命令以超过队列所能处理的平均数连续到达时，此策略允许无界线程具有增长的可能性。 
+					
+					\item \textbf{无界队列}。使用无界队列（例如，不具有预定义容量的 LinkedBlockingQueue）\textbf{将导致在所有 corePoolSize 线程都忙时新任务在队列中等待。这样，创建的线程就不会超过 corePoolSize。}（因此，maximumPoolSize 的值也就无效了。）当每个任务完全独立于其他任务，即任务执行互不影响时，适合于使用无界队列 
+					
+					\item  \textbf{有界队列}。当使用有限的 maximumPoolSizes 时，\textbf{有界队列（如 ArrayBlockingQueue）有助于防止资源耗尽，但是可能较难调整和控制}。队列大小和最大池大小可能需要相互折衷：\textbf{使用大型队列和小型池可以最大限度地降低 CPU 使用率、操作系统资源和上下文切换开销，但是可能导致人工降低吞吐量}。如果任务频繁阻塞（例如，如果它们是 I/O 边界），则系统可能为超过您许可的更多线程安排时间。\textbf{使用小型队列通常要求较大的池大小，CPU 使用率较高，但是可能遇到不可接受的调度开销，这样也会降低吞吐量。}
+				\end{enumerate}
+				
+			
+		
+\newpage
+\section{C++}
+	\subsection{题目}
+		\url{https://www.zhihu.com/question/34574154?sort=created}
+	
+		\url{http://www.cnblogs.com/fangyukuan/archive/2010/09/18/1829871.html}
+		
+		\url{http://www.cnblogs.com/Y1Focus/p/6707121.html}
+		
+		\url{http://www.cnblogs.com/LUO77/p/5771237.html}
+		
+		\url{http://www.cnblogs.com/bozhicheng/p/6259784.html}
+
+		\url{http://www.cnblogs.com/simplepaul/p/6820533.html}
+		\subsubsection{文本文件和二进制文件的区别}
+			ASCII文件也称为文本文件，这种文件在磁盘中存放时每个字符对应一个字节，用于存放对应的ASCII码
+			
+			ASCII码文件可在屏幕上按字符显示， 例如源程序文件就是ASCII文件，用DOS命令TYPE可显示文件的内容。 由于是按字符显示，因此能读懂文件内容。
+			
+			二进制文件是按二进制的编码方式来存放文件的。 例如， 数5678的存储形式为： 00010110 00101110只占二个字节。二进制文件虽然也可在屏幕上显示， 但其内容无法读懂。C系统在处理这些文件时，并不区分类型，都看成是字符流，按字节进行处理。 输入输出字符流的开始和结束只由程序控制而不受物理符号(如回车符)的控制。 因此也把这种文件称作“流式文件”。
+		\subsubsection{结构体用memcmp比较的问题}
+				可以通过\verb|memcmp()|来比较2个相同的结构体变量，但这2个变量必须在赋值前进行清零初始化（否则结果不准确）
+				
+				即比较前需要\verb| memset(&x, 0 ,sizeof(x))|,然后再 \verb|memcmp(&t3, &t4, sizeof(CmpTest))|
+				
+		\subsubsection{memcpy 实现}
+				
+		\subsubsection{strcpy 实现}
+				
+		\subsubsection{strcat 实现}
+		
+		\subsubsection{书写 给定类的赋值操作符 = }
+			\begin{itemize}[itemindent = 1em]
+				\item 形式：\verb|className& className::operator =(const className& rhs)|
+				\item 自我赋值	:\verb|if(*this == rhs)|
+				\item 连续赋值	:\verb|返回 className &|
+				\item 参数不变性:\verb|const className& rhs|
+				\item 异常安全性:\verb|用交换技术|
+			\end{itemize}
+			
+		\subsubsection{什么是“引用”？申明和使用“引用”要注意哪些问题？}
+			\begin{enumerate}[itemindent = 1em]
+				\item 引用就是某个\textbf{目标变量}的“别名”(\verb|alias|)，对应用的操作与\textit{对变量直接操作效果完全相同}。
+				
+				\item 申明一个引用的时候，切记要对其进行初始化。
+				
+				\item 引用声明完毕后，相当于目标变量名有两个名称，即该目标原名称和引用名，不能再把该引用名作为其他变量名的别名。
+				
+				\item 声明一个引用，不是新定义了一个变量，它只表示该引用名是目标变量名的一个别名，它本身不是一种数据类型，因此引用本身不占存储单元，系统也不给引用分配存储单元。
+				
+				\item 不能建立数组的引用。
+				
+				\item 引用效率比指针会更高一些，因为引用不需要判断是否合法，因为是引用则必然存在其真实变量。
+			\end{enumerate}
+		\subsubsection{将“引用”作为函数参数有哪些特点？}
+			\begin{itemize}[itemindent = 1em]
+				\item 传递引用给函数与传递指针的效果是一样的，直接操作原实参。
+				\item 在内存中并没有产生实参的副本，效率和空间占用更好。
+				\item 用更容易使用，更清晰，易于程序员阅读。
+			\end{itemize}
+		\subsubsection{在什么时候需要使用“常引用”？}
+			既要利用引用提高程序的效率，又要保护传递给函数的数据不在函数中被改变
+			
+			\begin{lstlisting}
+	string foo( );
+	void bar(string&s)
+	// 那么下面的表达式将是非法的：
+	bar(foo( ));
+	bar("hello world");
+			\end{lstlisting}
+			
+			原因在于\verb|foo( )|和\verb|"hello world"|串都会产生一个临时对象，而在C++中，这些\textbf{临时对象}都是\verb|const|类型的。因此上面的表达式就是试图将一个\verb|const|类型的对象转换为非\verb|const|类型，这是非法的。
+			
+			引用型参数应该在能被定义为\verb|const|的情况下，尽量定义为\verb|const|。
+		\subsubsection{将“引用”作为函数返回值类型的格式、好处和需要遵守的规则?}
+			\begin{itemize}[itemindent = 1em]
+				\item \textbf{格式}
+					\begin{lstlisting}
+	类型标识符& 函数名(形参列表及类型说明)
+	{ 
+		 函数体
+	}
+					\end{lstlisting}
+				\item \textbf{好处}:在内存中不产生被返回值的副本,(注意)：正是因为这点原因，所以返回一个\textbf{局部变量}的引用是不可取的。因为随着该局部变量生存期的结束，相应的引用也会失效，产生runtime error!
+				
+				\item \textbf{须遵守的规则}
+					\begin{enumerate}
+						\item 不能返回局部变量的引用
+						\item 不能返回函数内部\verb|new|分配的内存的引用
+						\item 可以返回类成员的引用，但最好是\verb|const|
+					\end{enumerate}
+			\end{itemize}		
+		
+		\subsubsection{引用与指针的区别是什么？}
+			 指针通过某个指针变量指向一个对象后，对它所指向的变量\textbf{间接操作}。程序中使用指针，程序的可读性差；
+			
+			而引用本身就是目标变量的别名，对引用的操作就是对目标变量的操作。
+
+		\subsubsection{什么时候需要“引用”？}
+			\begin{enumerate}[itemindent = 1em]
+				\item 赋值操作符\verb|=|的参数
+				\item 拷贝构造函数的参数
+				\item 赋值操作符\verb|=|的返回值
+				\item 流操作符\verb|<<|和\verb|>>|
+			\end{enumerate}
+		
+		\subsubsection{结构与联合有和区别？}
+			结构和联合都是由多个不同的数据类型成员组成
+			
+			区别:
+			\begin{enumerate}[itemindent = 1em]
+				\item  但在任何同一时刻, 联合中\textbf{只存放了一个被选中的成员}（所有成员共用一块地址空间）, \textbf{而结构的所有成员都存在}（不同成员的存放地址不同）。
+				
+				\item  \textbf{对于联合的不同成员赋值, 将会对其它成员重写}, 原来成员的值就不存在了, 而对于结构的不同成员赋值是互不影响的。
+			\end{enumerate}
+		
+		\subsubsection{ 已知strcpy的函数原型：char *strcpy(char *strDest, const char *strSrc)其中strDest 是目的字符串，strSrc 是源字符串。不调用C++/C 的字符串库函数，请编写函数 strcpy}
+			答：
+			\begin{lstlisting}
+	#include <assert.h>
+	#include <stdio.h>
+	char*strcpy(char*strDest, constchar*strSrc)
+	{
+		assert((strDest!=NULL) && (strSrc !=NULL)); // 2分
+		char* address = strDest; 　　// 2分
+		while( (*strDest++=*strSrc++) !='\0' )　　　　　　　// 2分
+		NULL; 
+		return address ; 　　　// 2分
+	}
+			\end{lstlisting}
+			
+		\subsubsection{不用中间变量实现交换swap的问题}
+			\begin{lstlisting}[frame=L]
+	void swap(int& a, int& b) 
+	{  
+		a += b;  
+		b = a - b;  
+		a -= b;  
+	}  
+			\end{lstlisting}
+		\subsubsection{＃include<file.h> 与＃include "file.h"的区别？}
+			前者是从\verb|Standard Library|的路径寻找和引用\verb|<file.h>|，而后者是从当前工作路径搜寻并引用\verb|"file.h"|
+			
+		\subsubsection{面向对象的三个基本特征，并简单叙述之？}
+			\begin{itemize}
+				\item \textbf{封装}：将客观事物抽象成类，每个类对自身的数据和方法实行protection(private, protected,public)
+				\item \textbf{继承}：
+				\item \textbf{多态}：系统能够在运行时，能够根据其类型确定调用哪个重载的成员函数的能力，称为多态性
+			\end{itemize}
+		\subsubsection{重载（overload)和重写(overried，有的书也叫做“覆盖”）的区别？}
+			\textbf{重载}：是指\textbf{允许}存在\textbf{多个同名函数}，而这些函数的\textbf{参数表不同}（或许\textbf{参数个数}不同，或许\textbf{参数类型}不同，或许两者都不同）。
+			
+			\textbf{重写}：是指\textbf{子类重新定义父类}\textit{虚函数}的方法。
+		\subsubsection{多态的作用？}
+			概念：
+			\begin{itemize}[itemindent = 1em]
+				\item 首先多态的意思是：在面向对象语言中，接口的多种不同的实现方式，多态性允许你将父对象设置成为和一个或更多的他的子对象相等的技术，赋值以后，父对象就可以根据当前赋值给他的子对象的特性以不同的方式运作。
+				
+				\item 比如有一个父类\verb|superClass|，它有2个子类\verb|subClass1|，\verb|subClass2|。\verb|superClass|有一个方法\verb|func()|,两个子类都重写了这个方法。那么我们可以定义一个\verb|superClass|的\verb|引用obj|，让它指向一个子类的对象，比如\verb|superClass| \verb|obj = new subClass1();|那么我们调用\verb|obj.func()|方法时候，会进行\textbf{动态绑定}，也就是\verb|obj|它的实际类型的\verb|func()|方法，即\verb|subClass1的func()|方法。同样你写\verb|superClass obj| \verb|= new subClass2();|\verb|obj.func()|其实调用的是\verb|subClass2的func()|方法。\textbf{这种由于子类重写父类方法，然后用父类引用指向子类对象，调用方法时候会进行动态绑定，这就是多态。}
+				
+				\item 多态对\textbf{程序的扩展}具有非常大的作用，比如你要再有一个\verb|subClass3|，你需要改动的东西会少很多，要是使用了配置文件那就可以不动源代码了。
+			\end{itemize}
+			
+			作用：
+			\begin{itemize}[itemindent = 1em]
+				\item  隐藏实现细节，使得代码能够模块化；扩展代码模块，实现代码重用；
+				\item  接口重用：为了类在继承和派生的时候，保证使用家族中任一类的实例的某一属性时的正确调用。
+			\end{itemize}
+		
+		\subsubsection{virtual 指针与对象初始化的区别}
+			对象，有无虚析构无关要紧，都会调用父类析构函数
+			
+			如果是用父类指针的话，调用子类初始化，由于当父类指针指向子类对象，父类析构不是虚函数，则执行时，不能执行到子类的析构函数。
+			
+		\subsubsection{New delete 与malloc free 的联系与区别?}
+			都是在堆(\verb|heap|)上进行动态的内存操作。
+			
+			用\verb|malloc|函数需要指定内存分配的字节数并且\textbf{不能}初始化对象，\verb|new| \textbf{会}自动调用对象的构造函数。\verb|delete| \textbf{会}调用对象的\verb|destructor|，而\verb|free |\textbf{不会}调用对象的\verb|destructor|.
+			
+			\verb|new| 类型安全、返回的是某种数据类型指针，\verb|malloc| 非类型安全、返回的是\verb|void|指针
+			
+			关于\textbf{内存分配失败}：
+				\begin{itemize}[itemindent = 2em]
+					\item \verb|new| 会抛出\verb|bad_alloc|异常
+					\item \verb|malloc| 则会 返回\verb|NULL|指针
+				\end{itemize}
+				
+		\subsubsection{有哪几种情况只能用intializationlist 而不能用assignment?}
+			\begin{enumerate}
+				\item 当类中含有\verb|const| 成员变量
+				\item 当类中含有\verb|reference| 成员变量
+				\item 基类的构造函数都需要初始化表
+			\end{enumerate}
+		\subsubsection{C++是不是类型安全的？}
+			不是。两个\textbf{不同类型}的指针之间\textbf{可以强制转换}
+		
+		\subsubsection{指针函数与函数指针}	
+			\url{http://blog.csdn.net/ameyume/article/details/8220832}
+			
+			指针函数：就是返回值是一个地址！
+			
+		\subsubsection{请说出const与\#define 相比，有何优点？}
+			\verb|const| 常量有数据类型，而宏常量没有数据类型。编译器可以对前者进行\textbf{类型安全检查}。而对后者只进行\textbf{字符替换}，没有类型安全检查，并且在字符替换可能会产生意料不到的错误。
+			
+			有些集成化的调试工具可以对\verb|const| 常量进行\textbf{调试}，但是\textbf{不能}对宏常量进行调试。
+		\subsubsection{简述数组与指针的区别？}
+			\begin{itemize}
+				\item \textbf{数组}要么在\textit{静态存储区}被创建（如全局数组），要么在\textit{栈}上被创建。\textbf{指针}可以随时指向\textit{任意类型的内存块}。
+				\item 修改内容上的差别
+					\begin{lstlisting}
+	char a[] = “hello”;
+	a[0] = ‘X’;
+	char *p = “world”; // 注意p 指向常量字符串
+	p[0] = ‘X’; // 编译器不能发现该错误，运行时错误
+					\end{lstlisting}
+				\item 用运算符\verb|sizeof| 可以计算出数组的容量（字节数）。\verb|sizeof(p)|,\verb|p |为指针得到的是一个指针变量的字节数，而不是\verb|p| 所指的内存容量
+				
+					\begin{lstlisting}
+	char a[] ="hello world";
+	char*p = a;
+	cout<<sizeof(a) << endl; // 12 字节
+	cout<<sizeof(p) << endl; // 4 字节
+					\end{lstlisting}
+				
+				\item \verb|C++/C| 语言没有办法知道指针所指的内存容量，除非在申请内存时记住它。注意当数组作为函数的参数进行传递时，该数组自动退化为同类型的指针。
+					\begin{lstlisting}
+	void Func(char a[100])
+	{
+		cout<<sizeof(a) << endl; // 4 字节而不是100 字节
+	}
+					\end{lstlisting}
+			\end{itemize}
+		\subsubsection{类成员函数的重载、覆盖和隐藏区别？}
+			\subparagraph{成员函数被重载的特征}
+				\begin{enumerate}
+					\item 相同的范围（在同一个类中）；
+					\item 函数名字相同；
+					\item 参数不同；
+					\item \verb|virtual| 关键字可有可无。
+				\end{enumerate}
+			\subparagraph{覆盖是指派生类函数覆盖基类函数，特征是}
+				\begin{enumerate}
+					\item 不同的范围（分别位于派生类与基类）；
+					\item 函数名字相同；
+					\item 参数相同；
+					\item 基类函数必须有\verb|virtual| 关键字。
+				\end{enumerate}
+			
+			\subparagraph{“隐藏”是指派生类的函数屏蔽了与其同名的基类函数，规则如下}
+				\begin{enumerate}
+					\item 如果派生类的函数与基类的函数同名，但是参数不同。此时，不论有无\verb|virtual|关键字，基类的函数将被隐藏（注意别与重载混淆）。
+					\item 如果派生类的函数与基类的函数同名，并且参数也相同，但是基类函数没有\verb|virtual| 关键字。此时，基类的函数被隐藏（注意别与覆盖混淆）
+				\end{enumerate}
+			
+		\subsubsection{如何打印出当前源文件的文件名以及源文件的当前行号？}
+				\verb|cout << __FILE__ ;|
+				
+				\verb|cout<<__LINE__ ;|
+				
+				\verb|__FILE__和__LINE__|是系统预定义宏，这种宏并不是在某个文件中定义的，而是由编译器定义的
+				
+		\subsubsection{关于\_\_stdcall和\_\_cdecl调用方式的理解}
+			深入汇编理解：\url{http://blog.csdn.net/beanjoy/article/details/9135373}
+			\begin{itemize}[itemindent = 1em]
+				\item\verb| __stdcall|：参数\textbf{由右向左}压入堆栈；堆栈\textbf{由函数本身}清理。
+				\item \verb|__cdecl|：参数也是\textbf{由右向左}压入堆栈；但堆栈\textbf{由调用者}清理。
+			\end{itemize}
+		\subsubsection{腾讯-输出是什么 }
+		\begin{lstlisting}
+	main()
+	{
+		int a[5]={1,2,3,4,5};
+		int *p=(int *)(&a+1);
+		printf("%d",*(p-1));
+	}
+		\end{lstlisting}
+		
+		\begin{enumerate}
+			\item \verb|&a|   a是一个数组名，也就是数组的首地址。
+			\item \textit{对a进行取地址运算符}，得到的是一个\textbf{指向数组的指针}！也就相当于 \verb|int (*p) [5] = &a;|
+			\item \verb|a|是一个指针，它指向的是一个包含\verb|5个int|元素的数组！
+			\item 执行\verb|a+1|后，p的偏移量相当于 \verb|a + sizeof(int) * 5| ！
+			\item 程序中强制将指针\verb|p|转换成一个\verb|int*| 那么 \verb|p -1| 其实就是 \verb|p - sizeof(int)|
+		\end{enumerate}
+\newpage
+\section{STL 组件与使用}
+	\subsection{题目}
+		\subsubsection{使用过哪些组件？} 使用过哪些组件？其实现原理及复杂度,迭代器的失效场景..
+		
+		\url{http://blog.csdn.net/rainkop/article/details/8423732}
+
+	\subsection{体会}
+		固然我们强调工作中不要重新发明轮子，但是，作为一个合格的程序员，应该具备自制轮子的能力。
+		\textbf{非不能也，是不为也}！
+		
+		在深入理解STL实现后，运用STL自然手到擒来.并能自动避免一些错误和低效的用法
+		
+		
+\newpage
+\section{Boost 组件与使用}
+	\subsection{题目}
+		\subparagraph{boost 的网络库ASIO}  boost 的网络库ASIO 使用过么，有什么体会
+		
+
+\newpage
+\section{网络、服务器编程}
+	\subsection{参考C++\_NetProgram}
+	
+	\subsection{题目}
+		\url{http://www.cnblogs.com/nancymake/p/6516933.html}
+		
+		\subsubsection{多线程和多进程的区别}
+			\begin{enumerate}
+				\item \textbf{进程}数据是分开的:共享复杂，需要用IPC，同步简单；\textbf{多线程}共享进程数据：共享简单，同步复杂
+				\item \textbf{进程}创建销毁、切换复杂，速度慢 ；\textbf{线程}创建销毁、切换简单，速度快 
+				\item \textbf{进程}占用内存多， CPU利用率低；\textbf{线程}占用内存少， CPU利用率高
+				\item \textbf{进程}编程简单，调试简单；\textbf{线程} 编程复杂，调试复杂
+				\item \textbf{进程间}不会相互影响 ；\textbf{线程}一个线程挂掉将导致整个进程挂掉
+				\item \textbf{进程}适应于多核、多机分布；\textbf{线程}适用于多核
+			\end{enumerate}
+		
+			\subparagraph{线程所私有的}-
+			
+			线程id、寄存器的值、栈、线程的优先级和调度策略、线程的私有数据、信号屏蔽字、errno变量、
+		\subsubsection{多线程锁的种类有哪些？}
+		
+		\subsubsection{自旋锁和互斥锁的区别？}
+		
+		\subsubsection{进程间通信和线程间通信}
+		
+		\subsubsection{多线程程序架构，线程数量应该如何设置？}
+		
+		\subsubsection{什么是原子操作，gcc提供的原子操作原语，使用这些原语如何实现读写锁？}
+		
+		\subsubsection{网络编程设计模式，reactor/proactor/半同步半异步模式？}
+			\begin{itemize}
+				\item \textbf{Reactor模式}：同步阻塞I/O模式，注册对应读写事件处理器，等待事件发生进而调用事件处理器处理事件。 proactor模式：异步I/O模式。Reactor和Proactor模式的主要区别就是真正的读取和写入操作是有谁来完成的，Reactor中需要应用程序自己读取或者写入数据，Proactor模式中，应用程序不需要进行实际读写过程。
+				
+				主线程往epoll内核上注册socket读事件，主线程调用\verb|epoll_wait|等待\verb|socket|上有数据可读，当\verb|socket|上有数据可读的时候，主线程把\verb|socket|可读事件放入请求队列。睡眠在请求队列上的某个工作线程被唤醒，处理客户请求，然后往epoll内核上注册socket写请求事件。主线程调用\verb|epoll_wait|等待写请求事件，当有事件可写的时候，主线程把socket可写事件放入请求队列。睡眠在请求队列上的工作线程被唤醒，处理客户请求。
+				\item \textbf{Proactor}:
+				主线程调用\verb|aio_read|函数向内核注册\verb|socket|上的读完成事件，并告诉内核用户读缓冲区的位置，以及读完成后如何通知应用程序，主线程继续处理其他逻辑，当\verb|socket|上的数据被读入用户缓冲区后，通过信号告知应用程序数据已经可以使用。应用程序预先定义好的信号处理函数选择一个工作线程来处理客户请求。工作线程处理完客户请求之后调用\verb|aio_write|函数向内核注册\verb|socket|写完成事件，并告诉内核写缓冲区的位置，以及写完成时如何通知应用程序。主线程处理其他逻辑。当用户缓存区的数据被写入\verb|socket|之后内核向应用程序发送一个信号，以通知应用程序数据已经发送完毕。应用程序预先定义的数据处理函数就会完成工作。
+				
+				\item \textbf{半同步半异步模式}：
+				上层的任务（如：数据库查询，文件传输）使用同步I/O模型，简化了编写并行程序的难度。
+				而底层的任务（如网络控制器的中断处理）使用异步I/O模型，提供了执行效率。
+			\end{itemize}
+			
+		
+			
+			
+		\subsubsection{有一个计数器，多个线程都需要更新，会遇到什么问题，原因是什么，应该如何做？如何优化？}
+		
+		\subsubsection{如果select返回可读，结果只读到0字节，什么情况？}
+		
+		\subsubsection{connect可能会长时间阻塞，怎么解决?}
+		
+		\subsubsection{keepalive 是什么东西？如何使用？}
+		
+		\subsubsection{socket什么情况下可读？}
+		
+		\subsubsection{udp调用connect有什么作用？}
+		
+		\subsubsection{socket编程，如果client断电了，服务器如何快速知道？}
+			
+		\subsubsection{怎么清理僵尸进程}
+		
+		\subsubsection{系统调用函数} wait fork
+		
+		\subsubsection{socket 的阻塞和非阻塞的概念}
+		
+		\subsubsection{信号与信号量之间的区别}
+		
+		\subsubsection{TCP头大小，包含字段？三次握手，四次断开描述过程，都有些什么状态。状态变迁图。TCP/IP收发缓冲区}
+		
+		\subsubsection{使用udp和tcp进程网络传输，为什么tcp能保证包是发送顺序，而 udp无法保证？}
+		
+		\subsubsection{epoll哪些触发模式，有啥区别？}
+		
+		\subsubsection{tcp与udp的区别（必问）为什么TCP要叫做数据流？}
+		
+		\subsubsection{流量控制和拥塞控制的实现机制}
+			Nagle 交互控制
+		
+			慢启动- 拥塞窗口
+			
+			滑动窗口
+			
+			拥塞避免算法
+			
+		\subsubsection{滑动窗口的实现机制}
+			滑动窗口机制，窗口的大小并不是固定的而是根据我们之间的链路的带宽的大小，这个时候链路是否拥护塞。接受方是否能处理这么多数据了。  滑动窗口协议，是TCP使用的一种流量控制方法。该协议允许发送方在停止并等待确认前可以连续发送多个分组。由于发送方不必每发一个分组就停下来等待确认，因此该协议可以加速数据的传输。
+		
+		\subsubsection{epoll和select的区别？}
+		
+		\subsubsection{网络中，如果客户端突然掉线或者重启，服务器端怎么样才能立刻知道？}
+		
+		\subsubsection{TTL是什么？有什么用处，通常那些工具会用到它？ping? traceroute? ifconfig? netstat?}
+		
+		\subsubsection{linux的五种IO模式/异步模式.}
+		
+		\subsubsection{请说出http协议的优缺点.}
+		
+		\subsubsection{NAT类型，UDP穿透原理}
+		
+		\subsubsection{大规模连接上来，并发模型怎么设计}
+		
+		\subsubsection{流量控制与拥塞控制的区别，节点计算机怎样感知网络拥塞了？}
+		
+		
+
+\newpage
+\section{多线程编程}
+	\subsection{参考C++\_Advanced}
+
+\newpage
+\section{算法}
+
+
+\newpage
+\section{程序设计}
+	\subsection{设计模式}
+	\subsection{UML}
+
+\newpage
+\section{OpenGL}
+	\subsection{参考OpenGL}
+	
+\newpage
+\section{DirectX}
+	\subsection{参考DirectX9}
+	
+\newpage
+\section{PC游戏试玩记录}
+	\subsection{坦克世界}
+	
+	\subsection{生死狙击}
+		\paragraph{连跳}
+			\url{https://zhidao.baidu.com/question/873824108590170252.html}
+			\url{http://news.4399.com/gonglue/ssjj/yxgl/wf/675362.html}
+			\begin{enumerate}
+				\item 首先W往前助跑
+				\item W跳出去
+				\item 空中松开W
+				\item 在落地瞬间按蹲（虽然说是瞬间，可每个人的键盘都可能会有延迟，所以要多跳尝试，我就是在空中2/3的时候就要按蹲了）
+				\item 然后再滑一次轮滚（鼠标中间的）
+				\item 然后同样在落地瞬间按蹲,即一直重复一个动作
+			\end{enumerate}
+
+		\paragraph{升级跳}
+	
+	\subsection{Dota2}
+		\paragraph{1.起步-新手} 对于新手这些东西确实挺不好理解的，比如说什么被动，冷却时间，出什么装备..等，这块要是加个对于这些名词的解释会有更好的效果...
+		
+		\paragraph{2.准备-新玩} 了解了一般名词后，对于Dota2 的游戏玩起来还是比较有吸引力，集中在设置了金钱的诱惑陷阱，和何时出击击杀英雄与占塔..,最主要的是...每局比赛都需要将近半个小时的时间，而这 则是对游戏中英雄技能了解 和学习的阶段..不是通过试玩，而是与人机对战..除此，游戏中的英雄种类繁多，这是他长存的另一核心..
+	
+	\subsection{CrossFire}
+	
+	\subsection{League Of Legends}
+	
+	\subsection{文明5}	
+    
+    \subsection{极品飞车-系列} 
+     
+    \subsection{QQ飞车--鹏鹏卡丁车}
+    
+    
+    
+    
+\end{document} 
+ 		    

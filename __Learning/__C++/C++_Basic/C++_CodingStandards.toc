@@ -1,0 +1,171 @@
+\contentsline {chapter}{\numberline {第一章\hspace {0.3em}}代码管理}{7}
+\contentsline {section}{\numberline {1.1}Compile Cleanly at High warning levels}{7}
+\contentsline {section}{\numberline {1.2}*Use a version Control system (Git)}{7}
+\contentsline {paragraph}{Summary}{7}
+\contentsline {section}{\numberline {1.3}Invest in code reviews}{7}
+\contentsline {paragraph}{Summary}{7}
+\contentsline {chapter}{\numberline {第二章\hspace {0.3em}}设计风格}{9}
+\contentsline {section}{\numberline {2.1}Give one entity on cohesive responsibility}{9}
+\contentsline {paragraph}{Summary}{9}
+\contentsline {section}{\numberline {2.2}Correctness, simplicity, And clarity come first}{9}
+\contentsline {paragraph}{Summary}{9}
+\contentsline {section}{\numberline {2.3}Know when and how to code for scalability}{9}
+\contentsline {paragraph}{Summary}{9}
+\contentsline {section}{\numberline {2.4}Don't optimize prematurely}{9}
+\contentsline {paragraph}{Summary}{9}
+\contentsline {section}{\numberline {2.5}Don't pessimize prematurely}{10}
+\contentsline {paragraph}{Summary}{10}
+\contentsline {section}{\numberline {2.6}Minimize global and shared data}{10}
+\contentsline {paragraph}{Summary}{10}
+\contentsline {section}{\numberline {2.7}Hide information}{10}
+\contentsline {paragraph}{Summary}{10}
+\contentsline {section}{\numberline {2.8}*Know when and how to code for concurrency(并发)}{10}
+\contentsline {paragraph}{Summary}{10}
+\contentsline {section}{\numberline {2.9}Ensure resources are owned by objects}{10}
+\contentsline {paragraph}{Summary}{10}
+\contentsline {paragraph}{Use explicit(显式) RAII and smart pointers}{11}
+\contentsline {chapter}{\numberline {第三章\hspace {0.3em}}编程方式}{13}
+\contentsline {section}{\numberline {3.1}Prefer compile- and link-time errors to run-time errors}{13}
+\contentsline {paragraph}{Summary}{13}
+\contentsline {section}{\numberline {3.2}Use const proactively}{13}
+\contentsline {paragraph}{Summary}{13}
+\contentsline {section}{\numberline {3.3}Avoid macros(宏命令)}{13}
+\contentsline {paragraph}{Summary}{13}
+\contentsline {section}{\numberline {3.4}Avoid Magic numbers}{13}
+\contentsline {paragraph}{Summary}{13}
+\contentsline {section}{\numberline {3.5}Declare variables as locally as possible}{14}
+\contentsline {paragraph}{Summary}{14}
+\contentsline {section}{\numberline {3.6}Always initialize variables}{14}
+\contentsline {paragraph}{Summary}{14}
+\contentsline {section}{\numberline {3.7}Avoid long functions,Avoid deep nesting}{14}
+\contentsline {paragraph}{Summary}{14}
+\contentsline {section}{\numberline {3.8}Avoid initialization dependencies across compilation units}{14}
+\contentsline {paragraph}{Summary}{14}
+\contentsline {section}{\numberline {3.9}Minimize definitional dependencies,Avoid cyclic dependencies(循环依赖)}{15}
+\contentsline {paragraph}{Summary}{15}
+\contentsline {section}{\numberline {3.10}Make header files self-sufficient}{15}
+\contentsline {paragraph}{Summary}{15}
+\contentsline {section}{\numberline {3.11}Always write internal \#include guards. Never wirte External \#include guards.}{15}
+\contentsline {paragraph}{Summary}{15}
+\contentsline {chapter}{\numberline {第四章\hspace {0.3em}}函数与操作符}{17}
+\contentsline {section}{\numberline {4.1}Take parameters appropriately by value, (smart) pointer, or reference}{17}
+\contentsline {paragraph}{Summary}{17}
+\contentsline {section}{\numberline {4.2}Preserve natural semantics for overloaded operators}{17}
+\contentsline {paragraph}{Summary}{17}
+\contentsline {section}{\numberline {4.3}Prefer the canonical forms of arithmatic and assignment operators}{17}
+\contentsline {paragraph}{Summary}{17}
+\contentsline {section}{\numberline {4.4}Prefer the canonical form of ++ and --,Prefer calling the prefix forms}{17}
+\contentsline {paragraph}{Summary}{17}
+\contentsline {section}{\numberline {4.5}Consider overloading to avoid implicit type type conversions}{18}
+\contentsline {paragraph}{Summary}{18}
+\contentsline {section}{\numberline {4.6}Avoid overloading \&\&, ||,or,(comma)}{18}
+\contentsline {paragraph}{Summary}{18}
+\contentsline {section}{\numberline {4.7}Don't write code that depends on the order of evaluation of function arguments}{18}
+\contentsline {paragraph}{Summary}{18}
+\contentsline {chapter}{\numberline {第五章\hspace {0.3em}}类的设计与继承}{19}
+\contentsline {section}{\numberline {5.1}Be clear what kind of class you're writing}{19}
+\contentsline {paragraph}{Summary}{19}
+\contentsline {section}{\numberline {5.2}Prefer minimal classes to monolithic classes}{19}
+\contentsline {paragraph}{Summary}{19}
+\contentsline {section}{\numberline {5.3}Prefer composition to inheritance}{19}
+\contentsline {paragraph}{Summary}{19}
+\contentsline {section}{\numberline {5.4}Avoid inheriting from classes that were not designed to be base classes}{19}
+\contentsline {paragraph}{Summary}{19}
+\contentsline {section}{\numberline {5.5}Prefer providing abstract interfaces}{19}
+\contentsline {paragraph}{Summary}{19}
+\contentsline {section}{\numberline {5.6}Public inheritance is substitutablity.Inherit,not to reuse,but to be reused.}{19}
+\contentsline {paragraph}{Summary}{19}
+\contentsline {section}{\numberline {5.7}Practice safe overriding}{19}
+\contentsline {paragraph}{Summary}{19}
+\contentsline {section}{\numberline {5.8}Consider making virtual functions nonpublic,and public functions nonvirtual}{20}
+\contentsline {paragraph}{Summary}{20}
+\contentsline {section}{\numberline {5.9}Avoid providing implicit conversions}{20}
+\contentsline {paragraph}{Summary}{20}
+\contentsline {section}{\numberline {5.10}Make data members private,except in behaviorless aggregates(C-style structs)}{20}
+\contentsline {paragraph}{Summary}{20}
+\contentsline {section}{\numberline {5.11}Don't give away your internals}{20}
+\contentsline {paragraph}{Summary}{20}
+\contentsline {section}{\numberline {5.12}Pimpl judiciously}{20}
+\contentsline {paragraph}{Summary}{20}
+\contentsline {section}{\numberline {5.13}Prefer writing nonmember nonfriend functions}{20}
+\contentsline {paragraph}{Summary}{20}
+\contentsline {section}{\numberline {5.14}Always provide new and delete together}{20}
+\contentsline {paragraph}{Summary}{20}
+\contentsline {chapter}{\numberline {第六章\hspace {0.3em}}构造函数、析构函数与拷贝构造}{21}
+\contentsline {section}{\numberline {6.1}Define and initialize member variables in the same order}{21}
+\contentsline {paragraph}{Summary}{21}
+\contentsline {section}{\numberline {6.2}Prefer initialization to assignment in constructors}{21}
+\contentsline {paragraph}{Summary}{21}
+\contentsline {section}{\numberline {6.3}Avoid calling virtual functions in consturctors and destructors}{21}
+\contentsline {paragraph}{Summary}{21}
+\contentsline {section}{\numberline {6.4}Make base class desturctors public and virtual,or protected and nonvirtual}{21}
+\contentsline {paragraph}{Summary}{21}
+\contentsline {section}{\numberline {6.5}Destructors,deallocation,and swap never fail}{21}
+\contentsline {paragraph}{Summary}{21}
+\contentsline {section}{\numberline {6.6}Copy and destroy consistently}{21}
+\contentsline {paragraph}{Summary}{21}
+\contentsline {section}{\numberline {6.7}Explicitly enable or disable copying}{22}
+\contentsline {paragraph}{Summary}{22}
+\contentsline {section}{\numberline {6.8}Avoid slicing.Consider Clone instead of copying in base classes.}{22}
+\contentsline {paragraph}{Summary}{22}
+\contentsline {section}{\numberline {6.9}Prefer the cannoical form of assignment}{22}
+\contentsline {paragraph}{Summary}{22}
+\contentsline {section}{\numberline {6.10}Whenever it makes sense,provide a no-fail swap(and provide it correctly)}{22}
+\contentsline {paragraph}{Summary}{22}
+\contentsline {chapter}{\numberline {第七章\hspace {0.3em}}命名空间 与 模块}{23}
+\contentsline {section}{\numberline {7.1}Keep a type and its nonmember function interface in the same namespace}{23}
+\contentsline {paragraph}{Summary}{23}
+\contentsline {section}{\numberline {7.2}Keep types and functions in separate namespaces unless they're specifically intended to work together}{23}
+\contentsline {paragraph}{Summary}{23}
+\contentsline {section}{\numberline {7.3}Don't write namespace usings in a header file or before an \#include}{23}
+\contentsline {paragraph}{Summary}{23}
+\contentsline {section}{\numberline {7.4}Avoid allocationg and deallocating memory in different modules}{23}
+\contentsline {paragraph}{Summary}{23}
+\contentsline {section}{\numberline {7.5}Don't define entities with linkage in a header file}{23}
+\contentsline {paragraph}{Summary}{23}
+\contentsline {section}{\numberline {7.6}Don't allow exceptions to propagate across module boundaries}{23}
+\contentsline {paragraph}{Summary}{23}
+\contentsline {section}{\numberline {7.7}Use sufficiently portable types in a module's interface}{24}
+\contentsline {paragraph}{Summary}{24}
+\contentsline {chapter}{\numberline {第八章\hspace {0.3em}}错误处理与异常}{25}
+\contentsline {section}{\numberline {8.1}Assert liberally to ducument internal assumptions and invariants}{25}
+\contentsline {paragraph}{Summary}{25}
+\contentsline {section}{\numberline {8.2}Establish a rational error handling policy,and follow it strictly}{25}
+\contentsline {paragraph}{Summary}{25}
+\contentsline {section}{\numberline {8.3}Distinguish between errors and ono-errors}{25}
+\contentsline {paragraph}{Summary}{25}
+\contentsline {section}{\numberline {8.4}Design and write error-safe code}{25}
+\contentsline {paragraph}{Summary}{25}
+\contentsline {section}{\numberline {8.5}Prefer to use exceptions to report errors}{25}
+\contentsline {paragraph}{Summary}{25}
+\contentsline {section}{\numberline {8.6}Throw by value,catch by reference}{25}
+\contentsline {paragraph}{Summary}{25}
+\contentsline {section}{\numberline {8.7}Report,handle,and translate errors appropriately}{25}
+\contentsline {paragraph}{Summary}{25}
+\contentsline {section}{\numberline {8.8}Avoid exception specifications}{26}
+\contentsline {paragraph}{Summary}{26}
+\contentsline {chapter}{\numberline {第九章\hspace {0.3em}}类型安全}{27}
+\contentsline {section}{\numberline {9.1}Avoid tupe switching; prefer polymorphism(多态)}{27}
+\contentsline {paragraph}{Summary}{27}
+\contentsline {section}{\numberline {9.2}Rely on types,not on representations}{27}
+\contentsline {paragraph}{Summary}{27}
+\contentsline {section}{\numberline {9.3}Avoid using reinterpret\_cast}{27}
+\contentsline {paragraph}{Summary}{27}
+\contentsline {section}{\numberline {9.4}Avoid using static\_cast on pointer}{27}
+\contentsline {paragraph}{Summary}{27}
+\contentsline {section}{\numberline {9.5}Avoid casting away const}{27}
+\contentsline {paragraph}{Summary}{27}
+\contentsline {section}{\numberline {9.6}Don't use C-style casts}{27}
+\contentsline {paragraph}{Summary}{27}
+\contentsline {section}{\numberline {9.7}Don't memcpy or memcmp ono-PODs}{27}
+\contentsline {paragraph}{Summary}{27}
+\contentsline {section}{\numberline {9.8}Don't use unions to reinterpret representation}{27}
+\contentsline {paragraph}{Summary}{27}
+\contentsline {section}{\numberline {9.9}Don't use varargs(可变长参数)}{28}
+\contentsline {paragraph}{Summary}{28}
+\contentsline {section}{\numberline {9.10}Don't use invalid objects}{28}
+\contentsline {paragraph}{Summary}{28}
+\contentsline {section}{\numberline {9.11}Don't use unsafe functions}{28}
+\contentsline {paragraph}{Summary}{28}
+\contentsline {section}{\numberline {9.12}Don't treat arrays polymorphically( 多态的)}{28}
+\contentsline {paragraph}{Summary}{28}

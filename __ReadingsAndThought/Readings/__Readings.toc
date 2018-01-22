@@ -1,0 +1,184 @@
+\contentsline {chapter}{\numberline {第一章\hspace {0.3em}}2015}{7}{chapter.1}
+\contentsline {section}{\numberline {1.1}《走错路，也能到对岸》 }{7}{section.1.1}
+\contentsline {section}{\numberline {1.2}《穷爸爸富爸爸》-罗伯特 }{8}{section.1.2}
+\contentsline {section}{\numberline {1.3}《成就你一生的100条哲理》 }{13}{section.1.3}
+\contentsline {section}{\numberline {1.4}《因为痛，所以叫青春》-(韩)金兰都 }{14}{section.1.4}
+\contentsline {section}{\numberline {1.5}《哈佛凌晨四点半》-韦秀英 }{17}{section.1.5}
+\contentsline {section}{\numberline {1.6}《35岁前要做的33件事》-蔡虹 }{20}{section.1.6}
+\contentsline {section}{\numberline {1.7}《每天学点时间管理术》 }{21}{section.1.7}
+\contentsline {section}{\numberline {1.8}《不曾走过，怎会懂得》 }{22}{section.1.8}
+\contentsline {section}{\numberline {1.9}《春天沉醉的晚上》 }{23}{section.1.9}
+\contentsline {section}{\numberline {1.10}《跟任何人都聊得来》 }{24}{section.1.10}
+\contentsline {subsection}{\numberline {1.10.1}坚持自己的个性，交谈才会更有趣}{24}{subsection.1.10.1}
+\contentsline {subsection}{\numberline {1.10.2}你真的了解自己么}{24}{subsection.1.10.2}
+\contentsline {subsection}{\numberline {1.10.3}为什么听不懂，为什么说不清}{24}{subsection.1.10.3}
+\contentsline {subsection}{\numberline {1.10.4}挑战我们心中的假设}{24}{subsection.1.10.4}
+\contentsline {subsection}{\numberline {1.10.5}找到共同的兴趣点}{24}{subsection.1.10.5}
+\contentsline {subsection}{\numberline {1.10.6}千方百计让自己变得有趣}{24}{subsection.1.10.6}
+\contentsline {subsection}{\numberline {1.10.7}学会从他人的角度出发}{24}{subsection.1.10.7}
+\contentsline {subsection}{\numberline {1.10.8}学会倾听，别人才能聊的开}{24}{subsection.1.10.8}
+\contentsline {subsection}{\numberline {1.10.9}学会提问，别人才能聊的透}{24}{subsection.1.10.9}
+\contentsline {subsection}{\numberline {1.10.10}压力，一种积极的沟通力量}{24}{subsection.1.10.10}
+\contentsline {subsection}{\numberline {1.10.11}如何应对棘手的交谈}{24}{subsection.1.10.11}
+\contentsline {subsection}{\numberline {1.10.12}战胜交谈拖延症}{24}{subsection.1.10.12}
+\contentsline {subsection}{\numberline {1.10.13}学会记笔记，为人际关系加分}{24}{subsection.1.10.13}
+\contentsline {subsection}{\numberline {1.10.14}移动互联时代的沟通技巧}{25}{subsection.1.10.14}
+\contentsline {section}{\numberline {1.11}《微时间管理术》 }{26}{section.1.11}
+\contentsline {section}{\numberline {1.12}《乔布斯的魔力演讲》- 卡迈恩·加洛}{27}{section.1.12}
+\contentsline {chapter}{\numberline {第二章\hspace {0.3em}}2016}{29}{chapter.2}
+\contentsline {section}{\numberline {2.1}《 岛上书店 》-加布瑞埃拉•泽文 }{29}{section.2.1}
+\contentsline {section}{\numberline {2.2}《 浪潮之巅 》 }{30}{section.2.2}
+\contentsline {section}{\numberline {2.3}《 一分钟能做什么 》 }{31}{section.2.3}
+\contentsline {paragraph}{动起来}{31}{section*.2}
+\contentsline {paragraph}{心态}{31}{section*.3}
+\contentsline {section}{\numberline {2.4}《 乖，摸摸头 》- 大冰 }{32}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}故事}{32}{subsection.2.4.1}
+\contentsline {paragraph}{1.杂草野}{32}{section*.4}
+\contentsline {paragraph}{2.大兵}{32}{section*.5}
+\contentsline {paragraph}{3.那个流浪狗}{32}{section*.6}
+\contentsline {subsection}{\numberline {2.4.2}句}{32}{subsection.2.4.2}
+\contentsline {section}{\numberline {2.5}《 围城 》 }{34}{section.2.5}
+\contentsline {paragraph}{1.方鸿渐}{34}{section*.7}
+\contentsline {paragraph}{2.苏小姐}{34}{section*.8}
+\contentsline {paragraph}{3.唐晓芙}{34}{section*.9}
+\contentsline {section}{\numberline {2.6}《 一个人的朝圣 》-蕾秋·乔伊斯 }{35}{section.2.6}
+\contentsline {subsection}{\numberline {2.6.1}故事}{35}{subsection.2.6.1}
+\contentsline {paragraph}{1.哈罗德}{35}{section*.10}
+\contentsline {section}{\numberline {2.7}《 从你的全世界路过 》 -张嘉佳 }{36}{section.2.7}
+\contentsline {subsection}{\numberline {2.7.1}图书篇}{36}{subsection.2.7.1}
+\contentsline {paragraph}{1.猪头}{36}{section*.12}
+\contentsline {paragraph}{2.许多的爱情}{36}{section*.13}
+\contentsline {paragraph}{3.胡言与悦悦 与他的母亲}{36}{section*.14}
+\contentsline {paragraph}{4.摆渡人(备胎)的爱情}{36}{section*.15}
+\contentsline {paragraph}{5.那个叫大黑的野狗}{36}{section*.16}
+\contentsline {subsection}{\numberline {2.7.2}电影篇-戳不中女人G点，再爱也只能做个路人}{36}{subsection.2.7.2}
+\contentsline {paragraph}{1.陈末-小容}{36}{section*.17}
+\contentsline {paragraph}{2.猪头}{36}{section*.18}
+\contentsline {paragraph}{3.荔枝和茅十八}{37}{section*.19}
+\contentsline {paragraph}{总结}{37}{section*.20}
+\contentsline {subsection}{\numberline {2.7.3}句子}{37}{subsection.2.7.3}
+\contentsline {section}{\numberline {2.8}《 学会提问 》 }{40}{section.2.8}
+\contentsline {section}{\numberline {2.9}《 追风筝的人 》 }{41}{section.2.9}
+\contentsline {section}{\numberline {2.10}《 活着 》 - 余华 }{42}{section.2.10}
+\contentsline {section}{\numberline {2.11}<爱> - 张爱玲}{43}{section.2.11}
+\contentsline {section}{\numberline {2.12}《 我们仨 》 - 杨绛}{44}{section.2.12}
+\contentsline {section}{\numberline {2.13}<一只特立独行的猪> - 王小波}{45}{section.2.13}
+\contentsline {section}{\numberline {2.14}<一碗清汤荞麦面> - 栗良平}{46}{section.2.14}
+\contentsline {paragraph}{原文}{46}{section*.21}
+\contentsline {section}{\numberline {2.15}《 天才在左疯子在右 》 - 高铭}{50}{section.2.15}
+\contentsline {paragraph}{<永远永远>}{50}{section*.22}
+\contentsline {section}{\numberline {2.16}《 知行合一，王阳明 》- 度阴山}{51}{section.2.16}
+\contentsline {subsection}{\numberline {2.16.1}心学的问世}{51}{subsection.2.16.1}
+\contentsline {subsection}{\numberline {2.16.2}为什么是王阳明}{51}{subsection.2.16.2}
+\contentsline {paragraph}{1.虽小技、必有可观者焉}{51}{section*.23}
+\contentsline {paragraph}{2.圣人}{51}{section*.24}
+\contentsline {paragraph}{3.教育为人}{51}{section*.25}
+\contentsline {paragraph}{4.静}{51}{section*.26}
+\contentsline {paragraph}{5.智}{51}{section*.27}
+\contentsline {paragraph}{*6.朱熹理学-道出天机}{51}{section*.28}
+\contentsline {paragraph}{7.外力-机遇}{51}{section*.29}
+\contentsline {subparagraph}{站的角度不同，看到的情景就完全不一样}{51}{section*.30}
+\contentsline {subparagraph}{人生一切所谓的苦难，都是比较而言}{51}{section*.31}
+\contentsline {subparagraph}{竹子}{51}{section*.32}
+\contentsline {subparagraph}{经历}{51}{section*.33}
+\contentsline {subparagraph}{知行合一}{51}{section*.34}
+\contentsline {subparagraph}{经验}{52}{section*.35}
+\contentsline {subsection}{\numberline {2.16.3}王阳明如何做到知行合一之南赣(gan)剿匪}{52}{subsection.2.16.3}
+\contentsline {section}{\numberline {2.17}<木兰花·拟古决绝词柬友，纳兰性德>}{53}{section.2.17}
+\contentsline {section}{\numberline {2.18}《 格局逆袭 》 - 万能的大熊 }{54}{section.2.18}
+\contentsline {paragraph}{层次，格局}{54}{section*.36}
+\contentsline {paragraph}{有才华的穷人-你是吗}{54}{section*.37}
+\contentsline {section}{\numberline {2.19}<地毯的那一端，张晓风>}{55}{section.2.19}
+\contentsline {section}{\numberline {2.20}<你没有权利评判我，冯小凯>}{58}{section.2.20}
+\contentsline {paragraph}{罗胖曰}{58}{section*.38}
+\contentsline {section}{\numberline {2.21}<父亲，散文网>}{59}{section.2.21}
+\contentsline {section}{\numberline {2.22}<拥有风信子,是妈妈的幸福-刘继荣>}{61}{section.2.22}
+\contentsline {section}{\numberline {2.23}<作为读者的谦虚-蒋方舟>}{63}{section.2.23}
+\contentsline {section}{\numberline {2.24}<假若我再上一次大学-季羡林> 《季羡林谈人生》}{64}{section.2.24}
+\contentsline {section}{\numberline {2.25}<有一种魅力,叫惜字如金-颜卤煮>}{66}{section.2.25}
+\contentsline {section}{\numberline {2.26}《 我不喜欢这世界、我只喜欢你 》-乔一}{68}{section.2.26}
+\contentsline {subparagraph}{感悟：}{68}{section*.39}
+\contentsline {section}{\numberline {2.27}<背影 - 朱自清>}{71}{section.2.27}
+\contentsline {section}{\numberline {2.28}《 挪威的森林 》 -村上春树 }{72}{section.2.28}
+\contentsline {section}{\numberline {2.29}《 了不起的盖茨比 》 -菲茨杰拉德 }{79}{section.2.29}
+\contentsline {section}{\numberline {2.30}《 撒哈拉的故事 》 -三毛 }{80}{section.2.30}
+\contentsline {section}{\numberline {2.31}<古代美好的18种交情称谓> }{82}{section.2.31}
+\contentsline {subparagraph}{忤chu臼jiu之交:}{82}{section*.41}
+\contentsline {subparagraph}{患难之交:}{82}{section*.42}
+\contentsline {subparagraph}{忘年之交:}{82}{section*.43}
+\contentsline {subparagraph}{金石之交:}{82}{section*.44}
+\contentsline {subparagraph}{胶漆之交:}{82}{section*.45}
+\contentsline {subparagraph}{再世之交:}{82}{section*.46}
+\contentsline {subparagraph}{八拜之交:}{82}{section*.47}
+\contentsline {subparagraph}{车笠之交:}{82}{section*.48}
+\contentsline {subparagraph}{布衣之交:}{82}{section*.49}
+\contentsline {subparagraph}{肺腑之交:}{82}{section*.50}
+\contentsline {subparagraph}{君子之交:}{82}{section*.51}
+\contentsline {subparagraph}{莫逆之交:}{82}{section*.52}
+\contentsline {subparagraph}{贫贱之交:}{82}{section*.53}
+\contentsline {subparagraph}{平昔之交:}{82}{section*.54}
+\contentsline {subparagraph}{忘形之交:}{82}{section*.55}
+\contentsline {subparagraph}{刎颈之交:}{82}{section*.56}
+\contentsline {subparagraph}{竹马之交:}{82}{section*.57}
+\contentsline {subparagraph}{总角之交:}{82}{section*.58}
+\contentsline {section}{\numberline {2.32}描述女人的美}{83}{section.2.32}
+\contentsline {section}{\numberline {2.33}<走过残酷而美好的时光> - 姗姗}{84}{section.2.33}
+\contentsline {section}{\numberline {2.34}<如果常流泪，就不能看见星光> - 三毛}{86}{section.2.34}
+\contentsline {section}{\numberline {2.35}爱情需要注意的一些心得}{87}{section.2.35}
+\contentsline {section}{\numberline {2.36}<一棵大树> - 谢尔.西弗斯汀}{88}{section.2.36}
+\contentsline {section}{\numberline {2.37}<别人讨厌你，并不是因为你不会说话> - 网摘}{89}{section.2.37}
+\contentsline {section}{\numberline {2.38}<你说话直？对不起我很介意！> - 值得反思的一篇网摘}{91}{section.2.38}
+\contentsline {section}{\numberline {2.39}我爱你的多种表达}{93}{section.2.39}
+\contentsline {section}{\numberline {2.40}《 简爱.Jane.Eyre 》 - 夏洛蒂·勃朗特}{94}{section.2.40}
+\contentsline {subparagraph}{美句}{94}{section*.59}
+\contentsline {section}{\numberline {2.41}一些可以培养的习惯}{96}{section.2.41}
+\contentsline {section}{\numberline {2.42}一些诗}{97}{section.2.42}
+\contentsline {subsection}{\numberline {2.42.1}腹有诗书气自华 - 《 和董传留别 》 -苏轼 }{97}{subsection.2.42.1}
+\contentsline {subsection}{\numberline {2.42.2}人生几回伤往事 - 《西塞山怀古》 -刘禹锡}{97}{subsection.2.42.2}
+\contentsline {subsection}{\numberline {2.42.3}情人眼里出西施 -《 集杭州俗语诗 》 - 黄增 }{97}{subsection.2.42.3}
+\contentsline {subsection}{\numberline {2.42.4}夕阳无限好，只是近黄昏 - 李商隐}{97}{subsection.2.42.4}
+\contentsline {subsection}{\numberline {2.42.5}春宵一刻值千金 - 苏轼}{97}{subsection.2.42.5}
+\contentsline {section}{\numberline {2.43}诸葛教子书}{98}{section.2.43}
+\contentsline {paragraph}{宁静的力量：}{98}{section*.60}
+\contentsline {paragraph}{淡泊的力量：}{98}{section*.61}
+\contentsline {paragraph}{学习的力量：}{98}{section*.62}
+\contentsline {paragraph}{立志的力量：}{98}{section*.63}
+\contentsline {paragraph}{速度的力量：}{98}{section*.64}
+\contentsline {paragraph}{性格的力量：}{98}{section*.65}
+\contentsline {paragraph}{时间的力量：}{98}{section*.66}
+\contentsline {paragraph}{精简的力量：}{98}{section*.67}
+\contentsline {section}{\numberline {2.44}《 走在人生边上 》- 杨绛 }{99}{section.2.44}
+\contentsline {section}{\numberline {2.45}前言的鬼神存在论}{99}{section.2.45}
+\contentsline {section}{\numberline {2.46}语录摘要}{100}{section.2.46}
+\contentsline {paragraph}{1.鲁迅}{100}{section*.68}
+\contentsline {paragraph}{2.万能的大熊}{100}{section*.69}
+\contentsline {paragraph}{3.村上春树}{100}{section*.70}
+\contentsline {paragraph}{4.路遥}{100}{section*.71}
+\contentsline {paragraph}{5.亦舒}{100}{section*.72}
+\contentsline {paragraph}{6.高晓松}{100}{section*.73}
+\contentsline {paragraph}{7.三毛}{101}{section*.74}
+\contentsline {paragraph}{8.张爱玲}{102}{section*.75}
+\contentsline {paragraph}{9.卡夫卡}{103}{section*.76}
+\contentsline {paragraph}{10.钱钟书}{103}{section*.77}
+\contentsline {paragraph}{11.雨果}{103}{section*.78}
+\contentsline {paragraph}{12.席慕容}{103}{section*.79}
+\contentsline {paragraph}{13.周国平}{104}{section*.80}
+\contentsline {paragraph}{14.林徽因}{104}{section*.81}
+\contentsline {paragraph}{15.萧红}{105}{section*.82}
+\contentsline {paragraph}{16.沈从文}{105}{section*.83}
+\contentsline {paragraph}{*.昳名}{105}{section*.84}
+\contentsline {chapter}{\numberline {第三章\hspace {0.3em}}2017}{111}{chapter.3}
+\contentsline {subparagraph}{诺贝尔系列}{111}{section*.86}
+\contentsline {subparagraph}{名声系列}{115}{section*.87}
+\contentsline {section}{\numberline {3.1}《 了不起的盖茨比 》 }{115}{section.3.1}
+\contentsline {section}{\numberline {3.2}《 雾都孤儿 》 }{115}{section.3.2}
+\contentsline {section}{\numberline {3.3}《 曾国藩家书 》 }{116}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}劝学}{116}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}修身}{116}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}交友}{116}{subsection.3.3.3}
+\contentsline {section}{\numberline {3.4}《 麦田里的守望者 》 }{116}{section.3.4}
+\contentsline {section}{\numberline {3.5}《 岛上书店 》 }{116}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}往事}{116}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.5.2}现任}{116}{subsection.3.5.2}
+\contentsline {subsection}{\numberline {3.5.3}句子}{116}{subsection.3.5.3}
+\contentsline {section}{\numberline {3.6}<想好就动手 - 林语堂>}{117}{section.3.6}

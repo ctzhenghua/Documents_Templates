@@ -1,0 +1,323 @@
+\contentsline {chapter}{\numberline {第一章\hspace {0.3em}}正则表达式}{7}{chapter.1}
+\contentsline {section}{\numberline {1.1}基础知识}{7}{section.1.1}
+\contentsline {subparagraph}{头文件}{7}{section*.2}
+\contentsline {subsection}{\numberline {1.1.1}整个字符串是否匹配}{7}{subsection.1.1.1}
+\contentsline {subsection}{\numberline {1.1.2}只返回一个匹配结果}{7}{subsection.1.1.2}
+\contentsline {subsection}{\numberline {1.1.3}返回多个匹配结果}{7}{subsection.1.1.3}
+\contentsline {section}{\numberline {1.2}子表达式匹配}{8}{section.1.2}
+\contentsline {chapter}{\numberline {第二章\hspace {0.3em}}异常}{11}{chapter.2}
+\contentsline {section}{\numberline {2.1}基础知识}{11}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}operator =}{11}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}what}{11}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}Relationship}{11}{subsection.2.1.3}
+\contentsline {subsection}{\numberline {2.1.4}C++ 异常机制的工作方式}{11}{subsection.2.1.4}
+\contentsline {subsubsection}{流程}{12}{section*.3}
+\contentsline {subparagraph}{显示异常名字}{12}{lstlisting.2.-6}
+\contentsline {subsection}{\numberline {2.1.5}其他}{14}{subsection.2.1.5}
+\contentsline {subsubsection}{std::variant}{14}{section*.5}
+\contentsline {section}{\numberline {2.2}logic\_error}{15}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}invalid\_argument}{15}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}domain\_error}{15}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}length\_error}{15}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}out\_of\_range}{15}{subsection.2.2.4}
+\contentsline {subsection}{\numberline {2.2.5}future\_error}{16}{subsection.2.2.5}
+\contentsline {subsection}{\numberline {2.2.6}bad\_optional\_access}{16}{subsection.2.2.6}
+\contentsline {section}{\numberline {2.3}runtime\_error}{16}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}range\_error}{16}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}overflow\_error}{16}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.3}underflow\_error}{16}{subsection.2.3.3}
+\contentsline {subsection}{\numberline {2.3.4}regex\_error}{17}{subsection.2.3.4}
+\contentsline {subsection}{\numberline {2.3.5}system\_error}{17}{subsection.2.3.5}
+\contentsline {subsubsection}{ios\_base::failure}{17}{section*.6}
+\contentsline {subsubsection}{filesystem::filesystem\_error}{18}{section*.7}
+\contentsline {subsection}{\numberline {2.3.6}tx\_exception}{18}{subsection.2.3.6}
+\contentsline {section}{\numberline {2.4}bad errors}{18}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}bad\_typeid}{18}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.2}bad\_cast}{19}{subsection.2.4.2}
+\contentsline {subsubsection}{bad\_any\_cast}{19}{section*.8}
+\contentsline {subsection}{\numberline {2.4.3}bad\_weak\_ptr}{19}{subsection.2.4.3}
+\contentsline {subsection}{\numberline {2.4.4}bad\_function\_call}{19}{subsection.2.4.4}
+\contentsline {subsection}{\numberline {2.4.5}bad\_alloc}{20}{subsection.2.4.5}
+\contentsline {subsection}{\numberline {2.4.6}bad\_exception}{20}{subsection.2.4.6}
+\contentsline {subsection}{\numberline {2.4.7}bad\_variant\_access}{21}{subsection.2.4.7}
+\contentsline {chapter}{\numberline {第三章\hspace {0.3em}}多线程}{23}{chapter.3}
+\contentsline {section}{\numberline {3.1}参考}{23}{section.3.1}
+\contentsline {section}{\numberline {3.2}须知}{23}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}线程安全}{23}{subsection.3.2.1}
+\contentsline {subparagraph}{线程安全的条件}{23}{section*.9}
+\contentsline {subparagraph}{线程安全的类}{24}{section*.10}
+\contentsline {subparagraph}{对象的race condition}{24}{section*.11}
+\contentsline {subsection}{\numberline {3.2.2}对象的创建}{24}{subsection.3.2.2}
+\contentsline {section}{\numberline {3.3}使用}{24}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}头文件}{24}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}多线程}{24}{subsection.3.3.2}
+\contentsline {subparagraph}{Funcs:}{25}{section*.12}
+\contentsline {subsection}{\numberline {3.3.3}初始化线程}{26}{subsection.3.3.3}
+\contentsline {subparagraph}{初始化方式..}{27}{section*.13}
+\contentsline {subsection}{\numberline {3.3.4}线程间数据交互和数据争用(Data Racing)}{29}{subsection.3.3.4}
+\contentsline {subparagraph}{解决方案：}{30}{section*.14}
+\contentsline {subsection}{\numberline {3.3.5}互斥锁}{33}{subsection.3.3.5}
+\contentsline {subsubsection}{Mutex}{33}{section*.15}
+\contentsline {subparagraph}{lock\_guard<T\_mutex> m(T\_mutex)}{34}{section*.16}
+\contentsline {subparagraph}{unique\_lock<T\_mutex> m(T\_mutex)}{34}{section*.17}
+\contentsline {subparagraph}{Recursice\_mutex}{34}{section*.18}
+\contentsline {subsubsection}{Call once}{36}{section*.19}
+\contentsline {subparagraph}{注意：}{36}{section*.20}
+\contentsline {subsection}{\numberline {3.3.6}条件变量}{37}{subsection.3.3.6}
+\contentsline {subsection}{\numberline {3.3.7}异步操作-async}{39}{subsection.3.3.7}
+\contentsline {subsubsection}{future}{39}{section*.21}
+\contentsline {subsubsection}{promise}{41}{section*.22}
+\contentsline {subsubsection}{packaged\_task}{41}{section*.23}
+\contentsline {subsubsection}{参考}{43}{section*.24}
+\contentsline {subsection}{\numberline {3.3.8}线程池}{43}{subsection.3.3.8}
+\contentsline {subsubsection}{背景}{43}{section*.25}
+\contentsline {subsubsection}{应用场景}{43}{section*.26}
+\contentsline {subsubsection}{实现}{43}{section*.27}
+\contentsline {subsubsection}{实现原理}{47}{section*.28}
+\contentsline {subsubsection}{参考}{47}{section*.29}
+\contentsline {section}{\numberline {3.4}References}{47}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}thread}{47}{subsection.3.4.1}
+\contentsline {subsubsection}{consturcting Threads}{47}{section*.30}
+\contentsline {subsubsection}{Detach thread}{48}{section*.31}
+\contentsline {subsubsection}{Get thread id}{49}{section*.32}
+\contentsline {subsubsection}{Join thread}{50}{section*.33}
+\contentsline {subsubsection}{Check if joinable}{51}{section*.34}
+\contentsline {subsubsection}{Move-assign thread:operator=}{52}{section*.35}
+\contentsline {subsection}{\numberline {3.4.2}atomic}{53}{subsection.3.4.2}
+\contentsline {subsection}{\numberline {3.4.3}mutex}{53}{subsection.3.4.3}
+\contentsline {subsubsection}{Mutex types}{54}{section*.36}
+\contentsline {subsubsection}{Locks}{55}{section*.37}
+\contentsline {subsubsection}{Functions}{58}{section*.38}
+\contentsline {subsection}{\numberline {3.4.4}condition\_variable}{59}{subsection.3.4.4}
+\contentsline {subparagraph}{notify\_one}{60}{section*.39}
+\contentsline {subparagraph}{Wait for timeout or until notified}{62}{section*.40}
+\contentsline {subparagraph}{Data Races}{63}{section*.41}
+\contentsline {subsection}{\numberline {3.4.5}Futures}{63}{subsection.3.4.5}
+\contentsline {subsubsection}{future}{64}{section*.42}
+\contentsline {subparagraph}{Get value}{65}{section*.43}
+\contentsline {subparagraph}{Get shared future}{65}{section*.44}
+\contentsline {subparagraph}{Check for valid shared state}{66}{section*.45}
+\contentsline {subparagraph}{Wait for ready}{67}{section*.46}
+\contentsline {subparagraph}{Wait for ready during time span}{68}{section*.47}
+\contentsline {subsubsection}{shared\_future}{69}{section*.48}
+\contentsline {subsubsection}{promise}{69}{section*.49}
+\contentsline {subparagraph}{Set value}{70}{section*.50}
+\contentsline {chapter}{\numberline {第四章\hspace {0.3em}}模版编程}{71}{chapter.4}
+\contentsline {section}{\numberline {4.1}前言须知}{71}{section.4.1}
+\contentsline {section}{\numberline {4.2}函数模版}{71}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}概述}{71}{subsection.4.2.1}
+\contentsline {subparagraph}{定义}{72}{section*.51}
+\contentsline {subsection}{\numberline {4.2.2}普通函数模版}{72}{subsection.4.2.2}
+\contentsline {subparagraph}{实现}{72}{section*.52}
+\contentsline {subsection}{\numberline {4.2.3}定制非模版函数(重载函数模版)}{73}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}实参的演绎-模版类型推导确定}{74}{subsection.4.2.4}
+\contentsline {section}{\numberline {4.3}类模板}{74}{section.4.3}
+\contentsline {section}{\numberline {4.4}非类型模版参数}{74}{section.4.4}
+\contentsline {section}{\numberline {4.5}默认模版参数}{74}{section.4.5}
+\contentsline {section}{\numberline {4.6}模版类型的模版参数}{75}{section.4.6}
+\contentsline {section}{\numberline {4.7}typename}{75}{section.4.7}
+\contentsline {subsection}{\numberline {4.7.1}模板类中再有模版成员}{75}{subsection.4.7.1}
+\contentsline {section}{\numberline {4.8}模版特化}{76}{section.4.8}
+\contentsline {subsection}{\numberline {4.8.1}Full Specialization}{76}{subsection.4.8.1}
+\contentsline {subsection}{\numberline {4.8.2}Partial Specialization}{76}{subsection.4.8.2}
+\contentsline {section}{\numberline {4.9}模版友元}{76}{section.4.9}
+\contentsline {section}{\numberline {4.10}参考}{77}{section.4.10}
+\contentsline {chapter}{\numberline {第五章\hspace {0.3em}}Effective}{79}{chapter.5}
+\contentsline {section}{\numberline {5.1}Effective C++}{79}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}C++ 基本相关性能提升}{79}{subsection.5.1.1}
+\contentsline {paragraph}{1.尽量以const，enum，inline替换\#define}{79}{section*.53}
+\contentsline {paragraph}{2.尽可能使用const}{79}{section*.54}
+\contentsline {paragraph}{3.确定对象被使用前已先被初始化}{79}{section*.55}
+\contentsline {subparagraph}{赋值与初始化}{79}{section*.56}
+\contentsline {subparagraph}{Note}{79}{section*.57}
+\contentsline {subsection}{\numberline {5.1.2}C++ 构造/析构/赋值性能提升}{80}{subsection.5.1.2}
+\contentsline {paragraph}{4.C++默认编写并调用哪些函数}{80}{section*.58}
+\contentsline {paragraph}{5.若不想使用编译器自动生成的函数，就该明确拒绝}{80}{section*.59}
+\contentsline {paragraph}{6.为多态基类声明virtual析构函数}{80}{section*.60}
+\contentsline {paragraph}{7.别让异常逃离析构函数}{80}{section*.61}
+\contentsline {paragraph}{8.决不让构造和析构过程中调用virtual函数}{80}{section*.62}
+\contentsline {paragraph}{9.令operator= 返回一个reference to *this}{81}{section*.63}
+\contentsline {paragraph}{10.在operator =中处理“自我赋值”}{81}{section*.64}
+\contentsline {paragraph}{11.复制对象时勿忘其每一个成员}{82}{section*.65}
+\contentsline {subsection}{\numberline {5.1.3}资源管理}{82}{subsection.5.1.3}
+\contentsline {paragraph}{12.以对象管理资源}{82}{section*.66}
+\contentsline {paragraph}{13.在资源管理类中小心拷贝行为}{82}{section*.67}
+\contentsline {paragraph}{14.在资源管理类中提供对原始资源的访问}{82}{section*.68}
+\contentsline {paragraph}{15.成对使用new和delete时要采取相同形式}{82}{section*.69}
+\contentsline {paragraph}{16.以独立语句将newed对象置入智能指针}{82}{section*.70}
+\contentsline {subsection}{\numberline {5.1.4}设计与声明}{82}{subsection.5.1.4}
+\contentsline {paragraph}{17.让接口容易被正确使用，不易被误用}{82}{section*.71}
+\contentsline {paragraph}{18.设计class犹如设计type}{82}{section*.72}
+\contentsline {paragraph}{19.宁以pass-by-reference-to-const替代psss-by-value}{82}{section*.73}
+\contentsline {paragraph}{20.必须返回对象时，别妄想返回其reference}{83}{section*.74}
+\contentsline {paragraph}{21.将成员变量声明为private}{83}{section*.75}
+\contentsline {paragraph}{22.宁以non-member、non-friend替换member函数}{83}{section*.76}
+\contentsline {paragraph}{23.若所有参数皆需类型转换，请为此采用non-member函数}{83}{section*.77}
+\contentsline {paragraph}{24.考虑写出一个不抛异常的swap函数}{83}{section*.78}
+\contentsline {subsection}{\numberline {5.1.5}实现}{83}{subsection.5.1.5}
+\contentsline {paragraph}{25.尽可能延后变量定义式的出现时间}{83}{section*.79}
+\contentsline {paragraph}{26.尽量少做转型动作}{83}{section*.80}
+\contentsline {paragraph}{27.避免返回handls指向对象内部成分}{83}{section*.81}
+\contentsline {paragraph}{28.为“异常安全”而努力是值得的}{83}{section*.82}
+\contentsline {paragraph}{29.透彻了解inlining的里里外外}{83}{section*.83}
+\contentsline {paragraph}{30.将文件间的编译依存关系降至最低}{83}{section*.84}
+\contentsline {subsection}{\numberline {5.1.6}继承与面向对象设计}{83}{subsection.5.1.6}
+\contentsline {paragraph}{31.确定你的public继承塑模出is-a关系}{83}{section*.85}
+\contentsline {paragraph}{32.避免遮掩继承而来的名称}{83}{section*.86}
+\contentsline {paragraph}{33.区分接口继承和实现继承}{84}{section*.87}
+\contentsline {paragraph}{34.考虑virtual函数以外的其它选择}{84}{section*.88}
+\contentsline {paragraph}{35.绝不重新定义继承而来的non-virtual函数}{84}{section*.89}
+\contentsline {paragraph}{36.绝不重新定义继承而来的缺省参数值}{84}{section*.90}
+\contentsline {paragraph}{37.通过符合塑模出has-a或“根据某物实现出”}{84}{section*.91}
+\contentsline {section}{\numberline {5.2}More Effective C++}{84}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}基础议题(Basics)}{84}{subsection.5.2.1}
+\contentsline {paragraph}{1.仔细区别 pointers 和 references}{84}{section*.92}
+\contentsline {paragraph}{2.最好使用 C++ 转型操作符}{84}{section*.93}
+\contentsline {paragraph}{3.绝对不要以多态方式处理数组}{84}{section*.94}
+\contentsline {paragraph}{4.避免无用的 default constructors}{85}{section*.95}
+\contentsline {subsection}{\numberline {5.2.2}操作符(Operators)}{85}{subsection.5.2.2}
+\contentsline {paragraph}{5.对定制的“类型转换函数”保持警觉}{85}{section*.96}
+\contentsline {subparagraph}{隐身类 类型抓换}{85}{section*.97}
+\contentsline {subparagraph}{避免 隐身转换}{87}{section*.98}
+\contentsline {paragraph}{6.区别 increment/decrement 操作符的前置和后置形式}{87}{section*.99}
+\contentsline {paragraph}{7.千万不要重载 \&\&, || 和 , 操作符}{87}{section*.100}
+\contentsline {paragraph}{8.了解各种不同意义的 new 和 delete}{87}{section*.101}
+\contentsline {subparagraph}{new操作符（new operator）和new操作（operator new）的区别}{87}{section*.102}
+\contentsline {subparagraph}{placement new}{87}{section*.103}
+\contentsline {subsection}{\numberline {5.2.3}异常(Exceptions)}{87}{subsection.5.2.3}
+\contentsline {paragraph}{--堆栈辗转开解stack-unwinding}{87}{section*.104}
+\contentsline {paragraph}{9.利用 destructors 避免泄漏资源}{87}{section*.105}
+\contentsline {paragraph}{10.在 constructors 内阻止资源泄漏}{88}{section*.106}
+\contentsline {paragraph}{11.禁止异常流出 destructors 之外}{88}{section*.107}
+\contentsline {paragraph}{12.了解 "抛出一个 exception ”  与 “传递一个参数” 或 “调用一个虚函数”之间的差异}{88}{section*.108}
+\contentsline {paragraph}{13.以 by reference 方式捕捉 exceptions}{88}{section*.109}
+\contentsline {paragraph}{14.明智运用 exception specifications}{88}{section*.110}
+\contentsline {paragraph}{15.了解异常处理的成本}{88}{section*.111}
+\contentsline {subsection}{\numberline {5.2.4}效率(Efficiency)}{88}{subsection.5.2.4}
+\contentsline {paragraph}{16.谨记 80-20 法则}{88}{section*.112}
+\contentsline {paragraph}{17.考虑使用 lazy evaluation（缓式评估）}{88}{section*.113}
+\contentsline {paragraph}{18.分期摊还预期的计算成本}{88}{section*.114}
+\contentsline {paragraph}{19.了解临时对象的来源}{88}{section*.115}
+\contentsline {paragraph}{20.协助完成“返回值优化(RVO)}{88}{section*.116}
+\contentsline {paragraph}{21.利用重载技术避免隐式类型转换}{88}{section*.117}
+\contentsline {paragraph}{22.考虑以操作符复合形式(op=)取代其独身形式(op)}{88}{section*.118}
+\contentsline {paragraph}{23.考虑使用其它程序库}{89}{section*.119}
+\contentsline {paragraph}{24.了解 virtual functions、multiple inheritance、virtual base classes、runtime type identification 的成本 }{89}{section*.120}
+\contentsline {subsection}{\numberline {5.2.5}技术(Techniques,Idioms,Patterns)}{89}{subsection.5.2.5}
+\contentsline {paragraph}{25.将 constructor 和 non-member functions 虚化}{89}{section*.121}
+\contentsline {paragraph}{26.限制某个 class 所能产生的对象数量}{89}{section*.122}
+\contentsline {paragraph}{27.要求（或禁止）对象产生于 heap 中}{89}{section*.123}
+\contentsline {paragraph}{28.Smart Pointer（智能指针）}{89}{section*.124}
+\contentsline {paragraph}{29.Reference counting（引用计数）}{89}{section*.125}
+\contentsline {paragraph}{30.Proxy classes（替身类、代理类）}{89}{section*.126}
+\contentsline {subsection}{\numberline {5.2.6}杂项讨论(Miscellany)}{89}{subsection.5.2.6}
+\contentsline {paragraph}{31.在未来时态下发展程序}{89}{section*.127}
+\contentsline {paragraph}{32.将非尾端类设计为抽象类}{89}{section*.128}
+\contentsline {section}{\numberline {5.3}Effective Modern C++}{90}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Deducing Types}{90}{subsection.5.3.1}
+\contentsline {subsection}{\numberline {5.3.2}auto}{90}{subsection.5.3.2}
+\contentsline {subsection}{\numberline {5.3.3}Moving to Modern C++}{90}{subsection.5.3.3}
+\contentsline {subsection}{\numberline {5.3.4}Smart Pointers}{90}{subsection.5.3.4}
+\contentsline {subsection}{\numberline {5.3.5}Rvalue References, Move Semantics, and Perfect Forwarding}{90}{subsection.5.3.5}
+\contentsline {subsection}{\numberline {5.3.6}Lambda Expressions}{90}{subsection.5.3.6}
+\contentsline {subsection}{\numberline {5.3.7}The Concurrency API}{90}{subsection.5.3.7}
+\contentsline {subsection}{\numberline {5.3.8}Tweaks}{90}{subsection.5.3.8}
+\contentsline {section}{\numberline {5.4}Effective STL}{90}{section.5.4}
+\contentsline {subsection}{\numberline {5.4.1}容器}{90}{subsection.5.4.1}
+\contentsline {paragraph}{1.慎重选择容器类型，根据需要选择高效的容器类型}{90}{section*.129}
+\contentsline {paragraph}{2.不要试图编写独立于容器类型的代码}{90}{section*.130}
+\contentsline {paragraph}{3.确定容器中的对象拷贝正确而高效。也就是防止在存在继承关系时发生剥离}{90}{section*.131}
+\contentsline {paragraph}{4.调用empty而不是检查size()是否为0来判断容器是否为空}{90}{section*.132}
+\contentsline {paragraph}{5.尽量使用区间成员，而不是多次使用与之对应的单元素成员函数，原因是这样更加高效}{90}{section*.133}
+\contentsline {paragraph}{6.小心C++编译器最烦人的分析机制}{90}{section*.134}
+\contentsline {paragraph}{7.如果在容器中包含了能过new操作创建的指针，切记在容器对象析构前将指针delete掉}{90}{section*.135}
+\contentsline {paragraph}{\sout {8.切勿创建包含auto\_ptr的容器对象}}{90}{section*.136}
+\contentsline {paragraph}{9.慎重选择删除元素的方法}{91}{section*.137}
+\contentsline {paragraph}{10.了解分配器allocator的约定和限制}{91}{section*.138}
+\contentsline {paragraph}{11.理解自定义分配器合理用法}{91}{section*.139}
+\contentsline {paragraph}{12.切勿对STL容器的线程安全性有不切实际的依赖}{91}{section*.140}
+\contentsline {subsection}{\numberline {5.4.2}vector And string}{91}{subsection.5.4.2}
+\contentsline {paragraph}{13.尽量用vector和string代替动态分配的数组}{91}{section*.141}
+\contentsline {paragraph}{14.使用reserve来避免不必要的内存重新分配}{91}{section*.142}
+\contentsline {paragraph}{15.注意string实现的多样性}{91}{section*.143}
+\contentsline {paragraph}{16.了解如何把vector和string数据传给旧的C API}{91}{section*.144}
+\contentsline {paragraph}{17.使用“swap 技巧”除去多余的容量}{91}{section*.145}
+\contentsline {paragraph}{18.避免使用vector<bool>}{91}{section*.146}
+\contentsline {subsection}{\numberline {5.4.3}关联容器}{91}{subsection.5.4.3}
+\contentsline {paragraph}{19.理解相等equality 和等价equivalence 的区别}{91}{section*.147}
+\contentsline {paragraph}{20.为包含指针的关联容器指定比较类型}{91}{section*.148}
+\contentsline {paragraph}{21.总是让比较函数在等值情况下返回false}{92}{section*.149}
+\contentsline {paragraph}{22.切勿直接修改set 或 multiset中的键}{92}{section*.150}
+\contentsline {paragraph}{23.考虑用排序的vector 替代 关联容器}{92}{section*.151}
+\contentsline {paragraph}{24.当效率至关重要时，请在map::operator[]与map::insert之间做出谨慎选择}{92}{section*.152}
+\contentsline {paragraph}{25.熟悉散列容器}{92}{section*.153}
+\contentsline {subsection}{\numberline {5.4.4}迭代器}{92}{subsection.5.4.4}
+\contentsline {paragraph}{26.尽量使用iterator，而不是const\_iterator、reverse\_iterator及const\_reverse\_iterator}{92}{section*.154}
+\contentsline {paragraph}{27.使用distance和advance将容器的const\_iterator转换成iterator}{92}{section*.155}
+\contentsline {paragraph}{28.正确理解由reverse\_iterator的base()成员函数所产生的iterator的用法}{92}{section*.156}
+\contentsline {paragraph}{29.对非格式化的逐个字符的输入考虑使用 istreambuf\_iterator}{92}{section*.157}
+\contentsline {subsection}{\numberline {5.4.5}算法}{92}{subsection.5.4.5}
+\contentsline {paragraph}{30.确保目标区间足够大}{92}{section*.158}
+\contentsline {paragraph}{31.了解各种与排序有关的选择}{92}{section*.159}
+\contentsline {subparagraph}{非稳定排序}{93}{section*.160}
+\contentsline {subparagraph}{稳定排序}{93}{section*.161}
+\contentsline {subparagraph}{分割序列的算法}{93}{section*.162}
+\contentsline {paragraph}{32.如果确实需要删除元素，则需要在remove这一类算法之后调用成员函数erase}{93}{section*.163}
+\contentsline {paragraph}{33.对包含指针的容器使用remove这一类算法时要特别小心}{93}{section*.164}
+\contentsline {paragraph}{\sout {34.了解哪些算法要求使用排序区间作为参数}}{93}{section*.165}
+\contentsline {paragraph}{\sout {35.通过mismatch或lexicographical\_compare实现简单忽略大小写的字符串比较}}{93}{section*.166}
+\contentsline {paragraph}{36.理解copy\_if算法的正确实现}{93}{section*.167}
+\contentsline {paragraph}{37. 使用accumulate或者for\_each进行区间统计}{93}{section*.168}
+\contentsline {subsection}{\numberline {5.4.6}函数子、函数子类、函数及其他}{93}{subsection.5.4.6}
+\contentsline {paragraph}{38.遵循按值传递的原则来设计函数子类}{93}{section*.169}
+\contentsline {paragraph}{39.确保判别式predicate是纯函数pure function}{93}{section*.170}
+\contentsline {paragraph}{40.若一个类是函数子，则就使它可配接adaptable}{93}{section*.171}
+\contentsline {paragraph}{41.理解ptr\_fun、mem\_fun、mem\_fun\_ref的来由}{94}{section*.172}
+\contentsline {paragraph}{42.确保 less<T>与operator< 具有相同的语义}{94}{section*.173}
+\contentsline {subsection}{\numberline {5.4.7}在程序中使用STL}{94}{subsection.5.4.7}
+\contentsline {paragraph}{43.算法调用优先于手写的循环}{94}{section*.174}
+\contentsline {paragraph}{44.容器的成员函数优于同名的算法}{94}{section*.175}
+\contentsline {paragraph}{45.正确区分 count、find、binary\_search、lower\_bound、upper\_bound 和 equal\_range}{94}{section*.176}
+\contentsline {paragraph}{46.考虑使用函数对象而不是函数作为STL算法参数}{94}{section*.177}
+\contentsline {paragraph}{47.避免产生“直写型（write-only）”代码}{95}{section*.178}
+\contentsline {paragraph}{48.总是包含（\#include）正确的头文件}{95}{section*.179}
+\contentsline {paragraph}{49.学会分析与STL相关的编译器诊断信息}{95}{section*.180}
+\contentsline {section}{\numberline {5.5}提升C++编程性能的技术}{95}{section.5.5}
+\contentsline {subsection}{\numberline {5.5.1}跟踪范例}{95}{subsection.5.5.1}
+\contentsline {subparagraph}{关注点}{95}{section*.181}
+\contentsline {subparagraph}{解决方案}{95}{section*.182}
+\contentsline {subparagraph}{涉及技术- 延迟创建}{95}{section*.183}
+\contentsline {subsection}{\numberline {5.5.2}虚函数}{96}{subsection.5.5.2}
+\contentsline {subsection}{\numberline {5.5.3}临时对象}{96}{subsection.5.5.3}
+\contentsline {subparagraph}{关注点}{96}{section*.184}
+\contentsline {subparagraph}{类型不匹配}{96}{section*.185}
+\contentsline {subparagraph}{避免重复创建相同的临时对象}{96}{section*.186}
+\contentsline {subsection}{\numberline {5.5.4}内存池}{96}{subsection.5.5.4}
+\contentsline {subsubsection}{单线程内存池}{96}{section*.187}
+\contentsline {subparagraph}{关注点}{96}{section*.188}
+\contentsline {subparagraph}{Rational 专用内存池}{96}{section*.189}
+\contentsline {subparagraph}{固定大小内存池实现}{97}{section*.190}
+\contentsline {subparagraph}{不定大小内存池}{98}{section*.191}
+\contentsline {subsubsection}{多线程内存池}{98}{section*.192}
+\contentsline {subsection}{\numberline {5.5.5}引用计数}{98}{subsection.5.5.5}
+\contentsline {subparagraph}{关注点}{98}{section*.193}
+\contentsline {subparagraph}{引用计数的实现}{98}{section*.194}
+\contentsline {subparagraph}{并发引用计数}{99}{section*.195}
+\contentsline {subparagraph}{引用计数的性能}{99}{section*.196}
+\contentsline {subsection}{\numberline {5.5.6}代码优化}{100}{subsection.5.5.6}
+\contentsline {subsection}{\numberline {5.5.7}设计优化}{100}{subsection.5.5.7}
+\contentsline {subsection}{\numberline {5.5.8}可伸缩性}{100}{subsection.5.5.8}
+\contentsline {subsection}{\numberline {5.5.9}系统体系结构相关性}{100}{subsection.5.5.9}
+\contentsline {section}{\numberline {5.6}深入探索 C++ 对象模型}{100}{section.5.6}
+\contentsline {section}{\numberline {5.7}STL 源码剖析}{100}{section.5.7}
+\contentsline {section}{\numberline {5.8}参考}{100}{section.5.8}
+\contentsline {paragraph}{Effective C++}{100}{section*.197}
+\contentsline {paragraph}{More Effective C++}{100}{section*.198}
+\contentsline {paragraph}{Effective Mordern C++}{100}{section*.199}
+\contentsline {paragraph}{Effective STL}{100}{section*.200}
+\contentsline {paragraph}{提高C++性能的编程技术}{100}{section*.201}
+\contentsline {paragraph}{STL 源码剖析}{100}{section*.202}
+\contentsline {chapter}{\numberline {第六章\hspace {0.3em}}OpenMP 并行技术}{101}{chapter.6}
+\contentsline {chapter}{\numberline {第七章\hspace {0.3em}}GPU 并行技术}{103}{chapter.7}
+\contentsline {section}{\numberline {7.1}OpenCL}{103}{section.7.1}
+\contentsline {section}{\numberline {7.2}CUDA}{103}{section.7.2}

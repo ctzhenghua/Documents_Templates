@@ -1,0 +1,53 @@
+\documentclass[UTF8,a4paper,8pt]{ctexart} 
+
+ \usepackage{graphicx}%学习插入图
+ \usepackage{verbatim}%学习注释多行
+ \usepackage{booktabs}%表格
+ \usepackage{geometry}%图片
+ \usepackage{amsmath} 
+ \usepackage{amssymb}
+ \usepackage{listings}%代码
+ \usepackage{xcolor}  %颜色
+ \usepackage{enumitem}%列表格式
+ \CTEXsetup[format+={\flushleft}]{section}
+
+
+\geometry{left=1.6cm,right=1.8cm,top=2cm,bottom=1.7cm} %设置文章宽度
+
+\pagestyle{plain} 		  %设置页面布局
+\author{\kaishu 郑华}
+\title{CMAKE  使用}
+ %代码效果定义
+ 
+ \definecolor{codegreen}{rgb}{0,0.6,0}
+ \definecolor{codegray}{rgb}{0.5,0.5,0.5}
+ \definecolor{codepurple}{rgb}{0.58,0,0.82}
+ \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+ 
+ \lstdefinestyle{mystyle}{
+ 	language = {c++},%lua 语言指定方法
+ 	backgroundcolor=\color{backcolour},   
+ 	commentstyle=\color{codegreen},
+ 	keywordstyle=\color{magenta},
+ 	numberstyle=\tiny\color{codegray},
+ 	stringstyle=\color{codepurple},
+ 	basicstyle=\footnotesize,
+ 	breakatwhitespace=false,         
+ 	breaklines=true,                 
+ 	captionpos=b,                    
+ 	keepspaces=true,                 
+ 	%numbers=left,                    
+ 	%numbersep=5pt,                  
+ 	showspaces=false,                
+ 	showstringspaces=false,
+ 	showtabs=false,                  
+ 	tabsize=2
+ }
+\lstset{style=mystyle, escapeinside=``}
+
+\begin{document}          %正文排版开始
+ 	\maketitle
+  
+     
+\end{document} 
+ 		    

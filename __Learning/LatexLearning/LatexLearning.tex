@@ -1,0 +1,134 @@
+\documentclass[UTF8,a4paper,8pt]{ctexart} 
+
+ \usepackage{graphicx}%学习插入图
+ \usepackage{verbatim}%学习注释多行
+ \usepackage{booktabs}%表格
+ \usepackage{geometry}%图片
+ \usepackage{amsmath} 
+ \usepackage{amssymb}
+ \usepackage{listings}%代码
+ \usepackage{xcolor}  %颜色
+ \usepackage{enumitem}%列表格式
+ \usepackage{hyperref}
+ \CTEXsetup[format+={\flushleft}]{section}
+ \newtheorem{thm}{定理}
+
+\geometry{left=1.6cm,right=1.8cm,top=2cm,bottom=1.7cm} %设置文章宽度
+
+\pagestyle{plain} 		  %设置页面布局
+\author{郑华}
+\title{Latex 学习笔记}
+ %代码效果定义
+ \definecolor{codegreen}{rgb}{0,0.6,0}
+ \definecolor{codegray}{rgb}{0.5,0.5,0.5}
+ \definecolor{codepurple}{rgb}{0.58,0,0.82}
+ \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+ 
+ \lstdefinestyle{mystyle}{
+ 	backgroundcolor=\color{backcolour},   
+ 	commentstyle=\color{codegreen},
+ 	keywordstyle=\color{magenta},
+ 	numberstyle=\tiny\color{codegray},
+ 	stringstyle=\color{codepurple},
+ 	basicstyle=\footnotesize,
+ 	breakatwhitespace=false,         
+ 	breaklines=true,                 
+ 	captionpos=b,                    
+ 	keepspaces=true,                 
+ 	%numbers=left,                    
+ 	%numbersep=5pt,                  
+ 	showspaces=false,                
+ 	showstringspaces=false,
+ 	showtabs=false,                  
+ 	tabsize=2
+ }
+\lstset{style=mystyle, escapeinside=``}
+
+\begin{document}          %正文排版开始
+ 	\maketitle
+ 
+ \section*{Command}
+ 
+  \paragraph{1.排版命令的参数}:$ \verb|\|$排版命令[可选参数]\{其他参数\}
+  
+	  \begin{itemize}
+	  	\item 方括号中的参数为可选
+	  	\item 花括号中的其他参数是不可省略的参数
+	  	\item 命令也可以不带参数
+	  \end{itemize}
+   \paragraph{2.对齐环境}:$ \verb|\|$begin\{flushleft\}//flushrihgt,center...//:$ \verb|\|$排版命令[可选参数]\{其他参数\}end\{\}
+	    \begin{itemize}
+	    	\item 默认两侧对齐
+	    	\item flushleft
+	    	\item flushright
+	    	\item center
+	    \end{itemize}
+	\paragraph{3.字体}
+		\begin{itemize}
+			\item \kaishu $ \verb|\|$kaishu
+			\item \zihao{-3} $ \verb|\|$zihao
+		\end{itemize}
+		
+    \paragraph{4.绘制图片}
+	    \begin{itemize}
+	    	\item $ \verb|\|$usepackage\{tikz\}
+	    	\item $ \verb|\|$begin\{tikzpicture\}
+	    	\item $ \verb|\|$node[box] (标识名) at(0,0) \{文字\}:话带字方框
+	    	\item $ \verb|\|$draw[->] (标识名1) -- node[above]\{字\} (标识名2);从标识名1 画 箭头 到 标识名2.
+	    \end{itemize}
+	    
+	\paragraph{5.自定义环境}
+		\begin{itemize}
+			\item  $\verb|\|$newtheorem\{thm\}\{定理\}
+			\item  $\verb|\|$begin\{thm\}[勾股定理]
+			\item  	\begin{thm}[勾股定理]
+				$A_2$
+			\end{thm}	
+		\end{itemize}
+	\paragraph{5.大纲}：文档设计工作主要在导言区通过引入宏包、定义命令和设置参数来完成。
+		\begin{itemize}
+			\item 引入宏包：如sepackage[nottoc]\{tocbibind\}
+			\item 标题作者：如
+			\item 新建环境：如$\verb|\|$newenvironment\{myquote\}
+			\{
+					$\verb|\|$begin\{quote\}$\verb|\|$kaishu$\verb|\|$zihao\{-5\}\}\{$\verb|\|$end\{quote\}
+			\}
+	
+			\item 新建命令：如$\verb|\|$ newcommand $\verb|\|$ degree\{ $\verb|\|$circ\}
+			\item 新建命令：\url{http://blog.163.com/chen_dawn/blog/static/112506320138762130518/}
+			
+		\end{itemize}                                                               
+		
+   \paragraph{6.抄录命令}
+	   \begin{itemize}
+		   	\item $\verb|\|$verb \quad 开始符号-自定义\quad 内容 \quad 终止符号-自定义
+		   	\item 用带星号的命令使空格可见$\verb|\|$verb*
+		   	\item $\verb|\|$begin\{verbatim\}
+	   \end{itemize}
+   \paragraph{7.让不同的行在指定的地方对齐}
+	   \begin{itemize}
+		   	\item  $\verb|\\|$分隔行与行
+		   	\item  $\verb|\=|$设置制表位
+		   	\item  $\verb|\>|$跳到设定好的下一个制表位
+		   	\item  $\verb|\‘|$使它前后的文字以当前制表位为中心对齐
+		   	\item  $\verb|\’|$使后面的文字右对齐
+		   	\item  $\verb|\<|$跳到设定好的上一个制表位
+		   	\item  $\verb|\+|$ 后面的行开始都右跳一个制表位
+		   	\item  $\verb|\-|$后面的行开始都左跳一个制表位
+		   	\item  $\verb|\kill|$忽略这一行的内容, 只保留制表位的设置。		   			   	
+		   	\item  $\verb|\hspace{3em} 类似于 \quad|$不过可以指定几个字的距离
+	   \end{itemize}
+ 	
+	\paragraph{8.algorithm 环境配置}
+		\begin{itemize}
+			\item  在latex 安装目录查找algorithmic.sty
+			\item  添加自己的命令，或修改原来的命令
+			
+			\item  配置参考：\url{http://blog.sina.com.cn/s/blog\_5a13c966010167fj.html}
+			\item  使用参考：\url{http://www.cnblogs.com/piags/archive/2012/11/06/2757683.html}
+		\end{itemize}	
+
+	\paragraph{9.样式修改}
+		\url{http://blog.renren.com/share/11982/4080240272}     
+\end{document} 
+ 		    
