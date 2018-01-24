@@ -1643,7 +1643,13 @@ inline FuncX(...){}
 			       
 			       \item  由于没有\verb|this|指针的额外开销，因此静态成员函数与类的全局函数相比速度上会有少许的增长
 		       \end{enumerate}
-	       
+
+\chapter{this}
+	\section{概念}
+	
+	\section{易混问题}
+		\url{https://www.cnblogs.com/lijia0511/p/4936843.html}
+		       
 \chapter{继承}
 \section{潜规则}
 	       \begin{enumerate}[fullwidth,itemindent=2em,label=(\arabic*)]
@@ -2101,7 +2107,215 @@ inline FuncX(...){}
 	         \end{itemize}
 	         
 	         这样，我们就可以看到对于下面这样的程序\verb|  Base *b = new Derive();| \verb|b->f();|由\verb|b|所指的内存中的虚函数表的\verb|f()|的位置已经被\verb|Derive::f()|函数地址所取代，于是在实际调用发生时，是\verb|Derive::f()|被调用了。这就实现了\textbf{多态}。
-	         
+
+
+\chapter{C++ 内存结构}
+	\section{进程结构}
+		\begin{figure}[htbp]
+			\centering
+			\includegraphics[scale=0.7]{processMem.png}
+			\caption{进程内存结构}
+		\end{figure}
+		
+		\subsection{Stack 栈}
+			栈，存放\verb|Automatic Variables|，按内存地址由高到低方向生长，其最大大小由编译时确定，速度快，但自由性差，最大空间不大。
+		
+		\subsection{Heap 堆}
+			堆，自由申请的空间，按内存地址由低到高方向生长，其大小由系统内存/虚拟内存上限决定，速度较慢，但自由性大，可用空间大。 
+			
+			\textbf{每个线程都会有自己的栈，但是堆空间是共用的。}
+			
+			堆和栈都是动态分配内存，两者空间大小都是可变的。
+		\subsection{.bss 未初始化全局与静态变量}
+			存放程序中未初始化的和零值全局变量与静态变量。静态分配，在程序开始时通常会被清零。
+			
+		\subsection{.data 初始化的全局与静态变量}
+			用来存放程序中已经初始化的非零全局变量与静态变量。静态分配
+			
+			data又可分为读写（RW）区域和只读（RO）区域。 
+			\begin{itemize}[itemindent = 2em]
+				\item \verb|RO|段保存常量所以也被称为\verb|.constdata |
+				\item \verb|RW|段则是普通非常全局变量，静态变量就在其中
+			\end{itemize}
+			
+		\subsection{.text 代码区}
+			也称为代码段(\verb|Code|)，用来存放程序执行代码，同时也可能会包含一些常量(如一些字符串常量等）。该段内存为静态分配，只读(某些架构可能允许修改)。 
+			
+			这块内存是共享的,当有多个相同进程(\verb|Process|)存在时，共用同一个\verb|.text|段。
+			
+			\verb|text|和\verb|data|段都在可执行文件中，\textbf{由系统从可执行文件中加载}；而\verb|bss|段不在可执行文件中，\textbf{由系统初始化。} 
+			这三段内存就组成了我们编写的程序的本体
+	\section{对象结构}
+		\url{http://www.cnblogs.com/gtarcoder/p/4929927.html}
+		
+		\url{http://www.cnblogs.com/jerry19880126/p/3616999.html}
+		
+		\subsection{单一对象}
+		
+			\begin{lstlisting}
+	class Base
+	{
+		int a;
+		int b;
+		public:
+		void CommonFunction();
+	};			
+			\end{lstlisting}
+			\begin{figure}[ht]
+				\centering
+				\includegraphics[scale = 0.8]{figure/single.png}
+				\caption{单一对象}
+			\end{figure}
+			 c++类中有四种成员：
+				\begin{enumerate}[itemindent = 1em]
+					\item 非静态数据成员：放在每个对象内部，作为对象专有的数据成员
+					\item 静态数据成员：被抽取出来放在程序的静态数据区内，\textbf{为该类所有对象共享，只保留一份} 
+					\item 非静态成员函数：
+					\item 静态成员函数：都被提取出来放在程序的代码段中并为该类\textbf{所有对象共享}，因此每个成员函数也只能存在一份代码实体
+				\end{enumerate}
+			 
+				   因此，构成对象的只有数据，任何成员函数都不属于任何一个对象，非静态成员函数和对象的关系就像是绑定，绑定的中介就是this指针。而this 指针是以默认的类指针 对象作为第一个参数传进成员函数的，所以不占空间。
+				   
+				   $$ \verb|对象大小 = 非静态数据成员|$$
+				   
+		\subsection{单继承}		   
+			\begin{lstlisting}
+	class DerivedClass: public Base
+	{
+		int c;
+		public:
+		void DerivedCommonFunction();
+	};
+			\end{lstlisting}
+			
+			\begin{figure}[ht]
+				\centering
+				\includegraphics[scale = 0.8]{figure/singleDerived.png}
+				\caption{单继承}
+			\end{figure}
+		
+		\subsection{单一对象(virtual)}
+			\begin{lstlisting}
+	class Base
+	{
+		int a;
+		int b;
+		public:
+		void CommonFunction();
+		void virtual VirtualFunction();
+	};			
+			\end{lstlisting}
+			
+			\begin{figure}[ht]
+				\centering
+				\includegraphics[scale = 0.8]{figure/singleVirtual.png}
+				\caption{单对象，包含虚函数}
+			\end{figure}
+		
+		\subsection{单继承(virtual)}
+		    \begin{lstlisting}
+	class DerivedClass: public Base
+	{
+		int c;
+		public:
+		void DerivedCommonFunction();
+		void virtual VirtualFunction();
+	};	      	
+		    \end{lstlisting}
+		      
+		    \begin{figure}[ht]
+		      \centering
+		      \includegraphics[scale = 0.8]{figure/singleDerivedVirutal.png}
+		      \caption{单继承，包含虚函数}
+		    \end{figure}  	
+		
+		\subsection{多继承(virtual)}
+			\begin{lstlisting}
+	class Base
+	{
+		int a;
+		int b;
+		public:
+		void CommonFunction();
+		void virtual VirtualFunction();
+	};
+	
+	
+	class DerivedClass1: public Base
+	{
+		int c;
+		public:
+		void DerivedCommonFunction();
+		void virtual VirtualFunction();
+	};
+	
+	class DerivedClass2 : public Base
+	{
+		int d;
+		public:
+		void DerivedCommonFunction();
+		void virtual VirtualFunction();
+	};
+	class DerivedDerivedClass : public DerivedClass1, public DerivedClass2
+	{
+		int e;
+		public:
+		void DerivedDerivedCommonFunction();
+		void virtual VirtualFunction();
+	};			
+			\end{lstlisting}
+			
+			\begin{figure}[ht]
+				\centering
+				\includegraphics[scale = 0.8]{figure/DerivedDerivedVirutal.png}
+				\caption{多继承，包含虚函数}
+			\end{figure}
+			
+			由外向内看，它并列地排布着继承而来的两个父类DerivedClass1与DerivedClass2，还有自身的成员变量e。DerivedClass1包含了它的成员变量c，以及Base，Base有一个0地址偏移的虚表指针，然后是成员变量a和b；DerivedClass2的内存排布类似于DerivedClass1，注意到DerivedClass2里面竟然也有一份Base。
+			
+		\subsection{虚继承-单继承(virtual)}
+			\begin{lstlisting}
+	class DerivedClass1: virtual public Base
+	{
+		int c;
+		public:
+		void DerivedCommonFunction();
+		void virtual VirtualFunction();
+	};
+	
+	class DerivedClass2 : virtual public Base
+	{
+		int d;
+		public:
+		void DerivedCommonFunction();
+		void virtual VirtualFunction();
+	};
+	
+	class DerivedDerivedClass :  public DerivedClass1, public DerivedClass2
+	{
+		int e;
+		public:
+		void DerivedDerivedCommonFunction();
+		void virtual VirtualFunction();
+	};
+			\end{lstlisting}
+		
+			\begin{figure}[ht]
+				\centering
+				\includegraphics[scale = 0.8]{figure/virtualDerivedVirutal.png}
+				\caption{虚单继承，包含虚函数}
+			\end{figure}
+			
+		\subsection{虚继承-多继承(virtual)}
+			\begin{figure}[ht]
+				\centering
+				\includegraphics[scale = 0.8]{figure/virtualDerivedDerivedVirutal.png}
+				\caption{虚多继承，包含虚函数}
+			\end{figure}
+	\section{ELF}
+		\url{https://www.cnblogs.com/gtarcoder/p/6006023.html}	
+		
+		\url{http://www.cnblogs.com/xmphoenix/archive/2011/10/23/2221879.html}
 \chapter{extern 关键字}
        
      \section{基本解释}extern可以置于变量或者函数前，以标示变量或者函数的定义在别的文件中，提示编译器遇到此变量和函数时在其他模块中寻找其定义

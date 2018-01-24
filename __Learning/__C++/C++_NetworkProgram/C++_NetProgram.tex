@@ -2321,6 +2321,12 @@
 			一台普通服务器的处理能力只能达到每秒几万个到几十万个请求，无法在一秒钟内处理上百万个甚至更多的请求。
 			但若能将多台这样的服务器组成一个系统，并通过软件技术将所有请求平均分配给所有服务器，那么这个系统就完全拥有每秒钟处理几百万个甚至更多请求的能力。这就是负载均衡最初的基本设计思想。
 	
+		\subsection{Nginx}
+		
+		
+		\subsection{LVS}
+			\url{http://www.cnblogs.com/gtarcoder/p/6012117.html}
+		
 	\section{群集技术}		
 		\subsection{集群系统}集群系统是一种由互相连接的计算机组成的并行或分布式系统，可以作为单独、统一的计算资源来使用
 	
@@ -2580,9 +2586,9 @@
 		
 		TcpServer server;
 	};
-			\end{lstlisting}
-
-\chapter{Redis}
+			\end{lstlisting} 
+		\subsection{具体细节}参考\verb|c++_project| \verb|->| muduo
+\chapter{Redis} 
 	\section{NoSQL} Not Only Sql
 		\subsection{解决问题}
 			\begin{itemize}

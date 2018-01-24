@@ -1,6 +1,7 @@
 \documentclass[UTF8,a4paper,8pt]{ctexbook} 
 
  \usepackage{graphicx}%学习插入图
+ %\graphicspath{{figures/}}
  \usepackage{verbatim}%学习注释多行
  \usepackage{booktabs}%表格
  \usepackage{geometry}%图片
@@ -55,7 +56,7 @@
 \begin{document}          %正文排版开始
  	\maketitle
  	\tableofcontents
-\chapter{开源-muduo-0.8.2}	
+\chapter{开源-muduo-1.1.2}	
 	 \section{架构图}
 		 \begin{figure}[h]
 		 	\centering
@@ -69,7 +70,240 @@
 		 博客：\url{http://www.cppblog.com/Solstice/default.html?page=3}
 		 
 			 \url{https://www.oschina.net/question/28_61182}
+			 
+	\section{类设计}
+		\subsection{Thread}
+			\begin{figure}[ht]
+				\centering
+				\includegraphics[scale= 0.3]{figure/muduoThread.png}
+				\caption{Thread类图}
+			\end{figure}
 			
+			\subsubsection{Thread头文件}
+				\begin{lstlisting}
+	namespace muduo
+	{
+		
+		class Thread : boost::noncopyable
+		{
+		  public:
+			typedef boost::function<void ()> ThreadFunc;
+			
+			explicit Thread(const ThreadFunc&, const string& name = string());
+			#ifdef __GXX_EXPERIMENTAL_CXX0X__
+			explicit Thread(ThreadFunc&&, const string& name = string());
+			#endif
+			~Thread();
+			
+			void start();
+			int join(); // return pthread_join()
+			
+			bool started() const { return started_; }
+
+			pid_t tid() const { return *tid_; }
+			const string& name() const { return name_; }
+			
+			static int numCreated() { return numCreated_.get(); }
+			
+		  private:
+			void setDefaultName();
+			
+			bool       started_;
+			bool       joined_;
+			pthread_t  pthreadId_;
+			boost::shared_ptr<pid_t> tid_;
+			ThreadFunc func_;
+			string     name_;
+			
+			static AtomicInt32 numCreated_;
+		};
+		
+	}
+				\end{lstlisting}
+			
+			\subparagraph{要点}	
+				\begin{itemize}[itemindent = 2em]
+					\item 该线程类使用基于对象的方式实现，即 注册回调函数 来实现各对象不同的功能。
+					\item 静态方法不能调用非静态，如this 
+					\item 参数类型匹配，例如传递对象指针先得转化为void*, 进去后然后再转回来。
+					\item \verb|pthread_create|在线程创建以后，就开始运行相关的线程函数
+					\item \verb|pthread_join|如果没有加\verb|pthread_join()|方法，main线程里面直接就执行起走了，加了之后是等待线程执行了之后才执行的后面的代码。
+					
+					\url{http://blog.csdn.net/dinghqalex/article/details/42921931}
+				\end{itemize}
+				
+				回调图如下\ref{callback}：
+				\begin{figure}[htbp]
+					\centering
+					\includegraphics[scale= 0.7]{figure/muduoCallback.png}
+					\label{callback}
+					\caption{回调演示}
+				\end{figure}
+				
+		\subsection{MutexLock}
+			\begin{figure}[htbp]
+				\centering
+				\includegraphics[scale= 0.4]{figure/muduoMutexlock.png}
+				\caption{MutexLock类图}
+			\end{figure}
+			
+			\subparagraph{要点}
+				\begin{itemize}[itemindent = 2em]
+					\item 存在锁竞争
+					\item 
+				\end{itemize}
+				
+		\subsection{Condition}
+			
+			\begin{figure}[htbp]
+				\centering
+				\includegraphics[scale= 0.4]{figure/muduoCondition.png}
+				\caption{Condition类图}
+			\end{figure}
+				
+			
+			\subparagraph{具体流程}
+				\begin{itemize}[itemindent = 2em]
+					\item 锁住 \verb|mutex_lock|
+					\item 等待条件满足
+						\begin{lstlisting}[frame=L]
+	while()
+	{
+		mutex_unlock
+		等待条件
+		mutex_lock
+	}
+						\end{lstlisting}
+					\item 解锁 \verb|mutex_unlock|
+				\end{itemize}
+				
+			\subparagraph{要点}
+				\begin{itemize}
+					\item 观察者模式
+				\end{itemize}
+				
+		
+		\subsection{CountDownLatch}
+				可以用于所有子线程等待主线程发起“起跑”
+				
+				可以用于主线程等待子线程初始化完毕才开始工作。
+				
+				\begin{figure}[htbp]
+					\centering
+					\includegraphics[scale= 0.4]{figure/muduoCountdownlatch.png}
+					\caption{Condition类图}
+				\end{figure}
+		
+		\subsection{BlockingQueue 与 BoundedBlockingQueue}
+			
+				\begin{figure}[htbp]
+					\centering
+					\includegraphics[scale= 0.7]{figure/BoundedBlockingQueue.png}
+					\caption{有界队列}
+				\end{figure}
+				
+			\subsubsection{BlockingQueue<T>}
+				\begin{figure}[htbp]
+					\centering
+					\includegraphics[scale= 0.6]{figure/BlockingQueue.png}
+					\caption{BlockingQueue类图}
+				\end{figure}
+				
+			\subsubsection{BoundedBlockingQueue<T>}
+				\begin{figure}[htbp]
+					\centering
+					\includegraphics[scale= 0.4]{figure/BoundBlockingQueue.png}
+					\caption{BlockingQueue}
+				\end{figure}
+				
+				
+				\subparagraph{实现示例}\verb|->|
+					\begin{lstlisting}
+	namespace muduo
+	{
+		
+		template<typename T>
+		class BlockingQueue : boost::noncopyable
+		{
+			public:
+			BlockingQueue()
+			: mutex_(),
+			notEmpty_(mutex_),
+			queue_()
+			{
+			}
+			
+			void put(const T& x)
+			{
+				MutexLockGuard lock(mutex_);
+				queue_.push_back(x);
+				notEmpty_.notify(); // wait morphing saves us
+				// http://www.domaigne.com/blog/computing/condvars-signal-with-mutex-locked-or-not/
+			}
+			
+			#ifdef __GXX_EXPERIMENTAL_CXX0X__
+			void put(T&& x)
+			{
+				MutexLockGuard lock(mutex_);
+				queue_.push_back(std::move(x));
+				notEmpty_.notify();
+			}
+			// FIXME: emplace()
+			#endif
+			
+			T take()
+			{
+				MutexLockGuard lock(mutex_);
+				// always use a while-loop, due to spurious wakeup
+				while (queue_.empty())
+				{
+					notEmpty_.wait();
+				}
+				assert(!queue_.empty());
+				#ifdef __GXX_EXPERIMENTAL_CXX0X__
+				T front(std::move(queue_.front()));
+				#else
+				T front(queue_.front());
+				#endif
+				queue_.pop_front();
+				return front;
+			}
+			
+			size_t size() const
+			{
+				MutexLockGuard lock(mutex_);
+				return queue_.size();
+			}
+			
+			private:
+			mutable MutexLock mutex_;
+			Condition         notEmpty_;
+			std::deque<T>     queue_;
+		};
+		
+	}
+					\end{lstlisting}
+				
+			\subsubsection{核心要点}
+				\begin{itemize}
+					\item 对于 无界队列只需要将 notFull 条件变量去掉即可
+				\end{itemize}
+		\subsection{ThreadPool}
+				\begin{figure}[htbp]
+					\centering
+					\includegraphics[scale= 0.7]{figure/ThreadPool.png}
+					\includegraphics[scale= 0.5]{figure/muduoThreadPool.png}
+					\caption{ThreadPool模型}
+				\end{figure}
+			
+			\subparagraph{示例代码}\url{https://github.com/ctzhenghua/muduo/blob/master/muduo/base/ThreadPool.cc}
+		
+		\subsection{Singleton}	
+				\begin{figure}[htbp]
+					\centering
+					\includegraphics[scale= 0.4]{figure/muduoSingleton.png}
+					\caption{ThreadPool模型}
+				\end{figure}
 \chapter{开源-libevent-1.4}
 	\section{参考}
 		代码架构：见参考手册，net 文件夹下
@@ -123,6 +357,7 @@
 		项目、属性、链接器、常规、附加库目录：填写附加依赖库所在目录 分号间隔多项
 		
 		项目、属性、链接器、输入、附加依赖项：填写附加依赖库的名字.lib 空格或分号间隔多项
+
 
 
 \chapter{游戏服务器2 - 戴汉水}

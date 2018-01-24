@@ -1,16 +1,16 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2018.1.13)  16 JAN 2018 23:50
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/W32TeX) (preloaded format=xelatex 2017.2.16)  24 JAN 2018 20:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**C++_Basic.tex
+**./C++_Basic.tex
 (./C++_Basic.tex
 LaTeX2e <2015/01/01>
 Babel <3.9l> and hyphenation patterns for 79 languages loaded.
-(/usr/local/texlive/2015/texmf-dist/tex/latex/ctex/ctexbook.cls
-(/usr/local/texlive/2015/texmf-dist/tex/latex/l3kernel/expl3.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/ctex/ctexbook.cls
+(e:/Software/texlive/2015/texmf-dist/tex/latex/l3kernel/expl3.sty
 Package: expl3 2015/03/01 v5547 L3 programming layer (loader) 
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/l3kernel/expl3-code.tex
+(e:/Software/texlive/2015/texmf-dist/tex/latex/l3kernel/expl3-code.tex
 Package: expl3 2015/03/01 v5547 L3 programming layer (code) 
 L3 Module: l3bootstrap 2015/02/28 v5542 L3 Bootstrap code
 L3 Module: l3names 2015/02/24 v5535 L3 Namespace for primitives
@@ -115,15 +115,15 @@ L3 Module: l3candidates 2015/03/01 v5544 L3 Experimental additions to l3kernel
 \l__coffin_scaled_total_height_dim=\dimen131
 \l__coffin_scaled_width_dim=\dimen132
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/l3kernel/l3unicode-data.def
+(e:/Software/texlive/2015/texmf-dist/tex/latex/l3kernel/l3unicode-data.def
 File: l3unicode-data.def 2015/03/01 v5544 L3 Unicode data
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/l3kernel/l3xdvipdfmx.def
+(e:/Software/texlive/2015/texmf-dist/tex/latex/l3kernel/l3xdvipdfmx.def
 File: l3xdvidpfmx.def 2015/03/01 v5544 L3 Experimental driver: xdvipdfmx
 ))
 Document Class: ctexbook 2015/05/16 v2.0.2 Chinese adapter for class book (CTEX
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
 Package: xparse 2014/11/25 v5471 L3 Experimental document command parser
 \l__xparse_current_arg_int=\count101
 \l__xparse_m_args_int=\count102
@@ -131,23 +131,23 @@ Package: xparse 2014/11/25 v5471 L3 Experimental document command parser
 \l__xparse_processor_int=\count104
 \l__xparse_v_nesting_int=\count105
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
 Package: l3keys2e 2014/11/25 v5471 LaTeX2e option processing using LaTeX3 keys
-) (/usr/local/texlive/2015/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+) (e:/Software/texlive/2015/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2015/05/04 v2.2 e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count106
 )
-(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+(e:/Software/texlive/2015/texmf-dist/tex/generic/oberdiek/ifpdf.sty
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
 Package ifpdf Info: pdfTeX in PDF mode is not detected.
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/base/fix-cm.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/base/fix-cm.sty
 Package: fix-cm 2015/01/14 v1.1t fixes to LaTeX
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/base/ts1enc.def
+(e:/Software/texlive/2015/texmf-dist/tex/latex/base/ts1enc.def
 File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
 ))
-(/usr/local/texlive/2015/texmf-dist/tex/latex/ms/everysel.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/ms/everysel.sty
 Package: everysel 2011/10/28 v1.2 EverySelectfont Package (MS)
 )
 \l__ctex_tmp_int=\count107
@@ -155,12 +155,12 @@ Package: everysel 2011/10/28 v1.2 EverySelectfont Package (MS)
 \l__ctex_tmp_box=\box41
 \g__file_internal_ior=\read1
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/ctex/config/ctexopts.cfg
+(e:/Software/texlive/2015/texmf-dist/tex/latex/ctex/config/ctexopts.cfg
 File: ctexopts.cfg 2015/05/16 v2.0.2 Option configuration file (CTEX)
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/base/book.cls
+(e:/Software/texlive/2015/texmf-dist/tex/latex/base/book.cls
 Document Class: book 2014/09/29 v1.4h Standard LaTeX document class
-(/usr/local/texlive/2015/texmf-dist/tex/latex/base/bk12.clo
+(e:/Software/texlive/2015/texmf-dist/tex/latex/base/bk12.clo
 File: bk12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count108
@@ -192,13 +192,14 @@ File: bk12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 . Defining command \CTEXoptions with sig. '+o' on line 486.
 .................................................
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/ctex/engine/ctex-engine-xetex.def
+(e:/Software/texlive/2015/texmf-dist/tex/latex/ctex/engine/ctex-engine-xetex.de
+f
 File: ctex-engine-xetex.def 2015/05/16 v2.0.2 XeLaTeX adapter (CTEX)
-(/usr/local/texlive/2015/texmf-dist/tex/xelatex/xecjk/xeCJK.sty
+ (e:/Software/texlive/2015/texmf-dist/tex/xelatex/xecjk/xeCJK.sty
 Package: xeCJK 2015/05/15 v3.3.2 Typesetting CJK scripts with XeLaTeX
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/l3packages/xtemplate/xtemplate.st
-y
+(e:/Software/texlive/2015/texmf-dist/tex/latex/l3packages/xtemplate/xtemplate.s
+ty
 Package: xtemplate 2014/11/25 v5471 L3 Experimental prototype document function
 s
 \l__xtemplate_tmp_dim=\dimen135
@@ -412,7 +413,7 @@ Variant \prop_get:NoNF already defined; not changing it on line 108
 . Defining command \xeCJKOffVerbAddon with sig. '' on line 3272.
 .................................................
 \l__xeCJK_verb_exspace_skip=\skip53
- (/usr/local/texlive/2015/texmf-dist/tex/latex/fontspec/fontspec.sty
+ (e:/Software/texlive/2015/texmf-dist/tex/latex/fontspec/fontspec.sty
 Package: fontspec 2015/03/14 v2.4c Font selection for XeLaTeX and LuaLaTeX
 \l_fontspec_script_int=\count126
 \l_fontspec_language_int=\count127
@@ -422,7 +423,7 @@ Package: fontspec 2015/03/14 v2.4c Font selection for XeLaTeX and LuaLaTeX
 \l__fontspec_tmpc_dim=\dimen161
 Variant \tl_gset:cV already defined; not changing it on line 71
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/fontspec/fontspec-patches.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/fontspec/fontspec-patches.sty
 Package: fontspec-patches 2015/03/14 v2.4c Font selection for XeLaTeX and LuaLa
 TeX
 LaTeX Info: Redefining \em on input line 49.
@@ -439,57 +440,57 @@ LaTeX Info: Redefining \- on input line 60.
 . Defining command \liningnums with sig. 'm' on line 159.
 .................................................
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
 Package: fontspec-xetex 2015/03/14 v2.4c Font selection for XeLaTeX and LuaLaTe
 X
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/base/fontenc.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/euenc/eu1enc.def
+(e:/Software/texlive/2015/texmf-dist/tex/latex/euenc/eu1enc.def
 File: eu1enc.def 2010/05/27 v0.1h Experimental Unicode font encodings
 )
 LaTeX Font Info:    Try loading font information for EU1+lmr on input line 105.
 
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/euenc/eu1lmr.fd
+(e:/Software/texlive/2015/texmf-dist/tex/latex/euenc/eu1lmr.fd
 File: eu1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ))
-(/usr/local/texlive/2015/texmf-dist/tex/xelatex/xunicode/xunicode.sty
+(e:/Software/texlive/2015/texmf-dist/tex/xelatex/xunicode/xunicode.sty
 File: xunicode.sty 2011/09/09 v0.981 provides access to latin accents and many 
 other characters in Unicode lower plane
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/tipa/t3enc.def
+(e:/Software/texlive/2015/texmf-dist/tex/latex/tipa/t3enc.def
 File: t3enc.def 2001/12/31 T3 encoding
 LaTeX Font Info:    Try loading font information for EU1+lmss on input line 357
 .
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/euenc/eu1lmss.fd
+(e:/Software/texlive/2015/texmf-dist/tex/latex/euenc/eu1lmss.fd
 File: eu1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ))
 \tipaTiiicode=\count129
 \tipasavetokens=\toks14
 \tipachecktokens=\toks15
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/graphicx.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/keyval.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks16
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/graphics.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/trig.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/graphics.cfg
+(e:/Software/texlive/2015/texmf-dist/tex/latex/latexconfig/graphics.cfg
 File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 )
 Package graphics Info: Driver file: xetex.def on input line 94.
 
-(/usr/local/texlive/2015/texmf-dist/tex/xelatex/xetex-def/xetex.def
+(e:/Software/texlive/2015/texmf-dist/tex/xelatex/xetex-def/xetex.def
 File: xetex.def 2015/03/25 v4.04 LaTeX color/graphics driver for XeTeX (TeX Liv
 e/RRM/JK)
 ))
@@ -609,8 +610,8 @@ LaTeX Info: Redefining \slshape on input line 2237.
 LaTeX Info: Redefining \scshape on input line 2242.
 LaTeX Info: Redefining \upshape on input line 2247.
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/fontspec/fontspec.cfg)))
-(/usr/local/texlive/2015/texmf-dist/tex/xelatex/xecjk/xunicode-addon.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/fontspec/fontspec.cfg)))
+(e:/Software/texlive/2015/texmf-dist/tex/xelatex/xecjk/xunicode-addon.sty
 Package: xunicode-addon 2015/05/15 v3.3.2 addon file for xunicode
 .................................................
 . LaTeX info: "xparse/redefine-command"
@@ -753,12 +754,12 @@ Package: xunicode-addon 2015/05/15 v3.3.2 addon file for xunicode
 . 571.
 .................................................
 )
-(/usr/local/texlive/2015/texmf-dist/tex/xelatex/xunicode/xunicode.sty
+(e:/Software/texlive/2015/texmf-dist/tex/xelatex/xunicode/xunicode.sty
 File: xunicode.sty 2011/09/09 v0.981 provides access to latin accents and many 
 other characters in Unicode lower plane
 
 *** Reloading Xunicode for encoding 'EU1' ***
-) (/usr/local/texlive/2015/texmf-dist/tex/xelatex/xecjk/xunicode-extra.def
+) (e:/Software/texlive/2015/texmf-dist/tex/xelatex/xecjk/xunicode-extra.def
 File: xunicode-extra.def 2015/05/15 v3.3.2 extra definition for xunicode
 )
 .................................................
@@ -837,13 +838,13 @@ File: xunicode-extra.def 2015/05/15 v3.3.2 extra definition for xunicode
 . Redefining command \fontfamily with sig. 'm' on line 3760.
 .................................................
 
-(/usr/local/texlive/2015/texmf-dist/tex/xelatex/xecjk/xeCJK.cfg
+(e:/Software/texlive/2015/texmf-dist/tex/xelatex/xecjk/xeCJK.cfg
 File: xeCJK.cfg 2015/05/15 v3.3.2 Configuration file for xeCJK package
 ))
-(/usr/local/texlive/2015/texmf-dist/tex/xelatex/xecjk/xeCJKfntef.sty
+(e:/Software/texlive/2015/texmf-dist/tex/xelatex/xecjk/xeCJKfntef.sty
 Package: xeCJKfntef 2015/05/15 v3.3.2 xeCJK font effect
 
-(/usr/local/texlive/2015/texmf-dist/tex/generic/ulem/ulem.sty
+(e:/Software/texlive/2015/texmf-dist/tex/generic/ulem/ulem.sty
 \UL@box=\box45
 \UL@hyphenbox=\box46
 \UL@skip=\skip54
@@ -855,15 +856,15 @@ Package: xeCJKfntef 2015/05/15 v3.3.2 xeCJK font effect
 Package: ulem 2012/05/18
 \ULdepth=\dimen166
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/environ/environ.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/environ/environ.sty
 Package: environ 2014/05/04 v0.3 A new way to define environments
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/trimspaces/trimspaces.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/trimspaces/trimspaces.sty
 Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 )
 \@envbody=\toks18
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/cjk/texinput/CJKfntef.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/cjk/texinput/CJKfntef.sty
 Package: CJKfntef 2015/04/18 4.8.4
 \CJK@fntefSkip=\skip55
 \CJK@nest=\count132
@@ -959,7 +960,7 @@ Package: CJKfntef 2015/04/18 4.8.4
 . Defining command \CTEXnoindent with sig. '' on line 644.
 .................................................
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/zhnumber/zhnumber.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/zhnumber/zhnumber.sty
 Package: zhnumber 2014/09/13 v2.1 Typesetting numbers with Chinese glyphs
 .................................................
 . LaTeX info: "xparse/define-command"
@@ -1009,7 +1010,8 @@ Package: zhnumber 2014/09/13 v2.1 Typesetting numbers with Chinese glyphs
 . Defining command \zhnumsetup with sig. '+m' on line 800.
 .................................................
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/zhnumber/config/zhnumber-utf8.cfg
+(e:/Software/texlive/2015/texmf-dist/tex/latex/zhnumber/config/zhnumber-utf8.cf
+g
 File: zhnumber-utf8.cfg 2014/09/13 v2.1 Chinese numerals with UTF8 encoding
 ))
 .................................................
@@ -1034,12 +1036,12 @@ File: zhnumber-utf8.cfg 2014/09/13 v2.1 Chinese numerals with UTF8 encoding
 . Redefining command \refstepcounter with sig. 'm' on line 1014.
 .................................................
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/ctex/scheme/ctex-scheme-chinese-b
-ook.def
+(e:/Software/texlive/2015/texmf-dist/tex/latex/ctex/scheme/ctex-scheme-chinese-
+book.def
 File: ctex-scheme-chinese-book.def 2015/05/16 v2.0.2 Chinese scheme for book (C
 TEX)
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/ctex/config/ctex-name-utf8.cfg
+(e:/Software/texlive/2015/texmf-dist/tex/latex/ctex/config/ctex-name-utf8.cfg
 File: ctex-name-utf8.cfg 2015/05/16 v2.0.2 Caption with encoding UTF8 (CTEX)
 ))
 .................................................
@@ -1053,28 +1055,41 @@ File: ctex-name-utf8.cfg 2015/05/16 v2.0.2 Caption with encoding UTF8 (CTEX)
 . Defining command \CTeX with sig. '' on line 1121.
 .................................................
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/ctex/fontset/ctex-fontset-fandol.
-def
-File: ctex-fontset-fandol.def 2015/05/16 v2.0.2 Fandol fonts definition (CTEX)
+(e:/Software/texlive/2015/texmf-dist/tex/latex/ctex/fontset/ctex-fontset-window
+s.def
+File: ctex-fontset-windows.def 2015/05/16 v2.0.2 Windows fonts definition (CTEX
+)
 
-*************************************************
-* fontspec warning: "script-not-exist"
-* 
-* Font 'FandolSong-Regular' does not contain script 'CJK'.
-*************************************************
-\g__fontspec_family_FandolSong-Regular_int=\count134
+(e:/Software/texlive/2015/texmf-dist/tex/latex/ctex/fontset/ctex-fontset-window
+snew.def
+File: ctex-fontset-windowsnew.def 2015/05/16 v2.0.2 Windows fonts definition fo
+r Vista or later version (CTEX)
+\g__fontspec_family_SimSun_int=\count134
+.................................................
+. fontspec info: "no-font-shape"
+. 
+. Could not resolve font KaiTi/B (it probably doesn't exist).
+.................................................
+.................................................
+. fontspec info: "no-font-shape"
+. 
+. Could not resolve font SimHei/I (it probably doesn't exist).
+.................................................
+.................................................
+. fontspec info: "no-font-shape"
+. 
+. Could not resolve font SimSun/BI (it probably doesn't exist).
+.................................................
 .................................................
 . fontspec info: "defining-font"
 . 
-. Font family 'FandolSong-Regular(0)' created for font 'FandolSong-Regular'
-. with options
-. [Script={CJK},Extension={.otf},BoldFont={FandolSong-Bold},ItalicFont={FandolK
-ai-Regular}].
+. Font family 'SimSun(0)' created for font 'SimSun' with options
+. [Script={CJK},BoldFont={SimHei},ItalicFont={KaiTi}].
 . 
 . This font family consists of the following shapes:
 . 
 . * 'normal' with NFSS spec.:
-. <->"[FandolSong-Regular.otf]/OT:"
+. <->"SimSun/OT:script=hani;language=DFLT;"
 . 
 . * 'small caps' with NFSS spec.:
 . 
@@ -1082,7 +1097,7 @@ ai-Regular}].
 . 
 . 
 . * 'bold' with NFSS spec.:
-. <->"[FandolSong-Bold.otf]/OT:"
+. <->"SimHei/OT:script=hani;language=DFLT;"
 . 
 . * 'bold small caps' with NFSS spec.:
 . 
@@ -1090,7 +1105,7 @@ ai-Regular}].
 . 
 . 
 . * 'italic' with NFSS spec.:
-. <->"[FandolKai-Regular.otf]/OT:"
+. <->"KaiTi/OT:script=hani;language=DFLT;"
 . 
 . * 'small caps' with NFSS spec.:
 . 
@@ -1100,33 +1115,47 @@ ai-Regular}].
 .................................................
 . LaTeX info: "xparse/define-command"
 . 
-. Defining command \songti with sig. '' on line 97.
+. Defining command \songti with sig. '' on line 93.
 .................................................
 .................................................
 . LaTeX info: "xparse/define-command"
 . 
-. Defining command \heiti with sig. '' on line 98.
+. Defining command \heiti with sig. '' on line 94.
 .................................................
 .................................................
 . LaTeX info: "xparse/define-command"
 . 
-. Defining command \fangsong with sig. '' on line 99.
+. Defining command \fangsong with sig. '' on line 95.
 .................................................
 .................................................
 . LaTeX info: "xparse/define-command"
 . 
-. Defining command \kaishu with sig. '' on line 100.
+. Defining command \kaishu with sig. '' on line 96.
 .................................................
-)) (/usr/local/texlive/2015/texmf-dist/tex/latex/ctex/config/ctex.cfg
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \lishu with sig. '' on line 97.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \youyuan with sig. '' on line 98.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \yahei with sig. '' on line 99.
+.................................................
+))) (e:/Software/texlive/2015/texmf-dist/tex/latex/ctex/config/ctex.cfg
 File: ctex.cfg 2015/05/16 v2.0.2 Configuration file (CTEX)
-)
-(/usr/local/texlive/2015/texmf-dist/tex/latex/tools/verbatim.sty
+) (e:/Software/texlive/2015/texmf-dist/tex/latex/tools/verbatim.sty
 Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
 \every@verbatim=\toks19
 \verbatim@line=\toks20
 \verbatim@in@stream=\read2
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/booktabs/booktabs.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2005/04/14 v1.61803 publication quality tables
 \heavyrulewidth=\dimen172
 \lightrulewidth=\dimen173
@@ -1146,14 +1175,14 @@ Package: booktabs 2005/04/14 v1.61803 publication quality tables
 \@lastruleclass=\count138
 \@thisrulewidth=\dimen184
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/geometry/geometry.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2010/09/12 v5.6 Page Geometry
 
-(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+(e:/Software/texlive/2015/texmf-dist/tex/generic/oberdiek/ifvtex.sty
 Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
 Package ifvtex Info: VTeX not detected.
 )
-(/usr/local/texlive/2015/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+(e:/Software/texlive/2015/texmf-dist/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
 \Gm@cnth=\count139
@@ -1169,24 +1198,24 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layoutvoffset=\dimen192
 \Gm@dimlist=\toks21
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amsmath.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2013/01/14 v2.14 AMS math features
 \@mathmargin=\skip59
 
 For additional information on amsmath, use the `?' option.
-(/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amstext.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2000/06/29 v2.01
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amsgen.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0
 \@emptytoks=\toks22
 \ex@=\dimen193
 ))
-(/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amsbsy.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d
 \pmbraise@=\dimen194
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amsopn.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 1999/12/14 v2.01 operator names
 )
 \inf@bad=\count142
@@ -1227,17 +1256,17 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 LaTeX Info: Redefining \[ on input line 2665.
 LaTeX Info: Redefining \] on input line 2666.
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
-(/usr/local/texlive/2015/texmf-dist/tex/latex/listings/listings.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/listings/listings.sty
 \lst@mode=\count154
 \lst@gtempboxa=\box55
 \lst@token=\toks27
@@ -1251,29 +1280,29 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 \lst@lineno=\count159
 \lst@maxwidth=\dimen205
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/listings/lstmisc.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
 \c@lstnumber=\count160
 \lst@skipnumbers=\count161
 \lst@framebox=\box56
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/listings/listings.cfg
+(e:/Software/texlive/2015/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2014/09/06 1.5e listings configuration
 ))
 Package: listings 2014/09/06 1.5e (Carsten Heinz)
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/color.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/graphics/color.sty
 Package: color 2014/10/28 v1.1a Standard LaTeX Color (DPC)
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/color.cfg
+(e:/Software/texlive/2015/texmf-dist/tex/latex/latexconfig/color.cfg
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: xetex.def on input line 142.
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/xcolor/xcolor.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/color.cfg
+(e:/Software/texlive/2015/texmf-dist/tex/latex/latexconfig/color.cfg
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package xcolor Info: Driver file: xetex.def on input line 225.
@@ -1287,7 +1316,7 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/enumitem/enumitem.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/enumitem/enumitem.sty
 Package: enumitem 2011/09/28 v3.5.2 Customized lists
 \labelindent=\skip62
 \enit@outerparindent=\dimen206
@@ -1295,14 +1324,14 @@ Package: enumitem 2011/09/28 v3.5.2 Customized lists
 \enit@inbox=\box57
 \enitdp@description=\count162
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/hyperref.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2012/11/06 v6.83m Hypertext links for LaTeX
 
-(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+(e:/Software/texlive/2015/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
 Package: hobsub-hyperref 2012/05/28 v1.13 Bundle oberdiek, subset hyperref (HO)
 
 
-(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
+(e:/Software/texlive/2015/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
 Package: hobsub-generic 2012/05/28 v1.13 Bundle oberdiek, subset generic (HO)
 Package: hobsub 2012/05/28 v1.13 Construct package bundles (HO)
 Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
@@ -1341,28 +1370,28 @@ Package: atbegshi 2011/10/05 v1.16 At begin shipout hook (HO)
 Package: refcount 2011/10/16 v3.4 Data extraction from label references (HO)
 Package: hycolor 2011/01/30 v1.7 Color options for hyperref/bookmark (HO)
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/auxhook.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/oberdiek/auxhook.sty
 Package: auxhook 2011/03/04 v1.3 Hooks for auxiliary files (HO)
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
 )
 \@linkdim=\dimen207
 \Hy@linkcounter=\count163
 \Hy@pagecounter=\count164
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/pd1enc.def
+(e:/Software/texlive/2015/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2012/11/06 v6.83m Hyperref: PDFDocEncoding definition (HO)
 )
 \Hy@SavedSpaceFactor=\count165
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+(e:/Software/texlive/2015/texmf-dist/tex/latex/latexconfig/hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
 )
 Package hyperref Info: Option `colorlinks' set `true' on input line 4319.
 Package hyperref Info: Option `unicode' set `true' on input line 4319.
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/puenc.def
+(e:/Software/texlive/2015/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2012/11/06 v6.83m Hyperref: PDF Unicode definition (HO)
 )
 Package hyperref Info: Hyper figures OFF on input line 4443.
@@ -1374,7 +1403,7 @@ Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4688.
 \c@Hy@tempcnt=\count166
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/url/url.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip18
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
@@ -1399,10 +1428,10 @@ LaTeX Info: Redefining \pageref on input line 6369.
 
 Package hyperref Message: Driver (autodetected): hxetex.
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/hxetex.def
+(e:/Software/texlive/2015/texmf-dist/tex/latex/hyperref/hxetex.def
 File: hxetex.def 2012/11/06 v6.83m Hyperref driver for XeTeX
 
-(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/stringenc.sty
+(e:/Software/texlive/2015/texmf-dist/tex/generic/oberdiek/stringenc.sty
 Package: stringenc 2011/12/02 v1.10 Convert strings between diff. encodings (HO
 )
 )
@@ -1412,7 +1441,7 @@ Package: stringenc 2011/12/02 v1.10 Convert strings between diff. encodings (HO
 \Fld@listcount=\count173
 \c@bookmark@seq@number=\count174
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
 Package: rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
 Package rerunfilecheck Info: Feature \pdfmdfivesum is not available
 (rerunfilecheck)             (e.g. pdfTeX or LuaTeX with package `pdftexcmds').
@@ -1429,16 +1458,16 @@ tly
 * Command \CTEXsetup is deprecated.
 * \ctexset { section = { format+={\flushleft } } } is set.
 *************************************************
-(/usr/local/texlive/2015/texmf-dist/tex/latex/listings/lstlang1.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2014/09/06 1.5e listings language file
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/listings/lstlang1.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2014/09/06 1.5e listings language file
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/listings/lstmisc.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
 )
-(/usr/local/texlive/2015/texmf-dist/tex/xelatex/xecjk/xeCJK-listings.sty
+(e:/Software/texlive/2015/texmf-dist/tex/xelatex/xecjk/xeCJK-listings.sty
 Package: xeCJK-listings 2015/05/15 v3.3.2 xeCJK patch file for listings
 \l__xeCJK_listings_max_char_int=\count175
 \l__xeCJK_listings_flag_int=\count176
@@ -1464,7 +1493,7 @@ LaTeX Font Info:    Checking defaults for EU1/lmr/m/n on input line 47.
 LaTeX Font Info:    ... okay on input line 47.
 LaTeX Font Info:    Checking defaults for T3/cmr/m/n on input line 47.
 LaTeX Font Info:    Try loading font information for T3+cmr on input line 47.
- (/usr/local/texlive/2015/texmf-dist/tex/latex/tipa/t3cmr.fd
+ (e:/Software/texlive/2015/texmf-dist/tex/latex/tipa/t3cmr.fd
 File: t3cmr.fd 2001/12/31 TIPA font definitions
 )
 LaTeX Font Info:    ... okay on input line 47.
@@ -1472,7 +1501,6 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 47.
 LaTeX Font Info:    ... okay on input line 47.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 47.
 LaTeX Font Info:    ... okay on input line 47.
-
 ABD: EverySelectfont initializing macros
 LaTeX Info: Redefining \selectfont on input line 47.
 .................................................
@@ -1570,10 +1598,10 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 \c@lstlisting=\count177
 \AtBeginShipoutBox=\box59
 Package hyperref Info: Link coloring ON on input line 47.
-(/usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
+(e:/Software/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
-(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+(e:/Software/texlive/2015/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count178
@@ -1588,30 +1616,40 @@ LaTeX Info: Redefining \nameref on input line 47.
 
 LaTeX Font Info:    Try loading font information for U+msa on input line 50.
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
+(e:/Software/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 50.
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
+(e:/Software/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-*************************************************
-* fontspec warning: "script-not-exist"
-* 
-* Font 'FandolKai-Regular' does not contain script 'CJK'.
-*************************************************
-\g__fontspec_family_FandolKai-Regular_int=\count179
+\g__fontspec_family_KaiTi_int=\count179
+.................................................
+. fontspec info: "no-font-shape"
+. 
+. Could not resolve font KaiTi/I (it probably doesn't exist).
+.................................................
+.................................................
+. fontspec info: "no-font-shape"
+. 
+. Could not resolve font KaiTi/BI (it probably doesn't exist).
+.................................................
+.................................................
+. fontspec info: "no-font-shape"
+. 
+. Could not resolve font KaiTi/I (it probably doesn't exist).
+.................................................
 .................................................
 . fontspec info: "defining-font"
 . 
-. Font family 'FandolKai-Regular(0)' created for font 'FandolKai-Regular' with
-. options [Script={CJK},Extension={.otf},AutoFakeBold={4}].
+. Font family 'KaiTi(0)' created for font 'KaiTi' with options
+. [Script={CJK},AutoFakeBold={4}].
 . 
 . This font family consists of the following shapes:
 . 
 . * 'normal' with NFSS spec.:
-. <->"[FandolKai-Regular.otf]/OT:"
+. <->"KaiTi/OT:script=hani;language=DFLT;"
 . 
 . * 'small caps' with NFSS spec.:
 . 
@@ -1619,47 +1657,56 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 . 
 . 
 . * 'bold' with NFSS spec.:
-. <->"[FandolKai-Regular.otf]/OT:embolden=4;"
+. <->"KaiTi/OT:script=hani;language=DFLT;embolden=4;"
 . 
 . * 'bold small caps' with NFSS spec.:
 . 
 . and font adjustment code:
 . 
 .................................................
-[1
+ [1
 
 
 ] [2
 
-] (./C++_Basic.toc [3] [4] [5] [6] [7] [8])
+]
+(./C++_Basic.toc [3] [4] [5] [6] [7] [8] [9])
 \tf@toc=\write4
 \openout4 = `C++_Basic.toc'.
 
- [9] [10
-
-]
+ [10]
 第一章
-*************************************************
-* fontspec warning: "script-not-exist"
-* 
-* Font 'FandolFang-Regular' does not contain script 'CJK'.
-*************************************************
-\g__fontspec_family_FandolFang-Regular_int=\count180
+\g__fontspec_family_FangSong_int=\count180
+.................................................
+. fontspec info: "no-font-shape"
+. 
+. Could not resolve font FangSong/I (it probably doesn't exist).
+.................................................
+.................................................
+. fontspec info: "no-font-shape"
+. 
+. Could not resolve font FangSong/BI (it probably doesn't exist).
+.................................................
+.................................................
+. fontspec info: "no-font-shape"
+. 
+. Could not resolve font FangSong/I (it probably doesn't exist).
+.................................................
 LaTeX Font Info:    Try loading font information for EU1+lmtt on input line 62.
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/euenc/eu1lmtt.fd
+(e:/Software/texlive/2015/texmf-dist/tex/latex/euenc/eu1lmtt.fd
 File: eu1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 .................................................
 . fontspec info: "defining-font"
 . 
-. Font family 'FandolFang-Regular(0)' created for font 'FandolFang-Regular'
-. with options [Script={CJK},Extension={.otf},AutoFakeBold={4}].
+. Font family 'FangSong(0)' created for font 'FangSong' with options
+. [Script={CJK},AutoFakeBold={4}].
 . 
 . This font family consists of the following shapes:
 . 
 . * 'normal' with NFSS spec.:
-. <->"[FandolFang-Regular.otf]/OT:"
+. <->"FangSong/OT:script=hani;language=DFLT;"
 . 
 . * 'small caps' with NFSS spec.:
 . 
@@ -1667,14 +1714,16 @@ File: eu1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 . 
 . 
 . * 'bold' with NFSS spec.:
-. <->"[FandolFang-Regular.otf]/OT:embolden=4;"
+. <->"FangSong/OT:script=hani;language=DFLT;embolden=4;"
 . 
 . * 'bold small caps' with NFSS spec.:
 . 
 . and font adjustment code:
 . 
 .................................................
- [11]
+ [11
+
+]
 Overfull \hbox (56.43109pt too wide) in paragraph at lines 94--95
 [][]$[][][][][] [] [] [] [][][][][][] [] [][][] [] [][][][][][][][][][] [] [][]
 [][][][][][][][][][][][][][][][][][][][][][] [] [][][][] [] [][][][][][] [] [] 
@@ -1683,20 +1732,18 @@ Overfull \hbox (56.43109pt too wide) in paragraph at lines 94--95
 
 File: moveANDcopy.jpg Graphic file (type QTm)
 <use  "moveANDcopy.jpg" > [12] [13] [14] [15]
-Overfull \hbox (8.27446pt too wide) in paragraph at lines 274--275
-\EU1/FandolSong-Regular(0)/m/n/12 提 供 了 一 个[]\EU1/lmtt/m/n/12 insert_after \EU1
-/FandolSong-Regular(0)/m/n/12 函 数，|  用 于 在 给 定 元 素 之 后 插 入 节 点。| []\EU1/lmtt/m/
-n/12 erase_after\EU1/FandolFang-Regular(0)/m/n/12 、| \EU1/lmtt/m/n/12 emplace_a
-fter
+Overfull \hbox (22.14758pt too wide) in paragraph at lines 274--275
+\EU1/SimSun(0)/m/n/12 应 提 供 了 一 个[]\EU1/lmtt/m/n/12 insert_after \EU1/SimSun(0)
+/m/n/12 函 数，|  用 于 在 给 定 元 素 之 后 插 入 节 点。| []\EU1/lmtt/m/n/12 erase_after\EU1/F
+angSong(0)/m/n/12 、| \EU1/lmtt/m/n/12 emplace_after
  []
 
 
-Overfull \hbox (24.17447pt too wide) in paragraph at lines 283--284
-[]\EU1/FandolSong-Regular(0)/bx/n/12 无 关 序 列 容 器\EU1/FandolSong-Regular(0)/m/n/
-12 ：|  引 入 了 对[]\EU1/lmtt/m/n/12 map\EU1/FandolFang-Regular(0)/m/n/12 、| \EU1/l
-mtt/m/n/12 set \EU1/FandolSong-Regular(0)/m/n/12 等 关 联 容 器 的 无 序 版 本，|  叫 做[]\E
-U1/lmtt/m/n/12 unorderer_map/unordered_set\EU1/FandolSong-Regular(0)/m/n/12 。| 
-
+Overfull \hbox (18.70134pt too wide) in paragraph at lines 283--284
+[]\EU1/SimSun(0)/bx/n/12 无 关 序 列 容 器\EU1/SimSun(0)/m/n/12 ：|  引 入 了 对[]\EU1/lmt
+t/m/n/12 map\EU1/FangSong(0)/m/n/12 、| \EU1/lmtt/m/n/12 set \EU1/SimSun(0)/m/n/
+12 等 关 联 容 器 的 无 序 版 本，|  叫 做[]\EU1/lmtt/m/n/12 unorderer_map/unordered_set\EU1
+/SimSun(0)/m/n/12 。| 
  []
 
 [16]
@@ -1713,10 +1760,9 @@ Underfull \vbox (badness 4673) has occurred while \output is active []
  [24]
 [25] [26] [27] [28]
 Overfull \hbox (10.71936pt too wide) in paragraph at lines 817--818
- []\EU1/FandolSong-Regular(0)/bx/n/12 引 用 计 数 实 现[] \EU1/FandolSong-Regular(0)/
-m/n/12 中 间 对 象\EU1/lmr/m/n/12 :[][]$[][][][] [] [] [] [][][][] [] [][][][] [] [
-][][] [] [][][][][][][][][][][][] [] [][][][][][][] [] [][][][][][][] [] [][][]
-[][][][]$[][] 
+ []\EU1/SimSun(0)/bx/n/12 引 用 计 数 实 现[] \EU1/SimSun(0)/m/n/12 中 间 对 象\EU1/lmr/m
+/n/12 :[][]$[][][][] [] [] [] [][][][] [] [][][][] [] [][][] [] [][][][][][][][
+][][][][] [] [][][][][][][] [] [][][][][][][] [] [][][][][][][]$[][] 
  []
 
 [29] [30] [31] [32] [33] [34]
@@ -1767,14 +1813,18 @@ File: union2.png Graphic file (type QTm)
 File: weakCopy.png Graphic file (type QTm)
  <use  "weakCopy.png" > [55] [56] [57] [58]
 第八章
-(/usr/local/texlive/2015/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2014/09/06 1.5e listings language file
-) [59
+[59
+
+] [60
 
 ]
-[60]
+第九章
+(e:/Software/texlive/2015/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2014/09/06 1.5e listings language file
+) [61]
+[62]
 File: derive.png Graphic file (type QTm)
- <use  "derive.png" > [61] [62]
+ <use  "derive.png" > [63] [64]
 File: derive.jpg Graphic file (type QTm)
  <use  "derive.jpg" >
 File: derive2.jpg Graphic file (type QTm)
@@ -1782,31 +1832,31 @@ File: derive2.jpg Graphic file (type QTm)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[63]
+[65]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [64]
-[65] [66]
-第九章
-[67
+ [66]
+[67] [68]
+第十章
+[69
 
 ]
-Overfull \hbox (17.19931pt too wide) in paragraph at lines 2004--2005
-[]\EU1/FandolSong-Regular(0)/bx/n/12 深 入 \EU1/lmr/bx/n/12 c++ \EU1/FandolSong-R
-egular(0)/bx/n/12 内 存 模 型\EU1/FandolSong-Regular(0)/m/n/12 ：| [][]$[][][][] [] 
-[] [] [][][][] [] [][][][] [] [][][] [] [][][][][][][][][][][][][][][] [] [][][
-][][][][] [] [][][][][][][] [] [][][][][][][][]$[][] 
+Overfull \hbox (9.93369pt too wide) in paragraph at lines 2010--2011
+[]\EU1/SimSun(0)/bx/n/12 深 入 \EU1/lmr/bx/n/12 c++ \EU1/SimSun(0)/bx/n/12 内 存 模 
+型\EU1/SimSun(0)/m/n/12 ：| [][]$[][][][] [] [] [] [][][][] [] [][][][] [] [][][]
+ [] [][][][][][][][][][][][][][][] [] [][][][][][][] [] [][][][][][][] [] [][][
+][][][][][]$[][] 
  []
 
 
-Overfull \hbox (27.38371pt too wide) in paragraph at lines 2009--2010
-[]\EU1/FandolSong-Regular(0)/m/n/12 虚 函 数  |（[]\EU1/lmtt/m/n/12 Virtual Functio
-n\EU1/FandolSong-Regular(0)/m/n/12 ）|  是 通 过 一 张 虚 函 数 表  |（[]\EU1/lmtt/m/n/12 
-Virtual Table\EU1/FandolSong-Regular(0)/m/n/12 ）|  来 实 现 的。|  简 称 为[]\EU1/lmtt/
-m/n/12 V-Table\EU1/FandolSong-Regular(0)/m/n/12 。|
+Overfull \hbox (7.5136pt too wide) in paragraph at lines 2015--2016
+[]\EU1/SimSun(0)/m/n/12 虚 函 数  |（[]\EU1/lmtt/m/n/12 Virtual Function\EU1/SimSun
+(0)/m/n/12 ）|  是 通 过 一 张 虚 函 数 表  |（[]\EU1/lmtt/m/n/12 Virtual Table\EU1/SimSun
+(0)/m/n/12 ）|  来 实 现 的。|  简 称 为[]\EU1/lmtt/m/n/12 V-Table\EU1/SimSun(0)/m/n/12 
+。|
  []
 
-[68]
+[70]
 File: process.png Graphic file (type QTm)
  <use  "process.png" >
 
@@ -1822,143 +1872,163 @@ File: vt-base2.jpg Graphic file (type QTm)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[69] [70] [71] [72
+[71] [72] [73] [74
 
 ]
-第十章
-
-Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 2110.
-
-[73]
-Overfull \hbox (14.31975pt too wide) in paragraph at lines 2162--2164
-[]\EU1/FandolSong-Regular(0)/m/n/12 目 前 业 界 针 对 这 种 情 况 的 处 理 没 有 一 个 很 完 美 的 方
- 案，| \EU1/FandolSong-Regular(0)/bx/n/12 通 常 的 做 法 是 提 供 方 在 自 己 的[]\EU1/lmtt/m/
-n/12 xxx_pub.h
- []
-
-[74]
 第十一章
-[75
+File: processMem.png Graphic file (type QTm)
+<use  "processMem.png" > [75]
+File: figure/single.png Graphic file (type QTm)
+ <use  "figure/single.png" > [76]
+File: figure/singleDerived.png Graphic file (type QTm)
 
-] [76
+<use  "figure/singleDerived.png" > [77]
+File: figure/singleVirtual.png Graphic file (type QTm)
+ <use  "figure/singleVirtual.png" >
+File: figure/singleDerivedVirutal.png Graphic file (type QTm)
+
+<use  "figure/singleDerivedVirutal.png" > [78]
+File: figure/DerivedDerivedVirutal.png Graphic file (type QTm)
+
+<use  "figure/DerivedDerivedVirutal.png" > [79]
+File: figure/virtualDerivedVirutal.png Graphic file (type QTm)
+
+<use  "figure/virtualDerivedVirutal.png" >
+File: figure/virtualDerivedDerivedVirutal.png Graphic file (type QTm)
+
+<use  "figure/virtualDerivedDerivedVirutal.png" > [80] [81] [82
 
 ]
 第十二章
-[77] [78]
-第十三章
-[79
 
-] [80] [81] [82
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 2324.
+
+[83]
+Overfull \hbox (15.633pt too wide) in paragraph at lines 2376--2378
+[]\EU1/SimSun(0)/m/n/12 目 前 业 界 针 对 这 种 情 况 的 处 理 没 有 一 个 很 完 美 的 方 案，| \EU1/Si
+mSun(0)/bx/n/12 通 常 的 做 法 是 提 供 方 在 自 己 的[]\EU1/lmtt/m/n/12 xxx_pub.h
+ []
+
+[84]
+第十三章
+[85
+
+] [86
 
 ]
 第十四章
-[83] [84]
+[87] [88]
 第十五章
-[85
+[89
 
-] [86] [87] [88
+] [90] [91] [92
 
 ]
 第十六章
-[89] [90]
+[93] [94]
 第十七章
-[91
+[95
 
-] [92
+] [96] [97] [98
 
 ]
 第十八章
-[93] [94] [95] [96
+[99] [100]
+第十九章
+[101
+
+] [102
 
 ]
-第十九章
-[97] [98]
 第二十章
-[99
+[103] [104] [105] [106
 
-] [100]
+]
 第二十一章
-[101
+[107] [108]
+第二十二章
+[109
+
+] [110]
+第二十三章
+[111
 
 ]
 Underfull \vbox (badness 1281) has occurred while \output is active []
 
- [102]
+ [112]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [103]
-[104]
-第二十二章
-[105
-
-] [106
-
-]
-第二十三章
-
-Overfull \hbox (13.33424pt too wide) in paragraph at lines 2946--2947
-[]\EU1/FandolSong-Regular(0)/m/n/12 打 开 属 性 管 理 器，|  点 击 项 目 前 的 箭 头，|  展 开 项 目
-，|  找 到[]\EU1/lmtt/m/n/12 Debug \EU1/FandolSong-Regular(0)/m/n/12 或 者[]\EU1/lmt
-t/m/n/12 Release \EU1/FandolSong-Regular(0)/m/n/12 下 面 的 []\EU1/lmtt/m/n/12 Mic
-rosoft.Cpp
- []
-
-[107]
-Overfull \hbox (111.77289pt too wide) in paragraph at lines 2967--2968
-[]\EU1/lmr/m/n/12 -\EU1/FandolSong-Regular(0)/m/n/12 配 置 \EU1/lmr/m/n/12 includ
-e Directories += \EU1/FandolSong-Regular(0)/m/n/12 安 装 目 录 $[]$\EU1/lmr/m/n/12 
-opencv$[]$build$[]$include; += \EU1/FandolSong-Regular(0)/m/n/12 安 装 目 录 $[]$ \
-EU1/lmr/m/n/12 opencv$[]$build$[]$include$[]$opencv;
- []
-
-
-Overfull \hbox (36.07927pt too wide) in paragraph at lines 2990--2991
-[]\EU1/lmr/m/n/12 win10 \EU1/FandolSong-Regular(0)/m/n/12 权 限 更 改：| [][]$[][][]
-[] [] [] [] [][][][] [] [][][] [] [][][] [] [][][][][][][] [] [][][] [] [][][][
-] [] [][][][][][] [] [][][][][][][][][][][][][][][][][][][][][][][][]$[][] 
- []
-
-[108] [109] [110] [111] [112
-
-]
+ [113]
+[114]
 第二十四章
+[115
 
-Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 3107.
-
-
-Overfull \hbox (17.56613pt too wide) in paragraph at lines 3132--3133
-[][]\EU1/lmtt/m/n/12 break +offset,  break -offset\EU1/lmr/m/n/12 : \EU1/Fandol
-Song-Regular(0)/m/n/12 在 当 前 行 号 的 前 面 或 后 面 的[]\EU1/lmtt/m/n/12 offset \EU1/Fa
-ndolSong-Regular(0)/m/n/12 行 停 住。| []\EU1/lmtt/m/n/12 offiset \EU1/FandolSong-R
-egular(0)/m/n/12 为
- []
-
-[113] [114] [115] [116
+] [116
 
 ]
 第二十五章
+
+Overfull \hbox (17.27399pt too wide) in paragraph at lines 3160--3161
+[]\EU1/SimSun(0)/m/n/12 打 开 属 性 管 理 器，|  点 击 项 目 前 的 箭 头，|  展 开 项 目，|  找 到[]\EU
+1/lmtt/m/n/12 Debug \EU1/SimSun(0)/m/n/12 或 者[]\EU1/lmtt/m/n/12 Release \EU1/Si
+mSun(0)/m/n/12 下 面 的 []\EU1/lmtt/m/n/12 Microsoft.Cpp
+ []
+
 [117]
+Overfull \hbox (111.77289pt too wide) in paragraph at lines 3181--3182
+[]\EU1/lmr/m/n/12 -\EU1/SimSun(0)/m/n/12 配 置 \EU1/lmr/m/n/12 include Directorie
+s += \EU1/SimSun(0)/m/n/12 安 装 目 录 $[]$\EU1/lmr/m/n/12 opencv$[]$build$[]$inclu
+de; += \EU1/SimSun(0)/m/n/12 安 装 目 录 $[]$ \EU1/lmr/m/n/12 opencv$[]$build$[]$in
+clude$[]$opencv;
+ []
+
+
+Overfull \hbox (28.81364pt too wide) in paragraph at lines 3204--3205
+[]\EU1/lmr/m/n/12 win10 \EU1/SimSun(0)/m/n/12 权 限 更 改：| [][]$[][][][] [] [] [] 
+[][][][] [] [][][] [] [][][] [] [][][][][][][] [] [][][] [] [][][][] [] [][][][
+][][] [] [][][][][][][][][][][][][][][][][][][][][][][][]$[][] 
+ []
+
+[118] [119] [120] [121] [122
+
+]
+第二十六章
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 3321.
+
+
+Overfull \hbox (17.79639pt too wide) in paragraph at lines 3346--3347
+[][]\EU1/lmtt/m/n/12 break +offset,  break -offset\EU1/lmr/m/n/12 : \EU1/SimSun
+(0)/m/n/12 在 当 前 行 号 的 前 面 或 后 面 的[]\EU1/lmtt/m/n/12 offset \EU1/SimSun(0)/m/n/
+12 行 停 住。| []\EU1/lmtt/m/n/12 offiset \EU1/SimSun(0)/m/n/12 为
+ []
+
+[123] [124] [125] [126
+
+]
+第二十七章
+[127]
 File: Naming.png Graphic file (type QTm)
  <use  "Naming.png" >
-Overfull \hbox (5.12567pt too wide) in paragraph at lines 3284--3285
+Overfull \hbox (5.12567pt too wide) in paragraph at lines 3498--3499
  [][] 
  []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[118] [119]
-Overfull \hbox (21.6755pt too wide) in paragraph at lines 3340--3341
-[][]\EU1/lmtt/m/n/12 #define INT_PTR int* \EU1/FandolSong-Regular(0)/m/n/12 这 是
- \EU1/FandolSong-Regular(0)/bx/n/12 宏 定 义\EU1/FandolSong-Regular(0)/m/n/12 ，|  
-编 译 预 处 理 阶 段 要 进 行 宏 替 换，| []\EU1/lmtt/m/n/12 INT_PTR a,b\EU1/FandolFang-Regul
-ar(0)/m/n/12 会变成 \EU1/lmtt/m/n/12 int* a,b
+[128] [129]
+Overfull \hbox (24.302pt too wide) in paragraph at lines 3554--3555
+[][]\EU1/lmtt/m/n/12 #define INT_PTR int* \EU1/SimSun(0)/m/n/12 这 是 \EU1/SimSun
+(0)/bx/n/12 宏 定 义\EU1/SimSun(0)/m/n/12 ，|  编 译 预 处 理 阶 段 要 进 行 宏 替 换，| []\EU1/l
+mtt/m/n/12 INT_PTR a,b\EU1/FangSong(0)/m/n/12 会变成 \EU1/lmtt/m/n/12 int* a,b
  []
 
-[120] [121] [122]
-Overfull \hbox (201.52167pt too wide) in paragraph at lines 3454--3455
+[130] [131] [132]
+Overfull \hbox (201.52167pt too wide) in paragraph at lines 3668--3669
 [][][]$[][][][] [] [] [] [][][][][][][][][][][][][] [] [][][] [] [][][][][][][]
 [][] [] [][][][][][][][] [] [][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
@@ -1966,26 +2036,26 @@ Overfull \hbox (201.52167pt too wide) in paragraph at lines 3454--3455
  []
 
 
-Overfull \hbox (0.98647pt too wide) in paragraph at lines 3458--3459
-[]\EU1/lmr/m/n/12 LNK2019: \EU1/FandolSong-Regular(0)/m/n/12 无 法 解 析 的 外 部 符 号 
-\EU1/lmr/m/n/12 __imp__InitCommonControlsEx@4\EU1/FandolSong-Regular(0)/m/n/12 
-，|  该 符 号 在 函 数 \EU1/lmr/m/n/12 _Win-
+Overfull \hbox (2.29971pt too wide) in paragraph at lines 3672--3673
+[]\EU1/lmr/m/n/12 LNK2019: \EU1/SimSun(0)/m/n/12 无 法 解 析 的 外 部 符 号 \EU1/lmr/m/n
+/12 __imp__InitCommonControlsEx@4\EU1/SimSun(0)/m/n/12 ，|  该 符 号 在 函 数 \EU1/lmr
+/m/n/12 _Win-
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3462.
-[123]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 3462.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3676.
+[133]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 3676.
  (./C++_Basic.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 3462.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 3462.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 3676.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 3676.
  ) 
 Here is how much of TeX's memory you used:
- 30658 strings out of 493706
- 593599 string characters out of 6145769
- 735193 words of memory out of 5000000
- 33686 multiletter control sequences out of 15000+600000
+ 30712 strings out of 493706
+ 589979 string characters out of 6145376
+ 737837 words of memory out of 5000000
+ 33722 multiletter control sequences out of 15000+600000
  11646 words of font info for 82 fonts, out of 8000000 for 9000
  1328 hyphenation exceptions out of 8191
- 63i,10n,74p,10443b,1977s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 63i,10n,75p,10445b,1977s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on C++_Basic.pdf (123 pages).
+Output written on C++_Basic.pdf (133 pages).
