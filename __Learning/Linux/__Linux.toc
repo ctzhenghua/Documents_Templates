@@ -23,285 +23,317 @@
 \contentsline {subparagraph}{文本工具Texlive与Texstudio}{17}{section*.8}
 \contentsline {subparagraph}{git}{17}{section*.9}
 \contentsline {subparagraph}{网易云音乐}{17}{section*.10}
+\contentsline {subparagraph}{vim 插件安装}{17}{section*.11}
 \contentsline {chapter}{\numberline {第二章\hspace {0.3em}}命令相关}{19}{chapter.2}
 \contentsline {section}{\numberline {2.1}导航命令}{19}{section.2.1}
-\contentsline {paragraph}{pwd}{19}{section*.11}
-\contentsline {paragraph}{cd}{19}{section*.12}
-\contentsline {paragraph}{ls}{19}{section*.13}
+\contentsline {paragraph}{pwd}{19}{section*.12}
+\contentsline {paragraph}{cd}{19}{section*.13}
+\contentsline {paragraph}{ls}{19}{section*.14}
 \contentsline {section}{\numberline {2.2}Linux系统}{21}{section.2.2}
-\contentsline {paragraph}{\$PATH}{22}{section*.14}
-\contentsline {paragraph}{用户配置}{22}{section*.15}
-\contentsline {paragraph}{交换区}{22}{section*.16}
-\contentsline {paragraph}{符号链接}{22}{section*.17}
-\contentsline {paragraph}{开关机}{22}{section*.18}
+\contentsline {paragraph}{\$PATH}{22}{section*.15}
+\contentsline {paragraph}{用户配置}{22}{section*.16}
+\contentsline {paragraph}{交换区}{22}{section*.17}
+\contentsline {paragraph}{符号链接}{22}{section*.18}
+\contentsline {paragraph}{开关机}{22}{section*.19}
 \contentsline {section}{\numberline {2.3}操作文件和目录}{23}{section.2.3}
 \contentsline {subsection}{\numberline {2.3.1}文件系统}{23}{subsection.2.3.1}
-\contentsline {paragraph}{EXT2}{23}{section*.19}
-\contentsline {paragraph}{dumpe2fs}{23}{section*.20}
-\contentsline {paragraph}{df}{24}{section*.21}
-\contentsline {paragraph}{du}{24}{section*.22}
+\contentsline {paragraph}{EXT2}{23}{section*.20}
+\contentsline {paragraph}{dumpe2fs}{23}{section*.21}
+\contentsline {paragraph}{df}{24}{section*.22}
+\contentsline {paragraph}{du}{24}{section*.23}
 \contentsline {subsection}{\numberline {2.3.2}相关命令}{24}{subsection.2.3.2}
-\contentsline {paragraph}{通配符}{24}{section*.23}
-\contentsline {paragraph}{cd}{25}{section*.24}
-\contentsline {paragraph}{pwd}{25}{section*.25}
-\contentsline {paragraph}{cp}{25}{section*.26}
-\contentsline {paragraph}{mv}{26}{section*.27}
-\contentsline {paragraph}{dd}{26}{section*.28}
-\contentsline {paragraph}{mkdir}{26}{section*.29}
-\contentsline {paragraph}{rmdir}{26}{section*.30}
-\contentsline {paragraph}{rm}{26}{section*.31}
-\contentsline {paragraph}{ln}{26}{section*.32}
-\contentsline {paragraph}{查看文件}{28}{section*.33}
-\contentsline {subparagraph}{cat}{28}{section*.34}
-\contentsline {subparagraph}{tac}{28}{section*.35}
-\contentsline {subparagraph}{nl}{28}{section*.36}
-\contentsline {subparagraph}{more}{28}{section*.37}
-\contentsline {subparagraph}{less}{28}{section*.38}
-\contentsline {subparagraph}{head}{28}{section*.39}
-\contentsline {subparagraph}{tail}{28}{section*.40}
-\contentsline {subparagraph}{od}{28}{section*.41}
-\contentsline {paragraph}{touch}{29}{section*.42}
-\contentsline {subparagraph}{文件时间概念}{29}{section*.43}
-\contentsline {subparagraph}{touch 选项}{29}{section*.44}
+\contentsline {paragraph}{通配符}{24}{section*.24}
+\contentsline {paragraph}{cd}{25}{section*.25}
+\contentsline {paragraph}{pwd}{25}{section*.26}
+\contentsline {paragraph}{cp}{25}{section*.27}
+\contentsline {paragraph}{mv}{26}{section*.28}
+\contentsline {paragraph}{dd}{26}{section*.29}
+\contentsline {paragraph}{mkdir}{26}{section*.30}
+\contentsline {paragraph}{rmdir}{26}{section*.31}
+\contentsline {paragraph}{rm}{26}{section*.32}
+\contentsline {paragraph}{ln}{26}{section*.33}
+\contentsline {paragraph}{查看文件}{28}{section*.34}
+\contentsline {subparagraph}{cat}{28}{section*.35}
+\contentsline {subparagraph}{tac}{28}{section*.36}
+\contentsline {subparagraph}{nl}{28}{section*.37}
+\contentsline {subparagraph}{more}{28}{section*.38}
+\contentsline {subparagraph}{less}{28}{section*.39}
+\contentsline {subparagraph}{head}{28}{section*.40}
+\contentsline {subparagraph}{tail}{28}{section*.41}
+\contentsline {subparagraph}{od}{28}{section*.42}
+\contentsline {paragraph}{touch}{29}{section*.43}
+\contentsline {subparagraph}{文件时间概念}{29}{section*.44}
+\contentsline {subparagraph}{touch 选项}{29}{section*.45}
 \contentsline {section}{\numberline {2.4}命令}{29}{section.2.4}
-\contentsline {subparagraph}{type}{29}{section*.45}
-\contentsline {subparagraph}{which}{29}{section*.46}
-\contentsline {subparagraph}{man}{29}{section*.47}
-\contentsline {subparagraph}{--help}{29}{section*.48}
-\contentsline {subparagraph}{apropos}{29}{section*.49}
-\contentsline {subparagraph}{whatis}{29}{section*.50}
-\contentsline {subparagraph}{info}{29}{section*.51}
-\contentsline {subparagraph}{alias}{30}{section*.52}
-\contentsline {subparagraph}{参考}{30}{section*.53}
+\contentsline {subparagraph}{type}{29}{section*.46}
+\contentsline {subparagraph}{which}{29}{section*.47}
+\contentsline {subparagraph}{man}{29}{section*.48}
+\contentsline {subparagraph}{--help}{29}{section*.49}
+\contentsline {subparagraph}{apropos}{29}{section*.50}
+\contentsline {subparagraph}{whatis}{29}{section*.51}
+\contentsline {subparagraph}{info}{29}{section*.52}
+\contentsline {subparagraph}{alias}{30}{section*.53}
+\contentsline {subparagraph}{参考}{30}{section*.54}
 \contentsline {section}{\numberline {2.5}重定向}{30}{section.2.5}
-\contentsline {subparagraph}{cat}{30}{section*.54}
-\contentsline {subparagraph}{管道}{30}{section*.55}
-\contentsline {subparagraph}{sort}{30}{section*.56}
-\contentsline {subparagraph}{uniq}{30}{section*.57}
-\contentsline {subparagraph}{wc}{30}{section*.58}
-\contentsline {subparagraph}{tee}{30}{section*.59}
-\contentsline {subparagraph}{/dev/null 文件}{31}{section*.60}
+\contentsline {subparagraph}{cat}{30}{section*.55}
+\contentsline {subparagraph}{管道}{30}{section*.56}
+\contentsline {subparagraph}{sort}{30}{section*.57}
+\contentsline {subparagraph}{uniq}{30}{section*.58}
+\contentsline {subparagraph}{wc}{30}{section*.59}
+\contentsline {subparagraph}{tee}{30}{section*.60}
+\contentsline {subparagraph}{/dev/null 文件}{31}{section*.61}
 \contentsline {section}{\numberline {2.6}shell扩展}{31}{section.2.6}
-\contentsline {subparagraph}{echo}{31}{section*.61}
-\contentsline {subparagraph}{波浪线扩展}{31}{section*.62}
-\contentsline {subparagraph}{算术扩展}{31}{section*.63}
-\contentsline {subparagraph}{花括号扩展}{31}{section*.64}
-\contentsline {subparagraph}{命令 替换}{31}{section*.65}
-\contentsline {subparagraph}{双引号扩展}{31}{section*.66}
-\contentsline {subparagraph}{单引号扩展}{31}{section*.67}
+\contentsline {subparagraph}{echo}{31}{section*.62}
+\contentsline {subparagraph}{波浪线扩展}{31}{section*.63}
+\contentsline {subparagraph}{算术扩展}{31}{section*.64}
+\contentsline {subparagraph}{花括号扩展}{31}{section*.65}
+\contentsline {subparagraph}{命令 替换}{31}{section*.66}
+\contentsline {subparagraph}{双引号扩展}{31}{section*.67}
+\contentsline {subparagraph}{单引号扩展}{31}{section*.68}
 \contentsline {section}{\numberline {2.7}权限}{31}{section.2.7}
 \contentsline {subsection}{\numberline {2.7.1}基础}{31}{subsection.2.7.1}
-\contentsline {subparagraph}{chmod}{32}{section*.68}
-\contentsline {subparagraph}{umask}{32}{section*.69}
-\contentsline {subparagraph}{chown}{33}{section*.70}
-\contentsline {subparagraph}{chgrp}{33}{section*.71}
-\contentsline {subparagraph}{passwd}{33}{section*.72}
-\contentsline {subparagraph}{Set UID}{33}{section*.73}
+\contentsline {subparagraph}{chmod}{32}{section*.69}
+\contentsline {subparagraph}{umask}{32}{section*.70}
+\contentsline {subparagraph}{chown}{33}{section*.71}
+\contentsline {subparagraph}{chgrp}{33}{section*.72}
+\contentsline {subparagraph}{passwd}{33}{section*.73}
+\contentsline {subparagraph}{Set UID}{33}{section*.74}
 \contentsline {subsection}{\numberline {2.7.2}UID EUID}{33}{subsection.2.7.2}
 \contentsline {section}{\numberline {2.8}进程}{33}{section.2.8}
-\contentsline {paragraph}{ps}{33}{section*.74}
-\contentsline {paragraph}{后台执行}{34}{section*.75}
-\contentsline {paragraph}{其他}{34}{section*.76}
-\contentsline {subparagraph}{ctrl+z}{34}{section*.77}
-\contentsline {subparagraph}{ctrl+c}{34}{section*.78}
-\contentsline {subparagraph}{top}{34}{section*.79}
-\contentsline {subparagraph}{jobs}{34}{section*.80}
-\contentsline {subparagraph}{bg}{34}{section*.81}
-\contentsline {subparagraph}{fg}{34}{section*.82}
-\contentsline {subparagraph}{kill}{35}{section*.83}
-\contentsline {subparagraph}{killall}{35}{section*.84}
+\contentsline {paragraph}{ps}{33}{section*.75}
+\contentsline {paragraph}{后台执行}{34}{section*.76}
+\contentsline {paragraph}{其他}{34}{section*.77}
+\contentsline {subparagraph}{ctrl+z}{34}{section*.78}
+\contentsline {subparagraph}{ctrl+c}{34}{section*.79}
+\contentsline {subparagraph}{top}{34}{section*.80}
+\contentsline {subparagraph}{jobs}{34}{section*.81}
+\contentsline {subparagraph}{bg}{34}{section*.82}
+\contentsline {subparagraph}{fg}{34}{section*.83}
+\contentsline {subparagraph}{kill}{35}{section*.84}
+\contentsline {subparagraph}{killall}{35}{section*.85}
 \contentsline {section}{\numberline {2.9}环境/etc}{35}{section.2.9}
 \contentsline {subsection}{\numberline {2.9.1}基本概念}{35}{subsection.2.9.1}
 \contentsline {subsection}{\numberline {2.9.2}相关命令}{35}{subsection.2.9.2}
-\contentsline {subparagraph}{printenv}{35}{section*.85}
-\contentsline {subparagraph}{set}{36}{section*.86}
-\contentsline {subparagraph}{export}{36}{section*.87}
-\contentsline {subparagraph}{alias}{36}{section*.88}
+\contentsline {subparagraph}{printenv}{35}{section*.86}
+\contentsline {subparagraph}{set}{36}{section*.87}
+\contentsline {subparagraph}{export}{36}{section*.88}
+\contentsline {subparagraph}{alias}{36}{section*.89}
 \contentsline {section}{\numberline {2.10}VI 编辑器}{36}{section.2.10}
-\contentsline {subsection}{\numberline {2.10.1}模式转换}{36}{subsection.2.10.1}
-\contentsline {subsection}{\numberline {2.10.2}常用命令}{37}{subsection.2.10.2}
-\contentsline {subsubsection}{选中一块区域并缩进缩出}{37}{section*.89}
-\contentsline {subsubsection}{移动光标}{37}{section*.90}
-\contentsline {subparagraph}{数字0}{37}{section*.91}
-\contentsline {subparagraph}{\$}{37}{section*.92}
-\contentsline {subparagraph}{num+G}{37}{section*.93}
-\contentsline {subparagraph}{G}{37}{section*.94}
-\contentsline {subparagraph}{O}{37}{section*.95}
-\contentsline {subsubsection}{删除操作}{38}{section*.96}
-\contentsline {subparagraph}{dd}{38}{section*.97}
-\contentsline {subparagraph}{num+dd}{38}{section*.98}
-\contentsline {subparagraph}{dW}{38}{section*.99}
-\contentsline {subparagraph}{d+num+G}{38}{section*.100}
-\contentsline {subparagraph}{d+G}{38}{section*.101}
-\contentsline {subparagraph}{u}{38}{section*.102}
-\contentsline {subsubsection}{复制粘贴}{38}{section*.103}
-\contentsline {subparagraph}{normal mode}{38}{section*.104}
-\contentsline {subparagraph}{yy}{38}{section*.105}
-\contentsline {subparagraph}{num+yy}{38}{section*.106}
-\contentsline {subparagraph}{y+num+G}{38}{section*.107}
-\contentsline {subparagraph}{y+G}{38}{section*.108}
-\contentsline {subparagraph}{p}{38}{section*.109}
-\contentsline {subparagraph}{J}{38}{section*.110}
-\contentsline {subsubsection}{查找}{39}{section*.111}
-\contentsline {subparagraph}{'/keyword'}{39}{section*.112}
-\contentsline {subparagraph}{'?keyword'}{39}{section*.113}
-\contentsline {subparagraph}{n}{39}{section*.114}
-\contentsline {subsubsection}{全局搜索和替换}{39}{section*.115}
-\contentsline {subsubsection}{查找删除注释}{39}{section*.116}
-\contentsline {subparagraph}{'s/old/new/ '}{39}{section*.117}
-\contentsline {subparagraph}{'s/old/new/g '}{39}{section*.118}
-\contentsline {subparagraph}{'\%s/old/new/'}{39}{section*.119}
-\contentsline {subparagraph}{'\%s/old/new/g'}{39}{section*.120}
-\contentsline {subparagraph}{',5 s/\^ /\#/g'}{40}{section*.121}
-\contentsline {subparagraph}{',+5 s/\^ /\#/g'}{40}{section*.122}
-\contentsline {subparagraph}{'3,5 s/\^ \#//g'}{40}{section*.123}
-\contentsline {subsubsection}{编辑多文本}{40}{section*.124}
-\contentsline {subparagraph}{vi file1 file2 }{40}{section*.125}
-\contentsline {subparagraph}{n 与 N}{40}{section*.126}
-\contentsline {subparagraph}{:buffers}{40}{section*.127}
-\contentsline {subparagraph}{:buffer num}{40}{section*.128}
-\contentsline {subparagraph}{:e newfile}{40}{section*.129}
-\contentsline {subparagraph}{:tabe}{40}{section*.130}
-\contentsline {subparagraph}{文件间复制}{40}{section*.131}
-\contentsline {subparagraph}{插入整个文件}{40}{section*.132}
-\contentsline {subsection}{\numberline {2.10.3}常用插件}{40}{subsection.2.10.3}
-\contentsline {subsubsection}{ctags}{40}{section*.133}
-\contentsline {subsubsection}{YouCompleteMe}{41}{section*.134}
-\contentsline {section}{\numberline {2.11}存储介质挂载}{41}{section.2.11}
-\contentsline {subsection}{\numberline {2.11.1}挂载点的意义}{41}{subsection.2.11.1}
-\contentsline {subsection}{\numberline {2.11.2}挂载}{41}{subsection.2.11.2}
-\contentsline {subparagraph}{mount}{41}{section*.135}
-\contentsline {section}{\numberline {2.12}网络}{42}{section.2.12}
-\contentsline {subparagraph}{ping}{42}{section*.136}
-\contentsline {subparagraph}{traceroute}{42}{section*.137}
-\contentsline {subparagraph}{netstat}{42}{section*.138}
-\contentsline {subparagraph}{ftp:lftp:sftp}{43}{section*.139}
-\contentsline {subparagraph}{wget}{44}{section*.140}
-\contentsline {subparagraph}{*远程操作 ssh}{44}{section*.141}
-\contentsline {subparagraph}{*数据传输 rsync}{45}{section*.142}
-\contentsline {subparagraph}{nc}{45}{section*.143}
-\contentsline {subparagraph}{pv}{45}{section*.144}
-\contentsline {subparagraph}{tcpdump}{45}{section*.145}
-\contentsline {subparagraph}{iperf}{46}{section*.146}
-\contentsline {subparagraph}{ifconfig}{46}{section*.147}
-\contentsline {subparagraph}{iptables}{46}{section*.148}
-\contentsline {subparagraph}{vmstate}{46}{section*.149}
-\contentsline {section}{\numberline {2.13}正则表达式}{47}{section.2.13}
-\contentsline {subsection}{\numberline {2.13.1}字符类}{48}{subsection.2.13.1}
-\contentsline {subsection}{\numberline {2.13.2}数量限定类}{48}{subsection.2.13.2}
-\contentsline {subsection}{\numberline {2.13.3}位置限定类}{49}{subsection.2.13.3}
-\contentsline {subsection}{\numberline {2.13.4}特殊字符}{49}{subsection.2.13.4}
-\contentsline {section}{\numberline {2.14}搜索命令}{49}{section.2.14}
-\contentsline {subparagraph}{*文件搜索命令 locate}{49}{section*.150}
-\contentsline {subparagraph}{*文件搜索命令 find}{50}{section*.151}
-\contentsline {subparagraph}{*字符串搜索命令 grep}{51}{section*.152}
-\contentsline {subparagraph}{命令搜索命令 whereis 与 which}{51}{section*.153}
-\contentsline {subparagraph}{xargs}{51}{section*.154}
-\contentsline {subparagraph}{stat}{51}{section*.155}
-\contentsline {section}{\numberline {2.15}文本相关}{52}{section.2.15}
-\contentsline {subsection}{\numberline {2.15.1}sed}{52}{subsection.2.15.1}
-\contentsline {subparagraph}{选项}{52}{section*.156}
-\contentsline {subparagraph}{命令}{52}{section*.157}
-\contentsline {subsection}{\numberline {2.15.2}awk}{53}{subsection.2.15.2}
-\contentsline {subsection}{\numberline {2.15.3}cat}{53}{subsection.2.15.3}
-\contentsline {subsection}{\numberline {2.15.4}sort}{53}{subsection.2.15.4}
-\contentsline {subsection}{\numberline {2.15.5}uniq}{53}{subsection.2.15.5}
-\contentsline {subsection}{\numberline {2.15.6}cut}{53}{subsection.2.15.6}
-\contentsline {subsection}{\numberline {2.15.7}paste}{54}{subsection.2.15.7}
-\contentsline {subsection}{\numberline {2.15.8}join}{54}{subsection.2.15.8}
-\contentsline {subsection}{\numberline {2.15.9}comm}{54}{subsection.2.15.9}
-\contentsline {subsection}{\numberline {2.15.10}diff}{54}{subsection.2.15.10}
-\contentsline {subsection}{\numberline {2.15.11}patch}{54}{subsection.2.15.11}
-\contentsline {subsection}{\numberline {2.15.12}tr}{54}{subsection.2.15.12}
-\contentsline {subsection}{\numberline {2.15.13}aspelx}{54}{subsection.2.15.13}
-\contentsline {section}{\numberline {2.16}归档备份}{54}{section.2.16}
-\contentsline {subsection}{\numberline {2.16.1}压缩与解压缩}{54}{subsection.2.16.1}
-\contentsline {subsection}{\numberline {2.16.2}同步文件和目录}{56}{subsection.2.16.2}
-\contentsline {paragraph}{rsync}{56}{section*.158}
-\contentsline {section}{\numberline {2.17}软件包管理}{57}{section.2.17}
-\contentsline {subsection}{\numberline {2.17.1}已编译文件}{57}{subsection.2.17.1}
-\contentsline {subsection}{\numberline {2.17.2}源码安装}{57}{subsection.2.17.2}
-\contentsline {subsection}{\numberline {2.17.3}deb包安装}{57}{subsection.2.17.3}
-\contentsline {subsubsection}{Ubuntu}{58}{section*.159}
-\contentsline {section}{\numberline {2.18}参考}{58}{section.2.18}
-\contentsline {chapter}{\numberline {第三章\hspace {0.3em}}Shell 脚本}{59}{chapter.3}
-\contentsline {section}{\numberline {3.1}Shell 基本知识}{59}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Shell}{59}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Shell 执行脚本}{59}{subsection.3.1.2}
-\contentsline {subparagraph}{Example:}{59}{section*.160}
-\contentsline {subsubsection}{执行方式}{60}{section*.161}
-\contentsline {subsubsection}{执行过程}{60}{section*.162}
-\contentsline {subparagraph}{注意}{61}{section*.163}
-\contentsline {subparagraph}{Example}{61}{lstlisting.3.-17}
-\contentsline {subsection}{\numberline {3.1.3}Shell 变量}{62}{subsection.3.1.3}
-\contentsline {subsubsection}{shell变量的种类}{62}{section*.165}
-\contentsline {subparagraph}{环境变量：}{62}{section*.166}
-\contentsline {subparagraph}{本地变量：}{62}{section*.167}
-\contentsline {subparagraph}{变量引用：}{62}{section*.168}
-\contentsline {subparagraph}{只读变量}{63}{section*.169}
-\contentsline {subparagraph}{删除变量}{63}{section*.170}
-\contentsline {subparagraph}{Shell 字符串}{63}{section*.171}
-\contentsline {subparagraph}{Shell 数组}{64}{section*.172}
-\contentsline {subparagraph}{Shell 注释}{65}{section*.173}
-\contentsline {subsection}{\numberline {3.1.4}Shell 通配符、命令代换、单引号、双引号}{65}{subsection.3.1.4}
-\contentsline {subsection}{\numberline {3.1.5}Shell 传递参数}{65}{subsection.3.1.5}
-\contentsline {subsection}{\numberline {3.1.6}Shell 各种括号}{66}{subsection.3.1.6}
-\contentsline {subsubsection}{( )-小括号}{66}{section*.174}
-\contentsline {subsubsection}{(( ))-双小括号}{66}{section*.175}
-\contentsline {subsubsection}{[ ]-中括号}{67}{section*.176}
-\contentsline {subsubsection}{[[ ]]-双中括号}{67}{section*.177}
-\contentsline {subsubsection}{\{ \}-大括号}{68}{section*.178}
-\contentsline {paragraph}{\{\}常规用法}{68}{section*.179}
-\contentsline {paragraph}{\{\}特殊的替换用法}{68}{section*.180}
-\contentsline {paragraph}{\{\}模式匹配替换用法}{68}{section*.181}
-\contentsline {paragraph}{\{\}字符串提取和替换}{68}{section*.182}
-\contentsline {subsection}{\numberline {3.1.7}参考}{69}{subsection.3.1.7}
-\contentsline {section}{\numberline {3.2}Shell 运算操作}{69}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}算数运算}{69}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}关系运算}{70}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}布尔运算}{71}{subsection.3.2.3}
-\contentsline {subsection}{\numberline {3.2.4}逻辑运算}{72}{subsection.3.2.4}
-\contentsline {subsection}{\numberline {3.2.5}字符串运算}{73}{subsection.3.2.5}
-\contentsline {subsection}{\numberline {3.2.6}文件测试运算}{74}{subsection.3.2.6}
-\contentsline {section}{\numberline {3.3}Shell 脚本控制结构}{75}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}if-else}{75}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}while}{75}{subsection.3.3.2}
-\contentsline {subparagraph}{let 命令}{75}{section*.183}
-\contentsline {subsection}{\numberline {3.3.3}for}{76}{subsection.3.3.3}
-\contentsline {subsection}{\numberline {3.3.4}until}{76}{subsection.3.3.4}
-\contentsline {subsection}{\numberline {3.3.5}case}{77}{subsection.3.3.5}
-\contentsline {subsection}{\numberline {3.3.6}continue,break}{77}{subsection.3.3.6}
-\contentsline {section}{\numberline {3.4}Shell 函数}{77}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}函数定义}{77}{subsection.3.4.1}
-\contentsline {subparagraph}{注意}{78}{section*.184}
-\contentsline {subsection}{\numberline {3.4.2}函数参数}{79}{subsection.3.4.2}
-\contentsline {section}{\numberline {3.5}Shell 脚本调用已有脚本}{80}{section.3.5}
-\contentsline {subparagraph}{Example}{80}{lstlisting.3.-41}
-\contentsline {section}{\numberline {3.6}Shell 示例}{81}{section.3.6}
-\contentsline {subparagraph}{How would you print just the 10th line of a file?}{81}{section*.186}
-\contentsline {chapter}{\numberline {第四章\hspace {0.3em}}Linux 系统编程}{83}{chapter.4}
-\contentsline {section}{\numberline {4.1}线程}{83}{section.4.1}
-\contentsline {subparagraph}{pthread\_create}{83}{section*.187}
-\contentsline {section}{\numberline {4.2}进程}{83}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}进程空间}{83}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}uid、euid}{83}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}fork}{83}{subsection.4.2.3}
-\contentsline {section}{\numberline {4.3}共享内存区}{85}{section.4.3}
-\contentsline {section}{\numberline {4.4}消息队列}{85}{section.4.4}
-\contentsline {section}{\numberline {4.5}信号量}{85}{section.4.5}
-\contentsline {section}{\numberline {4.6}库的使用}{85}{section.4.6}
-\contentsline {subsection}{\numberline {4.6.1}介绍}{85}{subsection.4.6.1}
-\contentsline {subsection}{\numberline {4.6.2}静态函数库}{85}{subsection.4.6.2}
-\contentsline {subparagraph}{Example}{86}{section*.188}
-\contentsline {subparagraph}{静态库搜索路径}{87}{section*.189}
-\contentsline {subsection}{\numberline {4.6.3}动态函数库}{88}{subsection.4.6.3}
-\contentsline {subparagraph}{Example}{89}{section*.190}
-\contentsline {subparagraph}{动态库搜索路径}{89}{section*.191}
-\contentsline {chapter}{\numberline {第五章\hspace {0.3em}}Linux 服务器搭建}{91}{chapter.5}
-\contentsline {section}{\numberline {5.1}基本技能需求}{91}{section.5.1}
-\contentsline {subsection}{\numberline {5.1.1}网路：了解网路基础知识与所需服务之通讯协定}{92}{subsection.5.1.1}
-\contentsline {subsection}{\numberline {5.1.2}伺服器本身：了解架网路伺服器之目的以配合主机的安装规划}{92}{subsection.5.1.2}
-\contentsline {subsection}{\numberline {5.1.3}伺服器本身：了解作业系统的基本操作}{92}{subsection.5.1.3}
-\contentsline {subsection}{\numberline {5.1.4}内部防火墙设定：管理系统的可分享资源}{92}{subsection.5.1.4}
-\contentsline {subsection}{\numberline {5.1.5}伺服器软体设定：学习设定技巧与开机是否自动执行}{93}{subsection.5.1.5}
-\contentsline {subsection}{\numberline {5.1.6}细部权限设定：包括SELinux与档案权限}{93}{subsection.5.1.6}
+\contentsline {subsection}{\numberline {2.10.1}基本模式}{36}{subsection.2.10.1}
+\contentsline {subsection}{\numberline {2.10.2}模式转换}{37}{subsection.2.10.2}
+\contentsline {subsection}{\numberline {2.10.3}常用命令}{37}{subsection.2.10.3}
+\contentsline {subsubsection}{选中一块区域并缩进缩出}{37}{section*.90}
+\contentsline {subparagraph}{可视模式}{37}{section*.91}
+\contentsline {subparagraph}{正常模式}{38}{section*.92}
+\contentsline {subsubsection}{移动光标}{38}{section*.93}
+\contentsline {subparagraph}{数字0}{38}{section*.94}
+\contentsline {subparagraph}{\$}{38}{section*.95}
+\contentsline {subparagraph}{gg}{38}{section*.96}
+\contentsline {subparagraph}{G}{38}{section*.97}
+\contentsline {subparagraph}{b}{38}{section*.98}
+\contentsline {subparagraph}{e}{38}{section*.99}
+\contentsline {subparagraph}{w}{39}{section*.100}
+\contentsline {subparagraph}{num+G}{39}{section*.101}
+\contentsline {subsubsection}{删除操作}{39}{section*.102}
+\contentsline {subparagraph}{x}{39}{section*.103}
+\contentsline {subparagraph}{d0}{39}{section*.104}
+\contentsline {subparagraph}{d\$}{39}{section*.105}
+\contentsline {subparagraph}{dW}{39}{section*.106}
+\contentsline {subparagraph}{dd}{39}{section*.107}
+\contentsline {subparagraph}{d+G}{39}{section*.108}
+\contentsline {subparagraph}{num+dd}{39}{section*.109}
+\contentsline {subparagraph}{d+num+G}{39}{section*.110}
+\contentsline {subsubsection}{撤销恢复}{39}{section*.111}
+\contentsline {subparagraph}{u}{39}{section*.112}
+\contentsline {subparagraph}{ctrl+r}{39}{section*.113}
+\contentsline {subsubsection}{复制粘贴}{40}{section*.114}
+\contentsline {subparagraph}{y0}{40}{section*.115}
+\contentsline {subparagraph}{y\$}{40}{section*.116}
+\contentsline {subparagraph}{yW}{40}{section*.117}
+\contentsline {subparagraph}{yy}{40}{section*.118}
+\contentsline {subparagraph}{num+yy}{40}{section*.119}
+\contentsline {subparagraph}{y+num+G}{40}{section*.120}
+\contentsline {subparagraph}{y+G}{40}{section*.121}
+\contentsline {subparagraph}{p}{40}{section*.122}
+\contentsline {subparagraph}{P}{40}{section*.123}
+\contentsline {subparagraph}{J}{40}{section*.124}
+\contentsline {subsubsection}{查找}{40}{section*.125}
+\contentsline {subparagraph}{'/keyword'}{40}{section*.126}
+\contentsline {subparagraph}{'?keyword'}{40}{section*.127}
+\contentsline {subparagraph}{n}{40}{section*.128}
+\contentsline {subparagraph}{N}{41}{section*.129}
+\contentsline {subparagraph}{\%}{41}{section*.130}
+\contentsline {subsubsection}{全局搜索和替换}{41}{section*.131}
+\contentsline {subsubsection}{查找删除注释}{41}{section*.132}
+\contentsline {subparagraph}{'s/old/new/ '}{41}{section*.133}
+\contentsline {subparagraph}{'s/old/new/g '}{41}{section*.134}
+\contentsline {subparagraph}{'\%s/old/new/'}{41}{section*.135}
+\contentsline {subparagraph}{'\%s/old/new/g'}{41}{section*.136}
+\contentsline {subparagraph}{',5 s/\^ /\#/g'}{41}{section*.137}
+\contentsline {subparagraph}{',+5 s/\^ /\#/g'}{42}{section*.138}
+\contentsline {subparagraph}{'3,5 s/\^ \#//g'}{42}{section*.139}
+\contentsline {subsubsection}{查看目录下有什么文件}{42}{section*.140}
+\contentsline {subsubsection}{文件保存}{42}{section*.141}
+\contentsline {subparagraph}{:w}{42}{section*.142}
+\contentsline {subparagraph}{局部另存为}{42}{section*.143}
+\contentsline {subparagraph}{文件覆盖}{42}{section*.144}
+\contentsline {subparagraph}{文件合并}{42}{section*.145}
+\contentsline {subsubsection}{编辑多文本}{42}{section*.146}
+\contentsline {subparagraph}{vi file1 file2 }{42}{section*.147}
+\contentsline {subparagraph}{在不同窗口中打开多个文件}{43}{section*.148}
+\contentsline {subparagraph}{分屏操作}{43}{section*.149}
+\contentsline {subparagraph}{n 与 N}{43}{section*.150}
+\contentsline {subparagraph}{:buffers}{43}{section*.151}
+\contentsline {subparagraph}{:buffer num}{43}{section*.152}
+\contentsline {subparagraph}{:e newfile}{43}{section*.153}
+\contentsline {subparagraph}{:tabe}{44}{section*.154}
+\contentsline {subparagraph}{文件间复制}{44}{section*.155}
+\contentsline {subparagraph}{插入整个文件}{44}{section*.156}
+\contentsline {subsection}{\numberline {2.10.4}配置}{44}{subsection.2.10.4}
+\contentsline {subsubsection}{.vimrc}{44}{section*.157}
+\contentsline {subsubsection}{基本配置}{44}{section*.158}
+\contentsline {subsubsection}{插件配置}{45}{section*.159}
+\contentsline {subparagraph}{树形目录}{45}{section*.160}
+\contentsline {subparagraph}{代码补全}{45}{section*.161}
+\contentsline {subparagraph}{git显示}{45}{section*.162}
+\contentsline {subsection}{\numberline {2.10.5}常用插件}{45}{subsection.2.10.5}
+\contentsline {subsubsection}{ctags}{45}{section*.163}
+\contentsline {subsubsection}{YouCompleteMe}{45}{section*.164}
+\contentsline {section}{\numberline {2.11}存储介质挂载}{45}{section.2.11}
+\contentsline {subsection}{\numberline {2.11.1}挂载点的意义}{45}{subsection.2.11.1}
+\contentsline {subsection}{\numberline {2.11.2}挂载}{45}{subsection.2.11.2}
+\contentsline {subparagraph}{mount}{46}{section*.165}
+\contentsline {section}{\numberline {2.12}网络}{47}{section.2.12}
+\contentsline {subparagraph}{ping}{47}{section*.166}
+\contentsline {subparagraph}{traceroute}{47}{section*.167}
+\contentsline {subparagraph}{netstat}{47}{section*.168}
+\contentsline {subparagraph}{ftp:lftp:sftp}{47}{section*.169}
+\contentsline {subparagraph}{wget}{48}{section*.170}
+\contentsline {subparagraph}{*远程操作 ssh}{48}{section*.171}
+\contentsline {subparagraph}{*数据传输 rsync}{49}{section*.172}
+\contentsline {subparagraph}{nc}{49}{section*.173}
+\contentsline {subparagraph}{pv}{49}{section*.174}
+\contentsline {subparagraph}{tcpdump}{49}{section*.175}
+\contentsline {subparagraph}{iperf}{50}{section*.176}
+\contentsline {subparagraph}{ifconfig}{50}{section*.177}
+\contentsline {subparagraph}{iptables}{50}{section*.178}
+\contentsline {subparagraph}{vmstate}{50}{section*.179}
+\contentsline {section}{\numberline {2.13}正则表达式}{51}{section.2.13}
+\contentsline {subsection}{\numberline {2.13.1}字符类}{52}{subsection.2.13.1}
+\contentsline {subsection}{\numberline {2.13.2}数量限定类}{52}{subsection.2.13.2}
+\contentsline {subsection}{\numberline {2.13.3}位置限定类}{53}{subsection.2.13.3}
+\contentsline {subsection}{\numberline {2.13.4}特殊字符}{53}{subsection.2.13.4}
+\contentsline {section}{\numberline {2.14}搜索命令}{53}{section.2.14}
+\contentsline {subparagraph}{*文件搜索命令 locate}{53}{section*.180}
+\contentsline {subparagraph}{*文件搜索命令 find}{54}{section*.181}
+\contentsline {subparagraph}{*字符串搜索命令 grep}{55}{section*.182}
+\contentsline {subparagraph}{命令搜索命令 whereis 与 which}{55}{section*.183}
+\contentsline {subparagraph}{xargs}{55}{section*.184}
+\contentsline {subparagraph}{stat}{55}{section*.185}
+\contentsline {section}{\numberline {2.15}文本相关}{56}{section.2.15}
+\contentsline {subsection}{\numberline {2.15.1}sed}{56}{subsection.2.15.1}
+\contentsline {subparagraph}{选项}{56}{section*.186}
+\contentsline {subparagraph}{命令}{56}{section*.187}
+\contentsline {subsection}{\numberline {2.15.2}awk}{57}{subsection.2.15.2}
+\contentsline {subsection}{\numberline {2.15.3}cat}{57}{subsection.2.15.3}
+\contentsline {subsection}{\numberline {2.15.4}sort}{57}{subsection.2.15.4}
+\contentsline {subsection}{\numberline {2.15.5}uniq}{57}{subsection.2.15.5}
+\contentsline {subsection}{\numberline {2.15.6}cut}{57}{subsection.2.15.6}
+\contentsline {subsection}{\numberline {2.15.7}paste}{58}{subsection.2.15.7}
+\contentsline {subsection}{\numberline {2.15.8}join}{58}{subsection.2.15.8}
+\contentsline {subsection}{\numberline {2.15.9}comm}{58}{subsection.2.15.9}
+\contentsline {subsection}{\numberline {2.15.10}diff}{58}{subsection.2.15.10}
+\contentsline {subsection}{\numberline {2.15.11}patch}{58}{subsection.2.15.11}
+\contentsline {subsection}{\numberline {2.15.12}tr}{58}{subsection.2.15.12}
+\contentsline {subsection}{\numberline {2.15.13}aspelx}{58}{subsection.2.15.13}
+\contentsline {section}{\numberline {2.16}归档备份}{58}{section.2.16}
+\contentsline {subsection}{\numberline {2.16.1}压缩与解压缩}{58}{subsection.2.16.1}
+\contentsline {subsection}{\numberline {2.16.2}同步文件和目录}{60}{subsection.2.16.2}
+\contentsline {paragraph}{rsync}{60}{section*.188}
+\contentsline {section}{\numberline {2.17}软件包管理}{61}{section.2.17}
+\contentsline {subsection}{\numberline {2.17.1}已编译文件}{61}{subsection.2.17.1}
+\contentsline {subsection}{\numberline {2.17.2}源码安装}{61}{subsection.2.17.2}
+\contentsline {subsection}{\numberline {2.17.3}deb包安装}{61}{subsection.2.17.3}
+\contentsline {subsubsection}{Ubuntu}{62}{section*.189}
+\contentsline {section}{\numberline {2.18}参考}{62}{section.2.18}
+\contentsline {chapter}{\numberline {第三章\hspace {0.3em}}Shell 脚本}{63}{chapter.3}
+\contentsline {section}{\numberline {3.1}Shell 基本知识}{63}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Shell}{63}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Shell 执行脚本}{63}{subsection.3.1.2}
+\contentsline {subparagraph}{Example:}{63}{section*.190}
+\contentsline {subsubsection}{执行方式}{64}{section*.191}
+\contentsline {subsubsection}{执行过程}{64}{section*.192}
+\contentsline {subparagraph}{注意}{65}{section*.193}
+\contentsline {subparagraph}{Example}{65}{lstlisting.3.-19}
+\contentsline {subsection}{\numberline {3.1.3}Shell 变量}{66}{subsection.3.1.3}
+\contentsline {subsubsection}{shell变量的种类}{66}{section*.195}
+\contentsline {subparagraph}{环境变量：}{66}{section*.196}
+\contentsline {subparagraph}{本地变量：}{66}{section*.197}
+\contentsline {subparagraph}{变量引用：}{66}{section*.198}
+\contentsline {subparagraph}{只读变量}{67}{section*.199}
+\contentsline {subparagraph}{删除变量}{67}{section*.200}
+\contentsline {subparagraph}{Shell 字符串}{67}{section*.201}
+\contentsline {subparagraph}{Shell 数组}{68}{section*.202}
+\contentsline {subparagraph}{Shell 注释}{69}{section*.203}
+\contentsline {subsection}{\numberline {3.1.4}Shell 通配符、命令代换、单引号、双引号}{69}{subsection.3.1.4}
+\contentsline {subsection}{\numberline {3.1.5}Shell 传递参数}{69}{subsection.3.1.5}
+\contentsline {subsection}{\numberline {3.1.6}Shell 各种括号}{70}{subsection.3.1.6}
+\contentsline {subsubsection}{( )-小括号}{70}{section*.204}
+\contentsline {subsubsection}{(( ))-双小括号}{70}{section*.205}
+\contentsline {subsubsection}{[ ]-中括号}{71}{section*.206}
+\contentsline {subsubsection}{[[ ]]-双中括号}{71}{section*.207}
+\contentsline {subsubsection}{\{ \}-大括号}{72}{section*.208}
+\contentsline {paragraph}{\{\}常规用法}{72}{section*.209}
+\contentsline {paragraph}{\{\}特殊的替换用法}{72}{section*.210}
+\contentsline {paragraph}{\{\}模式匹配替换用法}{72}{section*.211}
+\contentsline {paragraph}{\{\}字符串提取和替换}{72}{section*.212}
+\contentsline {subsection}{\numberline {3.1.7}参考}{73}{subsection.3.1.7}
+\contentsline {section}{\numberline {3.2}Shell 运算操作}{73}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}算数运算}{73}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}关系运算}{74}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}布尔运算}{75}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}逻辑运算}{76}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.5}字符串运算}{77}{subsection.3.2.5}
+\contentsline {subsection}{\numberline {3.2.6}文件测试运算}{78}{subsection.3.2.6}
+\contentsline {section}{\numberline {3.3}Shell 脚本控制结构}{79}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}if-else}{79}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}while}{79}{subsection.3.3.2}
+\contentsline {subparagraph}{let 命令}{79}{section*.213}
+\contentsline {subsection}{\numberline {3.3.3}for}{80}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.4}until}{80}{subsection.3.3.4}
+\contentsline {subsection}{\numberline {3.3.5}case}{81}{subsection.3.3.5}
+\contentsline {subsection}{\numberline {3.3.6}continue,break}{81}{subsection.3.3.6}
+\contentsline {section}{\numberline {3.4}Shell 函数}{81}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}函数定义}{81}{subsection.3.4.1}
+\contentsline {subparagraph}{注意}{82}{section*.214}
+\contentsline {subsection}{\numberline {3.4.2}函数参数}{83}{subsection.3.4.2}
+\contentsline {section}{\numberline {3.5}Shell 脚本调用已有脚本}{84}{section.3.5}
+\contentsline {subparagraph}{Example}{84}{lstlisting.3.-43}
+\contentsline {section}{\numberline {3.6}Shell 示例}{85}{section.3.6}
+\contentsline {subparagraph}{How would you print just the 10th line of a file?}{85}{section*.216}
+\contentsline {chapter}{\numberline {第四章\hspace {0.3em}}Linux 系统编程}{87}{chapter.4}
+\contentsline {section}{\numberline {4.1}线程}{87}{section.4.1}
+\contentsline {subparagraph}{pthread\_create}{87}{section*.217}
+\contentsline {section}{\numberline {4.2}进程}{87}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}进程空间}{87}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}uid、euid}{87}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}fork}{87}{subsection.4.2.3}
+\contentsline {section}{\numberline {4.3}共享内存区}{89}{section.4.3}
+\contentsline {section}{\numberline {4.4}消息队列}{89}{section.4.4}
+\contentsline {section}{\numberline {4.5}信号量}{89}{section.4.5}
+\contentsline {section}{\numberline {4.6}库的使用}{89}{section.4.6}
+\contentsline {subsection}{\numberline {4.6.1}介绍}{89}{subsection.4.6.1}
+\contentsline {subsection}{\numberline {4.6.2}静态函数库}{89}{subsection.4.6.2}
+\contentsline {subparagraph}{Example}{90}{section*.218}
+\contentsline {subparagraph}{静态库搜索路径}{91}{section*.219}
+\contentsline {subsection}{\numberline {4.6.3}动态函数库}{92}{subsection.4.6.3}
+\contentsline {subparagraph}{Example}{93}{section*.220}
+\contentsline {subparagraph}{动态库搜索路径}{93}{section*.221}
+\contentsline {chapter}{\numberline {第五章\hspace {0.3em}}Linux 服务器搭建}{95}{chapter.5}
+\contentsline {section}{\numberline {5.1}基本技能需求}{95}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}网路：了解网路基础知识与所需服务之通讯协定}{96}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}伺服器本身：了解架网路伺服器之目的以配合主机的安装规划}{96}{subsection.5.1.2}
+\contentsline {subsection}{\numberline {5.1.3}伺服器本身：了解作业系统的基本操作}{96}{subsection.5.1.3}
+\contentsline {subsection}{\numberline {5.1.4}内部防火墙设定：管理系统的可分享资源}{96}{subsection.5.1.4}
+\contentsline {subsection}{\numberline {5.1.5}伺服器软体设定：学习设定技巧与开机是否自动执行}{97}{subsection.5.1.5}
+\contentsline {subsection}{\numberline {5.1.6}细部权限设定：包括SELinux与档案权限}{97}{subsection.5.1.6}

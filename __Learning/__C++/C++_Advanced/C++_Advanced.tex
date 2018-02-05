@@ -13,7 +13,7 @@
  \usepackage{ulem}
  \CTEXsetup[format+={\flushleft}]{section}
 
-
+\graphicspath{{figure/}}
 \geometry{left=1.6cm,right=1.8cm,top=2cm,bottom=1.7cm} %设置文章宽度
 
 \pagestyle{plain} 		  %设置页面布局
@@ -141,34 +141,81 @@
 		\end{lstlisting}
 		
 	
-\chapter{异常}
-	\section{基础知识}
-		\subsection{operator =}
-			copies exception object
-		\subsection{what}
-			virtual public member function,returns an explanatory string 
-		\subsection{Relationship}
-			所有的异常类型都继承自std::exception ，在头文件 <exception> 中定义.具体细节见下图：
-			\begin{figure}[h]
-				\centering
-				\includegraphics[scale = 0.45]{exception_level.png}
-				\caption{Exception 层次结构}
-			\end{figure}
+\chapter{异常处理}
+	\section{简介}
+		用于处理软件程序运行时的错误，并用于处理软件系统中可预知或不可预知的问题。这样就可以保证软件系统运行的稳定性与健壮性
 		
-		\subsection{C++ 异常机制的工作方式}
-			当抛出异常时，其控制权 将转交给与其类型匹配的最近的处理代码
+		C++应用程序中在考虑异常设计时，并不是所有的程序模块处理都需要附加上异常情况的处理。相对来说，异常处理没有普通方法函数调用速度快。过度的错误处理会影响应用程序运行的效率。通常在C++开发的软件系统中，应用程序都由对应的库、组件以及运行的具体不同模块组成。在设计时，异常的处理应充分考虑到独立程序库以及组件之间的情况。便于使用者在程序出现异常情况下，使用库或者组件的开发者能够快速定位出库、组件还是应用程序的错误。
+		
+		\paragraph{编写流程}
+			\begin{enumerate}
+				\item 使用Try块
+				\item 引发异常
+				\item 使用catch 捕获特定类型
+			\end{enumerate}
 			
-			运行时异常系统立即开始查找适合的catch块，此catch块必须与传递给throw 语句的参数相匹配。在过程内部，catch块必须在try 之后。
+		\textbf{try体中可以直接抛出异常，或者在try体中调用的函数体中间接的抛出}
+		\begin{lstlisting}
+	try
+	{
+		…               //可能出错产生异常的代码
+	
+		throwtypen();  //throw  new Type();  一个对象或值
+	}catch(type1)
+	{
+		…               //对应类型的异常处理代码
+	}catch(type2)
+	{
+		…               //对应类型的异常处理代码
+	}catch(...) 		//任意类型
+	{
+	
+	}  
+	
+
+	或者
+	
+	try	
+	{
+		function();//调用可能会抛出异常的函数方法
+	}catch(type1)
+	{
+		…               //对应类型的异常处理代码
+	}catch(type2)
+	{
+		…               //对应类型的异常处理代码
+	}	
+		\end{lstlisting}
+
+	\section{异常处理机制}
+		\subsection{异常再引发}
+			\begin{itemize}
+			\item 可以在基本任务完成后重新引发所处理的异常，最后再\verb|throw|
+			\item 主要用于在程序终止前写入日志和实施特殊的清除任务
+			\end{itemize}
 			
-			当F()抛出一个异常时，异常从F()返回，并且不执行throw语句后的任何语句。 控制权返回给F()的调用者，即main()函数。 这种从F() 返回异常 与常规返回并无区别。 
+			\begin{lstlisting}
+	try
+	{
+		throw AnException();
+	}
+	catch(...)
+	{
+		..
+		throw;
+	}
+			\end{lstlisting}
 			
-			由于异常要离开F()之前，会调用所有局部对象的析构函数。换言之，从F()正常返回需要进行清理工作，由于异常返回也必须完成这些清理工作。
+		\subsection{栈展开}
+			\begin{itemize}
+				\item  异常引发代码和异常处理程序可能属于不同函数
+				\item  当异常发生时，沿着异常处理块的嵌套顺序逆向回溯查找能够处理该异常的catch 字句，即如果当前函数没有处理代码，则返回上一层调用函数查找catch处理代码，以此类推
+				\item  如找到对应的catch 字句，处理该异常
+				\item  异常处理完后，程序保持catch 字句所在的函数栈框架，不会返回引发异常的函数栈框架，即程序停留在catch处理程序处。
+				\item  函数栈框架消失时，局部对象被自动析构，但是如果未执行\verb|delete| 操作，动态分配的目标对象就未被析构
+			\end{itemize}
 			
-			异常会进行传播，直至遇到匹配的处理代码。异常只能由catch块处理。考虑到匹配的需要，catch块总是在try 块之后。try 块是编译器查找catch块的线索。 也就是说，try 块创建了一个动态调用链。一旦进入catch块就会立即处理异常，当退出相应的catch块时，异常结束(异常状况不再存在)
-			
-			如果main()中没有匹配的catch块，异常就仍然没有得到处理，而且，一旦控制从F()返回main(), 将调用预定义的terminate()。 注意，在这种情况下，绝不会执行try 块后的代码。一旦F()抛出异常，使得控制权返回main(),我们就正处于异常处理模式。函数terminate() 将导致应用程序异常终止。(参考自：\textbf{C++面向对象高效编程})
-			
-			\subsubsection{流程}见图\ref{process_error}
+			流程如图\ref{process_error}所示
 \begin{lstlisting}
 	#include <iostream>
 	
@@ -178,10 +225,10 @@
 	{
 		try{
 			cout << "Before Throw" << endl;
-			throw 1;
+			throw 1; // 抛出对象  new Obj
 			cout << "After Throw In Try" << endl;
 		}
-		catch (int& i)
+		catch (int& i)	// 捕获对象 Obj& 
 		{
 			cout << "After Throw In Catch" << endl;
 		}
@@ -199,8 +246,57 @@
 				\caption{流程演示}
 				\label{process_error}
 			\end{figure}
-			
-	\subparagraph{显示异常名字}
+	
+	\subsection{未处理异常}
+		\begin{itemize}
+			\item 所有未处理异常由预定义函数\verb|std::terminate()| 函数处理
+			\item 可以使用\verb|std::set_terminate()| 函数设置\verb|std::terminate()| 函数处理例程。
+		\end{itemize}
+		
+		\begin{lstlisting}
+	void term_func()  {  exit( -1 );  }
+	int main()
+	{
+	   try
+	   {
+	      set_terminate( term_func );
+	      throw "Out of memory!";
+	   }
+	   catch( int ){  /* … */  }
+	   return 0;
+	}
+		\end{lstlisting}
+	\subsection{描述函数可否引发异常}
+		\begin{itemize}
+			\item 声明时，函数后加 \verb|throw()| 表示不能引发异常 等价于 c11\verb|noexcept 或 noexcept(true)|
+			\item 声明时，函数后加 \verb|throw(T)| 表示引发某类异常 
+			\item 声明时，函数后加 \verb|throw(...)| 表示可以引发任意形式异常 等价于 c11\verb|noexcept(false)|
+			\item 可能引发异常 时，c11 使用\verb|noexcept(noexcept(expr))|,expr 为可转换为true  或 false 常数表达式
+		\end{itemize}	
+		
+		c11 建议使用\verb|noexcept| 来表示该函数是否可以抛出异常	
+			\begin{lstlisting}
+	class JuStack
+	{
+	  public:
+		    JuStack( int cap ) : _stk(new int[cap+1]), _cap(cap), _cnt(0), _top(0)  { }
+		    virtual ~JuStack()  {  if( _stk )  delete _stk, _stk = NULL;  }
+	  public:
+		    int Pop()  throw( EStackEmpty ); // int pop() noexcept(false);
+		    void Push( int value )  throw( EStackFull );
+		    bool IsFull() const  {  return _cap == _cnt;  }
+		    bool IsEmpty() const  {  return _cnt == 0;  }
+		    int GetCapacity() const  {  return _cap;  }
+		    int GetCount() const  {  return _cnt;  }
+  	  private:
+		    int * _stk;
+		    int _cap, _cnt, _top;
+	}; 
+	
+			\end{lstlisting}
+	\subsection{显示异常名字}
+		C++ 程序在编译是会将函数名称进行变化，导致战追踪时不好读，此时可以使用 demangle 方法对函数名进行转换，使其回到原先声明的名字，方便阅读差错。
+		
 \begin{lstlisting}
 	// 显示异常 的具体 代码
 	#include <exception>
@@ -245,17 +341,14 @@
 	*/
 	
 \end{lstlisting}	
-		\subsection{其他}
-			\subsubsection{std::variant}
-				The class template std::variant represents\textbf{ a type-safe union}. An instance of std::variant at any given time either holds a value of one of its alternative types, or it holds no value (this state is hard to achieve, see valueless\_by\_exception).
-				
-				As with unions, if a variant holds a value of some object type T, the object representation of T is allocated directly within the object representation of the variant itself. Variant is not allowed to allocate additional (dynamic) memory.
-				
-				If a variant holds a value of a reference type, the implementation may choose to store it in the form of a wrapper type such as std::reference\_wrapper.
-				
-				A variant is permitted to hold the type void, to hold the same type more than once, and to hold differently cv-qualified versions of the same type.
-				
-				As with unions, the default-initialized variant holds a value of its first alternative, unless that alternative is not default-constructible (in which case default constructor won't compile: the helper class std::monostate can be used to make such variants default-constructible)
+		\subsection{异常标准库类结构}
+			所有的异常类型都继承自std::exception ，在头文件 <exception> 中定义.具体细节见下图：
+			\begin{figure}[h]
+				\centering
+				\includegraphics[scale = 0.45]{exception_level.png}
+				\caption{Exception 层次结构}
+			\end{figure}
+	
 \begin{lstlisting}
 	#include <variant>
 	#include <string>
@@ -557,79 +650,117 @@
 					\item 不要在构造函数中将this传给跨线程的对象
 					\item 即便在最后一行也不行：派生会先执行父类的构造的，而你写的可能就是父类..这样对方就讲返回一个半成品..
 				\end{itemize}
+\section{概念}
+	线程是比进程更小的程序执行单位
+	
+	多个线程\textbf{可共享全局数据}，\textbf{也可使用专有数据}	
+
+	\subparagraph{内核线程}
+		\begin{itemize}[itemindent = 1em]
+			\item 操作系统内核支持多线程调度与执行
+			\item 内核线程使用资源较少，仅包括内核栈和上下文切换时需要的保存寄存器内容的空间
+		\end{itemize}
+	
+	\subparagraph{轻量级进程}
+		\begin{itemize}[itemindent = 1em]
+			\item 由内核支持的独立调度单元，调度开销小于普通的进程	
+			\item 系统支持多个轻量级进程同时运行，每个都与特定的内核线程相关联
+		\end{itemize}
+	
+	\subparagraph{用户线程}
+		\begin{itemize}[itemindent = 1em]
+			\item 	建立在用户空间的多个用户级线程，映射到轻量级进程后调度执行
+			\item   用户线程在用户空间创建、同步和销毁，开销较低
+			\item   每个线程具有独特的ID
+		\end{itemize}
+	
+	\subparagraph{进程与线程的比较}
+		\begin{itemize}[itemindent = 1em]
+			\item 线程空间不独立，有问题的线程会影响其他线程；进程空间独立，有问题的进程一般不会影响其他进程	
+			\item 创建进程需要额外的性能开销
+			\item 线程用于开发细颗粒度并行性，进程用于开发粗颗粒度并行性
+			\item 线程容易共享数据，进程共享数据必须使用进程间通讯机制
+		\end{itemize}
+	
+\section{POSIX线程}
+	\subsection{线程创建}
+		\subparagraph{线程创建函数}
+			\begin{itemize}[itemindent = 1em]
+				\item 头文件\verb|"pthread.h"|
+				\item 函数 \verb|int pthread_create(pthread_t* thread, const pthread_attr_t* attr, void* (*func)| \verb|(void*), void* arg);|
+			\end{itemize}
+		\subparagraph{线程创建流程}
+			\begin{itemize}[itemindent = 1em]
+				\item 定义指向\verb|pthread_t|对象的指针对象，\verb|pthread_t|对象用于存储新线程的\verb|ID|
+				\item 定义指向线程属性\verb|pthread_attr_t|对象的指针对象；线程属性对象控制线程与程序其他部分（可能是其他线程）的交互；如果传递\verb|NULL|，则\textbf{使用缺省属性构造新线程}
+				
+				\item 定义指向线程函数的指针对象，使其指向固定格式的线程函数
+				\item 实现线程函数；线程函数的参数和返回值均为哑型指针；\textbf{需要传递多个参数时}，打包成单个\verb|void*|型的指针对象
+				\item 线程退出时使用返回值将数据传递给主调线程；多个结果同样可以打包传递
+			\end{itemize}
+			
+		\subparagraph{线程创建说明}
+			\begin{itemize}[itemindent = 1em]
+				\item \verb|pthread_create()|函数在线程创建完毕后立即返回，它并不等待线程结束
+				\item 原线程与新线程如何执行与调度有关，程序不得依赖线程先后执行的关系
+				\item 可以使用同步机制确定线程的先后执行关系
+			\end{itemize}
+			
+		\subparagraph{线程退出方式}
+			\begin{itemize}[itemindent = 1em]
+				\item 线程函数结束执行
+				\item 调用\verb|pthread_exit()|函数显式结束
+				\item 被其他线程撤销
+			\end{itemize}
+			
+		\subparagraph{示例代码}\verb|->|
 		
-\section{使用}
+			\begin{lstlisting}
+	#include <pthread.h> 
+	#include <iostream>
+	void *  PrintAs( void * unused )
+	{
+		while( true )    std::cerr << 'a';
+		return NULL;
+	}
+	void *  PrintZs( void * unused )
+	{
+		while( true )    std::cerr << 'z';
+		return NULL;
+	}
+	int  main()
+	{
+		pthread_t  thread_id;
+		pthread_create( &thread_id, NULL, &PrintAs, NULL );
+		PrintZs( NULL );
+		return 0;
+	}
+	
+			\end{lstlisting}
+		
+	\subsection{线程ID}
+	
+	\subsection{线程属性}
+	
+	\subsection{线程撤销}
+
+	\subsection{线程局部存储}
+	
+	\subsection{线程清除}
+			
+\section{C++11线程}
 	\subsection{头文件}
 		\begin{itemize}
-			\item \textbf{<atomic>}: 包含std::atomic和std::atomic\_flag类，以及一套C风格的原子类型和与C兼容的原子操作的函数。
-			\item \textbf{<thread>}: 包含std::thread类以及std::this\_thread命名空间。
-			\item \textbf{<mutex>}: 包含与互斥量(mutex)相关的类以及其他类型和函数。
-			\item \textbf{<condition\_variable>}: 包含与条件变量相关的类， 包括std::condition\_variable 和
+			\item \verb|<atomic>|: 包含\verb|std::atomic|和\verb|std::atomic_flag|类，以及一套C风格的原子类型和与C兼容的原子操作的函数。
+			\item \verb|<thread>|: 包含\verb|std::thread|类以及\verb|std::this_thread|命名空间。
+			\item \verb|<mutex>|: 包含与互斥量(\verb|mutex、lock_guard、unique_lock|)相关的类以及其他类型和函数。
+			\item \verb|<condition_variable>|: 包含与条件变量相关的类， 包括\verb|std::condition_variable |和
 			
-			 std::condition\_variable\_any。
-			\item \textbf{<future>}:包含两个Provider类（std::promise和std::package\_task）和两个Future类（std::future和std::shared\_future）以及相关的类型和函数
+			 \verb|std::condition_variable_any|。
+			\item \verb|<future>|:包含两个\verb|Promise|类（\verb|std::promise|和\verb|std::package_task|）和两个\verb|Future|类（\verb|std::future|和\verb|std::shared_future|）以及相关的类型和函数
 		\end{itemize}
-		
-	\subsection{多线程}
-		C++11中使用多线程非常简单，直接使用头文件thread中的thread类型即可创建一个线程，具体例子如下所示：
-		\begin{lstlisting}
-	#include <iostream>
-	#include <thread>
-	#include <string>
-	using namespace std;
-	
-	void Func();
-	
-	int main()
-	{
-		//线程函数无参数- 使用Lamda 进行函数设置..
-		thread t([](){ cout << "Hello World!" << endl; });
-		//当然也可以 直接以指定函数的方式初始化 线程
-		thread t1(Func);
-		t.join(); //t1线程调用t2.join()，表示t1要等到t2结束后才能继续执行
-	}
-		\end{lstlisting}
-		
-		这里涉及到多线程环境中父子线程的关系问题。一般操作系统中，\textbf{当主线程执行完毕退出时，无论子线程是否执行完毕，所有的子线程都会终止}。\textbf{而当子线程先退出时，无论是执行完毕正常退出还是以其他方式异常终止，线程均会进入终止态（僵死态），此时线程分配的系统资源还没有释放}，线程仍作为一个线程实体存在于操作系统中。\textbf{如果我们就这样不管这个子线程，那么它占用的系统资源（如动态申请的内存、打开的文件等）将一直被占据，造成资源的浪费}。此时可以通过定义以下两种父子线程关系进行解决：
-		
-		\begin{itemize}
-			\item \textbf{可会和}（joinable）：主线程必须显示等待子线程，只有子线程结束后，主线程才继续执行后面的操作
-			\item \textbf{相分离}（detached）：父子线程分离，主线程无须等待子线程完成，子线程一旦进入终止态后系统立即销毁线程以及回收资源
-		\end{itemize}
-		
-		\subparagraph{Funcs:}thread头文件的\textbf{this\_thread命名空间}定义了几个有用的函数：
-		\begin{itemize}
-			\item \textbf{get\_id}:    返回当前的线程id
-			\item \textbf{yield}:  	   在处于等待状态时，可以让调度器先运行其他可用的线程
-			\item \textbf{sleep\_for}: 阻塞当前线程，时间不少于参数指定的时间
-			\item \textbf{sleep\_util}:阻塞当前线程，时间为参数指定的时间
-		\end{itemize}
-		\begin{lstlisting}
-	#include <iostream>
-	#include <thread>
-	#include <string>
-	using namespace std;
-	
-	void f()
-	{
-		// Using ID to Distinguishing threads 
-		cout << "Thread ID: " << this_thread::get_id() << endl;
-		this_thread::sleep_for(chrono::seconds(3));
-	}
-	
-	int main()
-	{
-		thread t1(f);
-		//输出线程id和cpu核数
-		std::cout << ID: << t1.get_id() << std::endl;
-		std::cout << CPU: << std::thread::hardware_concurrency() << std::endl;
-		//主函数阻塞等待线程结束
-		t1.join();
-		//主函数和线程函数分离执行，线程变为后台线程,与t1.join() 互斥
-		//t1.detach();
-	}
-		\end{lstlisting}
-		\subsection{初始化线程}
+
+	\subsection{线程类}
 		首先其类模板模型如下图所示：
 		\begin{figure}[h]
 			\centering
@@ -670,9 +801,9 @@
 			thread& operator=(thread&&) noexcept;
 			//
 			void swap(thread&) noexcept;
-			bool joinable() const noexcept;
-			void join();
-			void detach();
+			bool joinable() const noexcept; //判断线程是否可联
+			void join();  //等待线程结束
+			void detach(); //分离线程
 			// 获取物理线程数目
 			static unsigned hardware_concurrency() noexcept;
 		}
@@ -681,17 +812,25 @@
 		{
 			thread::id get_id();
 			void yield();
+			// 阻塞当前线程至指定时点
 			template<class Clock, class Duration>
 			void sleep_until(const chrono::time_point<Clock, Duration>& abs_time);
+			// 阻塞当前线程指定时长
 			template<class Rep, class Period>
 			void sleep_for(const chromo::duration<Rep, Period>& rel_time);
 		}
 	}	
 		\end{lstlisting}
 		
-		\subparagraph{初始化方式..}
+	\subparagraph{初始化方式..}
+		创建如果指定函数，那么创建成功后就立刻执行，否则等待函数指定时执行。
+		
+		\verb|join| 函数用于等待结束。
+		
+		线程局部存储使用\verb|thread_local|关键字
+		
 		\begin{enumerate}[itemindent = 1em]
-			\item \textbf{thread\_run\_func\_var\_args}:
+			\item \verb|thread_run_func_var_args|:
 			\begin{lstlisting}
 	#include <iostream>
 	#include <thread>
@@ -737,7 +876,7 @@
 		return 0;
 	}
 			\end{lstlisting}
-			\item \textbf{thread\_run\_lambda}:
+			\item \verb|thread_run_lambda|:
 			\begin{lstlisting}
 	void threadRunLambda(void)
 	{
@@ -755,7 +894,7 @@
 		delete t;
 	}
 			\end{lstlisting}
-			\item \textbf{thread\_run\_member\_func}:
+			\item \verb|thread_run_member_func|:
 			\begin{lstlisting}
 // Method1:
 	struct God
@@ -779,21 +918,45 @@
 // Method2:
 	class Factor{
 	public:
-		void operater() (){
-			cout <<"create"<<endl;
+		void operater() (int a){
+			cout <<"create"<< a <<endl;
 		}
 	};
 
 	void threadRunObject(void)
 	{
 		Factor factor;
-		thread t(factor);
+		int a = 1;
+		
+		thread t(factor, a);
+		thread t2(Factor(),a)
 		t.join();
+		t2.join();
 	}
 			\end{lstlisting}
+			
+			\item  \verb|bind()将函数转化为return Type(*pointer)()|
+				\begin{lstlisting}
+	#include <iostream>
+	#include <thread>
+	class Worker  {
+		public:
+		Worker( int a = 0, int b = 0 ) : _a(a), _b(b)  {  }
+		void  ThreadFunc()  {  ……  }
+		private:  int  _a, _b;
+	};
+	
+	int  main()
+	{
+		Worker  worker( 10, 20 );
+		std::thread  t( std::bind( &Worker::ThreadFunc, &worker ) );
+		t.join();
+		return 0;
+	}
+				\end{lstlisting}
 		\end{enumerate}
 		
-		\subsection{线程间数据交互和数据争用(Data Racing)}
+	\subsection{线程间数据交互和数据争用(Data Racing)}
 		同一个进程内的多个线程之间多是免不了要有数据互相来往的，队列和共享数据是实现多个线程之间的数据交互的常用方式，封装好的队列使用起来相对来说不容易出错一些，而共享数据则是最基本的也是较容易出错的，因为它会产生数据争用的情况，即有超过一个线程试图同时抢占某个资源，比如对某块内存进行读写等，如下例所示:
 		\begin{lstlisting}
 static void inc(int *p)
@@ -819,7 +982,7 @@ void ThreadDataRacing()
 		
 		\subparagraph{解决方案：}
 		\begin{enumerate}[itemindent = 1em]
-			\item \textbf{atomic}:针对简单的基本类型数据如字符、整型、指针等
+			\item \textbf{atomic}:针对简单的基本类型数据如\textbf{字符、整型、指针}等 
 			\begin{lstlisting}
 static void inc(atomic<int> *p )
 {
@@ -894,11 +1057,11 @@ void threadMutex(void)
 	cout << "a=" << a << endl;
 }
 			\end{lstlisting}
-			\item \textbf{conditon\_variable}:在上例中，我们还使用了线程本地存储 (TLS) 变量，我们只需要在变量前面声明它是 thread\_local 即可。TLS 变量在线程栈内分配，线程栈只有在线程创建之后才生效，在线程退出的时候销毁，需要注意不同系统的线程栈的大小是不同的，如果 TLS 变量占用空间比较大，需要注意这个问题。TLS 变量一般不能跨线程，其初始化在调用线程第一次使用这个变量时进行，默认初始化为 0。
 			
-			A condition variable is a synchronization primitive that allows multiple threads to communicate with each other. It allows some number of threads to wait (possibly with a timeout) for notification from another thread that they may proceed. A condition variable is always associated with a mutex.
+			在上例中，我们还使用了\textbf{线程本地存储 (TLS) 变量}，我们只需要在变量前面声明它是 \verb|thread_local| 即可。\textit{TLS 变量在线程栈内分配，线程栈只有在线程创建之后才生效，在线程退出的时候销毁}，需要注意不同系统的线程栈的大小是不同的，如果 TLS 变量占用空间比较大，需要注意这个问题。TLS 变量一般不能跨线程，其初始化在调用线程第一次使用这个变量时进行，默认初始化为 0。
 			
-			对于线程间的事件通知，C++11 提供了条件变量类 condition\_variable，可视为 pthread\_cond\_t 的封装，使用条件变量可以让一个线程等待其它线程的通知 (wait，wait\_for，wait\_until)，也可以给其它线程发送通知 (notify\_one，notify\_all)，条件变量必须和锁配合使用，在等待时因为有解锁和重新加锁，所以，在等待时必须使用可以手工解锁和加锁的锁，比如 unique\_lock，而不能使用 lock\_guard
+			\item \textbf{conditon\_variable}: 对于线程间的事件通知，提供了条件变量类 \verb|condition_variable|，可视为 \verb|pthread_cond_t| 的封装，使用条件变量可以让一个线程等待其它线程的通知 (\verb|wait|，\verb|wait_for|，\verb|wait_until|)，也可以给其它线程发送通知 (\verb|notify_one|，\verb|notify_all|)，条件变量必须和锁配合使用，在等待时因为有解锁和重新加锁，所以，在等待时必须使用可以手工解锁和加锁的锁，比如 \verb|unique_lock|，而不能使用 \verb|lock_guard|
+			
 			\begin{lstlisting}
 #include <condition_variable>
 mutex m;
@@ -936,7 +1099,7 @@ void threadCondVar(void)
 		多线程编程一般避免不了同步的问题，C++11这里也提供了非常方便的方法来进行解决。标准中提供了一下四种互斥锁，分别是：
 		\begin{itemize}
 			\item  \textbf{Mutex}：基本的Mutex类，\textbf{独占的互斥量，不能递归使用}，提供了核心函数lock()和unlock()
-			\item  \textbf{Recursive\_mutex}：递归Mutex类，\textbf{递归互斥量，不带超时功能}，允许在同一个线程中对一个互斥量的多次请求。一般在项目模块分工中可以使用，这样即使其他人使用了同样的锁也不会导致死锁
+			\item  \textbf{Recursive\_mutex}：递归Mutex类，允许在同一个线程中对一个互斥量的多次加锁与解锁操作。一般在项目模块分工中可以使用，这样即使其他人使用了同样的锁也不会导致死锁
 			\item \textbf{Timed\_mutex}：定时递归Mutex类，\textbf{带超时的独占的互斥量，不能递归使用}，除了递归，还可以在某个时间段里或者某个时刻到达之间获取该互斥量。当一个线程在临界区操作的时间非常长，可以用定时锁指定时间
 			\item \textbf{Recursive\_timed\_mutex}：定时递归Mutex类，\textbf{带超时的递归互斥量}，综合timed\_mutex和recuseive\_mutex
 		\end{itemize}
@@ -969,7 +1132,8 @@ void threadCondVar(void)
 		for (auto &i : v) i.join();
 	}
 		\end{lstlisting}
-		\subparagraph{lock\_guard<T\_mutex> m(T\_mutex)}:从对象初始化时 到 对象销毁时
+		\subparagraph{lock\_guard<T\_mutex> m(T\_mutex)}:从对象初始化时 到 对象销毁时，所有权不可转移，对象生存期内不允许手动加锁和解锁
+		
 		
 		\subparagraph{unique\_lock<T\_mutex> m(T\_mutex)}:提供比lock\_guard 更灵活的方式，可以指定什么时候上锁，什么时候解锁，但是可以保证任何时候都会在析构时将锁释放掉。
 			\begin{lstlisting}
@@ -1097,130 +1261,206 @@ int main(){
 		
 		Keep in mind that \textbf{locks are slow}. Indeed, when you use locks you make sections of the code sequential. \textbf{If you want an highly parallel application}, there are other solutions than locks that are performing much better.
 	\subsection{条件变量}
-		条件变量condition\_variable\textit{也可以}\textbf{进行线程之间的通信}，\textit{当一个线程要等待另一个线程完成某个操作时}，\textbf{可以使用条件变量进行实现}。\textit{条件变量可以将一个或多个线程进入阻塞状态，直到收到另外一个线程的通知，或者超时才能退出阻塞状态}。
+		\subparagraph{condition\_variable}\verb|->|
 		
-		\textbf{一个线程等待某个条件满足}，其首先获得一个unique\_lock锁。该锁将会传递给wait()方法，然后wait()方法会释放互斥量并将该线程暂停，\textbf{直到条件变量得到相应的信号}。当接受到信号，线程被唤醒后，该锁就又被重新获得了。
+			\textbf{必须}与\verb|std::unique_lock|配合使用
 		
-		\textbf{另外一个线程发送信号使得条件满足}。其通过调用notify\_one()来发送通知，会将处于阻塞状态的等待该条件获得信号的线程中的某一个线程（\textbf{任意一个线程）恢复执行}；还可以通过调用notify\_all()将\textbf{等待该条件的所有线程唤醒}。
-		
-		下面是一个使用条件变量的简单例子。该程序中f1等待某个条件，该条件在f2输出并且睡眠2s后才得到满足，之后f1才能够进行输出：
+			条件变量condition\_variable\textit{也可以}\textbf{进行线程之间的通信}，\textit{当一个线程要等待另一个线程完成某个操作时}，\textbf{可以使用条件变量进行实现}。\textit{条件变量可以将一个或多个线程进入阻塞状态，直到收到另外一个线程的通知，或者超时才能退出阻塞状态}。
+			
+			\textbf{一个线程等待某个条件满足}，其首先获得一个\verb|unique_lock|锁。该锁将会传递给\verb|wait()|方法，然后\verb|wait()|方法会释放互斥量并将该线程暂停，\textbf{直到条件变量得到相应的信号}。当接受到信号，线程被唤醒后，该锁就又被重新获得了。
+			
+			\textbf{另外一个线程发送信号使得条件满足}。其通过调用\verb|notify_one()|来发送通知，会将处于阻塞状态的等待该条件获得信号的线程中的某一个线程（\textbf{任意一个线程）恢复执行}；还可以通过调用\verb|notify_all()|将\textbf{等待该条件的所有线程唤醒}。
 
-		\begin{lstlisting}
-//A condition variable manages a list of threads waiting until another thread notify them. Each thread that wants to wait on the condition variable has to acquire a lock first. The lock is then released when the thread starts to wait on the condition and the lock is acquired again when the thread is awakened.
-
-//A very good example is a concurrent Bounded Buffer. It’s a cyclic buffer with a certain capacity with a start and an end. Here is our implementation of a Bounded Buffer using condition variables:
+			\begin{lstlisting}
+#include <iostream>
+#include <thread>
 #include <mutex>
 #include <condition_variable>
-#include <thread>
-#include <iostream>
-
-using namespace std;
-
-struct BoundedBuffer {
-	int* buffer;
-	int capacity;
-	
-	int front;
-	int rear;
-	int count;
-	
-	std::mutex lock;
-	
-	std::condition_variable not_full;
-	std::condition_variable not_empty;
-	
-	BoundedBuffer(int capacity) : capacity(capacity), front(0), rear(0), count(0) {
-		buffer = new int[capacity];
-	}
-
-~BoundedBuffer(){
-		delete[] buffer;
-	}
-
-void deposit(int data){
-		std::unique_lock<std::mutex> l(lock);
-		
-		not_full.wait(l, [this](){return count != capacity; });
-		
-		buffer[rear] = data;
-		rear = (rear + 1) % capacity;
-		++count;
-		
-		not_empty.notify_one();
-	}
-
-int fetch(){
-		std::unique_lock<std::mutex> l(lock);
-		
-		not_empty.wait(l, [this](){return count != 0; });
-		
-		int result = buffer[front];
-		front = (front + 1) % capacity;
-		--count;
-		
-		not_full.notify_one();
-		
-		return result;
-	}
-};
-
-void consumer(int id, BoundedBuffer& buffer){
-	for (int i = 0; i < 50; ++i){
-		int value = buffer.fetch();
-		std::cout << "Consumer " << id << " fetched " << value << std::endl;
-		std::this_thread::sleep_for(std::chrono::milliseconds(250));
-	}
+std::mutex  x;
+std::condition_variable  cond;
+bool  ready = false;
+bool  IsReady()  {  return ready;  }
+void  Run( int no )
+{
+	std::unique_lock<std::mutex>  locker( x );
+	while( !ready )		//  若标志位非true，阻塞当前线程
+	cond.wait( locker );	//  解锁并睡眠，被唤醒后重新加锁
+	//  以上两行代码等价于cond.wait( locker, &IsReady );
+	//  第二个参数为谓词，亦可使用函子实现
+	std::cout << "thread " << no << '\n';
 }
 
-void producer(int id, BoundedBuffer& buffer){
-	for (int i = 0; i < 75; ++i){
-		buffer.deposit(i);
-		std::cout << "Produced " << id << " produced " << i << std::endl;
-		std::this_thread::sleep_for(std::chrono::milliseconds(100));
-	}
-}
-
-int main(){
-	BoundedBuffer buffer(200);
-	
-	std::thread c1(consumer, 0, std::ref(buffer));
-	std::thread c2(consumer, 1, std::ref(buffer));
-	std::thread c3(consumer, 2, std::ref(buffer));
-	std::thread p1(producer, 0, std::ref(buffer));
-	std::thread p2(producer, 1, std::ref(buffer));
-	
-	c1.join();
-	c2.join();
-	c3.join();
-	p1.join();
-	p2.join();
-	
+int  main()
+{
+	std::thread  threads[8];
+	for( int i = 0; i < 8; ++i )
+	threads[i] = std::thread( Run, i );
+	std::cout << "8 threads ready...\n";
+	{
+		std::unique_lock<std::mutex>  locker( x );    //  互斥加锁
+		ready = true;		//  设置全局标志位为true
+		cond.notify_all();	//  唤醒所有线程
+	}    //  离开作用域，自动解锁；可将此复合语句块实现为函数
+	//  基于区间的循环结构，对属于threads数组的所有元素t，执行循环体
+	for( auto & t: threads )
+		t.join();
 	return 0;
 }
 		\end{lstlisting}
-	\subsection{异步操作-async}
-		C++11中的future是标准库提供的一种\textbf{用于获取异步操作的结果的机制}，\textit{其可以调用一个函数，然后转而做其他的事情，让函数自己在一边执行，当需要的时候再回过头来获取该函数计算的结果}。另外，其还可以延迟异步操作中异常(Exception)的抛出。下面是一个简单的例子
 		
-		\subsubsection{future}
-			std::future 可以用来\textbf{获取异步任务的结果}，因此可以把它当成一种简单的线程间同步的手段。\textit{std::future 通常}\textbf{由某个 Provider 创建}，你可以把 Provider 想象成一个异步任务的提供者，\textbf{Provider 在某个线程中设置共享状态的值}，\textbf{与该共享状态相关联的 std::future 对象调用 get（通常在另外一个线程中） 获取该值}，\textit{如果共享状态的标志不为 ready，则调用 std::future::get 会阻塞当前的调用者，直到 Provider 设置了共享状态的值（此时共享状态的标志变为 ready）}，std::future::get 返回异步任务的值或异常（如果发生了异常）。
+		\subparagraph{conditon\_variable\_any} \verb|->|
+		
+		更加通用的条件变量，可以与任意型式的互斥锁配合使用，相比前者使用时会有额外的开销
+		
+	\subsection{期许与承诺}
+		\paragraph{线程的返回值}
+			为支持跨平台，thread 类无属性字段保存线程函数的返回值。解决方案有三种：
+			\begin{itemize}[itemindent = 2em]
+				\item 使用指针类型的函数参数
+				\item 使用期许\verb|std::future| 类模版
+				\item 使用承诺\verb|std::promise|类模版
+			\end{itemize}	
+	
+		\subsubsection{指针型式参数}
+			使用指针作为函数参数，获取线程计算结果
 			
-			一个有效(valid)的 std::future 对象通常由以下三种 Provider 创建，并和某个共享状态相关联。Provider 可以是函数或者类，其实我们前面都已经提到了，他们分别是：
+			\begin{lstlisting}
+#include <iostream>
+#include <vector>
+#include <tuple>
+#include <thread>
+#include <mutex>
+std::mutex x;
+//  劳工线程类模板，处理T型数据对象
+template< typename T >  class Worker
+{
+public:
+	explicit Worker( int no, T a = 0, T b = 0 ) : _no(no), _a(a), _b(b)  {  }
+	void  ThreadFunc( T * r )  {  x.lock();    *r = _a + _b;    x.unlock();  }
+private:
+	int  _no;	//  线程编号，非线程ID
+	T  _a, _b;	//  保存在线程中的待处理数据
+};
+		
+int main()
+{
+	//  定义能够存储8个三元组的向量v，元组首元素为指向劳工对象的指针
+	//  次元素保存该劳工对象计算后的结果数据，尾元素为指向劳工线程对象的指针
+	//  向量中的每个元素都表示一个描述线程运行的线程对象，
+	//  该线程对象对应的执行具体任务的劳工对象，及该劳工对象运算后的返回值
+	std::vector< std::tuple<Worker<int>*, int, std::thread*> >  v( 8 );
+			
+	//  构造三元组向量，三元编号顺次为0、1、2
+	for( int i = 0; i < 8; i++ )
+		v[i] = std::make_tuple( new Worker<int>( i, i+1, i+2 ), 0, nullptr );
+			
+	//  输出处理前结果；使用std::get<n>(v[i])获取向量的第i个元组的第n个元素
+	//  三元编号顺次为0、1、2，因而1号元保存的将是劳工对象运算后的结果
+	for( int i = 0; i < 8; i++ )
+		std::cout << "No. " << i << ": result = " << std::get<1>(v[i]) << std::endl;
+	//  创建8个线程分别计算
+	for( int i = 0; i < 8; i++ )
+	{
+		//  将劳工类成员函数绑定为线程函数，对应劳工对象绑定为执行对象
+		//  将构造线程对象时传递的附加参数作为被绑定的线程函数的第一个参数
+		//  auto表示由编译器自动推断f的型式
+		auto  f = std::bind( &Worker<int>::ThreadFunc,
+		std::get<0>( v[i] ), std::placeholders::_1 );
+				
+		//  动态构造线程对象，并保存到向量的第i个三元组中
+		//  传递三元组的1号元地址，即将该地址作为线程函数的参数
+		//  线程将在执行时将结果写入该地址
+		//  此性质由绑定函数std::bind()使用占位符std::placeholders::_1指定
+		//  线程对象为2号元，即三元组的最后一个元素
+		std::get<2>( v[i] ) = new std::thread( f, &std::get<1>( v[i] ) );
+	}
+	for( int i = 0; i < 8; i++ )
+	{
+		//  等待线程结束
+		std::get<2>( v[i] )->join(); 
+		//  销毁劳工对象
+		delete std::get<0>( v[i] ),    std::get<0>( v[i] ) = nullptr;
+		//  销毁线程对象
+		delete std::get<2>( v[i] ),    std::get<2>( v[i] ) = nullptr;
+	}
+			
+	//  输出线程计算后的结果
+	for( int i = 0; i < 8; i++ )
+		std::cout << "No. " << i << ": result = " << std::get<1>(v[i]) << std::endl;
+	return 0;
+}	   				
+			\end{lstlisting}
+				
+		\subsubsection{期许future}\verb|->|
+		
+			\textbf{目的}：\textbf{获取异步操作结果}，延迟引发线程的异步操作异常
+			
+			\textbf{使用方法}:
+				\begin{itemize}[itemindent = 2em]
+					\item 定义期许模板类的期许对象
+					\item 使用\verb|std::async()|函数的返回值初始化
+					\item 调用期许对象的成员函数\verb|get()|获取线程返回值
+				\end{itemize}
+			
+			\verb|使用期许对象获取线程返回值|
+			\begin{lstlisting}
+#include <iostream>
+#include <exception>
+#include <thread>
+#include <future>
+	
+unsigned long int  CalculateFactorial( short int n )
+{
+	 unsigned long int  r = 1;
+	 if( n > 20 )
+		 throw std::range_error( "The number is too big." );
+	 for( short int i = 2; i <= n; i++ )
+		 r *= i;
+	return r;
+}
+
+int main()
+{
+	short int  n = 20;
+	//  启动异步线程，执行后台计算任务，并返回std::future对象
+    std::future<unsigned long int>  f = std::async( CalculateFactorial, n );
+    try
+    {
+        //  获取线程返回值，若线程已结束，立即返回，否则等待该线程计算完毕
+        //***(重点)  若线程引发异常，则延迟到std::future::get()或std::future::wait()调用时引发,   在调用端处理异常
+	    unsigned long int  r = f.get();
+	    std::cout << n << "! = " << r << std::endl;
+	}
+	catch( const std::range_error & e )  
+	{
+	    std::cerr << e.what() << std::endl;
+    }
+  return 0;
+}
+	
+			\end{lstlisting}
+			
+			\subparagraph{理论}	
+			\verb|std::future|可以用来\textbf{获取异步任务的结果}，因此可以把它当成一种简单的线程间同步的手段。\verb|std::future| 通常\textbf{由某个 Provider 创建}，你可以把 Provider 想象成一个异步任务的提供者，\textbf{Provider 在某个线程中设置共享状态的值}，\textbf{与该共享状态相关联的} \verb|std::future| \textbf{对象调用} \verb|get|\textbf{（通常在另外一个线程中） 获取该值}，\textit{如果共享状态的标志不为 ready，则调用 std::future::get 会阻塞当前的调用者，直到 Provider 设置了共享状态的值（此时共享状态的标志变为 ready）}，\verb|std::future::get| \textbf{返回}异步任务的\textbf{值或异常}（如果发生了异常）。
+						
+			一个有效(valid)的 \verb|std::future| 对象通常由以下三种 Provider 创建，并和某个共享状态相关联。Provider 可以是函数或者类，其实我们前面都已经提到了，他们分别是：
 				\begin{itemize}
 					\item \textbf{std::async} 函数
 					\item \textbf{std::promise::get\_future}，get\_future 为 promise 类的成员函数
 					\item \textbf{std::packaged\_task::get\_future}，此时 get\_future为 packaged\_task 的成员函数
 				\end{itemize}
 
-			一个 std::future 对象只有在有效(valid)的情况下才有用(useful)，由 std::future 默认构造函数创建的 future 对象不是有效的（除非当前非有效的 future 对象被 move 赋值另一个有效的 future 对象）。
+			一个 \verb|std::future| 对象只有在有效(valid)的情况下才有用(useful)，由 \verb|std::future| 默认构造函数创建的 future 对象不是有效的（除非当前非有效的 future 对象被 move 赋值另一个有效的 future 对象）。
 			
-			在一个有效的 future 对象上调用 get 会阻塞当前的调用者，直到 Provider 设置了共享状态的值或异常（此时共享状态的标志变为 ready），std::future::get 将返回异步任务的值或异常（如果发生了异常）。
+			在一个有效的 \verb|future| 对象上调用 \verb|get| 会阻塞当前的调用者，直到 Provider 设置了共享状态的值或异常（此时共享状态的标志变为 ready），\verb|std::future::get| 将返回异步任务的值或异常（如果发生了异常）。
 \begin{lstlisting}
 #include <iostream>       // std::cout
 #include <future>         // std::async, std::future
 #include <chrono>         // std::chrono::milliseconds
 
 // a non-optimized way of checking for prime numbers:
-bool is_prime (int x) {
+bool is_prime (int x) 
+{
 	for (int i=2; i<x; ++i) if (x%i==0) return false;
 	return true;
 }
@@ -1234,7 +1474,7 @@ int main ()
 	std::cout << "checking, please wait";
 	std::chrono::milliseconds span (100);
 	while (fut.wait_for(span)==std::future_status::timeout)
-	std::cout << '.' << std::flush;
+		std::cout << '.' << std::flush;
 	
 	bool x = fut.get();     // retrieve return value
 	
@@ -1245,11 +1485,88 @@ int main ()
 
 //checking, please wait........................
 //444444443 is prime.
-\end{lstlisting}
-		\subsubsection{promise}
-			promise 对象可以保存某一类型 T 的值，该值可被 future 对象读取（可能在另外一个线程中），因此 promise 也提供了一种线程同步的手段。在 promise 对象构造时可以和一个共享状态（通常是std::future）相关联，并可以在相关联的共享状态(std::future)上保存一个类型为 T 的值。
+\end{lstlisting}			
+	
+		\subsubsection{承诺promise}\verb|->|
+				
+					\textbf{目的}：承诺对象\textbf{允许}期许对象\textbf{获取}线程对象创建的\textbf{线程返回值}
+
+					\textbf{使用方法}:
+						\begin{itemize}[itemindent = 2em]
+							\item 创建承诺\verb|std::promise<T>|对象
+							
+							\item 获取该承诺对象的\textbf{相关}期许\verb|std::future<T>|对象
+							
+							\item 创建线程对象，并传递承诺对象
+							
+							\item 线程函数内部通过承诺模板类的成员函数\verb|set_value()|、\verb|set_value_at_thread_exit()|、\verb|set_exception()|或\verb|set_exception_at_thread_exit()|设置值或异常
+							
+							\item 通过期许对象等待并获取异步操作结果
+							
+						\end{itemize}
+					
+					\verb|使用承诺对象获取线程返回值|	
+					\begin{lstlisting}
+#include <iostream>
+#include <exception>
+#include <thread>
+#include <future>
+
+unsigned long int CalculateFactorial( short int n )
+{
+  unsigned long int r = 1;
+  if( n > 20 )    
+	  throw std::range_error( "The number is too big." );
+  for( short int i = 2; i <= n; i++ )    
+	  r *= i;
+  return r;
+}
+
+//  CalculateFactorial()函数的包装函数原型
+void DoCalculateFactorial(std::promise<unsigned long int> && promise, short int n );
+
+int main()
+{
+    short int  n = 6;
+    std::promise<unsigned long int>  p;    //  创建承诺对象
+    std::future<unsigned long int>  f = p.get_future();    //  获取相关期许对象
+    //  启动线程，执行CalculateFactorial()函数的包装函数
+    std::thread  t( DoCalculateFactorial, std::move( p ), n );
+    t.detach();
+    try
+    {
+      unsigned long int  r = f.get();
+      std::cout << n << "! = " << r << std::endl;
+    }
+    catch( std::range_error & e )
+      std::cerr << e.what() << std::endl;
+  return 0;
+}
+
+
+
+// 重点
+// CalculateFactorial()函数的包装函数实现
+void DoCalculateFactorial(std::promise<unsigned long int> && promise, short int n )
+{
+	  try
+	  {
+		    //  设置线程返回值，供期许对象获取
+		    promise.set_value( CalculateFactorial( n ) );
+	  }
+	  catch( ... )
+	  {
+		    //  捕获全部异常，并在期许获取线程返回值时重新引发
+		    promise.set_exception( std::current_exception() );
+	  }
+}
+
+					\end{lstlisting}
+	
+			\subparagraph{理论}
+			\verb|promise |对象可以保存某一类型 \verb|T| 的值，该值可被 \verb|future| 对象读取（可能在另外一个线程中），因此 \verb|promise| 也提供了一种线程同步的手段。在 \verb|promise| 对象构造时可以和一个共享状态（通常是\verb|std::future|）相关联，并可以在相关联的共享状态(\verb|std::future|)上保存一个类型为\verb| T| 的值。
 			
-			可以通过 get\_future 来获取与该 promise 对象相关联的 future 对象，调用该函数之后，两个对象共享相同的共享状态(shared state)
+			可以通过 \verb|get_future| 来获取与该 \verb|promise| 对象相关联的 \verb|future| 对象，调用该函数之后，两个对象共享相同的共享状态(shared state)
 				\begin{itemize}
 					\item \textbf{promise} 对象是异步 Provider，它可以在某一时刻设置共享状态的值。
 					\item \textbf{future} 对象可以异步返回共享状态的值，或者在必要的情况下阻塞调用者并等待共享状态标志变为 ready，然后才能获取共享状态的值。
@@ -1341,12 +1658,6 @@ The countdown lasted for 10 seconds.
 			
 			\url{http://www.cnblogs.com/haippy/p/3239248.html}
 	\subsection{线程池}
-		\subsubsection{背景}
-			在传统的收到任务即创建线程的情况下，我们每收到一个任务，就创建一个线程，执行任务，销毁线程，我们把这三个过程所用的时间分别记做T1,T2,T3
-			任务本身所用的时间仅占T2/(T1+T2+T3),这在任务本身所用时间很短的情况下， 效率是很低的此外，通常操作系统所能创建的线程数量都是有限的，并不能无限制的创建线程。
-			
-			而在线程池中，我们通常会预先创建m个线程，放到空闲容器中，当有任务来临时，线程池会从空闲的线程中挑选一个线程来执行该任务，在执行完毕后再将其放回空闲容器中
-		
 		\subsubsection{应用场景}线程池通常适合下面的几个场合：
 			\begin{itemize}
 				\item 单位时间内处理的任务数较多，且每个任务的执行时间较短
@@ -1496,6 +1807,8 @@ The countdown lasted for 10 seconds.
 	}
 			\end{lstlisting}
 		\subsubsection{实现原理}
+			回调思想。
+		
 			接着前面的废话说。“管理一个任务队列，一个线程队列，然后每次取一个任务分配给一个线程去做，循环往复。” 这个思路有神马问题？线程池一般要复用线程，所以如果是取一个 task 分配给某一个 thread，执行完之后再重新分配，在语言层面基本都是不支持的：一般语言的 thread 都是执行一个固定的 task 函数，执行完毕线程也就结束了(至少 c++ 是这样)。so 要如何实现 task 和 thread 的分配呢？
 			
 			\textbf{让每一个 thread 都去执行调度函数：循环获取一个 task，然后执行之}。
@@ -2502,9 +2815,68 @@ The countdown lasted for 10 seconds.
 			
 			The member of the void specialization simply makes the shared state ready, without setting any value	
 	
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%CHAPTER_TEMPLATE%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%			 
-\chapter{模版编程}
-\url{http://www.jianshu.com/p/b56d59f77d53}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%CHAPTER_TEMPLATE%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
+
+\chapter{多进程}
+
+
+
+	 
+\chapter{泛型编程}
+	
+	\section{decltype}
+		\verb|delctype(expr)| 用来推断 \verb|expr| 的类型，和 \verb|auto |是类似的，相当于类型占位符，占据一个类型的位置；\verb|auto f(A a, B b) -> decltype(a+b)| 是一种用法，不能写作 \verb|decltype(a+b) f(A a, B b)|，为啥？！ c++ 就是这么规定的！
+		
+		
+	\section{完美转发}
+		右值引用类型是独立于值的，一个右值引用参数作为函数的形参，在函数内部再转发该参数的时候它已经变成一个左值，并不是他原来的类型。
+					
+		如果我们需要一种方法能够按照参数原来的类型转发到另一个函数，这种转发类型称为完美转发
+		
+		大概意思就是：不改变最初传入的类型的引用类型(左值还是左值，右值还是右值)；
+		\begin{lstlisting}
+	// forward example
+	#include <utility>      // std::forward
+	#include <iostream>     // std::cout
+	
+	// function with lvalue and rvalue reference overloads:
+	void overloaded (const int& x) 
+	{
+		std::cout << "[lvalue]";
+	}
+	void overloaded (int&& x) 
+	{
+		std::cout << "[rvalue]";
+	}
+	
+	// function template taking rvalue reference to deduced type:
+	template <class T> void fn (T&& x) 
+	{
+	  overloaded (x);                   // always an lvalue
+	  overloaded (std::forward<T>(x));  // rvalue if argument is rvalue
+	}
+	
+	int main () {
+	  int a;
+	
+	  std::cout << "calling fn with lvalue: ";
+	  fn (a);
+	  std::cout << '\n';
+	
+	  std::cout << "calling fn with rvalue: ";
+	  fn (0);
+	  std::cout << '\n';
+	
+	  return 0;
+	}
+	
+	
+	
+	//OutPut
+	calling fn with lvalue: [lvalue][lvalue]
+	calling fn with rvalue: [lvalue][rvalue]
+		\end{lstlisting}
+
 \section{前言须知}
 	类模板是c++编译器指令，说明了如何生成类和成员函数 除非编译器实现了新的关键字export关键字， 否则将模板成员函数放置在一个独立的实现文件中， 将无法运行： 因为模板不是函数， 他们不能单独编译， 模板必须与特定的模板实例化请求一起使用， 为此 \textbf{最简单的方法是： }\textbf{将所有的模板信息放在一个头文件中， 并在要使用这些模板的文件中包含该头文件}，否则会出现以下错误\textbf{LNK2019}：
 	
@@ -2522,74 +2894,71 @@ The countdown lasted for 10 seconds.
 		\end{figure}	
  
  
+	 \paragraph{特点}
+		 \begin{itemize}
+			 \item 抽象性：模版代码高度抽象，是函数和类的模范
+			 \item \textbf{安全性}：型式检查能够发现大多数型式失配问题
+			 \item \textbf{通用性}：函数和类模版定义一次，按需生成函数和类的实体
+			 \item 易用性：接口相对直观且高度一致
+			 \item \textbf{效率}： 减少冗余代码，提高编程效率，通过编译优化，提升程序执行效率
+		 \end{itemize}
+	
+	\paragraph{用途}
+		\begin{itemize}
+			\item \textbf{函数模板}：构造函数集，实现不依赖特定数据结构的抽象算法
+			\item \textbf{类模板}：构造类集，实现抽象数据结构
+			\item \textbf{元编程}：构造在编译期执行的运算，提升程序执行效率
+		\end{itemize}	 
+		
 \section{函数模版}
-	\subsection{概述}
-		函数模板定义了参数化的非成员函数，这使得程序员能够用不同类型的参数调用相同的函数，由编译器决定调用哪一种类型，并且从模板中生成相应的代码
-		
-		\subparagraph{定义}template<typename T> 返回类型\ 函数名\ (形参表) \ \{函数体\}
-	
-	\subsection{普通函数模版}
-		针对于基本的单元类型
-		
-		\subparagraph{实现}:
-	\begin{lstlisting}
-	    #include <string> 
-	    #include <iostream> 
-	    using namespace std; 
-	    template<typename T> void print(const T& var) 
-	    {     
-		    cout << var << endl; 
-	    } 
-	    int main() 
-	    {     
-		    string str("Hello World");     
-		    const int num=1234; 
-		    print(str); 
-		    print(num); 
-		    return 0; 
-	    } 
-	    //输出：Hello World  
-	    //  1234,	如果不用泛型的话，这个得重新实现 	
-	    
-	    
-///////////////////////////////////////////////////////////////////////
-	    // 定义函数模板，找出三个值中最小的值，与数据类型无关 
-	    template <class T> 
-	    T min(T ii, T jj, T kk) 
-	    { 
-		    T temp; 
-		    if((ii<jj)&&(ii<kk)){temp=ii;} 
-		    else if((jj<ii)&&(jj<kk)){temp=jj;} 
-		    else{    temp=kk; } 
-		    return temp; 
-	    } 
-	    // 下面是主函数 
-	    void main() 
-	    { 
-		    cout<<min(100,20,30)<<endl; 
-		    cout<<min(10.60,10.64,53.21)<<endl; 
-		    cout<<min('c','a','C')<<endl; 
-		    cout<<min("anderson","Washington","Smith")<<endl; //非单元类型，会导致异常结果,
-		    /*
-			    a-z：97-122
-			    A-Z：65-90
-			    0-9：48-57
-			    
-			    所以最小的应该为Smith
-		    */
-	    }     
-	\end{lstlisting}	
-	
+	\subsection{定义及使用}
+			\begin{lstlisting}
+	template <typedname AnyType>
+	void Swap(AnyType &a, AnyType &b)
+	{
+		AnyType  temp;
+		temp = a;
+		a = b;
+		b = temp;
+	}			
+			\end{lstlisting}
+			
+	\subsection{声明模版函数}
+		\begin{lstlisting}			
+	template<typename T>
+	void Swap(T &a, T &b);			
+		\end{lstlisting}
+			
+	\subsection{模版也可以重载}
+			
+	\subsection{实参的演绎-模版类型推导确定}
+				
+				当我们调用某些模版时，模板参数可以由我们所传递的实参来决定。如下
+			\begin{lstlisting}
+	template <typename T>
+	inline T const& max(T const& a, T const& b);
+			
+	max(4,7);		//Ok: 两个实参的类型都是int
+	max(4,4.2);		//ERROR: 第一个T为int，第二个T为double
+			\end{lstlisting}
+			
+			有三种方法可以处理上面的错误：
+			\begin{enumerate}[itemindent = 1em]
+				\item 对实参进行强制类型转换，使他们可以相互匹配： max(static\_cast<double>(4),4.2);
+				\item 显示指定T的类型：max<double>(4,4.2); 
+				\item 指定两个参数可以具有不同的类型
+			\end{enumerate}
+			
 	\subsection{定制非模版函数(重载函数模版)}
-		函数模板功能非常强大，但是有时候可能会陷入困境，加入待比较的函数模板没有提供正确的操作符，或者提供的操作对某些特定的类型会产生不正确的操作结果，则程序不会对此进行编译。为了避免这种错误，可以使用函数模板和同名的非模板函数重载，这就是\textbf{函数定制}，以完成对特定的类型等完成特定的功能.
-		
-		函数模板与同名的非模板函数重载必须遵守以下规定：
-		\begin{itemize}[itemindent = 1em]
-			\item 寻找一个参数完全匹配的\textbf{函数}，如有，则调用它
-			\item 如果失败，寻找一个\textbf{函数模板}，使其实例化，产生一个匹配的模板函数，若有，则调用它
-			\item 如果失败，再试低一级的对函数重载的方法，例如通过类型转换可产生的参数匹配等，若找到匹配的函数，调用它
-		\end{itemize}
-	\begin{lstlisting}
+			函数模板功能非常强大，但是有时候可能会陷入困境，加入待比较的函数模板没有提供正确的操作符，或者提供的操作对某些特定的类型会产生不正确的操作结果，则程序不会对此进行编译。为了避免这种错误，可以使用函数模板和同名的非模板函数重载，这就是\textbf{函数定制}，以完成对特定的类型等完成特定的功能.
+			
+			函数模板与同名的非模板函数重载必须遵守以下规定：
+			\begin{itemize}[itemindent = 1em]
+				\item 寻找一个参数完全匹配的\textbf{函数}，如有，则调用它
+				\item 如果失败，寻找一个\textbf{函数模板}，使其实例化，产生一个匹配的模板函数，若有，则调用它
+				\item 如果失败，再试低一级的对函数重载的方法，例如通过类型转换可产生的参数匹配等，若找到匹配的函数，调用它
+			\end{itemize}
+		\begin{lstlisting}
 	// 定义函数模板，找出三个值中最小的值，与数据类型无关 
 	template <class T> 
 	T min(T ii, T jj, T kk) 
@@ -2620,31 +2989,130 @@ The countdown lasted for 10 seconds.
 		cout<<min('c','a','C')<<endl;     
 		cout<<min("anderson","Washington","Smith")<<endl; //正常输出 Smith
 	} 	
-	\end{lstlisting}
+		\end{lstlisting}
+\section{函子}
+	编写函数，求某个数据集的最小元，元素型式为T
 	
-	\subsection{实参的演绎-模版类型推导确定}
-		
-		当我们调用某些模版时，模板参数可以由我们所传递的实参来决定。如下
-	\begin{lstlisting}
-		template <typename T>
-		inline T const& max(T const& a, T const& b);
-		
-		max(4,7);		//Ok: 两个实参的类型都是int
-		max(4,4.2);		//ERROR: 第一个T为int，第二个T为double
-	\end{lstlisting}
+	实现策略：使用\textbf{函数指针}作为回调函数参数
 	
-	有三种方法可以处理上面的错误：
-	\begin{enumerate}[itemindent = 1em]
-		\item 对实参进行强制类型转换，使他们可以相互匹配： max(static\_cast<double>(4),4.2);
-		\item 显示指定T的类型：max<double>(4,4.2); 
-		\item 指定两个参数可以具有不同的类型
-	\end{enumerate}
+	实现策略：使用\textbf{函子（function object，functor）}作为回调函数参数
+	
+	\subsection{函数指针实现}
+		\begin{lstlisting}
+	template< typename T >
+	const T & Min( const T * a, int n, bool (*comparer)(const T&, const T&) )
+	{
+		  int index = 0;
+		  for( int i = 1; i < n; i++)
+		  {
+			    if( comparer( a[i], a[index] ) )
+				      index = i;
+		  }
+		  return a[index];
+	}
+	
+		\end{lstlisting}
+	
+	\subsection{函子}
+		\subparagraph{目的}:
+			\begin{itemize}
+				\item 功能上：类似函数指针
+				
+				\item 实现上：重载函数调用操作符，必要时重载小于比较操作符
+			\end{itemize}
+			
+		\subparagraph{优点}：
+			\begin{itemize}
+				\item 函数指针不能内联，而函子可以，效率更高
+				
+				\item 函子可以拥有任意数量的额外数据，可以保存结果和状态，提高代码灵活性
+				
+				\item 编译时可对函子进行型式检查
+			\end{itemize}
+			
+		\subparagraph{例子}\verb|->|
+		
+			\begin{lstlisting}
+	template< typename T >  class Comparer
+	{
+	public:
+		  //  确保型式T已存在或重载operator<
+		  bool operator()( const T & a, const T & b )  {  return a < b;  }
+	};
+	
+	template< typename T, typename Comparer >
+	const T & Min( const T * a, int n, Comparer comparer )
+	{
+		  int index = 0;
+		  for( int i = 1; i < n; i++)
+		  {
+			    if( comparer( a[i], a[index] ) )    index = i;
+		  }
+		  return a[index];
+	}
+	
+	
+	//  使用方法
+	int a[8] = { 9, 2, 3, 4, 5, 6, 7, 8 };
+	int min = Min( a, 8, Comparer<int>() );    //  构造匿名函子作为函数参数
+			\end{lstlisting}		
+			
 \section{类模板}
+		\subsection{定义类模板}
+			\begin{lstlisting}	
+	//.h file		
+	template <Class Type>    //First imoprtant thing
+		
+	class Stack
+	{
+	private:
+		enum {MAX = 10};     //constant specific to class
+		Type items[MAX];
+		int  top;
+	public:
+		Stack();
+		bool isEmpty();
+		bool push(const Type& item);
+		bool pop(Type &item);
+	};		    
+			\end{lstlisting}
+				
+				
+		\subsection{使用类模板}
+			\begin{lstlisting}	
+	//.cpp file		
+	template <class Type>
+	bool Stack<Type>::isEmpty()
+	{
+		return top==0;
+	}			
+			\end{lstlisting}
+			
+		\subsection{类模板别名}
+			\begin{lstlisting}			
+	typedef std::array<double,12> arrd;
+		
+	arrd gallons;			
+			\end{lstlisting}
+	
+	
+		\subsection{类模板显示特化}
+			使用特定的型或值显式特化类模板，\textbf{以定制类模板代码}
+			
+			\begin{lstlisting}
+	template<> class A<char> { … };
+			\end{lstlisting}
 
-
-
-\section{非类型模版参数}
-	\verb|template<class T, size_t N> class Stack{};|
+			\begin{itemize}
+				\item 显式特化版本\textbf{覆盖}体化版本
+				
+				\item 显式特化并\textbf{不要求}与原始模板\textbf{相同}，特化版本可以具有不同的数据成员或成员函数
+				
+				\item 类模板可以部分特化，结果仍是类模板，以支持类模板的部分定制
+			\end{itemize}
+\section{模版参数}
+	\subsection{非类型模版参数}
+		\verb|template<class T, size_t N> class Stack{};|
 	\begin{lstlisting}
 	template<class T, size_t N> class Stack{
 		T data[N]; // Fixed capacity is N
@@ -2658,10 +3126,10 @@ The countdown lasted for 10 seconds.
 	inline void Stack<T>::push(const T& t){// Something}
 	\end{lstlisting}
 
-\section{默认模版参数}
-	\verb|template<class T, size_t N = 100> class Stack{};|
+	\subsection{默认模版参数}
+		\verb|template<class T, size_t N = 100> class Stack{};|
 	
-	\begin{lstlisting}
+		\begin{lstlisting}
 	template<class T = int, size_t N = 100>
 	class Stack{
 		T data[N];
@@ -2671,9 +3139,9 @@ The countdown lasted for 10 seconds.
 	};
 	
 	Stack<> myStack; 	// Same as Stack<int, 100>
-	\end{lstlisting}
+		\end{lstlisting}
 	
-\section{模版类型的模版参数}
+	\subsection{模版类型的模版参数}
 	\verb|template<class T, template<class U> class Seq> class Container{};|
 	
 	\begin{lstlisting}
@@ -2688,7 +3156,7 @@ The countdown lasted for 10 seconds.
 	Container<int, vector> container;
 	\end{lstlisting}
 	
-\section{typename}
+	\subsection{typename}
 	 必须 对 \textbf{模版中的嵌套 类型}使用 \verb|typename|进行说明，否则模版会编译不过
 	\begin{lstlisting}
 	template<class T, template<class U, class = allocate<U> > class Seq>
@@ -2714,7 +3182,9 @@ The countdown lasted for 10 seconds.
 	vector<int> v1(data, data+5);
 	vector<double> v2(v1.begin(),v1.end());
 		\end{lstlisting}
-		
+
+
+
 \section{模版特化}
 	\subsection{Full Specialization}
 		\verb|template<>|
@@ -2769,6 +3239,11 @@ The countdown lasted for 10 seconds.
 		*/
 	}
 	\end{lstlisting}	
+	
+\section{元编程}
+	
+	
+	
 \section{参考}\url{http://developer.51cto.com/art/201208/351569.htm}    
 
 \chapter{Effective}

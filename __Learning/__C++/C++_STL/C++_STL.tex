@@ -22,6 +22,7 @@
  \newcommand{\Figure}[1]{$\textbf{Figure }#1\ $}
  \renewcommand{\figurename}{Fig}
  
+ \graphicspath{{figure/}}
  \geometry{left=1.6cm,right=1.8cm,top=2cm,bottom=1.7cm} %设置文章宽度
 
   %代码效果定义
@@ -57,9 +58,37 @@
  	
  	\tableofcontents
 
+
+		
+		
+		
 \chapter{容器-Container}
 \section{容器底层数据结构实现}
 	\subsection{总结}
+		 \paragraph{0.tuple}    tuple元组是一个固定大小的不同类型值的集合，可以用来代替简单的结构体
+			 \begin{lstlisting}
+	#include <tuple>
+	#include <string>
+	#include <iostream>
+	using namespace std;
+	int main(int arc,char** argv)
+	{
+		using MyTuple = tuple < int, string > ;
+		
+		tuple < int, string > tup1 = make_tuple(1, "jack");	// 创建一个MyTuple类型的元组
+		MyTuple tup2 = make_tuple(2, "lily");	// 创建一个MyTuple类型的元组
+		
+		int var = 3;
+		auto tup3 = tie(var,tup1,tup2);				// 创建一个tuple < int, MyTuple, MyTuple>类型的元组
+		
+		cout << get<0>(tup1) << endl;			// 输出 1
+		cout << get<1>(tup2) << endl;			// 输出 lily
+		cout << get<1>(get<1>(tup3)) << endl; // 输出 jack
+		
+		return 0;
+	}
+			 \end{lstlisting}
+			 
 		 \paragraph{1.vector}      底层数据结构为\textbf{数组} ，支持快速随机访问
 			 \subparagraph{array}  专门的数组..固定大小
 		 
@@ -852,21 +881,52 @@ void AVLTree<T>::traversal()
 
 
 \chapter{迭代器-Iterator}
-		迭代器（Iterator），提供了访问容器中对象的方法。例如，可以使用一对迭代器指定list或vector中的一定范围的对象。迭代器就如同一个指针。事实上，C++的指针也是一种迭代器。但是，迭代器也可以是那些定义了operator*()以及其他类似于指针的操作符地方法的类对象；
+	\section{性质}
+		\begin{itemize}
+			\item 它是一个访问容器对象的\textbf{技术手段}，通过迭代器可以访问容器中的对象
+			\item 功能类似于指针 \textbf{或者}  数组下标，通过指针加减 与 数组下标运算获得下一数据成员
+
+			\item 在实现上，迭代器可以是指针，但并不必须是指针，也不必总是使用数据对象的地址。只要能够访问到数据对象就可以了。
+		\end{itemize}
+	
+	
+
+	\section{使用方法}
+		\begin{itemize}
+			\item 声明迭代器变量
+			
+			\item 使用引领操作符访问迭代器指向的当前目标对象
+			
+			\item 使用\textbf{递增操作符}获得下一对象的访问权
+			
+			\item 若迭代器新值超出容器的元素范围，\textbf{类似指针值变成NULL，目标对象不可引用}
+		\end{itemize}
 		
-		Iterator（迭代器）模式又称Cursor（游标）模式，用于提供一种方法顺序访问一个聚合对象中各个元素, 
-		而又不需暴露该对象的内部表示。或者这样说可能更容易理解：Iterator模式是运用于聚合对象的一种模式，通过运用该模式，使得我们可以在不知道对象内部表示的情况下，按照一定顺序（由iterator提供的方法）访问聚合对象中的各个元素。
-		
-		迭代器的作用：能够让迭代器与算法不干扰的相互发展，最后又能无间隙的粘合起来，重载了*，＋＋，＝＝，！＝，＝运算符。用以操作复杂的数据结构，容器提供迭代器，算法使用迭代器；
-		
-		常见的一些迭代器类型：iterator、const\_iterator、reverse\_iterator和const\_reverse\_iterator
-	\section{声明}
 		\begin{lstlisting}
 	// 声明如下：
 	vector<T>::iterator it;
 	list<T>::iterator it;
 	deque<T>::iterator it；
+	
+	#include <iostream>
+	#include <algorithm>
+	using namespace std;
+	const int size = 16;
+	int main()
+	{
+		  int a[size];
+		  for( int i = 0; i < size; ++i )  a[i] = i;
+		  int key = 7;
+		  int * ip = find( a, a + size, key );
+		  if( ip == a + size )    //  不要使用NULL做指针测试，直接使用过尾值 [)
+			    cout << key << " not found." << endl;
+		  else
+			    cout << key << " found." << endl;
+		  return 0;
+	}
+	
 		\end{lstlisting}
+		
 	\section{类别}
 		\begin{table}[H]
 			\centering
@@ -925,7 +985,8 @@ void AVLTree<T>::traversal()
 					priority\_queue    & 不支持\\
 					\hline
 				\end{tabular}
-			\end{table}	
+			\end{table}
+				
 	\section{删除}
 		vector用到erase的话,那必须用迭代器了，那么以下就要注意了
 		\begin{itemize}
@@ -957,7 +1018,8 @@ void AVLTree<T>::traversal()
 			  ++pos;
 		  }
 	  }
-\end{lstlisting}		
+\end{lstlisting}
+		
 	\section{Iterator 失效概要}
 		Golden Rule是：\textbf{尽量不要使用容器的插入删除操作之前的迭代器}。
 		
@@ -989,6 +1051,7 @@ void AVLTree<T>::traversal()
 		 如果元素的值为奇数，则删除此元素，it指向下一个元素，如果元素的值为偶数，则检查下一个元素的值。整个迭代过程中迭代器就不会失效了。
 	 */
 			\end{lstlisting}
+			
 	\section{Insertion 失效总结}
 		\subsection{Sequence containers}
 			\begin{itemize}

@@ -296,8 +296,17 @@
 					\item  \textbf{有界队列}。当使用有限的 maximumPoolSizes 时，\textbf{有界队列（如 ArrayBlockingQueue）有助于防止资源耗尽，但是可能较难调整和控制}。队列大小和最大池大小可能需要相互折衷：\textbf{使用大型队列和小型池可以最大限度地降低 CPU 使用率、操作系统资源和上下文切换开销，但是可能导致人工降低吞吐量}。如果任务频繁阻塞（例如，如果它们是 I/O 边界），则系统可能为超过您许可的更多线程安排时间。\textbf{使用小型队列通常要求较大的池大小，CPU 使用率较高，但是可能遇到不可接受的调度开销，这样也会降低吞吐量。}
 				\end{enumerate}
 				
-			
+		\subsubsection{Linux  能同时启动多少个线程}
+			对于32-bit Linux， 一个进程的地址空间是4G,其中用户态能访问的是3G， 而一个线程的默认栈为10M， 心算便知，一个进程大约最多能同时启动300个线程	
 		
+		\subsubsection{多线程 能提高 并发度么？}
+			如果指的是“并发连接数”，不能
+			
+			假如单纯采用 thread per connection 模型，那么并发连接数大约300，这远远低于基于事件的单线程程序所能轻松达到的并发数（几千上万），所谓基于事件，指的是用I/O multiplexing event loop 的编程模型， 又称Reactor 模式
+			
+			所以多线程并不能提高并发度。
+ 			
+			
 \newpage
 \section{C++}
 	\subsection{题目}

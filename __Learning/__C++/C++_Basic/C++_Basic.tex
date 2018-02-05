@@ -91,7 +91,7 @@
 	const int&&	r4 = x++;	//常量右值引用，不能修改，不能转移，无实际意义
 	cout << r2 << endl;			//右引用延长生命期，右值对象在表达式结束后仍然存在
 			\end{lstlisting}	
-			\url{https://github.com/ctzhenghua/C-NetworkPractice-Code/blob/master/C%2B%2B/Basic/RightValue/RightReference.cc}
+			\url{https://github.com/ctzhenghua/C-NetworkPractice-Code/blob/Dev/C%2B%2B/Basic/RightValue/RightReference.cc}
 			
 		
 		\subsection{Move 语义}
@@ -330,7 +330,35 @@
 						\end{lstlisting}
 					\end{itemize}
 		\subsection{完美转发}	
-
+			右值引用类型是独立于值的，一个右值引用参数作为函数的形参，在函数内部再转发该参数的时候它已经变成一个左值，并不是他原来的类型。
+			
+			如果我们需要一种方法能够按照参数原来的类型转发到另一个函数，这种转发类型称为完美转发
+			
+			\begin{lstlisting}
+	template<typename T>
+	void print(T& t){
+	    cout << "lvalue" << endl;
+	}
+	template<typename T>
+	void print(T&& t){
+	    cout << "rvalue" << endl;
+	}
+	 
+	template<typename T>
+	void TestForward(T && v){
+	    print(v);
+	    print(std::forward<T>(v));
+	    print(std::move(v));
+	}
+	 
+	int main(){
+	    TestForward(1); // l r r
+	    int x = 1;
+	    TestForward(x); // l l r
+	    TestForward(std::forward<int>(x)); // l r r
+	    return 0;
+	}
+			\end{lstlisting}
 	\section{面向对象改进}
 		\subsection{override 与 final 标识符}
 			我总觉得 C++中虚函数的设计很差劲，因为时至今日仍然\textbf{没有一个强制的机制来标识虚函数会在派生类里被改写}。\textbf{vitual关键字是可选的}，这使得阅读代码变得很费劲。因为可能需要追溯到继承体系的源头才能确定某个方法是否是虚函数。\textbf{为了增加可读性，我总是在派生类里也写上virtual关键字}，并且也鼓励大家都这么做。即使这样，仍然会产生一些微妙的错误。看下面这个例子：
@@ -2012,6 +2040,11 @@ inline FuncX(...){}
 \section{虚函数表}
 		\url{http://www.cnblogs.com/hushpa/p/5707475.html#undefined}
 		
+		\subparagraph{vtbl}
+		每一个class 产生出一堆 指向\verb|virtual functions| 的指针，放在表格之中。这个表格被称为 \verb|virtual table(vtbl)|.
+		\subparagraph{vptr}
+		每个\verb|class object| 被安插一个指针，指向相关的\verb|virtual table|. 通常这个指针被称为 \verb|vptr|. \verb|vptr| 的设置 和 重置 都由每一个 class 的 constructor、deconstructor 和 copy assignment 运算符自动完成. 每个class 所关联的 \verb|type_info object|(用以 支持\verb|runtime type identification, RTTI|) 也经由 \verb|virtual table| 被指出来，通常该指针放在表格的 第一个\verb|slot|.
+					
 		虚函数（\verb|Virtual Function|）是通过一张虚函数表（\verb|Virtual Table|）来实现的。简称为\verb|V-Table|。在这个表中，主是要一个类的虚函数的地址表，这张表解决了继承、覆盖的问题，保证其容真实反应实际的函数。这样，在有虚函数的类的实例中这个表被分配在了这个实例的内存中，所以，当我们用父类的指针来操作一个子类的时候，这张虚函数表就显得由为重要了，它就像一个地图一样，指明了实际所应该调用的函数。	
 		
 		
@@ -2108,7 +2141,7 @@ inline FuncX(...){}
 	         
 	         这样，我们就可以看到对于下面这样的程序\verb|  Base *b = new Derive();| \verb|b->f();|由\verb|b|所指的内存中的虚函数表的\verb|f()|的位置已经被\verb|Derive::f()|函数地址所取代，于是在实际调用发生时，是\verb|Derive::f()|被调用了。这就实现了\textbf{多态}。
 
-
+	
 \chapter{C++ 内存结构}
 	\section{进程结构}
 		\begin{figure}[htbp]
@@ -2212,7 +2245,7 @@ inline FuncX(...){}
 				\caption{单对象，包含虚函数}
 			\end{figure}
 		
-		\subsection{单继承(virtual)}
+		\subsection{单继承(virtual)}DerivedClass继承了Base，内存排布是\textbf{先父类后子类}。
 		    \begin{lstlisting}
 	class DerivedClass: public Base
 	{
@@ -2927,229 +2960,10 @@ inline FuncX(...){}
 	enum Enum2 : unsigned short;     // Illegal in C++11, because Enum2 was formerly declared with a different underlying type.		
 		\end{lstlisting}
 \chapter{模版}
-	\section{函数模版}
-		\subparagraph{1.定义及使用}:
-			\begin{lstlisting}
-	template <typedname AnyType>
-	void Swap(AnyType &a, AnyType &b)
-	{
-		AnyType  temp;
-		temp = a;
-		a = b;
-		b = temp;
-	}			
-			\end{lstlisting}
-		
-		\subparagraph{2.声明模版函数}：
-			\begin{lstlisting}			
-	template<typename T>
-	void Swap(T &a, T &b);			
-			\end{lstlisting}
-		
-		\subparagraph{3.模版也可以重载}
-		
-	\section{类模板}
-		\subparagraph{1.定义类模板}:
-			\begin{lstlisting}	
-	//.h file		
-	template <Class Type>    //First imoprtant thing
+	参考C++\_STL 中的泛型编程一章。
 	
-	class Stack
-	{
-	private:
-		enum {MAX = 10};     //constant specific to class
-		Type items[MAX];
-		int  top;
-	public:
-		Stack();
-		bool isEmpty();
-		bool push(const Type& item);
-		bool pop(Type &item);
-	};		    
-			\end{lstlisting}
-			
-			
-		\subparagraph{2.使用类模板}:
-			\begin{lstlisting}	
-	//.cpp file		
-	template <class Type>
-	bool Stack<Type>::isEmpty()
-	{
-		return top==0;
-	}			
-			\end{lstlisting}
-		
-		\subparagraph{3.类模板别名}:
-			\begin{lstlisting}			
-	typedef std::array<double,12> arrd;
-	
-	arrd gallons;			
-			\end{lstlisting}
 \chapter{异常}
-	\section{简介}
-		用于处理软件程序运行时的错误，并用于处理软件系统中可预知或不可预知的问题。这样就可以保证软件系统运行的稳定性与健壮性
-		
-		C++应用程序中在考虑异常设计时，并不是所有的程序模块处理都需要附加上异常情况的处理。相对来说，异常处理没有普通方法函数调用速度快。过度的错误处理会影响应用程序运行的效率。通常在C++开发的软件系统中，应用程序都由对应的库、组件以及运行的具体不同模块组成。在设计时，异常的处理应充分考虑到独立程序库以及组件之间的情况。便于使用者在程序出现异常情况下，使用库或者组件的开发者能够快速定位出库、组件还是应用程序的错误。
-		
-		\subsection{机制}
-			\begin{enumerate}
-				\item 引发异常
-				\item 使用处理程序捕获异常
-				\item 使用Try块
-				\item 代码：primer Error5
-			\end{enumerate}
-			
-		\textbf{try体中可以直接抛出异常，或者在try体中调用的函数体中间接的抛出}
-		\begin{lstlisting}
-	try
-	{
-		…               //可能出错产生异常的代码
 	
-		throwtypen();  //throw  new Type();  一个对象或值
-	}catch(type1)
-	{
-		…               //对应类型的异常处理代码
-	}catch(type2)
-	{
-		…               //对应类型的异常处理代码
-	}
-	
-		…                        //更多类型异常处理代码
-	
-	或者
-	
-	try	
-	{
-		function();//调用可能会抛出异常的函数方法
-	}catch(type1)
-	{
-		…               //对应类型的异常处理代码
-	}catch(type2)
-	{
-		…               //对应类型的异常处理代码
-	}
-		…		
-		\end{lstlisting}
-		
-		\begin{lstlisting}
-	//error5.cpp -- unwinding the stack
-	class demo
-	{
-	private:
-		std::string word;
-	public:
-		demo (const std::string & str)
-		{
-			word = str;
-			std::cout << "demo " << word << " created\n";
-		}
-		~demo()
-		{
-			std::cout << "demo " << word << " destroyed\n";
-		}
-		void show() const
-		{
-			std::cout << "demo " << word << " lives!\n";
-		}
-	}; 
-	
-	// function prototypes
-	double hmean(double a, double b);
-	double gmean(double a, double b);
-	double means(double a, double b);
-	
-	int main()
-	{
-		using std::cout;
-		using std::cin;
-		using std::endl;
-	
-		double x, y, z;
-		{
-			demo d1("found in block in main()");
-			cout << "Enter two numbers: ";
-			while (cin >> x >> y)
-			{
-				try {                  // start of try block
-					z = means(x,y);
-					cout << "The mean mean of " << x << " and " << y
-					<< " is " << z << endl;
-					cout << "Enter next pair: ";
-				} // end of try block
-				catch (bad_hmean & bg)    // start of catch block
-				{
-					bg.mesg();
-					cout << "Try again.\n";
-					continue;
-				}                  
-				catch (bad_gmean & hg) 
-				{
-					cout << hg.mesg();
-					cout << "Values used: " << hg.v1 << ", " 
-					<< hg.v2 << endl;
-					cout << "Sorry, you don't get to play any more.\n";
-					break;
-				} // end of catch block
-			}
-			d1.show();
-		}
-		cout << "Bye!\n";
-		// cin.get();
-		// cin.get();
-		return 0;
-	}
-		
-	double hmean(double a, double b)
-	{
-		if (a == -b)
-		throw bad_hmean(a,b);
-		return 2.0 * a * b / (a + b);
-	}
-	
-	double gmean(double a, double b)
-	{
-		if (a < 0 || b < 0)
-		throw bad_gmean(a,b);
-		return std::sqrt(a * b); 
-	}
-	
-	double means(double a, double b)
-	{
-		double am, hm, gm;
-		demo d2("found in means()");
-		am = (a + b) / 2.0;    // arithmetic mean
-		try 
-		{
-			hm = hmean(a,b);
-			gm = gmean(a,b);
-		}
-		catch (bad_hmean & bg) // start of catch block
-		{
-			bg.mesg();
-			std::cout << "Caught in means()\n";
-			throw;             // rethrows the exception 
-		}          
-		d2.show();
-		return (am + hm + gm) / 3.0;	
-	}					
-		\end{lstlisting}
-	
-	\subsection{细节}
-		\begin{enumerate}
-			\item 程序\textbf{接受到throw语句后就会自动调用析构器}，把该域（try后的括号内）对象clean up，然后再进
-			入catch语句（如果在循环体中就退出循环）。
-			
-			这种机制会引起一些致命的错误，比如，当“类”有指针成员变量时（又是指针！），在 “类的构建器
-			”中的throw语句引起的退出，会导致这个指针所指向的对象没有被析构。这里很基础，就不深入了，提
-			示一下，把指针改为类就行了，比如模板类来代替指针，在模板类的内部设置一个析构函数。
-		\end{enumerate}	
-
-\chapter{C++ 对象模型}
-	\section{C++ Object Model}	
-		\subsection{vtbl}
-			每一个class 产生出一堆 指向\verb|virtual functions| 的指针，放在表格之中。这个表格被称为 \verb|virtual table(vtbl)|.
-		\subsection{vptr}
-			每个\verb|class object| 被安插一个指针，指向相关的\verb|virtual table|. 通常这个指针被称为 \verb|vptr|. \verb|vptr| 的设置 和 重置 都由每一个 class 的 constructor、deconstructor 和 copy assignment 运算符自动完成. 每个class 所关联的 \verb|type_info object|(用以 支持\verb|runtime type identification, RTTI|) 也经由 \verb|virtual table| 被指出来，通常该指针放在表格的 第一个\verb|slot|.
 		
 \chapter{编译}
 	\section{Windows-VisualStudio}

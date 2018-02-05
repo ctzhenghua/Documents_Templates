@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/W32TeX) (preloaded format=xelatex 2017.2.16)  22 JAN 2018 17:53
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/W32TeX) (preloaded format=xelatex 2017.2.16)  6 FEB 2018 00:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2012,25 +2012,25 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
  [8]
 第一章
-File: server-Arch.png Graphic file (type QTm)
-<use  "server-Arch.png" > [9
+File: figures/server-Arch.png Graphic file (type QTm)
+<use  "figures/server-Arch.png" > [9
 
 ]
-File: server-database.png Graphic file (type QTm)
- <use  "server-database.png" >
-File: web-Server.png Graphic file (type QTm)
+File: figures/server-database.png Graphic file (type QTm)
+ <use  "figures/server-database.png" >
+File: figures/web-Server.png Graphic file (type QTm)
 
-<use  "web-Server.png" >
-File: server-cache.png Graphic file (type QTm)
- <use  "server-cache.png" >
-File: server-readwrite.png Graphic file (type QTm)
+<use  "figures/web-Server.png" >
+File: figures/server-cache.png Graphic file (type QTm)
+ <use  "figures/server-cache.png" >
+File: figures/server-readwrite.png Graphic file (type QTm)
 
-<use  "server-readwrite.png" >
-File: server-readwrite2.png Graphic file (type QTm)
- <use  "server-readwrite2.png" > [10] [11]
-File: server-distributedCache.png Graphic file (type QTm)
-
-<use  "server-distributedCache.png" > [12] [13] [14
+<use  "figures/server-readwrite.png" >
+File: figures/server-readwrite2.png Graphic file (type QTm)
+ <use  "figures/server-readwrite2.png" >
+[10] [11]
+File: figures/server-distributedCache.png Graphic file (type QTm)
+ <use  "figures/server-distributedCache.png" > [12] [13] [14
 
 ]
 第二章
@@ -2038,10 +2038,11 @@ File: server-distributedCache.png Graphic file (type QTm)
 
 ]
 第三章
-File: OSI-Model.png Graphic file (type QTm)
-<use  "OSI-Model.png" >
-File: TCP-4.png Graphic file (type QTm)
- <use  "TCP-4.png" > [17] [18] [19] [20]
+File: figures/OSI-Model.png Graphic file (type QTm)
+<use  "figures/OSI-Model.png" >
+File: figures/TCP-4.png Graphic file (type QTm)
+ <use  "figures/TCP-4.png" > [17] [18] [19]
+[20]
 第四章
 \g__fontspec_family_FangSong_int=\count201
 .................................................
@@ -2107,20 +2108,21 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [27]
 [28] [29]
-File: fork.jpg Graphic file (type QTm)
- <use  "fork.jpg" > [30] [31]
-File: TCP-status.jpg Graphic file (type QTm)
- <use  "TCP-status.jpg" > [32] [33]
-File: TCP-3times.png Graphic file (type QTm)
+File: figures/fork.jpg Graphic file (type QTm)
+ <use  "figures/fork.jpg" > [30] [31]
+File: figures/TCP-status.jpg Graphic file (type QTm)
 
-<use  "TCP-3times.png" > [34]
-File: Tcp-close.png Graphic file (type QTm)
- <use  "Tcp-close.png" >
-File: Client-status.png Graphic file (type QTm)
+<use  "figures/TCP-status.jpg" > [32] [33]
+File: figures/TCP-3times.png Graphic file (type QTm)
+ <use  "figures/TCP-3times.png" >
+[34]
+File: figures/Tcp-close.png Graphic file (type QTm)
+ <use  "figures/Tcp-close.png" >
+File: figures/Client-status.png Graphic file (type QTm)
+ <use  "figures/Client-status.png" >
+File: figures/Server-status.png Graphic file (type QTm)
 
-<use  "Client-status.png" >
-File: Server-status.png Graphic file (type QTm)
- <use  "Server-status.png" > [35] [36] [37]
+<use  "figures/Server-status.png" > [35] [36] [37]
 Overfull \hbox (20.09113pt too wide) in paragraph at lines 1024--1025
 []\EU1/SimSun(0)/m/n/10 对 于 \EU1/SimSun(0)/bx/n/10 消 息 传 递\EU1/SimSun(0)/m/n/10
  ，|  解 决 办 法 是 \EU1/SimSun(0)/bx/n/10 设 置 缓 冲 区 的 大 小 限 制\EU1/SimSun(0)/m/n/10 
@@ -2128,15 +2130,15 @@ Overfull \hbox (20.09113pt too wide) in paragraph at lines 1024--1025
  在某些情况下
  []
 
-File: keepAlive.jpg Graphic file (type QTm)
-<use  "keepAlive.jpg" > [38] [39]
+File: figures/keepAlive.jpg Graphic file (type QTm)
+<use  "figures/keepAlive.jpg" > [38] [39]
 Missing character: There is no μ in font [lmroman10-regular]:mapping=tex-text!
  [40] [41] [42]
-File: orgi.png Graphic file (type QTm)
- <use  "orgi.png" >
-File: after.png Graphic file (type QTm)
+File: figures/orgi.png Graphic file (type QTm)
 
-<use  "after.png" > [43] [44]
+<use  "figures/orgi.png" >
+File: figures/after.png Graphic file (type QTm)
+ <use  "figures/after.png" > [43] [44]
 Overfull \hbox (15.54428pt too wide) in paragraph at lines 1343--1344
 \EU1/SimSun(0)/m/n/10 作。|  设 置 了[]\EU1/lmtt/m/n/10 IPC_CREAT \EU1/SimSun(0)/m/n
 /10 标 志 后，|  即 使 给 出 的 键 是 一 个 已 有 信 号 量 的 键，|  也 不 会 产 生 错 误。|  而[]\EU1/lmtt/m
@@ -2152,21 +2154,22 @@ Overfull \hbox (24.95175pt too wide) in paragraph at lines 1461--1463
  []
 
 [48]
-File: BlockingIO.jpg Graphic file (type QTm)
- <use  "BlockingIO.jpg" > [49]
-File: MultiThread.jpg Graphic file (type QTm)
- <use  "MultiThread.jpg" > [50]
-File: nonBlockingIO.jpg Graphic file (type QTm)
+File: figures/BlockingIO.jpg Graphic file (type QTm)
+ <use  "figures/BlockingIO.jpg" > [49]
+File: figures/MultiThread.jpg Graphic file (type QTm)
+ <use  "figures/MultiThread.jpg" >
+[50]
+File: figures/nonBlockingIO.jpg Graphic file (type QTm)
+ <use  "figures/nonBlockingIO.jpg" > [51]
+File: figures/IOMultiplexing.jpg Graphic file (type QTm)
 
-<use  "nonBlockingIO.jpg" > [51]
-File: IOMultiplexing.jpg Graphic file (type QTm)
- <use  "IOMultiplexing.jpg" >
+<use  "figures/IOMultiplexing.jpg" >
 Overfull \hbox (33.42822pt too wide) in paragraph at lines 1572--1573
  [][] 
  []
 
-File: asyIO.jpg Graphic file (type QTm)
-<use  "asyIO.jpg" >
+File: figures/asyIO.jpg Graphic file (type QTm)
+<use  "figures/asyIO.jpg" >
 Overfull \hbox (20.78093pt too wide) in paragraph at lines 1582--1583
  [][] 
  []
@@ -2208,128 +2211,160 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 ] [68]
 第六章
+File: figures/IO_SingleThread_Blocking.jpg Graphic file (type QTm)
+<use  "figures/IO_SingleThread_Blocking.jpg" >
+File: figures/iterative.png Graphic file (type QTm)
+ <use  "figures/iterative.png" >
+[69
+
+] [70]
+File: figures/concurrent.png Graphic file (type QTm)
+ <use  "figures/concurrent.png" > [71]
+File: figures/preFork.png Graphic file (type QTm)
+ <use  "figures/preFork.png" >
+[72]
 File: Reactor.png Graphic file (type QTm)
-<use  "Reactor.png" > [69
+ <use  "Reactor.png" >
+File: figures/reactor.png Graphic file (type QTm)
+ <use  "figures/reactor.png" > [73]
+File: figures/ReactorExample.png Graphic file (type QTm)
 
-]
-File: ReactorExample.png Graphic file (type QTm)
- <use  "ReactorExample.png" >
-File: IO_SingleThread_Blocking.jpg Graphic file (type QTm)
+<use  "figures/ReactorExample.png" > [74] [75]
+File: figures/reactorThreadpool.png Graphic file (type QTm)
 
-<use  "IO_SingleThread_Blocking.jpg" >
+<use  "figures/reactorThreadpool.png" >
+Overfull \hbox (20.37947pt too wide) in paragraph at lines 2467--2468
+ [][] 
+ []
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+[76]
+File: figures/MultipleReactors.png Graphic file (type QTm)
+ <use  "figures/MultipleReactors.png" > [77]
+File: figures/MultipleReactorsThreadpool.png Graphic file (type QTm)
 
-[70] [71]
-File: half.png Graphic file (type QTm)
- <use  "half.png" > [72]
-Overfull \hbox (31.858pt too wide) in paragraph at lines 2469--2470
+<use  "figures/MultipleReactorsThreadpool.png" >
+Overfull \hbox (16.36023pt too wide) in paragraph at lines 2501--2502
+ [][] 
+ []
+
+[78]
+File: figures/PreActor.png Graphic file (type QTm)
+ <use  "figures/PreActor.png" >
+Overfull \hbox (4.31944pt too wide) in paragraph at lines 2520--2521
+ [][] 
+ []
+
+[79] [80]
+File: figures/half.png Graphic file (type QTm)
+ <use  "figures/half.png" > [81]
+Overfull \hbox (31.858pt too wide) in paragraph at lines 2594--2595
 []\EU1/SimSun(0)/bx/n/10 改 进 方 面\EU1/SimSun(0)/m/n/10 ：|  让 一 个 工 作 线 程 能 够 处 理
  很 多 的 客 户 请 求。|  即 对 每 一 个 工 作 线 程，|  对 于 各 自 连 接 的[]\EU1/lmtt/m/n/10 socket \
 EU1/SimSun(0)/m/n/10 们 调 用[]\EU1/lmtt/m/n/10 epoll_wait\EU1/SimSun(0)/m/n/10 。|
  
  []
 
-File: half2.png Graphic file (type QTm)
-<use  "half2.png" > [73] [74
+File: figures/half2.png Graphic file (type QTm)
+<use  "figures/half2.png" > [82] [83] [84
 
 ]
 第七章
-[75] [76
+[85] [86
 
 ]
 第八章
-[77] [78]
+[87] [88]
 第九章
-[79
+[89
 
-] [80
+] [90] [91] [92
 
 ]
 第十章
-[81] [82]
+[93] [94]
 第十一章
-File: core.png Graphic file (type QTm)
-<use  "core.png" > [83
+File: figures/core.png Graphic file (type QTm)
+<use  "figures/core.png" > [95
 
-] [84]
-File: strace-Net.png Graphic file (type QTm)
- <use  "strace-Net.png" > [85] [86]
+] [96]
+File: figures/strace-Net.png Graphic file (type QTm)
+ <use  "figures/strace-Net.png" > [97]
+[98]
 第十二章
-[87
+[99
 
 ]
-File: DNS.png Graphic file (type QTm)
- <use  "DNS.png" > [88] [89]
-File: TCP-MM.jpg Graphic file (type QTm)
- <use  "TCP-MM.jpg" > [90]
-File: IPClassify.png Graphic file (type QTm)
-
-<use  "IPClassify.png" >
-Underfull \hbox (badness 3965) in paragraph at lines 3054--3054
+File: figures/DNS.png Graphic file (type QTm)
+ <use  "figures/DNS.png" > [100] [101]
+File: figures/TCP-MM.jpg Graphic file (type QTm)
+ <use  "figures/TCP-MM.jpg" >
+[102]
+File: figures/IPClassify.png Graphic file (type QTm)
+ <use  "figures/IPClassify.png" >
+Underfull \hbox (badness 3965) in paragraph at lines 3286--3286
 []|\EU1/SimSun(0)/m/n/10 最 大 可 指 派 的 网 络
  []
 
 
-Underfull \hbox (badness 3965) in paragraph at lines 3054--3054
+Underfull \hbox (badness 3965) in paragraph at lines 3286--3286
 []|\EU1/SimSun(0)/m/n/10 第 一 个 可 指 派 的 网
  []
 
 
-Underfull \hbox (badness 3965) in paragraph at lines 3054--3054
+Underfull \hbox (badness 3965) in paragraph at lines 3286--3286
 []|\EU1/SimSun(0)/m/n/10 最 后 一 个 可 指 派 的
  []
 
 
-Underfull \hbox (badness 3965) in paragraph at lines 3054--3055
+Underfull \hbox (badness 3965) in paragraph at lines 3286--3287
 []|\EU1/SimSun(0)/m/n/10 每 个 网 络 中 最 大 的
  []
 
-[91]
-Overfull \hbox (2.2963pt too wide) in paragraph at lines 3074--3074
+[103]
+Overfull \hbox (2.2963pt too wide) in paragraph at lines 3306--3306
 []|[]\EU1/FangSong(0)/m/n/10 非全\EU1/lmtt/m/n/10 0\EU1/FangSong(0)/m/n/10 或全\EU1
 /lmtt/m/n/10 1\EU1/FangSong(0)/m/n/10 的任何数| 
  []
 
 
-Overfull \hbox (4.23085pt too wide) in paragraph at lines 3083--3084
+Overfull \hbox (4.23085pt too wide) in paragraph at lines 3315--3316
 []\EU1/SimSun(0)/m/n/10 子 网 掩 码 ——|  屏 蔽 一 个[]\EU1/lmtt/m/n/10 IP \EU1/SimSun(0
 )/m/n/10 地 址 的 网 络 部 分 的  |“全 \EU1/lmr/m/n/10 1\EU1/SimSun(0)/m/n/10 ”|  比 特 模 
 式。|  对 于 \EU1/lmr/bx/n/10 A \EU1/SimSun(0)/bx/n/10 类 地 址 \EU1/SimSun(0)/m/n/10 
 来 说，|  默 认 的 子 网 掩 码 是[]\EU1/lmtt/m/n/10 255.0.0.0\EU1/SimSun(0)/m/n/10 ；|
  []
 
-File: subNetMask.png Graphic file (type QTm)
-<use  "subNetMask.png" > [92] [93] [94
+File: figures/subNetMask.png Graphic file (type QTm)
+<use  "figures/subNetMask.png" > [104] [105] [106
 
 ]
 第十三章
 
-Overfull \hbox (0.42722pt too wide) in paragraph at lines 3113--3114
+Overfull \hbox (0.42722pt too wide) in paragraph at lines 3345--3346
  []\EU1/lmr/bx/n/10 1. \EU1/SimSun(0)/bx/n/10 使 用 \EU1/lmr/bx/n/10 socket \EU1/
 SimSun(0)/bx/n/10 通 信 实 现 \EU1/lmr/bx/n/10 FTP \EU1/SimSun(0)/bx/n/10 服 务 器[] [
 ][]$[][][][] [] [] [] [][][] [] [][][] [] [][][] [] [][][][][][][][][][][][][][
 ] [] [][] [] [][][][][] [] [][][][][][][][][][][][][][][][][]$[][] 
  []
 
-[95]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3121.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 3121.
+[107]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3353.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 3353.
  (./C++_NetProgram.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 3121.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 3121.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 3353.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 3353.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 39112 strings out of 493706
- 777523 string characters out of 6145376
- 917452 words of memory out of 5000000
- 41913 multiletter control sequences out of 15000+600000
+ 39156 strings out of 493706
+ 778401 string characters out of 6145376
+ 920607 words of memory out of 5000000
+ 41948 multiletter control sequences out of 15000+600000
  10738 words of font info for 78 fonts, out of 8000000 for 9000
  1328 hyphenation exceptions out of 8191
  63i,13n,75p,10422b,2025s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on C++_NetProgram.pdf (95 pages).
+Output written on C++_NetProgram.pdf (107 pages).

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/W32TeX) (preloaded format=xelatex 2017.2.16)  25 JAN 2018 02:03
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/W32TeX) (preloaded format=xelatex 2017.2.16)  6 FEB 2018 00:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1632,8 +1632,8 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
  [4]
 第一章
-File: muduo.png Graphic file (type QTm)
-<use  "muduo.png" >
+File: figure/muduo.png Graphic file (type QTm)
+<use  "figure/muduo.png" >
 \g__fontspec_family_FangSong_int=\count179
 .................................................
 . fontspec info: "no-font-shape"
@@ -1714,51 +1714,59 @@ File: figure/muduoThreadPool.png Graphic file (type QTm)
  <use  "figure/muduoThreadPool.png" >
 File: figure/muduoSingleton.png Graphic file (type QTm)
 
-<use  "figure/muduoSingleton.png" > [11] [12
+<use  "figure/muduoSingleton.png" > [11]
+File: figure/threadLocal.png Graphic file (type QTm)
+ <use  "figure/threadLocal.png" >
+[12] [13] [14
 
 ]
 第二章
-[13] [14
+File: figure/httpServer.png Graphic file (type QTm)
+<use  "figure/httpServer.png" > [15] [16] [17] [18
 
 ]
 第三章
-File: lighttpd.jpg Graphic file (type QTm)
-<use  "lighttpd.jpg" > [15] [16
+[19] [20
 
 ]
 第四章
-File: nginx.png Graphic file (type QTm)
-<use  "nginx.png" > [17] [18
+File: figure/lighttpd.jpg Graphic file (type QTm)
+<use  "figure/lighttpd.jpg" > [21] [22
 
 ]
 第五章
-[19] [20]
-第六章
-[21
-
-] [22
+File: figure/nginx.png Graphic file (type QTm)
+<use  "figure/nginx.png" > [23] [24
 
 ]
+第六章
+[25] [26]
 第七章
-[23] [24
+[27
+
+] [28
 
 ]
 第八章
-[25]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 428.
- [26]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 428.
+[29] [30
+
+]
+第九章
+[31]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 576.
+ [32]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 576.
  (./C++_Project.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 428.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 428.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 576.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 576.
  ) 
 Here is how much of TeX's memory you used:
- 29280 strings out of 493706
- 561952 string characters out of 6145376
- 689102 words of memory out of 5000000
- 32308 multiletter control sequences out of 15000+600000
- 10690 words of font info for 72 fonts, out of 8000000 for 9000
+ 29328 strings out of 493706
+ 562984 string characters out of 6145376
+ 689113 words of memory out of 5000000
+ 32352 multiletter control sequences out of 15000+600000
+ 10698 words of font info for 73 fonts, out of 8000000 for 9000
  1328 hyphenation exceptions out of 8191
  63i,8n,75p,10419b,1787s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on C++_Project.pdf (26 pages).
+Output written on C++_Project.pdf (32 pages).

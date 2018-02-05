@@ -21,6 +21,7 @@
   
  \renewcommand{\figurename}{Fig}
  
+ \graphicspath{{figure/}}
  \geometry{left=1.6cm,right=1.8cm,top=2cm,bottom=1.7cm} %设置文章宽度
  
  \pagestyle{plain} 		  %设置页面布局
@@ -87,29 +88,42 @@
 		  \begin{figure}[h]
 		  	\centering
 		  	\includegraphics[scale = 0.7]{FenBuShi.jpg}
+		  	\includegraphics[scale = 0.7]{figure/git.png}
 		  	\caption{分布式架构结构图}
 		  \end{figure}
 		  
 		 当然，Git的优势不单是不必联网这么简单，后面我们还会看到Git极其强大的分支管理，把SVN等远远抛在了后面。
-  \chapter{Git 安装配置}
   
   \chapter{Git 工作流程}
-	  一般工作流程如下：
-		  \begin{figure}[h]
+		\section{流程}
+		  \begin{figure}[ht]
 		  	\centering
+		  	\includegraphics[scale = 0.7]{figure/process.png}
+		  	\includegraphics[scale = 0.3]{figure/gitArc.png}
 		  	\includegraphics[scale = 0.5]{git-process.png}
 		  	\caption{Git 工作流程图}
 		  \end{figure}
 		  
-	  \begin{enumerate}
-	  	\item \textbf{克隆} Git 资源作为工作目录
-	  	\item \textbf{在克隆的资源上添加或修改文件}
-	  	\item 如果其他人修改了，你可以更新资源
-	  	\item \textbf{在提交前查看修改}
-	  	\item 提交修改
-	  	\item 在修改完成后，如果发现错误，可以撤回提交并再次修改并提交
+	  \begin{enumerate}[itemindent = 2em]
+	  	\item \textbf{在工作目上添加或修改文件}，如果其他人修改了，你可以更新资源
+	  	\item 将需要进行版本管理的文件放入\textbf{暂存区域}                    
+	  	\item 将\textbf{暂存区域}的文件提交到\textbf{git仓库} 
 	  \end{enumerate}
 	  
+	  \subparagraph{如何创建工作目录}
+		  有两种方法
+		  
+		  \begin{itemize}[itemindent = 2em]
+		  	\item 从远程仓库克隆到一个文件夹中
+		  	\item 新建一个空文件夹，然后执行\verb|git init|即可对该文件的内容进行版本管理了
+		  \end{itemize}
+	  \section{状态}
+		  \begin{itemize}[itemindent = 2em]
+		  	\item 已修改(modified)
+		  	\item 已暂存(staged)
+		  	\item 已提交(committed)
+		  \end{itemize}
+		  
   \chapter{Git 工作区、暂存区、版本库}
 	  \section{版本库 repository}
 		  什么是版本库呢？版本库又名仓库，英文名repository，\textbf{你可以简单理解成一个目录}，\textit{这个目录里面的所有文件都可以被Git管理起来}，\textbf{每个文件的修改、删除，Git都能跟踪}，以便任何时刻都可以追踪历史，\textbf{或者在将来某个时刻可以“还原”}。
@@ -181,60 +195,17 @@
 	$ git clone git://github.com/schacon/grit.git mygrit
 		 \end{lstlisting} 
   \chapter{Git 基本操作}
-	  \section{基本操作}
+	  \section{提交与更新}
 		  \subsection{git status}
 			  命令可以让我们时刻\textbf{掌握仓库当前的状态}，得知添加到缓存中的文件是否被修改过了，是否是还没有准备提交的修改。例子结合\verb|git add| 一起学习。
 			  
-			  加上 \verb|-s| 参数，以获得简短的结果输出。如果没加该参数会详细输出内容
-			  \begin{lstlisting}
-	$ git status
-	On branch master
-	
-	Initial commit
-	
-	Changes to be committed:
-	(use "git rm --cached <file>..." to unstage)
-	
-	new file:   README
-	new file:   hello.php
-			  \end{lstlisting}
+			  加上 \verb|-s| 参数，以获得\textbf{简短的结果输出}。如果没加该参数会详细输出内容
 			  
 		  \subsection{git add}
 			  使用 \verb|git add |命令将想要\textbf{快照的内容写入缓存区}.
 		  
 			  \verb|git add| 命令可将该文件添加到缓存，如我们添加以下两个文件,	新项目中，添加所有文件很普遍，我们可以使用 \verb|'git add .'| 命令来添加当前项目的所有文件
-			  \begin{lstlisting}
-	$ touch README
-	$ touch hello.php
-	$ ls
-	README		hello.php
-	
-	$ git status -s
-	?? README
-	?? hello.php
-	$ 
-	
-	$ git add README hello.php 
-	
-	$ git status -s
-	A  README
-	A  hello.php
-	$ 
-	
-	//现在我们修改 README 文件：
-	$ vim README
-	//在 README 添加以下内容：# Runoob Git 测试，然后保存退出。
-	
-	$ git status -s
-	AM README
-	A  hello.php
-	
-	//"AM" 状态的意思是，这个文件在我们将它添加到缓存之后又有改动。改动后我们在执行 git add 命令将其添加到缓存中
-	$ git add .
-	$ git status -s
-	A  README
-	A  hello.php
-			  \end{lstlisting}
+			  
 		\subsection{git diff}
 			执行 \verb|git diff| 来\textbf{查看}执行 \verb|git status| 的结果的\textbf{详细信息}。
 			
@@ -247,52 +218,6 @@
 				\item 显示摘要而非整个 diff：\verb|git diff --stat| 
 			\end{itemize}
 			
-			\begin{lstlisting}
-	// Example:
-	// 在 hello.php 文件中输入以下内容：
-	<?php
-	echo '菜鸟教程：www.runoob.com';
-	?>
-	$ git status -s
-	A  README
-	AM hello.php
-	$ git diff
-	diff --git a/hello.php b/hello.php
-	index e69de29..69b5711 100644
-	--- a/hello.php
-	+++ b/hello.php
-	@@ -0,0 +1,3 @@
-	+<?php
-	+echo '菜鸟教程：www.runoob.com';
-	+?>
-			\end{lstlisting}
-			
-		\verb|git status| 显示你上次提交更新后的更改或者写入缓存的\textbf{改动}， 而 \verb|git diff| 一行一行地显示\textbf{这些改动具体是啥}
-			
-		\verb|git diff --cached| 的执行效果如下..具体体现缓存中的文件的更新时间戳与改动内容：
-			\begin{lstlisting}
-	$ git add hello.php 
-	$ git status -s
-	A  README
-	A  hello.php
-	$ git diff --cached
-	diff --git a/README b/README
-	new file mode 100644
-	index 0000000..8f87495
-	--- /dev/null
-	+++ b/README
-	@@ -0,0 +1 @@
-	+# Runoob Git 测试
-	diff --git a/hello.php b/hello.php
-	new file mode 100644
-	index 0000000..69b5711
-	--- /dev/null
-	+++ b/hello.php
-	@@ -0,0 +1,3 @@
-	+<?php
-	+echo '菜鸟教程：www.runoob.com';
-	+?>
-			\end{lstlisting}
 		\subsection{git commit}
 			使用 \verb|git add |命令将想要\textbf{快照的内容写入缓存区}， 而执行 \verb|git commit| \textbf{将缓存区内容添加到仓库中}。
 
@@ -303,106 +228,33 @@
 			\end{lstlisting}
 						
 			接下来我们写入缓存，并提交对 hello.php 的所有改动。在首个例子中，我们使用 \verb|-m| 选项以在命令行中提供提交注释。
-			\begin{lstlisting}
-	$ git add hello.php
-	$ git status -s
-	A  README
-	A  hello.php
-	$ $ git commit -m '第一次版本提交'
-	[master (root-commit) d32cf1f] 第一次版本提交
-	2 files changed, 4 insertions(+)
-	create mode 100644 README
-	create mode 100644 hello.php
-	
-	$ git status
-	# On branch master
-	nothing to commit (working directory clean)
-			\end{lstlisting}
+
+			如果你觉得 \verb|git add |提交缓存的流程太过繁琐，Git 也允许你用 \verb|-a |选项跳过这一步。命令格式如下：\verb|git commit -am"注释"|
+		
+		\subsection{git rm fileName}
+			删除工作目录与暂存区中的文件，不会删除快照中的。
 			
-			如果你觉得 \verb|git add |提交缓存的流程太过繁琐，Git 也允许你用 \verb|-a |选项跳过这一步。命令格式如下：\verb|git commit -a|
-			\begin{lstlisting}
-	// 我们先修改 hello.php 文件为以下内容：
-	<?php
-	echo '菜鸟教程：www.runoob.com';
-	echo '菜鸟教程：www.runoob.com';
-	?>
-	// 再执行以下命令：
-	git commit -am '修改 hello.php 文件'
-	[master 71ee2cb] 修改 hello.php 文件
-	1 file changed, 1 insertion(+)
-			\end{lstlisting}
-			
-		\subsection{git rm}
-		
-		\subsection{git mv}
-		
-		
-	\section{版本回滚与前进控制}
+		\subsection{git mv  fileName newFilename}
+			更改工作目录与暂存区 的文件名字
+			 
+				
+	\section{版本记录与回滚}
 		\subsection{git log}
 			在使用 Git 提交了若干更新之后，又或者克隆了某个项目，想回顾下提交历史，我们可以使用 \verb|git log| 命令查看。
 			
-			我们可以用 \verb|--oneline| 选项来查看历史记录的简洁的版本-告诉我们\textbf{此项目的开发历史}。
-			\begin{lstlisting}
-	$ git log --oneline
-	88afe0e Merge branch 'change_site'
-	14b4dca 新增加一行
-	d7e7346 changed the site
-	556f0a0 removed test2.txt
-	2e082b7 add test2.txt
-	048598f add test.txt
-	85fc7e7 test comment from w3cschool.cc
-			\end{lstlisting}
+			\begin{itemize}
+				\item   \verb|--oneline| 选项来查看历史记录的简洁的版本-告诉我们\textbf{此项目的开发历史}。
+				\item 	\verb|--graph| 查看历史中什么时候出现了分支、合并。以下为相同的命令，开启了拓扑图选项,们可以\textbf{更清楚明了地看到何时工作分叉、又何时归并}
+				\item 	\verb|--reverse| \textbf{逆向显示所有日志}。
+				\item  	\verb|git log --author| \textbf{查找指定用户的提交日志}可以使用命令： 例如，比方说我们要找 Git 源码中 Linus 提交的部分
+				\item   \verb|--since 和 --before|，但是你也可以用 \verb|--until 和 --after|。 
+				\item   \verb|--decorate| 显示分支、 标签引用
+			\end{itemize}
 			
-			我们还可以用 \verb|--graph| 选项，查看历史中什么时候出现了分支、合并。以下为相同的命令，开启了拓扑图选项,们可以\textbf{更清楚明了地看到何时工作分叉、又何时归并}
-			\begin{lstlisting}
-	$ git log --oneline --graph
-	*   88afe0e Merge branch 'change_site'
-	|\  
-	| * d7e7346 changed the site
-	* | 14b4dca 新增加一行
-	|/  
-	* 556f0a0 removed test2.txt
-	* 2e082b7 add test2.txt
-	* 048598f add test.txt
-	* 85fc7e7 test comment from w3cschool.cc
-			\end{lstlisting}
-			
-			可以用 '\verb|--reverse|'参数来\textbf{逆向显示所有日志}。
-			\begin{lstlisting}
-	$ git log --reverse --oneline
-	85fc7e7 test comment from w3cschool.cc
-	048598f add test.txt
-	2e082b7 add test2.txt
-	556f0a0 removed test2.txt
-	d7e7346 changed the site
-	14b4dca 新增加一行
-	88afe0e Merge branch 'change_site'
-			\end{lstlisting}
-			
-			如果只想\textbf{查找指定用户的提交日志}可以使用命令：\verb|git log --author| , 例如，比方说我们要找 Git 源码中 Linus 提交的部分
-			\begin{lstlisting}
-	$ git log --author=Linus --oneline -5
-	81b50f3 Move 'builtin-*' into a 'builtin/' subdirectory
-	3bb7256 make "index-pack" a built-in
-	377d027 make "git pack-redundant" a built-in
-	b532581 make "git unpack-file" a built-in
-	112dd51 make "mktag" a built-in
-			\end{lstlisting}
-			
-			如果\textbf{你要指定日期}，可以执行几个选项：\verb|--since 和 --before|，但是你也可以用 \verb|--until 和 --after|。 
-			例如，如果我要看 Git 项目中三周前且在四月十八日之后的所有提交，我可以执行这个（我还用了 \verb|--no-merges| 选项以隐藏合并提交）
 			\begin{lstlisting}
 	$ git log --oneline --before={3.weeks.ago} --after={2010-04-18} --no-merges
-	5469e2d Git 1.7.1-rc2
-	d43427d Documentation/remote-helpers: Fix typos and improve language
-	272a36b Fixup: Second argument may be any arbitrary string
-	b6c8d2d Documentation/remote-helpers: Add invocation section
-	5ce4f4e Documentation/urls: Rewrite to accomodate transport::address
-	00b84e9 Documentation/remote-helpers: Rewrite description
-	03aa87e Documentation: Describe other situations where -z affects git diff
-	77bc694 rebase-interactive: silence warning when no commits rewritten
-	636db2c t3301: add tests to use --format="%N"
 			\end{lstlisting}
+			
 		\subsection{git reset}
 			需要友情提示的是，你看到的一大串类似\verb|3628164...882e1e0|的是\verb|commit id|（版本号）
 			
@@ -410,20 +262,84 @@
 			
 			首先，Git必须知道当前版本是哪个版本，在Git中，用\verb|HEAD|表示当前版本，也就是最新的提交\verb|3628164...882e1e0|（注意我的提交ID和你的肯定不一样），上一个版本就是\verb|HEAD^|，上上一个版本就是\verb|HEAD^^|，当然往上100个版本写100个\verb|^|比较容易数不过来，所以写成\verb|HEAD~100|。
 			
-			\subparagraph{-->即可以使用该命令回退到过去}现在，我们要把当前版本“\verb|append GPL|”回退到上一个版本“\verb|add distributed|”，就可以使用\verb|git reset|命令：
+			假设当前版本库如下：
+			\begin{figure}
+				\centering
+				\includegraphics[scale = 0.7]{figure/reset-original.png}
+				\caption{最初版本库}
+			\end{figure}
+			
+			\subparagraph{-->将快照回退到过去}
+				现在，我们要把当前版本“\verb|append GPL|”回退到上一个版本“\verb|add distributed|”，就可以使用\verb|git reset|命令：
+			
+				\begin{itemize}
+					\item \verb|--mixed(默认参数)| 回滚到\textbf{暂存区}，不覆盖工作目录内容
+						\begin{enumerate}
+							\item 移动\verb|HEAD|的指向，将其\textbf{指向上一个快照}
+							\item 将\verb|HEAD|移动后指向的快照回滚到\textbf{暂存区域}
+						\end{enumerate}
+					\item \verb|--soft| 仅仅移动\verb|HEAD|指针到上一个快照，类似于\textbf{撤销动作}，但是不改变暂存区与工作目录内容
+					\item \verb|--hard| 回滚到\textbf{工作目录}，即将工作目录的内容一同覆盖
+						\begin{enumerate}
+							\item 移动\verb|HEAD|的指向，将其指向上一个快照
+							\item 将\verb|HEAD|移动后指向的快照回滚到暂存区域
+							\item 将暂存区域的文件还原到工作目录
+						\end{enumerate}
+				\end{itemize}
+				
 			\begin{lstlisting}
-	$ git reset --hard HEAD^
+	$ git reset HEAD^    //等价于 git reset --mixed HEAD^1
 	HEAD is now at ea34578 add distributed
 			\end{lstlisting}
 			
+			执行了\verb|git reset HEAD~|后，版本库就会如下图所示
+				\begin{figure}
+					\centering
+					\includegraphics[scale = 0.7]{figure/reset-mix.png}
+					\caption{mixed 后}
+				\end{figure}
+			
+			执行了\verb|git reset --hard HEAD~|后，版本就会如下图所示
+				\begin{figure}
+					\centering
+					\includegraphics[scale = 0.7]{figure/reset-mix.png}
+					\caption{hard 后}
+				\end{figure}
+		 
 			此时，最新的那个版本\verb|append GPL|已经看不到了！-->\textbf{[可以通过 命令}\verb|git reflog| 来验证]，好比你从21世纪坐时光穿梭机来到了19世纪，想再回去已经回不去了，肿么办？
 			
-			\subparagraph{-->用版本提交号码回到未来}办法其实还是有的，只要上面的命令行窗口还没有被关掉，你就可以顺着往上找啊找啊，找到那个\verb|append GPL|的\verb|commit id|是\verb|3628164...|，于是就可以指定回到未来的某个版本：
+			\subparagraph{-->回滚指定快照}\verb|git reset commitID|-->\verb|git reset ba2dfda|
 			
-			\begin{lstlisting}
-	$ git reset --hard 3628164
-	HEAD is now at 3628164 append GPL
-			\end{lstlisting}
+			\subparagraph{-->回滚指定文件}\verb|git reset commitID 文件/路径| -->\verb|git reset bas2fs fileFuture|
+			
+				此时，\verb|HEAD|指针是不会改变的
+			
+			\subparagraph{-->用版本提交号码回到未来}
+				\begin{enumerate}[itemindent = 2em]
+					\item \verb|git relog|找到未来的版本快照id 
+					\item \verb|git reset|回到未来
+				\end{enumerate}
+				
+		\section{修改最后一次提交}
+			\subsection{少提交}
+				\begin{itemize}
+					\item 版本刚一提交(commit)到仓库，突然想起漏掉两个文件还没有添加(add)
+					\item 版本刚一提交(commit)到仓库，突然想起版本说明不够，无法xx
+				\end{itemize}
+			
+			\paragraph{方案}
+			
+				\verb|commit --amend| 就会更正最近的一次提交。 这样将\textbf{不会再增加额外的快照}、增加开销
+				
+			    首先需要将需要添加的文件\verb|add|到暂存区，然后执行\verb|git commit --amend|，这样将不产生额外的快照 
+				
+		
+		\section{工作区误删文件恢复}
+			
+			\textbf{从暂存区拉回}：
+			\verb|git checkout -- fileName| --> \verb|git checkout -- ReadMe.md|
+			
+			
   \chapter{Git 分支管理}
 	  分支在实际中有什么用呢？假设你准备开发一个新功能，但是需要两周才能完成，第一周你写了50\%的代码，如果立刻提交，由于代码还没写完，不完整的代码库会导致别人不能干活了。如果等代码全部写完再一次提交，又存在丢失每天进度的巨大风险。
 	  
@@ -437,40 +353,36 @@
 	$ git branch
 	* master
 	
-	$ git branch testing
+	$ git branch feature
 	$ git branch
 	* master
-	  testing
+	  feature
 			  \end{lstlisting}
+			  
+			  执行后，仓库的形状会如下图\ref{branch-after}所示：
+				  \begin{figure}[htbp]
+				  	\centering
+				  	\includegraphics[scale = 0.7]{figure/branch.png}
+				  	\caption{创建分支 后}
+				  	\label{branch-after}
+				  \end{figure}
+			  
 		  \subsection{git checkout (branchName)}
 			  \textbf{切换分支},当你切换分支的时候，Git 会用该分支的最后提交的快照替换你的工作目录的内容， 所以多个分支不需要多个目录
 		  
 			  用 \verb|git checkout (branch)| 切换到我们要修改的分支
-			  \begin{lstlisting}
-	$ ls
-	README
-	$ echo 'runoob.com' > test.txt
-	$ git add .
-	$ git commit -m 'add test.txt'
-	[master 048598f] add test.txt
-	2 files changed, 1 insertion(+), 3 deletions(-)
-	delete mode 100644 hello.php
-	create mode 100644 test.txt
-	$ ls
-	README		test.txt
-	$ git checkout testing
-	Switched to branch 'testing'
-	$ ls
-	README		hello.php
-			  \end{lstlisting}
+
+			  如执行\verb|git checkout feature|后，仓库的结构图会如下：
 			  
-			  当我们切换到"testing"分支的时候，我们添加的新文件test.txt被移除了, 原来被删除的文件hello.php文件又出现了。切换回"master"分支的时候，它们\textbf{又重新出现了}
-			  \begin{lstlisting}
-	$ git checkout master
-	Switched to branch 'master'
-	$ ls
-	README		test.txt
-			  \end{lstlisting}
+				\begin{figure}[htbp]
+					\centering
+					\includegraphics[scale = 0.7]{figure/branchCheck.png}
+					\caption{切换分支 后}
+				\end{figure}  
+		
+		  \subsection{git checkout -b (branchName)}
+			  创建分支 并 切换到该分支下
+			  
 		  \subsection{git branch -d (branchName)}
 			 \textbf{删除分支},例如我们要删除"testing"分支
 			  
@@ -504,6 +416,15 @@
 	  \section{解决冲突}
 		  使用\verb|git diff| 发现冲突文件，手动改写后，然后使用普通文件的添加和提交\verb|git add,commit|
   
+	  
+	  
+	  \section{项目中的分支演示}
+		  \begin{figure}[htbp]
+		  	\centering
+		  	\includegraphics[scale = 0.7]{figure/BranchIn.png}
+		  	\caption{项目分支演示}
+		  \end{figure}
+		  
   \chapter{GitHub 远程仓库}
 	  \section{远程硬盘仓库-GitHub}
 		  \subparagraph{第1步：创建SSHKey}。在用户主目录下，看看有没有\verb|.ssh|目录，如果有，再看看这个目录下有没有\verb|id_rsa和id_rsa.pub|这两个文件，如果已经有了，可直接跳到下一步。如果没有，打开Shell（Windows下打开Git Bash），创建SSH Key
@@ -532,27 +453,38 @@
 	  \section{添加远程库}
 		  在github 网站上创建项目..
 	  \section{从远程库克隆}
-		  git clone git@github.com:ctzhenghua/C-NetworkPractice-Code.git
+		  \verb|git clone git@github.com:ctzhenghua/C-NetworkPractice-Code.git|
 		  
 		  
 		  \subsection{创建项目的目录结构}
-			  1 创建目录 
+			   创建目录 
 			  
-			  2 \verb|find . -type d -empty -exec touch {}\ .gitignore;\|
+			   \verb|find . -type d -empty -exec touch {}\ .gitignore;\|
 			  
-			  3 git add
+			   \verb|git add file|
 			  
-			  4 git commit
+			   \verb|git commit file|
 	  
-	  \section{多人协作}
-	  
-  \chapter{Git 服务器搭建}
+	  \section{提交更新}
+		  \verb|git push origin master|
+		  
+	  \section{拉取更新}
+		  
+		  \verb|git fetch[remote]| 下载远程仓库的所有变动
+		  
+		  \verb|git remote -v| 显示所有远程仓库
+		  
+		  \verb|git pull[remote] [branch]| 取回远程仓库的变化，并与本地分支合并
+
+		  \verb|git push[remote] [branch]| 上传本地指定分支到远程仓库
   
   \chapter{参考}
-		  动手教程 \url{https://try.github.io/levels/1/challenges/13}
+		  动手教程   \url{https://try.github.io/levels/1/challenges/13}
 		  
-		  菜鸟教程  \url{http://www.runoob.com/git/git-tutorial.html}
+		  菜鸟教程   \url{http://www.runoob.com/git/git-tutorial.html}
 		  
 		  廖雪峰教程 \url{http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000}
+		  
+		  纯命令分类 \url{http://blog.csdn.net/jtracydy/article/details/70402663}
 \end{document} 
  		    

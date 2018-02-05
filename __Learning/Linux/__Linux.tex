@@ -210,7 +210,12 @@
 			\subsection{GUID}
 	\section{裸机装机必备软件及技巧}
 		\subparagraph{vim}必备，要么你修改配置文档都是个问题。
+			通过wifi 先将基本的vim 搞定。
+			
 			\verb|sudo apt-get install vim|
+			
+			编程相关的插件到后续再安装。
+			
 		\subparagraph{网络配置}有网才能工作
 			
 			1.ln -s 创建快捷命令
@@ -267,6 +272,30 @@
 				\item 再次运行安装命令
 			\end{enumerate} 
 		
+		\subparagraph{vim 插件安装}
+			\url{http://blog.csdn.net/lhf_tiger/article/details/7216500}
+			
+			\begin{enumerate}
+				\item \verb|Ctags|:
+					\verb|sudo apt-get install ctags|
+					
+					进入目录中
+					\verb|ctags -R|
+					
+					
+				\item \verb|Cscope|:
+					\url{http://blog.csdn.net/av_geek/article/details/47976981}	
+					
+					\verb|sudo apt-get install cscope|
+					
+					\begin{itemize}
+						\item 进入项目主目录 \verb|find . -name "*.h" -o -name "*.cc">cscope.files|
+						\item 执行 \verb|cscope -bkq -i cscope.files|
+						\item 执行 \verb|ctags -R|
+						\item 进入要编辑的文件中\verb|:cs add cscope.out|
+						\item 然后执行相应的命令 \verb@:cs find c|d|e|f|g|i|s|t name@
+					\end{itemize}
+			\end{enumerate}
 		
  \chapter{命令相关}
 	 \section{导航命令}
@@ -437,7 +466,7 @@
 			
 			\begin{figure}[h]
 				\centering
-				\includegraphics[scale=0.7]{pwd.png}
+				\includegraphics[scale=0.7]{figure/pwd.png}
 				\caption{pwd -P 选项示例}
 			\end{figure}
 		\paragraph{cp} 复制文件和目录，默认会改变时间戳
@@ -513,7 +542,7 @@
 			
 			\begin{figure}
 				\centering
-				\includegraphics[scale = 1.2]{Link.jpg}	
+				\includegraphics[scale = 1.2]{figure/Link.jpg}	
 				\caption{Linux Link Data Access Roud}
 				\label{Link}
 			\end{figure}
@@ -611,7 +640,7 @@
 		\subsection{基础}
 		\begin{figure}[h]
 			\centering
-			\includegraphics[scale = 1]{fileDescription.png}
+			\includegraphics[scale = 1]{figure/fileDescription.png}
 			\caption{ls -l 文件权限}
 		\end{figure}
 		
@@ -794,60 +823,101 @@
 		\subparagraph{alias}为命令创建一个别名.
 		
 	\section{VI 编辑器}
+		\subsection{基本模式}
+			\begin{itemize}
+				\item 普通模式
+				\item 插入模式
+				\item 可视模式
+				\item 选择模式
+				\item 命令行模式
+				\item ex模式
+			\end{itemize}
+			\begin{figure}[h]
+				\centering
+				\includegraphics[scale = 0.5]{figure/viInsert.png}
+				\caption{vi插入示例}
+			\end{figure}
+
 		\subsection{模式转换}
 			模式如下，所有在\textbf{使用命令的时候一般需要按Esc按键返回到命令模式下才可以.}.而并非在插入模式与ex转义方式下。
 			通过输入vi的插入命令（i）、附加命令（a）、打开命令（o）、替换命令（s）、修改命令(c）或取代命令（r）可以从命令方式进入输入方式。
 			\begin{figure}[h]
 				\centering
-				\includegraphics[scale = 0.5]{vi.png}
+				\includegraphics[scale = 0.5]{figure/vi.png}
 				\caption{vi模式转换示例}
 			\end{figure}
 		
 		\subsection{常用命令}
 			\url{http://blog.csdn.net/weixin_40910753/article/details/79077074}
+			
+			$$\verb|数字奥义(单，范围)| + \verb|命令| + \verb|正则光标|$$
+			
 			\subsubsection{选中一块区域并缩进缩出}
-				\begin{enumerate}
-					\item 按\verb|ESC| 进入正常模式
-					\item 按\verb|shift+v|进入视觉模式
-					\item 2不松手，移动上下键选择文本
-					\item \verb|gv>| 缩进，命令可以重复执行，\verb|gv<| 缩出
-				\end{enumerate}
+				\subparagraph{可视模式}
+					按\verb|ESC| 进入正常模式
+					\begin{enumerate}
+						\item 按\verb|v|进入视觉模式
+						\item 按\verb|shift|，移动上下键选择文本
+						\item \verb|>| 缩进，\verb|<| 缩出
+					\end{enumerate}
+					
+				\subparagraph{正常模式}
+					按\verb|ESC| 进入正常模式
+					
+					\verb|数字的奥义| + \verb@>>|<<@
+					
 			\subsubsection{移动光标}
+				按\verb|ESC| 进入正常模式
 				\subparagraph{数字0} 移动光标至本行开头，\verb|Home| 也有此功能
 				\subparagraph{\$} 移动光标至本行末尾，\verb|End| 也有此功能
-				\subparagraph{num+G} 移动光标到第 \verb|num| 行
+				\subparagraph{gg} 移动光标到文件第一行
 				\subparagraph{G} 移动光标到文件最后一行
-				\subparagraph{O} 在当前行插入一行，小写则是后插入一行
+				\subparagraph{b} 移动光标到该单词的第一个字母
+				\subparagraph{e} 移动光标到该单词的最后一个字母
+				\subparagraph{w} 移动光标到下一个单词的起始处
+				\subparagraph{num+G} 移动光标到第 \verb|num| 行
 				
 			\subsubsection{删除操作}
-				\subparagraph{dd} 删除当前行
-				\subparagraph{num+dd} 删除与本行在内的往后 \verb|num| 行
+				按\verb|ESC| 进入正常模式
+				\subparagraph{x} 删除当前字符
+				\subparagraph{d0}删除当前光标到行开头字符
+				\subparagraph{d\$}删除当前光标到结尾字符
 				\subparagraph{dW} 删除整个单词
-				\subparagraph{d+num+G} 删除当前行到第\verb|num|行
+				\subparagraph{dd} 删除当前行
 				\subparagraph{d+G} 删除当前行到文件末尾
-				\subparagraph{u} 取消删除操作
+				\subparagraph{num+dd} 删除与本行在内的往后 \verb|num| 行
 				
+					\verb|数字 + motion = | 重复多个motion
+				\subparagraph{d+num+G} 删除当前行到第\verb|num|行
+			
+			\subsubsection{撤销恢复}	
+				\subparagraph{u} undo  操作
+				\subparagraph{ctrl+r} redo 操作
+			
 			\subsubsection{复制粘贴}
-				\subparagraph{normal mode}命令在按返回后直接使用，不用使用\verb|:yy|,使用方式：
-				
-					\verb|1. Esc|
-					
-					\verb|2. yy|
-					
-					\verb|3. p|
+				按\verb|ESC| 进入正常模式
+				\subparagraph{y0}复制当前光标到行开头字符
+				\subparagraph{y\$}复制当前光标到结尾字符
+				\subparagraph{yW} 复制整个单词
 				\subparagraph{yy} 复制当前行
 				\subparagraph{num+yy} 复制连同当前行往后的num行
 				\subparagraph{y+num+G} 复制当前行到文件第num行
 				\subparagraph{y+G} 复制当前行到文件末尾
-				\subparagraph{p} 粘贴复制文本到当前光标前
+				\subparagraph{p} 粘贴复制文本到当前光标\textbf{前}
+				\subparagraph{P} 粘贴复制文本到当前光标\textbf{后}
 				\subparagraph{J} 合并后一行至当前行
 				\url{https://stackoverflow.com/questions/2770739/vim-error-e492-not-an-editor-command-dd}
+				
 			\subsubsection{查找}
+				按\verb|ESC| 进入正常模式
 				\subparagraph{'/keyword'} 在当前文本 向后查找 \verb|keyword|
 				\subparagraph{'?keyword'} 在当前文本 向前查找 \verb|keyword|
 				\subparagraph{n} 寻找下一个 
+				\subparagraph{N} 寻找上一个 
+				\subparagraph{\%} 快速\textbf{匹配括号}
 				
 			\subsubsection{全局搜索和替换}
+				\verb|esc : 进入ex 模式|
 				\begin{table}[H]
 					\centering
 					\caption{ex 搜索替换使用规范}
@@ -858,11 +928,17 @@
 						\verb|：|	&  分号用于启动一条ex 命令\\
 						\verb|% |	 &  确定作用范围，\verb|%|代表从文件的第一行到最后一行，\verb|1,5| 代表第一行到第5行，\verb|2,$| 代表从第二行到最后一行. 如果不指定范围的话，只会在当前行生效\\
 						\verb|s |	 &  指定了具体的操作- 本次操作为替换操作(搜索和替换)\\
-						\verb|/find/replace|		&  搜说find关机字，并将其替换为replace\\
-						\verb|g |	 &  代指global 全局的意思，也就是说对搜索到的每一行的每一个实例进行替换，是一个范围参数，如果g 缺失，那么只替换 每一行第一个符合条件的实例\\
+						\verb|s/find/replace|		&  搜说find关机字，并将其替换为replace\\
+						\verb|g |	 &  替换正行\\
+						\verb|c |	 &  确认是否替换\\
 						\hline
 					\end{tabular}
 				\end{table}	
+				
+				\verb|:%s/find/replace/g| 全文将find 替换为 replace
+				
+				\verb|:1,4s/find/replace/gc| 将第一行到第4行的find 全部替换为 replace,并询问确认意见
+				
 				\url{http://blog.sina.com.cn/s/blog_736f1c59010136ry.html}
 			\subsubsection{查找删除注释}
 				\subparagraph{'s/old/new/ '}用old替换new，替换当前行的第一个匹配
@@ -872,18 +948,122 @@
 				\subparagraph{',5 s/\^ /\#/g'} 注释当前行到第5行
 				\subparagraph{',+5 s/\^ /\#/g'} 注释当前行与之后的5行
 				\subparagraph{'3,5 s/\^ \#//g'} 解除3-5行的注释	
+			
+			\subsubsection{查看目录下有什么文件}
+				\verb|:! command|
 				
+				
+				\verb|:! ls /| 列出根目录文件			
+			\subsubsection{文件保存}
+				\verb|esc : 进入ex 模式|
+				\subparagraph{:w} \verb|:w newFileName| 另存为newFileName
+				\subparagraph{局部另存为}
+					\begin{itemize}
+						\item \verb|esc  v|进程可视模式
+						\item \verb|shift |选中文本
+						\item \verb|: w newFileName| 将选中的另存为newFileName
+					\end{itemize}			
+				
+				\subparagraph{文件覆盖}
+					\verb|:w! oldFile| 将oldfile 用现有内容覆盖
+						
+						
+				\subparagraph{文件合并}
+					\verb|:r file| 将file文件的内容 合并到当前文件 光标的下方。
+					
 			\subsubsection{编辑多文本}
+				\url{https://www.cnblogs.com/end/archive/2012/06/12/2546757.html}
 				\subparagraph{vi file1 file2 }
+					\begin{itemize}[itemindent = 2em]
+						\item \verb|-o| 垂直并排
+						\item \verb|-O| 水平并排
+						\item \verb|ctrl + w + w| 切换到下一个文件
+						\item \verb|ctrl + w + 方向键| 切换到相对位置的文件
+						\item \verb|a| 作用于所有，在ex模式下使用\verb|:wa :qa|
+					\end{itemize}
+				
+				\subparagraph{在不同窗口中打开多个文件}	
+					如果\textbf{已经打开}一个了一个文件，
+					
+					\begin{itemize}[itemindent = 2em]
+						\item \verb|esc ：|进入命令模式
+						\item \verb|:sp newFile|水平分割继续打开第二个文件
+						\item \verb|:vsp newFile|纵向分割打开第二个文件
+					\end{itemize}
+				
+					或者用 \verb|vi -o file1 file2 file3....|用\textbf{分割屏幕窗口方式同时打开多个文件}。
+					
+				\subparagraph{分屏操作}
+					\begin{itemize}[itemindent = 2em]
+						\item \verb|ctrl+w s|   对当前文档内容分屏显示
+						\item \verb|ctrl+w q|   关闭所处分屏
+						\item \verb|ctrl+w o |  仅显示当前分屏内容
+					\end{itemize}
+				
 				\subparagraph{n 与 N} 切换下一个文件
 				\subparagraph{:buffers} 显示当前打开的文件们
 				\subparagraph{:buffer num} 切换到文件num
 				
-				\subparagraph{:e newfile}[*常用] 载入更多的文件 
+				\subparagraph{:e newfile}[*常用] 载入更多的文件，然后使用\verb|ctrl + ^|在文件之间切换
+				
+					\begin{itemize}[itemindent = 2em]
+						\item \verb|:ls|  展示全部的打开文档
+						
+						\item \verb|:xn|  切换到向下的第x个文档
+						
+						\item \verb|n ctrl+6 |切换到第n个buffer
+						
+						\item \verb|ctrl+6  或 :e#|   回到前一个编辑文件
+					\end{itemize}
+				
+				
+				
+				
 				\subparagraph{:tabe}
 				\url{http://blog.csdn.net/achang21/article/details/44562253}
 				\subparagraph{文件间复制} 跟普通复制粘贴一样，只是需要切换目标文件先
-				\subparagraph{插入整个文件} \verb|:r insertFile| 将insertFile 的内容插入到光标位置之前 				
+				
+				\subparagraph{插入整个文件} \verb|:r insertFile| 将insertFile 的内容插入到光标位置之前 	
+		
+		\subsection{配置}
+			\url{https://segmentfault.com/a/1190000011466454}
+			
+			\subsubsection{.vimrc}
+				\verb|.vimrc| 是 \verb|Vim| 的配置文件，需要我们自己创建
+				\begin{lstlisting}
+	cd Home               // 进入 Home 目录
+	touch .vimrc          // 配置文件
+	
+	# 安装插件管理工具 vim-plug
+	# Unix
+	# Vim
+	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	# Neovim
+	curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+				\end{lstlisting}
+			
+			\subsubsection{基本配置}
+				\begin{itemize}
+					\item 文件编码 \verb|set encoding=utf-8|
+					\item 显示行号 \verb|set number|
+					\item 显示光标当前位置 \verb|set ruler|
+					\item 设置缩进 
+					    \begin{lstlisting}
+	set cindent	
+	set tabstop=2
+	set shiftwidth=2
+					    \end{lstlisting}
+				    
+					\item  突出显示当前行 \verb|set cursorline|
+				\end{itemize}
+				
+			\subsubsection{插件配置}
+				\subparagraph{树形目录}Plug 'scrooloose/nerdtree'
+				\subparagraph{代码补全}Plug 'Valloric/YouCompleteMe'
+				\subparagraph{git显示}Plug 'airblade/vim-gitgutter'
+							
 		\subsection{常用插件}
 			\subsubsection{ctags}
 				\url{http://blog.csdn.net/u013445530/article/details/46726109}
@@ -1546,8 +1726,8 @@ rsync [OPTION]... rsync://[USER@]HOST[:PORT]/SRC [DEST]
 				 如果在命令行下，将多个命令用括号括起来，并用分号隔开来执行，交互式进程依然会创建一个子shell执行括号中的命令:
 					 \begin{figure}[h]
 					 	\begin{center}
-						 	\includegraphics[scale = 0.5]{ShellBracket.png}
-						 	\includegraphics[scale = 0.5]{ShellBracketNo.png}
+						 	\includegraphics[scale = 0.5]{figure/ShellBracket.png}
+						 	\includegraphics[scale = 0.5]{figure/ShellBracketNo.png}
 						\end{center}
 					 	\caption{(comands) VS Comands}
 					 \end{figure}
@@ -1565,13 +1745,13 @@ ls
 					 \end{lstlisting}
 					 \begin{figure}[h]
 					 	\centering
-					 	\includegraphics[scale = 0.5]{SourceExample.png}
+					 	\includegraphics[scale = 0.5]{figure/SourceExample.png}
 					 	\caption{without use . Or source Command}
 					 \end{figure}
 					 \begin{figure}[h]
 					 	\begin{center}
-					 		\includegraphics[scale = 0.5]{SourceExample1.png}
-					 		\includegraphics[scale = 0.5]{SourceExample2.png}
+					 		\includegraphics[scale = 0.5]{figure/SourceExample1.png}
+					 		\includegraphics[scale = 0.5]{figure/SourceExample2.png}
 					 	\end{center}
 					 	\caption{Use . Or source Command}
 					 \end{figure}
@@ -1606,7 +1786,7 @@ ls
 				
 					\begin{figure}[h]
 						\centering
-						\includegraphics[scale = 0.7]{ShellRefVariable.png}
+						\includegraphics[scale = 0.7]{figure/ShellRefVariable.png}
 						\caption{Shell Variable Use}
 					\end{figure}
 				\subparagraph{只读变量}
@@ -2411,7 +2591,7 @@ ls
 			
 			\begin{figure}[h]
 				\centering
-				\includegraphics[scale = 0.7]{compileProcess.png}
+				\includegraphics[scale = 0.7]{figure/compileProcess.png}
 				\caption{编译过程}
 			\end{figure}
 			
@@ -2504,7 +2684,7 @@ ls
 			静态链接的话，文件会很大，往往实现很小的一个功能就需要占用很大的空间，而且每次库文件升级的话，都要重新编译源文件，很不方便。如下：
 			\begin{figure}[h]
 				\centering
-				\includegraphics[scale = 0.7]{staticLib-disAdvantage.png}
+				\includegraphics[scale = 0.7]{figure/staticLib-disAdvantage.png}
 				\caption{静态库冗余空间}
 			\end{figure}
 			
@@ -2515,7 +2695,7 @@ ls
 			
 			\begin{figure}[h]
 				\centering
-				\includegraphics[scale = 0.7]{dynamicLib.png}
+				\includegraphics[scale = 0.7]{figure/dynamicLib.png}
 				\caption{动态库解决静态库冗余空间问题}
 			\end{figure}
 
@@ -2562,7 +2742,7 @@ ls
 		
 		\begin{figure}[h]
 			\centering
-			\includegraphics[scale = 0.8]{linuxServerExample.jpg}
+			\includegraphics[scale = 0.8]{figure/linuxServerExample.jpg}
 		\end{figure}
 		
 		看到没有，你连线到伺服器，重点在取得对方的资料，而一般资料的存在就是使用档案啰！那你有没有权限取得？最终与该档案系统的设定有关啦！

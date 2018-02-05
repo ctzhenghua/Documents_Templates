@@ -65,7 +65,7 @@
 	 \section{架构篇}
 		\begin{figure}[ht]
 			\centering
-			\includegraphics[width=0.8\linewidth]{server-Arch}
+			\includegraphics[width=0.8\linewidth]{figures/server-Arch}
 			\caption{基本架构}
 			\label{fig:server-arch}
 		\end{figure}
@@ -109,7 +109,7 @@
 		\subsection{服务器与数据库分离}
 			\begin{figure}[ht]
 				\centering
-				\includegraphics[width=0.7\linewidth]{server-database}
+				\includegraphics[width=0.7\linewidth]{figures/server-database}
 				\caption{web server与数据库分离}
 				\label{fig:server-database}
 			\end{figure}
@@ -117,14 +117,14 @@
 			\subsubsection{动静分离}	
 				\begin{figure}[ht]
 					\centering
-					\includegraphics[width=0.7\linewidth]{web-Server}
+					\includegraphics[width=0.7\linewidth]{figures/web-Server}
 					\caption{动态请求与静态请求分离}
 					\label{fig:web-server}
 				\end{figure}
 		\subsection{缓存处理}
 			\begin{figure}[ht]
 				\centering
-				\includegraphics[width=0.7\linewidth]{server-cache}
+				\includegraphics[width=0.7\linewidth]{figures/server-cache}
 				\caption{缓存}
 				\label{fig:server-cache}
 			\end{figure}
@@ -132,8 +132,8 @@
 		\subsection{服务器集群+读写分离}
 			\begin{figure}[ht]
 			\centering
-				\includegraphics[width=0.4\linewidth]{server-readwrite}
-				\includegraphics[width=0.4\linewidth]{server-readwrite2}
+				\includegraphics[width=0.4\linewidth]{figures/server-readwrite}
+				\includegraphics[width=0.4\linewidth]{figures/server-readwrite2}
 				\caption{读写分离}
 				\label{fig:server-readwrite}
 			\end{figure}
@@ -159,7 +159,7 @@
 			\subsubsection{分布式缓存}		
 				\begin{figure}[ht]
 					\centering
-					\includegraphics[width=0.7\linewidth]{server-distributedCache}
+					\includegraphics[width=0.7\linewidth]{figures/server-distributedCache}
 					\caption{分布式缓存}
 					\label{fig:server-distributedcache}
 				\end{figure}
@@ -191,7 +191,7 @@
 		\subsection{OSI-ISO 7层模型}
 				\begin{figure}[h]
 					\centering
-					\includegraphics[scale = 0.8]{OSI-Model.png}
+					\includegraphics[scale = 0.8]{figures/OSI-Model.png}
 				\end{figure}
 			
 			当然，每个层有每个层的功能，每个对等层之间传输的单位是PDU(propoal  Data Unit)，也有每个对等层之间的协议（\textit{如：应用与应用的协议}），具体功能见下：
@@ -208,7 +208,7 @@
 		\subsection{TCP 4层模型 与 OSI 7层模型 的关系}
 			\begin{figure}[h]
 				\centering
-				\includegraphics[scale = 0.8]{TCP-4.png}
+				\includegraphics[scale = 0.8]{figures/TCP-4.png}
 			\end{figure}
 			 \begin{enumerate}
 			 	\item \textbf{应用层：}由OSI的\textbf{应用层、表示层、会话层}组成，\textit{用户进程s,ftp,telnet，qq 等}
@@ -773,7 +773,7 @@
 		 \textbf{fork执行完毕后}，出现两个进程，\textbf{作用域代码共享}，如下图所示：
 			 \begin{figure}[h]
 			 	\centering
-			 	\includegraphics[scale = 0.7]{fork.jpg}
+			 	\includegraphics[scale = 0.7]{figures/fork.jpg}
 			 \end{figure}
 	\section{僵尸进程}
 		如果\textbf{子进程}\textit{先于}\textbf{父进程}退出， 同时父进程又没有调用wait/waitpid，则该子进程将成为僵尸进程。
@@ -858,7 +858,7 @@
 			TCP 从开始建立到最后 关闭的所有11 种状态如下图\ref{allstatus} 所示
 			\begin{figure}[ht]
 				\centering
-				\includegraphics[scale = 0.5]{TCP-status.jpg}
+				\includegraphics[scale = 0.5]{figures/TCP-status.jpg}
 				\caption{整个过程}
 				\label{allstatus}
 			\end{figure}
@@ -884,7 +884,7 @@
 			
 			\begin{figure}[ht]
 				\centering
-				\includegraphics[scale = 0.5]{TCP-3times.png}
+				\includegraphics[scale = 0.5]{figures/TCP-3times.png}
 				\caption{3次握手}
 				\label{3times}
 			\end{figure}
@@ -909,7 +909,7 @@
 			断开连接简单的过程如下
 			\begin{figure}[ht]
 				\centering
-				\includegraphics[scale = 0.7]{Tcp-close.png}
+				\includegraphics[scale = 0.7]{figures/Tcp-close.png}
 				\caption{Tcp 终止连接4次握手}
 				\label{tcpClose}
 			\end{figure}
@@ -936,7 +936,7 @@
 				整个过程Client端所经历的状态如下：
 				\begin{figure}[ht]
 					\centering
-					\includegraphics[scale = 0.7]{Client-status.png}
+					\includegraphics[scale = 0.7]{figures/Client-status.png}
 					\caption{Client 所有状态}
 					\label{clientStatus}
 				\end{figure}
@@ -945,7 +945,7 @@
 			整个过程Server端所经历的状态如下：
 			\begin{figure}[ht]
 				\centering
-				\includegraphics[scale = 0.7]{Server-status.png}
+				\includegraphics[scale = 0.7]{figures/Server-status.png}
 				\caption{Server 所有状态}
 				\label{serverStatus}
 			\end{figure}	
@@ -1045,7 +1045,7 @@
 			
 			\begin{figure}[h]
 				\centering
-				\includegraphics[scale = 0.9]{keepAlive.jpg}
+				\includegraphics[scale = 0.9]{figures/keepAlive.jpg}
 				\caption{keepAlive}
 			\end{figure}
 			
@@ -1222,7 +1222,7 @@
 				
 					\begin{figure}[h]
 						\centering
-						\includegraphics*[scale = 0.8]{orgi.png}
+						\includegraphics*[scale = 0.8]{figures/orgi.png}
 						\caption{执行dup 前}
 					\end{figure}
 				
@@ -1231,7 +1231,7 @@
 					
 					\begin{figure}[h]
 						\centering
-						\includegraphics*[scale = 0.8]{after.png}
+						\includegraphics*[scale = 0.8]{figures/after.png}
 						\caption{执行dup 后}
 					\end{figure}
 					
@@ -1493,7 +1493,7 @@
 			\subparagraph{阻塞I/O模型图}：在调用recv()/recvfrom（）函数时，发生在内核中等待数据和复制数据的过程。
 			\begin{figure}[h]
 				\centering
-				\includegraphics[scale = 0.8]{BlockingIO.jpg}
+				\includegraphics[scale = 0.8]{figures/BlockingIO.jpg}
 			\end{figure}
 			
 			当调用recv()函数时，系统首先查是否有准备好的数据。如果数据没有准备好，那么系统就处于等待状态。当数据准备好后，将数据从系统缓冲区复制到用户空间，然后该函数返回。在套接应用程序中，当调用recv()函数时，未必用户空间就已经存在数据，那么此时recv()函数就会处于等待状态。
@@ -1521,7 +1521,7 @@
 			多线程/进程服务器同时为多个客户机提供应答服务。模型如下：
 			\begin{figure}[h]
 				\centering
-				\includegraphics[scale = 0.8]{MultiThread.jpg}
+				\includegraphics[scale = 0.8]{figures/MultiThread.jpg}
 			\end{figure}
 			
 			主线程持续等待客户端的连接请求，如果有连接，则创建新线程，并在新线程中提供为前例同样的问答服务。
@@ -1543,7 +1543,7 @@
 			
 			\begin{figure}[h]
 				\centering
-				\includegraphics[scale = 0.8]{nonBlockingIO.jpg}
+				\includegraphics[scale = 0.8]{figures/nonBlockingIO.jpg}
 			\end{figure}
 			
 			当使用socket()函数和WSASocket()函数创建套接字时，默认都是阻塞的。在创建套接字之后，通过调用ioctlsocket()函数，将该套接字设置为非阻塞模式。Linux下的函数是:fcntl().
@@ -1569,7 +1569,7 @@
 			
 			\begin{figure}[h]
 				\centering
-				\includegraphics[scale = 0.8]{IOMultiplexing.jpg}
+				\includegraphics[scale = 0.8]{figures/IOMultiplexing.jpg}
 			\end{figure}
 			\subsubsection{信号驱动I/O：SIGIO}
 			
@@ -1579,7 +1579,7 @@
 			
 			\begin{figure}[h]
 				\centering
-				\includegraphics[scale = 0.8]{asyIO.jpg}
+				\includegraphics[scale = 0.8]{figures/asyIO.jpg}
 			\end{figure}
 			
 			同步IO引起进程阻塞，直至IO操作完成。
@@ -2339,12 +2339,76 @@
 	
 	
 \chapter{常见服务器模型}
-	\section{ReActor 模式}
+	\section{阻塞IO服务器模型之单线程服务器模型}
+		单线程服务器模型是最简单的一个服务器模型，几乎我们所有程序员在刚开始接触网络编程（不管是B/S结构还是C/S结构）都是从这个简单的模型开始。这种模型只提供同时一个客户端访问，多个客户端访问必须要等到前一个客户端访问结束，一个一个排队，即提供一问一答服务。
+			\begin{figure}[htbp]
+				\centering
+				\includegraphics[scale = 1.8]{figures/IO_SingleThread_Blocking.jpg}
+				\includegraphics[scale = 0.7]{figures/iterative.png}
+				\caption{单线程阻塞服务器模型}
+				\label{Blocking_Single}
+			\end{figure}
+		
+		
+		\subparagraph{特点}\verb|->|
+			\begin{itemize}[itemindent = 1em]
+				\item 不适合执行时间较长的服务
+				\item 无法充分利用多核CPU
+			\end{itemize}
+			
+		图\ref{Blocking_Single}展示了单线程阻塞服务器是怎样响应客户端的访问。首先，服务器必须初始化一个Serversocket实例，绑定某个端口号，并使之监听客户端的访问，以此提供一种服务。接着客户端1远程调用服务器的这个服务，服务器接受到请求后，对其进行处理，并返回信息给客户端1，整个过程都是在一个线程里面完成的。最后，就算客户端2在服务器处理完客户端1之前就进行请求访问，也要等服务器对客户端1响应完后，才会对客户端2进行响应处理。
+		
+		我们注意到，大部分的\verb|socket|操作都是阻塞的，所谓阻塞是指调用后不马上返回调用结果，而让当前线程一直阻塞，只有当该调用获得结果或者超时时才会返回。而我们的图2-6-1-1也有很多个节点都是阻塞的，例如，服务器阻塞监听客户端，直到有客户端访问才返回一个socket；对于客户端，建立一个socket连接后，也进行阻塞，直到服务器响应。几乎所有的IO操作都会产生阻塞，在网络编程中体现在socket的通信。这种阻塞给网络编程带来了一个问题，如图中黑块1和黑块2部分，当服务器处理完进行IO操作（这里的IO操作其实是给客户端发送消息）时，服务器必须要等到客户端成功接收才能继续往下处理另外一个客户端的请求，在此期间，线程将无法执行任何运算跟响应任何客户端请求。而如果这过程永远发送不到客户端，服务器就一直阻塞在那里了，不会接着处理任何事情。
+		
+		这种模型的特点是：最简单的服务器模型，整个运行过程都只有一个线程，只能支持同时处理一个客户端的请求，如果多个客户端访问必须排队等待，服务器系统资源消耗较小，但并发能力低，如果遇到IO操作出现错误异常将导致服务器停止运行，容错能力差。一般这种模型一般用在访问跟并发量少，请求是短暂的、无状态的，对响应时间要求不高，处理逻辑较复杂的场合。
+	
+		
+	
+	\newpage		
+	\section{并发式 模式}
+		
+		架构如图\ref{conCurrent}.
+		
+		\begin{figure}[htbp]
+			\centering
+			\includegraphics[scale = 0.6]{figures/concurrent.png}
+			\caption{conCurrent服务器模型}
+			\label{conCurrent}
+		\end{figure}
+		
+		\subparagraph{特点}\verb|->|
+			\begin{itemize}[itemindent = 1em]
+				\item one connection per process/thread
+				\item 适合执行时间较长的服务
+			\end{itemize}	
+
+	\newpage	
+	\section{pre-Fork or pre-Threaded}
+		架构如图\ref{preFork}.
+		
+		\begin{figure}[htbp]
+			\centering
+			\includegraphics[scale = 0.6]{figures/preFork.png}
+			\caption{preFork服务器模型}
+			\label{preFork}
+		\end{figure}
+		
+		\subparagraph{特点}\verb|->|
+			\begin{itemize}[itemindent = 1em]
+				\item 预分配定量进程或线程，省去进程创建开销
+				\item 存在惊群现象(unp27章)
+			\end{itemize}
+	
+
+	\newpage
+	\section{ReActor  模式}
 		Reactor模式首先是事件驱动的，有一个或多个并发输入源，有一个Service Handler，有多个Request Handlers；这个Service Handler会同步的将输入的请求（Event）多路复用的分发给相应的Request Handler 
 	
 			\begin{figure}[h]
 				\centering
 				\includegraphics[scale = 0.7]{Reactor.png}
+				\includegraphics[scale = 0.7]{figures/reactor.png}
+				\caption{reactor 架构}
 			\end{figure}
 	
 		从结构上，这有点类似生产者消费者模式，即有一个或多个生产者将事件放入一个Queue中，而一个或多个消费者主动的从这个Queue中Poll事件来处理；而Reactor模式则并没有Queue来做缓冲，每当一个Event输入到Service Handler之后，该Service Handler会主动的根据不同的Event类型将其分发给对应的Request Handler来处理。
@@ -2371,7 +2435,7 @@
 			
 				\begin{figure}[h]
 					\centering
-					\includegraphics[scale = 0.8]{ReactorExample.png}
+					\includegraphics[scale = 0.8]{figures/ReactorExample.png}
 				\end{figure}
 			
 			实际的餐馆都是用的Reactor模式在服务。一些设计的模型其实都是从生活中来的。
@@ -2381,30 +2445,84 @@
 			在单核的机上，多线程并不能提高系统的性能，除非在有一些阻塞的情况发生。否则线程切换的开销会使处理的速度变慢。就像你一个人做两件事情，1、削一个苹果。2、切一个西瓜。那你可以一件一件的做，我想你也会一件一件的做。如果这个时候你使用多线程，一会儿削苹果，一会切西瓜，可以相像究竟是哪个速度快。这也就是说为什么在单核机上多线程来处理可能会更慢。
 			
 			但当有阻碍操作发生时，多线程的优势才会显示出来，现在你有另外两件事情去做，1、削一个苹果。2、烧一壶开水。我想没有人会去做完一件再做另一件，你肯定会一边烧水，一边就把苹果削了。
+			
+			\subparagraph{特点}\verb|->|
+				\begin{itemize}[itemindent = 1em]
+					\item 并发处理多个请求，实际是在一个线程中完成。无法重复利用多核CPU
+					\item 不适合执行时间比较长的服务，所以为了让客户感觉是在“并发”处理而不是“循环”处理，每个请求必须在相对较短时间内执行
+				\end{itemize}
+				
+		\subsection{reActor + thread per request}过渡模型
+		\subsection{参考}
+			\url{http://daimojingdeyu.iteye.com/blog/828696}
+	
+			\url{http://www.blogjava.net/DLevin/archive/2015/09/02/427045.html}	
+			
+	\newpage
+	\section{reactor + thread pool}
+		架构如图\ref{reactorThreadpool}.
 		
-	\subsection{参考}
-	\url{http://daimojingdeyu.iteye.com/blog/828696}
-	
-	\url{http://www.blogjava.net/DLevin/archive/2015/09/02/427045.html}	
-	
-	\section{阻塞IO服务器模型之单线程服务器模型}
-		单线程服务器模型是最简单的一个服务器模型，几乎我们所有程序员在刚开始接触网络编程（不管是B/S结构还是C/S结构）都是从这个简单的模型开始。这种模型只提供同时一个客户端访问，多个客户端访问必须要等到前一个客户端访问结束，一个一个排队，即提供一问一答服务。
-		\begin{figure}[h]
+		\begin{figure}[htbp]
 			\centering
-			\includegraphics[scale = 1.6]{IO_SingleThread_Blocking.jpg}
-			\caption{单线程阻塞服务器模型}
-			\label{Blocking_Single}
+			\includegraphics[scale = 0.8]{figures/reactorThreadpool.png}
+			\caption{preFork服务器模型}
+			\label{reactorThreadpool}
 		\end{figure}
+		
+		\subparagraph{特点}
+			\begin{itemize}
+				\item 能够处理密集型任务
+			\end{itemize}
+	\newpage
+	\section{multiple reactors}
+		架构如图\ref{MultipleReactors}.
+		
+		\begin{figure}[htbp]
+			\centering
+			\includegraphics[scale = 0.8]{figures/MultipleReactors.png}
+			\caption{preFork服务器模型}
+			\label{MultipleReactors}
+		\end{figure}
+		
+		\subparagraph{特点}
+		\begin{itemize}
+			\item 能够适应更大的并发
+			\item 能够处理突发大量I/O 请求
+			\item 具有负载均衡的功能
+		\end{itemize}
 	
-		图\ref{Blocking_Single}展示了单线程阻塞服务器是怎样响应客户端的访问。首先，服务器必须初始化一个Serversocket实例，绑定某个端口号，并使之监听客户端的访问，以此提供一种服务。接着客户端1远程调用服务器的这个服务，服务器接受到请求后，对其进行处理，并返回信息给客户端1，整个过程都是在一个线程里面完成的。最后，就算客户端2在服务器处理完客户端1之前就进行请求访问，也要等服务器对客户端1响应完后，才会对客户端2进行响应处理。
+	
+	\newpage
+	\section{multiple reactors + thread pool}
+		架构如图\ref{MultipleReactorsThreadpool}.
 		
-		我们注意到，大部分的\verb|socket|操作都是阻塞的，所谓阻塞是指调用后不马上返回调用结果，而让当前线程一直阻塞，只有当该调用获得结果或者超时时才会返回。而我们的图2-6-1-1也有很多个节点都是阻塞的，例如，服务器阻塞监听客户端，直到有客户端访问才返回一个socket；对于客户端，建立一个socket连接后，也进行阻塞，直到服务器响应。几乎所有的IO操作都会产生阻塞，在网络编程中体现在socket的通信。这种阻塞给网络编程带来了一个问题，如图中黑块1和黑块2部分，当服务器处理完进行IO操作（这里的IO操作其实是给客户端发送消息）时，服务器必须要等到客户端成功接收才能继续往下处理另外一个客户端的请求，在此期间，线程将无法执行任何运算跟响应任何客户端请求。而如果这过程永远发送不到客户端，服务器就一直阻塞在那里了，不会接着处理任何事情。
+		\begin{figure}[htbp]
+			\centering
+			\includegraphics[scale = 0.7]{figures/MultipleReactorsThreadpool.png}
+			\caption{preFork服务器模型}
+			\label{MultipleReactorsThreadpool}
+		\end{figure}
 		
-		这种模型的特点是：最简单的服务器模型，整个运行过程都只有一个线程，只能支持同时处理一个客户端的请求，如果多个客户端访问必须排队等待，服务器系统资源消耗较小，但并发能力低，如果遇到IO操作出现错误异常将导致服务器停止运行，容错能力差。一般这种模型一般用在访问跟并发量少，请求是短暂的、无状态的，对响应时间要求不高，处理逻辑较复杂的场合。
-
+		\subparagraph{特点}
+		\begin{itemize}
+			\item 能够适应更大的并发
+			\item 更好的处理突发事件
+			\item 更好的发挥多核作用
+			\item 具有负载均衡的功能
+		\end{itemize}
+		
+	\newpage
 	\section{ProActor}
+		异步架构如图\ref{PreActor}.
+				
+				\begin{figure}[htbp]
+					\centering
+					\includegraphics[scale = 0.8]{figures/PreActor.png}
+					\caption{PreActor服务器模型}
+					\label{PreActor}
+				\end{figure}
 	
-	
+	\newpage
 	\section{Reactor with Proactor}
 		以读取操作为例
 		
@@ -2433,6 +2551,7 @@
 		
 			\verb|Reactor和Proactor|模式的主要区别就是真正的读取和写入操作是有谁来完成的，\verb|Reactor|中需要应用程序自己读取或者写入数据，而\verb|Proactor|模式中，应用程序不需要进行实际的读写过程，它只需要从缓存区读取或者写入即可，操作系统会读取缓存区或者写入缓存区到真正的\verb|IO|设备.
 	
+	\newpage
 	\section{半同步半异步模型}
 		\subsection{同步}
 			I/O 事件为就绪状态时 通知应用程序，数据的搬放由应用程序本身来完成，涉及应用缓存与内核缓存的复制效率问题。
@@ -2448,7 +2567,7 @@
 			\subsubsection{半同步半反应堆模式}
 				\begin{figure}[h]
 					\centering
-					\includegraphics[scale = 0.5]{half.png}
+					\includegraphics[scale = 0.5]{figures/half.png}
 					\caption{半同步半异步}
 				\end{figure}
 				
@@ -2476,16 +2595,18 @@
 				
 				\begin{figure}[h]
 					\centering
-					\includegraphics[scale = 0.5]{half2.png}
+					\includegraphics[scale = 0.5]{figures/half2.png}
 					\caption{半同步半异步-2}
 				\end{figure}
-	
+				
+	\newpage
 	\section{领导者追随者模式}
 		放风的山贼（领导者）与 睡觉（追随者）、抢劫（old领导者）的山贼
 		
 		\url{http://blog.csdn.net/jinchaoh/article/details/50427733}
 	
-\chapter{如何使用多台机器并行处理数据}
+	
+\chapter{使用多台机器并行处理数据}
 	\section{集群服务器}
 			\textbf{同一个业务}，部署在多个服务器上
 			
@@ -2588,8 +2709,15 @@
 	};
 			\end{lstlisting} 
 		\subsection{具体细节}参考\verb|c++_project| \verb|->| muduo
-\chapter{Redis} 
+\chapter{Redis with Memcache} 
 	\section{NoSQL} Not Only Sql
+		在大多数web 应用都将数据保存到关系型数据库中，www服务器从中读取数据并在浏览器中显示。
+		
+		但随着数据量的增大，访问的集中，就会出现关系型数据库的负担加重，数据库响应缓慢、网站打开延迟等问题。
+		
+		通过在内存中缓存数据库的查询结果，减少数据访问次数，以提高动态web 应用的速度，提高网站架构的并发能力和可扩展性。
+		
+		传统开发中用的数据库最多的就是MySql,随着 数据量上亿级后，它的关系型数据库的读取速度可能就不能满足我们对数据的需求，所以内存式的缓存系统就出现了。
 		\subsection{解决问题}
 			\begin{itemize}
 				\item 高并发读写(传统问题)
@@ -2604,21 +2732,43 @@
 				\item 文档数据库
 				\item 图形数据库
 			\end{itemize}
+	\section{Memcache with Redis}
+		\subsection{Memcache}
+			Memcache 是一个高性能的分布式内存对象缓存系统，用于动态web 应用以减少数据库负载。它通过在内存中缓存数据和对象来减少读取数据库的次数，从而提高动态、数据库驱动网站的速度。
+		
+			Memcache 基于一个存储键/值对 的hashmap。 其守护进程(daemon) 是用C写的，但是客户端可以用任何语言来编写，并通过memcache 协议与守护进程通信。
+			
+			内部的数据存储，使用基于Slab 的内存管理机制，有利于减少内存碎片和频繁的分配销毁内存所带来的开销。各个Slab 按需动态分配一个page 的内存。
+			 
+			Memcache 是纯KV 缓存，分布式实现由客户端实现。
+			
+			Memcache 不能做数据的持久化工作，只是缓存。
+		\subsection{Redis}
+			Redis 有着更复杂的数据结构并且提供对他们的原子性操作，这是一个不同于其他数据库的进化路径。
+			
+			Redis 的数据类型都是基于基本数据结构的，同时对程序员透明，无需进行额外的抽象。
+		
+			Redis 运行在内存中但是可以持久化到磁盘，所以对不同数据集进行高速读写时需要权衡内存，应用数据量不能大于硬件内存。
+			
+			在内存数据库方面的另一个优点是：相比在磁盘上相同的复杂的数据结构，在内存中操作起来非常简单，这样Redis 可以做很多内部复杂性很强的事情。同时，在磁盘格式方面他们是紧凑的以追加的方式产生的，因为他们并不需要进行随机访问。
+			
+			Redis  内部的数据结构最终也会落实到 key-value 对应的形式，不过从暴露给用户的数据结构来看，要比Memcache 丰富，除了标准的键值对，Redis 还支持 List,Set,Hashes,Sorted Set 等数据结构
+			
+			Redis 的分布式由服务器端实现，通过服务器配置来实现分布式。
+			
+			Redis 支持两种数据持久化的方案：1是snapshot 快照(隔段时间将完整的数据Dump下来存储在文件中)，2是AOF增量log 方式(记录对数据的修改操作)。
+			
+			Redis 可以以master-Slave 的方式配置服务器，Salve节点对数据进行replica 备份，Slave 节点也可以充当read-Only 的节点分担数据读取的工作。
+
+	\section{Memcache}
 	
-	\section{Redis}
-		\subsection{应用场景}
-			\begin{itemize}
-				\item 缓存
-				\item 聊天室，秒杀，任务队列
-				\item 应用排行榜.网站统计
-				\item 数据存储(add,del,update,select)定期持久化到硬盘中
-				\item 分布式集群架构中的session 分离
-			\end{itemize}
-		\subsection{安装}
-		 
-		\subsection{使用}
+		介绍：\url{https://www.cnblogs.com/szlbm/p/5588549.html}
 		
+		C++withMem:\url{http://www.jsjtt.com/xitongyingyong/linux/58.html}
 		
+		\url{http://www.cnblogs.com/rooney/archive/2012/07/04/2577018.html}
+	
+
 \chapter{编译}
 	\section{常规}
 	
@@ -2732,7 +2882,7 @@
 		\verb|gdb 运行程序 core文件|
 			\begin{figure}[h]
 				\centering
-				\includegraphics[scale=0.4]{core.png}
+				\includegraphics[scale=0.4]{figures/core.png}
 				\caption{如何使用core文件}
 			\end{figure}
 		
@@ -2856,7 +3006,7 @@ Program terminated with signal 11, Segmentation fault.
 			跟踪与网络有关的所有系统调用. 
 				\begin{figure}[h]
 					\centering
-					\includegraphics[scale = 0.6]{strace-Net.png}
+					\includegraphics[scale = 0.6]{figures/strace-Net.png}
 				\end{figure}
 				
 			\verb|-e strace=signal |
@@ -2932,7 +3082,7 @@ Program terminated with signal 11, Segmentation fault.
 			即将易记的域名\verb|www.baidu.com| 转换为 计算机识别的\verb|IP|地址\verb|192.168.2.1|
 			\begin{figure}[h]
 				\centering
-				\includegraphics[scale=0.5]{DNS.png}
+				\includegraphics[scale=0.5]{figures/DNS.png}
 			\end{figure}
 			
 		\subsection{文件传送 FTP}
@@ -2986,7 +3136,7 @@ Program terminated with signal 11, Segmentation fault.
 				
 				\begin{figure}[h]
 					\centering
-					\includegraphics[scale = 0.8]{TCP-MM.jpg}
+					\includegraphics[scale = 0.8]{figures/TCP-MM.jpg}
 					\caption{分用复用图}
 					\label{MM}
 				\end{figure}
@@ -3049,7 +3199,7 @@ Program terminated with signal 11, Segmentation fault.
 				
 					\begin{figure}[h]
 						\centering
-						\includegraphics[scale = 0.9]{IPClassify.png}
+						\includegraphics[scale = 0.9]{figures/IPClassify.png}
 					\end{figure}
 					
 					\begin{table}[H]
@@ -3093,7 +3243,7 @@ Program terminated with signal 11, Segmentation fault.
 			注意，不同的网络类型(ABC)也可以使用比其小的子网掩码，如B类地址使用C类子网掩码.
 			如\begin{figure}[h]
 				\centering
-				\includegraphics[scale = 0.5]{subNetMask.png}
+				\includegraphics[scale = 0.5]{figures/subNetMask.png}
 			\end{figure}
 			
 	\section{数据链路层 Hardware}

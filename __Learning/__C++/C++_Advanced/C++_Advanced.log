@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/W32TeX) (preloaded format=xelatex 2017.2.16)  19 AUG 2017 22:43
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/W32TeX) (preloaded format=xelatex 2017.2.16)  6 FEB 2018 00:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1667,7 +1667,9 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \tf@toc=\write4
 \openout4 = `C++_Advanced.toc'.
 
- [6]
+ [6] [7] [8
+
+]
 第一章
 \g__fontspec_family_FangSong_int=\count180
 .................................................
@@ -1714,44 +1716,49 @@ File: eu1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 . and font adjustment code:
 . 
 .................................................
- [7
-
-] [8]
-[9] [10
+ [9] [10]
+[11] [12
 
 ]
 第二章
-File: exception_level.png Graphic file (type QTm)
-<use  "exception_level.png" > [11]
-File: Exception_Process.png Graphic file (type QTm)
- <use  "Exception_Process.png" >
+[13] [14]
+File: figure/Exception_Process.png Graphic file (type QTm)
+ <use  "figure/Exception_Process.png" > [15] [16]
+File: figure/exception_level.png Graphic file (type QTm)
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[12]
+<use  "figure/exception_level.png" >
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [13]
-[14] [15]
-Overfull \hbox (38.71956pt too wide) in paragraph at lines 311--312
+ [17]
+Underfull \vbox (badness 4168) has occurred while \output is active []
+
+ [18]
+[19]
+Overfull \hbox (38.71956pt too wide) in paragraph at lines 404--405
 []\EU1/lmr/m/n/12 The only standard library components that throw this exceptio
 n are std::wstring_convert::from_bytes
  []
 
 
-Overfull \hbox (105.44336pt too wide) in paragraph at lines 319--320
+Overfull \hbox (105.44336pt too wide) in paragraph at lines 412--413
 \EU1/lmr/m/n/12 braries, however, use this. For example, boost.math throws std:
 :overflow_error if boost::math::policies::throw_on_error
  []
 
-[16] [17] [18] [19] [20] [21] [22
+[20] [21] [22] [23] [24] [25] [26
 
 ]
 第三章
-[23] [24] [25]
-File: thread.png Graphic file (type QTm)
- <use  "thread.png" > [26] [27] [28] [29] [30]
-Overfull \hbox (13.20177pt too wide) in paragraph at lines 869--870
+[27] [28]
+Overfull \hbox (41.01419pt too wide) in paragraph at lines 690--691
+[]\EU1/SimSun(0)/m/n/12 函 数 []\EU1/lmtt/m/n/12 int pthread_create(pthread_t* th
+read, const pthread_attr_t* attr, void* (*func)
+ []
+
+[29] [30]
+File: figure/thread.png Graphic file (type QTm)
+ <use  "figure/thread.png" > [31] [32] [33] [34] [35] [36]
+Overfull \hbox (13.20177pt too wide) in paragraph at lines 1032--1033
 []\EU1/lmr/bx/n/12 mutex\EU1/lmr/m/n/12 : \EU1/SimSun(0)/m/n/12 如 果 要 \EU1/SimS
 un(0)/bx/n/12 支 持 手 工 加 锁\EU1/SimSun(0)/m/n/12 ，|  可 以 考 虑 使 用 \EU1/lmr/m/n/12 
 unique_lock \EU1/SimSun(0)/m/n/12 或 者 直 接 使 用 \EU1/lmr/m/n/12 mutex\EU1/SimSun(
@@ -1759,87 +1766,103 @@ unique_lock \EU1/SimSun(0)/m/n/12 或 者 直 接 使 用 \EU1/lmr/m/n/12 mutex\
  []
 
 
-Overfull \hbox (1.39182pt too wide) in paragraph at lines 871--872
+Overfull \hbox (1.39182pt too wide) in paragraph at lines 1034--1035
 \EU1/lmr/m/n/12 resources. This prevents data races and provides support for sy
 nchronization between threads. 
  []
 
-[31]
-Overfull \hbox (19.33275pt too wide) in paragraph at lines 901--902
-[]\EU1/SimSun(0)/m/n/12 对 于 线 程 间 的 事 件 通 知，| \EU1/lmr/m/n/12 C++11 \EU1/SimSun
-(0)/m/n/12 提 供 了 条 件 变 量 类 \EU1/lmr/m/n/12 condition_variable\EU1/SimSun(0)/m/n
-/12 ，|  可 视 为 \EU1/lmr/m/n/12 pthread_cond_t
+[37] [38] [39] [40] [41] [42]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [43]
+[44] [45] [46] [47]
+Overfull \hbox (7.1102pt too wide) in paragraph at lines 1502--1503
+[]\EU1/SimSun(0)/m/n/12 线 程 函 数 内 部 通 过 承 诺 模 板 类 的 成 员 函 数[]\EU1/lmtt/m/n/12 s
+et_value()\EU1/SimSun(0)/m/n/12 、| []\EU1/lmtt/m/n/12 set_value_at_thread_exit(
+)\EU1/SimSun(0)/m/n/12 、|
  []
 
-[32] [33] [34] [35] [36] [37]
+[48] [49] [50] [51]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [38]
-[39] [40] [41] [42] [43]
+ [52]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [44]
+ [53]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [45]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [46]
-[47] [48] [49] [50] [51] [52] [53] [54] [55]
+ [54]
+[55]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [56]
 [57] [58] [59] [60]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 3000) has occurred while \output is active []
 
  [61]
-[62] [63] [64] [65] [66] [67] [68] [69] [70]
-第四章
-File: MustKnowError.png Graphic file (type QTm)
-<use  "MustKnowError.png" >
-File: TemplateFirst.png Graphic file (type QTm)
- <use  "TemplateFirst.png" > [71
+[62] [63]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-] [72] [73] [74]
-[75] [76] [77] [78
+ [64]
+[65] [66] [67] [68] [69] [70] [71] [72] [73] [74] [75] [76] [77] [78]
+第四章
+[79
+
+] [80
 
 ]
 第五章
 
-Overfull \hbox (71.29425pt too wide) in paragraph at lines 2802--2803
+Overfull \hbox (11.08453pt too wide) in paragraph at lines 2828--2829
+\EU1/SimSun(0)/m/n/12 型 的 位 置；| []\EU1/lmtt/m/n/12 auto f(A a, B b) -> decltype
+(a+b) \EU1/SimSun(0)/m/n/12 是 一 种 用 法，|  不 能 写 作 []\EU1/lmtt/m/n/12 decltype(a+
+b) f(A a, B b)\EU1/SimSun(0)/m/n/12 ，|
+ []
+
+[81]
+File: figure/MustKnowError.png Graphic file (type QTm)
+ <use  "figure/MustKnowError.png" >
+File: figure/TemplateFirst.png Graphic file (type QTm)
+ <use  "figure/TemplateFirst.png" >
+[82] [83] [84] [85] [86] [87] [88] [89] [90]
+第六章
+
+Overfull \hbox (71.29425pt too wide) in paragraph at lines 3277--3278
 \EU1/SimSun(0)/bx/n/12 成 员 变 量 总 是 以 其 说 明 次 序 被 初 始 化\EU1/SimSun(0)/m/n/12 。| 
  所 以：| []\EU1/FangSong(0)/m/n/12 当在成员初始化列表中列各成员时，| 最好总是以其声明次序为次序\EU1/SimSun(0)/
 m/n/12 。| 
  []
 
-[79] [80] [81] [82] [83]
-Overfull \hbox (42.03468pt too wide) in paragraph at lines 2951--2952
+[91
+
+] [92] [93] [94] [95]
+Overfull \hbox (42.03468pt too wide) in paragraph at lines 3426--3427
 []\EU1/SimSun(0)/m/n/12 声 明 一 个 \EU1/SimSun(0)/bx/n/12 非 虚 函 数 \EU1/SimSun(0)/m
 /n/12 的 目 的 是 \EU1/SimSun(0)/bx/n/12 为 了 令 派 生 类 继 承 函 数 的 接 口 及 一 份 强 制 性 实 现\
 EU1/lmr/m/n/12 -[]\EU1/lmtt/m/n/12 "\EU1/FangSong(0)/m/n/12 不变性，| 凌驾特异性\EU1/lmt
 t/m/n/12 " 
  []
 
-[84] [85]
-Overfull \hbox (19.2122pt too wide) in paragraph at lines 3047--3048
+[96] [97]
+Overfull \hbox (19.2122pt too wide) in paragraph at lines 3522--3523
 \EU1/SimSun(0)/m/n/12 号。|  你 不 用 定 义 函 数 的 返 回 类 型，|  因 为 返 回 类 型 就 是 这 个 函 数 的
  名 字。|  例 如 \EU1/SimSun(0)/bx/n/12 为 了 允 许[]\EU1/lmtt/m/n/12 Rational\EU1/lmr/m
 /n/12 (\EU1/SimSun(0)/m/n/12 有
  []
 
-[86]
-Overfull \hbox (10.65164pt too wide) in paragraph at lines 3076--3079
+[98]
+Overfull \hbox (10.65164pt too wide) in paragraph at lines 3551--3554
 \EU1/SimSun(0)/m/n/12 够 重 写 或 重 载 这 个 函 数 来 改 变 它 的 行 为。| []\EU1/lmtt/m/n/12 ne
 w \EU1/SimSun(0)/m/n/12 操 作 符 为 分 配 内 存 所 调 用 函 数 的 名 字 是[]\EU1/lmtt/m/n/12 ope
 rator new\EU1/SimSun(0)/m/n/12 。|
  []
 
-[87] [88]
+[99] [100]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [89]
-[90] [91]
-Overfull \hbox (3.95663pt too wide) in paragraph at lines 3171--3172
+ [101]
+[102] [103]
+Overfull \hbox (3.95663pt too wide) in paragraph at lines 3646--3647
  []\EU1/lmr/bx/n/12 25. \EU1/SimSun(0)/bx/n/12 熟 悉 散 列 容 器[] []\EU1/lmtt/m/n/12
  unordered_map\EU1/FangSong(0)/m/n/12 、| \EU1/lmtt/m/n/12 unordered_multimap\EU
 1/FangSong(0)/m/n/12 、| \EU1/lmtt/m/n/12 unordered_set\EU1/FangSong(0)/m/n/12 、
@@ -1847,7 +1870,7 @@ Overfull \hbox (3.95663pt too wide) in paragraph at lines 3171--3172
  []
 
 
-Overfull \hbox (3.36227pt too wide) in paragraph at lines 3173--3174
+Overfull \hbox (3.36227pt too wide) in paragraph at lines 3648--3649
  []\EU1/lmr/bx/n/12 26. \EU1/SimSun(0)/bx/n/12 尽 量 使 用 \EU1/lmr/bx/n/12 iterato
 r\EU1/SimSun(0)/bx/n/12 ，|  而 不 是 \EU1/lmr/bx/n/12 const_iterator\EU1/SimSun(0)
 /bx/n/12 、| \EU1/lmr/bx/n/12 reverse_iterator \EU1/SimSun(0)/bx/n/12 及 \EU1/lmr
@@ -1855,66 +1878,66 @@ r\EU1/SimSun(0)/bx/n/12 ，|  而 不 是 \EU1/lmr/bx/n/12 const_iterator\EU1/Si
  []
 
 
-Overfull \hbox (14.98224pt too wide) in paragraph at lines 3175--3176
+Overfull \hbox (14.98224pt too wide) in paragraph at lines 3650--3651
 \EU1/SimSun(0)/m/n/12 使 用[]\EU1/lmtt/m/n/12 const_cast \EU1/SimSun(0)/m/n/12 进 
 行 转 换，|  因 为 这 两 个 根 本 就 是 两 个 完 全 不 相 关 的 类，|  比[]\EU1/lmtt/m/n/12 string\EU1/
 FangSong(0)/m/n/12 和\EU1/lmtt/m/n/12 complex<double>
  []
 
 
-Overfull \hbox (43.66039pt too wide) in paragraph at lines 3194--3195
+Overfull \hbox (43.66039pt too wide) in paragraph at lines 3669--3670
 []\EU1/SimSun(0)/m/n/12 应 该 使 用 插 入 迭 代 器。|  插 入 迭 代 器 有 []\EU1/lmtt/m/n/12 ins
 erter\EU1/SimSun(0)/m/n/12 、| []\EU1/lmtt/m/n/12 back_inserter\EU1/SimSun(0)/m/
 n/12 、| []\EU1/lmtt/m/n/12 front_inserter\EU1/SimSun(0)/m/n/12 、| []\EU1/lmtt/m
 /n/12 ostream_iterator 
  []
 
-[92]
-Overfull \hbox (2.5005pt too wide) in paragraph at lines 3215--3216
+[104]
+Overfull \hbox (2.5005pt too wide) in paragraph at lines 3690--3691
  []\EU1/lmr/bx/n/12 32. \EU1/SimSun(0)/bx/n/12 如 果 确 实 需 要 删 除 元 素，|  则 需 要 在 \
 EU1/lmr/bx/n/12 remove \EU1/SimSun(0)/bx/n/12 这 一 类 算 法 之 后 调 用 成 员 函 数 \EU1/lm
 r/bx/n/12 erase[] \EU1/SimSun(0)/m/n/12 算 法[]\EU1/lmtt/m/n/12 remove
  []
 
-[93]
-File: STL-Effective.png Graphic file (type QTm)
- <use  "STL-Effective.png" > [94] [95] [96] [97] [98]
-Overfull \hbox (4.91214pt too wide) in paragraph at lines 3435--3436
+[105]
+File: figure/STL-Effective.png Graphic file (type QTm)
+ <use  "figure/STL-Effective.png" > [106] [107] [108] [109] [110]
+Overfull \hbox (4.91214pt too wide) in paragraph at lines 3910--3911
 []\EU1/SimSun(0)/m/n/12 实 现 \EU1/lmr/m/n/12 B\EU1/SimSun(0)/m/n/12 ：|  将 计 数 功 
 能 放 入[]\EU1/lmtt/m/n/12 SmartPtr \EU1/SimSun(0)/m/n/12 中。|  去 掉[]\EU1/lmtt/m/n/
 12 RefCountBase\EU1/SimSun(0)/m/n/12 ，|  而 是 在[]\EU1/lmtt/m/n/12 SmartPtr \EU1/
 SimSun(0)/m/n/12 中 增 加 一 个[]\EU1/lmtt/m/n/12 size_t
  []
 
-[99]
-Overfull \hbox (19.3473pt too wide) in paragraph at lines 3474--3475
+[111]
+Overfull \hbox (19.3473pt too wide) in paragraph at lines 3949--3950
  []\EU1/lmr/bx/n/12 More Effective C++[] [][]$[][][][] [] [] [] [][][] [] [][][
 ][][][][] [] [][][] [] [][][][][][][][][][][][] [] [][][][][][][] [] [][][][] [
 ] [][] [] [][] [] [][][][][][][] []
  []
 
-[100]
-第六章
-[101
+[112]
+第七章
+[113
 
-] [102
+] [114
 
 ]
-第七章
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3492.
-[103]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 3492.
+第八章
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3967.
+[115]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 3967.
  (./C++_Advanced.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 3492.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 3492.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 3967.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 3967.
  ) 
 Here is how much of TeX's memory you used:
- 30794 strings out of 493706
- 586545 string characters out of 6145376
- 744135 words of memory out of 5000000
- 33825 multiletter control sequences out of 15000+600000
+ 30904 strings out of 493706
+ 587703 string characters out of 6145376
+ 781146 words of memory out of 5000000
+ 33933 multiletter control sequences out of 15000+600000
  11646 words of font info for 82 fonts, out of 8000000 for 9000
  1328 hyphenation exceptions out of 8191
- 63i,8n,75p,10420b,1982s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 63i,8n,75p,10420b,1984s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on C++_Advanced.pdf (103 pages).
+Output written on C++_Advanced.pdf (115 pages).
