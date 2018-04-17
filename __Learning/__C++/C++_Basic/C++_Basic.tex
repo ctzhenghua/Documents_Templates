@@ -11,6 +11,9 @@
  \usepackage{enumitem}%列表格式
  \usepackage{hyperref}
  \usepackage{url}
+ 
+ 
+ \graphicspath{{figure/}}
  \CTEXsetup[format+={\flushleft}]{section}
  
   %代码效果定义
@@ -1533,6 +1536,14 @@ inline FuncX(...){}
 	}
 			  \end{lstlisting} 
 	
+	\subsection{初始化顺序}
+		\begin{enumerate}
+			\item 普通的变量：一般不考虑啥效率的情况下 可以在构造函数中进行赋值。考虑一下效率的可以再构造函数的初始化列表中进行
+			\item static 静态变量
+			\item const  常量变量:onst常量需要在声明的时候即初始化。一般采用在构造函数的初始化列表中进行。
+			\item Reference 引用型变量：引用型变量和const变量类似。需要在创建的时候即进行初始化。也是在初始化列表中进行。但需要注意用Reference类型。
+			\item 字符串初始化
+		\end{enumerate}
 \section{值语义与对象语义}
 	\url{http://blog.csdn.net/chdhust/article/details/9927083}
 	
@@ -1611,7 +1622,11 @@ inline FuncX(...){}
 		    \end{itemize}
 	       
 \section{STATIC 修饰词}
-	       
+	\subsection{初始化时间}
+		\textbf{全局}变量、\textbf{文件域}的静态变量和\textbf{类的静态成员}变量\textbf{在main执行之前}的静态初始化过程中分配内存并初始化；\textbf{局部静态变量}（一般为函数内的静态变量）\textbf{在第一次使用时分配内存并初始化}。这里的变量包含内置数据类型和自定义类型的对象。  
+		
+		 
+		 \textbf{非局部静态变量}一般\textbf{在main执行之前}的静态初始化过程中分配内存并初始化，\textbf{可以认为是线程安全的}； 
 	\subsection{静态全局变量}	
 		       \begin{enumerate}[fullwidth,itemindent=2em,label=(\arabic*)]
 			       \item  该变量在全局数据区分配内存
@@ -2183,6 +2198,22 @@ inline FuncX(...){}
 		
 		\url{http://www.cnblogs.com/jerry19880126/p/3616999.html}
 		
+		\subsection{虚函数在内存中分布}
+			对于有虚函数的基类和子类来说，内存中类对象的开始位置就是4字节的\verb|VPTR|（虚函数表的地址，指向\verb|VTABLE|）。
+			
+			\textit{如果一个子类继承自基类，且没有对虚函数进行重写}，子类\textbf{仍然会自己维护一个虚函数表}，和基类的虚函数表地址不同（尽管可能内容相同）。 
+			
+			\color{blue}可以这样理解，每个类都是一个架构模型，不同类型的实例则是需要根据不同的架构进行填充内存的。所以每个类都需要有各自的架构模型，如果是继承那么会将父类的模型拷贝过来再改造。
+			\color{black}
+			
+			
+			\textbf{虚函数表中存放该类对应的实际会调用的函数地址,} \textit{即若子类没有覆盖基类的虚函数，则对应位置存放基类虚函数地址}；\color{blue}\textbf{若子类覆盖了基类的虚函数，则对应位置存放子类的虚函数地址}。虚函数表以\verb|NULL|结尾。且如果子类中添加了基类中没有的虚函数，则新加的虚函数被放在子类虚函数表最后。 \color{black}
+			
+			\textbf{虚函数表只存放虚函数的地址，非虚函数由编译器在编译期间静态设定。} 
+			
+			\textbf{如果一个子类是多继承}，即含有多个基类，\textbf{则有多个虚函数表，分别对应到不同的继承}。
+
+		
 		\subsection{单一对象}
 		
 			\begin{lstlisting}
@@ -2210,8 +2241,29 @@ inline FuncX(...){}
 				   因此，构成对象的只有数据，任何成员函数都不属于任何一个对象，非静态成员函数和对象的关系就像是绑定，绑定的中介就是this指针。而this 指针是以默认的类指针 对象作为第一个参数传进成员函数的，所以不占空间。
 				   
 				   $$ \verb|对象大小 = 非静态数据成员|$$
-				   
-		\subsection{单继承}		   
+		
+		\newpage
+	\subsection{单一对象(virtual)}
+		\begin{lstlisting}
+	class Base
+	{
+		int a;
+		int b;
+	public:
+		void CommonFunction();
+		void virtual VirtualFunction();
+	};			
+		\end{lstlisting}
+	
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[scale = 0.8]{figure/singleVirtual.png}
+		\caption{单对象，包含虚函数}
+	\end{figure}
+
+		
+		\newpage			   
+		\subsection{单继承(base 无virtual)}		   
 			\begin{lstlisting}
 	class DerivedClass: public Base
 	{
@@ -2226,26 +2278,9 @@ inline FuncX(...){}
 				\includegraphics[scale = 0.8]{figure/singleDerived.png}
 				\caption{单继承}
 			\end{figure}
-		
-		\subsection{单一对象(virtual)}
-			\begin{lstlisting}
-	class Base
-	{
-		int a;
-		int b;
-		public:
-		void CommonFunction();
-		void virtual VirtualFunction();
-	};			
-			\end{lstlisting}
-			
-			\begin{figure}[ht]
-				\centering
-				\includegraphics[scale = 0.8]{figure/singleVirtual.png}
-				\caption{单对象，包含虚函数}
-			\end{figure}
-		
-		\subsection{单继承(virtual)}DerivedClass继承了Base，内存排布是\textbf{先父类后子类}。
+	
+		\newpage
+		\subsection{单继承(base 有virtual)}DerivedClass继承了Base，内存排布是\textbf{先父类后子类}。
 		    \begin{lstlisting}
 	class DerivedClass: public Base
 	{
@@ -2259,11 +2294,58 @@ inline FuncX(...){}
 		    \begin{figure}[ht]
 		      \centering
 		      \includegraphics[scale = 0.8]{figure/singleDerivedVirutal.png}
+		      \includegraphics[scale = 0.8]{vtable1.png}
 		      \caption{单继承，包含虚函数}
 		    \end{figure}  	
-		
-		\subsection{多继承(virtual)}
+
+		\newpage
+		\subsection{虚继承-单继承(virtual)}
 			\begin{lstlisting}
+	class DerivedClass1: virtual public Base
+	{
+		int c;
+	public:
+		void DerivedCommonFunction();
+		void virtual VirtualFunction();
+	};
+	
+	class DerivedClass2 : virtual public Base
+	{
+		int d;
+	public:
+		void DerivedCommonFunction();
+		void virtual VirtualFunction();
+	};
+	
+	class DerivedDerivedClass :  public DerivedClass1, public DerivedClass2
+	{
+		int e;
+	public:
+		void DerivedDerivedCommonFunction();
+		void virtual VirtualFunction();
+	};
+			\end{lstlisting}
+		
+		\begin{figure}[ht]
+			\centering
+			\includegraphics[scale = 0.8]{figure/virtualDerivedVirutal.png}
+			\caption{虚单继承，包含虚函数}
+		\end{figure}
+
+	\newpage	
+		\subsection{多继承(base  有 virtual)}
+			如果一个子类有多个基类，为多继承。
+			
+			\textbf{其对象在内存中的布局为}：
+				\begin{enumerate}
+					\item \textit{按照多个继承，分为多个块}；
+					\item \textbf{每块的开头为一种继承的虚函数表}，接着为该种继承的基类的非静态成员变量
+					\item 所有块结束之后，为该子类特有的非静态成员变量
+					\item 如果该子类又新加了虚函数，则虚函数\textbf{放在第一个虚函数表的最后}。
+				\end{enumerate}
+			
+			\begin{lstlisting}
+// 显示菱形继承
 	class Base
 	{
 		int a;
@@ -2295,19 +2377,69 @@ inline FuncX(...){}
 		public:
 		void DerivedDerivedCommonFunction();
 		void virtual VirtualFunction();
-	};			
+	};	
+	
+	
+// 验证子类新建虚函数位置 添加在 第一张虚表上
+	class A{
+		public:
+		virtual void f1(){
+			cout << "f1 in class A" << endl;
+		}
+		private:
+		int a;
+	};
+	class B{
+		public:
+		virtual void f2(){
+			cout << "f2 in class B" << endl;
+		}
+		virtual void f4(){
+			cout << "f4 in class B" << endl;
+		}
+		int b;
+	}
+	class D:public A, B{
+		public:
+		void f1(){
+			cout << "f1 in class D" << endl;
+		}
+		void f2(){
+			cout << "f2 in class D" << endl;
+		}
+		virtual void f3(){
+			cout << "f3 in class D" << endl;
+		}
+		private:
+		double c;
+	}		
 			\end{lstlisting}
 			
 			\begin{figure}[ht]
 				\centering
 				\includegraphics[scale = 0.8]{figure/DerivedDerivedVirutal.png}
+				\includegraphics[scale = 0.8]{vtable2.png}
 				\caption{多继承，包含虚函数}
 			\end{figure}
 			
-			由外向内看，它并列地排布着继承而来的两个父类DerivedClass1与DerivedClass2，还有自身的成员变量e。DerivedClass1包含了它的成员变量c，以及Base，Base有一个0地址偏移的虚表指针，然后是成员变量a和b；DerivedClass2的内存排布类似于DerivedClass1，注意到DerivedClass2里面竟然也有一份Base。
+			由外向内看，它并列地排布着继承而来的两个父类DerivedClass1与DerivedClass2，还有自身的成员变量e。DerivedClass1包含了它的成员变量c，以及Base，Base有一个0地址偏移的虚表指针，然后是成员变量a和b；DerivedClass2的内存排布类似于DerivedClass1，\textbf{注意到DerivedClass2里面竟然也有一份Base。}
 			
-		\subsection{虚继承-单继承(virtual)}
+			\subparagraph{菱形继承}如果有多个类继承自同一个基类，最后又被同一个子类继承这些类（例如 B, C继承自A， D继承自B,C），这种情况下，若类型A存在非静态成员变量a，则会有D类型的对象保留从B继承来的a和从C继承来的a，出现空间冗余。 
+			
+			\textbf{使用虚继承}，可以使得D从B继承来的a和从C继承来的a是同一个，\textbf{节省空间}。 
+
+		\newpage
+		\subsection{虚继承-多继承(base  有 virtual)}
 			\begin{lstlisting}
+	class Base
+	{
+		int a;
+		int b;
+		public:
+		void CommonFunction();
+		void virtual VirtualFunction();
+	};	
+	
 	class DerivedClass1: virtual public Base
 	{
 		int c;
@@ -2332,19 +2464,34 @@ inline FuncX(...){}
 		void virtual VirtualFunction();
 	};
 			\end{lstlisting}
-		
-			\begin{figure}[ht]
-				\centering
-				\includegraphics[scale = 0.8]{figure/virtualDerivedVirutal.png}
-				\caption{虚单继承，包含虚函数}
-			\end{figure}
 			
-		\subsection{虚继承-多继承(virtual)}
-			\begin{figure}[ht]
-				\centering
-				\includegraphics[scale = 0.8]{figure/virtualDerivedDerivedVirutal.png}
-				\caption{虚多继承，包含虚函数}
-			\end{figure}
+			\subparagraph{Derived类图}
+			
+				\verb|DerivedClass1|就已经有变化了，原来是先排虚表指针与\verb|Base|成员变量，\verb|vfptr|位于0地址偏移处；但现在有两个虚表指针了，一个是\verb|vbptr|，另一个是\verb|vfptr|。\verb|vbptr|是这个\verb|DerivedClass1|对应的虚表指针，它指向\verb|DerivedClass1|的虚表\verb|vbtable|，另一个\verb|vfptr|是虚基类表对应的虚指针，它指向\verb|vftable|。
+				
+				\begin{figure}[ht]
+					\centering
+					\includegraphics[scale = 0.8]{Derived.png}
+					\caption{虚多继承-D}
+				\end{figure}
+			
+			\subparagraph{DerivedDerived  类图}
+				
+				这里面有三个虚指针了，但\verb|base|却只有一份。第一张虚表是内含\verb|DerivedClass1|的，第二张虚表是内含\verb|DerivedClass2|的，最后一张表是虚基表。
+				
+				\begin{figure}[ht]
+					\centering
+					\includegraphics[scale = 0.8]{virtualDerivedDerivedVirutal.png}
+					\caption{虚多继承-DD}
+				\end{figure}
+		
+			\subparagraph{总结} \verb|->|
+				
+			\textbf{虚继承的作用是减少了对基类的重复，代价是增加了虚表指针的负担（更多的虚表指针）。}
+			
+			\textbf{如果是虚继承，那么子类会有两份虚指针}，一份指向自己的虚表，另一份指向虚基表，多重继承时虚基表与虚基表指针有且只有一份
+			
+	\newpage		
 	\section{ELF}
 		\url{https://www.cnblogs.com/gtarcoder/p/6006023.html}	
 		

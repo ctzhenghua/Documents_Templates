@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/W32TeX) (preloaded format=xelatex 2017.2.16)  2 FEB 2018 13:20
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/W32TeX) (preloaded format=xelatex 2017.2.16)  6 FEB 2018 18:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1475,34 +1475,34 @@ Package: xeCJK-listings 2015/05/15 v3.3.2 xeCJK patch file for listings
 (./C++_Basic.aux)
 \openout1 = `C++_Basic.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for EU1/lmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for T3/cmr/m/n on input line 47.
-LaTeX Font Info:    Try loading font information for T3+cmr on input line 47.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for EU1/lmr/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for T3/cmr/m/n on input line 50.
+LaTeX Font Info:    Try loading font information for T3+cmr on input line 50.
  (e:/Software/texlive/2015/texmf-dist/tex/latex/tipa/t3cmr.fd
 File: t3cmr.fd 2001/12/31 TIPA font definitions
 )
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
 ABD: EverySelectfont initializing macros
-LaTeX Info: Redefining \selectfont on input line 47.
+LaTeX Info: Redefining \selectfont on input line 50.
 .................................................
 . fontspec info: "setup-math"
 . 
@@ -1510,56 +1510,56 @@ LaTeX Info: Redefining \selectfont on input line 47.
 .................................................
 \symlegacymaths=\mathgroup6
 LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
-(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 47.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 47.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 47.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 47.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 47.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 47.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 47.
-LaTeX Font Info:    Redeclaring math accent \check on input line 47.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 47.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 47.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 47.
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 47.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 47.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 47.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 47.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 47.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 47.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 47.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 47.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 47.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 47.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 47.
-LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 47.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 47.
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 50.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 50.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 50.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 50.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 50.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 50.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 50.
+LaTeX Font Info:    Redeclaring math accent \check on input line 50.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 50.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 50.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 50.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 50.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 50.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 50.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 50.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 50.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 50.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 50.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 50.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 50.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 50.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 50.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 50.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 50.
 LaTeX Font Info:    Encoding `OT1' has changed to `EU1' for symbol font
-(Font)              `operators' in the math version `normal' on input line 47.
+(Font)              `operators' in the math version `normal' on input line 50.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> EU1/lmr/m/n on input line 47.
+(Font)                  OT1/cmr/m/n --> EU1/lmr/m/n on input line 50.
 LaTeX Font Info:    Encoding `OT1' has changed to `EU1' for symbol font
-(Font)              `operators' in the math version `bold' on input line 47.
+(Font)              `operators' in the math version `bold' on input line 50.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> EU1/lmr/m/n on input line 47.
+(Font)                  OT1/cmr/bx/n --> EU1/lmr/m/n on input line 50.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  EU1/lmr/m/n --> EU1/lmr/m/n on input line 47.
+(Font)                  EU1/lmr/m/n --> EU1/lmr/m/n on input line 50.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> EU1/lmr/m/it on input line 47.
+(Font)                  OT1/cmr/m/it --> EU1/lmr/m/it on input line 50.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> EU1/lmr/bx/n on input line 47.
+(Font)                  OT1/cmr/bx/n --> EU1/lmr/bx/n on input line 50.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> EU1/lmss/m/n on input line 47.
+(Font)                  OT1/cmss/m/n --> EU1/lmss/m/n on input line 50.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> EU1/lmtt/m/n on input line 47.
+(Font)                  OT1/cmtt/m/n --> EU1/lmtt/m/n on input line 50.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  EU1/lmr/m/n --> EU1/lmr/bx/n on input line 47.
+(Font)                  EU1/lmr/m/n --> EU1/lmr/bx/n on input line 50.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> EU1/lmr/bx/it on input line 47.
+(Font)                  OT1/cmr/bx/it --> EU1/lmr/bx/it on input line 50.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> EU1/lmss/bx/n on input line 47.
+(Font)                  OT1/cmss/bx/n --> EU1/lmss/bx/n on input line 50.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> EU1/lmtt/bx/n on input line 47.
+(Font)                  OT1/cmtt/m/n --> EU1/lmtt/bx/n on input line 50.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
@@ -1597,7 +1597,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 
 \c@lstlisting=\count177
 \AtBeginShipoutBox=\box59
-Package hyperref Info: Link coloring ON on input line 47.
+Package hyperref Info: Link coloring ON on input line 50.
 (e:/Software/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
@@ -1606,20 +1606,20 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count178
 )
-LaTeX Info: Redefining \ref on input line 47.
-LaTeX Info: Redefining \pageref on input line 47.
-LaTeX Info: Redefining \nameref on input line 47.
+LaTeX Info: Redefining \ref on input line 50.
+LaTeX Info: Redefining \pageref on input line 50.
+LaTeX Info: Redefining \nameref on input line 50.
 
 (./C++_Basic.out) (./C++_Basic.out)
 \@outlinefile=\write3
 \openout3 = `C++_Basic.out'.
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 50.
+LaTeX Font Info:    Try loading font information for U+msa on input line 53.
 
 (e:/Software/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 50.
+LaTeX Font Info:    Try loading font information for U+msb on input line 53.
 
 (e:/Software/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1692,7 +1692,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 . 
 . Could not resolve font FangSong/I (it probably doesn't exist).
 .................................................
-LaTeX Font Info:    Try loading font information for EU1+lmtt on input line 62.
+LaTeX Font Info:    Try loading font information for EU1+lmtt on input line 65.
 
 (e:/Software/texlive/2015/texmf-dist/tex/latex/euenc/eu1lmtt.fd
 File: eu1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -1724,22 +1724,22 @@ File: eu1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
  [11
 
 ]
-Overfull \hbox (37.89111pt too wide) in paragraph at lines 94--95
+Overfull \hbox (37.89111pt too wide) in paragraph at lines 97--98
 [][]$[][][][][] [] [] [] [][][][][][] [] [][][] [] [][][][][][][][][][] [] [][]
 [][][][][][][][][][][][][][][][][][][][][][] [] [][][][] [] [][][] [] [] [] [][
 ] [] [][] [] [][][][][] [] [][][][][][][][][][] []
  []
 
-File: moveANDcopy.jpg Graphic file (type QTm)
-<use  "moveANDcopy.jpg" > [12] [13] [14] [15]
-Overfull \hbox (22.14758pt too wide) in paragraph at lines 274--275
+File: figure/moveANDcopy.jpg Graphic file (type QTm)
+<use  "figure/moveANDcopy.jpg" > [12] [13] [14] [15]
+Overfull \hbox (22.14758pt too wide) in paragraph at lines 277--278
 \EU1/SimSun(0)/m/n/12 应 提 供 了 一 个[]\EU1/lmtt/m/n/12 insert_after \EU1/SimSun(0)
 /m/n/12 函 数，|  用 于 在 给 定 元 素 之 后 插 入 节 点。| []\EU1/lmtt/m/n/12 erase_after\EU1/F
 angSong(0)/m/n/12 、| \EU1/lmtt/m/n/12 emplace_after
  []
 
 
-Overfull \hbox (18.70134pt too wide) in paragraph at lines 283--284
+Overfull \hbox (18.70134pt too wide) in paragraph at lines 286--287
 []\EU1/SimSun(0)/bx/n/12 无 关 序 列 容 器\EU1/SimSun(0)/m/n/12 ：|  引 入 了 对[]\EU1/lmt
 t/m/n/12 map\EU1/FangSong(0)/m/n/12 、| \EU1/lmtt/m/n/12 set \EU1/SimSun(0)/m/n/
 12 等 关 联 容 器 的 无 序 版 本，|  叫 做[]\EU1/lmtt/m/n/12 unorderer_map/unordered_set\EU1
@@ -1751,7 +1751,7 @@ Underfull \vbox (badness 3919) has occurred while \output is active []
 
  [19]
 [20] [21] [22] [23] [24] [25] [26] [27] [28]
-Overfull \hbox (10.71936pt too wide) in paragraph at lines 845--846
+Overfull \hbox (10.71936pt too wide) in paragraph at lines 848--849
  []\EU1/SimSun(0)/bx/n/12 引 用 计 数 实 现[] \EU1/SimSun(0)/m/n/12 中 间 对 象\EU1/lmr/m
 /n/12 :[][]$[][][][] [] [] [] [][][][] [] [][][][] [] [][][] [] [][][][][][][][
 ][][][][] [] [][][][][][][] [] [][][][][][][] [] [][][][][][][]$[][] 
@@ -1767,7 +1767,7 @@ Underfull \vbox (badness 1728) has occurred while \output is active []
 第二章
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 1094.
+(hyperref)                than one, level fixed on input line 1097.
 
 [37] [38
 
@@ -1775,14 +1775,14 @@ Package hyperref Warning: Difference (2) between bookmark levels is greater
 第三章
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 1118.
+(hyperref)                than one, level fixed on input line 1121.
 
 [39] [40] [41] [42
 
 ]
 第四章
 [43]
-Overfull \hbox (42.95059pt too wide) in paragraph at lines 1249--1250
+Overfull \hbox (42.95059pt too wide) in paragraph at lines 1252--1253
 [][]\EU1/lmtt/m/n/12 friend ostream &  operator <<(ostream & outputStream ,cons
 t  Class-name  & RightValue) 
  []
@@ -1791,13 +1791,13 @@ t  Class-name  & RightValue)
 
 ]
 第五章
-File: struct.png Graphic file (type QTm)
-<use  "struct.png" > [47]
-File: union.png Graphic file (type QTm)
- <use  "union.png" > [48]
-File: union2.png Graphic file (type QTm)
- <use  "union2.png" >
-[49] [50
+File: figure/struct.png Graphic file (type QTm)
+<use  "figure/struct.png" > [47]
+File: figure/union.png Graphic file (type QTm)
+ <use  "figure/union.png" > [48]
+File: figure/union2.png Graphic file (type QTm)
+
+<use  "figure/union2.png" > [49] [50
 
 ]
 第六章
@@ -1806,8 +1806,12 @@ File: union2.png Graphic file (type QTm)
 ]
 第七章
 [55] [56]
-File: weakCopy.png Graphic file (type QTm)
- <use  "weakCopy.png" > [57] [58] [59] [60]
+File: figure/weakCopy.png Graphic file (type QTm)
+ <use  "figure/weakCopy.png" >
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[57] [58] [59] [60]
 第八章
 [61
 
@@ -1819,12 +1823,13 @@ File: weakCopy.png Graphic file (type QTm)
 File: lstlang1.sty 2014/09/06 1.5e listings language file
 ) [63]
 [64]
-File: derive.png Graphic file (type QTm)
- <use  "derive.png" > [65] [66]
-File: derive.jpg Graphic file (type QTm)
- <use  "derive.jpg" >
-File: derive2.jpg Graphic file (type QTm)
- <use  "derive2.jpg" >
+File: figure/derive.png Graphic file (type QTm)
+ <use  "figure/derive.png" > [65] [66]
+File: figure/derive.jpg Graphic file (type QTm)
+ <use  "figure/derive.jpg" >
+File: figure/derive2.jpg Graphic file (type QTm)
+
+<use  "figure/derive2.jpg" >
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
@@ -1837,7 +1842,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 [71
 
 ]
-Overfull \hbox (9.93369pt too wide) in paragraph at lines 2038--2039
+Overfull \hbox (9.93369pt too wide) in paragraph at lines 2053--2054
 []\EU1/SimSun(0)/bx/n/12 深 入 \EU1/lmr/bx/n/12 c++ \EU1/SimSun(0)/bx/n/12 内 存 模 
 型\EU1/SimSun(0)/m/n/12 ：| [][]$[][][][] [] [] [] [][][][] [] [][][][] [] [][][]
  [] [][][][][][][][][][][][][][][] [] [][][][][][][] [] [][][][][][][] [] [][][
@@ -1845,7 +1850,7 @@ Overfull \hbox (9.93369pt too wide) in paragraph at lines 2038--2039
  []
 
 
-Overfull \hbox (34.45288pt too wide) in paragraph at lines 2046--2047
+Overfull \hbox (34.45288pt too wide) in paragraph at lines 2061--2062
 \EU1/SimSun(0)/m/n/12 算 符 自 动 完 成\EU1/lmr/m/n/12 . \EU1/SimSun(0)/m/n/12 每 个 \E
 U1/lmr/m/n/12 class \EU1/SimSun(0)/m/n/12 所 关 联 的 []\EU1/lmtt/m/n/12 type_info 
 object\EU1/lmr/m/n/12 (\EU1/SimSun(0)/m/n/12 用 以 支 持[]\EU1/lmtt/m/n/12 runtime 
@@ -1853,7 +1858,7 @@ type identification, RTTI\EU1/lmr/m/n/12 )
  []
 
 
-Overfull \hbox (7.5136pt too wide) in paragraph at lines 2048--2049
+Overfull \hbox (7.5136pt too wide) in paragraph at lines 2063--2064
 []\EU1/SimSun(0)/m/n/12 虚 函 数  |（[]\EU1/lmtt/m/n/12 Virtual Function\EU1/SimSun
 (0)/m/n/12 ）|  是 通 过 一 张 虚 函 数 表  |（[]\EU1/lmtt/m/n/12 Virtual Table\EU1/SimSun
 (0)/m/n/12 ）|  来 实 现 的。|  简 称 为[]\EU1/lmtt/m/n/12 V-Table\EU1/SimSun(0)/m/n/12 
@@ -1861,123 +1866,123 @@ Overfull \hbox (7.5136pt too wide) in paragraph at lines 2048--2049
  []
 
 [72]
-File: process.png Graphic file (type QTm)
- <use  "process.png" >
+File: figure/process.png Graphic file (type QTm)
+ <use  "figure/process.png" >
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-File: vt-base.jpg Graphic file (type QTm)
-<use  "vt-base.jpg" >
+File: figure/vt-base.jpg Graphic file (type QTm)
+<use  "figure/vt-base.jpg" >
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-File: vt-base2.jpg Graphic file (type QTm)
-<use  "vt-base2.jpg" >
+File: figure/vt-base2.jpg Graphic file (type QTm)
+<use  "figure/vt-base2.jpg" >
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [73] [74] [75] [76]
 第十一章
-File: processMem.png Graphic file (type QTm)
-<use  "processMem.png" > [77
+File: figure/processMem.png Graphic file (type QTm)
+<use  "figure/processMem.png" > [77
 
-]
+] [78]
 File: figure/single.png Graphic file (type QTm)
- <use  "figure/single.png" > [78]
-File: figure/singleDerived.png Graphic file (type QTm)
-
-<use  "figure/singleDerived.png" > [79]
+ <use  "figure/single.png" > [79]
 File: figure/singleVirtual.png Graphic file (type QTm)
- <use  "figure/singleVirtual.png" >
-File: figure/singleDerivedVirutal.png Graphic file (type QTm)
 
-<use  "figure/singleDerivedVirutal.png" > [80]
+<use  "figure/singleVirtual.png" > [80]
+File: figure/singleDerived.png Graphic file (type QTm)
+ <use  "figure/singleDerived.png" >
+[81]
+File: figure/singleDerivedVirutal.png Graphic file (type QTm)
+ <use  "figure/singleDerivedVirutal.png" >
+File: figure/vtable1.png Graphic file (type QTm)
+ <use  "figure/vtable1.png" >
+[82]
+File: figure/virtualDerivedVirutal.png Graphic file (type QTm)
+ <use  "figure/virtualDerivedVirutal.png" > [83] [84]
 File: figure/DerivedDerivedVirutal.png Graphic file (type QTm)
 
-<use  "figure/DerivedDerivedVirutal.png" > [81]
-File: figure/virtualDerivedVirutal.png Graphic file (type QTm)
-
-<use  "figure/virtualDerivedVirutal.png" >
+<use  "figure/DerivedDerivedVirutal.png" >
+File: figure/vtable2.png Graphic file (type QTm)
+ <use  "figure/vtable2.png" >
+[85] [86]
+File: figure/Derived.png Graphic file (type QTm)
+ <use  "figure/Derived.png" >
 File: figure/virtualDerivedDerivedVirutal.png Graphic file (type QTm)
 
-<use  "figure/virtualDerivedDerivedVirutal.png" > [82] [83] [84
-
-]
+<use  "figure/virtualDerivedDerivedVirutal.png" > [87] [88]
 第十二章
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 2357.
+(hyperref)                than one, level fixed on input line 2504.
 
-[85]
-Overfull \hbox (15.633pt too wide) in paragraph at lines 2409--2411
+[89
+
+]
+Overfull \hbox (15.633pt too wide) in paragraph at lines 2556--2558
 []\EU1/SimSun(0)/m/n/12 目 前 业 界 针 对 这 种 情 况 的 处 理 没 有 一 个 很 完 美 的 方 案，| \EU1/Si
 mSun(0)/bx/n/12 通 常 的 做 法 是 提 供 方 在 自 己 的[]\EU1/lmtt/m/n/12 xxx_pub.h
  []
 
-[86]
+[90]
 第十三章
-[87
+[91
 
-] [88
+] [92
 
 ]
 第十四章
-[89] [90]
+[93] [94]
 第十五章
-[91
+[95
 
-] [92] [93] [94
+] [96] [97] [98
 
 ]
 第十六章
-[95] [96]
+[99] [100]
 第十七章
-[97
+[101
 
-] [98] [99] [100
+] [102] [103] [104
 
 ]
 第十八章
-[101] [102]
+[105] [106]
 第十九章
-[103
+[107
 
-] [104
+] [108
 
 ]
 第二十章
-[105] [106] [107] [108
+[109] [110] [111] [112
 
 ]
 第二十一章
-[109] [110]
+[113] [114]
 第二十二章
-[111
+[115
 
-] [112
+] [116
 
 ]
 第二十三章
-[113]
-Underfull \vbox (badness 1281) has occurred while \output is active []
+[117] [118
 
- [114]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [115]
-[116]
+]
 第二十四章
 
-Overfull \hbox (17.27399pt too wide) in paragraph at lines 3130--3131
+Overfull \hbox (17.27399pt too wide) in paragraph at lines 3121--3122
 []\EU1/SimSun(0)/m/n/12 打 开 属 性 管 理 器，|  点 击 项 目 前 的 箭 头，|  展 开 项 目，|  找 到[]\EU
 1/lmtt/m/n/12 Debug \EU1/SimSun(0)/m/n/12 或 者[]\EU1/lmtt/m/n/12 Release \EU1/Si
 mSun(0)/m/n/12 下 面 的 []\EU1/lmtt/m/n/12 Microsoft.Cpp
  []
 
-[117
-
-]
-Overfull \hbox (111.77289pt too wide) in paragraph at lines 3151--3152
+[119]
+Overfull \hbox (111.77289pt too wide) in paragraph at lines 3142--3143
 []\EU1/lmr/m/n/12 -\EU1/SimSun(0)/m/n/12 配 置 \EU1/lmr/m/n/12 include Directorie
 s += \EU1/SimSun(0)/m/n/12 安 装 目 录 $[]$\EU1/lmr/m/n/12 opencv$[]$build$[]$inclu
 de; += \EU1/SimSun(0)/m/n/12 安 装 目 录 $[]$ \EU1/lmr/m/n/12 opencv$[]$build$[]$in
@@ -1985,50 +1990,50 @@ clude$[]$opencv;
  []
 
 
-Overfull \hbox (28.81364pt too wide) in paragraph at lines 3174--3175
+Overfull \hbox (28.81364pt too wide) in paragraph at lines 3165--3166
 []\EU1/lmr/m/n/12 win10 \EU1/SimSun(0)/m/n/12 权 限 更 改：| [][]$[][][][] [] [] [] 
 [][][][] [] [][][] [] [][][] [] [][][][][][][] [] [][][] [] [][][][] [] [][][][
 ][][] [] [][][][][][][][][][][][][][][][][][][][][][][][]$[][] 
  []
 
-[118] [119] [120] [121] [122
+[120] [121] [122] [123] [124
 
 ]
 第二十五章
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 3291.
+(hyperref)                than one, level fixed on input line 3282.
 
 
-Overfull \hbox (17.79639pt too wide) in paragraph at lines 3316--3317
+Overfull \hbox (17.79639pt too wide) in paragraph at lines 3307--3308
 [][]\EU1/lmtt/m/n/12 break +offset,  break -offset\EU1/lmr/m/n/12 : \EU1/SimSun
 (0)/m/n/12 在 当 前 行 号 的 前 面 或 后 面 的[]\EU1/lmtt/m/n/12 offset \EU1/SimSun(0)/m/n/
 12 行 停 住。| []\EU1/lmtt/m/n/12 offiset \EU1/SimSun(0)/m/n/12 为
  []
 
-[123] [124] [125] [126
+[125] [126] [127] [128
 
 ]
 第二十六章
-[127]
-File: Naming.png Graphic file (type QTm)
- <use  "Naming.png" >
-Overfull \hbox (5.12567pt too wide) in paragraph at lines 3468--3469
+[129]
+File: figure/Naming.png Graphic file (type QTm)
+ <use  "figure/Naming.png" >
+Overfull \hbox (5.12567pt too wide) in paragraph at lines 3459--3460
  [][] 
  []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[128] [129]
-Overfull \hbox (24.302pt too wide) in paragraph at lines 3524--3525
+[130] [131]
+Overfull \hbox (24.302pt too wide) in paragraph at lines 3515--3516
 [][]\EU1/lmtt/m/n/12 #define INT_PTR int* \EU1/SimSun(0)/m/n/12 这 是 \EU1/SimSun
 (0)/bx/n/12 宏 定 义\EU1/SimSun(0)/m/n/12 ，|  编 译 预 处 理 阶 段 要 进 行 宏 替 换，| []\EU1/l
 mtt/m/n/12 INT_PTR a,b\EU1/FangSong(0)/m/n/12 会变成 \EU1/lmtt/m/n/12 int* a,b
  []
 
-[130] [131] [132]
-Overfull \hbox (201.52167pt too wide) in paragraph at lines 3638--3639
+[132] [133] [134]
+Overfull \hbox (201.52167pt too wide) in paragraph at lines 3629--3630
 [][][]$[][][][] [] [] [] [][][][][][][][][][][][][] [] [][][] [] [][][][][][][]
 [][] [] [][][][][][][][] [] [][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
@@ -2036,26 +2041,26 @@ Overfull \hbox (201.52167pt too wide) in paragraph at lines 3638--3639
  []
 
 
-Overfull \hbox (2.29971pt too wide) in paragraph at lines 3642--3643
+Overfull \hbox (2.29971pt too wide) in paragraph at lines 3633--3634
 []\EU1/lmr/m/n/12 LNK2019: \EU1/SimSun(0)/m/n/12 无 法 解 析 的 外 部 符 号 \EU1/lmr/m/n
 /12 __imp__InitCommonControlsEx@4\EU1/SimSun(0)/m/n/12 ，|  该 符 号 在 函 数 \EU1/lmr
 /m/n/12 _Win-
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3646.
-[133]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 3646.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3637.
+[135]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 3637.
  (./C++_Basic.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 3646.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 3646.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 3637.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 3637.
  ) 
 Here is how much of TeX's memory you used:
- 30683 strings out of 493706
- 589699 string characters out of 6145376
- 736263 words of memory out of 5000000
- 33693 multiletter control sequences out of 15000+600000
+ 30635 strings out of 493706
+ 589090 string characters out of 6145376
+ 735586 words of memory out of 5000000
+ 33641 multiletter control sequences out of 15000+600000
  11646 words of font info for 82 fonts, out of 8000000 for 9000
  1328 hyphenation exceptions out of 8191
  63i,10n,75p,10445b,1977s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on C++_Basic.pdf (133 pages).
+Output written on C++_Basic.pdf (135 pages).

@@ -569,11 +569,70 @@
 				\verb|__FILE__和__LINE__|是系统预定义宏，这种宏并不是在某个文件中定义的，而是由编译器定义的
 				
 		\subsubsection{关于\_\_stdcall和\_\_cdecl调用方式的理解}
-			深入汇编理解：\url{http://blog.csdn.net/beanjoy/article/details/9135373}
-			\begin{itemize}[itemindent = 1em]
-				\item\verb| __stdcall|：参数\textbf{由右向左}压入堆栈；堆栈\textbf{由函数本身}清理。
-				\item \verb|__cdecl|：参数也是\textbf{由右向左}压入堆栈；但堆栈\textbf{由调用者}清理。
-			\end{itemize}
+			\url{http://blog.csdn.net/myjisgreat/article/details/46477769}
+			
+			\subparagraph{案例理解}
+				\verb|stdcall| 就是“我”把书（参数）依次放在了书堆顶(压入堆栈)，事先与服务员约定好我已经放了N本书（N个字节），“服务员”按照约定查看N本书（我压入的参数），做好他的工作后，他按照约定的书本个数N，来把N本书从书堆上移除（清理堆栈，释放那几个参数的空间，而不是释放整个堆栈）
+				
+				\verb|cdelcall|是“我”把书（参数）依次放在了书堆顶，没有与服务员约定书的多少，服务员查看我给的书，然后呼叫我，我自己把刚刚放上的书移除
+				
+			\subparagraph{清理区别}	\verb|->|
+			
+				\verb|cdecl|是调用者恢复堆栈的，假设有一百个不同的函数调用函数a那么内存中就有一百端恢复堆栈的代码，是不是很浪费空间呢？
+				
+				\verb|stdcall|是函数恢复堆栈，只有在函数代码的结尾出现一次恢复堆栈的代码，所以节约空间
+					
+				\begin{lstlisting}
+//cdecl :内存中“实际”代码, 指令都是保存在内存中，看到a和c分别调用b，内存中就有两处恢复堆栈的代码
+	b函数
+	{
+		do something
+		return
+	}
+	
+	a函数调用b函数
+	{
+		push 参数(参数进栈)
+		call 函数
+		sub esp…(恢复堆栈)	// 调用者清理
+	}
+	
+	c函数调用b函数
+	{
+		push 参数(参数进栈)
+		call 函数
+		sub esp…(恢复堆栈) // 调用者清理
+	}
+	
+//stdcall :可以看到，只有b函数内部有一份恢复堆栈的代码，调用函数的地方不再有重复代码
+	b函数
+	{
+		do something
+		恢复堆栈  // 只有一处清理，自己负责清理
+		return
+	}
+	
+	a函数调用b函数
+	{
+		push 参数(参数进栈)
+		call 函数//这里没有恢复堆栈的代码
+	}
+	
+	c函数调用b函数
+	{
+		push 参数(参数进栈)
+		call 函数
+	}
+				\end{lstlisting}
+		
+
+		
+			\subparagraph{参数区别}\verb|->|
+			
+				\verb|cdecl|的优势在于他\textbf{可以不定参数个数}，参考printf函数. 原因在于是调用者存入参数，调用者释放参数占有的空间，都是调用者完成的，所以有参数个数的自由性
+			
+				\verb|stdcall|在结束函数时，回复的空间是编译时决定的，函数负责释放，但\textit{他无法知道你实际压入几个参数}，于是stdcall在编译时就规定了参数个数，\textbf{无法实现不定个数的参数调用}
+		
 		\subsubsection{腾讯-输出是什么 }
 		\begin{lstlisting}
 	main()

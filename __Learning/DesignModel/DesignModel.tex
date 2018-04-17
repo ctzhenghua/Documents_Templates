@@ -78,6 +78,7 @@
 			\label{singleton}
 		\end{figure}	
 	\subsection{实现}
+		\subparagraph{普通版线程安全-懒汉式} 在调用时创建
 \begin{lstlisting}
 ////////////////////////////////Header File////////////////////////////////////
 	#include <iostream> using namespace std;
@@ -89,6 +90,7 @@
 	protected:
 		Singleton();
 	private: 
+	    static mutex __mutex;
 		static Singleton* _instance;
 	};
 			
@@ -99,7 +101,11 @@
 	{ 
 		if (_instance == nullptr) 
 		{ 
-			_instance = new Singleton(); 
+			lock_guard<mutex> l(__mutex);
+			if(_instance == nullptr)
+				_instance = new Singleton(); 
+			
+			return _instance;
 		}
 	}
 			
@@ -110,7 +116,52 @@
 		return 0;
 	}
 \end{lstlisting}
+		
+		\subparagraph{内部局部静态变量线程安全-懒汉式} 在调用时创建
+			\begin{lstlisting}
+	class singleton
+	{
+	  protected:
+		singleton()
+		{
+			pthread_mutex_init(&mutex);
+		}
+		public:
+		static pthread_mutex_t mutex;
+		static singleton* initance();
+		int a;
+	};
 	
+	pthread_mutex_t singleton::mutex;
+	singleton* singleton::initance()
+	{
+		pthread_mutex_lock(&mutex);
+			static singleton obj;
+		pthread_mutex_unlock(&mutex);
+		
+		return &obj;
+	}
+			\end{lstlisting}
+			
+		\subparagraph{饿汉式} 在初始化时候创建,本身就是线程安全的
+			\begin{lstlisting}
+	class singleton
+	{
+		protected:
+		singleton()
+		{}
+		private:
+		static singleton* p;
+		public:
+		static singleton* initance();
+	};
+	singleton* singleton::p = new singleton;
+	singleton* singleton::initance()
+	{
+		return p;
+	}
+			\end{lstlisting}
+			
 	\subsection{应用场景}
 		Singleton模式在开发中经常用到，且不说我们开发过程中一些变量必须是唯一的，比如说打印机的实例等等。
 		

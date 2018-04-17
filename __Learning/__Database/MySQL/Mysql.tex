@@ -13,6 +13,7 @@
  \usepackage{algorithm}  %format of the algorithm
  \usepackage{algorithmic}%format of the algorithm
  \usepackage{multirow}   %multirow for format of table
+ \usepackage{longtable} 
  \usepackage{tabularx} 	%表格排版格式控制
  \usepackage{array}	%表格排版格式控制
  \usepackage{hyperref} %超链接 \url{URL}
@@ -51,6 +52,7 @@
  	commentstyle=\color{mygreen},    % comment style
  	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
  	keywordstyle=\color{blue},       % keyword style
+ 	xleftmargin=.06\textwidth, 
  	stringstyle=\color{mymauve}\ttfamily,     % string literal style
  	frame=single,
  	rulesepcolor=\color{red!20!green!20!blue!20},
@@ -64,30 +66,342 @@
  	\maketitle
  \chapter{基础概念}
 	 \section{术语}
-		 数据库: 数据库是一些关联表的集合。.
-		 
-		 数据表: 表是数据的矩阵。在一个数据库中的表看起来像一个简单的电子表格。
-		 
-		 列: 一列(数据元素) 包含了相同的数据, 例如邮政编码的数据。
-		 
-		 行：一行（=元组，或记录）是一组相关的数据，例如一条用户订阅的数据。
-		 
-		 冗余：存储两倍数据，冗余降低了性能，但提高了数据的安全性。
-		 
-		 主键：主键是唯一的。一个数据表中只能包含一个主键。你可以使用主键来查询数据。
-		 
-		 外键：外键用于关联两个表。
-		 
-		 复合键：复合键（组合键）将多个列作为一个索引键，一般用于复合索引。
-		 
-		 索引：使用索引可快速访问数据库表中的特定信息。索引是对数据库表中一列或多列的值进行排序的一种结构。类似于书籍的目录。
-		 1
-		 参照完整性: 参照的完整性要求关系中不允许引用不存在的实体。与实体完整性是关系模型必须满足的完整性约束条件，目的是保证数据的一致性。
+		 \begin{itemize}
+		 	\item  \textbf{数据库}: 数据库是一些关联表的集合。.
+		 	\item  \textbf{数据表}: 表是数据的矩阵。在一个数据库中的表看起来像一个简单的电子表格。
+		 	\item  \textbf{列}: 一列(数据元素) 包含了相同的数据, 例如邮政编码的数据。
+		 	\item  \textbf{行}：一行（=元组，或记录）是一组相关的数据，例如一条用户订阅的数据。
+		 	\item  \textbf{冗余}：存储两倍数据，冗余降低了性能，但提高了数据的安全性。
+		 	\item  \textbf{主键}：主键是唯一的。一个数据表中只能包含一个主键。你可以使用主键来查询数据。
+		 	\item  \textbf{外键}：外键用于关联两个表。
+		 	\item  \textbf{复合键}：复合键（组合键）将多个列作为一个索引键，一般用于复合索引。
+		 	\item  \textbf{索引}：使用索引可快速访问数据库表中的特定信息。索引是对数据库表中一列或多列的值进行排序的一种结构。类似于书籍的目录。
+		 	\item  \textbf{参照完整性}: 参照的完整性要求关系中不允许引用不存在的实体。与实体完整性是关系模型必须满足的完整性约束条件，目的是保证数据的一致性。
+		 \end{itemize}
+		
 	 
- 
  \chapter{数据库基本操作}
  
- \chapter{高级操作} 
+	 \section{SQL 分类}
+		\begin{itemize}
+			\item 数据库查询：代表关键字 \verb|select|
+			\item 数据库操纵：代表关键字 \verb|insert delete update|
+			\item 数据库定义：代表关键字 \verb|create drop   alter|
+			\item 事务控制：代表关键字 \verb|commit rollback|
+			\item 数据控制：代表关键字 \verb|grant, revoke|
+		\end{itemize} 
+	
+	\section{常用命令}
+		\subparagraph{显示当前的数据库们} \verb|show databases;|
+		\subparagraph{使用某个数据库} \verb|use databaseName;|
+		\subparagraph{显示数据库中的表们} \verb|show tables;|
+		\subparagraph{查看表的创建语句} \verb|show create table tableName;|
+		\subparagraph{查看表的结构} \verb|desc tableName;|
+		\subparagraph{select version();} 显示当前数据库管理系统的版本。
+		\subparagraph{重名命结果} \verb|as| ,如 \verb|select lower(ename) as E from emp;|
+		\subparagraph{创建数据库} \verb|create database Name;|
+		\subparagraph{终止一条语句} \verb|\c|
+		\subparagraph{退出管理系统} \verb|exit Or quit Or ctrl+c|	
+	\section{查询语句}
+		\subsection{条件查询}
+				\begin{table}[H]
+					\centering
+					\caption{查询符号}
+					\begin{longtable}{c|m{10cm}}
+						\hline
+						运算符   &   功能说明\\
+						\hline
+						\verb|=| &  等于 \\
+						\verb|!=| & 不等于 \\
+						\verb|between ... and ..| & 等同于 \verb|>= ... and <= ...| \\
+						\verb|is null| & 为\verb|null(is not null 不为空)| \\
+						\verb|and| & 并且 \\
+						\verb|or| & 或者\\
+						\verb|in| & 包含，相当于多个\verb|or|,(not in 不在这个范围内)\\
+						\verb|not| & 取非\\
+						\verb|like| & 为模糊查询，支持\verb|%|或\verb|_|匹配，其中\verb|%|匹配任意个字符，\verb|_|只匹配一个字符\\
+						\hline	
+					\end{longtable}
+				\end{table}
+				
+		\verb|example ->| 
+			\begin{lstlisting}
+// 执行顺序
+	select  // 3
+		xx, xx2, xx3
+	 from   // 1
+		XX
+	 where  // 2
+		 xx = xx;
+		 
+// in 示例	查找job是什么的，不是什么的	 
+	select 
+		ename,job
+	from
+		emp
+	where
+		job in('MANAGER','SALESMAN');
+		
+	select 
+		ename,job
+	from
+		emp
+	where
+		job not in('MANAGER','SALESMAN');
+
+// like 示例, 查找以S 开头的名字
+	select 
+		ename
+	from 
+		emp
+	where
+		ename like 'S%'	
+			\end{lstlisting}
+			
+		\subsection{排序}
+			\verb|order  by|
+		
+			\begin{lstlisting}
+// order  示例 默认升序，（desc 降序）
+select 
+	ename,salary
+from
+	emp
+order by
+	salary
+
+// 按照第几个字段排序	
+select 
+	ename,salary // 1,2 字段
+from
+	emp
+order by
+	2  // 第2个字段
+	
+// 多个字段排序, ename 升序，salary 降序，使用逗号分割
+select 
+	ename,salary
+from
+	emp
+order by
+	salary desc, ename
+			\end{lstlisting}
+		
+		
+		\subsection{数据处理函数（单行）}处理单行后结束
+			\begin{itemize}[itemindent = 2em]
+				\item \verb|lower| :转换小写
+				\item \verb|upper| :转换大写
+				\item \verb|substr| :取子串（被截取的串，起始位置，截取长度）
+				\item \verb|length| :取长度
+				\item \verb|trim| :去空格
+				\item \verb|round| :四舍五入
+				\item \verb|rand()| :生成随机数
+				\item \verb|ifnull(xx, num)|: 可以将\verb|null| 值转换成一个具体值
+			\end{itemize}
+		
+		
+		\subsection{分组函数、聚合函数（多行）}
+		
+			处理多行后结束，自动忽略空值
+			
+			先分组，然后再执行分组函数， 而where在分组函数之前执行，所以不能
+			
+			\verb|where| 中不能出现分组函数
+			
+			\begin{itemize}[itemindent = 2em]
+				\item \verb|count |:取得记录数
+				\item \verb|sum |:求和
+				\item \verb|avg |:求平均
+				\item \verb|max |:取最大值
+				\item \verb|min |:取最小值
+			\end{itemize}
+			
+			\verb|distinct 去重关键字 -> select distinct job from emp;|  只能出现在所有\textbf{字段}的最前面
+			
+			\verb|select count(distinct job) from emp;|
+			
+		\subsection{分组查询}
+			\subparagraph{group by}: 通过哪个或哪些字段进行分组，使用后select 后只能跟参与分组的字段和分组函数。
+			
+				\verb|example->| 找出每个工作岗位的最高薪水【先按照工作岗位分组，使用max 函数求每一组的最高工资】
+				
+					\begin{lstlisting}
+// 先按照job 分组，然后对每一组使用max(salary) 求最大值。					
+	select 			//3
+		max(salary)
+	from			//2
+		emp;
+	group by		//1
+		job;	
+		
+// 结合where 限定分组前条件，即分组前过滤
+	select
+		job, max(sal)
+	from 
+		emp
+	where 
+		job != 'MANAGER'
+	group by
+		job;
+	
+					\end{lstlisting}
+			
+				\verb|example->| 找出每个工作岗位的平均薪水，要求显示平均薪水大于1500
+				 where  处理不了
+				
+			\subparagraph{having} 与where 都是为了完成数据的过滤， where 和 having 后面都是添加过滤条件，where是 在group by 之前执行， 而having 是在group  by  后执行。
+			
+				\begin{lstlisting}
+//上例子解法
+select 
+	job,avg(sal)
+from 
+	emp
+group by
+	job
+having 
+	avg(sal) >  1500;
+ 
+				\end{lstlisting}
+			
+			
+			\subsection{查询语句总结}
+			
+				\subparagraph{关键字顺序不能变}:
+				
+					\begin{lstlisting}
+	select 
+		...
+	from
+		...
+	where
+		...
+	group by
+		...
+	having
+		...
+	order by
+		...
+					\end{lstlisting}
+			
+				\subparagraph{执行顺序}：
+					\begin{enumerate}[itemindent = 2em]
+						\item \verb|from| 从某张表中检索数据
+						\item \verb|where| 经过某条件进行过滤
+						\item \verb|group by| 然后分组
+						\item \verb|having| 分组之后不满意再过滤
+						\item \verb|select| 查询出来
+						\item \verb|order by| 排序输出
+					\end{enumerate}
+		
+\section{连接查询}
+			查询的时候只从一张表检索数据称为单表查询
+			
+			在实际的开发中，数据并不是存储在一张表中的，是同时存储在多张表中，这些表和表之间存在关系，我们在检索的时候通常需要将多长表联合起来取得有效数据，这种多表查询被称为连接查询或者叫做跨表查询。
+			
+			连接查询根据连接方式可以分为如下方式：
+				\begin{itemize}[itemindent = 2em]
+					\item  内连接
+						\begin{itemize}[itemindent = 3em]
+							\item 等值连接
+							\item 非等值连接
+							\item 自连接
+						\end{itemize}
+						
+					\item  外连接
+						\begin{itemize}[itemindent = 3em]
+							\item 左外连接
+							\item 右外连接
+						\end{itemize}
+						
+					\item  全连接【几乎不用】
+				\end{itemize}
+				
+		\subsection{内连接}		
+				查找两张表匹配的数据。
+				
+				A表和B表能够完全匹配的记录查询出来，被称为内连接。
+				
+				\subparagraph{别名的使用，内连接的等值连接} 在进行多表连接查询的时候，尽量给表起别名，这样效率高，可读性高
+					\begin{lstlisting}
+// 将表emp 用别名 e表示..	
+
+// 查询员工名与其对应的部门名
+	select	
+		e.ename, d.dname
+	from 
+		emp e, dept d;
+	where 
+		e.depno = d.depno
+		
+// SQL99 语法,使得表连接独立出来了，结构更清晰
+	select 
+		e.ename, d.dname
+	from 
+		emp e
+	join	  // 内连接的inner 可以省略 
+	    dept d
+	on 
+		e.depno = d.depno;
+					\end{lstlisting}
+					
+				\subparagraph{内连接的非等值连接} 范围
+					\begin{lstlisting}
+// 找出员工名， 薪水，与其的薪水等级
+	select 	
+		e.name, e.sal, s.grade
+	from
+		emp e
+	join 
+		salgrade s
+	on e.sal >= s.lower and e.sal <= s.higher;  // 可以使用between and 替代
+					\end{lstlisting}
+				 
+				
+				\subparagraph{内连接的自连接} 自己与自己连接,将自己视为两张表
+					\begin{lstlisting}
+//  找出每一个员工的上级领导，要求显示员工名以及对应的领导名
+	表结构:
+	empno ename mgr
+	7369  SMITH 7123
+
+// 要点：将自己视为两张表
+	select
+		a.ename empname, b.ename leaderName
+	from 
+		emp a
+	join
+		emp b
+	on 
+		a.mgr = b.empno;
+					\end{lstlisting}	
+				
+	\subsection{外连接}
+
+		A表和B表能够匹配的记录查询出来之外，将其中一张表的记录完全无条件的完全查询出来，对方表没有匹配的记录，会自动模拟出NULL与之匹配。
+		
+		$$\verb|外连接查询的结构条数| >= \verb|内连接的查询结果数量|$$
+		
+		可以添加除了内连接外的其他数据。
+		
+		
+		\verb|example ->|找出每一个员工对应的部门名称，并且显示所有部门名称，注意部门可能没有员工。
+		
+				
+		\subparagraph{左外连接}
+			\verb|select e.ename, d.dname  from dept d left join emp e on e.deptno = d.deptno;|
+		
+		\subparagraph{右外连接}
+			\verb|select e.ename, d.dname  from emp e right join dept d on e.deptno = d.deptno;|// outer  省略
+				
+		
+		\subparagraph{总结}
+			希望将哪边表的数据完全显示出来， join 的前边的修饰词 \verb|right left| 可以恰好说明，如上，希望将dept表完全显示，那么\verb|先写dept| 的话，那么就在\verb|join 的左边|，就是 \verb|left join|.		
+\chapter{高级操作} 
+\section{主从模式-replication}
+
+\section{集群}	
 		    
 \end{document} 
  		    

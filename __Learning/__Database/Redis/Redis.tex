@@ -107,15 +107,37 @@
 		\end{lstlisting}
 
 \chapter{基本操作}	
-	\section{Key}
-	\section{SET}\verb|SET name "runoob"|->\verb|SET key value|
 	
+1	\section{Key}
+		\subparagraph{须知}redis命令\textbf{不区分大小写}，所以\verb|get var|和\verb|GET var|是等价的
+		
+		\subparagraph{keys [pattern]} 返回相应的的key
+		
+		\subparagraph{dump key } 序列化给定key,并返回序列化的值
+		
+		\subparagraph{randomkey} 返回随机的key
+		
+		\subparagraph{exists key} 判断key是否存在
+		
+		\subparagraph{type key} 返回key 存储的类型
+		
+		\subparagraph{del key} 删除key
+		
+		\subparagraph{expire key seconds} 给key设置过期时间
+		
+		\subparagraph{persist key} 移除key 的过期时间，key将持久保存
+		
+	\section{SET}\verb|SET name "runoob"|->\verb|SET key value|
+		
 	\section{GET}\verb|GET key|
 	
 
 \chapter{数据类型}	
 	\section{string}
-	
+		\textbf{二进制安全的}。意思是redis的string可以包含任何数据。比如jpg图片或者序列化的对象 
+		
+		一个键最大能存储\verb|512MB|
+		
 	\section{list}
 	
 	\section{hash}
@@ -145,7 +167,36 @@
 
 \chapter{应用}	
 	\section{位图法统计活跃用户}
+		\begin{itemize}
+			\item 1亿个用户
+			\item 如何记录用户的登录信息
+			\item 如何查询活跃用户，一周连续登录
+		\end{itemize}
 	
+		从信息的角度看，一个用户的登录只需要 一个位 就可以表示。 0-1
+		
+		在数据库中，数据一般都有编号
+		
+		简化如：
+			\begin{lstlisting}
+	7个用户
+	
+	周一 01011100
+	周二 01010010
+	周三 01111000
+	
+	setbit  mon   100000000  0  // 初始化为0
+	setbit  mon   3     1       // 第3号用户登录，标记为1
+	setbit  mon   9     1
+	
+	
+	setbit  tuseday 10000000 0
+	set bit tuesday 4  1
+	
+
+	bitop and mon tuseday ...
+	
+			\end{lstlisting}
 	\section{频道发布与订阅}
 	
 	\section{微博之用户注册与微博发布}

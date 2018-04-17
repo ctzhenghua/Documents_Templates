@@ -1,4 +1,4 @@
-\documentclass[UTF8,a4paper,8pt]{ctexart} 
+\documentclass[UTF8,a4paper,8pt]{ctexbook} 
 
  \usepackage{graphicx}%学习插入图
  \usepackage{verbatim}%学习注释多行
@@ -14,6 +14,7 @@
 
 
 \geometry{left=1.6cm,right=1.8cm,top=2cm,bottom=1.7cm} %设置文章宽度
+\graphicspath{{figure/}}
 
 \pagestyle{plain} 		  %设置页面布局
 \author{\kaishu 郑华}
@@ -59,15 +60,14 @@
 	\tableofcontents
 	
 \newpage
-\section{安装配置}
-    \subsection{各种库文件}网盘环境
-    
+\chapter{安装配置}
+    \section{各种库文件}网盘环境
     \textbf{有时一个warnning可能就会导致全局皆输。}
     
     比如这次环境的调试程序，一个warnning4005  就是隐式转类型警告，结果就是跑不出来。最后发现是OpenGL为了兼容各系统，估计是把每个类型的字节固定了，而且还是32位，而我的是64位，导致了程序的不可运行
     
-    \subsection{常见错误}
-	    \subsubsection{0x70000000C}见图\ref{Glut Error},图\ref{Glut_fix}.
+    \section{常见错误}
+	    \subsection{0x70000000C}见图\ref{Glut Error},图\ref{Glut_fix}.
 	    
 		    解决：1- 使用glut.h , 2- 给链接输入添加\verb|glut32.lib Opengl32.lib Glu32.lib glew32.lib comctl32.lib|
 		    \begin{figure}[h]
@@ -83,35 +83,689 @@
 		    	\caption{解决方法}
 		    	\label{Glut_fix}
 		    \end{figure}
-    \subsection{参考文献} 
+    \section{参考文献} 
     \url{http://johnhany.net/2015/03/environment-for-opengl-4-with-vs2012/}    
-    
-\newpage
-\section{四大变换}
 
-
-    \subsection{参考文献} 
-		 \url{http://blog.csdn.net/lyx2007825/article/details/8792475}
- 
-    
 \newpage
-\section{OpenGL基础编程}
-	\subsection{渲染管线}
+\chapter{入门绘图}
+	\section{第一个三角形}
+		这篇教程中我们依然使用那个单位化的盒子模型。可见的点必须在这个盒子内，这样他们将可以通过视窗的变换映射到窗口中可见的坐标上。当俯视Z坐标轴的负方向时这个单位化盒子看上去如下图：
+			\begin{figure}[htbp]
+				\begin{center}
+					\includegraphics[scale = 0.5]{unitPic.png}
+					\caption{单位示例}
+				\end{center}
+			\end{figure}
+			
+		点(-1.0, -1.0)映射到盒子的左下角，（-1.0，1.0）映射到左上角等等。如果将三角形的顶点往盒子外扩展移到盒子外，这个三角形将会被裁剪，只能看到三角形的一部分。
+    
+    
+	   \subparagraph{核心代码}\verb|-|
+	   
+		  \verb|顶点数据->|  
+		  \begin{lstlisting}
+	Vector3f Vertices[3]; 
+	Vertices[0] = Vector3f(-1.0f, -1.0f, 0.0f); 
+	Vertices[1] = Vector3f(1.0f, -1.0f, 0.0f); 
+	Vertices[2] = Vector3f(0.0f, 1.0f, 0.0f); 
+		  \end{lstlisting} 
+		  
+		  \verb|绘图方式|
+		  \begin{lstlisting}
+	glDrawArrays(GL_TRIANGLES, 0, 3); 
+		  \end{lstlisting}
+		  
+		  
+		  \verb|示例代码|
+		  \begin{lstlisting}
+	#include <stdio.h>
+	#include <GL/glew.h>        // GLEW扩展库
+	#include <GLUT/freeglut.h>  // freeGLUT图形库
+	#include "ogldev_math_3d.h" // 用于OpenGL的3d数学库
+	
+	GLuint VBO;
+	
+	/**
+	* 渲染回调函数
+	*/
+	static void RenderScenceCB(){
+		// 清空颜色缓存
+		glClear(GL_COLOR_BUFFER_BIT);
+		
+		// 开启顶点属性
+		glEnableVertexAttribArray(0);
+		// 绑定GL_ARRAY_BUFFER缓冲器
+		glBindBuffer(GL_ARRAY_BUFFER, VBO);
+		// 告诉管线怎样解析bufer中的数据
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+		
+		// 开始绘制几何图形(绘制一个三角形，三个顶点)
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+		
+		//  禁用顶点数据
+		glDisableVertexAttribArray(0);
+		
+		// 交换前后缓存
+		glutSwapBuffers();
+		
+		glFlush();
+	}
+	
+	/**
+	* 创建顶点缓冲器
+	*/
+	static void CreateVertexBuffer()
+	{
+		// 创建含有3个顶点的顶点数组
+		Vector3f Vertices[3];
+		// 三角形的三个顶点位置
+		Vertices[0] = Vector3f(-1.0f, -1.0f, 0.0f);
+		Vertices[1] = Vector3f(1.0f, -1.0f, 0.0f);
+		Vertices[2] = Vector3f(0.0f, 1.0f, 0.0f);
+		
+		// 创建缓冲器
+		glGenBuffers(1, &VBO);
+		// 绑定GL_ARRAY_BUFFER缓冲器
+		glBindBuffer(GL_ARRAY_BUFFER, VBO);
+		// 绑定顶点数据
+		glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
+	}
+	
+	/**
+	* 主函数
+	*/
+	int main(int argc, char ** argv) {
+		
+		// 初始化GLUT
+		glutInit(&argc, argv);
+		
+		// 显示模式：双缓冲、RGBA
+		glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
+		
+		// 窗口设置
+		glutInitWindowSize(480, 320);      // 窗口尺寸
+		glutInitWindowPosition(100, 100);  // 窗口位置
+		glutCreateWindow("Tutorial 03");   // 窗口标题
+		
+		// 开始渲染
+		glutDisplayFunc(RenderScenceCB);
+		
+		// 缓存清空后的颜色值
+		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		
+		// 检查GLEW是否就绪，必须要在GLUT初始化之后！
+		GLenum res = glewInit();
+		if (res != GLEW_OK) {
+			fprintf(stderr, "Error: '%s'\n", glewGetErrorString(res));
+			return 1;
+		}
+		
+		// 创建顶点缓冲器
+		CreateVertexBuffer();
+		
+		// 通知开始GLUT的内部循环
+		glutMainLoop();
+		
+		return 0;
+	}
+		  \end{lstlisting}
+	
+	\section{渲染管线}
+		\subparagraph{参考}\url{http://blog.csdn.net/cjneo/article/details/50538033}
 		\begin{figure}[h]
 			\centering
 			\includegraphics[scale = 0.4]{OpenGLPipeline.png}
 			\includegraphics[scale = 0.8]{OpenGLPipeline1.png}
 			\caption{OpenGL 渲染管线}
 		\end{figure}
-
+	
 		\begin{enumerate}
-			\item \textbf{数据}：顶点数据、索引数据
-			\item \textbf{顶点渲染}
-			\item \textbf{输出普通图形}：不渲染颜色
-			\item \textbf{Fragment Shader}:顶点颜色、输出带色图形[默认白色]
+			\item \textbf{Vertex Processor数据}：顶点数据、索引数据\verb|->|负责执行处理经过管线的每一个顶点的vertex shader顶点着色代码
+			
+				\verb|--|这里顶点着色器还不知道渲染的图元的topology拓扑结构是怎样的，另外不可以在顶点着色处理器阶段删除丢弃顶点，每个顶点有且只有一次经过顶点处理器，要经过变换后继续进入管线的下一步。
+				
+			\item \textbf{Geometry Processor顶点渲染}：链接成具体的图形拓扑结构，如点、线、面
+			
+			\item \textbf{Clipper}：它将所有图元裁剪到那个单位化的盒子模型内，它另外还会将图元裁剪在Z轴的远近平面范围内（也就是说太远或太近都不显示）。同时也提供用户自定义的裁剪平面进行自定义的裁剪。经过裁剪后保留下来的顶点现在会被映射到屏幕空间坐标系上，光栅器将会根据他们的拓扑结构把他们渲染到屏幕上。
+			
+				\verb|--|这一步更像是视图变换，选取出可以显示的部分。
+				
+			\item \textbf{Fragment Shader}：顶点颜色、输出带色图形[默认白色]
 		\end{enumerate}
+	
+		上面这三个可编程阶段（vertex processor顶点处理、geometry processor几何处理、fragment processor像素处理）\textbf{都是可选的而不是必须}的。
 		
-		\subparagraph{参考}\url{http://blog.csdn.net/cjneo/article/details/50538033}
+		\textbf{如果不在这几个处理器上绑定自己的shaer着色器}，那么就会执行一些默认的函数功能，也就是备胎着色器。
+		  
+	\section{着色器}
+		参考文献：\url{http://blog.csdn.net/column/details/13062.html}
+		
+		着色器是目前做3D图形最流行的方式。着色器使得开发者能更加自由的通过编程实现自己的图形效果，使开发更加灵活和具有创新性。
+			
+		\textbf{Shader着色器}的使用跟C/C++程序的创建过程类似。
+		\textbf{首先}你要\textit{写一个shader着色器文本}并使其在你的程序中有效可用，这个过程可以通过依次简单的引用这些源码脚本或者从外部文件中加载，注意都是以字符串数组的形式。
+		\textbf{然后}一个个的\textit{编译这些shader文本}成shader对象。
+		\textbf{最后}你就可以\textit{将这些shader着色器}\textbf{连接到}\textit{单个程序中并加载到GPU中}。链接这些shader可以使驱动器能够有机会精减这些shader并根据他们的关系优化他们。例如：可能一个顶点着色器发出的法向量在相应的片段着色器阶段中被忽视，这样驱动中的GLSL编译器就会移除着色器中与这个法向量相关的函数功能从而更快的执行这个顶点着色器。如果之后那个着色器又匹配了需要用到那个法向量的片段着色器，然后连接到其他程序后会产生一个不同的顶点着色器。  
+
+		\subparagraph{核心流程}
+		
+			\begin{itemize}
+			\item \verb|创建着色器程序对象|:我们通过\textbf{创建程序对象}\textit{来建立}\textbf{shader着色器程序}。我们将把所有的着色器连接到这个对象上。
+			\begin{lstlisting}
+	GLuint ShaderProgram = glCreateProgram();
+			\end{lstlisting}
+			
+			\item \verb|创建着色器对象|：使用下面的函数创建两个shader着色器对象。其中一个使用的ShaderType为\verb|GL_VERTEX_SHADER|，另一个的类型为\verb|GL_FRAGMENT_SHADER|。
+			\begin{lstlisting}
+	GLuint ShaderObj = glCreateShader(ShaderType); 
+			\end{lstlisting}
+			
+			\item \verb|定义着色器对象代码源|：函数\verb|glShaderSource|以\textbf{shader对象}为参数，使你可以灵活的定义代码来源。shader源代码（也就是我们所常说的shader脚本）可以由多个字符串数组排布组合而成，你需要提供一个指针数组来对应指向这些字符串数组，同时要提供一个整型数组来对应表示每个数组的长度。为了简单，我们这里只使用一个字符串数组来保存所有的shader源代码，并且分别用数组的一个元素来分别指向这个字符串数组和表示数组的长度。 
+			第二个参数表示的是这两个数组的元素个数（我们的例子中则只有1个）。
+			\begin{lstlisting}
+	const GLchar* p[1]; 
+	p[0] = pShaderText; 
+	GLint Lengths[1]; 
+	Lengths[0]= strlen(pShaderText); 
+	glShaderSource(ShaderObj, 1, p, Lengths);
+			\end{lstlisting}
+			
+			\item \verb|编译着色器对象|
+			\begin{lstlisting}
+	glCompileShader(ShaderObj); 
+			\end{lstlisting}	
+			
+			\item \verb|打印编译信息|
+			\begin{lstlisting}
+	GLint success; 
+	glGetShaderiv(ShaderObj, GL_COMPILE_STATUS, &success); 
+	if (!success) 
+	{ 
+		GLchar InfoLog[1024]; 
+		glGetShaderInfoLog(ShaderObj, sizeof(InfoLog), NULL, InfoLog); 
+		fprintf(stderr, "Error compiling shader type %d: '%s'\n", ShaderType, InfoLog); 
+	} 
+			\end{lstlisting}
+		
+			\item \verb|绑定着色器对象到着色器程序对象上|
+			\begin{lstlisting}
+	glAttachShader(ShaderProgram, ShaderObj);
+			\end{lstlisting}
+			
+			
+			\item \verb|链接所有的编译的对象|：编译好所有的shader对象并将他们绑定到程序中后我就可以连接他们了。
+			
+			注意在完成程序的连接后你可以通过调用函数glDetachShader和glDeleteShader来清除每个中介shader对象。OpenGL保存着由它产生的多数对象的引用计数，如果一个shader对象被创建后又被删除的话驱动程序也会同时清除掉它，但是如果他被绑定在程序上，只调用glDeleteShader函数只是会标记它等待删除，只有等你调用glDetachShader后它的引用计数才会被置零然后被移除掉。
+			\begin{lstlisting}
+	glLinkProgram(ShaderProgram); 
+			\end{lstlisting}
+			
+			\item \verb|获取链接编译信息|:如同程序的链接信息一样 LNK,我们使用glGetProgramiv而不是glGetShaderiv，glGetProgramInfoLog而不是glGetShaderInfoLog。
+			\begin{lstlisting}
+	glGetProgramiv(ShaderProgram, GL_LINK_STATUS, &Success); 
+	if (Success == 0) 
+	{ 
+		glGetProgramInfoLog(ShaderProgram, sizeof(ErrorLog), NULL, ErrorLog); 
+		fprintf(stderr, "Error linking shader program: '%s'\n", ErrorLog); 
+	} 
+			\end{lstlisting}
+			
+			\item \verb|使用回调函数完成渲染|：要使用连接好的shader程序你需要用下面的回调函数将它设置到管线声明中。这个程序将在所有的draw call中一直生效直到你用另一个替换掉它或者使用glUseProgram指令将其置NULL明确地禁用它。如果你创建的shader程序只包含一种类型的shader（只是为某一个阶段添加的自定义shader），那么在其他阶段的该操作将会使用它们默认的固定功能操作。
+			
+			到现在我们已经完成了OpenGL中和shader相关操作的准备工作的学习。在这篇教程之后的内容主要是关于顶点着色器和片段着色器（包含在pVS和pFS脚本中）。
+			\begin{lstlisting}
+	glUseProgram(ShaderProgram); 
+			\end{lstlisting}
+		\end{itemize}
+		
+		\subparagraph{示例}\verb|着色器使用示例|
+		
+			\begin{lstlisting}
+	GLuint VBO;
+	
+	// 定义要读取的顶点着色器脚本和片断着色器脚本的文件名，作为文件读取路径（这样的话shader.vs和shader.fs文件要放到工程的根目录下，保证下面定义的是这两个文件的文件路径）
+	const char* pVSFileName = "shader.vs";
+	const char* pFSFileName = "shader.fs";
+	
+	static void RenderSceneCB()
+	{
+		glClear(GL_COLOR_BUFFER_BIT);
+		
+		glEnableVertexAttribArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, VBO);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+		
+		// 依然还是绘制一个三角形
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+		
+		glDisableVertexAttribArray(0);
+		
+		glutSwapBuffers();
+	}
+	
+	
+	static void InitializeGlutCallbacks()
+	{
+		glutDisplayFunc(RenderSceneCB);
+	}
+	
+	static void CreateVertexBuffer()
+	{
+		Vector3f Vertices[3];
+		Vertices[0] = Vector3f(-1.0f, -1.0f, 0.0f);
+		Vertices[1] = Vector3f(1.0f, -1.0f, 0.0f);
+		Vertices[2] = Vector3f(0.0f, 1.0f, 0.0f);
+		
+		glGenBuffers(1, &VBO);
+		glBindBuffer(GL_ARRAY_BUFFER, VBO);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
+	}
+	
+	// 使用shader文本编译shader对象，并绑定shader都想到着色器程序中
+	static void AddShader(GLuint ShaderProgram, const char* pShaderText, GLenum ShaderType)
+	{
+		// 根据shader类型参数定义两个shader对象
+		GLuint ShaderObj = glCreateShader(ShaderType);
+		// 检查是否定义成功
+		if (ShaderObj == 0) {
+			fprintf(stderr, "Error creating shader type %d\n", ShaderType);
+			exit(0);
+		}
+		
+		// 定义shader的代码源
+		const GLchar* p[1];
+		p[0] = pShaderText;
+		GLint Lengths[1];
+		Lengths[0]= strlen(pShaderText);
+		glShaderSource(ShaderObj, 1, p, Lengths);
+		glCompileShader(ShaderObj);// 编译shader对象
+		
+		// 检查和shader相关的错误
+		GLint success;
+		glGetShaderiv(ShaderObj, GL_COMPILE_STATUS, &success);
+		if (!success) {
+			GLchar InfoLog[1024];
+			glGetShaderInfoLog(ShaderObj, 1024, NULL, InfoLog);
+			fprintf(stderr, "Error compiling shader type %d: '%s'\n", ShaderType, InfoLog);
+			exit(1);
+		}
+		
+		// 将编译好的shader对象绑定到program object程序对象上
+		glAttachShader(ShaderProgram, ShaderObj);
+	}
+	
+	// 编译着色器函数
+	static void CompileShaders()
+	{
+		// 创建着色器程序
+		GLuint ShaderProgram = glCreateProgram();
+		// 检查是否创建成功
+		if (ShaderProgram == 0) {
+			fprintf(stderr, "Error creating shader program\n");
+			exit(1);
+		}
+		
+		// 存储着色器文本的字符串缓冲
+		string vs, fs;
+		// 分别读取着色器文件中的文本到字符串缓冲区
+		if (!ReadFile(pVSFileName, vs)) {
+			exit(1);
+		};
+		if (!ReadFile(pFSFileName, fs)) {
+			exit(1);
+		};
+		
+		// 添加顶点着色器和片段着色器
+		AddShader(ShaderProgram, vs.c_str(), GL_VERTEX_SHADER);
+		AddShader(ShaderProgram, fs.c_str(), GL_FRAGMENT_SHADER);
+		
+		// 链接shader着色器程序，并检查程序相关错误
+		GLint Success = 0;
+		GLchar ErrorLog[1024] = { 0 };
+		glLinkProgram(ShaderProgram);
+		glGetProgramiv(ShaderProgram, GL_LINK_STATUS, &Success);
+		if (Success == 0) {
+			glGetProgramInfoLog(ShaderProgram, sizeof(ErrorLog), NULL, ErrorLog);
+			fprintf(stderr, "Error linking shader program: '%s'\n", ErrorLog);
+			exit(1);
+		}
+		
+		// 检查验证在当前的管线状态程序是否可以被执行
+		glValidateProgram(ShaderProgram);
+		glGetProgramiv(ShaderProgram, GL_VALIDATE_STATUS, &Success);
+		if (!Success) {
+			glGetProgramInfoLog(ShaderProgram, sizeof(ErrorLog), NULL, ErrorLog);
+			fprintf(stderr, "Invalid shader program: '%s'\n", ErrorLog);
+			exit(1);
+		}
+		
+		// 设置到管线声明中来使用上面成功建立的shader程序
+		glUseProgram(ShaderProgram);
+	}
+	
+	// 主函数
+	int main(int argc, char** argv)
+	{
+		glutInit(&argc, argv);
+		glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGB);
+		glutInitWindowSize(1024, 768);
+		glutInitWindowPosition(100, 100);
+		glutCreateWindow("Tutorial 04");
+		
+		InitializeGlutCallbacks();
+		
+		// 必须在glut初始化后！
+		GLenum res = glewInit();
+		if (res != GLEW_OK) {
+			fprintf(stderr, "Error: '%s'\n", glewGetErrorString(res));
+			return 1;
+		}
+		
+		printf("GL version: %s\n", glGetString(GL_VERSION));
+		
+		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		
+		CreateVertexBuffer();
+		
+		// 编译着色器
+		CompileShaders();
+		
+		glutMainLoop();
+		
+		return 0;
+	}
+			\end{lstlisting}
+
+		顶点着色器shader.vs脚本代码：
+		\begin{lstlisting}
+	#version 330  //告诉编译器我们的目标GLSL编译器版本是3.3
+	
+	layout (location = 0) in vec3 Position; // 绑定定点属性名和属性，方式二缓冲属性和shader属性对应映射
+	
+	void main()
+	{
+		gl_Position = vec4(0.5 * Position.x, 0.5 * Position.y, Position.z, 1.0); // 为glVertexAttributePointer提供返回值
+	}		
+		\end{lstlisting}
+		
+		片段着色器shader.fs脚本代码：
+		\begin{lstlisting}
+	#version 330  //告诉编译器我们的目标GLSL编译器版本是3.3
+	
+	out vec4 FragColor;  // 片段着色器的输出颜色变量
+	
+	// 着色器的唯一入口函数
+	void main()
+	{
+		// 定义输出颜色值（R G B 透明度）
+		FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+	}	
+		\end{lstlisting}
+		
+		\begin{figure}[h]
+			\centering
+			\includegraphics[scale = 0.4]{result.png}
+			\caption{OpenGL 渲染管线}
+		\end{figure}
+		
+
+		\subsection{顶点着色器}
+			\subparagraph{主要功能}
+				\begin{itemize}[itemindent = 1em]
+					\item 顶点法线变换及单位化
+					\item 纹理坐标变换
+					\item 光照参数生成
+				\end{itemize}
+			\subparagraph{输入内容}
+				\begin{itemize}[itemindent = 1em]
+					\item 着色器源代码
+					\item attribute变量
+					\item uniform变量
+				\end{itemize}
+			\subparagraph{输出内容}
+				\begin{itemize}[itemindent = 1em]
+					\item varying变量
+					\item 内置的特殊变量,如\verb|gl_Position、gl_FrontFacing、gl_PointSize|
+				\end{itemize}
+		\subsection{片段着色器}
+			\subparagraph{主要功能}
+				\begin{itemize}[itemindent = 1em]
+					\item 在差值得到的值上进行操作
+					\item 访问纹理
+					\item 应用纹理
+					\item 雾化
+					\item 颜色融合
+				\end{itemize}
+			\subparagraph{输入内容}
+				\begin{itemize}[itemindent = 1em]
+					\item 着色器源代码
+					\item 用户自定义的varying变量
+					\item uniform变量
+					\item 采样器（Sampler）
+					\item 一些内置的特殊变量（\verb|gl_PointCoord、gl_FragCoord、gl_FrontFacing等）|	
+				\end{itemize}
+			\subparagraph{输出内容}:内置的特殊变量\verb|gl_FragColor|
+			
+		\subsection{程序组成}
+			在OpenGL程序中\textbf{使用着色器}一般需要依次执行以下步骤：
+			\begin{enumerate}[itemindent = 1em]
+				\item 顶点着色程序的源代码和片段着色程序的源代码分别写入到一个文件里（或字符数组）里面，一般顶点着色器源码文件后缀为\textbf{.vert}，片段着色器源码文件后缀为\textbf{.frag}
+				\item \textbf{使用glCreateshader()}分别创建一个顶点着色器对象和一个片段着色器对象
+				\item \textbf{使用glShaderSource()}分别将顶点/片段着色程序的源代码字符数组绑定到顶点/片段着色器对象上
+				\item \textbf{使用glCompileShader()}分别编译顶点着色器和片段着色器对象（最好检查一下编译的成功与否）
+				\item \textbf{使用glCreaterProgram()}创建一个着色程序对象
+				\item \textbf{使用glAttachShader()}将顶点和片段着色器对象附件到需要着色的程序对象上
+				\item \textbf{使用glLinkProgram()}分别将顶点和片段着色器和着色程序执行链接生成一个可执行程序（最好检查一下链接的成功与否）
+				\item \textbf{使用glUseProgram()}将OpenGL渲染管道切换到着色器模式，并使用当前的着色器进行渲染
+			\end{enumerate}	
+		
+			\textbf{整体流程}如下所示：
+			\begin{figure}[htbp]
+				\centering
+				\includegraphics[width = 12cm, height = 6cm]{GLSLProcess.png}
+				\caption{GLSL 流程}
+				\label{GLSL}
+			\end{figure}
+			
+			\begin{itemize}[itemindent = 1em]
+				\item 准备\textbf{原始顶点数据}
+				\item 准备\textbf{着色器代码}
+				\item \textbf{创建着色器对象}
+				\item \textbf{创建着色器程序对象}
+				\item \textbf{链接着色器程序对象与着色器对象}
+				\item \textbf{在程序中使用着色器}
+			\end{itemize}	
+
+
+\chapter{三大变换}
+	从这个教程开始我们开始研究各种各样的图形变换，\textbf{图形变换就可以让一个3d物体在屏幕中变换的的时候看上去保持有深度的错觉}，也就是立体的投影效果。
+	
+	\textbf{实现}立体效果的\textbf{方法是}使用一个\textbf{经过多次相乘的变换矩阵}得到的\textbf{最终变换矩阵}来\textbf{和顶点的位置再相乘}，\textit{这样得到3d物体的一个多次变换后的最终复合变换效果}。
+	
+	\section{平移}
+		参考文献：\url{https://blog.csdn.net/cordova/article/details/52541902}
+		
+		为了实现平移转换\textbf{所以矩阵是4*4的}
+		
+		
+		这里我们先看一下平移变换，使一个物体沿着一个任意长度任意方向的向量平移，比如说让一个三角形从左边移动到右边：
+			\begin{figure}[h]
+				\centering
+				\includegraphics[scale = 0.4]{transfer.png}
+				\caption{平移示例}
+			\end{figure}
+
+		在之前顶点着色器知识的基础上我们可以想到实现平移的一种办法是设置一个偏移向量（这里就是- 1了），并把这个便宜向量定义成一致变量然后传递给shader让每一个顶点按照那个偏移向量移动即可。
+		
+		但这样就\textit{打破}\textbf{通过乘以一个经过多个变换矩阵相乘得到的复合变换矩阵来进行复合变换}\textit{的统一性了}。
+		 
+		统一的说，我们是想找到这样一个矩阵，对于给定的\verb|点P(x,y,z)|和平移向量$V(v1,v2,v3)$，能够使 $M * P = P1(x+v1, y+v2, z+v3) $，简单地说就是\verb|矩阵M将P转换成了P+V|。在结果向量\verb|P1|中我们可以看到每个分量是\verb|P|和\verb|V|每个分量对应相加的和，结果向量P1的+号左侧来自P本身，对于得到P本身的向量应该这样： 
+		\verb|I * P = P(x,y,z)| 。所以我们应该从得到本身开始来调整变换矩阵得到结果矩阵右侧相加结果（…+V1, …+V2, …+V3）的最终变换矩阵。首先自身变换矩阵的样子如下：
+			\begin{equation}
+			 \left(
+			\begin{array}{ccc}
+			1 & 0 & 0\\
+			
+			0 & 1 & 0\\
+			
+			0 & 0 & 1\\
+			\end{array}
+			\right)
+			\left(
+			\begin{array}{c}
+				X\\ 
+				Y\\
+				Z 
+			\end{array}	
+			\right) 
+			=
+			\left(
+				\begin{array}{c}
+				X\\ 
+				Y\\
+				Z 
+				\end{array}	
+			\right)
+		\end{equation}
+		
+		我们想修改这个自身变换矩阵使结果变成这样子：
+			$$
+				\left(
+				\begin{array}{c}
+				X+V_1\\ 
+				Y+V_2\\
+				Z+V_3 
+				\end{array}	
+				\right)
+			$$
+		
+		如果我们坚持用$3\times3$矩阵好像不可能得到想要的结果，但如果改成$4\times4$矩阵我可以这样得到想要的结果：
+			\begin{equation}
+			\left(
+			\begin{array}{cccc}
+			1 & 0 & 0& V_1\\
+			
+			0 & 1 & 0& V_2\\
+			
+			0 & 0 & 1& V_3\\
+			
+			0 & 0 & 0& 1\\
+			\end{array}
+			\right)
+			\left(
+			\begin{array}{c}
+			X\\ 
+			Y\\
+			Z\\
+			1 
+			\end{array}	
+			\right) 
+			=
+			\left(
+			\begin{array}{c}
+			X+V_1\\ 
+			Y+V_2\\
+			Z+V_3\\
+			1 
+			\end{array}	
+			\right)
+			\end{equation}
+		
+		这样使用一个4维向量表示一个3维向量叫做\textbf{齐次坐标}，这在3d图形学中很常用也很有用，第四个分量称作\verb|“w”|。事实上，我们之前教程中看到的内部shader符号变量\verb|gl_Position|就是一个4维向量，第四个分量\verb|“w”|在从3d到2d的投影变换中起着关键作用。通常对于表示点的矩阵会让\verb|w=1|，而对于表示向量的矩阵会让\verb|w=0|，\textbf{因为点可以被做变换而向量不可以}，你可以改变一个向量的长度和方向，但是长度和方向一样的所有向量都是相等的，不管他们的起点在哪里，所以我们可以把所有的向量起点放到原点来看。对于向量设置\verb|w=0|然后乘以\textbf{变换矩阵}会得到\textbf{和自身一样的向量}。
+		
+	\section{旋转}
+		参考文献：\url{https://blog.csdn.net/cordova/article/details/52558133}
+		
+		旋转变换将总是改变位置的其中两个坐标，第三个坐标保持不变，这意味着旋转的路径会保持在其中一个平面上：XY平面（绕Z轴旋转），YZ平面（绕X轴旋转）和XZ平面（绕Y轴旋转）。也有一些复杂的旋转变换允许图形绕着任意向量旋转，但在我们这个阶段还不需要。
+		
+		让我们从普遍统一的角度来定义这个问题。看下面这个图：
+			\begin{figure}[h]
+				\centering
+				\includegraphics[scale = 0.7]{rotate.png}
+				\caption{旋转示例}
+			\end{figure}
+		
+		我们想从(x1,y1)沿着圆移动到(x2,y2)，换句话说就是将点(x1,y1)旋转a2角度。假设圆的半径是1，那有下面的式子：
+		\begin{equation}
+			\begin{cases}
+				x_1 = cos(\alpha_1)\\
+				y_1 = sin(\alpha_1)\\
+				x_2 = cos(\alpha_1 + \alpha_2)\\
+				y_2 = sin(\alpha_1 + \alpha_2)
+			\end{cases}
+		\end{equation}
+		
+		我们用下面的三角函数变换公式来推导x2和y2的表达式：
+		$$
+			\begin{cases}
+				cos(\alpha_1 + \alpha_2) = cos(\alpha_1)\cdot cos(\alpha_2) - sin(\alpha_1)\cdot sin(\alpha_2)\\
+				sin(\alpha_1 + \alpha_2) = sin(\alpha_1)\cdot cos(\alpha_2) + cos(\alpha_1)\cdot sin(\alpha_2)
+			\end{cases}
+		$$
+		
+		上式等价于
+		$$
+		\begin{cases}
+			x_2 = x_1\cdot cos(\alpha_2) - y_1\cdot sin(\alpha_2)\\
+			y_2 = y_1\cdot cos(\alpha_2) + x_1\cdot sin(\alpha_2)
+		\end{cases}
+		$$
+		
+		
+		再上面的图中我们看的是XY平面，Z轴指向纸面。X和Y放在4维矩阵里面的的话那么上面的公式可以写成下面的矩阵形式（不影响Z和W分量）：
+		
+		\begin{equation}
+		\left(
+		\begin{array}{cccc}
+		cos(\alpha_2) & -sin(\alpha_2) & 0& V_1\\
+		
+		sin(\alpha_2) & cos(\alpha_2) & 0& V_2\\
+		
+		0 & 0 & 1& V_3\\
+		
+		0 & 0 & 0& 1\\
+		\end{array}
+		\right)
+		\left(
+		\begin{array}{c}
+		X\\ 
+		Y\\
+		Z\\
+		1 
+		\end{array}	
+		\right) 
+		=
+		\left(
+		\begin{array}{c}
+		x_1\cdot cos(\alpha_2) - y_1\cdot sin(\alpha_2)\\ 
+		y_1\cdot cos(\alpha_2) + x_1\cdot sin(\alpha_2)\\
+		Z+V_3\\
+		1 
+		\end{array}	
+		\right)
+		\end{equation}
+	\section{缩放}
+		参考文献：\url{https://blog.csdn.net/cordova/article/details/52558804}
+
+		缩放变换非常简单，它的目的是增大或者缩小物体的尺寸。比如你想使用同一个模型来制作很多不同的物体（大小不一的树组成的树林，用的同一个模型），或者你想按照比例让物体和现实世界尺寸一致。在上面的情形中你就需要在三个坐标轴上同等缩放顶点的位置。当然，有时也希望物体只在一个轴上或者两个轴上缩放使模型更薄、更瘦或者更高等等。
+		
+		进行缩放变换其实很简单。我们从最开始的原变换矩阵来看，回忆平移变换矩阵的样子，我们保持结果矩阵中V1,V2和V3保持原样的办法是让变换矩阵主对角线上的值都为’1’，这样原向量一次都和1相乘之后依然保持不变，各分量之间互不影响。所以，这里的缩放变换，只要把那些‘1’换成我们想缩放的值，原向量各分量分别乘以这些值之后就会在相应坐标轴上进行相应的缩放了，值大于1则放大，值小于1则缩小。
+		
+		\begin{figure}[h]
+			\centering
+			\includegraphics[scale = 0.57]{scale_1.png}
+			\includegraphics[scale = 0.57]{scale_2.png}
+			\caption{缩放示例}
+		\end{figure}
+
+\chapter{四大变换}
+参考文献:\url{http://blog.csdn.net/lyx2007825/article/details/8792475}
+
+
+
+   
+\chapter{OpenGL基础编程}
+	
 	\subsection{基本结构-框架}
 		跟DirectX类似，都是进入消息循环然后不断监听消息。区别在于函数名可能不同，与其内部实现不同。
 		有几个概念也是特别重要，其实这些就是数据准备过程和绘画过程，即Preparing to Send Data to OpenGL 和 Sending Data to OpenGL
@@ -434,408 +1088,49 @@
 	\subsection{光照添加}
 	
 	\subsection{纹理添加}
-			
-	\subsection{着色器-GLSL}
-		OpenGL着色语言（OpenGL Shading Language，GLSL）是用来在OpenGL中着色编程的语言，是一种具有C/C++风格的高级过程语言，同样也以main函数开始，只不过执行过程是在GPU上。GLSL使用类型限定符而不是通过读取和写入操作来管理输入和输出。着色器主要分为顶点着色器（Vertex Shader）和片段着色器（Fragment Shader）两部分
-		\subsubsection{顶点着色器}
-			\subparagraph{主要功能}
-				\begin{itemize}[itemindent = 1em]
-					\item 顶点法线变换及单位化
-					\item 纹理坐标变换
-					\item 光照参数生成
-				\end{itemize}
-			\subparagraph{输入内容}
-				\begin{itemize}[itemindent = 1em]
-					\item 着色器源代码
-					\item attribute变量
-					\item uniform变量
-				\end{itemize}
-			\subparagraph{输出内容}
-				\begin{itemize}[itemindent = 1em]
-					\item varying变量
-					\item 内置的特殊变量,如\verb|gl_Position、gl_FrontFacing、gl_PointSize|
-				\end{itemize}
-		\subsubsection{片段着色器}
-			\subparagraph{主要功能}
-				\begin{itemize}[itemindent = 1em]
-					\item 在差值得到的值上进行操作
-					\item 访问纹理
-					\item 应用纹理
-					\item 雾化
-					\item 颜色融合
-				\end{itemize}
-			\subparagraph{输入内容}
-				\begin{itemize}[itemindent = 1em]
-					\item 着色器源代码
-					\item 用户自定义的varying变量
-					\item uniform变量
-					\item 采样器（Sampler）
-					\item 一些内置的特殊变量（\verb|gl_PointCoord、gl_FragCoord、gl_FrontFacing等）|	
-				\end{itemize}
-			\subparagraph{输出内容}:内置的特殊变量\verb|gl_FragColor|
-		\subsubsection{程序组成}
-			在OpenGL程序中\textbf{使用着色器}一般需要依次执行以下步骤：
-				\begin{enumerate}[itemindent = 1em]
-					\item 顶点着色程序的源代码和片段着色程序的源代码分别写入到一个文件里（或字符数组）里面，一般顶点着色器源码文件后缀为\textbf{.vert}，片段着色器源码文件后缀为\textbf{.frag}
-					\item \textbf{使用glCreateshader()}分别创建一个顶点着色器对象和一个片段着色器对象
-					\item \textbf{使用glShaderSource()}分别将顶点/片段着色程序的源代码字符数组绑定到顶点/片段着色器对象上
-					\item \textbf{使用glCompileShader()}分别编译顶点着色器和片段着色器对象（最好检查一下编译的成功与否）
-					\item \textbf{使用glCreaterProgram()}创建一个着色程序对象
-					\item \textbf{使用glAttachShader()}将顶点和片段着色器对象附件到需要着色的程序对象上
-					\item \textbf{使用glLinkProgram()}分别将顶点和片段着色器和着色程序执行链接生成一个可执行程序（最好检查一下链接的成功与否）
-					\item \textbf{使用glUseProgram()}将OpenGL渲染管道切换到着色器模式，并使用当前的着色器进行渲染
-				\end{enumerate}	
-				\subparagraph{示例}
-					以下是一个功能简单但流程完整的使用顶点着色器和片段着色器渲染的矩形图形。项目一共包含5个文件。2个资源文件（VertexShader.vert和FragmentShader.frag，分别是顶点着色器源码文件和片段着色器源码文件），2个cpp文件（Hello GLSL.cpp和Textfile.cpp）,1个头文件Textfile.h。
-					
-					\textbf{整体流程}如下所示：
-						\begin{figure}[h]
-							\centering
-							\includegraphics[width = 12cm, height = 6cm]{GLSLProcess.png}
-							\caption{GLSL 流程}
-							\label{GLSL}
-						\end{figure}
-					
-					\begin{itemize}[itemindent = 1em]
-						\item 准备\textbf{原始顶点数据}
-							\begin{lstlisting}
-	GLuint vaoHandle;// VAO对象  
-	
-	//顶点位置数组    
-	float positionData[] = {-0.5f,-0.5f,0.0f,1.0f,  
-							0.5f,-0.5f,0.0f,1.0f,  
-							0.5f,0.5f,0.0f,1.0f,  
-							-0.5f,0.5f,0.0f,1.0f};  
-	//顶点颜色数组    
-	float colorData[] = {1.0f, 0.0f, 0.0f,1.0f,  
-					 	 0.0f, 1.0f, 0.0f,1.0f,  
-						 0.0f, 0.0f, 1.0f,1.0f,  
-						 1.0f,1.0f,0.0f,1.0f};  						
-	
-	void initVBO()  
-	{  
-		//绑定VAO  
-		glGenVertexArrays(1, &vaoHandle);  
-		glBindVertexArray(vaoHandle);  
 		
-		// Create and populate the buffer objects    
-		GLuint vboHandles[2];  
-		glGenBuffers(2, vboHandles);  
-		GLuint positionBufferHandle = vboHandles[0];  
-		GLuint colorBufferHandle = vboHandles[1];  
-		
-		//绑定VBO以供使用    
-		glBindBuffer(GL_ARRAY_BUFFER, positionBufferHandle);  
-		//加载数据到VBO    
-		glBufferData(GL_ARRAY_BUFFER, 16 * sizeof(float),  
-		positionData, GL_STATIC_DRAW);  
-		
-		//绑定VBO以供使用    
-		glBindBuffer(GL_ARRAY_BUFFER, colorBufferHandle);  
-		//加载数据到VBO    
-		glBufferData(GL_ARRAY_BUFFER, 16 * sizeof(float),  
-		colorData, GL_STATIC_DRAW);  
-		
-		glEnableVertexAttribArray(0);//顶点坐标    
-		glEnableVertexAttribArray(1);//顶点颜色    
-		
-		//调用glVertexAttribPointer之前需要进行绑定操作    
-		glBindBuffer(GL_ARRAY_BUFFER, positionBufferHandle);  
-		glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, (GLubyte *)NULL);  
-		glBindBuffer(GL_ARRAY_BUFFER, colorBufferHandle);  
-		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, (GLubyte *)NULL);  
-	}  
-							\end{lstlisting}
-						\item 准备\textbf{着色器代码}
-							\begin{lstlisting}
-	// 顶点着色器：VertexShader.vert 
-	//定义GLSL版本    
-	#version 430    
-	
-	in vec4 VertexPosition;    
-	in vec4 VertexColor;  
-	
-	out vec4 Color;    
-	
-	void main()    
-	{    
-		Color =VertexColor;    
-		gl_Position = VertexPosition;  
-	}    
-	
-	// 片段着色器：FragmentShader.frag
-	#version 440       
-	in vec4 Color;   //汉字用于测试汉字是否可用，有报着色器源码注释含汉字运行报错的  
-	
-	out vec4 FragColor;      
-	
-	void main()    
-	{    
-		FragColor = Color;    
-	}    
-							\end{lstlisting}
-						\item \textbf{创建着色器对象}
-							\begin{lstlisting}
-							
-	// 读取着色器代码文件-将其转换为字符穿传入GLSL 编译器
-	// 读入字符流  
-	char *textFileRead(const char *fn)  
-	{  
-		FILE *fp;  
-		char *content = NULL;  
-		int count = 0;  
-		if (fn != NULL)  
-		{  
-			fp = fopen(fn, "rt");  
-			if (fp != NULL)  
-			{  
-				fseek(fp, 0, SEEK_END);  
-				count = ftell(fp);  
-				rewind(fp);  
-				if (count > 0)  
-				{  
-					content = (char *)malloc(sizeof(char) * (count + 1));  
-					count = fread(content, sizeof(char), count, fp);  
-					content[count] = '\0';  
-				}  
-				fclose(fp);  
-			}  
-		}  
-		return content;  
-	}  
-					
-							
-	GLuint vShader, fShader;//顶点/片段着色器对象 
-	void initShader(const char *VShaderFile, const char *FShaderFile)  
-	{  
-		// 1、查看显卡、GLSL和OpenGL的信息    
-		const GLubyte *vendor = glGetString(GL_VENDOR);  
-		const GLubyte *renderer = glGetString(GL_RENDERER);  
-		const GLubyte *version = glGetString(GL_VERSION);  
-		const GLubyte *glslVersion = glGetString(GL_SHADING_LANGUAGE_VERSION);  
-		cout << "显卡供应商   : " << vendor << endl;  
-		cout << "显卡型号     : " << renderer << endl;  
-		cout << "OpenGL版本   : " << version << endl;  
-		cout << "GLSL版本     : " << glslVersion << endl;  
-		
-		// 2、编译着色器    
-		//创建着色器对象：顶点着色器    
-		vShader = glCreateShader(GL_VERTEX_SHADER);  
-		//错误检测    
-		if (0 == vShader)  
-		{  
-			cerr << "ERROR : Create vertex shader failed" << endl;  
-			exit(1);  
-		}  
-		
-		//把着色器源代码和着色器对象相关联    
-		const GLchar *vShaderCode = textFileRead(VShaderFile);  
-		const GLchar *vCodeArray[1] = { vShaderCode };  
-		
-		//将字符数组绑定到对应的着色器对象上  
-		glShaderSource(vShader, 1, vCodeArray, NULL);  
-		
-		//编译着色器对象    
-		glCompileShader(vShader);  
-		
-		//检查编译是否成功    
-		GLint compileResult;  
-		glGetShaderiv(vShader, GL_COMPILE_STATUS, &compileResult);  
-		if (GL_FALSE == compileResult)  
-		{  
-			GLint logLen;  
-			//得到编译日志长度    
-			glGetShaderiv(vShader, GL_INFO_LOG_LENGTH, &logLen);  
-			if (logLen > 0)  
-			{  
-				char *log = (char *)malloc(logLen);  
-				GLsizei written;  
-				//得到日志信息并输出    
-				glGetShaderInfoLog(vShader, logLen, &written, log);  
-				cerr << "vertex shader compile log : " << endl;  
-				cerr << log << endl;  
-				free(log);//释放空间    
-			}  
-		}  
-		
-		//创建着色器对象：片断着色器    
-		fShader = glCreateShader(GL_FRAGMENT_SHADER);  
-		//错误检测    
-		if (0 == fShader)  
-		{  
-			cerr << "ERROR : Create fragment shader failed" << endl;  
-			exit(1);  
-		}  
-		
-		//把着色器源代码和着色器对象相关联    
-		const GLchar *fShaderCode = textFileRead(FShaderFile);  
-		const GLchar *fCodeArray[1] = { fShaderCode };  
-		glShaderSource(fShader, 1, fCodeArray, NULL);  
-		
-		//编译着色器对象    
-		glCompileShader(fShader);  
-		
-		//检查编译是否成功    
-		glGetShaderiv(fShader, GL_COMPILE_STATUS, &compileResult);  
-		if (GL_FALSE == compileResult)  
-		{  
-			GLint logLen;  
-			//得到编译日志长度    
-			glGetShaderiv(fShader, GL_INFO_LOG_LENGTH, &logLen);  
-			if (logLen > 0)  
-			{  
-				char *log = (char *)malloc(logLen);  
-				GLsizei written;  
-				//得到日志信息并输出    
-				glGetShaderInfoLog(fShader, logLen, &written, log);  
-				cerr << "fragment shader compile log : " << endl;  
-				cerr << log << endl;  
-				free(log);//释放空间    
-			}  
-		}  
-		
-		//3、链接着色器对象    
-		//创建着色器程序    
-		GLuint programHandle = glCreateProgram();  
-		if (!programHandle)  
-		{  
-			cerr << "ERROR : create program failed" << endl;  
-			exit(1);  
-		}  
-		//将着色器程序链接到所创建的程序中    
-		glAttachShader(programHandle, vShader);  
-		glAttachShader(programHandle, fShader);  
-		//将这些对象链接成一个可执行程序    
-		glLinkProgram(programHandle);  
-		//查询链接的结果    
-		GLint linkStatus;  
-		glGetProgramiv(programHandle, GL_LINK_STATUS, &linkStatus);  
-		if (GL_FALSE == linkStatus)  
-		{  
-			cerr << "ERROR : link shader program failed" << endl;  
-			GLint logLen;  
-			glGetProgramiv(programHandle, GL_INFO_LOG_LENGTH,  
-			&logLen);  
-			if (logLen > 0)  
-			{  
-				char *log = (char *)malloc(logLen);  
-				GLsizei written;  
-				glGetProgramInfoLog(programHandle, logLen,  
-				&written, log);  
-				cerr << "Program log : " << endl;  
-				cerr << log << endl;  
-			}  
-		}  
-		else//链接成功，在OpenGL管线中使用渲染程序    
-		{  
-			glUseProgram(programHandle);  
-		}  
-	}  
-							\end{lstlisting}
-						\item \textbf{使用着色器}渲染
-							\begin{lstlisting}
-	void init()  
-	{  
-		//初始化glew扩展库    
-		GLenum err = glewInit();  
-		if (GLEW_OK != err)  
-		{  
-			cout << "Error initializing GLEW: " << glewGetErrorString(err) << endl;  
-		}  
-		//加载顶点和片段着色器对象并链接到一个程序对象上  
-		initShader("VertexShader.vert","FragmentShader.frag");  
-		//绑定并加载VAO，VBO  
-		initVBO();  
-		glClearColor(0.0, 0.0, 0.0, 0.0);  
-	}  
-	
-	// 显示函数
-	void display()  
-	{  
-		glClear(GL_COLOR_BUFFER_BIT);  
-		//使用VAO、VBO绘制    
-		glBindVertexArray(vaoHandle);  
-		glDrawArrays(GL_TRIANGLE_FAN, 0, 4);  
-		glBindVertexArray(0);  
-		glutSwapBuffers();  
-	} 
-	
-	// 键盘监听 ESC键用于退出使用着色器  
-	void keyboard(unsigned char key, int x, int y)  
-	{  
-		switch (key)  
-		{  
-		case 27:  
-			glDeleteShader(vShader);  
-			glUseProgram(0);  
-			glutPostRedisplay(); //刷新显示  
-			break;  
-		}  
-	}   
-	
-	// Main
-	int main(int argc, char** argv)  
-	{  
-		glutInit(&argc, argv);  
-		glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);  
-		glutInitWindowSize(600, 600);  
-		glutInitWindowPosition(100, 100);  
-		glutCreateWindow("Hello GLSL"); 
-		 
-		init();  
-		glutDisplayFunc(display);  
-		glutKeyboardFunc(keyboard); 
-		 
-		glutMainLoop();  
-		return 0;  
-	}  
-							\end{lstlisting}
-					\end{itemize}
-					
-		\subsubsection{参考文献}
-			着色器：\url{http://blog.csdn.net/dcrmg/article/details/53648306}
-\newpage			
-\section{MFC with OpenGL}
-	\subsection{环境配置}
+
+\chapter{MFC with OpenGL}
+	\section{环境配置}
 		\url{http://blog.csdn.net/sircarfield/article/details/6992586}
 		
 		\url{http://www.cnblogs.com/phinecos/archive/2007/07/28/834916.html}
 		
-	\subsection{闪烁解决办法}
+	\section{闪烁解决办法}
 		\url{http://blog.sina.com.cn/s/blog_6d4b374e010141ix.html}
 		    
 		\url{http://bbs.csdn.net/topics/390804673}
 			
-	\subsection{定时器概念与程序}
+	\section{定时器概念与程序}
 		\url{http://blog.sina.com.cn/s/blog_678e97f80100thp7.html}
 			
 			
-	\subsection{坐标确定}
+	\section{坐标确定}
 		左下角为原点
 		
-	\subsection{画椭球}
+	\section{画椭球}
 		\url{http://www.tuicool.com/articles/zmE3Mr}
 		
-\newpage
-\section{OpenGL 读取 OBJ 文件}
-    \subsection{参考文献} 
+
+\chapter{OpenGL 读取 OBJ 文件}
+    \section{参考文献} 
 		\subparagraph{OBJ 文件格式}\url{http://guanser.blog.163.com/blog/static/2112467872012877161702/}
 	
 	
-\newpage 
-\section{OpenGL 实现天空盒子}
-	\subsection{实现}
+ 
+\chapter{OpenGL 实现天空盒子}
+	\section{实现}
 		
-	\subsection{错误记录}
+	\section{错误记录}
 		\paragraph{1.error LNK1281}error LNK1281: 无法生成 SAFESEH 映像VS2013常见编译错误解决
 		
 		\subparagraph{解决方案}：
 		
 		打开项目属性的链接器的命令行，在那里输入： /SAFESEH:NO点击确定再次编译，成功解决问题
 
-\newpage
-\section{PCL  安装}
-	\subsection{错误记录}
+
+\chapter{PCL  安装}
+	\section{错误记录}
 		\paragraph{1.error LNK2019} 要么是 依赖库没配置好， 要么就是32位与64位不兼容(这里包括 库与系统不兼容，还包括库与系统兼容但与编译器不兼容)
 		
 		如当使用 64位的库时，也是64位的系统，虽然你使用的编译器也是64位，但是在编译的时候并没有选择 x64,而选择了win32 也会出现这个错误

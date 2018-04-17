@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/W32TeX) (preloaded format=xelatex 2017.2.16)  6 FEB 2018 01:12
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/W32TeX) (preloaded format=xelatex 2017.2.16)  7 FEB 2018 19:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2068,18 +2068,18 @@ File: eu1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ]
 第六章
 [13]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 157.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 157.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 174.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 174.
  (./Redis.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 157.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 157.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 174.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 174.
  ) 
 Here is how much of TeX's memory you used:
- 37778 strings out of 493706
- 746462 string characters out of 6145376
- 811521 words of memory out of 5000000
- 40634 multiletter control sequences out of 15000+600000
- 11590 words of font info for 75 fonts, out of 8000000 for 9000
+ 37783 strings out of 493706
+ 746590 string characters out of 6145376
+ 811522 words of memory out of 5000000
+ 40637 multiletter control sequences out of 15000+600000
+ 11606 words of font info for 77 fonts, out of 8000000 for 9000
  1328 hyphenation exceptions out of 8191
  63i,7n,75p,10413b,1178s stack positions out of 5000i,500n,10000p,200000b,80000s
 
