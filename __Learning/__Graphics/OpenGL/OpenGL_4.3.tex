@@ -761,9 +761,392 @@
 \chapter{四大变换}
 参考文献:\url{http://blog.csdn.net/lyx2007825/article/details/8792475}
 
+\verb|--|:\url{https://blog.csdn.net/u012501459/article/details/12945147}
 
+\verb|数学变换过程：|\url{https://blog.csdn.net/wangdingqiaoit/article/details/51594408}
 
-   
+	\section{坐标变化全过程演示}
+		OpenGL中的坐标处理过程包括\textbf{模型变换}、\textbf{照像机变换}、\textbf{投影变换}、\textbf{视口变换}等过程，如下图所示：
+		
+		\begin{figure}[htbp]
+			\centering
+			\includegraphics[scale = 0.57]{transferAll.png}
+			\caption{转化流程}
+		\end{figure}
+		
+		在上面的图中，注意，OpenGL只定义了\textit{裁剪坐标系、规范化设备坐标系和屏幕坐标系}，而\textbf{局部坐标系(模型坐标系)、世界坐标系和照相机坐标系}都是为了方便用户设计而自定义的坐标系，它们的关系如下图所示
+		
+		\begin{figure}[htbp]
+			\centering
+			\includegraphics[scale = 0.9]{transferAll2.png}
+			\caption{转化流程2}
+		\end{figure}
+		
+		图中左边的过程包括模型变换、视变换，投影变换，这些变换可以由用户根据需要自行指定，这些内容在顶点着色器中完成；而图中右边的两个步骤，包括透视除法、视口变换，这两个步骤是OpenGL自动执行的，在顶点着色器处理后的阶段完成。
+		
+	\section{模型变换(世界变换)}
+			\subparagraph{包含}：所有单位模型的变换，为了能够在世界坐标系中正确的显式相对位置。如图\ref{mxzh}
+				\begin{figure}[htbp]
+					\centering
+					\includegraphics[scale = 0.7]{transferModel.png}
+					\caption{模型转换过程}
+					\label{mxzh}
+				\end{figure}
+			
+			\subparagraph{顺序}：\verb|缩放–>旋转—>平移|
+		
+			\subparagraph{数学}->\verb|变换矩阵*位置坐标|，如公式\ref{model transform}
+					\begin{equation}\label{model transform}
+					\left(
+					\begin{array}{cccc}
+					1 & 0 & 0& V_1\\
+					
+					0 & 1 & 0& V_2\\
+					
+					0 & 0 & 1& V_3\\
+					
+					0 & 0 & 0& 1\\
+					\end{array}
+					\right)
+					\left(
+					\begin{array}{c}
+					X\\ 
+					Y\\
+					Z\\
+					1 
+					\end{array}	
+					\right) 
+					=
+					\left(
+					\begin{array}{c}
+					X+V_1\\ 
+					Y+V_2\\
+					Z+V_3\\
+					1 
+					\end{array}	
+					\right)
+					\end{equation}
+		
+		
+			利用GLM数学库实现模型变换，例如平移变换示例代码为：
+			\begin{lstlisting}
+	glm::mat4 model; // 构造单位矩阵
+	model = glm::translate(model, glm::vec3(0.0f, 0.0f,-0.5f));
+			\end{lstlisting}
+			
+	\section{摄像机变换}
+			数学变换参考文献：\url{https://blog.csdn.net/wangdingqiaoit/article/details/51570001}
+			
+			\subparagraph{包含}：相机坐标系中的坐标，就是从相机的角度来解释世界坐标系中位置。如
+				\begin{figure}[htbp]
+					\centering
+					\includegraphics[scale = 0.7]{transferEye.png}
+					\caption{摄像机转换过程}
+				\end{figure}
+			
+			\subparagraph{数学}：OpenGL中相机始终位于原点，指向-Z轴，而以相反的方式来调整场景中物体，从而达到相同的观察效果。例如要观察-z轴方向的一个立方体的右侧面，可以有两种方式：
+				\begin{itemize}[itemindent = 1em]
+					\item \textbf{立方体不动}，让相机绕着+y轴，旋转+90度，此时相机镜头朝向立方体的右侧面，实现目的。完成这一旋转的矩阵记作$R_y(\frac{\pi}{2})$
+					\item \textbf{相机不动}，让立方体绕着+y轴，旋转-90度，此时也能实现同样的目的。注意这时相机没有转动。完成这一旋转的矩阵记作$R_y(-\frac{\pi}{2})$
+				\end{itemize}
+				
+				\textbf{OpenGL中采用方式2的观点来解释视变换。}例如下面\ref{sxweizhi}的图表示了假想的相机：
+				\begin{figure}[htbp]
+					\centering
+					\includegraphics[scale = 0.4]{Eye.png}
+					\caption{openGL摄像机位置}
+					\label{sxweizhi}
+				\end{figure}	
+				
+				再举一个例子，比如，\textit{一个物体中心位于原点，照相机也位于初始位置原点，方向指向-Z轴}。\textbf{为了对物体的+Z面成像}，那么必须将照相机从原点移走，如果照相机仍然指向-Z轴，需要将照相机沿着+Z轴方向后退。假若照相机不移动，我们可以通过将物体沿着-Z轴后退d个单位，则变换矩阵为：
+					$$
+					Matrix = 
+					\left(
+					\begin{array}{cccc}
+					1 & 0 & 0& 0\\
+					
+					0 & 1 & 0& 0\\
+					
+					0 & 0 & 1& -d\\
+					
+					0 & 0 & 0& 1\\
+					\end{array}
+					\right)
+					$$
+					
+			进一步说明这里相对的概念，对这个概念不感兴趣的可以跳过。默认时相机位于(0,0,0)，指向-z轴，相当于调用了：
+			\begin{lstlisting}
+	glm::lookAt(glm::vec(0.0f,0.0f,0.0f),
+		glm::vec3(0.0f, 0.0f, -1.0f),
+		glm::vec3(0.0f, 1.0f, 0.0f));
+			\end{lstlisting}
+			得到是单位矩阵，\textbf{这是相机的默认情况}。
+			
+			\textbf{上述第一种方式}，相机绕着+y轴旋转90度，相机指向-x轴，则等价于调用变为:
+			\begin{lstlisting}
+	glm::mat4 view =glm::lookAt(glm::vec(0.0f,0.0f,0.0f),
+		glm::vec3(-1.0f, 0.0f, 0.0f),
+		glm::vec3(0.0f, 1.0f, 0.0f));
+			\end{lstlisting}
+			得到的视变换矩阵为:
+				$$
+				Matrix = 
+				\left(
+				\begin{array}{cccc}
+				0 & 0 & -1& 0\\
+				
+				0 & 1 & 0& 0\\
+				
+				1 & 0 & 0& 0\\
+				
+				0 & 0 & 0& 1\\
+				\end{array}
+				\right)
+				$$
+			
+			\textbf{上述第二种方式}，通过立方体绕着+y轴旋转-90度，则得到的矩阵M,相当于:
+				\begin{lstlisting}
+	glm::mat4 model = glm::rotate(glm::mat4(1.0), glm::radians(-90.0f), glm::vec3(0.0, 1.0, 0.0));
+				\end{lstlisting}
+				
+			\textbf{这里得到的矩阵M和上面的矩阵view是相同的}，可以自行验证下。 
+			\textit{也就是说，通过旋转相机+y轴90度，和旋转立方体+y轴-90度，最终计算得到的}\textbf{矩阵相同}。调整相机来得到观察效果，可以通过相应的方式来调整物体达到相同的效果。在OpenGL中并不存在真正的相机，这只是一个虚构的概念。
+			
+			\subparagraph{计算变换矩阵}
+				相机坐标系由相机位置eye和UVN基向量(或者说由forward, side ,up）构成，如下图\ref{shexiang}所示：
+				\begin{figure}[htbp]
+					\centering
+					\includegraphics[scale = 0.7]{EyeTrans.png}
+					\caption{摄像机-物体图例}
+					\label{shexiang}
+				\end{figure}
+				
+				各个参数的含义如下：
+				\begin{itemize}[itemindent = 1em]
+					\item \textbf{相机位置 }也称为观察参考点 (View Reference Point) 在世界坐标系下指定相机的位置\textbf{eye}。
+					\item \textbf{相机镜头方向}，由相机位置和相机指向的目标(target)位置计算出，$forwrad=(target−eye)$。
+					\item \textbf{相机顶部正朝向}: View Up Vector 确定在相机哪个方向是向上的，一般取(0, 1, 0)。
+				\end{itemize}
+				上面的图简化为图\ref{shexiangjie2}： 
+				\begin{figure}[htbp]
+					\centering
+					\includegraphics[scale = 0.7]{EyeTrans2.png}
+					\caption{摄像机-物体图例2}
+					\label{shexiangjie2}
+				\end{figure}
+				
+				在使用过程中，我们是要指定的参数即为\textbf{相机位置(eye)}，\textbf{相机指向的目标位置(target)}和\textbf{viewUp vector}三个参数。 
+				
+				\begin{enumerate}[itemindent = 1em]
+					\item 首选\textbf{计算相机镜头方向}：$forwrad=(target−eye)$，并完成标准化$\frac{forward}{|forward|}$
+					\item 根据view-up vector和forward\textbf{确定相机的side向量}:
+						$$viewUp' = \dfrac{viewUp}{||viewUp||}$$
+						$$side = cross(forward, viewUp')$$
+					\item 根据forward和side\textbf{计算up向量}: 
+						$$up=cross(side,forward)$$
+				\end{enumerate}
+				
+				这样\textbf{eye位置，以及forward、side、up三个基向量构成一个新的坐标系}，注意这个坐标系是一个\textbf{左手坐标系}，因此在实际使用中，\textbf{需要对forward进行一个翻转，利用-forward、side、up和eye来构成一个右手坐标系}。
+				
+				从坐标和变换一节，了解到，要实现不同坐标系之间的坐标转换，需要求取一个变换矩阵。而这个矩阵就是一个坐标系A中的原点和基在另一个坐标系B下的表示。 
+				
+				我们将相机坐标系的原点和基，使用世界坐标系表示为(s代表side基向量，u代表up基向量，f代表forward基向量)： 
+								$$
+								CameraWorld =  
+								\left(
+								\begin{array}{cccc}
+								s[0] & u[0] & -f[0]& eye_x\\
+								
+								s[1] & u[1] & -f[1]& eye_y\\
+								
+								s[2] & u[2] & -f[2]& eye_z\\
+								
+								0 & 0 & 0& 1\\
+								\end{array}
+								\right)
+								$$
+								
+				通过一些列变换求得视变换矩阵为
+					$$
+					Model_{view} =  
+					\left(
+					\begin{array}{cccc}
+						s[0] & s[1] & s[2]& -dot(s,eye)\\
+						
+						u[0] & u[1] & u[2]& -dot(u,eye)\\
+						
+						-f[0] & -f[1] & -f[2]& dot(f,eye)\\
+						
+						0 & 0 & 0& 1\\
+					\end{array}
+					\right)
+					$$
+					
+				这种方式对应的计算代码如下：
+				\begin{lstlisting}
+	// 手动构造LookAt矩阵 方式1
+	glm::mat4 computeLookAtMatrix1(glm::vec3 eye, glm::vec3 target, glm::vec3 viewUp)
+	{
+		glm::vec3 f = glm::normalize(target - eye); // forward vector
+		glm::vec3 s = glm::normalize(glm::cross(f, viewUp)); // side vector
+		glm::vec3 u = glm::normalize(glm::cross(s, f)); // up vector
+		glm::mat4 lookAtMat(
+				glm::vec4(s.x, u.x, -f.x, 0.0), // 第一列
+				glm::vec4(s.y, u.y, -f.y, 0.0), // 第二列
+				glm::vec4(s.z, u.z, -f.z, 0.0), // 第三列
+				glm::vec4(-glm::dot(s, eye),
+				-glm::dot(u, eye), glm::dot(f, eye), 1.0)  // 第四列
+			);
+		return lookAtMat;
+	}
+				\end{lstlisting}
+				
+				而最终结果则可以表示为
+				$$ 	
+				\left(
+				\begin{array}{c}
+				X_{eye}\\ 
+				Y_{eye}\\
+				Z_{eye}\\
+				w_{eye}
+				\end{array}	
+				\right) 
+				=
+				Matrix_{view}
+				\cdot
+				Matrix_{model}
+				\cdot
+				\left(
+				\begin{array}{c}
+				X_{obj}\\ 
+				Y_{obj}\\
+				Z_{obj}\\
+				w_{obj}
+				\end{array}	
+				\right) 
+				$$
+				
+	\section{投影变换}
+			数学变换参考文献：\url{https://blog.csdn.net/wangdingqiaoit/article/details/51589825}
+			
+			\subparagraph{含义}：投影方式决定以何种方式成像，投影方式有很多种，OpenGL中主要使用两种方式，即透视投影(perspective projection)和正交投影( orthographic projection)。
+			\begin{itemize}[itemindent = 1em]
+				\item \textbf{正交投影}是平行投影的一种特殊情形，正交投影的投影线垂直于观察平面。平行投影的投影线相互平行，投影的结果与原物体的大小相等，因此广泛地应用于工程制图等方面。 
+				\item \textbf{透视投影}的投影线相交于一点，因此投影的结果与原物体的实际大小并不一致，而是会近大远小。因此透视投影更接近于真实世界的投影方式。
+			\end{itemize}
+			两者的示意图如下\ref{tyqb}：
+			\begin{figure}[htbp]
+				\centering
+				\includegraphics[scale = 0.7]{project.png}
+				\caption{投影区别}
+				\label{tyqb}
+			\end{figure}
+			在OpenGL中成像时的效果如下\ref{touyingqubie}所示：
+			   \begin{figure}[htbp]
+			   	\centering
+			   	\includegraphics[scale = 0.7]{project2.png}
+			   	\caption{openGL投影区别}
+			   	\label{touyingqubie}
+			   \end{figure}
+			上面的图中，红色和黄色球在视见体内，因而呈现在投影平面上，而绿色球在视见体外，没有在投影平面上成像。  注意在相机坐标系下，相机指向$-z$轴，nearVal和farVal表示的剪裁平面分别为:近裁剪平面$z=−nearVal$，以及远裁剪平面$z=−farVal$ 
+			
+			在openGL 实现如下：
+			
+			使用\verb|glOrtho(xleft, xright, ybottom, ytop, znear, zfar);|或者类似API\textbf{指定正交投影}，参数意义形象表示为下图\ref{zhengjiao}所示
+				\begin{figure}[htbp]
+					\centering
+					\includegraphics[scale = 0.7]{Ortho.png}
+					\caption{openGL正交投影效果}
+					\label{zhengjiao}
+				\end{figure}
+			
+			使用\verb|void gluPerspective(...);|或者类似的API指定透视投影的视见体，其参数含义如下图\ref{toushi}所示
+				\begin{figure}[htbp]
+					\centering
+					\includegraphics[scale = 0.7]{project3.png}
+					\caption{openGL透视投影效果}
+					\label{toushi}
+				\end{figure}
+				
+			另外一种经常使用 的方式是\textbf{通过视角(Fov)，宽高比(Aspect)来指定透视投影}，例如旧版中函数gluPerspective 如图\ref{ts1}:
+				\begin{figure}[htbp]
+					\centering
+					\includegraphics[scale = 0.7]{toushi.png}
+					\caption{openGL投影示意}
+					\label{ts1}
+				\end{figure}
+			
+			这些参数指定的是一个对称的视见体，如下图\ref{ts2}所示
+				\begin{figure}[htbp]
+					\centering
+					\includegraphics[scale = 1]{toushi2.png}
+					\caption{openGL投影示意2}
+					\label{ts2}
+				\end{figure}
+		
+			由这些参数，可以得到： 
+				\begin{itemize}[itemindent = 1em]
+					\item $h=near∗tan(\dfrac{\theta}{2})$
+					\item $w=h*Aspect$
+					\item $r=−l,r=w$
+					\item $t=−b,t=h$
+				\end{itemize}
+				
+			则得到透视投影矩阵为：
+				$$
+				Model_{project} =  
+				\left(
+				\begin{array}{cccc}
+				\dfrac{cot(\frac{\theta}{2})}{Aspect} & 0 & 0& 0\\
+				
+				0 & cot(\frac{\theta}{2}) & 0& 0\\
+				
+				0 & 0 & \dfrac{-(f+n)}{f-n}& \dfrac{-2fn}{f-n}\\
+				
+				0 & 0 & -1& 0\\
+				\end{array}
+				\right)
+				$$
+				
+			通过一系列变换，最后的变换矩阵使用如下所示	
+				$$ 	
+				\left(
+				\begin{array}{c}
+					X_{clip}\\ 
+					Y_{clip}\\
+					Z_{clip}\\
+					w_{clip}
+				\end{array}	
+				\right) 
+				=
+				Matrix_{projection}
+				\cdot
+				\left(
+				\begin{array}{c}
+				X_{eye}\\ 
+				Y_{eye}\\
+				Z_{eye}\\
+				w_{eye}
+				\end{array}	
+				\right) 
+				$$	
+			
+	\section{视口变换}
+		\subparagraph{含义}：是将规范化设备坐标(NDC)转换为屏幕坐标的过程，如下图\ref{shikou}所示：
+			\begin{figure}[htbp]
+				\centering
+				\includegraphics[scale = 1.2]{viewPort.png}
+				\caption{视口变换图例}
+				\label{shikou}
+			\end{figure}
+			
+			在openGL视口变化通过函数: 
+			\begin{lstlisting}
+	glViewport(GLint sx , GLint sy , GLsizei ws , GLsizei hs); 
+	glDepthRangef(GLclampf ns , GLclampf fs );
+			\end{lstlisting}
+			
+			两个函数来指定。其中(sx,sy)表示\textbf{窗口的左下角}，ns和 fs指定\textbf{远近剪裁平面到屏幕坐标的映射关系}。视口变换由OpenGL自动执行，不需要额外代码。
 \chapter{OpenGL基础编程}
 	
 	\subsection{基本结构-框架}
