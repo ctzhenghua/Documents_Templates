@@ -4448,6 +4448,138 @@ private:
 3、 目标对象高度共享
 4、 引用的创建和清除很廉价
 				\end{lstlisting}
+		\subsection{循环引用}
+			参考文献：\url{http://www.cnblogs.com/TianFang/archive/2008/09/20/1294590.html}
+		
+			引用计数是一种便利的内存管理机制，但它有一个很大的缺点，那就是不能管理循环引用的对象。一个简单的例子如下：
+			\begin{lstlisting}
+	#include <string>
+	#include <iostream>
+	#include <boost/shared_ptr.hpp>
+	#include <boost/weak_ptr.hpp>
+	
+	class parent;
+	class children;
+	
+	typedef boost::shared_ptr<parent> parent_ptr;
+	typedef boost::shared_ptr<children> children_ptr;
+	
+	class parent
+	{
+		public:
+		~parent() { std::cout <<"destroying parent\n"; }
+		
+		public:
+		children_ptr children;
+	};
+	
+	class children
+	{
+		public:
+		~children() { std::cout <<"destroying children\n"; }
+		
+		public:
+		parent_ptr parent;
+	};
+	
+	
+	void test()
+	{
+		parent_ptr father(new parent());
+		children_ptr son(new children);
+		
+		father->children = son;
+		son->parent = father;
+	}
+	
+	void main()
+	{
+		std::cout<<"begin test...\n";
+		test();
+		std::cout<<"end test.\n";
+	}	
+			\end{lstlisting}
+		运行该程序可以看到，即使退出了\verb|test|函数后，由于\verb|parent和children|对象互相引用，\textbf{它们的引用计数都是1，不能自动释放}，\textit{并且此时这两个对象再无法访问到}。\textbf{这就引起了c++中那臭名昭著的内存泄漏}。	
+			
+		一般来讲，解除这种循环引用有下面有三种可行的方法：
+			\begin{enumerate}[itemindent = 1em]
+				\item 当只剩下最后一个引用的时候需要手动打破循环引用释放对象。
+				\item 当parent的生存期超过children的生存期的时候，children改为使用一个普通指针指向parent。
+				\item 使用弱引用的智能指针打破这种循环引用。
+			\end{enumerate}
+		虽然这三种方法都可行，但方法1和方法2都需要程序员手动控制，麻烦且容易出错。这里主要介绍一下第三种方法和boost中的弱引用的智能指针\verb|boost::weak_ptr|。
+		
+			\subparagraph{强引用弱引用}
+				一个强引用当被引用的对象活着的话，这个引用也存在（就是说，\textbf{当至少有一个强引用，那么这个对象就不能被释放}）。\verb|boost::share_ptr|就是强引用。
+				
+				相对而言，弱引用当引用的对象活着的时候不一定存在。仅仅是当它存在的时候的一个引用。弱引用并不修改该对象的引用计数，这意味这弱引用它并不对对象的内存进行管理，\textbf{在功能上类似于普通指针}，然而一个比较大的区别是，\textbf{弱引用能检测到所管理的对象是否已经被释放}，从而避免访问非法内存。	
+				
+			
+			\subparagraph{通过弱引用打破循环引用}
+				由于弱引用不更改引用计数，类似普通指针，只要把循环引用的一方使用弱引用，即可解除循环引用。对于上面的那个例子来说，只要把children的定义改为如下方式，即可解除循环引用：
+				\begin{lstlisting}
+	class children
+	{
+	public:
+		~children() { std::cout <<"destroying children\n"; }
+	
+	public:
+		boost::weak_ptr<parent> parent;
+	};
+				\end{lstlisting}
+			
+			最后值得一提的是,虽然通过弱引用指针可以有效的解除循环引用，但这种方式必须在程序员能预见会出现循环引用的情况下才能使用，也可以是说这个仅仅是一种编译期的解决方案，如果程序在运行过程中出现了循环引用，还是会造成内存泄漏的。因此，不要认为只要使用了智能指针便能杜绝内存泄漏。毕竟，对于C++来说，由于没有垃圾回收机制，内存泄漏对每一个程序员来说都是一个非常头痛的问题。
+		
+			\subparagraph{实践操作示例}
+				参考文献：\url{https://blog.csdn.net/xtzmm1215/article/details/45868835}
+				\begin{lstlisting}
+	class B;  
+	class A  
+	{  
+		public:// 为了省去一些步骤这里 数据成员也声明为public  
+		weak_ptr<B> pb;  
+		//shared_ptr<B> pb;  
+		void doSomthing()  
+		{  
+			shared_ptr<B> pp = pb.lock();  
+			if(pp)//通过lock()方法来判断它所管理的资源是否被释放  
+			{  
+				cout<<"sb use count:"<<pp.use_count()<<endl;  
+			}  
+		}  
+		
+		~A()  
+		{  
+			cout << "kill A\n";  
+		}  
+	};  
+	
+	class B  
+	{  
+		public:  
+		//weak_ptr<A> pa;  
+		shared_ptr<A> pa;  
+		~B()  
+		{  
+			cout <<"kill B\n";  
+		}  
+	};  
+	
+	int main(int argc, char** argv)  
+	{  
+		shared_ptr<A> sa(new A());  
+		shared_ptr<B> sb(new B());  
+		if(sa && sb)  
+		{  
+			sa->pb=sb;  
+			sb->pa=sa;  
+		}  
+		sa->doSomthing();  
+		cout<<"sb use count:"<<sb.use_count()<<endl;  
+		return 0;  
+	}  
+				\end{lstlisting}
+				
 		\subsection{代码优化}
 		\subsection{设计优化}
 		\subsection{可伸缩性}
