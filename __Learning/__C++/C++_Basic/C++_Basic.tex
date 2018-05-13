@@ -1499,6 +1499,18 @@ inline FuncX(...){}
 		       \item  构造函数主要用来对数据成员进行初始化，并负责其他一些在对象创建时需要处理的事务
 		       
 		       \item  自己定义构造函数，否则编译器会生成一个公有的构造函数
+		       
+		       \item  构造函数不能是虚函数
+			      \begin{itemize}[itemindent  = 2em]
+			      	\item \textbf{从存储空间角度}:
+				      	虚函数对应一个vtable，这大家都知道，可是这个\verb|vtable|其实是\textbf{存储在对象的内存空间}的。问题出来了，\textit{如果构造函数是虚的，就需要通过 vtable来调用}，\textbf{可是对象还没有实例化，也就是内存空间还没有}，无法找到vtable，所以构造函数不能是虚函数。
+				      	
+			      	\item \textbf{从使用角度}:
+				      	\textit{虚函数主要用于在信息不全的情况下，能使重载的函数得到对应的调用}。\textbf{构造函数}本身就是\textit{要初始化实例}，那使用虚函数也\textbf{没有实际意义}呀。所以构造函数没有必要是虚函数。
+				      	
+			      	\item \textbf{从实现上看}:
+				      	\textit{vbtl在构造函数调用后才建立}，因而构造函数不可能成为虚函数
+			      \end{itemize}
 		    \end{enumerate}
 		  \subsection{Initializer-List Constructors}    
 			  \begin{lstlisting}
@@ -1535,7 +1547,7 @@ inline FuncX(...){}
 		cout << e.what() << endl;
 	}
 			  \end{lstlisting} 
-	
+		
 	\subsection{初始化顺序}
 		\begin{enumerate}
 			\item 普通的变量：一般不考虑啥效率的情况下 可以在构造函数中进行赋值。考虑一下效率的可以再构造函数的初始化列表中进行

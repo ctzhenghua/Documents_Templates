@@ -1,0 +1,146 @@
+ \documentclass[UTF8,a4paper,12pt]{ctexbook} 
+
+ \usepackage{graphicx}%学习插入图
+ \usepackage{verbatim}%学习注释多行
+ \usepackage{booktabs}%表格
+ \usepackage{geometry}%图片
+ \usepackage{amsmath}
+ \usepackage{amssymb}
+ \usepackage{listings}%代码
+ \usepackage{xcolor}  %颜色
+ \usepackage{enumitem}%列表格式
+ \usepackage{tcolorbox}
+ \usepackage{algorithm}  %format of the algorithm
+ \usepackage{algorithmic}%format of the algorithm
+ \usepackage{multirow}   %multirow for format of table
+ \usepackage{tabularx} 	%表格排版格式控制
+ \usepackage{array}	%表格排版格式控制
+ \usepackage{hyperref} %超链接 \url{URL}
+ % \setCJKmainfont{方正兰亭黑简体}  %中文字体设置
+ % \setCJKsansfont{华康少女字体} %设置中文字体
+ % \setCJKmonofont{华康少女字体} %设置中文字体
+
+ \CTEXsetup[format+={\flushleft}]{section}
+
+ %%%% 段落首行缩进两个字 %%%%
+ \makeatletter
+ \let\@afterindentfalse\@afterindenttrue
+ \@afterindenttrue
+ \makeatother
+ \setlength{\parindent}{2em}  %中文缩进两个汉字位
+ 
+ 
+ %%%% 下面的命令重定义页面边距，使其符合中文刊物习惯 %%%%
+ \addtolength{\topmargin}{-54pt}
+ \setlength{\oddsidemargin}{0.63cm}  % 3.17cm - 1 inch
+ \setlength{\evensidemargin}{\oddsidemargin}
+ \setlength{\textwidth}{14.66cm}
+ \setlength{\textheight}{24.00cm}    % 24.62
+ 
+ %%%% 下面的命令设置行间距与段落间距 %%%%
+ \linespread{1.4}
+ % \setlength{\parskip}{1ex}
+ \setlength{\parskip}{0.5\baselineskip}
+ 
+ %%%% 下面的命令定义图表、算法、公式 %%%%
+ \newcommand{\EQ}[1]{$\textbf{EQ:}#1\ $}
+ \newcommand{\ALGORITHM}[1]{$\textbf{Algorithm:}#1\ $}
+ \newcommand{\Figure}[1]{$\textbf{Figure }#1\ $}
+ 
+ %%%% 下面命令改变图表下标题的前缀 %%%%% 如:图-1、Fig-1
+ \renewcommand{\figurename}{Fig}
+ 
+ \geometry{left=1.6cm,right=1.8cm,top=2cm,bottom=1.7cm} %设置文章宽度
+ 
+ \pagestyle{plain} 		  %设置页面布局
+
+ %代码效果定义
+ \definecolor{mygreen}{rgb}{0,0.6,0}
+ \definecolor{mygray}{rgb}{0.5,0.5,0.5}
+ \definecolor{mymauve}{rgb}{0.58,0,0.82}
+ \lstset{ %
+ 	backgroundcolor=\color{white},   % choose the background color
+ 	basicstyle=\footnotesize\ttfamily,      % size of fonts used for the code
+ 	%stringstyle=\color{codepurple},
+ 	%basicstyle=\footnotesize,
+ 	%breakatwhitespace=false,         
+ 	%breaklines=true,                 
+ 	%captionpos=b,                    
+ 	%keepspaces=true,                 
+ 	%numbers=left,                    
+ 	%numbersep=5pt,                  
+ 	%showspaces=false,                
+ 	%showstringspaces=false,
+ 	%showtabs=false,        
+ 	columns=fullflexible,
+ 	breaklines=true,                 % automatic line breaking only at whitespace
+ 	captionpos=b,                    % sets the caption-position to bottom
+ 	tabsize=4,
+ 	commentstyle=\color{mygreen},    % comment style
+ 	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+ 	keywordstyle=\color{blue},       % keyword style
+ 	stringstyle=\color{mymauve}\ttfamily,     % string literal style
+ 	frame=single,
+ 	rulesepcolor=\color{red!20!green!20!blue!20},
+ 	% identifierstyle=\color{red},
+ 	language=c++,
+ }
+ \author{\kaishu 郑华}
+ \title{\heiti 图形学理论 笔记}
+ 
+\begin{document}          %正文排版开始
+ 	\maketitle
+ 	\tableofcontents
+ 	
+ 
+ 
+\part{基础知识}
+\chapter{参考文献}
+	\section{视频} 清华大学：\url{http://cg.cs.tsinghua.edu.cn/course/resource_main.htm}
+	
+	\section{书籍} 胡世民 计算机图形基础教程
+	
+	
+\chapter{背景知识}
+	\section{光照模型}
+		\subsection{简单光照模型}
+		
+		\subsection{局部光照模型}
+		
+		\subsection{整体光照模型}
+		
+		
+	\section{绘制方法}
+		\subsection{光线追踪}
+		
+		\subsection{辐射度}
+		
+		
+	\section{加速算法}
+		\subsection{包围盒树、自适应八叉树等}
+		
+		\subsection{阴影算法、纹理合成}
+
+
+\chapter{光照}
+	\section{色彩空间}
+		 RGB 3通道 
+		 
+		 CMY 减色系统
+		  					
+	\section{图象与像素}
+	
+	
+	\section{三角网格模型}
+		obj
+		
+		法向量
+	
+
+
+
+\part{应用实践}
+
+	  
+\end{document} 
+ 		    

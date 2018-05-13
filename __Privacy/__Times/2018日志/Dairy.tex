@@ -9,6 +9,32 @@
 \usepackage{listings}%代码
 \usepackage{xcolor}%颜色
 \usepackage{enumitem}%列表格式
+\usepackage{tikz}
+\usepackage{dirtree}
+
+
+\usetikzlibrary{intersections,
+	positioning,
+	petri,
+	backgrounds,
+	fit,
+	decorations.pathmorphing,
+	arrows,
+	arrows.meta,
+	bending,
+	calc,
+	intersections,
+	through,
+	backgrounds,
+	shapes.geometric,
+	quotes,
+	matrix,
+	trees,
+	shapes.symbols,
+	graphs,
+	math,
+	patterns,
+	external}
 \CTEXsetup[format+={\flushleft}]{section}
 
 %设置文章宽度
@@ -1242,6 +1268,7 @@
 	 	 问题如下所示：
 		 	 \begin{enumerate}[itemindent = 1em]
 		 	 	\item \textbf{c++} inline 实现机制
+		 	 	\item \textbf{c++} 如何判断浮点数等于0
 		 	 	\item \textbf{c++} 虚函数实现机制
 		 	 	\item \textbf{c++} 内存布局
 		 	 	\item \textbf{c++} 引用计数->循环引用问题
@@ -1289,33 +1316,390 @@
 	 	 
 	 	 晚上起来后叫着四个哥们出去吃了烧烤，分享了下心事之类的
  	 \paragraph{Day 22  论文签字截至   \quad     }
+	 	 Hello：
+	 	 
+	 	 巧了，晚上找张军祥要李老师电话的时候他说李老师还在，于是我就跑过去了，把论文字签了，版面费也报了。
+	 	 
+	 	 
  	 \paragraph{Day 23  毕业资格审查   \quad     }
+	 	 Hello：
+	 	 
+	 	 早上给Hr 打了电话，问了留在我这的简历是否会影响到那个小伙子，然后再问了大概出结果的时间（周三-预答辩那天）。
+	 	 
+	 	 下午折腾了会后，大概把论文的复印件签字、查重申请、6级复印件都交了，资格审查通过。
+	 	 
+	 	 然后存包请去吃了肯德基。
  	 \paragraph{Day 24      \quad     }
  	 \paragraph{Day 25  预答辩    \quad     }
+	 	 Hello：
+	 	 
+	 	 第3个答辩，整体感觉还可以，理性的看待了老师们提出的问题。
+	 	 
+	 	 本来以为今天可能会收到offer，还是没有。
  	 \paragraph{Day 26      \quad     }
+	 	 依旧没有offer， 心凉了。
+	 	 
+	 	 下午老师大概讲述了论文问题的解决方法，晚上着手解决了结构和摘要问题。
+	 	 
+	 	 明天小喵回来，下午6点，好开心。
+	 	 
+	 	 30号算是最后截至日期了，希望能够收到自己心仪的offer吧！ 给我个机会进大厂吧！
  	 \paragraph{Day 27      \quad     }
+	 	 陪李苗吃饭，哈哈，好开心
+	 	 
+	 	 
  	 \paragraph{Day 28      \quad     }
+	 	 找老师修改论文、开会
+	 	 
  	 \paragraph{Day 29      \quad     }   
+	 	 完成了论文的结构修改、摘要补充、内容逻辑修改
+ 	 
  	 \paragraph{Day 30  论文成型 截止日期    \quad     }
+ 	 
 \section{May}
  	 \paragraph{Day 1   盲审    \quad     }
  	 \paragraph{Day 2       \quad     }
+	 	 论文交了，明天就盲审去了
+	 	 
+	 	 晚上魏拓请大家吃了烧烤。
  	 \paragraph{Day 3       \quad     }
+	 	 Hello：
+	 	 
+	 	 明天去\textbf{成都}，安排下
+	 	 
+	 	 \newpage
+	 	 \textbf{代表}：（火锅、小郡肝串串、乐山钵钵鸡、乐山翘脚牛肉、双流兔头）
+		 	 
+		 \textbf{火锅榜}：\textit{骉骉火锅、巴蜀大宅门火锅、蜀九香火锅、大龙燚火锅、牛杂火锅、川西坝子、皇城老妈火锅、飘香火锅、大红锅、万州烤鱼、冒椒火辣}
+		 
+		 \textbf{小吃榜}：\textit{钵钵鸡、肥肠粉、老麻抄手、担担面、兔头、手撕烤兔、兔腰、老妈蹄花、小谭豆花、麻婆豆腐、锅盔 \& 糖油果子、蛋烘糕、凉糕、凉粉、甜水面、法式签名饼}
+		 
+		 \verb|tips-> |
+			 \begin{itemize}[itemindent = 2em]
+			 	\item  免费乘坐的\textbf{区域公交}，其中\verb|1006路|是新晋的吃货线路，秒杀老牌\verb|154路|。每一站都有好吃的。包括\textit{皇城坝牛肉面，王婆荞面，内江冷吃兔，骨汤抄手，香满钵钵钵鸡}等等
+			 	\item  从\textbf{都江堰}或青城山\textbf{坐城际动车回成都}可在\textbf{犀浦站}下车，和地铁同台换乘非常方便。如果到火车北站，出站要走很久 
+			 	\item  \textbf{周末春熙路地铁站}人特别多，有时候会排队限流。不过你可以选择往北步行500米到市二医院站，或往东500米到东门大桥站（取决于你坐哪条线），人瞬间少很多 
+			 \end{itemize}
+		 
+		 	 \verb|Day-01 ->太古里川剧（周五、阴、22~27℃）|
+		 	 \begin{itemize}[itemindent = 2em]
+		 	 	\item 预定房间（春熙路附近）
+		 	 	\item 前往市中心 \textbf{春熙路}
+		 	 	\item 前往 \textbf{太古里} 逛一会， \textbf{负一楼小吃} ， \textbf{钢管厂五区小郡肝串串香}、\textbf{翠台川菜}、\textbf{祝家川菜}（\textit{午饭}）、\textbf{蜀韵蜀味火锅}（\textit{晚饭}）
+		 	 	\item \textbf{方所}（全国第2家）、MUJI无印良品全球旗舰店
+		 	 	\item 芙蓉国粹\textbf{川剧}变脸 	
+		 	 	\item 回 	
+		 	 	\item 预定房间（廊桥附近）
+		 	 \end{itemize}
+		 	 
+		 	 \verb|Day-02 ->锦里川大（周六、阴、24~29℃）|
+		 	 \begin{itemize}[itemindent = 2em]
+		 	 	\item \textbf{锦里}（早上起来出发去、边吃边逛）
+		 	 	\item 杨记\textbf{乐山钵钵鸡（午饭）} 
+		 	 	\item \textbf{武伺候}（16:00 结束）
+		 	 	\item \textbf{川大}（科华北路）
+		 	 	\item \textbf{雨田饭店} 川菜（晚饭）
+		 	 	\item \textbf{廊桥}
+		 	 	\item *九眼桥酒吧
+		 	 	\item 回
+		 	 	\item 预定房间
+		 	 \end{itemize}
+		 	 
+		 	 \verb|Day-03 ->青羊区（周7、阴、25~32℃）|
+		 	 \begin{itemize}[itemindent = 2em]
+		 	 	\item \textbf{文殊院}
+		 	 	\item \textbf{青羊宫}（求签）
+		 	 	\item \textbf{杜甫草堂}		 	 	
+		 	 	\item \textbf{宽窄巷子} 吃川菜，火锅：\textit{大妙，子非，钓鱼台}
+		 	 	\item 泡桐树街、\textbf{小通巷}	、 奎星楼：\textit{二孃鸡爪爪，冒椒火辣，瓦烤}都是很不错的店
+		 	 	\item 回	 	
+		 	 \end{itemize}
+		 	 
+		 	 \verb|Day-04 ->都江堰（周1、阴转中雨、23~33℃）|
+		 	 \begin{itemize}[itemindent = 2em]
+		 	 	\item \textbf{都江堰}	 
+		 	 	\item 古镇：洛带古镇，\textbf{黄龙溪古镇}，街子古镇，安仁古镇	 	
+		 	 \end{itemize}
+		 	 
+		 	 \verb|Day-05 ->熊猫、大佛（周2、小雨、23~26℃）|
+		 	 \begin{itemize}[itemindent = 2em]
+		 	 	\item *大熊猫繁育研究基地或动物园
+		 	 	\item *吃玉林串串香
+		 	 	\item \textbf{乐山大佛 }	
+		 	 	\item *青城山（前山文化，后山风景）	
+		 	 \end{itemize}
+		 	 
+		 	\verb|Day-06 ->九寨沟（周3、阴小雨、23~27℃）|
+		 	\begin{itemize}[itemindent = 2em]
+		 		\item 九寨沟		 	
+		 	\end{itemize}
  	 \paragraph{Day 4       \quad     }
+	 	 Hello：
+	 	 
+	 	 早上起床出发，路上便憧憬着去成都的好处，下午两点左右到达成都东站。先是出发到出名的\textbf{雨天饭店}吃了水煮肉片、xx鸡。
+	 	 
+	 	 然后找到了住的地方-\textbf{M社区酒店}
+	 	 
+	 	 接着出发去\textbf{太古里}转，这个场所集中了主要的高消费品牌，包括意大利的\textbf{瓦萨琪}，而我们最后只是到中国最出名的书店\textbf{“方所”}参观并拍照。
+	 	 
+	 	 从太古里出来后，我们被困在\textbf{红星四段美食街}里出不来了，最后跟滴滴师傅打了好久的电话才确定在哪块，到达\textbf{芙蓉国粹川剧}买票发现好贵呀（150才是丙票），而且还得提前订，最后就决定去旁边出名的\textbf{小郡肝串串}吃完饭了，排了估计1个半小时吧，味道真是不错。
+	 	 
+	 	 晚上就开始预定第二天的行程并尽量将第三天的行程压缩到一天。
+	 	 
  	 \paragraph{Day 5       \quad     }
+	 	 Hello：
+	 	 
+	 	 早上起的比较早吧，估计8点半左右就出发了，到旁边的\textbf{谭姐豆花店}（since 1987） 吃了本地出名的豆花与龙抄手。
+	 	 
+	 	 然后出发去 \textbf{武侯祠}，路上的老人真是热心，主动跑过来说了怎么走。武侯祠主要是刘备、诸葛、张飞、云长的祠堂，里面主要是对这些人的纪念之类的。
+	 	 
+	 	 紧挨着武侯祠的是\textbf{锦里}，一条小吃街，充满了各种茶馆，喜剧，昨天没有看的戏今天在茶馆里看了，不过茶好贵呀（58-竹叶青）。
+	 	 
+	 	 张飞牛肉、小龙坎火锅底料、什么花生酥等
+	 	 
+	 	 从锦里出来后便出发到\textbf{青羊宫}求签，最后求事业求得一个上下签，说双虎相争之类的，从道馆出来后被本地人算是坑了60块吧，还是年轻，说两句好话就...
+	 	 
+	 	 然后接着出发去\textbf{杜甫草堂}，1个小时后，去了\textbf{宽窄巷子}。好累呀...晚上出发去了\textbf{大龙燚}总店吃了火锅。
  	 \paragraph{Day 6       \quad     }
+	 	 Hello：
+	 	 
+	 	 都江堰
  	 \paragraph{Day 7       \quad     }
+	 	 Hello：
+	 	 
+	 	 154路 吃货天
  	 \paragraph{Day 8       \quad     }
+	 	 Hello：
+	 	 
+	 	 回
  	 \paragraph{Day 9       \quad     }
+	 	 Hello
+	 	 
+	 	 签字(报账)
+	 \newpage
+	 	 
  	 \paragraph{Day 10      \quad     }
+	 	 Hello:
+	 	 
+ 	 
+	 	 \setlength{\DTbaselineskip}{15pt}
+	 	 \DTsetlength{1em}{3em}{0.1em}{1pt}{8pt}
+	 	 
+		 	 \dirtree{%
+		 	 	.1 Skills Map.
+		 	 	.2 Linux.
+		 	 	.3 Linux 基础编程.
+		 	 	.3 Linux 系统编程.
+		 	 	.3 Linux 内核学习.
+		 	 	.3 Networks.
+		 	 	.4 TCP/IP 协议.
+		 	 	.4 Http 协议.
+		 	 	.4 CDN.
+		 	 	.4 IO 处理方式.
+		 	 	.3 Operating System.
+		 	 	.4 虚拟内存.
+		 	 	.4 内存调度.
+		 	 	.4 进程调度.
+		 	 	.2 Languages.
+		 	 	.3 C++.
+		 	 	.4 内存管理.
+		 	 	.3 Go Web.
+		 	 	.3 Scripts.
+		 	 	.4 Shell.
+		 	 	.4 Python.
+		 	 	.2 Databases.
+		 	 	.3 Mysql.
+		 	 	.3 Redis.
+		 	 	.2 Tools.
+		 	 	.3 UML.
+		 	 	.3 VIM.
+		 	 	.3 LATEX.
+		 	 	.2 Gaming Development.
+		 	 	.3 计算机图形学原理.
+		 	 	.3 Unreal Engine 4C++ 开发.
+		 	 	.3 Unity 3D 了解.
+				.2 Artificial Intelligence.
+				.3 深度学习框架了解.
+				.3 人工神经网络了解.
+				.2 Projects.
+				.3 C++ http 项目.
+				.3 Muduo 网络库.
+		 	 }
+	 	 	
+	 	 	 \dirtree{%
+	 	 	 	.1 Life Schedule.
+	 	 	 	.2 Readings.
+	 	 	 	.3 论语中庸 一则.
+	 	 	 	.3 资治通鉴 一则（历史）.
+	 	 	 	.3 国学常识 一则.
+	 	 	 	.3 曾国藩书 一则.
+	 	 	 	.3 文学书籍 一则.
+	 	 	 	.2 Sports.
+	 	 	 	.3 跑步 一次.
+	 	 	 	.2 Learning.
+				.3 完成计划任务.
+	 	 	 }
+	 	 	\begin{itemize}[itemindent = 1em]
+	 	 		% 重要
+	 	 		\renewcommand\labelitemi{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$\checkmark$}}	
+				%%---------------------Linux-----------------%%
+				%\item   Linux 基础概念.
+	 	 		%\item   Linux 系统编程2章.
+	 	 		%\item   Linux 内核学习.
+	 	 		%%--Network
+	 	 		%\item   TCP/IP 协议
+	 	 		%\item   Http 协议
+	 	 		%\item   CDN
+	 	 		%\item   IO 处理方式
+	 	 		%%--Operating System
+	 	 		%\item   进程调度
+	 	 		%\item   虚拟内存
+	 	 		%\item   内存调度
+
+	 	 		%%--------------------Language---------------%%
+	 	 		%%--C++
+	 	 		%\item    C++ 内存管理
+	 	 		%%--Go
+	 	 		%\item   Go 基础语法
+	 	 		%\item   Go Web
+	 	 		%%--Script
+	 	 		%\item   Shell 基础语法
+	 	 		%\item   Python 基础语法
+
+
+	 	 		%%--------------------Database---------------%%
+	 	 		%\item   Mysql 数据库
+	 	 		%\item   Redis 数据库
+
+				
+	 	 		%%--------------------Projects---------------%%
+	 	 		%\item    C++ http 项目
+	 	 		%\item    linux-muduo 2节
+
+
+	 	 		%%---------------------Tools-----------------%%
+	 	 		%\item   UML 
+	 	 		%\item   Vim
+	 	 		%\item   Latex 
+
+				%%----------------------AI-------------------%%
+				%\item   深度学习框架了解
+				%\item   人工神经网络了解
+				
+				
+				%%-------------Gaming Development------------%%
+				%\item   计算机图形学原理
+				%\item   Ureal Engine4 基础C++ 脚本编程
+				%\item   Unity 3D 基础C# 脚本编程
+				
+				
+	 	 		%%------------------Life Change--------------%%
+	 	 		\renewcommand\labelitemi{\makebox[0pt][l]{$\square$}\hspace{1em}}
+	 	 		\item    国学尝试 一则
+	 	 		\item 	 资治通鉴 一则 
+	 	 		\item  	 论语中庸 一则 夫子至邦
+	 	 		\item    读书  30 Mins	：\verb|三国演义 2-3章|
+	 	 		\item    曾国藩家书：劝学
+	 	 	\end{itemize}
+	 	
+	 	\newpage 	
  	 \paragraph{Day 11      \quad     }
+	 	 Hello：
+	 	 
+	 	 \dirtree{%
+	 	 	.1 Time Schedule.
+	 	 	.2 10:00 -- 12:00 :Readings.
+	 	 	.3 论语中庸 一则.
+	 	 	.3 资治通鉴 一则（历史）.
+	 	 	.3 国学常识 一则.
+	 	 	.3 曾国藩书 一则.
+	 	 	.3 文学书籍 一则.
+	 	 	.2 14:40 -- 17:00 :Learning.
+	 	 	.3 Linux.
+	 	 	.4 Linux 复习一节.
+	 	 	.4 Linux 系统编程一节 Or 网络编程一节.
+	 	 	.3 Tools.
+	 	 	.4 UML 一节.
+	 	 	.4 Vim 一节.
+	 	 	.2 19:40 -- 23:00 :Learning.
+	 	 	.3 Languages.
+	 	 	.4 C++ Memory 一节.
+	 	 	.4 Python 一节.
+	 	 	.3 Gaming Development.
+	 	 	.4 图形学 一节.
+	 	 	.4 Unreal 一节.
+	 	 	.3 Projects.
+	 	 	.4 Muduo 库一节.
+	 	 }
+	 	 
+	 	 \begin{itemize}[itemindent = 1em]
+	 	 	% 重要
+	 	 	\renewcommand\labelitemi{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$\checkmark$}}	
+	 	 	%%---------------------Linux-----------------%%
+	 	 	\item   Linux 基础概念 2节.
+	 	 	%\item   Linux 系统编程2章.
+	 	 	%\item   Linux 内核学习.
+	 	 	%%--Network
+	 	 	%\item   TCP/IP 协议
+	 	 	%\item   Http 协议
+	 	 	%\item   CDN
+	 	 	%\item   IO 处理方式
+	 	 	%%--Operating System
+	 	 	%\item   进程调度
+	 	 	%\item   虚拟内存
+	 	 	%\item   内存调度
+	 	 	
+	 	 	%%--------------------Language---------------%%
+	 	 	%%--C++
+	 	 	\item    C++ 内存管理 2 节
+	 	 	%%--Go
+	 	 	%\item   Go 基础语法
+	 	 	%\item   Go Web
+	 	 	%%--Script
+	 	 	%\item   Shell 基础语法
+	 	 	%\item   Python 基础语法
+	 	 	
+	 	 	
+	 	 	%%--------------------Database---------------%%
+	 	 	%\item   Mysql 数据库
+	 	 	%\item   Redis 数据库
+	 	 	
+	 	 	
+	 	 	%%--------------------Projects---------------%%
+	 	 	%\item    C++ http 项目
+	 	 	%\item    linux-muduo 2节
+	 	 	
+	 	 	
+	 	 	%%---------------------Tools-----------------%%
+	 	 	%\item   UML 
+	 	 	%\item   Vim
+	 	 	%\item   Latex 
+	 	 	
+	 	 	%%----------------------AI-------------------%%
+	 	 	%\item   深度学习框架了解
+	 	 	%\item   人工神经网络了解
+	 	 	
+	 	 	
+	 	 	%%-------------Gaming Development------------%%
+	 	 	\item   计算机图形学原理 1节
+	 	 	\item   Ureal Engine4 基础C++ 脚本编程 2节
+	 	 	
+	 	 	
+	 	 	%%------------------Life Change--------------%%
+	 	 	\renewcommand\labelitemi{\makebox[0pt][l]{$\square$}\hspace{1em}}
+	 	 	\item    国学尝试 一则
+	 	 	\item 	 资治通鉴 一则 
+	 	 	\item  	 论语中庸 一则 夫子至邦
+	 	 	\item    读书  30 Mins	：\verb|三国演义 2-3章|
+	 	 	\item    曾国藩家书：劝学
+	 	 \end{itemize}
  	 \paragraph{Day 12      \quad     }
  	 \paragraph{Day 13      \quad     }
  	 \paragraph{Day 14      \quad     }
- 	 \paragraph{Day 15      \quad     }
+ 	 \paragraph{Day 15   盲审回   \quad     }
  	 \paragraph{Day 16      \quad     }
  	 \paragraph{Day 17      \quad     }
- 	 \paragraph{Day 18      \quad     }
+ 	 \paragraph{Day 18   盲审结果公示    \quad     }
  	 \paragraph{Day 19      \quad     }
  	 \paragraph{Day 20   正式答辩   \quad     }
  	 \paragraph{Day 21      \quad     }
@@ -1329,6 +1713,7 @@
  	 \paragraph{Day 29      \quad     }   
  	 \paragraph{Day 30      \quad     }
  	 \paragraph{Day 31      \quad     }
+ 	 
 \section{June}
  	 \paragraph{Day 1       \quad     }
  	 \paragraph{Day 2       \quad     }
