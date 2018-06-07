@@ -1,4 +1,4 @@
-\documentclass[UTF8,a4paper,12pt]{ctexart} 
+\documentclass[UTF8,a4paper,12pt]{ctexbook} 
 
 \usepackage{graphicx}%学习插入图
 \usepackage{verbatim}%学习注释多行
@@ -19,7 +19,10 @@
 \usepackage{tabularx} 	%表格排版格式控制
 \usepackage{array}	%表格排版格式控制
 \usepackage{hyperref} %超链接 \url{URL}
-
+\usepackage{dirtree}
+\setmainfont{Times New Roman}
+\graphicspath{{figure/}}
+\CTEXsetup[format+={\flushleft}]{section}
 %%%% 段落首行缩进两个字 %%%%
 \makeatletter
 \let\@afterindentfalse\@afterindenttrue
@@ -76,13 +79,188 @@
  
 \begin{document}          %正文排版开始
  	\maketitle
+ 	\tableofcontents
+
+\chapter{Bash 基本功能}
+	\section{基本}
+		\paragraph{history}查看历史命令
+			\begin{itemize}
+				\item \verb|-c :|清空历史命令
+				\item \verb|-w :|把缓存中的历史命令写入历史命令保存文件\verb|~/.bash_history|
+			\end{itemize}
+			
+			历史命令默认保存条数可以在文件\verb|/etc/profile 中|进行设置
+			
+		\paragraph{alias}定义别名 \verb|alias 别名='原命令'|
+		
+			删除别名\verb|unalias|
+		
+		\paragraph{命令执行时顺序}
+			\begin{enumerate}
+				\item 首先执行用绝对路径或相对路径执行的命令
+				\item 其次执行别名(alias)关联的命令
+				\item 其次执行Bash 的内部命令
+				\item 最后执行按照\verb|$PATH|环境变量定义的目录查找顺序找到的第一个命令
+			\end{enumerate}
+		
+		\paragraph{Bash 快捷键}如表\ref{bash_k}所示：
+			\begin{table}[H]
+				\centering
+				\caption{bash 快捷键}
+				\label{bash_k}
+				\begin{tabular}{p{2cm}<{\centering}|p{12cm}<{\centering}}
+					\toprule[1.5pt]
+					快捷键  &  作用含义\\
+					\hline
+					\verb|ctr+A | &  把光标移动到命令行开头   \\
+					\verb|ctr+E | &  把光标移动到命令行结尾   \\
+					\verb|ctr+C | &  强制终止当前命令   \\
+					\verb|ctr+L | &  清屏，相当于clear 命令   \\
+					\verb|ctr+U | &  剪切(dd)光标之前的命令   \\
+					\verb|ctr+K | &  剪切光标之后的命令   \\
+					\verb|ctr+Y | &  粘贴ctr+U或ctr+K剪切的内容   \\
+					\verb|ctr+R | &  在历史命令中搜索   \\
+					\verb|ctr+D | &  退出当前终端   \\
+					\verb|ctr+Z | &  暂停，并放入后台   \\
+					\verb|ctr+S | &  暂停屏幕输出   \\
+					\verb|ctr+Q | &  恢复屏幕输出   \\
+					\bottomrule[1.5pt]
+				\end{tabular}
+			\end{table}
+
+		\paragraph{环境变量配置文件}为使得环境变量永久生效的文件，主要是定义对系统的操作环境生效的默认环境变量，比如\verb|PATH|、\verb|HISTSIZE|、\verb|PS1|、\verb|HOMENAME|等默认变量。
+		
+			保存在\verb|/etc/|目录下的配置文件是对所有用户都生效的。而保存在用户当前目录\verb|~/|则只对当前用户生效
+		
+			\subparagraph{环境变量叠加方式}\verb|PATH='$PATH':/root| 
+				将\verb|/root|添加到环境变量中，但是这样更改后，下次重启会消失。如果想要长久生效需要更改配置文件。
+			
+			\subparagraph{执行顺序}执行过程如下所图\ref{env}示\verb|->|
+				\begin{figure}[htb]
+					\centering
+					\includegraphics[scale=0.3]{env.png}
+					\caption{执行顺序}
+					\label{env}
+				\end{figure}
+				
+			\subparagraph{/etc/profile}
+				定义\verb|PATH、LOGNAME、HISTSIZE、HOSTNAME 等|，调用\verb|/etc/profile.d/|目录下的所有脚本文件.sh并执行。
+				
+				然后进入用户目录，调用\verb|~/.bash_profile|，追加\verb|PATH|并生效，并间接调用\verb|~/.bashrc|，完成别名定义， 并简介调用\verb|/etc/bashrc| 配置文件完成不用登陆的shell 配置并生效。
+			
+			\subparagraph{/etc/profile.d/*.sh}这部分脚本主要设置语言等
+			
+			\subparagraph{~/.bash\_profile}设置登陆用户的环境变量\verb|$PATH|， 并调用配置\verb|~/.bashrc|
+			
+			\subparagraph{~/.bashrc}设置登录用户的\textbf{别名设置}， 并调用配置\verb|/etc/bashrc|
+			
+			\subparagraph{/etc/bashrc}设置未登录的BASH 环境变量
+			
+		
+		\paragraph{source}\verb|source 配置文件 => .  配置文件| 使配置文件生效。
+	
+	\section{字符截取}
+		\dirtree{%		
+			.1 字符截取.
+			.2 截取行.
+			.3 grep.
+			.3 sed.
+			.2 截取列.
+			.3 cut.
+			.3 awk.
+		}
+		\paragraph{grep}\verb|grep 选项 字符串 文件名|
+
+		\paragraph{cut}\verb|cut 选项 文件名|，有局限，仅支持制表符、和常用分隔符（，：。-），不支持空格。
+			\begin{itemize}
+				\item \verb|-f列号 |提取第几列
+				\item \verb|-d分隔符 |按照指定分隔符分割列
+			\end{itemize}
+			
+			\verb|cut -f 2 student.txt| 提取文件第2列
+			
+			\verb|cut -f 2,3 student.txt| 提取文件第2列和第三列
+			
+			\verb|cut -d ":" -f 1,3 /etc/passwd| 截取第一列和第三列，并且分隔符号为：
+	
+	\section{awk}
+		\subsection{基本使用}
+			\paragraph{使用格式}
+				\verb|awk '条件1{动作1} 条件2{动作2}...' 文件名|， 先读入一行，然后逐行执行操作。
+				
+				\subparagraph{条件 Pattern}一般使用关系表达式作为条件
+					\begin{itemize}[itemindent = 1em]
+						\item \verb|x > 10|
+						\item \verb|x >= 10|
+						\item \verb|x <= 10|
+					\end{itemize}
+			
+				\subparagraph{动作 Action}
+					\begin{itemize}[itemindent = 1em]
+						\item 格式化输出
+						\item 流程控制语句
+					\end{itemize}
+			
+			\paragraph{例子}
+				\begin{itemize}
+					\item \verb|awk ' {printf $2 "\t" $6 "\n"}'   student.txt|  :patten 省略，表示对每行都执行，显式文件中的第2列和第6列。
+					\item \verb@df -h|awk '{print $1 "\t" $3}' @: 截取df 输出的第1列和第三列， 与cut 不同的是，awk 无须指定分割符，并且需要注意的是，print 会自动分行，但是格式控制与printf 相同。
+				\end{itemize}
+				
+		
+		\subsection{awk 编程}
+			\paragraph{使用格式}
+				
+				\subparagraph{BEGIN} 在其他所有命令逐行执行前，执行一次 BEGIN后的动作
+				
+					\verb|awk 'BEGIN{print "Test awk BEGIN"} {print $2 "\t" $5}'  student.txt|
+					
+					这条命令首先执行BEGIN 后的 print Anction, 然后逐行读取数据执行之后的条件与动作。
+			
+				\subparagraph{FS内置变量} 指定分隔符
+				
+					\verb|awk '{FS=":"}{print $1"\t"$3}'  /etc/passwd|
+					
+					这条命令意思是指定分割符为：，但是在读入第一行后，再执行后面Action 时，指定分隔符已经来不及了，所以这种情况第一行时不会正确使用分割符分割的，而是从第2行开始的，为了解决这个问题，可以利用前面提到的BEGIN 解决。
+					
+					\verb|awk 'BEGIN{FS=":"}{xx}'  xx|
+				
+				\subparagraph{END} 在所有命令执行完后，执行一次 END后的动作
+					
+					\verb|awk '{print $1"\t"$3}  END{print"The End"}'  student.txt|	
+					
+				
+				\subparagraph{关系运算}
+					\verb@cat fileName.txt | grep -v Name | awk '$6 >= 87 {print $2}'@
+
+	\section{sed} 轻量\textbf{流}(与vi相比支持管道操作)编辑器，主要用来将数据进行选取、替换、删除、新增的命令。
+	
+		\paragraph{使用格式}
+			\verb|sed [选项] '[动作]'  文件名|
+			
+			\begin{itemize}
+				\item \verb|-n |一般sed 命令会将所有数据都输出到屏幕，而如果使用-n 选项，则只会将经过sed 命令处理的行输出到屏幕
+				\item \verb|-e |允许对输入数据应用多条sed 命令编辑
+				\item \verb|-i |用sed 的修改结果直接修改读取数据的文件，而不是由屏幕输出。
+			\end{itemize}
+			
+		\paragraph{动作}
+			\begin{itemize}
+				\item \verb|a |追加，在当前行后添加一行或多行。 添加多行时，除最后一行外，每行末尾需要用\verb|“\”| 代表数据未完结。
+				\item \verb|c |行替换，用c 后面的字符串替换原数据行，替换多行时，除最后一行外，每行末尾需用\verb|“\” |代表数据未完结。
+				\item \verb|i |插入， 在当前行前插入一行或多行，插入多行...
+				\item \verb|d |删除，删除指定行
+				\item \verb|p |打印，输出指定行
+				\item \verb|s |字符替换，用一个字符串替换另一个字符串。格式为\verb|"行范围s/旧字符串/新字符串/g"|
+			\end{itemize}
   
-\section{Shell 基本知识}
-		 \subsection{Shell}
+  	
+\chapter{Shell 基本知识}
+		 \section{Shell}
 			 \textbf{Shell就是一个命令行解释器}，它的作用是解释执行用户的命令,用户输入一条命令,Shell就解释执行一条,这种方式称为交互式(Interactive)
 			 
 			 Shell还有一种执行命令的方式称为\textbf{批处理(Batch)},\textit{用户事先写一个Shell脚本(Script)},\textbf{其中有很多条命令,让Shell一次把这些命令执行完,而不必一条一条地敲 命令}。Shell脚本和编程语言很相似,也有变量和流程控制语句,包括循环和分支。但\textbf{Shell脚本是解释执行的,不需 要编译,Shell程序从脚本中一行一行读取并执行这些命令,相当于一个用户把脚本中的命令一行一 行敲到Shell提示符下执行}。作为程序设计语言，它虽然不是 Linux系统内核的一部分，但它调用了系统内核的大部分功能来执行程序、创建文档并以并行的方式协调各个程序的运行
-		 \subsection{Shell 执行脚本}
+		 \section{Shell 执行脚本}
 			 shell执行脚本是一门解释性语言、批量化处理语言，大大的节省了工作成本，shell\textbf{脚本第一行必须以}\verb|#!|\textbf{开头}，\textit{它表示该脚本使用后面的解释器解释执行}。
 			 
 			\subparagraph{Example:}
@@ -96,7 +274,7 @@
 	echo "there are all files"
 			 \end{lstlisting}
 			 
-			 \subsubsection{执行方式}
+			 \paragraph{执行方式}
 				 \begin{lstlisting}[frame=L,xleftmargin=.06\textwidth]
 	//第一种执行方式:
 	[admin@localhost Shell]$ chmod +x  script.sh
@@ -108,7 +286,7 @@
 	[admin@localhost Shell]$ shell  script.sh
 				 \end{lstlisting}
 		 
-			 \subsubsection{执行过程}
+			 \paragraph{执行过程}
 				 Shel会fork一个子进程并调用exec执行./script.sh这个程序,exec系统调用应该把子进程的代码段替换成./script.sh程序的代码段,并从它的\_start始执行。然而script.sh是个文本文件,根 本没有代码段和\_start函数,怎么办呢?其实exec还有另外一种机制,如果要执行的是一个文本文件,并且第一行 指定了解释器,则用解释器程序的代码段替换当前进程,并且从解释器 的\_start开始执行,而这个文本文件被当作命令行参数传给解释器。因此,执行上述脚本相当于执行程序！
 				 
 				 什么是“子程序”呢？就是说，在我目前这个 shell 的情况下，去启用另一个新的 shell ，新的那个 shell 就是子程序
@@ -158,10 +336,13 @@ ls
 					 	\end{center}
 					 	\caption{Use . Or source Command}
 					 \end{figure}
-		 \subsection{Shell 变量}
+					 
+				shell子进程：\url{https://blog.csdn.net/sosodream/article/details/5683515}
+				
+		 \section{Shell 变量}
 			 shell变量不需要进行任何声明，直接定义即可，因为shell变量的值实际上都是字符串（对于没有定义的变量默认是一个空串）。定义的时候shell变量由大写字母加下划线组成，并且定义的时候等号两边不能存在空格，否则会被认为是命令！
 			 
-			 \subsubsection{shell变量的种类}
+			 \paragraph{shell变量的种类}
 				 \subparagraph{环境变量：}shell进程的环境变量可以从当前shell进程传给fork出来的子进程
 				 \subparagraph{本地变量：}只存在于当前shell进程
 				 
@@ -298,10 +479,10 @@ ls
 					以\verb|#|开头的行为注释行
 				
 				
-		 \subsection{Shell 通配符、命令代换、单引号、双引号}
+		 \section{Shell 通配符、命令代换、单引号、双引号}
 			 见基础相关拓展.
 	 
-		 \subsection{Shell 传递参数}
+		 \section{Shell 传递参数}
 			 我们可以在执行 Shell 脚本时，向脚本传递参数，脚本内获取参数的格式为：\verb|$n|。n 代表一个数字，1 为执行脚本的第一个参数，2 为执行脚本的第二个参数，以此类推……
 			 
 			 \begin{itemize}
@@ -328,15 +509,15 @@ ls
 	第三个参数为：3
 			 \end{lstlisting}
 			 
-		\subsection{Shell 各种括号}
+		\section{Shell 各种括号}
 			\url{http://blog.csdn.net/taiyang1987912/article/details/39551385}
-			\subsubsection{( )-小括号}
+			\paragraph{( )-小括号}
 				\begin{enumerate}
 					\item \textbf{命令组}:\textbf{括号中的命令将会新开一个子}\verb|shell|顺序执行，所以括号中的变量不能够被脚本余下的部分使用。括号中多个命令之间用分号隔开，最后一个命令可以没有分号，各命令和括号之间不必有空格
 					\item \textbf{命令替换}:等同于\verb|`cmd`|，\verb|shell|扫描一遍命令行，发现了\verb|$(cmd)|结构，便将\verb|$(cmd)|中的\verb|cmd|执行一次，得到其标准输出，再将此输出放到原来命令。有些\verb|shell|不支持，如tcsh。
 					\item 用于初始化数组。如：\verb|array=(a b c d)|
 				\end{enumerate}
-			\subsubsection{(( ))-双小括号}
+			\paragraph{(( ))-双小括号}
 				\begin{enumerate}
 					\item \textbf{整数扩展}。这种扩展计算是整数型的计算，不支持浮点型。\verb|((exp))|结构扩展并\textbf{计算一个算术表达式的值}，如果表达式的结果为0，那么返回的退出状态码为1，或者 是"假"，而一个非零值的表达式所返回的退出状态码将为0，或者是"true"。若是逻辑判断，表达式\verb|exp|为真则为1,假则为0
 					
@@ -347,7 +528,7 @@ ls
 					\item \textbf{常用于算术运算比较}，\textbf{双括号中的变量可以不使用}\verb|$|符号前缀。括号内支持多个表达式用逗号分开。 只要括号中的表达式符合C语言运算规则,比如可以直接使用\verb|for((i=0;i<5;i++))|, 如果不使用双括号, 则为\verb|for i in `seq 0 4`|或者\verb|for i in {0..4}|。再如可以直接使用\verb|if (($i<5))|, 如果不使用双括号, 则为\verb|if [ $i -lt 5 ]|
 				\end{enumerate}
 				
-			\subsubsection{[ ]-中括号}
+			\paragraph{[ ]-中括号}
 				\begin{enumerate}
 					\item bash 的内部命令，\verb|[和test|是等同的。如果我们不用绝对路径指明，通常我们用的都是bash自带的命令。\verb|if/test|结构中的\textbf{左中括号}是调用\verb|test|的命令标识，\textbf{右中括号}是关闭条件判断的。这个命令把它的参数作为比较表达式或者作为文件测试，并且根据比较的结果来返回一个退出状态码。\verb|if/test|结构中并不是必须右中括号，但是新版的Bash中要求必须这样
 					
@@ -358,7 +539,7 @@ ls
 					\item 在一个\verb|array |结构的上下文中，中括号用来引用\textbf{数组}中每个元素的\textbf{编号}
 				\end{enumerate}
 				
-			\subsubsection{[[ ]]-双中括号}
+			\paragraph{[[ ]]-双中括号}
 				\begin{enumerate}
 					\item \verb|[[|是 bash 程序语言的关键字。并不是一个命令，\verb|[[ ]] |结构比\verb|[ ]|结构更加通用。在\verb|[[和]]|之间所有的字符都不会发生文件名扩展或者单词分割，\textbf{但是会发生参数扩展和命令替换}
 					
@@ -381,7 +562,7 @@ ls
 	for ((i=0;i<5;i++));do echo $i;done    
 	for i in {0..4};do echo $i;done    				
 				\end{lstlisting}
-			\subsubsection{\{ \}-大括号}
+			\paragraph{\{ \}-大括号}
 				\paragraph{\{\}常规用法}
 				\begin{enumerate}
 					\item 
@@ -414,7 +595,7 @@ ls
 					
 					\item 
 				\end{enumerate}
-	    \subsection{参考}基本使用参考博客\url{http://www.cnblogs.com/Lynn-Zhang/p/5758287.html}。
+	    \section{参考}基本使用参考博客\url{http://www.cnblogs.com/Lynn-Zhang/p/5758287.html}。
 		 
 			 使用教程：\url{http://c.biancheng.net/cpp/view/6998.html}
 			 
@@ -422,8 +603,8 @@ ls
 			 
 			 Bash 在线运行网址：\url{http://www.runoob.com/try/runcode.php?filename=helloworld&type=bash}
 
-\section{Shell 运算操作}
-		 \subsection{算数运算}
+\chapter{Shell 运算操作}
+		 \section{算数运算}
 			 \begin{lstlisting}[xleftmargin=.06\textwidth]
 	#!/bin/bash
 	
@@ -463,7 +644,7 @@ ls
 	b % a : 0
 	a 不等于 b
 			 \end{lstlisting}
-		 \subsection{关系运算}
+		 \section{关系运算}
 			 \begin{lstlisting}[xleftmargin=.06\textwidth]
 	#!/bin/bash
 	
@@ -516,7 +697,7 @@ ls
 	10 -le 20: a 小于或等于 b
 				 \end{lstlisting}
 		 
-		 \subsection{布尔运算}
+		 \section{布尔运算}
 			 \begin{lstlisting}[xleftmargin=.06\textwidth]
 	#!/bin/bash
 
@@ -553,7 +734,7 @@ ls
 	10 -lt 100 -o 20 -gt 100 : 返回 true
 	10 -lt 100 -o 20 -gt 100 : 返回 false
 			 \end{lstlisting}
-		 \subsection{逻辑运算}
+		 \section{逻辑运算}
 			 \begin{lstlisting}[xleftmargin=.06\textwidth]
 	#!/bin/bash
 
@@ -578,7 +759,7 @@ ls
 	返回 false
 	返回 true
 			 \end{lstlisting}
-		 \subsection{字符串运算}
+		 \section{字符串运算}
 			 \begin{lstlisting}[xleftmargin=.06\textwidth]
 	#!/bin/bash
 	a="abc"
@@ -621,7 +802,7 @@ ls
 	-n abc : 字符串长度不为 0
 	abc : 字符串不为空
 			 \end{lstlisting}
-		\subsection{文件测试运算}
+		\section{文件测试运算}
 			\begin{lstlisting}
 	#!/bin/bash
 
@@ -681,9 +862,14 @@ ls
 			\end{lstlisting} 
 			 
 	 
-\section{Shell 脚本控制结构}
-		 \subsection{if-else}
-			 \begin{lstlisting}
+\chapter{Shell 脚本控制结构}
+	\section{两种判断格式}
+		\paragraph{test 选项}\verb|test -e /root/install.log|
+		
+		\paragraph{[空格 条件 空格]}\verb|[ -e /root/install.log ]|
+		
+	\section{if-else}
+		\begin{lstlisting}
 	a=10
 	b=20
 	if [ $a == $b ]
@@ -699,8 +885,8 @@ ls
 		echo "没有符合的条件"
 	fi
 			 \end{lstlisting}
-		 \subsection{while}
-			 \subparagraph{let 命令}
+	\section{while}
+		\subparagraph{let 命令}
 				 let 命令是 BASH 中用于计算的工具，用于执行一个或多个表达式，变量计算中不需要加上 \verb|$| 来表示变量。如果表达式中包含了空格或其他特殊字符，则必须引起来
 			 \begin{lstlisting}
 	#!/bin/sh
@@ -720,7 +906,7 @@ ls
 	let no-=20
 			 \end{lstlisting}
 		 
-		 \subsection{for}
+	\section{for}
 			 \begin{lstlisting}
 	for loop in 1 2 3 4 5
 	do
@@ -740,14 +926,16 @@ ls
 	////////////////////////Result is ......
 	This is a string
 			 \end{lstlisting}
-		 \subsection{until}
+			 
+	\section{until}
 			 \begin{lstlisting}
 	until condition
 	do
 		command
 	done
 			 \end{lstlisting}
-		\subsection{case}
+			 
+	\section{case}
 			\begin{lstlisting}
 	case 值 in
 	模式1)
@@ -781,13 +969,14 @@ ls
 		;;
 	esac
 			\end{lstlisting}
-		\subsection{continue,break}
+			
+	\section{continue,break}
 	
-\section{Shell 函数}
-		 \subsection{函数定义}
+\chapter{Shell 函数}
+	\section{函数定义}
 			 shell中函数的定义格式如下：
 		 	 \begin{lstlisting}
-	[ function ] funname [()]
+	funname()
 	{
 		action;
 		[return int;]
@@ -838,7 +1027,8 @@ ls
 	两个数字分别为 1 和 2 !
 	输入的两个数字之和为 3 !		
 			\end{lstlisting}
-		\subsection{函数参数}
+			
+	\section{函数参数}
 			在Shell中，调用函数时可以向其传递参数。在函数体内部，通过 \verb|$n| 的形式来获取参数的值，例如，\verb|$|1表示第一个参数，\verb|$|2表示第二个参数... 
 			
 				\begin{lstlisting}
@@ -885,7 +1075,8 @@ ls
 				\end{tabular}
 				\caption{参数说明}
 			\end{table}
-\section{Shell 脚本调用已有脚本}
+			
+\chapter{Shell 脚本调用已有脚本}
 		 和其他语言一样，\textbf{Shell 也可以包含外部脚本}。这样可以很方便的封装一些公用的代码作为一个独立的文件。
 		 
 		 Shell 文件包含的语法格式如下：
@@ -894,8 +1085,8 @@ ls
 	或	
 	source filename
 			\end{lstlisting}
-			\subparagraph{Example}
-			\begin{lstlisting}
+			\subparagraph{Example}\verb|->|
+				\begin{lstlisting}
 	//--->test1.sh
 	#!/bin/bash
 	url="http://www.runoob.com"
@@ -913,10 +1104,10 @@ ls
 	$ chmod +x test2.sh 
 	$ ./test2.sh 
 	菜鸟教程官网地址：http://www.runoob.com
-		 	\end{lstlisting}	
+		 		\end{lstlisting}	
 		 	
 		 	
-\section{Shell 示例}
+\chapter{Shell 示例}
 		 \subparagraph{How would you print just the 10th line of a file?}From LeetCode
 			\begin{lstlisting}
 	#!/bin/bash
@@ -933,7 +1124,7 @@ ls
 			\end{lstlisting}	
 			
 			
-\section{参考文献}
+\chapter{参考文献}
 	
 		 练习题：\url{https://wenku.baidu.com/view/e6664cafbd64783e08122b4f.html}
 		 

@@ -55,573 +55,111 @@
  %正文排版开始
  \begin{document} 
  	\maketitle
- 	
  	\tableofcontents
 
-
-		
-		
-		
+	
 \chapter{容器-Container}
-\section{容器底层数据结构实现}
-	\subsection{总结}
-		 \paragraph{0.tuple}    tuple元组是一个固定大小的不同类型值的集合，可以用来代替简单的结构体
-			 \begin{lstlisting}
-	#include <tuple>
-	#include <string>
-	#include <iostream>
-	using namespace std;
-	int main(int arc,char** argv)
-	{
-		using MyTuple = tuple < int, string > ;
-		
-		tuple < int, string > tup1 = make_tuple(1, "jack");	// 创建一个MyTuple类型的元组
-		MyTuple tup2 = make_tuple(2, "lily");	// 创建一个MyTuple类型的元组
-		
-		int var = 3;
-		auto tup3 = tie(var,tup1,tup2);				// 创建一个tuple < int, MyTuple, MyTuple>类型的元组
-		
-		cout << get<0>(tup1) << endl;			// 输出 1
-		cout << get<1>(tup2) << endl;			// 输出 lily
-		cout << get<1>(get<1>(tup3)) << endl; // 输出 jack
-		
-		return 0;
-	}
-			 \end{lstlisting}
+	\section{结构}
+		STL主要包括如下组件：
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{stlArc.png}
+			\includegraphics[scale=0.34]{stl_example.png}
+			\caption{STL 组成}
+		\end{figure}
+
+			
+	\section{容器底层数据结构实现}
+		 \paragraph{0.tuple}    
+		 	tuple元组是一个固定大小的不同类型值的集合，可以用来代替简单的结构体
+	 
+		 \paragraph{1.vector}     
+		 	底层数据结构为\textbf{数组} ，支持快速随机访问
+		 	
+			 \subparagraph{array}  
+			 	专门的数组..固定大小
+		 
+		 \paragraph{2.list}
+		 	底层数据结构为\textbf{双向链表}，支持快速增删
+		 	
+			 \subparagraph{forward\_list} 
+			 	单向链表..
+		 
+		 \paragraph{3.deque}       
+		 	底层数据结构\textbf{为一个中央控制器和多个缓冲区}，详细见STL源码剖析P146，支持首尾（中间不能）快速增删，也支持随机访问
+		 
+			 deque是一个双端队列(double-ended queue)，也是在堆中保存内容的.它的保存形式如下:
 			 
-		 \paragraph{1.vector}      底层数据结构为\textbf{数组} ，支持快速随机访问
-			 \subparagraph{array}  专门的数组..固定大小
-		 
-		 \paragraph{2.list}            底层数据结构为\textbf{双向链表}，支持快速增删
-			 \subparagraph{forward\_list} 单向链表..
-		 
-		 \paragraph{3.deque}       底层数据结构\textbf{为一个中央控制器和多个缓冲区}，详细见STL源码剖析P146，支持首尾（中间不能）快速增删，也支持随机访问
-		 
-		 deque是一个双端队列(double-ended queue)，也是在堆中保存内容的.它的保存形式如下:
-		 [堆1] --> [堆2] -->[堆3] --> ...
-		 每个堆保存好几个元素,然后堆和堆之间有指针指向,看起来像是list和vector的结合品.
+			 [堆1] --> [堆2] -->[堆3] --> ...
+			 
+			 每个堆保存好几个元素,然后堆和堆之间有指针指向,看起来像是list和vector的结合品.
 		 
 		 
-		 \paragraph{4.stack}         \textbf{底层一般用list或deque实现}，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时
+		 \paragraph{4.stack}         
+		 	\textbf{底层一般用list或deque实现}，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时
 		 
-		 \paragraph{5.queue}     底层一般用list或deque实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时
+		 \paragraph{5.queue}     
+		 	底层一般用list或deque实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时
 		 
-		 （stack和queue其实是适配器,而不叫容器，因为是对容器的再封装）
+		 	（stack和queue其实是适配器,而不叫容器，因为是对容器的再封装）
 		 
-		 \paragraph{6.priority\_queue}     的\textbf{底层数据结构一般为vector为底层容器}，堆heap为处理规则来管理底层容器实现
+		 \paragraph{6.priority\_queue}     
+		 	\textbf{底层数据结构一般为vector为底层容器}，堆heap为处理规则来管理底层容器实现
 		 
-		 \paragraph{7.set }            \textbf{ 底层数据结构为红黑树}，有序，不重复
+		 \paragraph{7.set }            
+		 	\textbf{ 底层数据结构为红黑树}，有序，不重复
 		 
-		 \paragraph{8.multiset}         底层数据结构为红黑树，有序，可重复 
+		 \paragraph{8.multiset}         
+		 	底层数据结构为红黑树，有序，可重复 
 		 
-		 \paragraph{9.map }               底层数据结构为红黑树，有序，不重复
+		 \paragraph{9.map }               
+		 	底层数据结构为红黑树，有序，不重复
 		 
-		 \paragraph{10.multimap}    底层数据结构为红黑树，有序，可重复
+		 \paragraph{10.multimap}    
+		 	底层数据结构为红黑树，有序，可重复
 		 
-		 \paragraph{11.unordered\_set }    \textbf{底层数据结构为hash表}，无序，不重复
+		 \paragraph{11.unordered\_set }    
+		 	\textbf{底层数据结构为hash表}，无序，不重复
 		 
-		 \paragraph{12.unordered\_multiset} 底层数据结构为hash表，无序，可重复 
+		 \paragraph{12.unordered\_multiset} 
+		 	底层数据结构为hash表，无序，可重复 
 		 
-		 \paragraph{13.unordered\_map}    底层数据结构为hash表，无序，不重复
+		 \paragraph{13.unordered\_map}    
+		 	底层数据结构为hash表，无序，不重复
 		 
-		 \paragraph{14.unordered\_multimap} 底层数据结构为hash表，无序，可重复  
-	\subsection{设计的数据结构精要}
+		 \paragraph{14.unordered\_multimap} 
+		 	底层数据结构为hash表，无序，可重复  
+		 	
 		\paragraph{红黑树}
-			\subparagraph{参考文献}http://blog.csdn.net/chenhuajie123/article/details/11951777
+			参考文献: \verb|http://blog.csdn.net/chenhuajie123/article/details/11951777|
+	
+	\section{重要网站}
+		
+		cpp: \url{cpluscplus.com}
+		
+		cppReference: \url{cppreference.com}
+		
+		gnucC++: \url{gcc.gnu.org}		
 			
-\section{Tree}
-	\subsection{二叉树前序、中序、后序遍历相互求法}
-		首先，我们看看前序、中序、后序遍历的特性： 
-		
-		前序遍历： 
-		\begin{enumerate}[itemindent = 2em]
-			\item 访问根节点 
-			\item 前序遍历左子树 
-			\item 前序遍历右子树
-		\end{enumerate}
-		
-		中序遍历： 
-		\begin{enumerate}[itemindent = 2em]
-			\item 前序遍历左子树 
-			\item 访问根节点 
-			\item 前序遍历右子树
-		\end{enumerate}
-		
-		后序遍历： 
-		\begin{enumerate}[itemindent = 2em]
-			\item 前序遍历左子树 
-			\item 前序遍历右子树
-			\item 访问根节点 
-		\end{enumerate}
-		
-		\subparagraph{一、已知前序、中序遍历，求后序遍历}：
-		
-			前序遍历:         GDAFEMHZ
-			
-			中序遍历:         ADEFGHMZ
-			
-			\begin{enumerate}[itemindent = 1em]
-				\item 根据前序遍历的特点，我们知道根结点为G根据前序遍历的特点，我们知道根结点为G
-				\item 观察中序遍历ADEFGHMZ。其中root节点G左侧的ADEF必然是root的左子树，G右侧的HMZ必然是root的右子树
-				\item 观察左子树ADEF，左子树的中的根节点必然是大树的root的leftchild。在前序遍历中，大树的root的leftchild位于root之后，所以左子树的根节点为D
-				\item 同样的道理，root的右子树节点HMZ中的根节点也可以通过前序遍历求得。在前序遍历中，一定是先把root和root的所有左子树节点遍历完之后才会遍历右子树，并且遍历的左子树的第一个节点就是左子树的根节点。同理，遍历的右子树的第一个节点就是右子树的根节点。
-				\item 观察发现，上面的过程是递归的
-			\end{enumerate}
-		
-		\subparagraph{二、已知中序和后序遍历，求前序遍历}：
-		
-			\begin{enumerate}[itemindent = 1em]
-				\item 根据后序遍历的特点，我们知道后序遍历最后一个结点即为根结点，即根结点为G。
-				\item 观察中序遍历ADEFGHMZ。其中root节点G左侧的ADEF必然是root的左子树，G右侧的HMZ必然是root的右子树。
-				\item 观察左子树ADEF，左子树的中的根节点必然是大树的root的leftchild。在前序遍历中，大树的root的leftchild位于root之后，所以左子树的根节点为D。
-				\item 同样的道理，root的右子树节点HMZ中的根节点也可以通过前序遍历求得。在前后序遍历中，一定是先把root和root的所有左子树节点遍历完之后才会遍历右子树，并且遍历的左子树的第一个节点就是左子树的根节点。同理，遍历的右子树的第一个节点就是右子树的根节点。
-				\item 观察发现，上面的过程是递归的
-			\end{enumerate}
-		
-		\subparagraph{三、总结}
-			根据上述思路，则大体思想如下：
-			
-			\begin{enumerate}[itemindent = 1em]
-				\item 确定根,确定左子树，确定右子树。
-				\item 在左子树中递归。
-				\item 在右子树中递归。
-				\item 打印当前根。
-			\end{enumerate}
-			
-			结果如图\ref{mid_first}所示：
-				\begin{figure}
-					\centering
-					\includegraphics[scale = 1]{Tree_Mid_First.jpg}
-					\caption{根据先序和中序确定二叉树}
-					\label{mid_first}
-				\end{figure}
-		
-		\subparagraph{四、代码实现思路}
+\newpage
+	\section{priority\_queue<int, vector<int>, greater<int> >}
+		\subsection{特点}
+			\begin{itemize}
+				\item 允许重复元素
+				\item 一种适配器[包装了底层容器如vector 的 高层抽象]
+				\item 可(pop())、(push())
+				\item pop() 的元素永远为当前序列里中最小或最大的。
+			\end{itemize}
+		\subsection{用途}
 
 
-	\subsection{平衡二叉树}
-		我们知道，对于一般的二叉搜索树（Binary Search Tree），其期望高度（即为一棵平衡树时）为log2n，其各操作的时间复杂度O(log2n)同时也由此而决定。但是，在某些极端的情况下（如在插入的序列是有序的时），二叉搜索树将退化成近似链或链，此时，其操作的时间复杂度将退化成线性的，即O(n)。我们可以通过随机化建立二叉搜索树来尽量的避免这种情况，但是在进行了多次的操作之后，由于在删除时，我们总是选择将待删除节点的后继代替它本身，这样就会造成总是右边的节点数目减少，以至于树向左偏沉。这同时也会造成树的平衡性受到破坏，提高它的操作的时间复杂度。于是就有了我们下边介绍的平衡二叉树。
+\newpage
+	\section{Vector}
+		\subsection{关于内存泄露的检验}
+			随着用string越来越多，有的时候你会发现string的内存管理的问题，存在内存暂时泄露的问题。这个内存泄露与我们常规说的内存泄露问题不一样。\textbf{它不是真的内存泄露，在程序结束的时候，内存还是会释放掉的，但是在程序的运行过程中，内存被string or  vector对象占用着}。比如你有个string对象保存了一个比较大的网页，用完了之后，你想通过clear来回收这个对象的内存，你这样是做不到的。因为string的clear并不会真正回收string对象分配内存。那要怎么做才能做到呢？
 		
-		平衡二叉树定义：平衡二叉树（Balanced Binary Tree）又被称为AVL树（有别于AVL算法），且具有以下性质：它是一 棵空树或\textbf{它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树}。平衡二叉树的常用算法有红黑树、AVL树等。在平衡二叉搜索树中，我们可以看到，\textbf{其高度一般都良好地维持在O(log2n)，大大降低了操作的时间复杂度}。
-		
-		最小二叉平衡树的节点的公式如下：
-		
-		F(n)=F(n-1)+F(n-2)+1
-		
-		这个类似于一个递归的数列，可以参考Fibonacci数列，1是根节点，F(n-1)是左子树的节点数量，F(n-2)是右子树的节点数量。
-		\begin{lstlisting}
-	// 求树高度
-	int high(btnode *T)  
-	{  
-		if(T==NULL)  
-			return 0;  
-		else  
-			return max(high(T->lchild),high(T->rchild))+1;  
-	}  
-	
-	
-	// 方法2
-	void high(bnode *T,int &h)    引用h为树的高度  
-	{  
-		if(T==NULL)  
-			h=0;  
-		else  
-		{  
-			int h1,h2;  
-			high(T->lchild,h1);  
-			high(T->rchild,h2);  
-			h=max(h1,h2)+1;  
-		}  
-	}  
-		\end{lstlisting}
-		
-		\subsubsection{平衡查找树之AVL树}
-			AVL树定义：AVL树是最先发明的自平衡二叉查找树。在AVL中任何节点的两个儿子子树的高度最大差别为1，所以它也被称为高度平衡树，n个结点的AVL树最大深度约1.44log2n。查找、插入和删除在平均和最坏情况下都是O(logn)。增加和删除可能需要通过一次或多次树旋转来重新平衡这个树。这个方案很好的解决了二叉查找树退化成链表的问题，把插入，查找，删除的时间复杂度最好情况和最坏情况都维持在O(logN)。但是频繁旋转会使插入和删除牺牲掉O(logN)左右的时间，不过相对二叉查找树来说，时间上稳定了很多。
-			
-			AVL树的自平衡操作——旋转：
-			
-			AVL树最关键的也是最难的一步操作就是旋转。旋转主要是为了实现AVL树在实施了插入和删除操作以后，树重新回到平衡的方法。下面我们重点研究一下AVL树的旋转。
-			
-			对于一个平衡的节点，由于任意节点最多有两个儿子，因此高度不平衡时，此节点的两颗子树的高度差2.容易看出，这种不平衡出现在下面四种情况：
-			\begin{figure}[h]
-				\centering
-				\includegraphics[scale = 0.8]{AVL.jpg}
-				\caption{AVL 4种不平衡}
-				\label{AVL}
-			\end{figure}
-				
-			\begin{enumerate}[itemindent = 1em,label = (\arabic{enumi})]
-				\item  6节点的左子树3节点高度比右子树7节点大2，左子树3节点的左子树1节点高度大于右子树4节点，这种情况成为左左。
-				\item  6节点的左子树2节点高度比右子树7节点大2，左子树2节点的左子树1节点高度小于右子树4节点，这种情况成为左右。
-				\item  2节点的左子树1节点高度比右子树5节点小2，右子树5节点的左子树3节点高度大于右子树6节点，这种情况成为右左。
-				\item  2节点的左子树1节点高度比右子树4节点小2，右子树4节点的左子树3节点高度小于右子树6节点，这种情况成为右右。
-			\end{enumerate}
-			
-			从图\ref{AVL}中可以可以看出，1和4两种情况是对称的，这两种情况的旋转算法是一致的，只需要经过一次旋转就可以达到目标，我们称之为单旋转。2和3两种情况也是对称的，这两种情况的旋转算法也是一致的，需要进行两次旋转，我们称之为双旋转。
-				
-			\subparagraph{单旋转}：
-			
-				单旋转是针对于\textbf{左左}和\textbf{右右}这两种情况的解决方案，这两种情况是对称的，只要解决了左左这种情况，右右就很好办了。图3是左左情况的解决方案，节点k2不满足平衡特性，因为它的左子树k1比右子树Z深2层，而且k1子树中，更深的一层的是k1的左子树X子树，所以属于左左情况。
-					\begin{figure}[h]
-						\centering
-						\includegraphics[scale = 0.8]{Rotate_1.jpg}
-						\caption{AVL 单旋转}
-					\end{figure}
-					
-				为使树恢复平衡，我们把k2变成这棵树的根节点，因为k2大于k1，把k2置于k1的右子树上，而原本在k1右子树的Y大于k1，小于k2，就把Y置于k2的左子树上，这样既满足了二叉查找树的性质，又满足了平衡二叉树的性质。
-				
-				这样的操作只需要一部分指针改变，结果我们得到另外一颗二叉查找树，它是一棵AVL树，因为X向上一移动了一层，Y还停留在原来的层面上，Z向下移动了一层。整棵树的新高度和之前没有在左子树上插入的高度相同，插入操作使得X高度长高了。因此，由于这颗子树高度没有变化，所以通往根节点的路径就不需要继续旋转了。
-					
-			\subparagraph{双旋转}：
-			
-				对于\textbf{左右}和\textbf{右左}这两种情况，单旋转不能使它达到一个平衡状态，要经过两次旋转。双旋转是针对于这两种情况的解决方案，同样的，这样两种情况也是对称的，只要解决了左右这种情况，右左就很好办了。图4是左右情况的解决方案，节点k3不满足平衡特性，因为它的左子树k1比右子树Z深2层，而且k1子树中，更深的一层的是k1的右子树k2子树，所以属于左右情况。
-				\begin{figure}[h]
-					\centering
-					\includegraphics[scale = 0.8]{Rotate_2.jpg}
-					\caption{AVL 双旋转}
-				\end{figure}
-				
-				为使树恢复平衡，我们需要进行两步，第一步，把k1作为根，进行一次右右旋转，旋转之后就变成了左左情况，所以第二步再进行一次左左旋转，最后得到了一棵以k2为根的平衡二叉树。
-			
-			\subparagraph{实现}：
+			vector 与 string 类似，而string比较少。
 			\begin{lstlisting}
-//AVL树节点信息
-template<class T>
-class TreeNode
-{
-public:
-	TreeNode():lson(NULL),rson(NULL),freq(1),hgt(0){}
-	T data;//值
-	int hgt;//高度
-	unsigned int freq;//频率
-	TreeNode* lson;//指向左儿子的地址
-	TreeNode* rson;//指向右儿子的地址
-};
-
-//AVL树类的属性和方法声明
-template<class T>
-class AVLTree
-{
-private:
-	TreeNode<T>* root;//根节点
-	void insertpri(TreeNode<T>* &node,T x);//插入
-	TreeNode<T>* findpri(TreeNode<T>* node,T x);//查找
-	void insubtree(TreeNode<T>* node);//中序遍历
-	void Deletepri(TreeNode<T>* &node,T x);//删除
-	int height(TreeNode<T>* node);//求树的高度
-	void SingRotateLeft(TreeNode<T>* &k2);//左左情况下的旋转
-	void SingRotateRight(TreeNode<T>* &k2);//右右情况下的旋转
-	void DoubleRotateLR(TreeNode<T>* &k3);//左右情况下的旋转
-	void DoubleRotateRL(TreeNode<T>* &k3);//右左情况下的旋转
-	int Max(int cmpa,int cmpb);//求最大值
-
-public:
-	AVLTree():root(NULL){}
-	void insert(T x);//插入接口
-	TreeNode<T>* find(T x);//查找接口
-	void Delete(T x);//删除接口
-	void traversal();//遍历接口
-
-};
-//计算节点的高度
-template<class T>
-int AVLTree<T>::height(TreeNode<T>* node)
-{
-	if(node!=NULL)
-		return node->hgt;
-	return -1;
-}
-//求最大值
-template<class T>
-int AVLTree<T>::Max(int cmpa,int cmpb)
-{
-	return cmpa>cmpb?cmpa:cmpb;
-}
-//左左情况下的旋转
-template<class T>
-void AVLTree<T>::SingRotateLeft(TreeNode<T>* &k2)
-{
-	TreeNode<T>* k1;
-	k1=k2->lson;
-	k2->lson=k1->rson;
-	k1->rson=k2;
-	
-	k2->hgt=Max(height(k2->lson),height(k2->rson))+1;
-	k1->hgt=Max(height(k1->lson),k2->hgt)+1;
-}
-//右右情况下的旋转
-template<class T>
-void AVLTree<T>::SingRotateRight(TreeNode<T>* &k2)
-{
-	TreeNode<T>* k1;
-	k1=k2->rson;
-	k2->rson=k1->lson;
-	k1->lson=k2;
-	
-	k2->hgt=Max(height(k2->lson),height(k2->rson))+1;
-	k1->hgt=Max(height(k1->rson),k2->hgt)+1;
-}
-//左右情况的旋转
-template<class T>
-void AVLTree<T>::DoubleRotateLR(TreeNode<T>* &k3)
-{
-	SingRotateRight(k3->lson);
-	SingRotateLeft(k3);
-}
-//右左情况的旋转
-template<class T>
-void AVLTree<T>::DoubleRotateRL(TreeNode<T>* &k3)
-{
-	SingRotateLeft(k3->rson);
-	SingRotateRight(k3);
-}
-//插入
-template<class T>
-void AVLTree<T>::insertpri(TreeNode<T>* &node,T x)
-{
-	if(node==NULL)//如果节点为空,就在此节点处加入x信息
-	{
-		node=new TreeNode<T>();
-		node->data=x;
-		return;
-	}
-	if(node->data>x)//如果x小于节点的值,就继续在节点的左子树中插入x
-	{
-		insertpri(node->lson,x);
-		if(2==height(node->lson)-height(node->rson))
-			if(x<node->lson->data)
-				SingRotateLeft(node);
-			else
-				DoubleRotateLR(node);
-	}
-	else if(node->data<x)//如果x大于节点的值,就继续在节点的右子树中插入x
-	{
-		insertpri(node->rson,x);
-		if(2==height(node->rson)-height(node->lson))//如果高度之差为2的话就失去了平衡,需要旋转
-			if(x>node->rson->data)
-				SingRotateRight(node);
-			else
-				DoubleRotateRL(node);
-	}
-	else ++(node->freq);//如果相等,就把频率加1
-	node->hgt=Max(height(node->lson),height(node->rson));
-}
-//插入接口
-template<class T>
-void AVLTree<T>::insert(T x)
-{
-	insertpri(root,x);
-}
-//查找
-template<class T>
-TreeNode<T>* AVLTree<T>::findpri(TreeNode<T>* node,T x)
-{
-	if(node==NULL)//如果节点为空说明没找到,返回NULL
-	{
-		return NULL;
-	}
-	if(node->data>x)//如果x小于节点的值,就继续在节点的左子树中查找x
-	{
-		return findpri(node->lson,x);
-	}
-	else if(node->data<x)//如果x大于节点的值,就继续在节点的左子树中查找x
-	{
-		return findpri(node->rson,x);
-	}
-	else return node;//如果相等,就找到了此节点
-}
-//查找接口
-template<class T>
-TreeNode<T>* AVLTree<T>::find(T x)
-{
-	return findpri(root,x);
-}
-//删除
-template<class T>
-void AVLTree<T>::Deletepri(TreeNode<T>* &node,T x)
-{
-	if(node==NULL) return ;//没有找到值是x的节点
-	if(x < node->data)
-	{
-		Deletepri(node->lson,x);//如果x小于节点的值,就继续在节点的左子树中删除x
-		if(2==height(node->rson)-height(node->lson))
-			if(node->rson->lson!=NULL&&(height(node->rson->lson)>height(node->rson->rson)) )
-				DoubleRotateRL(node);
-			else
-				SingRotateRight(node);
-	}
-	
-	else if(x > node->data)
-	{
-		Deletepri(node->rson,x);//如果x大于节点的值,就继续在节点的右子树中删除x
-		if(2==height(node->lson)-height(node->rson))
-			if(node->lson->rson!=NULL&& (height(node->lson->rson)>height(node->lson->lson) ))
-				DoubleRotateLR(node);
-			else
-				SingRotateLeft(node);
-	}
-	
-	else//如果相等,此节点就是要删除的节点
-	{
-		if(node->lson&&node->rson)//此节点有两个儿子
-		{
-			TreeNode<T>* temp=node->rson;//temp指向节点的右儿子
-			while(temp->lson!=NULL) temp=temp->lson;//找到右子树中值最小的节点
-			//把右子树中最小节点的值赋值给本节点
-			node->data=temp->data;
-			node->freq=temp->freq;
-			Deletepri(node->rson,temp->data);//删除右子树中最小值的节点
-			if(2==height(node->lson)-height(node->rson))
-			{
-				if(node->lson->rson!=NULL&& (height(node->lson->rson)>height(node->lson->lson) ))
-				DoubleRotateLR(node);
-				else
-				SingRotateLeft(node);
-			}
-		}
-		else//此节点有1个或0个儿子
-		{
-			TreeNode<T>* temp=node;
-			if(node->lson==NULL)//有右儿子或者没有儿子
-				node=node->rson;
-			else if(node->rson==NULL)//有左儿子
-				node=node->lson;
-			delete(temp);
-			temp=NULL;
-		}
-	}
-	
-	if(node==NULL) return;
-	node->hgt=Max(height(node->lson),height(node->rson))+1;
-	return;
-}
-//删除接口
-template<class T>
-void AVLTree<T>::Delete(T x)
-{
-	Deletepri(root,x);
-}
-//中序遍历函数
-template<class T>
-void AVLTree<T>::insubtree(TreeNode<T>* node)
-{
-	if(node==NULL) return;
-	insubtree(node->lson);//先遍历左子树
-	cout<<node->data<<" ";//输出根节点
-	insubtree(node->rson);//再遍历右子树
-}
-//中序遍历接口
-template<class T>
-void AVLTree<T>::traversal()
-{
-	insubtree(root);
-}
-			\end{lstlisting}
-		\subsubsection{平衡查找树之红黑树}
-			红黑树的\textbf{定义}：红黑树是一种自平衡二叉查找树，是在计算机科学中用到的一种数据结构，典型的用途是实现关联数组。它是在1972年由鲁道夫·贝尔发明的，称之为"对称二叉B树"，它现代的名字是在 Leo J. Guibas 和 Robert Sedgewick 于1978年写的一篇论文中获得的。它是复杂的，但它的操作有着良好的最坏情况运行时间，并且在实践中是高效的: 它可以在O(logn)时间内做查找，插入和删除，这里的n是树中元素的数目。
-			
-			红黑树和AVL树一样都对插入时间、删除时间和查找时间提供了最好可能的最坏情况担保。这不只是使它们在时间敏感的应用如实时应用（real time application）中有价值，而且使它们有在提供最坏情况担保的其他数据结构中作为建造板块的价值；例如，在计算几何中使用的很多数据结构都可以基于红黑树。此外，红黑树还是2-3-4树的一种等同，它们的思想是一样的，只不过红黑树是2-3-4树用二叉树的形式表示的。
-			
-			\subparagraph{红黑树的性质}：
-			
-				红黑树是每个节点都带有颜色属性的二叉查找树，颜色为红色或黑色。在二叉查找树强制的一般要求以外，对于任何有效的红黑树我们增加了如下的额外要求:
-				
-				性质1. 节点是红色或黑色。
-				
-				性质2. 根是黑色。
-				
-				性质3. 所有叶子都是黑色（叶子是NIL节点）。
-				
-				性质4. 每个红色节点必须有两个黑色的子节点。(从每个叶子到根的所有路径上不能有两个连续的红色节点。)
-				
-				性质5. 从任一节点到其每个叶子的所有简单路径都包含相同数目的黑色节点。
-		\subsubsection{B 树}
-			B树也是一种用于查找的平衡树，但是它不是二叉树。
-			
-			B树的定义：B树（B-tree）是一种树状数据结构，能够用来存储排序后的数据。这种数据结构能够让查找数据、循序存取、插入数据及删除的动作，都在对数时间内完成。B树，概括来说是一个一般化的二叉查找树，可以拥有多于2个子节点。与自平衡二叉查找树不同，B-树为系统最优化大块数据的读和写操作。B-tree算法减少定位记录时所经历的中间过程，从而加快存取速度。这种数据结构常被应用在数据库和文件系统的实作上。
-			
-			在B树中查找给定关键字的方法是，首先把根结点取来，在根结点所包含的关键字K1,…,Kn查找给定的关键字（可用顺序查找或二分查找法），若找到等于给定值的关键字，则查找成功；否则，一定可以确定要查找的关键字在Ki与Ki+1之间，Pi为指向子树根节点的指针，此时取指针Pi所指的结点继续查找，直至找到，或指针Pi为空时查找失败。
-			
-			B树作为一种多路搜索树（并不是二叉的）：
-			
-			1) 定义任意非叶子结点最多只有M个儿子；且M>2；
-			
-			2) 根结点的儿子数为[2, M]；
-			
-			3) 除根结点以外的非叶子结点的儿子数为[M/2, M]；
-			
-			4) 每个结点存放至少M/2-1（取上整）和至多M-1个关键字；（至少2个关键字）
-			
-			5) 非叶子结点的关键字个数=指向儿子的指针个数-1；
-			
-			6) 非叶子结点的关键字：K[1], K[2], …, K[M-1]；且K[i] < K[i+1]；
-			
-			7) 非叶子结点的指针：P[1], P[2], …, P[M]；其中P[1]指向关键字小于K[1]的子树，P[M]指向关键字大于K[M-1]的子树，其它P[i]指向关键字属于(K[i-1], K[i])的子树；
-			
-			8) 所有叶子结点位于同一层；
-		
-		\subsubsection{B+ 树}
-			B+树是B树的变体，也是一种多路搜索树：
-			
-			1) 其定义基本与B-树相同，除了：
-			
-			2) 非叶子结点的子树指针与关键字个数相同；
-			
-			3) 非叶子结点的子树指针P[i]，指向关键字值属于[K[i], K[i+1])的子树（B-树是开区间）；
-			
-			4) 为所有叶子结点增加一个链指针；
-			
-			5) 所有关键字都在叶子结点出现；
-			
-		\subsubsection{B* 树}
-			B*树是B+树的变体，在B+树的非根和非叶子结点再增加指向兄弟的指针，将结点的最低利用率从1/2提高到2/3。
-		
-	\subsection{Trie 字典树}	
-		Tire树称为字典树，又称单词查找树，Trie树，是一种树形结构，是一种哈希树的变种。典型应用是用于统计，排序和保存大量的字符串（但不仅限于字符串），所以经常被搜索引擎系统用于文本词频统计。它的优点是：利用字符串的公共前缀来减少查询时间，最大限度地减少无谓的字符串比较，查询效率比哈希树高。　
-		
-		Tire树的三个基本性质：
-		
-		1) 根节点不包含字符，除根节点外每一个节点都只包含一个字符； 
-		
-		2) 从根节点到某一节点，路径上经过的字符连接起来，为该节点对应的字符串； 
-		
-		3) 每个节点的所有子节点包含的字符都不相同。
-		
-		Tire树的应用：
-		
-		1) 串的快速检索
-		
-		给出N个单词组成的熟词表，以及一篇全用小写英文书写的文章，请你按最早出现的顺序写出所有不在熟词表中的生词。
-		
-		在这道题中，我们可以用数组枚举，用哈希，用字典树，先把熟词建一棵树，然后读入文章进行比较，这种方法效率是比较高的。
-		
-		2) “串”排序
-		
-		给定N个互不相同的仅由一个单词构成的英文名，让你将他们按字典序从小到大输出。用字典树进行排序，采用数组的方式创建字典树，这棵树的每个结点的所有儿子很显然地按照其字母大小排序。对这棵树进行先序遍历即可。
-		
-		3) 最长公共前缀
-		
-		对所有串建立字典树，对于两个串的最长公共前缀的长度即他们所在的结点的公共祖先个数，于是，问题就转化为求公共祖先的问题。
-
-\newpage
-\section{priority\_queue<int, vector<int>, greater<int> >}
-	\subsection{特点}
-		\begin{itemize}
-			\item 允许重复元素
-			\item 一种适配器[包装了底层容器如vector 的 高层抽象]
-			\item 可(pop())、(push())
-			\item pop() 的元素永远为当前序列里中最小或最大的。
-		\end{itemize}
-	\subsection{用途}
-
-
-\newpage
-\section{Vector}
-	\subsection{关于内存泄露的检验}
-		随着用string越来越多，有的时候你会发现string的内存管理的问题，存在内存暂时泄露的问题。这个内存泄露与我们常规说的内存泄露问题不一样。\textbf{它不是真的内存泄露，在程序结束的时候，内存还是会释放掉的，但是在程序的运行过程中，内存被string or  vector对象占用着}。比如你有个string对象保存了一个比较大的网页，用完了之后，你想通过clear来回收这个对象的内存，你这样是做不到的。因为string的clear并不会真正回收string对象分配内存。那要怎么做才能做到呢？
-		
-		vector 与 string 类似，而string比较少。
-		\begin{lstlisting}
 	vector<int> test;
 	
 	cout << test.capacity() << endl;
@@ -641,18 +179,18 @@ void AVLTree<T>::traversal()
 	
 	
 	cout << "after shrink_to_fit test capacity is " << test.capacity() << endl;
-		\end{lstlisting}
-
-		\begin{figure}[h]
-			\centering
-			\includegraphics[scale = 1]{VectorMemoryleak.png}
-			\caption{vector 内存泄露检测}
-		\end{figure}
-		
-		\subparagraph{Notice}vector依旧string clear后，需要调用.shrink\_to\_fit 才可将内存清除，防止内存泄露，或者与一个同类型空容器交换以释放内存。
-	\subsection{细节}
-		\subsubsection{push\_back 与 emplace\_back} \url{http://blog.csdn.net/yockie/article/details/52674366}	
-		\begin{lstlisting}
+			\end{lstlisting}
+	
+			\begin{figure}[h]
+				\centering
+				\includegraphics[scale = 1]{VectorMemoryleak.png}
+				\caption{vector 内存泄露检测}
+			\end{figure}
+			
+			\subparagraph{Notice}vector依旧string clear后，需要调用.shrink\_to\_fit 才可将内存清除，防止内存泄露，或者与一个同类型空容器交换以释放内存。
+		\subsection{细节}
+			\subsubsection{push\_back 与 emplace\_back} \url{http://blog.csdn.net/yockie/article/details/52674366}	
+			\begin{lstlisting}
 	#include <vector>
 	#include <string>
 	#include "time_interval.h"
@@ -725,106 +263,106 @@ void AVLTree<T>::traversal()
 			//constructor
 		}
 	}
-		\end{lstlisting}	
-\newpage
-\section{List}
-	\subsection{特点}
-		\begin{itemize}
-			\item 允许重复元素
-			\item 实现了基本的 == 和 != 等(如果两个链表里的元素都相等返回true)
-			\item 底层数据结构为 双向链表
-			\item 可前(push\_front())、后(push\_back())、任意位置插入(insert())
-			\item 当然就有pop了
-		\end{itemize}
-	\subsection{用途}
+			\end{lstlisting}
+				
+	\newpage
+	\section{List}
+		\subsection{特点}
+			\begin{itemize}
+				\item 允许重复元素
+				\item 实现了基本的 == 和 != 等(如果两个链表里的元素都相等返回true)
+				\item 底层数据结构为 双向链表
+				\item 可前(push\_front())、后(push\_back())、任意位置插入(insert())
+				\item 当然就有pop了
+			\end{itemize}
+		\subsection{用途}
 		
-\newpage
-\section{Set }
-	\subsection{排序}http://blog.csdn.net/wangran51/article/details/8836160
-	
-	\subsection{特点}
-		\begin{itemize}
-			\item 无重复元素
-			\item 元素默认升序排序【1,2,3】
-			\item 高效的查找：红黑二叉检索树
-			\item 不可以修改元素
-			\item 快捷的删除
-		\end{itemize}
-	\subsection{用途}
-		主要用于检索数据
+	\newpage
+	\section{Set }
+		\subsection{排序}http://blog.csdn.net/wangran51/article/details/8836160
+		
+		\subsection{特点}
+			\begin{itemize}
+				\item 无重复元素
+				\item 元素默认升序排序【1,2,3】
+				\item 高效的查找：红黑二叉检索树
+				\item 不可以修改元素
+				\item 快捷的删除
+			\end{itemize}
+		\subsection{用途}
+			主要用于检索数据
 
 
-
-\newpage
-\section{Map}	
- 	\subsection{特点}
-	 	\begin{itemize}
-	 		\item 无重复元素
-	 		\item 高效的查找：红黑二叉检索树，查找和添加的复杂度都为O(log(n)),unordered\_map 使用hash表作为基本的存储结构,O(1)。
-	 		\item 可以修改元素
-	 		\item 快捷的删除
-	 	\end{itemize} 
-	 \subsection{使用}
-		\subsubsection{map最基本的构造函数} 
-			\begin{itemize}
-				\item  map<string , int >mapstring;
-				\item  map< char ,string>mapchar;
-				\item  map<int ,char >mapint；
-			\end{itemize}
-		\subsubsection{map添加数据}
-			\begin{itemize}
-				\item map<int ,string> maplive;
-			\end{itemize}
-			\begin{enumerate}
-				\item maplive.insert(pair<int,string>(102,"aclive"));
-				\item maplive.insert(map<int,string>::value\_type(321,"hai"));
-				\item maplive[112]="April";    map中最简单最常用的插入添加！
-			\end{enumerate}
-		\subsubsection{map中元素的查找}
-			\begin{itemize}
-				\item 定义迭代器 准备保存 查找返回位置:map<int ,string >::iterator l\_it;
-				\item Find 函数: l\_it=maplive.find(112);
-				\item 结果判断: if(l\_it==maplive.end()) not find
-			\end{itemize}
-		\subsubsection{map中元素的删除}
-			先查找，返回迭代器位置，erase.
+	\newpage
+	\section{Map}	
+	 	\subsection{特点}
+		 	\begin{itemize}
+		 		\item 无重复元素
+		 		\item 高效的查找：红黑二叉检索树，查找和添加的复杂度都为O(log(n)),unordered\_map 使用hash表作为基本的存储结构,O(1)。
+		 		\item 可以修改元素
+		 		\item 快捷的删除
+		 	\end{itemize} 
+		 \subsection{使用}
+			\subsubsection{map最基本的构造函数} 
+				\begin{itemize}
+					\item  map<string , int >mapstring;
+					\item  map< char ,string>mapchar;
+					\item  map<int ,char >mapint；
+				\end{itemize}
+			\subsubsection{map添加数据}
+				\begin{itemize}
+					\item map<int ,string> maplive;
+				\end{itemize}
+				\begin{enumerate}
+					\item maplive.insert(pair<int,string>(102,"aclive"));
+					\item maplive.insert(map<int,string>::value\_type(321,"hai"));
+					\item maplive[112]="April";    map中最简单最常用的插入添加！
+				\end{enumerate}
+			\subsubsection{map中元素的查找}
+				\begin{itemize}
+					\item 定义迭代器 准备保存 查找返回位置:map<int ,string >::iterator l\_it;
+					\item Find 函数: l\_it=maplive.find(112);
+					\item 结果判断: if(l\_it==maplive.end()) not find
+				\end{itemize}
+			\subsubsection{map中元素的删除}
+				先查找，返回迭代器位置，erase.
+				
+			\subsubsection{map的sort问题} 
+				Map中的元素是自动按key升序排序,所以不能对map用sort函数 
 			
-		\subsubsection{map的sort问题} 
-			Map中的元素是自动按key升序排序,所以不能对map用sort函数 
-		
-		\subsubsection{其他操作函数}
+			\subsubsection{其他操作函数}
+				\begin{itemize}
+					\item begin()          返回指向map头部的迭代器
+					\item clear(）         删除所有元素
+					\item count()          返回指定元素出现的次数
+					\item rbegin()         返回一个指向map尾部的逆向迭代器
+					\item size()           返回map中元素的个数
+				\end{itemize}
+	 	
+	 	
+	\newpage
+	\section{Hash序列--> unordered\_map or set}	
+		\subsection{特点}
 			\begin{itemize}
-				\item begin()          返回指向map头部的迭代器
-				\item clear(）         删除所有元素
-				\item count()          返回指定元素出现的次数
-				\item rbegin()         返回一个指向map尾部的逆向迭代器
-				\item size()           返回map中元素的个数
+				\item 无重复元素
+				\item 高效的查找：查找和添加复杂度均为O(1)
+				\item 可以修改元素
+				\item 快捷的删除
 			\end{itemize}
-	 	
-	 	
-\newpage
-\section{Hash序列--> unordered\_map or set}	
-	\subsection{特点}
-		\begin{itemize}
-			\item 无重复元素
-			\item 高效的查找：查找和添加复杂度均为O(1)
-			\item 可以修改元素
-			\item 快捷的删除
-		\end{itemize}
-	\subsection{Hash tables}
-		Including hash tables (unordered associative containers) in the C++ standard library is one of the most recurring requests. It was not adopted in C++03 due to time constraints only. Although hash tables are less efficient than a balanced tree in the worst case (in the presence of many collisions), they perform better in many real applications.
-		
-		Collisions are managed only via linear chaining because the committee didn't consider it to be opportune to standardize solutions of open addressing that introduce quite a lot of intrinsic problems (above all when erasure of elements is admitted). To avoid name clashes with non-standard libraries that developed their own hash table implementations, the prefix \textbf{“unordered”} was used \textit{instead of} \textbf{“hash”}.
-		
-		The new library has four types of hash tables, differentiated by whether or not they accept elements with the same key (\textbf{unique keys or equivalent keys}), and whether they map each key to an associated value. They correspond to the four existing binary-search-tree-based associative containers, with an unordered\_ prefix.
-		
-		\begin{figure}[h]
-			\centering
-			\includegraphics[width = 15cm]{Hash_Table.png}
-			\caption{HashTable - 4types}
-		\end{figure}
-		
-	\begin{lstlisting}
+		\subsection{Hash tables}
+			Including hash tables (unordered associative containers) in the C++ standard library is one of the most recurring requests. It was not adopted in C++03 due to time constraints only. Although hash tables are less efficient than a balanced tree in the worst case (in the presence of many collisions), they perform better in many real applications.
+			
+			Collisions are managed only via linear chaining because the committee didn't consider it to be opportune to standardize solutions of open addressing that introduce quite a lot of intrinsic problems (above all when erasure of elements is admitted). To avoid name clashes with non-standard libraries that developed their own hash table implementations, the prefix \textbf{“unordered”} was used \textit{instead of} \textbf{“hash”}.
+			
+			The new library has four types of hash tables, differentiated by whether or not they accept elements with the same key (\textbf{unique keys or equivalent keys}), and whether they map each key to an associated value. They correspond to the four existing binary-search-tree-based associative containers, with an unordered\_ prefix.
+			
+			\begin{figure}[h]
+				\centering
+				\includegraphics[width = 15cm]{Hash_Table.png}
+				\caption{HashTable - 4types}
+			\end{figure}
+			
+		\begin{lstlisting}
 		#include <iostream>
 		#include <string>
 		#include <unordered_map>
@@ -850,34 +388,34 @@ void AVLTree<T>::traversal()
 			std::cout << "february  -> " << months["february"] << std::endl;
 			return 0;
 		}
-	\end{lstlisting}
-	\subsection{实现}
-		HashMap基于hash table（哈希表）。 哈希表最大的优点，就是把数据的存储和查找消耗的时间大大降低，几乎可以看成是常数时间；而代价仅仅是消耗比较多的内存。然而在当前可利用内存越来越多的情况下，用空间换时间的做法是值得的 
-		
-		其基本原理是：使用一个下标范围比较大的数组来存储元素。可以设计一个函数（哈希函数，也叫做散列函数），使得每个元素的关键字都与一个函数值（即数组下标，hash值）相对应，于是用这个数组单元来存储这个元素；也可以简单的理解为，按照关键字为每一个元素“分类”，然后将这个元素存储在相应“类”所对应的地方，称为桶。
-		
-		但是，不能够保证每个元素的关键字与函数值是一一对应的，因此极有可能出现对于不同的元素，却计算出了相同的函数值，这样就产生了“冲突”，换句话说，就是把不同的元素分在了相同的“类”之中。 总的来说，“直接定址”与“解决冲突”是哈希表的两大特点  
-		
-		HashMap，首先分配一大片内存，形成许多桶。是利用hash函数，对key进行映射到不同区域（桶）进行保存。
-		
-		\textbf{插入过程是}：
-			\begin{enumerate}[itemindent = 1em]
-				\item 得到key
-				\item 通过hash函数得到hash值
-				\item 得到桶号(一般都为hash值对桶数求模)
-				\item 存放key和value在桶内
-			\end{enumerate}
-		
-		\textbf{取值过程是}：
-			\begin{enumerate}[itemindent = 1em]
-				\item 得到key
-				\item 通过hash函数得到hash值
-				\item 得到桶号(一般都为hash值对桶数求模)
-				\item 比较桶的内部元素是否与key相等，若都不相等，则没有找到。
-				\item 取出相等的记录的value。
-			\end{enumerate}
-	\subsection{用法}
-		与 map 大体一致。
+		\end{lstlisting}
+		\subsection{实现}
+			HashMap基于hash table（哈希表）。 哈希表最大的优点，就是把数据的存储和查找消耗的时间大大降低，几乎可以看成是常数时间；而代价仅仅是消耗比较多的内存。然而在当前可利用内存越来越多的情况下，用空间换时间的做法是值得的 
+			
+			其基本原理是：使用一个下标范围比较大的数组来存储元素。可以设计一个函数（哈希函数，也叫做散列函数），使得每个元素的关键字都与一个函数值（即数组下标，hash值）相对应，于是用这个数组单元来存储这个元素；也可以简单的理解为，按照关键字为每一个元素“分类”，然后将这个元素存储在相应“类”所对应的地方，称为桶。
+			
+			但是，不能够保证每个元素的关键字与函数值是一一对应的，因此极有可能出现对于不同的元素，却计算出了相同的函数值，这样就产生了“冲突”，换句话说，就是把不同的元素分在了相同的“类”之中。 总的来说，“直接定址”与“解决冲突”是哈希表的两大特点  
+			
+			HashMap，首先分配一大片内存，形成许多桶。是利用hash函数，对key进行映射到不同区域（桶）进行保存。
+			
+			\textbf{插入过程是}：
+				\begin{enumerate}[itemindent = 1em]
+					\item 得到key
+					\item 通过hash函数得到hash值
+					\item 得到桶号(一般都为hash值对桶数求模)
+					\item 存放key和value在桶内
+				\end{enumerate}
+			
+			\textbf{取值过程是}：
+				\begin{enumerate}[itemindent = 1em]
+					\item 得到key
+					\item 通过hash函数得到hash值
+					\item 得到桶号(一般都为hash值对桶数求模)
+					\item 比较桶的内部元素是否与key相等，若都不相等，则没有找到。
+					\item 取出相等的记录的value。
+				\end{enumerate}
+		\subsection{用法}
+			与 map 大体一致。
 
 
 \chapter{迭代器-Iterator}
@@ -993,32 +531,31 @@ void AVLTree<T>::traversal()
 			\item 在执行erase后，不可以进行++pos 操作，否则会报错
 			\item 在不执行erase时，要进行++pos 进行前进
 		\end{itemize}
-\begin{lstlisting}
-
-	  for(auto i = 1; i < nums.size(); )
-	  {
-		  flag = true;
-		  if(nums[i-1] == nums[i])
-		  {
-			  ++size;
-			  if(size > 2)
-			  {
-				  --lenth;
-				  nums.erase(pos);    //这块执行pos 的话就不用再移位置了
-				  flag = false;
-			  }
-		  }
-		  else
-		  {
-			  size = 1;
-		  }
-		  if(flag)					//否则，移位置前进
-		  {
-			  ++i;
-			  ++pos;
-		  }
-	  }
-\end{lstlisting}
+		\begin{lstlisting}
+for(auto i = 1; i < nums.size(); )
+{
+	flag = true;
+	if(nums[i-1] == nums[i])
+	{
+		++size;
+		if(size > 2)
+		{
+			--lenth;
+			nums.erase(pos);  //这块执行pos 的话就不用再移位置了
+			flag = false;
+		}
+	}
+	else
+	{
+		size = 1;
+	}
+	if(flag) //否则，移位置前进
+	{
+		++i;
+		++pos;
+	}
+}
+		\end{lstlisting}
 		
 	\section{Iterator 失效概要}
 		Golden Rule是：\textbf{尽量不要使用容器的插入删除操作之前的迭代器}。

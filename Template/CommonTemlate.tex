@@ -19,10 +19,36 @@
 \usepackage{tabularx} 	%表格排版格式控制
 \usepackage{array}	%表格排版格式控制
 \usepackage{hyperref} %超链接 \url{URL}
+\usepackage{tikz}
+\usepackage{dirtree}
 
+
+\usetikzlibrary{intersections,
+	positioning,
+	petri,
+	backgrounds,
+	fit,
+	decorations.pathmorphing,
+	arrows,
+	arrows.meta,
+	bending,
+	calc,
+	intersections,
+	through,
+	backgrounds,
+	shapes.geometric,
+	quotes,
+	matrix,
+	trees,
+	shapes.symbols,
+	graphs,
+	math,
+	patterns,
+	external}
 \CTEXsetup[format+={\flushleft}]{section}
 
 %%%% 设置图片目录
+\setmainfont{Times New Roman}
 \graphicspath{{figure/}}
 
 %%%% 段落首行缩进两个字 %%%%

@@ -21,7 +21,37 @@
 \usepackage{tabularx} 	%表格排版格式控制
 \usepackage{array}	%表格排版格式控制
 \usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{dirtree}
 
+
+\usetikzlibrary{intersections,
+	positioning,
+	petri,
+	backgrounds,
+	fit,
+	decorations.pathmorphing,
+	arrows,
+	arrows.meta,
+	bending,
+	calc,
+	intersections,
+	through,
+	backgrounds,
+	shapes.geometric,
+	quotes,
+	matrix,
+	trees,
+	shapes.symbols,
+	graphs,
+	math,
+	patterns,
+	external}
+\CTEXsetup[format+={\flushleft}]{section}
+
+%%%% 设置图片目录
+\setmainfont{Times New Roman}
+\graphicspath{{figure/}}
 \CTEXsetup[format+={\flushleft}]{section}
 %%%% 下面的命令添加新字体 %%%%%
 
@@ -100,15 +130,334 @@
 
 \begin{document}          %正文排版开始
  	\maketitle
+ 	\tableofcontents
 
 \chapter{基本}
-	\section{安装}
+	\section{参考}
+		菜鸟教程：\url{http://www.runoob.com/python3/python3-basic-syntax.html}
+	\section{关键字}
+		\paragraph{常量}True  False None
+		
+		\paragraph{对象与容器} class import from del
+		
+		\paragraph{逻辑操作} and or not
+		
+		\paragraph{函数} def return 
+		
+		\paragraph{判断与循环':'} if elif else is in assert for while continue break
+		
+		\paragraph{异常} raise try except finally with as
+		
+		\paragraph{作用域} global nonlocal
+		
+		\paragraph{匿名函数与协程} yield lambda
+		
+	\section{容器与字符串}
+		\subsection{list 数组}
+			\paragraph{用法示例}\verb|->|
+				\begin{lstlisting}
+	# 定义
+	li = [1,2,3,4,5]
 	
-	\section{基本语法}
+	#遍历
+	for i in li:
+		print(i)	
+		
+	#使用range
+	#range(x) -> [0, x-1]
+	#range(x,y) -> [x, y-1]	
+	#range(x,y,z) ->[x, y-1]间隔为z -> [x, x+z, x+2z, ..]	
+	for i in range(len(li))
+		print(i)
+		
+	#负数索引: 倒数第多少
+	print(li[-1])
 	
+	li2 = []
+	#添加元素
+	li2.append(1)
+	li2.append('123')
+	li2.append(['d','ef','a'])	
+	
+	#合并两个数组
+	li.extend(li2)
 
-\chapter{应用}
+	#删除元素
+	li2.pop()
+	li2.pop(2) #删除索引位置
 	
+	#排序
+	li2.sort()
+	def item_key(x):
+		return x[0]
+	li2.sort(key = item_key) 	
+	li2.sort(key = lambda x:x[0]) #与上述等价 
+				\end{lstlisting}
+			
+			
+		\subsection{tuple 只读数组}
+			\begin{lstlisting}
+	tp = (1,2,3)
+			\end{lstlisting}
+		
+		\subsection{set 没用重复元素的数组}
+			\begin{lstlisting}
+	# 使用list 初始化
+	st = set([1,2,3,4,2,3,5]) 
+	# 自动去重并排序
+	# 使用tuple 初始化
+	st = set((2,2,3,4,5))
+			\end{lstlisting}	
+
+		\subsection{dict 字典map}
+			\begin{lstlisting}
+	# 空子典
+	di = {}
+	di = {'k1':'v1','k2':'v2'}
+	di['k3'] = 'v3'
+	
+	for k in di:
+		print(di[k])
+	
+	for k,v in di.items():
+		print(k,v)
+			\end{lstlisting}
+		
+		\subsection{数组切片}
+			\begin{lstlisting}
+	#[start, end, step] -> [start, start+step, ...<end]
+	#start 默认等于0   #end 默认等于-1   #step 默认等于1
+	li = [1,2,3,4,5]
+	li_0_2 = li[0:3] #-> li[0] li[1] li[2] ->i>=start < end
+	
+	# 直接用切片反转数组,切片是复制操作
+	print(li[::-1])
+			\end{lstlisting}
+			
+		\subsection{字符串与数组的关系}
+			默认的字符串相当于c++ 里面的字符串常量，需要利用list(str) 将其转化成字符数组进行操作。
+			
+			然后通过\verb|''.join(list)| 将list转化为string 
+			
+			\paragraph{切割}\verb|-|
+				\begin{lstlisting}
+	s = 'abc,def,ghi'
+	p1,p2,p3 = s.split(',')
+	print(p1,p2,p3)
+				\end{lstlisting}
+				
+			\paragraph{切片}\verb|同list|
+	\section{函数}
+		\paragraph{定义函数}\verb|->|
+			\begin{lstlisting}
+	def func():
+		pass
+			\end{lstlisting}
+			
+		\paragraph{默认参数}
+		
+		\paragraph{名字参数}
+		
+		\paragraph{函数可以当成变量}
+		
+		\paragraph{函数式编程map/reduce}
+		
+	\section{面向对象}
+		\paragraph{type(parameter)} 查看对象类型
+		
+		\subsection{定义}
+			\paragraph{绑定属性}\verb|__init__|绑定属性,并且第一个参数是self 且不能忘记
+			
+				\begin{lstlisting}
+	class Clazz(object):	
+		def __init__(self, x, y)
+			self.x = x
+			self.y = y
+				\end{lstlisting}
+			
+			\paragraph{实例化}\verb|clz = Clazz(100,200)|
+			
+		\subsection{this -> self}self 等价于this 指针
+		
+		\subsection{多态与继承}
+			\begin{lstlisting}
+	class Base:
+		def run(self):
+			print('Base:run')
+			
+	class Tom(Base):
+		def run(self):
+			print('Tom:run')
+	
+	t = Tom()
+	t.run()
+			\end{lstlisting}
+		
+	\section{文件读写}
+		\subsection{文本文件读写}
+			\begin{lstlisting}
+	f = open('text.txt','r')
+	# 打印整个文件
+	print(f.read())
+	# 按行打印
+	for line in f.readlines():
+		print(line)
+		
+	# 异常 处理
+	with open('text.txt') as f:
+		for line in f.readlines():
+			print(line)
+			\end{lstlisting}
+		
+	
+		\subsection{二进制文件读写}
+		
+		\subsection{string 与 bytes}
+		
+		\subsection{文件和目录操作}
+			
+	\section{多线程}
+		\subsection{多线程}线程与进程消耗的是一样的在Python 里
+		
+			\begin{lstlisting}
+	# 引入线程包
+	import threading
+	 
+	# 定义线程函数
+	def thread_func(x):
+		print('%d\n',%(x*100))
+	
+	# 添加线程	
+	threads = []
+	for i in range(5)
+		threads.append( threading.Thread(target = thread_func, args = (100,)) )
+	
+	# 执行线程
+	for thread in threads:
+		thread.start()
+	
+	# 等待线程结束
+	for thread in threads:
+		thread.join()
+	
+			\end{lstlisting}
+		\subsection{多进程}
+		
+		\subsection{线程同步}
+
+		
+	\section{错误与异常}
+		\paragraph{基础使用}\verb_~_
+			\begin{lstlisting}
+	try:
+		r = 10/0
+	# 捕获具体类型的异常
+	except ZeroDivisionError as e:
+		print(type(e))
+		print(e)
+	finally:
+		# 防止资源泄露
+		print('always come here')
+			\end{lstlisting}
+		
+		\paragraph{logging 库}\verb_~_
+			\begin{lstlisting}
+	import logging
+	
+	logging.info('xx')
+	logging.debug('xx')
+			\end{lstlisting}	
+		
+
+\chapter{爬虫}
+	\section{基础}
+		\paragraph{安装第3方包}\verb|pip install package|
+		
+		\subsection{HTTP 简介}
+			\paragraph{概念}
+				\begin{itemize}
+					\item Http = hyperText Transfer Protocol
+					\item URI = Uniform Resource Identifier
+					\item URL = Uniform Resource Locator
+					\item URI 和 URL的区别：URI强调的是资源，URL强调的是资源的位置。
+				\end{itemize}
+			
+			\paragraph{请求类型}
+				\begin{itemize}
+					\item \verb|OPTIONS :|返回服务器针对特定资源所支持的http 请求方法
+					\item \verb|HEAD :|向服务器索要与get 请求相一致的响应，只不过响应体将不会返回。只是确定文件是否存在。
+					\item \verb|GET :|向特定资源发出请求
+					\item \verb|PUT :|向指定资源位置上传其最新内容
+					\item \verb|POST :|向指定资源提交数据进行处理请求
+					\item \verb|DELETE :|请求服务器删除特定URI所标识的资源
+					\item \verb|PATCH :|用于将局部修改应用于某一资源
+				\end{itemize}
+			
+			\paragraph{常见状态码}
+				\begin{itemize}
+					\item \verb|200/OK :|请求成功
+					\item \verb|201/Created:|请求已被实现，且一个新资源已根据请求被建立，URI跟随Location 头信息返回。
+					\item \verb|202/Accepted:|服务器已接受请求，但尚未处理
+					\item \verb|400/Bad Request:|请求无法被服务器理解
+					\item \verb|401/Unauthorized:|当前请求需要用户验证
+					\item \verb|403/Forbidden:|服务器已理解请求，但是拒绝执行
+					\item \verb|404/Not Found:|未发现
+				\end{itemize}
+				
+		\subsection{HTML/XML/Json 简介}
+			Html:标签
+			
+			Xml:树结构
+			
+			Json(JavaScript Object Notation):类似与XML，但是更小、更快、解析更容易。
+		
+		\subsection{CSS 定位器}
+				
+			
+		\subsection{MySQL/SqlLite}
+		
+		
+		\subsection{爬虫框架}
+			\begin{itemize}
+				\item 将种子URL放入队列
+				\item 从队列中获取URL，抓取内容
+				\item 解析抓取内容，将需要进一步抓取的URL放入工作队列，存储解析后的内容
+			\end{itemize}
+			
+			\paragraph{抓取策略}
+				\begin{itemize}
+					\item 深度优先
+					\item 广度优先
+					\item PageRank
+					\item 大站优先
+				\end{itemize}
+			
+			\paragraph{如何去重}
+				\begin{itemize}
+					\item Hash 表
+					\item bloom 过滤器
+				\end{itemize}	
+		
+	\section{相关库的使用}
+	
+	
+	
+	\section{Scrapy 及相关应用}
+	
+	
+	\section{爬虫设计实战}
+	
+	
+	
+	\section{高级内容-并发编程}
+	
+	
+	
+	\section{分布式爬虫框架设计}
+	
+	
+	
+		
 
 \end{document} 
  		    

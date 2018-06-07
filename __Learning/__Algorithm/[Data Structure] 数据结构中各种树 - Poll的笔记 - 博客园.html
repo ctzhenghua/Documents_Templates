@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<!-- saved from url=(0047)http://www.cnblogs.com/maybe2030/p/4732377.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/encoder.js.下载"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/bundle-SimpleGamboge.css">
+<link type="text/css" rel="stylesheet" href="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/229915.css">
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/bundle-SimpleGamboge-mobile.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/maybe2030/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/maybe2030/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/maybe2030/wlwmanifest.xml">
+<script src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/jquery.js.下载" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'maybe2030', cb_enable_mathjax=true;var isLogined=true;</script>
+<script src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/blog-common.js.下载" type="text/javascript"></script>
+<script type="text/x-mathjax-config;executed=true">MathJax.Hub.Config({
+  tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] },
+  TeX: { equationNumbers: { autoNumber: ['AMS'], useLabelIds: true } },
+  'HTML-CSS': { linebreaks: { automatic: true } },
+  SVG: { linebreaks: { automatic: true } }});</script><script type="text/javascript" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/MathJax.js.下载"></script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><script src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/share.js.下载"></script><link rel="stylesheet" href="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/slide_share.css"><link rel="stylesheet" href="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/imgshare.css"><link rel="stylesheet" href="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/share_style0_16.css"></head>
+<body><div id="MathJax_Message" style="display: none;"></div>
+<a name="top"></a>
+<div id="page_begin_html"><div class="scrollBtn" id="scrollBtn">
+    <ul class="clearfix">
+        <li class="sB-home">
+            <a href="http://www.cnblogs.com/maybe2030" class="ff-t" title="首页"></a>
+        </li>
+        <li class="sB-comment">
+            <a href="http://www.cnblogs.com/maybe2030/p/4732377.html#blog-comments-placeholder" onclick="$(&#39;#tbCommentBody&#39;).focus();" class="ff-t" title="添加评论"></a>
+        </li>
+        <li class="sB-share"><a onclick="if(cb_entryId !=undefined){AddToWz(cb_entryId)}" href="javascript:void(0);" title="收藏"></a></li>
+        <li class="sB-goTop" id="goTop" style="display: list-item;">
+            <a href="http://www.cnblogs.com/maybe2030/p/4732377.html#top" title="回顶部"></a>
+        </li>
+    </ul>
+</div>
+
+</div><script>load_page_begin_html();</script>
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="http://www.cnblogs.com/maybe2030/"><img id="blogLogo" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/logo.gif" alt="返回主页" data-bd-imgshare-binded="1"></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/maybe2030/">Poll的笔记</a></h1>
+<h2>[三叶草精神] what hurts more,the pain of hard work or the pain of regret?</h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+
+<li><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/maybe2030/">首页</a></li>
+
+<li><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/Poll%E7%9A%84%E7%AC%94%E8%AE%B0">联系</a></li>
+
+<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+<li><a class="menu" href="http://www.cnblogs.com/">博客园</a></li></ul>
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<span id="stats_post_count">随笔 - 63&nbsp; </span>
+<span id="stats_article_count">文章 - 1&nbsp; </span>
+<span id="stats-comment_count">评论 - 236</span>
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class="postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/maybe2030/p/4732377.html">[Data Structure] 数据结构中各种树</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><a name="_labelTop"></a><div id="navCategory"><p style="font-size:18px"><b>阅读目录</b></p><ul><li><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#_label0">1. 二叉树</a></li><li><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#_label1">2. 二叉查找树</a></li><li><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#_label2">3. 平衡二叉树</a></li><li><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#_label3">3.1 平衡查找树之AVL树</a></li><li><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#_label4">3.2 平衡二叉树之红黑树</a></li><li><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#_label5">4. B树</a></li><li><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#_label6">5. B+树</a></li><li><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#_label7">6. B*树</a></li><li><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#_label8">7. Trie树</a></li></ul></div><p><span style="font-size: 16px;">　　数据结构中有很多树的结构，其中包括二叉树、二叉搜索树、2-3树、红黑树等等。本文中对数据结构中常见的几种树的概念和用途进行了汇总，不求严格精准，但求简单易懂。</span></p>
+<div style="text-align: right"><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#_labelTop">回到顶部</a><a name="_label0"></a></div><h3 class="First"><span style="font-size: 16px;">1. 二叉树</span></h3>
+<p><span style="font-size: 16px;">　　二叉树是数据结构中一种重要的数据结构，也是树表家族最为基础的结构。</span></p>
+<p><span style="font-size: 16px;">　　<strong>二叉树的定义：</strong></span><span style="font-size: 16px;">二叉树的每个结点至多只有二棵子树(不存在度大于2的结点)，二叉树的子树有左右之分，次序不能颠倒。二叉树的第i层至多有2<sup>i-1</sup>个结点；深度为k的二叉树至多有2<sup>k-1</sup>个结点；对任何一棵二叉树T，如果其终端结点数为n<sub>0</sub>，度为2的结点数为n<sub>2</sub>，则n<sub>0</sub>=n<sub>2</sub>+1。</span></p>
+<p><span style="font-size: 16px;">　　<strong>二叉树的示例</strong>：</span></p>
+<p><span style="font-size: 16px;"><img style="display: block; margin-left: auto; margin-right: auto;" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/2009050402.jpg" alt="" width="277" height="221" data-bd-imgshare-binded="1"></span></p>
+<p><span style="font-size: 16px;">　　<strong>满二叉树和完全二叉树：</strong></span></p>
+<p><span style="font-size: 16px;">　　满二叉树：除最后一层无任何子节点外，每一层上的所有结点都有两个子结点。也可以这样理解，除叶子结点外的所有结点均有两个子结点。节点数达到最大值，所有叶子结点必须在同一层上。</span></p>
+<p><span style="font-size: 16px;">　　满二叉树的性质：</span></p>
+<p><span style="font-size: 16px;">　　1)&nbsp;</span><span style="font-size: 16px;">一颗树深度为h，最大层数为k，深度与最大层数相同，k=h;</span></p>
+<p><span style="font-size: 16px;">　　2) 叶子数为2<sup>h</sup>;</span></p>
+<p><span style="font-size: 16px;">　　3) 第k层的结点数是：2<sup>k-1</sup>;</span></p>
+<p><span style="font-size: 16px;">　　4) 总结点数是：2<sup>k-1</sup>，且</span><span style="font-size: 16px;">总节点数一定是奇数。</span></p>
+<p><span style="font-size: 16px;">　　完全二叉树：若设二叉树的深度为h，除第 h 层外，其它各层 (1～(h-1)层) 的结点数都达到最大个数，第h层所有的结点都连续集中在最左边，这就是完全二叉树。</span></p>
+<p><span style="font-size: 16px;">　　<strong>注：</strong>完全二叉树是效率很高的数据结构，堆是一种完全二叉树或者近似完全二叉树，所以效率极高，像十分常用的排序算法、Dijkstra算法、Prim算法等都要用堆才能优化，二叉排序树的效率也要借助平衡性来提高，而平衡性基于完全二叉树。</span></p>
+<p><span style="font-size: 16px;"><img style="display: block; margin-left: auto; margin-right: auto;" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/141749056837546.png" alt="" width="608" height="205" data-bd-imgshare-binded="1"></span></p>
+<p><span style="font-size: 16px;">　　<strong>二叉树的性质</strong>：</span></p>
+<p><span style="font-size: 16px;">　　</span><span style="font-size: 16px;">1) 在非空二叉树中，第i层的结点总数不超过2<sup>i-1</sup></span><span style="font-size: 16px;">, i&gt;=1;</span></p>
+<p><span style="font-size: 16px;">　　2) 深度为h的二叉树最多有2<sup>h</sup></span><span style="font-size: 16px;">-1</span><span style="font-size: 16px;">个结点(h&gt;=1)，最少有h个结点;</span></p>
+<div class="para"><span style="font-size: 16px;">　　3) 对于任意一棵二叉树，如果其叶结点数为N<sub>0</sub>，而度数为2的结点总数为N<sub>2</sub>，则N<sub>0</sub>=N<sub>2</sub>+1;</span></div>
+<div class="para"><span style="font-size: 16px;">　　4) 具有n个结点的完全二叉树的深度为log<sub>2</sub>(n+1);</span></div>
+<div class="para"><span style="font-size: 16px;">　　5)有N个结点的完全二叉树各结点如果用顺序方式存储，则结点之间有如下关系：</span></div>
+<div class="para"><span style="font-size: 16px;">　　　　若I为结点编号则 如果I&gt;1，则其父结点的编号为I/2；</span></div>
+<div class="para"><span style="font-size: 16px;">　　　　如果2I&lt;=N，则其左儿子（即左子树的根结点）的编号为2I；若2I&gt;N，则无左儿子；</span></div>
+<div class="para"><span style="font-size: 16px;">　　　　如果2I+1&lt;=N，则其右儿子的结点编号为2I+1；若2I+1&gt;N，则无右儿子。</span></div>
+<div class="para"><span style="font-size: 16px;">　　6)给定N个节点，能构成h(N)种不同的二叉树，其中</span><span style="font-size: 16px;">h(N)为卡特兰数的第N项，h(n)=C(2*n, n)/(n+1)。</span></div>
+<div class="para"><span style="font-size: 16px;">　　7)设有i个枝点，I为所有枝点的道路长度总和，J为叶的道路长度总和J=I+2<sup>i</sup></span><span style="font-size: 16px;">。</span></div>
+<div style="text-align: right"><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#_labelTop">回到顶部</a><a name="_label1"></a></div><h3 class="First"><span style="font-size: 16px;">2. 二叉查找树</span></h3>
+<div class="para"><span style="font-size: 16px;"><span style="font-size: 16px;">　　<strong>二叉查找树定义</strong>：又称为是二叉排序树（Binary Sort Tree）或二叉搜索树。</span></span><span style="font-size: 16px;">二叉排序树或者是一棵空树，或者是具有下列性质的二叉树：</span>
+<div class="para"><span style="font-size: 16px;">　　1) 若左子树不空，则左子树上所有结点的值均小于它的根结点的值；</span></div>
+<div class="para"><span style="font-size: 16px;">　　2) 若右子树不空，则右子树上所有结点的值均大于或等于它的根结点的值；</span></div>
+<div class="para"><span style="font-size: 16px;">　　3) 左、右子树也分别为二叉排序树；</span></div>
+<div class="para"><span style="font-size: 16px;">　　4) 没有键值相等的节点。</span></div>
+<div class="para"><span style="font-size: 16px;">　　<strong>二叉查找树的性质：</strong></span><span style="font-size: 16px; color: #ff0000;"><strong>对二叉查找树进行中序遍历，即可得到有序的数列。</strong></span></div>
+<div class="para"><span style="font-size: 16px; color: #ff0000;"><strong>　　<span style="color: #000000;">二叉查找树的时间复杂度：<span style="color: #ff0000;"><strong>它和二分查找一样，插入和查找的时间复杂度均为O(logn)，但是在最坏的情况下仍然会有O(n)的时间复杂度。<span style="color: #000000;">原因在于插入和删除元素的时候，树没有保持平衡（比如，我们查找上图（b）中的“93”，我们需要进行n次查找操作）。我们追求的是在最坏的情况下仍然有较好的时间复杂度，这就是平衡查找树设计的初衷。</span></strong></span></span></strong></span></div>
+<div class="para"><span style="font-size: 16px; color: #ff0000;"><strong><span style="color: #000000;"><span style="color: #ff0000;"><strong><span style="color: #000000;">　　<span style="color: #ff0000;">二叉查找树的高度决定了二叉查找树的查找效率。</span></span></strong></span></span></strong></span></div>
+<div class="para">
+<p><span style="font-size: 16px;">　　<strong>二叉查找树的插入过程如下：</strong></span></p>
+<p><span style="font-size: 16px;">　　1) 若当前的二叉查找树为空，则插入的元素为根节点;</span></p>
+<p><span style="font-size: 16px;">　　2) 若插入的元素值小于根节点值，则将元素插入到左子树中;</span></p>
+<p><span style="font-size: 16px;">　　3) 若插入的元素值不小于根节点值，则将元素插入到右子树中。</span></p>
+<p><span style="font-size: 16px;">　　<strong>二叉查找树的删除，分三种情况进行处理：</strong></span></p>
+<p><span style="font-size: 16px;">　　1) p为叶子节点，直接删除该节点，再修改其父节点的指针（注意分是根节点和不是根节点），如图a;</span></p>
+<p><span style="font-size: 16px;">　　2) p为单支节点（即只有左子树或右子树）。让p的子树与p的父亲节点相连，删除p即可（注意分是根节点和不是根节点），如图b;</span></p>
+<p><span style="font-size: 16px;">　　3) p的左子树和右子树均不空。找到p的后继y，因为y一定没有左子树，所以可以删除y，并让y的父亲节点成为y的右子树的父亲节点，并用y的值代替p的值；或者方法二是找到p的前驱x，x一定没有右子树，所以可以删除x，并让x的父亲节点成为y的左子树的父亲节点。如图c。</span></p>
+<p><span style="font-size: 16px;"><img style="display: block; margin-left: auto; margin-right: auto;" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/2012032717571645.png" alt="" data-bd-imgshare-binded="1"></span></p>
+<p><span style="font-size: 16px;"><img style="display: block; margin-left: auto; margin-right: auto;" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/2012032717583358.png" alt="" width="576" height="198" data-bd-imgshare-binded="1"></span></p>
+<p><span style="font-size: 16px;"><img style="display: block; margin-left: auto; margin-right: auto;" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/2012032717584562.png" alt="" width="793" height="212" data-bd-imgshare-binded="1"></span></p>
+<p><span style="font-size: 16px;">　　二叉树相关实现源码：</span></p>
+<p><span style="font-size: 16px;">　　插入操作：</span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/copycode.gif" alt="复制代码" data-bd-imgshare-binded="1"></a></span></div>
+<pre><span style="color: #0000ff;">struct</span><span style="color: #000000;"> node
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> val;
+    pnode lchild;
+    pnode rchild;
+};
+
+pnode BT </span>=<span style="color: #000000;"> NULL;
+
+
+</span><span style="color: #008000;">//</span><span style="color: #008000;">递归方法插入节点 </span>
+pnode insert(pnode root, <span style="color: #0000ff;">int</span><span style="color: #000000;"> x)
+{
+    pnode p </span>= (pnode)<span style="color: #0000ff;">malloc</span><span style="color: #000000;">(LEN);
+    p</span>-&gt;val =<span style="color: #000000;"> x;
+    p</span>-&gt;lchild =<span style="color: #000000;"> NULL;
+    p</span>-&gt;rchild =<span style="color: #000000;"> NULL;
+    </span><span style="color: #0000ff;">if</span>(root ==<span style="color: #000000;"> NULL){
+        root </span>=<span style="color: #000000;"> p;    
+    }    
+    </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span>(x &lt; root-&gt;<span style="color: #000000;">val){
+        root</span>-&gt;lchild = insert(root-&gt;<span style="color: #000000;">lchild, x);    
+    }
+    </span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+        root</span>-&gt;rchild = insert(root-&gt;<span style="color: #000000;">rchild, x);    
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> root;
+}
+
+</span><span style="color: #008000;">//</span><span style="color: #008000;">非递归方法插入节点 </span>
+<span style="color: #0000ff;">void</span> insert_BST(pnode q, <span style="color: #0000ff;">int</span><span style="color: #000000;"> x)
+{
+    pnode p </span>= (pnode)<span style="color: #0000ff;">malloc</span><span style="color: #000000;">(LEN);
+    p</span>-&gt;val =<span style="color: #000000;"> x;
+    p</span>-&gt;lchild =<span style="color: #000000;"> NULL;
+    p</span>-&gt;rchild =<span style="color: #000000;"> NULL;
+    </span><span style="color: #0000ff;">if</span>(q ==<span style="color: #000000;"> NULL){
+        BT </span>=<span style="color: #000000;"> p;
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ;    
+    }        
+    </span><span style="color: #0000ff;">while</span>(q-&gt;lchild != p &amp;&amp; q-&gt;rchild !=<span style="color: #000000;"> p){
+        </span><span style="color: #0000ff;">if</span>(x &lt; q-&gt;<span style="color: #000000;">val){
+            </span><span style="color: #0000ff;">if</span>(q-&gt;<span style="color: #000000;">lchild){
+                q </span>= q-&gt;<span style="color: #000000;">lchild;    
+            }    
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+                q</span>-&gt;lchild =<span style="color: #000000;"> p;
+            }        
+        }    
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+            </span><span style="color: #0000ff;">if</span>(q-&gt;<span style="color: #000000;">rchild){
+                q </span>= q-&gt;<span style="color: #000000;">rchild;    
+            }    
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+                q</span>-&gt;rchild =<span style="color: #000000;"> p;    
+            }
+        }
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/copycode.gif" alt="复制代码" data-bd-imgshare-binded="1"></a></span></div></div>
+<p><span style="font-size: 16px;">　　删除操作：</span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/copycode.gif" alt="复制代码" data-bd-imgshare-binded="1"></a></span></div>
+<pre><span style="color: #0000ff;">bool</span> delete_BST(pnode p, <span style="color: #0000ff;">int</span> x) <span style="color: #008000;">//</span><span style="color: #008000;">返回一个标志，表示是否找到被删元素 </span>
+<span style="color: #000000;">{
+    </span><span style="color: #0000ff;">bool</span> find = <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    pnode q;
+    p </span>=<span style="color: #000000;"> BT;
+    </span><span style="color: #0000ff;">while</span>(p &amp;&amp; !find){  <span style="color: #008000;">//</span><span style="color: #008000;">寻找被删元素 </span>
+        <span style="color: #0000ff;">if</span>(x == p-&gt;val){  <span style="color: #008000;">//</span><span style="color: #008000;">找到被删元素 </span>
+            find = <span style="color: #0000ff;">true</span><span style="color: #000000;">;    
+        }    
+        </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span>(x &lt; p-&gt;val){ <span style="color: #008000;">//</span><span style="color: #008000;">沿左子树找 </span>
+            q =<span style="color: #000000;"> p;
+            p </span>= p-&gt;<span style="color: #000000;">lchild;    
+        }
+        </span><span style="color: #0000ff;">else</span>{   <span style="color: #008000;">//</span><span style="color: #008000;">沿右子树找 </span>
+            q =<span style="color: #000000;"> p;
+            p </span>= p-&gt;<span style="color: #000000;">rchild;    
+        }
+    }
+    </span><span style="color: #0000ff;">if</span>(p == NULL){   <span style="color: #008000;">//</span><span style="color: #008000;">没找到 </span>
+        cout &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">没有找到</span><span style="color: #800000;">"</span> &lt;&lt; x &lt;&lt;<span style="color: #000000;"> endl;    
+    }
+    
+    </span><span style="color: #0000ff;">if</span>(p-&gt;lchild == NULL &amp;&amp; p-&gt;rchild == NULL){  <span style="color: #008000;">//</span><span style="color: #008000;">p为叶子节点 </span>
+        <span style="color: #0000ff;">if</span>(p == BT){  <span style="color: #008000;">//</span><span style="color: #008000;">p为根节点 </span>
+            BT =<span style="color: #000000;"> NULL;    
+        }
+        </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span>(q-&gt;lchild ==<span style="color: #000000;"> p){   
+            q</span>-&gt;lchild =<span style="color: #000000;"> NULL;
+        }        
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+            q</span>-&gt;rchild =<span style="color: #000000;"> NULL;    
+        }
+        </span><span style="color: #0000ff;">free</span>(p);  <span style="color: #008000;">//</span><span style="color: #008000;">释放节点p </span>
+<span style="color: #000000;">    }
+    </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span>(p-&gt;lchild == NULL || p-&gt;rchild == NULL){ <span style="color: #008000;">//</span><span style="color: #008000;">p为单支子树 </span>
+        <span style="color: #0000ff;">if</span>(p == BT){  <span style="color: #008000;">//</span><span style="color: #008000;">p为根节点 </span>
+            <span style="color: #0000ff;">if</span>(p-&gt;lchild ==<span style="color: #000000;"> NULL){
+                BT </span>= p-&gt;<span style="color: #000000;">rchild;    
+            }    
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+                BT </span>= p-&gt;<span style="color: #000000;">lchild;    
+            }
+        }    
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+            </span><span style="color: #0000ff;">if</span>(q-&gt;lchild == p &amp;&amp; p-&gt;lchild){ <span style="color: #008000;">//</span><span style="color: #008000;">p是q的左子树且p有左子树 </span>
+                q-&gt;lchild = p-&gt;lchild;    <span style="color: #008000;">//</span><span style="color: #008000;">将p的左子树链接到q的左指针上 </span>
+<span style="color: #000000;">            }    
+            </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span>(q-&gt;lchild == p &amp;&amp; p-&gt;<span style="color: #000000;">rchild){
+                q</span>-&gt;lchild = p-&gt;<span style="color: #000000;">rchild;    
+            }
+            </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span>(q-&gt;rchild == p &amp;&amp; p-&gt;<span style="color: #000000;">lchild){
+                q</span>-&gt;rchild = p-&gt;<span style="color: #000000;">lchild;    
+            }
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+                q</span>-&gt;rchild = p-&gt;<span style="color: #000000;">rchild;
+            }
+        }
+        </span><span style="color: #0000ff;">free</span><span style="color: #000000;">(p);
+    }
+    </span><span style="color: #0000ff;">else</span>{ <span style="color: #008000;">//</span><span style="color: #008000;">p的左右子树均不为空 </span>
+        pnode t =<span style="color: #000000;"> p;
+        pnode s </span>= p-&gt;lchild;  <span style="color: #008000;">//</span><span style="color: #008000;">从p的左子节点开始 </span>
+        <span style="color: #0000ff;">while</span>(s-&gt;rchild){  <span style="color: #008000;">//</span><span style="color: #008000;">找到p的前驱，即p左子树中值最大的节点 </span>
+            t =<span style="color: #000000;"> s;   
+            s </span>= s-&gt;<span style="color: #000000;">rchild;    
+        }
+        p</span>-&gt;val = s-&gt;val;   <span style="color: #008000;">//</span><span style="color: #008000;">把节点s的值赋给p </span>
+        <span style="color: #0000ff;">if</span>(t ==<span style="color: #000000;"> p){
+            p</span>-&gt;lchild = s-&gt;<span style="color: #000000;">lchild;    
+        }    
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+            t</span>-&gt;rchild = s-&gt;<span style="color: #000000;">lchild;    
+        }
+        </span><span style="color: #0000ff;">free</span><span style="color: #000000;">(s); 
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> find;
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/copycode.gif" alt="复制代码" data-bd-imgshare-binded="1"></a></span></div></div>
+<p><span style="font-size: 16px;">　　查找操作：</span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/copycode.gif" alt="复制代码" data-bd-imgshare-binded="1"></a></span></div>
+<pre>pnode search_BST(pnode p, <span style="color: #0000ff;">int</span><span style="color: #000000;"> x)
+{
+    </span><span style="color: #0000ff;">bool</span> solve = <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">while</span>(p &amp;&amp; !<span style="color: #000000;">solve){
+        </span><span style="color: #0000ff;">if</span>(x == p-&gt;<span style="color: #000000;">val){
+            solve </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;    
+        }    
+        </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span>(x &lt; p-&gt;<span style="color: #000000;">val){
+            p </span>= p-&gt;<span style="color: #000000;">lchild;    
+        }
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+            p </span>= p-&gt;<span style="color: #000000;">rchild;    
+        }
+    }
+    </span><span style="color: #0000ff;">if</span>(p ==<span style="color: #000000;"> NULL){
+        cout </span>&lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">没有找到</span><span style="color: #800000;">"</span> &lt;&lt; x &lt;&lt;<span style="color: #000000;"> endl;    
+    } 
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> p;
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/copycode.gif" alt="复制代码" data-bd-imgshare-binded="1"></a></span></div></div>
+<div style="text-align: right"><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#_labelTop">回到顶部</a><a name="_label2"></a></div><h3 class="First"><span style="font-size: 16px;">3. 平衡二叉树</span></h3>
+<p><span style="font-size: 16px;">　　我们知道，对于一般的二叉搜索树（Binary Search Tree），其期望高度（即为一棵平衡树时）为log<sub>2</sub>n，其各操作的时间复杂度O(log<sub>2</sub>n)同时也由此而决定。但是，在某些极端的情况下（如在插入的序列是有序的时），二叉搜索树将退化成近似链或链，此时，其操作的时间复杂度将退化成线性的，即O(n)。我们可以通过随机化建立二叉搜索树来尽量的避免这种情况，但是在进行了多次的操作之后，由于在删除时，我们总是选择将待删除节点的后继代替它本身，这样就会造成总是右边的节点数目减少，以至于树向左偏沉。这同时也会造成树的平衡性受到破坏，提高它的操作的时间复杂度。于是就有了我们下边介绍的平衡二叉树。</span></p>
+<p><span style="font-size: 16px;">　　<strong>平衡二叉树定义：</strong>平衡二叉树（Balanced Binary Tree）又被称为AVL树（有别于AVL算法），且具有以下性质：它是一 棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。平衡二叉树的常用算法有红黑树、AVL树等。在平衡二叉搜索树中，我们可以看到，其高度一般都良好地维持在O(log<sub>2</sub>n)，大大降低了操作的时间复杂度。</span></p>
+<p><span style="font-size: 16px;">　　最小二叉平衡树的节点的公式如下：</span></p>
+<p><span style="font-size: 16px;">　　F(n)=F(n-1)+F(n-2)+1</span></p>
+<p><span style="font-size: 16px;">　　这个类似于一个递归的数列，可以参考Fibonacci数列，1是根节点，F(n-1)是左子树的节点数量，F(n-2)是右子树的节点数量。</span></p>
+<div style="text-align: right"><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#_labelTop">回到顶部</a><a name="_label3"></a></div><h3 class="First"><span style="font-size: 16px;">3.1 平衡查找树之AVL树</span></h3>
+<p><span style="font-size: 16px;">　　有关AVL树的具体实现，可以参考<a href="http://www.cppblog.com/cxiaojia/archive/2012/08/20/187776.html" target="_blank">C小加的博客《一步一步写平衡二叉树（AVL）》</a>。</span></p>
+<p><span style="font-size: 16px;">　　<strong>AVL树定义：</strong>AVL树是最先发明的自平衡二叉查找树。AVL树得名于它的发明者 G.M. Adelson-Velsky 和 E.M. Landis，他们在 1962 年的论文 "An algorithm for the organization of information" 中发表了它。在AVL中任何节点的两个儿子子树的高度最大差别为1，所以它也被称为高度平衡树，n个结点的AVL树最大深度约1.44log<sub>2</sub>n。查找、插入和删除在平均和最坏情况下都是O(logn)。增加和删除可能需要通过一次或多次树旋转来重新平衡这个树。<strong>这个方案很好的解决了二叉查找树退化成链表的问题，把插入，查找，删除的时间复杂度最好情况和最坏情况都维持在O(logN)。但是频繁旋转会使插入和删除牺牲掉O(logN)左右的时间，不过相对二叉查找树来说，时间上稳定了很多。</strong></span></p>
+<p><span style="font-size: 16px;">　　<strong>AVL树的自平衡操作——旋转：</strong></span></p>
+<p><span style="font-size: 16px;">　　AVL树最关键的也是最难的一步操作就是<strong>旋转</strong>。旋转主要是为了实现AVL树在实施了插入和删除操作以后，树重新回到平衡的方法。下面我们重点研究一下AVL树的旋转。</span></p>
+<p><span style="font-size: 16px;">　　对于一个平衡的节点，由于任意节点最多有两个儿子，因此高度不平衡时，此节点的两颗子树的高度差2.容易看出，这种不平衡出现在下面四种情况：</span></p>
+<p><span style="font-size: 16px;"><img style="display: block; margin-left: auto; margin-right: auto;" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/2012082016021366.jpg" alt="" width="593" height="231" data-bd-imgshare-binded="1"></span></p>
+<p><span style="font-size: 16px;">　　1) 6节点的左子树3节点高度比右子树7节点大2，左子树3节点的左子树1节点高度大于右子树4节点，这种情况成为左左。</span></p>
+<p><span style="font-size: 16px;">　　2) 6节点的左子树2节点高度比右子树7节点大2，左子树2节点的左子树1节点高度小于右子树4节点，这种情况成为左右。</span></p>
+<p><span style="font-size: 16px;">　　3) 2节点的左子树1节点高度比右子树5节点小2，右子树5节点的左子树3节点高度大于右子树6节点，这种情况成为右左。</span></p>
+<p><span style="font-size: 16px;">　　4) 2节点的左子树1节点高度比右子树4节点小2，右子树4节点的左子树3节点高度小于右子树6节点，这种情况成为右右。</span></p>
+<p><span style="font-size: 16px;">　　从图2中可以可以看出，1和4两种情况是对称的，这两种情况的旋转算法是一致的，只需要经过一次旋转就可以达到目标，我们称之为单旋转。2和3两种情况也是对称的，这两种情况的旋转算法也是一致的，需要进行两次旋转，我们称之为双旋转。</span></p>
+<p><span style="font-size: 16px;"><strong>　　单旋转</strong></span></p>
+<p><span style="font-size: 16px;">　　单旋转是针对于左左和右右这两种情况的解决方案，这两种情况是对称的，只要解决了左左这种情况，右右就很好办了。图3是左左情况的解决方案，节点k2不满足平衡特性，因为它的左子树k1比右子树Z深2层，而且k1子树中，更深的一层的是k1的左子树X子树，所以属于左左情况。</span></p>
+<p><span style="font-size: 16px;"><iframe id="iframe_0.8377218516591787" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/saved_resource.html" style="border: none; width: 530px; height: 229px;" frameborder="0" scrolling="no"></iframe></span></p>
+<p><span style="font-size: 16px;">　　为使树恢复平衡，我们把k2变成这棵树的根节点，因为k2大于k1，把k2置于k1的右子树上，而原本在k1右子树的Y大于k1，小于k2，就把Y置于k2的左子树上，这样既满足了二叉查找树的性质，又满足了平衡二叉树的性质。</span></p>
+<p><span style="font-size: 16px;">　　这样的操作只需要一部分指针改变，结果我们得到另外一颗二叉查找树，它是一棵AVL树，因为X向上一移动了一层，Y还停留在原来的层面上，Z向下移动了一层。整棵树的新高度和之前没有在左子树上插入的高度相同，插入操作使得X高度长高了。因此，由于这颗子树高度没有变化，所以通往根节点的路径就不需要继续旋转了。</span></p>
+<p><span style="font-size: 16px;"><strong>　　双旋转</strong></span></p>
+<p><span style="font-size: 16px;">　　对于左右和右左这两种情况，单旋转不能使它达到一个平衡状态，要经过两次旋转。双旋转是针对于这两种情况的解决方案，同样的，这样两种情况也是对称的，只要解决了左右这种情况，右左就很好办了。图4是左右情况的解决方案，节点k3不满足平衡特性，因为它的左子树k1比右子树Z深2层，而且k1子树中，更深的一层的是k1的右子树k2子树，所以属于左右情况。</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 16px;"><img style="display: block; margin-left: auto; margin-right: auto;" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/2012082016534455.jpg" alt="" data-bd-imgshare-binded="1"></span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 16px;">&nbsp;　　为使树恢复平衡，我们需要进行两步，第一步，把k1作为根，进行一次右右旋转，旋转之后就变成了左左情况，所以第二步再进行一次左左旋转，最后得到了一棵以k2为根的平衡二叉树。</span></p>
+<p><span style="font-size: 16px;">　　<strong>AVL树实现源码：</strong></span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/copycode.gif" alt="复制代码" data-bd-imgshare-binded="1"></a></span></div>
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">AVL树节点信息</span>
+template&lt;<span style="color: #0000ff;">class</span> T&gt;
+<span style="color: #0000ff;">class</span><span style="color: #000000;"> TreeNode
+{
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;">:
+        TreeNode():lson(NULL),rson(NULL),freq(</span><span style="color: #800080;">1</span>),hgt(<span style="color: #800080;">0</span><span style="color: #000000;">){}
+        T data;</span><span style="color: #008000;">//</span><span style="color: #008000;">值</span>
+        <span style="color: #0000ff;">int</span> hgt;<span style="color: #008000;">//</span><span style="color: #008000;">高度</span>
+        unsigned <span style="color: #0000ff;">int</span> freq;<span style="color: #008000;">//</span><span style="color: #008000;">频率</span>
+        TreeNode* lson;<span style="color: #008000;">//</span><span style="color: #008000;">指向左儿子的地址</span>
+        TreeNode* rson;<span style="color: #008000;">//</span><span style="color: #008000;">指向右儿子的地址</span>
+<span style="color: #000000;">};
+</span><span style="color: #008000;">//</span><span style="color: #008000;">AVL树类的属性和方法声明</span>
+template&lt;<span style="color: #0000ff;">class</span> T&gt;
+<span style="color: #0000ff;">class</span><span style="color: #000000;"> AVLTree
+{
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;">:
+        TreeNode</span>&lt;T&gt;* root;<span style="color: #008000;">//</span><span style="color: #008000;">根节点</span>
+        <span style="color: #0000ff;">void</span> insertpri(TreeNode&lt;T&gt;* &amp;node,T x);<span style="color: #008000;">//</span><span style="color: #008000;">插入</span>
+        TreeNode&lt;T&gt;* findpri(TreeNode&lt;T&gt;* node,T x);<span style="color: #008000;">//</span><span style="color: #008000;">查找</span>
+        <span style="color: #0000ff;">void</span> insubtree(TreeNode&lt;T&gt;* node);<span style="color: #008000;">//</span><span style="color: #008000;">中序遍历</span>
+        <span style="color: #0000ff;">void</span> Deletepri(TreeNode&lt;T&gt;* &amp;node,T x);<span style="color: #008000;">//</span><span style="color: #008000;">删除</span>
+        <span style="color: #0000ff;">int</span> height(TreeNode&lt;T&gt;* node);<span style="color: #008000;">//</span><span style="color: #008000;">求树的高度</span>
+        <span style="color: #0000ff;">void</span> SingRotateLeft(TreeNode&lt;T&gt;* &amp;k2);<span style="color: #008000;">//</span><span style="color: #008000;">左左情况下的旋转</span>
+        <span style="color: #0000ff;">void</span> SingRotateRight(TreeNode&lt;T&gt;* &amp;k2);<span style="color: #008000;">//</span><span style="color: #008000;">右右情况下的旋转</span>
+        <span style="color: #0000ff;">void</span> DoubleRotateLR(TreeNode&lt;T&gt;* &amp;k3);<span style="color: #008000;">//</span><span style="color: #008000;">左右情况下的旋转</span>
+        <span style="color: #0000ff;">void</span> DoubleRotateRL(TreeNode&lt;T&gt;* &amp;k3);<span style="color: #008000;">//</span><span style="color: #008000;">右左情况下的旋转</span>
+        <span style="color: #0000ff;">int</span> Max(<span style="color: #0000ff;">int</span> cmpa,<span style="color: #0000ff;">int</span> cmpb);<span style="color: #008000;">//</span><span style="color: #008000;">求最大值</span>
+
+    <span style="color: #0000ff;">public</span><span style="color: #000000;">:
+        AVLTree():root(NULL){}
+        </span><span style="color: #0000ff;">void</span> insert(T x);<span style="color: #008000;">//</span><span style="color: #008000;">插入接口</span>
+        TreeNode&lt;T&gt;* find(T x);<span style="color: #008000;">//</span><span style="color: #008000;">查找接口</span>
+        <span style="color: #0000ff;">void</span> Delete(T x);<span style="color: #008000;">//</span><span style="color: #008000;">删除接口</span>
+        <span style="color: #0000ff;">void</span> traversal();<span style="color: #008000;">//</span><span style="color: #008000;">遍历接口</span>
+<span style="color: #000000;">
+};
+</span><span style="color: #008000;">//</span><span style="color: #008000;">计算节点的高度</span>
+template&lt;<span style="color: #0000ff;">class</span> T&gt;
+<span style="color: #0000ff;">int</span> AVLTree&lt;T&gt;::height(TreeNode&lt;T&gt;*<span style="color: #000000;"> node)
+{
+    </span><span style="color: #0000ff;">if</span>(node!=<span style="color: #000000;">NULL)
+        </span><span style="color: #0000ff;">return</span> node-&gt;<span style="color: #000000;">hgt;
+    </span><span style="color: #0000ff;">return</span> -<span style="color: #800080;">1</span><span style="color: #000000;">;
+}
+</span><span style="color: #008000;">//</span><span style="color: #008000;">求最大值</span>
+template&lt;<span style="color: #0000ff;">class</span> T&gt;
+<span style="color: #0000ff;">int</span> AVLTree&lt;T&gt;::Max(<span style="color: #0000ff;">int</span> cmpa,<span style="color: #0000ff;">int</span><span style="color: #000000;"> cmpb)
+{
+    </span><span style="color: #0000ff;">return</span> cmpa&gt;cmpb?<span style="color: #000000;">cmpa:cmpb;
+}
+</span><span style="color: #008000;">//</span><span style="color: #008000;">左左情况下的旋转</span>
+template&lt;<span style="color: #0000ff;">class</span> T&gt;
+<span style="color: #0000ff;">void</span> AVLTree&lt;T&gt;::SingRotateLeft(TreeNode&lt;T&gt;* &amp;<span style="color: #000000;">k2)
+{
+    TreeNode</span>&lt;T&gt;*<span style="color: #000000;"> k1;
+    k1</span>=k2-&gt;<span style="color: #000000;">lson;
+    k2</span>-&gt;lson=k1-&gt;<span style="color: #000000;">rson;
+    k1</span>-&gt;rson=<span style="color: #000000;">k2;
+
+    k2</span>-&gt;hgt=Max(height(k2-&gt;lson),height(k2-&gt;rson))+<span style="color: #800080;">1</span><span style="color: #000000;">;
+    k1</span>-&gt;hgt=Max(height(k1-&gt;lson),k2-&gt;hgt)+<span style="color: #800080;">1</span><span style="color: #000000;">;
+}
+</span><span style="color: #008000;">//</span><span style="color: #008000;">右右情况下的旋转</span>
+template&lt;<span style="color: #0000ff;">class</span> T&gt;
+<span style="color: #0000ff;">void</span> AVLTree&lt;T&gt;::SingRotateRight(TreeNode&lt;T&gt;* &amp;<span style="color: #000000;">k2)
+{
+    TreeNode</span>&lt;T&gt;*<span style="color: #000000;"> k1;
+    k1</span>=k2-&gt;<span style="color: #000000;">rson;
+    k2</span>-&gt;rson=k1-&gt;<span style="color: #000000;">lson;
+    k1</span>-&gt;lson=<span style="color: #000000;">k2;
+
+    k2</span>-&gt;hgt=Max(height(k2-&gt;lson),height(k2-&gt;rson))+<span style="color: #800080;">1</span><span style="color: #000000;">;
+    k1</span>-&gt;hgt=Max(height(k1-&gt;rson),k2-&gt;hgt)+<span style="color: #800080;">1</span><span style="color: #000000;">;
+}
+</span><span style="color: #008000;">//</span><span style="color: #008000;">左右情况的旋转</span>
+template&lt;<span style="color: #0000ff;">class</span> T&gt;
+<span style="color: #0000ff;">void</span> AVLTree&lt;T&gt;::DoubleRotateLR(TreeNode&lt;T&gt;* &amp;<span style="color: #000000;">k3)
+{
+    SingRotateRight(k3</span>-&gt;<span style="color: #000000;">lson);
+    SingRotateLeft(k3);
+}
+</span><span style="color: #008000;">//</span><span style="color: #008000;">右左情况的旋转</span>
+template&lt;<span style="color: #0000ff;">class</span> T&gt;
+<span style="color: #0000ff;">void</span> AVLTree&lt;T&gt;::DoubleRotateRL(TreeNode&lt;T&gt;* &amp;<span style="color: #000000;">k3)
+{
+    SingRotateLeft(k3</span>-&gt;<span style="color: #000000;">rson);
+    SingRotateRight(k3);
+}
+</span><span style="color: #008000;">//</span><span style="color: #008000;">插入</span>
+template&lt;<span style="color: #0000ff;">class</span> T&gt;
+<span style="color: #0000ff;">void</span> AVLTree&lt;T&gt;::insertpri(TreeNode&lt;T&gt;* &amp;<span style="color: #000000;">node,T x)
+{
+    </span><span style="color: #0000ff;">if</span>(node==NULL)<span style="color: #008000;">//</span><span style="color: #008000;">如果节点为空,就在此节点处加入x信息</span>
+<span style="color: #000000;">    {
+        node</span>=<span style="color: #0000ff;">new</span> TreeNode&lt;T&gt;<span style="color: #000000;">();
+        node</span>-&gt;data=<span style="color: #000000;">x;
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">if</span>(node-&gt;data&gt;x)<span style="color: #008000;">//</span><span style="color: #008000;">如果x小于节点的值,就继续在节点的左子树中插入x</span>
+<span style="color: #000000;">    {
+        insertpri(node</span>-&gt;<span style="color: #000000;">lson,x);
+        </span><span style="color: #0000ff;">if</span>(<span style="color: #800080;">2</span>==height(node-&gt;lson)-height(node-&gt;<span style="color: #000000;">rson))
+            </span><span style="color: #0000ff;">if</span>(x&lt;node-&gt;lson-&gt;<span style="color: #000000;">data)
+                SingRotateLeft(node);
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+                DoubleRotateLR(node);
+    }
+    </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span>(node-&gt;data&lt;x)<span style="color: #008000;">//</span><span style="color: #008000;">如果x大于节点的值,就继续在节点的右子树中插入x</span>
+<span style="color: #000000;">    {
+        insertpri(node</span>-&gt;<span style="color: #000000;">rson,x);
+        </span><span style="color: #0000ff;">if</span>(<span style="color: #800080;">2</span>==height(node-&gt;rson)-height(node-&gt;lson))<span style="color: #008000;">//</span><span style="color: #008000;">如果高度之差为2的话就失去了平衡,需要旋转</span>
+            <span style="color: #0000ff;">if</span>(x&gt;node-&gt;rson-&gt;<span style="color: #000000;">data)
+                SingRotateRight(node);
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+                DoubleRotateRL(node);
+    }
+    </span><span style="color: #0000ff;">else</span> ++(node-&gt;freq);<span style="color: #008000;">//</span><span style="color: #008000;">如果相等,就把频率加1</span>
+    node-&gt;hgt=Max(height(node-&gt;lson),height(node-&gt;<span style="color: #000000;">rson));
+}
+</span><span style="color: #008000;">//</span><span style="color: #008000;">插入接口</span>
+template&lt;<span style="color: #0000ff;">class</span> T&gt;
+<span style="color: #0000ff;">void</span> AVLTree&lt;T&gt;<span style="color: #000000;">::insert(T x)
+{
+    insertpri(root,x);
+}
+</span><span style="color: #008000;">//</span><span style="color: #008000;">查找</span>
+template&lt;<span style="color: #0000ff;">class</span> T&gt;<span style="color: #000000;">
+TreeNode</span>&lt;T&gt;* AVLTree&lt;T&gt;::findpri(TreeNode&lt;T&gt;*<span style="color: #000000;"> node,T x)
+{
+    </span><span style="color: #0000ff;">if</span>(node==NULL)<span style="color: #008000;">//</span><span style="color: #008000;">如果节点为空说明没找到,返回NULL</span>
+<span style="color: #000000;">    {
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> NULL;
+    }
+    </span><span style="color: #0000ff;">if</span>(node-&gt;data&gt;x)<span style="color: #008000;">//</span><span style="color: #008000;">如果x小于节点的值,就继续在节点的左子树中查找x</span>
+<span style="color: #000000;">    {
+        </span><span style="color: #0000ff;">return</span> findpri(node-&gt;<span style="color: #000000;">lson,x);
+    }
+    </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span>(node-&gt;data&lt;x)<span style="color: #008000;">//</span><span style="color: #008000;">如果x大于节点的值,就继续在节点的左子树中查找x</span>
+<span style="color: #000000;">    {
+        </span><span style="color: #0000ff;">return</span> findpri(node-&gt;<span style="color: #000000;">rson,x);
+    }
+    </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">return</span> node;<span style="color: #008000;">//</span><span style="color: #008000;">如果相等,就找到了此节点</span>
+<span style="color: #000000;">}
+</span><span style="color: #008000;">//</span><span style="color: #008000;">查找接口</span>
+template&lt;<span style="color: #0000ff;">class</span> T&gt;<span style="color: #000000;">
+TreeNode</span>&lt;T&gt;* AVLTree&lt;T&gt;<span style="color: #000000;">::find(T x)
+{
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> findpri(root,x);
+}
+</span><span style="color: #008000;">//</span><span style="color: #008000;">删除</span>
+template&lt;<span style="color: #0000ff;">class</span> T&gt;
+<span style="color: #0000ff;">void</span> AVLTree&lt;T&gt;::Deletepri(TreeNode&lt;T&gt;* &amp;<span style="color: #000000;">node,T x)
+{
+    </span><span style="color: #0000ff;">if</span>(node==NULL) <span style="color: #0000ff;">return</span> ;<span style="color: #008000;">//</span><span style="color: #008000;">没有找到值是x的节点</span>
+    <span style="color: #0000ff;">if</span>(x &lt; node-&gt;<span style="color: #000000;">data)
+    {
+         Deletepri(node</span>-&gt;lson,x);<span style="color: #008000;">//</span><span style="color: #008000;">如果x小于节点的值,就继续在节点的左子树中删除x</span>
+         <span style="color: #0000ff;">if</span>(<span style="color: #800080;">2</span>==height(node-&gt;rson)-height(node-&gt;<span style="color: #000000;">lson))
+            </span><span style="color: #0000ff;">if</span>(node-&gt;rson-&gt;lson!=NULL&amp;&amp;(height(node-&gt;rson-&gt;lson)&gt;height(node-&gt;rson-&gt;<span style="color: #000000;">rson)) )
+                DoubleRotateRL(node);
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+                SingRotateRight(node);
+    }
+
+    </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span>(x &gt; node-&gt;<span style="color: #000000;">data)
+    {
+         Deletepri(node</span>-&gt;rson,x);<span style="color: #008000;">//</span><span style="color: #008000;">如果x大于节点的值,就继续在节点的右子树中删除x</span>
+         <span style="color: #0000ff;">if</span>(<span style="color: #800080;">2</span>==height(node-&gt;lson)-height(node-&gt;<span style="color: #000000;">rson))
+            </span><span style="color: #0000ff;">if</span>(node-&gt;lson-&gt;rson!=NULL&amp;&amp; (height(node-&gt;lson-&gt;rson)&gt;height(node-&gt;lson-&gt;<span style="color: #000000;">lson) ))
+                DoubleRotateLR(node);
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+                SingRotateLeft(node);
+    }
+
+    </span><span style="color: #0000ff;">else</span><span style="color: #008000;">//</span><span style="color: #008000;">如果相等,此节点就是要删除的节点</span>
+<span style="color: #000000;">    {
+        </span><span style="color: #0000ff;">if</span>(node-&gt;lson&amp;&amp;node-&gt;rson)<span style="color: #008000;">//</span><span style="color: #008000;">此节点有两个儿子</span>
+<span style="color: #000000;">        {
+            TreeNode</span>&lt;T&gt;* temp=node-&gt;rson;<span style="color: #008000;">//</span><span style="color: #008000;">temp指向节点的右儿子</span>
+            <span style="color: #0000ff;">while</span>(temp-&gt;lson!=NULL) temp=temp-&gt;lson;<span style="color: #008000;">//</span><span style="color: #008000;">找到右子树中值最小的节点
+            </span><span style="color: #008000;">//</span><span style="color: #008000;">把右子树中最小节点的值赋值给本节点</span>
+            node-&gt;data=temp-&gt;<span style="color: #000000;">data;
+            node</span>-&gt;freq=temp-&gt;<span style="color: #000000;">freq;
+            Deletepri(node</span>-&gt;rson,temp-&gt;data);<span style="color: #008000;">//</span><span style="color: #008000;">删除右子树中最小值的节点</span>
+            <span style="color: #0000ff;">if</span>(<span style="color: #800080;">2</span>==height(node-&gt;lson)-height(node-&gt;<span style="color: #000000;">rson))
+            {
+                </span><span style="color: #0000ff;">if</span>(node-&gt;lson-&gt;rson!=NULL&amp;&amp; (height(node-&gt;lson-&gt;rson)&gt;height(node-&gt;lson-&gt;<span style="color: #000000;">lson) ))
+                    DoubleRotateLR(node);
+                </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+                    SingRotateLeft(node);
+            }
+        }
+        </span><span style="color: #0000ff;">else</span><span style="color: #008000;">//</span><span style="color: #008000;">此节点有1个或0个儿子</span>
+<span style="color: #000000;">        {
+            TreeNode</span>&lt;T&gt;* temp=<span style="color: #000000;">node;
+            </span><span style="color: #0000ff;">if</span>(node-&gt;lson==NULL)<span style="color: #008000;">//</span><span style="color: #008000;">有右儿子或者没有儿子</span>
+            node=node-&gt;<span style="color: #000000;">rson;
+            </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span>(node-&gt;rson==NULL)<span style="color: #008000;">//</span><span style="color: #008000;">有左儿子</span>
+            node=node-&gt;<span style="color: #000000;">lson;
+            </span><span style="color: #0000ff;">delete</span><span style="color: #000000;">(temp);
+            temp</span>=<span style="color: #000000;">NULL;
+        }
+    }
+    </span><span style="color: #0000ff;">if</span>(node==NULL) <span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    node</span>-&gt;hgt=Max(height(node-&gt;lson),height(node-&gt;rson))+<span style="color: #800080;">1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+}
+</span><span style="color: #008000;">//</span><span style="color: #008000;">删除接口</span>
+template&lt;<span style="color: #0000ff;">class</span> T&gt;
+<span style="color: #0000ff;">void</span> AVLTree&lt;T&gt;<span style="color: #000000;">::Delete(T x)
+{
+    Deletepri(root,x);
+}
+</span><span style="color: #008000;">//</span><span style="color: #008000;">中序遍历函数</span>
+template&lt;<span style="color: #0000ff;">class</span> T&gt;
+<span style="color: #0000ff;">void</span> AVLTree&lt;T&gt;::insubtree(TreeNode&lt;T&gt;*<span style="color: #000000;"> node)
+{
+    </span><span style="color: #0000ff;">if</span>(node==NULL) <span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    insubtree(node</span>-&gt;lson);<span style="color: #008000;">//</span><span style="color: #008000;">先遍历左子树</span>
+    cout&lt;&lt;node-&gt;data&lt;&lt;<span style="color: #800000;">"</span> <span style="color: #800000;">"</span>;<span style="color: #008000;">//</span><span style="color: #008000;">输出根节点</span>
+    insubtree(node-&gt;rson);<span style="color: #008000;">//</span><span style="color: #008000;">再遍历右子树</span>
+<span style="color: #000000;">}
+</span><span style="color: #008000;">//</span><span style="color: #008000;">中序遍历接口</span>
+template&lt;<span style="color: #0000ff;">class</span> T&gt;
+<span style="color: #0000ff;">void</span> AVLTree&lt;T&gt;<span style="color: #000000;">::traversal()
+{
+    insubtree(root);
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/copycode.gif" alt="复制代码" data-bd-imgshare-binded="1"></a></span></div></div>
+<div style="text-align: right"><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#_labelTop">回到顶部</a><a name="_label4"></a></div><h3 class="First">3.2 平衡二叉树之红黑树</h3>
+<p><span style="font-size: 16px;">　　<strong>红黑树的定义：</strong>红黑树是一种自平衡二叉查找树，是在计算机科学中用到的一种数据结构，典型的用途是实现关联数组。它是在1972年由鲁道夫·贝尔发明的，称之为"对称二叉B树"，它现代的名字是在 Leo J. Guibas 和&nbsp;Robert Sedgewick&nbsp;于1978年写的一篇论文中获得的。<strong>它是复杂的，但它的操作有着良好的最坏情况运行时间，并且在实践中是高效的: 它可以在O(logn)时间内做查找，插入和删除，这里的n是树中元素的数目。</strong></span></p>
+<p><span style="font-size: 16px;">　　红黑树和AVL树一样都对插入时间、删除时间和查找时间提供了最好可能的最坏情况担保。这不只是使它们在时间敏感的应用如实时应用（real time application）中有价值，而且使它们有在提供最坏情况担保的其他数据结构中作为建造板块的价值；例如，在计算几何中使用的很多数据结构都可以基于红黑树。此外，红黑树还是2-3-4树的一种等同，它们的思想是一样的，只不过红黑树是2-3-4树用二叉树的形式表示的。</span></p>
+<p><span style="font-size: 16px;">　　<strong>红黑树的性质：</strong></span></p>
+<p><span style="font-size: 16px;">　　红黑树是每个节点都带有颜色属性的二叉查找树，颜色为红色或黑色。在二叉查找树强制的一般要求以外，对于任何有效的红黑树我们增加了如下的额外要求:</span></p>
+<p><span style="font-size: 16px;">　　性质1. 节点是红色或黑色。</span></p>
+<p><span style="font-size: 16px;">　　性质2. 根是黑色。</span></p>
+<p><span style="font-size: 16px;">　　性质3. 所有叶子都是黑色（叶子是NIL节点）。</span></p>
+<p><span style="font-size: 16px;">　　性质4. 每个红色节点必须有两个黑色的子节点。(从每个叶子到根的所有路径上不能有两个连续的红色节点。)</span></p>
+<p><span style="font-size: 16px;">　　性质5. 从任一节点到其每个叶子的所有简单路径都包含相同数目的黑色节点。</span></p>
+<p><span style="font-size: 16px;">　　下面是一个具体的红黑树的图例：</span></p>
+<div class="center">
+<div class="floatnone"><span style="font-size: 16px;"><iframe id="iframe_0.9017863245255198" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/saved_resource(1).html" style="border: none; width: 450px; height: 217px;" frameborder="0" scrolling="no"></iframe></span></div>
+</div>
+<p><span style="font-size: 16px;">　　这些约束确保了红黑树的关键特性: 从根到叶子的最长的可能路径不多于最短的可能路径的两倍长。结果是这个树大致上是平衡的。因为操作比如插入、删除和查找某个值的最坏情况时间都要求与树的高度成比例，这个在高度上的理论上限允许红黑树在最坏情况下都是高效的，而不同于普通的二叉查找树。</span></p>
+<p><span style="font-size: 16px;">　　要知道为什么这些性质确保了这个结果，注意到性质4导致了路径不能有两个毗连的红色节点就足够了。最短的可能路径都是黑色节点，最长的可能路径有交替的红色和黑色节点。因为根据性质5所有最长的路径都有相同数目的黑色节点，这就表明了没有路径能多于任何其他路径的两倍长。</span></p>
+<p><span style="font-size: 16px;">　　以下内容整理自<a href="https://zh.wikipedia.org/wiki/%E7%BA%A2%E9%BB%91%E6%A0%91" target="_blank">wiki百科之红黑树</a>。</span></p>
+<p><span style="font-size: 16px;">　　<strong>红黑树的自平衡操作：</strong><br></span></p>
+<p><span style="font-size: 16px;">　　因为每一个红黑树也是一个特化的二叉查找树，因此红黑树上的只读操作与普通二叉查找树上的只读操作相同。然而，在红黑树上进行插入操作和删除操作会导致不再符合红黑树的性质。恢复红黑树的性质需要少量(O(logn))的颜色变更(实际是非常快速的)和不超过三次树旋转(对于插入操作是两次)。虽然插入和删除很复杂，但操作时间仍可以保持为O(logn) 次。</span></p>
+<p><span style="font-size: 16px;">　　</span><span style="font-size: 16px;"><strong>我们首先以二叉查找树的方法增加节点并标记它为红色。如果设为黑色，就会导致根到叶子的路径上有一条路上，多一个额外的黑节点，这个是很难调整的（违背性质5）。</strong>但是设为红色节点后，可能会导致出现两个连续红色节点的冲突，那么可以通过颜色调换（color flips）和树旋转来调整。下面要进行什么操作取决于其他临近节点的颜色。同人类的家族树中一样，我们将使用术语叔父节点来指一个节点的父节点的兄弟节点。注意:</span></p>
+<ul>
+<li><span style="font-size: 16px;">性质1和性质3总是保持着。</span></li>
+<li><span style="font-size: 16px;">性质4只在增加红色节点、重绘黑色节点为红色，或做旋转时受到威胁。</span></li>
+<li><span style="font-size: 16px;">性质5只在增加黑色节点、重绘红色节点为黑色，或做旋转时受到威胁。</span></li>
+
+
+
+
+
+
+
+
+
+</ul>
+<p><span style="font-size: 16px;">　　<strong>插入操作：</strong></span></p>
+<p><span style="font-size: 16px;">　　假设，将要插入的节点标为<strong>N</strong>，N的父节点标为<strong>P</strong>，N的祖父节点标为<strong>G</strong>，N的叔父节点标为<strong>U</strong>。在图中展示的任何颜色要么是由它所处情形这些所作的假定，要么是假定所暗含的。</span></p>
+<p><span style="font-size: 16px;"><strong>　　情形1:&nbsp;</strong>该树为空树，直接插入根结点的位置，违反性质1，把节点颜色有红改为黑即可。</span></p>
+<p><span style="font-size: 16px; line-height: 1.5;">　　<strong>情形2:</strong>&nbsp;</span><span style="font-size: 16px;">插入节点N的父节点P为黑色，不违反任何性质，无需做任何修改<span style="line-height: 1.5;">。在这种情形下，树仍是有效的。性质5也未受到威胁，尽管新节点N有两个黑色叶子子节点；但由于新节点N是红色，通过它的每个子节点的路径就都有同通过它所取代的黑色的叶子的路径同样数目的黑色节点，所以依然满足这个性质。</span></span></p>
+<p><span style="font-size: 16px;"><span style="line-height: 1.5;">　　注：&nbsp;情形1很简单，情形2中P为黑色，一切安然无事，但P为红就不一样了，下边是P为红的各种情况，也是真正难懂的地方。</span></span></p>
+<p><span style="font-size: 16px;"><strong>　　情形3:&nbsp;</strong>如果父节点P和叔父节点U二者都是红色，(此时新插入节点N做为P的左子节点或右子节点都属于情形3,这里右图仅显示N做为P左子的情形)则我们可以将它们两个重绘为黑色并重绘祖父节点G为红色(用来保持性质4)。现在我们的新节点N有了一个黑色的父节点P。因为通过父节点P或叔父节点U的任何路径都必定通过祖父节点G，在这些路径上的黑节点数目没有改变。但是，红色的祖父节点G的父节点也有可能是红色的，这就违反了性质4。为了解决这个问题，我们在祖父节点G上递归地进行上述情形的整个过程（把G当成是新加入的节点进行各种情形的检查）。比如，G为根节点，那我们就直接将G变为黑色（情形1）；如果G不是根节点，而它的父节点为黑色，那符合所有的性质，直接插入即可（情形2）；如果G不是根节点，而它的父节点为红色，则递归上述过程（情形3）。</span></p>
+<p><span style="font-size: 16px;"><img style="display: block; margin-left: auto; margin-right: auto;" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/2011120116425251.png" alt="" width="438" height="203" data-bd-imgshare-binded="1"></span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 16px;"><strong>　　情形4:</strong>&nbsp;父节点P是红色而叔父节点U是黑色或缺少，新节点N是其父节点的左子节点，而父节点P又是其父节点G的左子节点。在这种情形下，我们进行针对祖父节点G的一次右旋转; 在旋转产生的树中，以前的父节点P现在是新节点N和以前的祖父节点G的父节点。我们知道以前的祖父节点G是黑色，否则父节点P就不可能是红色(如果P和G都是红色就违反了性质4，所以G必须是黑色)。我们切换以前的父节点P和祖父节点G的颜色，结果的树满足性质4。性质5也仍然保持满足，因为通过这三个节点中任何一个的所有路径以前都通过祖父节点G，现在它们都通过以前的父节点P。在各自的情形下，这都是三个节点中唯一的黑色节点。</span></p>
+<p><span style="font-size: 16px;"><iframe id="iframe_0.2600957082994786" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/saved_resource(2).html" style="border: none; width: 310px; height: 138px;" frameborder="0" scrolling="no"></iframe></span></p>
+<p><span style="font-size: 16px;"><strong>　　情形5:</strong> 父节点P是红色而叔父节点U是黑色或缺少，并且新节点N是其父节点P的右子节点而父节点P又是其父节点的左子节点。在这种情形下，我们进行一次左旋转调换新节点和其父节点的角色; 接着，我们按<strong>情形4</strong>处理以前的父节点P以解决仍然失效的性质4。注意这个改变会导致某些路径通过它们以前不通过的新节点N（比如图中1号叶子节点）或不通过节点P（比如图中3号叶子节点），但由于这两个节点都是红色的，所以性质5仍有效。</span></p>
+<p><iframe id="iframe_0.4885043322570093" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/saved_resource(3).html" style="border: none; width: 283px; height: 138px;" frameborder="0" scrolling="no"></iframe></p>
+<p><span style="font-size: 16px;">　　<strong>注: 插入实际上是原地算法，因为上述所有调用都使用了尾部递归。</strong></span></p>
+<p><span style="font-size: 16px;"><strong>　　删除操作：</strong></span></p>
+<p><span style="font-size: 16px;"><strong>　　如果需要删除的节点有两个儿子，那么问题可以被转化成删除另一个只有一个儿子的节点的问题</strong>。对于二叉查找树，在删除带有两个非叶子儿子的节点的时候，我们找到要么在它的左子树中的最大元素、要么在它的右子树中的最小元素，并把它的值转移到要删除的节点中。我们接着删除我们从中复制出值的那个节点，它必定有少于两个非叶子的儿子。因为只是复制了一个值，不违反任何性质，这就把问题简化为如何删除最多有一个儿子的节点的问题。它不关心这个节点是最初要删除的节点还是我们从中复制出值的那个节点。</span></p>
+<p><span style="font-size: 16px;"><strong>　　我们只需要讨论删除只有一个儿子的节点</strong>(如果它两个儿子都为空，即均为叶子，我们任意将其中一个看作它的儿子)。如果我们删除一个红色节点（此时该节点的儿子将都为叶子节点），它的父亲和儿子一定是黑色的。所以我们可以简单的用它的黑色儿子替换它，并不会破坏性质3和性质4。通过被删除节点的所有路径只是少了一个红色节点，这样可以继续保证性质5。另一种简单情况是在被删除节点是黑色而它的儿子是红色的时候。如果只是去除这个黑色节点，用它的红色儿子顶替上来的话，会破坏性质5，但是如果我们重绘它的儿子为黑色，则曾经通过它的所有路径将通过它的黑色儿子，这样可以继续保持性质5。</span></p>
+<p><span style="font-size: 16px;"><strong>　　需要进一步讨论的是在要删除的节点和它的儿子二者都是黑色的时候</strong>，这是一种复杂的情况。我们首先把要删除的节点替换为它的儿子。出于方便，称呼这个儿子为<strong>N</strong>(在新的位置上)，称呼它的兄弟(它父亲的另一个儿子)为<strong>S</strong>。在下面的示意图中，我们还是使用<strong>P</strong>称呼N的父亲，<strong>S<sub>L</sub></strong>称呼S的左儿子，<strong>S<sub>R</sub></strong>称呼S的右儿子。</span></p>
+<p><span style="font-size: 16px;">　　如果N和它初始的父亲是黑色，则删除它的父亲导致通过N的路径都比不通过它的路径少了一个黑色节点。因为这违反了性质5，树需要被重新平衡。有几种情形需要考虑:</span></p>
+<p><span style="font-size: 16px;"><strong>　　情形1:</strong>&nbsp;N是新的根。在这种情形下，我们就做完了。我们从所有路径去除了一个黑色节点，而新根是黑色的，所以性质都保持着。</span></p>
+<p><span style="font-size: 16px;">　　<strong>注意</strong>: 在情形2、5和6下，我们假定N是它父亲的左儿子。如果它是右儿子，则在这些情形下的左和右应当对调。</span></p>
+<p><span style="font-size: 16px;"><strong>　　情形2:</strong>&nbsp;S是红色。在这种情形下我们在N的父亲上做左旋转，把红色兄弟转换成N的祖父，我们接着对调N的父亲和祖父的颜色。完成这两个操作后，尽管所有路径上黑色节点的数目没有改变，但现在N有了一个黑色的兄弟和一个红色的父亲（它的新兄弟是黑色因为它是红色S的一个儿子），所以我们可以接下去按<strong>情形4</strong>、<strong>情形5</strong>或<strong>情形6</strong>来处理。</span></p>
+<p><span style="font-size: 16px;"><iframe id="iframe_0.15957533500254883" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/saved_resource(4).html" style="border: none; width: 298px; height: 136px;" frameborder="0" scrolling="no"></iframe></span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 16px;"><strong>　　情形3:</strong>&nbsp;N的父亲、S和S的儿子都是黑色的。在这种情形下，我们简单的重绘S为红色。结果是通过S的所有路径，它们就是以前<em>不</em>通过N的那些路径，都少了一个黑色节点。因为删除N的初始的父亲使通过N的所有路径少了一个黑色节点，这使事情都平衡了起来。但是，通过P的所有路径现在比不通过P的路径少了一个黑色节点，所以仍然违反性质5。要修正这个问题，我们要从<strong>情形1</strong>开始，在P上做重新平衡处理。</span></p>
+<p><span style="font-size: 16px;"><iframe id="iframe_0.18007570700418052" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/saved_resource(5).html" style="border: none; width: 313px; height: 132px;" frameborder="0" scrolling="no"></iframe></span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 16px;">　　<strong>情形4:</strong>&nbsp;S和S的儿子都是黑色，但是N的父亲是红色。在这种情形下，我们简单的交换N的兄弟和父亲的颜色。这不影响不通过N的路径的黑色节点的数目，但是它在通过N的路径上对黑色节点数目增加了一，添补了在这些路径上删除的黑色节点。</span></p>
+<p><span style="font-size: 16px;"><iframe id="iframe_0.7439986361685174" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/saved_resource(6).html" style="border: none; width: 313px; height: 132px;" frameborder="0" scrolling="no"></iframe></span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 16px;">　　<strong>情形5:</strong>&nbsp;S是黑色，S的左儿子是红色，S的右儿子是黑色，而N是它父亲的左儿子。在这种情形下我们在S上做右旋转，这样S的左儿子成为S的父亲和N的新兄弟。我们接着交换S和它的新父亲的颜色。所有路径仍有同样数目的黑色节点，但是现在N有了一个黑色兄弟，他的右儿子是红色的，所以我们进入了<strong>情形6</strong>。N和它的父亲都不受这个变换的影响。</span></p>
+<p><span style="font-size: 16px;"><iframe id="iframe_0.3611238223542066" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/saved_resource(7).html" style="border: none; width: 247px; height: 133px;" frameborder="0" scrolling="no"></iframe></span></p>
+<p><span style="font-size: 16px;"><strong>　　情形6:</strong>&nbsp;S是黑色，S的右儿子是红色，而N是它父亲的左儿子。在这种情形下我们在N的父亲上做左旋转，这样S成为N的父亲（P）和S的右儿子的父亲。我们接着交换N的父亲和S的颜色，并使S的右儿子为黑色。子树在它的根上的仍是同样的颜色，所以性质3没有被违反。但是，N现在增加了一个黑色祖先: 要么N的父亲变成黑色，要么它是黑色而S被增加为一个黑色祖父。所以，通过N的路径都增加了一个黑色节点。</span></p>
+<p><span style="font-size: 16px;">　　此时，如果一个路径不通过N，则有两种可能性:</span></p>
+<ul>
+<li><span style="font-size: 16px;">它通过N的新兄弟。那么它以前和现在都必定通过S和N的父亲，而它们只是交换了颜色。所以路径保持了同样数目的黑色节点。</span></li>
+<li><span style="font-size: 16px;">它通过N的新叔父，S的右儿子。那么它以前通过S、S的父亲和S的右儿子，但是现在只通过S，它被假定为它以前的父亲的颜色，和S的右儿子，它被从红色改变为黑色。合成效果是这个路径通过了同样数目的黑色节点。</span></li>
+
+
+
+
+
+
+
+
+
+</ul>
+<p><span style="font-size: 16px;">　　在任何情况下，在这些路径上的黑色节点数目都没有改变。所以我们恢复了性质4。在示意图中的白色节点可以是红色或黑色，但是在变换前后都必须指定相同的颜色。</span></p>
+<p><span style="font-size: 16px;"><iframe id="iframe_0.10006529503323192" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/saved_resource(8).html" style="border: none; width: 299px; height: 143px;" frameborder="0" scrolling="no"></iframe></span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 16px;">　　<strong>红黑树实现源码：</strong></span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/copycode.gif" alt="复制代码" data-bd-imgshare-binded="1"></a></span></div>
+<pre><span style="color: #0000ff;">#define</span> BLACK 1
+<span style="color: #0000ff;">#define</span> RED 0
+
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> bst {
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;">:
+
+    </span><span style="color: #0000ff;">struct</span><span style="color: #000000;"> Node {
+        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> value;
+        </span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> color;
+        Node </span>*leftTree, *rightTree, *<span style="color: #000000;">parent;
+
+        Node() {
+            color </span>=<span style="color: #000000;"> RED;
+            leftTree </span>=<span style="color: #000000;"> NULL;
+            rightTree </span>=<span style="color: #000000;"> NULL;
+            parent </span>=<span style="color: #000000;"> NULL;
+            value </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+        }
+
+        Node</span>*<span style="color: #000000;"> grandparent() {
+            </span><span style="color: #0000ff;">if</span> (parent ==<span style="color: #000000;"> NULL) {
+                </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> NULL;
+            }
+            </span><span style="color: #0000ff;">return</span> parent-&gt;<span style="color: #000000;">parent;
+        }
+
+        Node</span>*<span style="color: #000000;"> uncle() {
+            </span><span style="color: #0000ff;">if</span> (grandparent() ==<span style="color: #000000;"> NULL) {
+                </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> NULL;
+            }
+            </span><span style="color: #0000ff;">if</span> (parent == grandparent()-&gt;<span style="color: #000000;">rightTree)
+                </span><span style="color: #0000ff;">return</span> grandparent()-&gt;<span style="color: #000000;">leftTree;
+            </span><span style="color: #0000ff;">else</span>
+                <span style="color: #0000ff;">return</span> grandparent()-&gt;<span style="color: #000000;">rightTree;
+        }
+
+        Node</span>*<span style="color: #000000;"> sibling() {
+            </span><span style="color: #0000ff;">if</span> (parent-&gt;leftTree == <span style="color: #0000ff;">this</span><span style="color: #000000;">)
+                </span><span style="color: #0000ff;">return</span> parent-&gt;<span style="color: #000000;">rightTree;
+            </span><span style="color: #0000ff;">else</span>
+                <span style="color: #0000ff;">return</span> parent-&gt;<span style="color: #000000;">leftTree;
+        }
+    };
+
+    </span><span style="color: #0000ff;">void</span> rotate_right(Node *<span style="color: #000000;">p) {
+        Node </span>*gp = p-&gt;<span style="color: #000000;">grandparent();
+        Node </span>*fa = p-&gt;<span style="color: #000000;">parent;
+        Node </span>*y = p-&gt;<span style="color: #000000;">rightTree;
+
+        fa</span>-&gt;leftTree =<span style="color: #000000;"> y;
+
+        </span><span style="color: #0000ff;">if</span> (y !=<span style="color: #000000;"> NIL)
+            y</span>-&gt;parent =<span style="color: #000000;"> fa;
+        p</span>-&gt;rightTree =<span style="color: #000000;"> fa;
+        fa</span>-&gt;parent =<span style="color: #000000;"> p;
+
+        </span><span style="color: #0000ff;">if</span> (root ==<span style="color: #000000;"> fa)
+            root </span>=<span style="color: #000000;"> p;
+        p</span>-&gt;parent =<span style="color: #000000;"> gp;
+
+        </span><span style="color: #0000ff;">if</span> (gp !=<span style="color: #000000;"> NULL) {
+            </span><span style="color: #0000ff;">if</span> (gp-&gt;leftTree ==<span style="color: #000000;"> fa)
+                gp</span>-&gt;leftTree =<span style="color: #000000;"> p;
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+                gp</span>-&gt;rightTree =<span style="color: #000000;"> p;
+        }
+
+    }
+
+    </span><span style="color: #0000ff;">void</span> rotate_left(Node *<span style="color: #000000;">p) {
+        </span><span style="color: #0000ff;">if</span> (p-&gt;parent ==<span style="color: #000000;"> NULL) {
+            root </span>=<span style="color: #000000;"> p;
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+        }
+        Node </span>*gp = p-&gt;<span style="color: #000000;">grandparent();
+        Node </span>*fa = p-&gt;<span style="color: #000000;">parent;
+        Node </span>*y = p-&gt;<span style="color: #000000;">leftTree;
+
+        fa</span>-&gt;rightTree =<span style="color: #000000;"> y;
+
+        </span><span style="color: #0000ff;">if</span> (y !=<span style="color: #000000;"> NIL)
+            y</span>-&gt;parent =<span style="color: #000000;"> fa;
+        p</span>-&gt;leftTree =<span style="color: #000000;"> fa;
+        fa</span>-&gt;parent =<span style="color: #000000;"> p;
+
+        </span><span style="color: #0000ff;">if</span> (root ==<span style="color: #000000;"> fa)
+            root </span>=<span style="color: #000000;"> p;
+        p</span>-&gt;parent =<span style="color: #000000;"> gp;
+
+        </span><span style="color: #0000ff;">if</span> (gp !=<span style="color: #000000;"> NULL) {
+            </span><span style="color: #0000ff;">if</span> (gp-&gt;leftTree ==<span style="color: #000000;"> fa)
+                gp</span>-&gt;leftTree =<span style="color: #000000;"> p;
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+                gp</span>-&gt;rightTree =<span style="color: #000000;"> p;
+        }
+    }
+
+    </span><span style="color: #0000ff;">void</span> inorder(Node *<span style="color: #000000;">p) {
+        </span><span style="color: #0000ff;">if</span> (p ==<span style="color: #000000;"> NIL)
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+
+        </span><span style="color: #0000ff;">if</span> (p-&gt;<span style="color: #000000;">leftTree)
+            inorder(p</span>-&gt;<span style="color: #000000;">leftTree);
+
+        cout </span>&lt;&lt; p-&gt;value &lt;&lt; <span style="color: #800000;">"</span> <span style="color: #800000;">"</span><span style="color: #000000;">;
+                
+        </span><span style="color: #0000ff;">if</span> (p-&gt;<span style="color: #000000;">rightTree)
+            inorder(p</span>-&gt;<span style="color: #000000;">rightTree);
+    }
+
+    </span><span style="color: #0000ff;">string</span> outputColor(<span style="color: #0000ff;">bool</span><span style="color: #000000;"> color) {
+        </span><span style="color: #0000ff;">return</span> color ? <span style="color: #800000;">"</span><span style="color: #800000;">BLACK</span><span style="color: #800000;">"</span> : <span style="color: #800000;">"</span><span style="color: #800000;">RED</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+    }
+
+    Node</span>* getSmallestChild(Node *<span style="color: #000000;">p) {
+        </span><span style="color: #0000ff;">if</span> (p-&gt;leftTree ==<span style="color: #000000;"> NIL)
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> p;
+        </span><span style="color: #0000ff;">return</span> getSmallestChild(p-&gt;<span style="color: #000000;">leftTree);
+    }
+
+    </span><span style="color: #0000ff;">bool</span> delete_child(Node *p, <span style="color: #0000ff;">int</span><span style="color: #000000;"> data) {
+        </span><span style="color: #0000ff;">if</span> (p-&gt;value &gt;<span style="color: #000000;"> data) {
+            </span><span style="color: #0000ff;">if</span> (p-&gt;leftTree ==<span style="color: #000000;"> NIL) {
+                </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+            }
+            </span><span style="color: #0000ff;">return</span> delete_child(p-&gt;<span style="color: #000000;">leftTree, data);
+        } </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span> (p-&gt;value &lt;<span style="color: #000000;"> data) {
+            </span><span style="color: #0000ff;">if</span> (p-&gt;rightTree ==<span style="color: #000000;"> NIL) {
+                </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+            }
+            </span><span style="color: #0000ff;">return</span> delete_child(p-&gt;<span style="color: #000000;">rightTree, data);
+        } </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span> (p-&gt;value ==<span style="color: #000000;"> data) {
+            </span><span style="color: #0000ff;">if</span> (p-&gt;rightTree ==<span style="color: #000000;"> NIL) {
+                delete_one_child(p);
+                </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+            }
+            Node </span>*smallest = getSmallestChild(p-&gt;<span style="color: #000000;">rightTree);
+            swap(p</span>-&gt;value, smallest-&gt;<span style="color: #000000;">value);
+            delete_one_child(smallest);
+
+            </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        }
+    }
+
+    </span><span style="color: #0000ff;">void</span> delete_one_child(Node *<span style="color: #000000;">p) {
+        Node </span>*child = p-&gt;leftTree == NIL ? p-&gt;rightTree : p-&gt;<span style="color: #000000;">leftTree;
+        </span><span style="color: #0000ff;">if</span> (p-&gt;parent == NULL &amp;&amp; p-&gt;leftTree == NIL &amp;&amp; p-&gt;rightTree ==<span style="color: #000000;"> NIL) {
+            p </span>=<span style="color: #000000;"> NULL;
+            root </span>=<span style="color: #000000;"> p;
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+        }
+        
+        </span><span style="color: #0000ff;">if</span> (p-&gt;parent ==<span style="color: #000000;"> NULL) {
+            </span><span style="color: #0000ff;">delete</span><span style="color: #000000;">  p;
+            child</span>-&gt;parent =<span style="color: #000000;"> NULL;
+            root </span>=<span style="color: #000000;"> child;
+            root</span>-&gt;color =<span style="color: #000000;"> BLACK;
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+        }
+        
+        </span><span style="color: #0000ff;">if</span> (p-&gt;parent-&gt;leftTree ==<span style="color: #000000;"> p) {
+            p</span>-&gt;parent-&gt;leftTree =<span style="color: #000000;"> child;
+        } </span><span style="color: #0000ff;">else</span><span style="color: #000000;"> {
+            p</span>-&gt;parent-&gt;rightTree =<span style="color: #000000;"> child;
+        }
+        child</span>-&gt;parent = p-&gt;<span style="color: #000000;">parent;
+
+        </span><span style="color: #0000ff;">if</span> (p-&gt;color ==<span style="color: #000000;"> BLACK) {
+            </span><span style="color: #0000ff;">if</span> (child-&gt;color ==<span style="color: #000000;"> RED) {
+                child</span>-&gt;color =<span style="color: #000000;"> BLACK;
+            } </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+                delete_case(child);
+        }
+
+        </span><span style="color: #0000ff;">delete</span><span style="color: #000000;"> p;
+    }
+
+    </span><span style="color: #0000ff;">void</span> delete_case(Node *<span style="color: #000000;">p) {
+        </span><span style="color: #0000ff;">if</span> (p-&gt;parent ==<span style="color: #000000;"> NULL) {
+            p</span>-&gt;color =<span style="color: #000000;"> BLACK;
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+        }
+        </span><span style="color: #0000ff;">if</span> (p-&gt;sibling()-&gt;color ==<span style="color: #000000;"> RED) {
+            p</span>-&gt;parent-&gt;color =<span style="color: #000000;"> RED;
+            p</span>-&gt;sibling()-&gt;color =<span style="color: #000000;"> BLACK;
+            </span><span style="color: #0000ff;">if</span> (p == p-&gt;parent-&gt;<span style="color: #000000;">leftTree)
+                rotate_left(p</span>-&gt;<span style="color: #000000;">sibling());
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+                rotate_right(p</span>-&gt;<span style="color: #000000;">sibling());
+        }
+        </span><span style="color: #0000ff;">if</span> (p-&gt;parent-&gt;color == BLACK &amp;&amp; p-&gt;sibling()-&gt;color ==<span style="color: #000000;"> BLACK
+                </span>&amp;&amp; p-&gt;sibling()-&gt;leftTree-&gt;color == BLACK &amp;&amp; p-&gt;sibling()-&gt;rightTree-&gt;color ==<span style="color: #000000;"> BLACK) {
+            p</span>-&gt;sibling()-&gt;color =<span style="color: #000000;"> RED;
+            delete_case(p</span>-&gt;<span style="color: #000000;">parent);
+        } </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span> (p-&gt;parent-&gt;color == RED &amp;&amp; p-&gt;sibling()-&gt;color ==<span style="color: #000000;"> BLACK
+                </span>&amp;&amp; p-&gt;sibling()-&gt;leftTree-&gt;color == BLACK &amp;&amp; p-&gt;sibling()-&gt;rightTree-&gt;color ==<span style="color: #000000;"> BLACK) {
+            p</span>-&gt;sibling()-&gt;color =<span style="color: #000000;"> RED;
+            p</span>-&gt;parent-&gt;color =<span style="color: #000000;"> BLACK;
+        } </span><span style="color: #0000ff;">else</span><span style="color: #000000;"> {
+            </span><span style="color: #0000ff;">if</span> (p-&gt;sibling()-&gt;color ==<span style="color: #000000;"> BLACK) {
+                </span><span style="color: #0000ff;">if</span> (p == p-&gt;parent-&gt;leftTree &amp;&amp; p-&gt;sibling()-&gt;leftTree-&gt;color ==<span style="color: #000000;"> RED
+                        </span>&amp;&amp; p-&gt;sibling()-&gt;rightTree-&gt;color ==<span style="color: #000000;"> BLACK) {
+                    p</span>-&gt;sibling()-&gt;color =<span style="color: #000000;"> RED;
+                    p</span>-&gt;sibling()-&gt;leftTree-&gt;color =<span style="color: #000000;"> BLACK;
+                    rotate_right(p</span>-&gt;sibling()-&gt;<span style="color: #000000;">leftTree);
+                } </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span> (p == p-&gt;parent-&gt;rightTree &amp;&amp; p-&gt;sibling()-&gt;leftTree-&gt;color ==<span style="color: #000000;"> BLACK
+                        </span>&amp;&amp; p-&gt;sibling()-&gt;rightTree-&gt;color ==<span style="color: #000000;"> RED) {
+                    p</span>-&gt;sibling()-&gt;color =<span style="color: #000000;"> RED;
+                    p</span>-&gt;sibling()-&gt;rightTree-&gt;color =<span style="color: #000000;"> BLACK;
+                    rotate_left(p</span>-&gt;sibling()-&gt;<span style="color: #000000;">rightTree);
+                }
+            }
+            p</span>-&gt;sibling()-&gt;color = p-&gt;parent-&gt;<span style="color: #000000;">color;
+            p</span>-&gt;parent-&gt;color =<span style="color: #000000;"> BLACK;
+            </span><span style="color: #0000ff;">if</span> (p == p-&gt;parent-&gt;<span style="color: #000000;">leftTree) {
+                p</span>-&gt;sibling()-&gt;rightTree-&gt;color =<span style="color: #000000;"> BLACK;
+                rotate_left(p</span>-&gt;<span style="color: #000000;">sibling());
+            } </span><span style="color: #0000ff;">else</span><span style="color: #000000;"> {
+                p</span>-&gt;sibling()-&gt;leftTree-&gt;color =<span style="color: #000000;"> BLACK;
+                rotate_right(p</span>-&gt;<span style="color: #000000;">sibling());
+            }
+        }
+    }
+
+    </span><span style="color: #0000ff;">void</span> insert(Node *p, <span style="color: #0000ff;">int</span><span style="color: #000000;"> data) {
+        </span><span style="color: #0000ff;">if</span> (p-&gt;value &gt;=<span style="color: #000000;"> data) {
+            </span><span style="color: #0000ff;">if</span> (p-&gt;leftTree !=<span style="color: #000000;"> NIL)
+                insert(p</span>-&gt;<span style="color: #000000;">leftTree, data);
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;"> {
+                Node </span>*tmp = <span style="color: #0000ff;">new</span><span style="color: #000000;"> Node();
+                tmp</span>-&gt;value =<span style="color: #000000;"> data;
+                tmp</span>-&gt;leftTree = tmp-&gt;rightTree =<span style="color: #000000;"> NIL;
+                tmp</span>-&gt;parent =<span style="color: #000000;"> p;
+                p</span>-&gt;leftTree =<span style="color: #000000;"> tmp;
+                insert_case(tmp);
+            }
+        } </span><span style="color: #0000ff;">else</span><span style="color: #000000;"> {
+            </span><span style="color: #0000ff;">if</span> (p-&gt;rightTree !=<span style="color: #000000;"> NIL)
+                insert(p</span>-&gt;<span style="color: #000000;">rightTree, data);
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;"> {
+                Node </span>*tmp = <span style="color: #0000ff;">new</span><span style="color: #000000;"> Node();
+                tmp</span>-&gt;value =<span style="color: #000000;"> data;
+                tmp</span>-&gt;leftTree = tmp-&gt;rightTree =<span style="color: #000000;"> NIL;
+                tmp</span>-&gt;parent =<span style="color: #000000;"> p;
+                p</span>-&gt;rightTree =<span style="color: #000000;"> tmp;
+                insert_case(tmp);
+            }
+        }
+    }
+
+    </span><span style="color: #0000ff;">void</span> insert_case(Node *<span style="color: #000000;">p) {
+        </span><span style="color: #0000ff;">if</span> (p-&gt;parent ==<span style="color: #000000;"> NULL) {
+            root </span>=<span style="color: #000000;"> p;
+            p</span>-&gt;color =<span style="color: #000000;"> BLACK;
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+        }
+        </span><span style="color: #0000ff;">if</span> (p-&gt;parent-&gt;color ==<span style="color: #000000;"> RED) {
+            </span><span style="color: #0000ff;">if</span> (p-&gt;uncle()-&gt;color ==<span style="color: #000000;"> RED) {
+                p</span>-&gt;parent-&gt;color = p-&gt;uncle()-&gt;color =<span style="color: #000000;"> BLACK;
+                p</span>-&gt;grandparent()-&gt;color =<span style="color: #000000;"> RED;
+                insert_case(p</span>-&gt;<span style="color: #000000;">grandparent());
+            } </span><span style="color: #0000ff;">else</span><span style="color: #000000;"> {
+                </span><span style="color: #0000ff;">if</span> (p-&gt;parent-&gt;rightTree == p &amp;&amp; p-&gt;grandparent()-&gt;leftTree == p-&gt;<span style="color: #000000;">parent) {
+                    rotate_left(p);
+                    rotate_right(p);
+                    p</span>-&gt;color =<span style="color: #000000;"> BLACK;
+                    p</span>-&gt;leftTree-&gt;color = p-&gt;rightTree-&gt;color =<span style="color: #000000;"> RED;
+                } </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span> (p-&gt;parent-&gt;leftTree == p &amp;&amp; p-&gt;grandparent()-&gt;rightTree == p-&gt;<span style="color: #000000;">parent) {
+                    rotate_right(p);
+                    rotate_left(p);
+                    p</span>-&gt;color =<span style="color: #000000;"> BLACK;
+                    p</span>-&gt;leftTree-&gt;color = p-&gt;rightTree-&gt;color =<span style="color: #000000;"> RED;
+                } </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span> (p-&gt;parent-&gt;leftTree == p &amp;&amp; p-&gt;grandparent()-&gt;leftTree == p-&gt;<span style="color: #000000;">parent) {
+                    p</span>-&gt;parent-&gt;color =<span style="color: #000000;"> BLACK;
+                    p</span>-&gt;grandparent()-&gt;color =<span style="color: #000000;"> RED;
+                    rotate_right(p</span>-&gt;<span style="color: #000000;">parent);
+                } </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span> (p-&gt;parent-&gt;rightTree == p &amp;&amp; p-&gt;grandparent()-&gt;rightTree == p-&gt;<span style="color: #000000;">parent) {
+                    p</span>-&gt;parent-&gt;color =<span style="color: #000000;"> BLACK;
+                    p</span>-&gt;grandparent()-&gt;color =<span style="color: #000000;"> RED;
+                    rotate_left(p</span>-&gt;<span style="color: #000000;">parent);
+                }
+            }
+        }
+    }
+
+    </span><span style="color: #0000ff;">void</span> DeleteTree(Node *<span style="color: #000000;">p) {
+        </span><span style="color: #0000ff;">if</span> (!p || p ==<span style="color: #000000;"> NIL) {
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+        }
+        DeleteTree(p</span>-&gt;<span style="color: #000000;">leftTree);
+        DeleteTree(p</span>-&gt;<span style="color: #000000;">rightTree);
+        </span><span style="color: #0000ff;">delete</span><span style="color: #000000;"> p;
+    }
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;">:
+
+    bst() {
+        NIL </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> Node();
+        NIL</span>-&gt;color =<span style="color: #000000;"> BLACK;
+        root </span>=<span style="color: #000000;"> NULL;
+    }
+
+    </span>~<span style="color: #000000;">bst() {
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (root)
+            DeleteTree(root);
+        </span><span style="color: #0000ff;">delete</span><span style="color: #000000;"> NIL;
+    }
+
+    </span><span style="color: #0000ff;">void</span><span style="color: #000000;"> inorder() {
+        </span><span style="color: #0000ff;">if</span> (root ==<span style="color: #000000;"> NULL)
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+        inorder(root);
+        cout </span>&lt;&lt;<span style="color: #000000;"> endl;
+    }
+
+    </span><span style="color: #0000ff;">void</span> insert(<span style="color: #0000ff;">int</span><span style="color: #000000;"> x) {
+        </span><span style="color: #0000ff;">if</span> (root ==<span style="color: #000000;"> NULL) {
+            root </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> Node();
+            root</span>-&gt;color =<span style="color: #000000;"> BLACK;
+            root</span>-&gt;leftTree = root-&gt;rightTree =<span style="color: #000000;"> NIL;
+            root</span>-&gt;value =<span style="color: #000000;"> x;
+        } </span><span style="color: #0000ff;">else</span><span style="color: #000000;"> {
+            insert(root, x);
+        }
+    }
+
+    </span><span style="color: #0000ff;">bool</span> delete_value(<span style="color: #0000ff;">int</span><span style="color: #000000;"> data) {
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> delete_child(root, data);
+    }
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;">:
+    Node </span>*root, *<span style="color: #000000;">NIL;
+};</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/copycode.gif" alt="复制代码" data-bd-imgshare-binded="1"></a></span></div></div>
+<div style="text-align: right"><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#_labelTop">回到顶部</a><a name="_label5"></a></div><h3 class="First"><span style="font-size: 16px;">4. B树</span></h3>
+<p><span style="font-size: 16px;">　　B树也是一种用于查找的平衡树，但是它不是二叉树。</span></p>
+<p><span style="font-size: 16px;">　　<strong>B树的定义：</strong>B树（<span class="LangWithName"><span lang="en" xml:lang="en">B-tree）是一种树状数据结构，能够用来存储排序后的数据。这种数据结构能够让查找数据、循序存取、插入数据及删除的动作，都在对数时间内完成。B树，概括来说是一个一般化的二叉查找树，可以拥有多于2个子节点。与自平衡二叉查找树不同，B-树为系统最优化大块数据的读和写操作。B-tree算法减少定位记录时所经历的中间过程，从而加快存取速度。这种数据结构常被应用在数据库和文件系统的实作上。</span></span></span></p>
+<p><span style="font-size: 16px;">　　在B树中查找给定关键字的方法是，首先把根结点取来，在根结点所包含的关键字K1,…,Kn查找给定的关键字（可用顺序查找或二分查找法），若找到等于给定值的关键字，则查找成功；否则，一定可以确定要查找的关键字在Ki与Ki+1之间，Pi为指向子树根节点的指针，此时取指针Pi所指的结点继续查找，直至找到，或指针Pi为空时查找失败。</span></p>
+<p><span style="font-size: 16px;">　　B树作为一种多路搜索树（并不是二叉的）：</span></p>
+<p><span style="font-size: 16px;">　　1) 定义任意非叶子结点最多只有M个儿子；且M&gt;2；</span></p>
+<p><span style="font-size: 16px;">　　2)&nbsp;根结点的儿子数为[2, M]；</span></p>
+<p><span style="font-size: 16px;">　　3)&nbsp;除根结点以外的非叶子结点的儿子数为[M/2, M]；</span></p>
+<p><span style="font-size: 16px;">　　4)&nbsp;每个结点存放至少M/2-1（取上整）和至多M-1个关键字；（至少2个关键字）</span></p>
+<p><span style="font-size: 16px;">　　5)&nbsp;非叶子结点的关键字个数=指向儿子的指针个数-1；</span></p>
+<p><span style="font-size: 16px;">　　6)&nbsp;非叶子结点的关键字：K[1], K[2], …, K[M-1]；且K[i] &lt; K[i+1]；</span></p>
+<p><span style="font-size: 16px;">　　7)&nbsp;非叶子结点的指针：P[1], P[2], …, P[M]；其中P[1]指向关键字小于K[1]的</span><span style="font-size: 16px;">子树，P[M]指向关键字大于K[M-1]的子树，其它P[i]指向关键字属于(K[i-1], K[i])的子树；</span></p>
+<p><span style="font-size: 16px;">　　8)&nbsp;所有叶子结点位于同一层；</span></p>
+<p><span style="font-size: 16px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如下图为一个M=3的B树示例：</span></p>
+<p align="center"><img src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/4.JPG" alt="" data-bd-imgshare-binded="1"></p>
+<p style="text-align: left;" align="center"><span style="font-size: 16px;">　　B树创建的示意图：</span></p>
+<p style="text-align: left;" align="center"><span style="font-size: 16px;"><img style="display: block; margin-left: auto; margin-right: auto;" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/btreebuild.gif" alt="" data-bd-imgshare-binded="1"></span></p>
+<div style="text-align: right"><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#_labelTop">回到顶部</a><a name="_label6"></a></div><h3 class="First">5. B+树</h3>
+<p><span style="font-size: 16px;">　　B+树是B树的变体，也是一种多路搜索树：</span></p>
+<p><span style="font-size: 16px;">　　1) 其定义基本与B-树相同，除了：</span></p>
+<p><span style="font-size: 16px;">　　2) 非叶子结点的子树指针与关键字个数相同；</span></p>
+<p><span style="font-size: 16px;">　　3) 非叶子结点的子树指针P[i]，指向关键字值属于[K[i], K[i+1])的子树</span><span style="font-size: 16px;">（B-树是开区间）；</span></p>
+<p><span style="font-size: 16px;">　　4) 为所有叶子结点增加一个链指针；</span></p>
+<p><span style="font-size: 16px;">　　5) 所有关键字都在叶子结点出现；</span></p>
+<p><span style="font-size: 16px;">　　</span><span style="font-size: 16px;">下图为M=3的B+树的示意图：</span></p>
+<p align="center"><img src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/5.JPG" alt="" data-bd-imgshare-binded="1"></p>
+<p><span style="font-size: 16px;">　　B+树的搜索与B树也基本相同，区别是B+树只有达到叶子结点才命中（B树可以在</span><span style="font-size: 16px;">非叶子结点命中），其性能也等价于在关键字全集做一次二分查找；</span></p>
+<p><span style="font-size: 16px;">　　<strong>B+的性质：</strong></span></p>
+<p><span style="font-size: 16px;">　　1.所有关键字都出现在叶子结点的链表中（稠密索引），且链表中的关键字恰好</span><span style="font-size: 16px;">是有序的；</span></p>
+<p><span style="font-size: 16px;">　　2.不可能在非叶子结点命中；</span></p>
+<p><span style="font-size: 16px;">　　3.非叶子结点相当于是叶子结点的索引（稀疏索引），叶子结点相当于是存储</span><span style="font-size: 16px;">（关键字）数据的数据层；</span></p>
+<p><span style="font-size: 16px;">　　4.更适合文件索引系统。</span></p>
+<p><span style="font-size: 16px;">　　下面为一个B+树创建的示意图：</span></p>
+<p><span style="font-size: 16px;"><img style="display: block; margin-left: auto; margin-right: auto;" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/Bplustreebuild.gif" alt="" data-bd-imgshare-binded="1"></span></p>
+<div style="text-align: right"><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#_labelTop">回到顶部</a><a name="_label7"></a></div><h3 class="First">6. B*树</h3>
+<p><span style="font-size: 16px;">　　B*树是B+树的变体，在B+树的非根和非叶子结点再增加指向兄弟的指针，</span><span style="font-size: 16px;">将结点的最低利用率</span><span style="font-size: 16px;">从1/2提高到2/3。</span></p>
+<p><span style="font-size: 16px;">　　B*树如下图所示：</span></p>
+<p align="center"><span style="font-size: 16px;"><img src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/6.JPG" alt="" data-bd-imgshare-binded="1"></span></p>
+<p><span style="font-size: 16px;">　　B*树定义了非叶子结点关键字个数至少为(2/3)*M，即块的最低使用率为2/3</span><span style="font-size: 16px;">（代替B+树的1/2）；</span></p>
+<p><span style="font-size: 16px;">　　B+树的分裂：当一个结点满时，分配一个新的结点，并将原结点中1/2的数据</span><span style="font-size: 16px;">复制到新结点，最后在父结点中增加新结点的指针；B+树的分裂只影响原结点和父</span><span style="font-size: 16px;">结点，而不会影响兄弟结点，所以它不需要指向兄弟的指针；</span></p>
+<p><span style="font-size: 16px;">　　B*树的分裂：当一个结点满时，如果它的下一个兄弟结点未满，那么将一部分</span><span style="font-size: 16px;">数据移到兄弟结点中，再在原结点插入关键字，最后修改父结点中兄弟结点的关键字</span><span style="font-size: 16px;">（因为兄弟结点的关键字范围改变了）；如果兄弟也满了，则在原结点与兄弟结点之</span><span style="font-size: 16px;">间增加新结点，并各复制1/3的数据到新结点，最后在父结点增加新结点的指针；</span></p>
+<p><span style="font-size: 16px;">　　所以，B*树分配新结点的概率比B+树要低，空间使用率更高。</span></p>
+<div style="text-align: right"><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#_labelTop">回到顶部</a><a name="_label8"></a></div><h3 class="First">7. Trie树</h3>
+<p><span style="font-size: 16px;">　　Tire树称为字典树，又称单词查找树，Trie树，是一种树形结构，是一种哈希树的变种。典型应用是用于统计，排序和保存大量的字符串（但不仅限于字符串），所以经常被搜索引擎系统用于文本词频统计。<span style="color: #ff0000;"><strong>它的优点是：利用字符串的公共前缀来减少查询时间，最大限度地减少无谓的字符串比较，查询效率比哈希树高。</strong></span></span><span style="font-size: 16px;">　</span></p>
+<div class="para"><span style="font-size: 16px;">　　<strong>Tire树的三个基本性质：</strong></span></div>
+<div class="para"><span style="font-size: 16px;">　　1)&nbsp;根节点不包含字符，除根节点外每一个节点都只包含一个字符； </span></div>
+<div class="para"><span style="font-size: 16px;">　　2) 从根节点到某一节点，路径上经过的字符连接起来，为该节点对应的字符串； </span></div>
+<div class="para"><span style="font-size: 16px;">　　3) 每个节点的所有子节点包含的字符都不相同。</span></div>
+<p><span style="font-size: 16px;">　　<strong>Tire树的应用：</strong></span></p>
+<p><span style="font-size: 16px;">　　1)&nbsp;</span><span class="headline-content" style="font-size: 16px;">串的快速检索</span></p>
+<p class="para"><span style="font-size: 16px;">　　给出N个单词组成的熟词表，以及一篇全用小写英文书写的文章，请你按最早出现的顺序写出所有不在熟词表中的生词。</span></p>
+<p class="para"><span style="font-size: 16px;">在这道题中，我们可以用数组枚举，用哈希，用字典树，先把熟词建一棵树，然后读入文章进行比较，这种方法效率是比较高的。</span></p>
+<p class="para"><span class="headline-content" style="font-size: 16px;">　　2)&nbsp;“串”排序</span></p>
+<p class="para"><span style="font-size: 16px;">　　给定N个互不相同的仅由一个单词构成的英文名，让你将他们按字典序从小到大输出。</span><span style="font-size: 16px;">用字典树进行排序，采用数组的方式创建字典树，这棵树的每个结点的所有儿子很显然地按照其字母大小排序。对这棵树进行先序遍历即可。</span></p>
+<p class="para"><span style="font-size: 16px;">　　<span class="headline-content">3) 最长公共前缀</span></span></p>
+<p class="para"><span style="font-size: 16px;">　　对所有串建立字典树，对于两个串的最长公共前缀的长度即他们所在的结点的公共祖先个数，于是，问题就转化为求公共祖先的问题。</span></p>
+</div>
+</div></div><div id="MySignature" style="display: block;"><p style="background: rgb(89,195,228); padding: 10px 10px 10px 10px; border: 1px dashed rgb(255,255,255); font-family: 幼圆; front-size: 16px;">
+作者：<a href="http://www.cnblogs.com/maybe2030/" target="_blank">Poll的笔记</a>
+<br>
+博客出处：<a href="http://www.cnblogs.com/maybe2030/" target="_blank">http://www.cnblogs.com/maybe2030/</a>
+<br>
+本文版权归作者和博客园所有，欢迎转载，转载请标明出处。
+<br>
+&lt;如果你觉得本文还不错，对你的学习带来了些许帮助，请帮忙点击右下角的推荐&gt;
+</p></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory">分类: <a href="http://www.cnblogs.com/maybe2030/category/697575.html" target="_blank">C/C++</a>,<a href="http://www.cnblogs.com/maybe2030/category/709561.html" target="_blank">Data Structure</a></div>
+<div id="EntryTag">标签: <a href="http://www.cnblogs.com/maybe2030/tag/Data%20Structure/">Data Structure</a>, <a href="http://www.cnblogs.com/maybe2030/tag/C%2B%2B/">C++</a></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(4732377,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;d806c0a7-6907-e511-b908-9dcfd8948a71&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/icon_weibo_24.png" alt="" data-bd-imgshare-binded="1"></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/wechat.png" alt="" data-bd-imgshare-binded="1"></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/maybe2030/" target="_blank"><img src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/20150531155648.png" class="author_avatar" alt="" data-bd-imgshare-binded="1"></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/maybe2030/">Poll的笔记</a><br>
+            <a href="http://home.cnblogs.com/u/maybe2030/followees">关注 - 13</a><br>
+            <a href="http://home.cnblogs.com/u/maybe2030/followers">粉丝 - 312</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;d806c0a7-6907-e511-b908-9dcfd8948a71&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(4732377,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">4</span>
+    </div>
+    <div class="buryit" onclick="votePost(4732377,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">2</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="http://www.cnblogs.com/maybe2030/p/4719267.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/maybe2030/p/4719267.html" title="发布于2015-08-12 09:36">[Data Structure &amp; Algorithm] Hash那点事儿</a><br><a href="http://www.cnblogs.com/maybe2030/p/4734645.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/maybe2030/p/4734645.html" title="发布于2015-08-16 17:28">[Machine Learning &amp; Algorithm] 决策树与迭代决策树（GBDT）</a><br></div>
+</div>
+
+
+		</div>
+		<div class="postDesc">posted @ <span id="post-date">2015-08-15 17:49</span> <a href="http://www.cnblogs.com/maybe2030/">Poll的笔记</a> 阅读(<span id="post_view_count">4054</span>) 评论(<span id="post_comment_count">8</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=4732377" rel="nofollow">编辑</a> <a href="http://www.cnblogs.com/maybe2030/p/4732377.html#" onclick="AddToWz(4732377);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=229915,cb_entryId=4732377,cb_blogApp=currentBlogApp,cb_blogUserGuid='d806c0a7-6907-e511-b908-9dcfd8948a71',cb_entryCreatedDate='2015/8/15 17:49:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"><div id="comments_pager_top"></div>
+<br>
+<div class="feedback_area_title">评论列表</div>
+<div class="feedbackNoItems"></div>	
+
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"><a href="javascript:void(0);" onclick="return ReplyComment(3249101,&#39;CJ9zAxOUM4Rv0srOvwlBfYvZYBAUZwwwkRCEWwsZficezLkjyfCHow==&#39;)">回复</a><a href="javascript:void(0);" onclick="return QuoteComment(3249101,&#39;CJ9zAxOUM4Rv0srOvwlBfYvZYBAUZwwwkRCEWwsZficezLkjyfCHow==&#39;)">引用</a></span>
+				</div>
+				<a href="http://www.cnblogs.com/maybe2030/p/4732377.html#3249101" class="layer">#1楼</a><a name="3249101" id="comment_anchor_3249101"></a>  <span class="comment_date">2015-08-17 14:34</span> <a id="a_comment_author_3249101" href="http://www.cnblogs.com/MYSQLZOUQI/" target="_blank">xiaohuazi</a> <a href="http://msg.cnblogs.com/send/xiaohuazi" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3249101" class="blog_comment_body">抄得好！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3249101,&#39;Digg&#39;,this)">支持(1)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3249101,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3249101_avatar" style="display:none;">http://pic.cnblogs.com/face/572343/20151015094908.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"><a href="javascript:void(0);" onclick="return ReplyComment(3249224,&#39;HFiRv83si1iV3Ry3eBrxQl8qdRuARAimXtjz/MgoivQnn4EaqMqcjw==&#39;)">回复</a><a href="javascript:void(0);" onclick="return QuoteComment(3249224,&#39;HFiRv83si1iV3Ry3eBrxQl8qdRuARAimXtjz/MgoivQnn4EaqMqcjw==&#39;)">引用</a></span>
+				</div>
+				<a href="http://www.cnblogs.com/maybe2030/p/4732377.html#3249224" class="layer">#2楼</a><a name="3249224" id="comment_anchor_3249224"></a>[<span class="louzhu">楼主</span>]  <span class="comment_date">2015-08-17 16:35</span> <a id="a_comment_author_3249224" href="http://www.cnblogs.com/maybe2030/" target="_blank">Poll的笔记</a> <a href="http://msg.cnblogs.com/send/Poll%E7%9A%84%E7%AC%94%E8%AE%B0" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3249224" class="blog_comment_body"><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#3249101" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3249101);">@</a>
+xiaohuazi<br>你好，我个人认为好的博客分为三种类型：第一种为原创型；第二种为整理型，即集众人之所长，对某个领域某个问题进行集中的整理；第三种为翻译型。我觉得我这篇博文虽然大部分是摘自其他博客，但是我之前以及注明了来源，也不存在不尊重原创的情况。而且，这确实是属于本人的整理博文，是为了方便以后查阅，能够对其他人有帮助最好，没帮助也是自己笔记，对自己也有帮助，谢谢你的反馈。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3249224,&#39;Digg&#39;,this)">支持(2)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3249224,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3249224_avatar" style="display:none;">http://pic.cnblogs.com/face/764050/20150531155648.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"><a href="javascript:void(0);" onclick="return ReplyComment(3254290,&#39;GoAkJbHT1NAjF0+mXmvO6zrzwAsxx8+SQstZj3nSaL++Rn4W9Kge8w==&#39;)">回复</a><a href="javascript:void(0);" onclick="return QuoteComment(3254290,&#39;GoAkJbHT1NAjF0+mXmvO6zrzwAsxx8+SQstZj3nSaL++Rn4W9Kge8w==&#39;)">引用</a></span>
+				</div>
+				<a href="http://www.cnblogs.com/maybe2030/p/4732377.html#3254290" class="layer">#3楼</a><a name="3254290" id="comment_anchor_3254290"></a>  <span class="comment_date">2015-08-26 08:53</span> <a id="a_comment_author_3254290" href="http://home.cnblogs.com/u/771674/" target="_blank">VastStarry</a> <a href="http://msg.cnblogs.com/send/VastStarry" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3254290" class="blog_comment_body">评论的好，整理型文章只要注明了出处，而且在别人基础上有更多东西就值得肯定</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3254290,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3254290,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"><a href="javascript:void(0);" onclick="return ReplyComment(3459765,&#39;ESQ3vAp/AxVrxCuT/iclxySOl/J/f8Hyii4mgHYB5IFTh2q/MU7sgw==&#39;)">回复</a><a href="javascript:void(0);" onclick="return QuoteComment(3459765,&#39;ESQ3vAp/AxVrxCuT/iclxySOl/J/f8Hyii4mgHYB5IFTh2q/MU7sgw==&#39;)">引用</a></span>
+				</div>
+				<a href="http://www.cnblogs.com/maybe2030/p/4732377.html#3459765" class="layer">#4楼</a><a name="3459765" id="comment_anchor_3459765"></a>  <span class="comment_date">2016-06-28 08:12</span> <a id="a_comment_author_3459765" href="http://www.cnblogs.com/zhengbin/" target="_blank">郑州的文武</a> <a href="http://msg.cnblogs.com/send/%E9%83%91%E5%B7%9E%E7%9A%84%E6%96%87%E6%AD%A6" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3459765" class="blog_comment_body">啥是抄？这些数据结构是你发明的？！嫌抄自己写去</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3459765,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3459765,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3459765_avatar" style="display:none;">http://pic.cnblogs.com/face/731716/20150316143550.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"><a href="javascript:void(0);" onclick="return ReplyComment(3459916,&#39;HFiRv83si1iV3Ry3eBrxQl8qdRuARAimXtjz/MgoivQnn4EaqMqcjw==&#39;)">回复</a><a href="javascript:void(0);" onclick="return QuoteComment(3459916,&#39;HFiRv83si1iV3Ry3eBrxQl8qdRuARAimXtjz/MgoivQnn4EaqMqcjw==&#39;)">引用</a></span>
+				</div>
+				<a href="http://www.cnblogs.com/maybe2030/p/4732377.html#3459916" class="layer">#5楼</a><a name="3459916" id="comment_anchor_3459916"></a>[<span class="louzhu">楼主</span>]  <span class="comment_date">2016-06-28 10:47</span> <a id="a_comment_author_3459916" href="http://www.cnblogs.com/maybe2030/" target="_blank">Poll的笔记</a> <a href="http://msg.cnblogs.com/send/Poll%E7%9A%84%E7%AC%94%E8%AE%B0" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3459916" class="blog_comment_body"><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#3459765" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3459765);">@</a>
+郑州的文武<br>多谢支持！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3459916,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3459916,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3459916_avatar" style="display:none;">http://pic.cnblogs.com/face/764050/20150531155648.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"><a href="javascript:void(0);" onclick="return ReplyComment(3472803,&#39;1Rh/lWfifst4OygllkXE98uOQ00p3yww2b5UJvpEk1Qxxrae7XLcDQ==&#39;)">回复</a><a href="javascript:void(0);" onclick="return QuoteComment(3472803,&#39;1Rh/lWfifst4OygllkXE98uOQ00p3yww2b5UJvpEk1Qxxrae7XLcDQ==&#39;)">引用</a></span>
+				</div>
+				<a href="http://www.cnblogs.com/maybe2030/p/4732377.html#3472803" class="layer">#6楼</a><a name="3472803" id="comment_anchor_3472803"></a>  <span class="comment_date">2016-07-19 17:11</span> <a id="a_comment_author_3472803" href="http://www.cnblogs.com/xdlwd086/" target="_blank">文轩云阁</a> <a href="http://msg.cnblogs.com/send/%E6%96%87%E8%BD%A9%E4%BA%91%E9%98%81" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3472803" class="blog_comment_body">同学，你整理的非常好，多谢分享</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3472803,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3472803,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3472803_avatar" style="display:none;">http://pic.cnblogs.com/face/672259/20140913191341.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"><a href="javascript:void(0);" onclick="return ReplyComment(3472818,&#39;HFiRv83si1iV3Ry3eBrxQl8qdRuARAimXtjz/MgoivQnn4EaqMqcjw==&#39;)">回复</a><a href="javascript:void(0);" onclick="return QuoteComment(3472818,&#39;HFiRv83si1iV3Ry3eBrxQl8qdRuARAimXtjz/MgoivQnn4EaqMqcjw==&#39;)">引用</a></span>
+				</div>
+				<a href="http://www.cnblogs.com/maybe2030/p/4732377.html#3472818" class="layer">#7楼</a><a name="3472818" id="comment_anchor_3472818"></a>[<span class="louzhu">楼主</span>]  <span class="comment_date">2016-07-19 17:26</span> <a id="a_comment_author_3472818" href="http://www.cnblogs.com/maybe2030/" target="_blank">Poll的笔记</a> <a href="http://msg.cnblogs.com/send/Poll%E7%9A%84%E7%AC%94%E8%AE%B0" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3472818" class="blog_comment_body"><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#3472803" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3472803);">@</a>
+文轩云阁<br>多谢支持！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3472818,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3472818,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3472818_avatar" style="display:none;">http://pic.cnblogs.com/face/764050/20150531155648.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"><a href="javascript:void(0);" onclick="return ReplyComment(3508836,&#39;aaDlApORV3M3WoFMzd8bM7JZ4LRarU8ybBPFM4ejIBjy1bZfmp5NZw==&#39;)">回复</a><a href="javascript:void(0);" onclick="return QuoteComment(3508836,&#39;aaDlApORV3M3WoFMzd8bM7JZ4LRarU8ybBPFM4ejIBjy1bZfmp5NZw==&#39;)">引用</a></span>
+				</div>
+				<a href="http://www.cnblogs.com/maybe2030/p/4732377.html#3508836" class="layer">#8楼</a><a name="3508836" id="comment_anchor_3508836"></a><span id="comment-maxId" style="display:none;">3508836</span><span id="comment-maxDate" style="display:none;">2016/9/12 15:58:28</span>  <span class="comment_date">2016-09-12 15:58</span> <a id="a_comment_author_3508836" href="http://www.cnblogs.com/tamarous/" target="_blank">Tamarous</a> <a href="http://msg.cnblogs.com/send/Tamarous" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3508836" class="blog_comment_body">你好，有个疑问：深度为K的二叉树的结点数最多应该是2^k-1个，而不是2^(k-1)个吧</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3508836,&#39;Digg&#39;,this)">支持(1)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3508836,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	<div id="comments_pager_bottom"></div></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#" onclick="return RefreshPage();">刷新页面</a><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#top">返回顶部</a></div>
+<div id="comment_form_container">
+<div id="commentform_title">发表评论</div>
+<span id="tip_comment" style="color:Red"></span>
+<p>
+昵称：<input type="text" id="tbCommentAuthor" class="author" disabled="disabled" size="50" value="zhenghua">
+</p>
+<div class="commentbox_main">
+<div class="commentbox_title">
+<div class="commentbox_title_left">评论内容：</div>
+<div class="commentbox_title_right">
+<img id="ubb_quote" class="comment_icon" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/quote.gif" alt="引用" title="添加引用" onclick="insertUBB(&#39;tbCommentBody&#39;,&#39;quote&#39;)" data-bd-imgshare-binded="1">
+<img id="ubb_bold" class="comment_icon" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/b.png" alt="粗体" title="添加粗体" onclick="insertUBB(&#39;tbCommentBody&#39;,&#39;b&#39;)" data-bd-imgshare-binded="1">
+<img id="ubb_url" class="comment_icon" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/lk.png" alt="链接" title="添加链接" onclick="insertUbbUrl(&#39;tbCommentBody&#39;)" data-bd-imgshare-binded="1">
+<img id="ubb_indent" class="comment_icon" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/indent.png" alt="缩进" title="添加首行缩进" onclick="insertIndent(&#39;tbCommentBody&#39;)" data-bd-imgshare-binded="1">
+<img id="ubb_code" class="comment_icon" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/InsertCode.gif" alt="代码" title="添加代码" onclick="insertUbbCode()" data-bd-imgshare-binded="1">
+<img id="ubb_img" class="comment_icon" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/img.gif" alt="图片" title="上传图片" onclick="OpenImageUploadWindow();" data-bd-imgshare-binded="1">
+</div>
+</div>
+<div class="clear"></div>
+<textarea id="tbCommentBody" class="comment_textarea"></textarea>
+</div>
+<p id="commentbox_opt">
+<input id="btn_comment_submit" type="button" class="comment_btn" value="提交评论">
+<span id="span_comment_canceledit" style="display:none"><a href="javascript:void(0);" onclick="return CancelCommentEdit()">不改了</a></span>
+<a href="javascript:void(0);" onclick="return logout();">退出登录</a>
+        <a id="commentbox_opt_sub" href="javascript:void(0);" title="订阅后有新评论时会邮件通知您" onclick="commentManager.Subscribe()">订阅评论</a>
+</p>
+<div id="tip_comment2" style="color:Red"></div>
+<p>
+[Ctrl+Enter快捷键提交]
+</p>
+<div style="display:none">
+<span id="comment_edit_id"></span><span id="span_parentcomment_id"></span>
+<span id="span_parent_id"></span>
+<span id="span_comment_replyto"></span>
+<span id="span_comment_posted"></span>
+</div>
+</div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】50万行VC++源码: 大型组态工控、电力仿真CAD与GIS源码库</a><br><a href="http://rongcloud.cn/reports/journal2" target="_blank">【推荐】融云发布 App 社交化白皮书 IM 提升活跃超 8 倍</a><br><a href="http://bbs.h3bpm.com/index.php?m=app&amp;app=product_download&amp;a=reg&amp;utm_source=csdn&amp;utm_medium=pic&amp;utm_campaign=show&amp;utm_content=v10&amp;utm_term=%E5%85%8D%E8%B4%B9%E4%B8%8B%E8%BD%BD" target="_blank">【推荐】自开发 零实施的BPM</a><br></div>
+<div id="opt_under_post"></div>
+<div id="ad_c1" class="c_ad_block"><a href="http://click.aliyun.com/m/9742/" target="_blank"><img width="300" height="250" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/24442-20170123215154878-323669841.gif" alt="" data-bd-imgshare-binded="1"></a></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="http://news.cnblogs.com/n/561813/" target="_blank">真富可敌国：他们是科技圈最富有的十个人</a><br> ·  <a href="http://news.cnblogs.com/n/561812/" target="_blank">iPhone国行售后调整确定：要求确实苛刻</a><br> ·  <a href="http://news.cnblogs.com/n/561811/" target="_blank">因牵涉股权转让纠纷，水木清华BBS合伙人反目</a><br> ·  <a href="http://news.cnblogs.com/n/561810/" target="_blank">还没集到敬业福的有救了！快看图...</a><br> ·  <a href="http://news.cnblogs.com/n/561809/" target="_blank">Galaxy S7 edge屏幕惊现粉色竖线：三星回应</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="ad_c2" class="c_ad_block"><a href="http://bbs.h3bpm.com/index.php?m=app&amp;app=product_download&amp;a=reg&amp;utm_source=csdn&amp;utm_medium=pic&amp;utm_campaign=show&amp;utm_content=v10&amp;utm_term=%E5%85%8D%E8%B4%B9%E4%B8%8B%E8%BD%BD" target="_blank"><img width="468" height="60" src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/24442-20170118152220281-363324784.jpg" alt="" data-bd-imgshare-binded="1"></a></div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/554260/" target="_blank">「代码家」的学习过程和学习经验分享</a><br> ·  <a href="http://kb.cnblogs.com/page/556770/" target="_blank">写给未来的程序媛</a><br> ·  <a href="http://kb.cnblogs.com/page/558087/" target="_blank">高质量的工程代码为什么难写</a><br> ·  <a href="http://kb.cnblogs.com/page/555750/" target="_blank">循序渐进地代码重构</a><br> ·  <a href="http://kb.cnblogs.com/page/554496/" target="_blank">技术的正宗与野路子</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"><!-- Start of StatCounter Code for Default Guide -->
+<span class="statcounter"><a class="statcounter" href="http://www.statcounter.com/" target="_blank"><img src="./[Data Structure] 数据结构中各种树 - Poll的笔记 - 博客园_files/t.php" alt="StatCounter - Free Web Tracker and Counter" border="0" data-bd-imgshare-binded="1"></a></span>
+
+<noscript>&lt;div class="statcounter"&gt;&lt;a title="shopify stats"
+href="http://statcounter.com/shopify/" target="_blank"&gt;&lt;img
+class="statcounter"
+src="http://c.statcounter.com/10500913/0/47e32f49/0/"
+alt="shopify stats"&gt;&lt;/a&gt;&lt;/div&gt;</noscript>
+<!-- End of StatCounter Code for Default Guide -->
+<a href="http://statcounter.com/p10500913/?guest=1"></a>
+
+<div id="profile_block">昵称：<a href="http://home.cnblogs.com/u/maybe2030/">Poll的笔记</a><br>园龄：<a href="http://home.cnblogs.com/u/maybe2030/" title="入园时间：2015-05-31">1年7个月</a><br>粉丝：<a href="http://home.cnblogs.com/u/maybe2030/followers/">312</a><br>关注：<a href="http://home.cnblogs.com/u/maybe2030/followees/">13</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow(&#39;d806c0a7-6907-e511-b908-9dcfd8948a71&#39;)">+加关注</a></div></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style=""><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="Calendar">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2016/12/01&#39;);return false;">&lt;</a></td><td align="center">2017年1月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2017/02/01&#39;);return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">25</td><td class="CalOtherMonthDay" align="center">26</td><td class="CalOtherMonthDay" align="center">27</td><td class="CalOtherMonthDay" align="center">28</td><td class="CalOtherMonthDay" align="center">29</td><td class="CalOtherMonthDay" align="center">30</td><td class="CalOtherMonthDay" align="center">31</td></tr><tr><td class="CalWeekendDay" align="center">1</td><td align="center">2</td><td align="center">3</td><td align="center">4</td><td align="center">5</td><td align="center">6</td><td class="CalWeekendDay" align="center">7</td></tr><tr><td class="CalWeekendDay" align="center">8</td><td align="center">9</td><td align="center">10</td><td align="center">11</td><td align="center">12</td><td align="center">13</td><td class="CalWeekendDay" align="center">14</td></tr><tr><td class="CalWeekendDay" align="center">15</td><td align="center">16</td><td align="center">17</td><td align="center">18</td><td align="center">19</td><td align="center">20</td><td class="CalWeekendDay" align="center"><a href="http://www.cnblogs.com/maybe2030/archive/2017/01/21.html"><u>21</u></a></td></tr><tr><td class="CalWeekendDay" align="center">22</td><td align="center">23</td><td align="center">24</td><td class="CalTodayDay" align="center">25</td><td align="center">26</td><td align="center">27</td><td class="CalWeekendDay" align="center">28</td></tr><tr><td class="CalWeekendDay" align="center">29</td><td align="center">30</td><td align="center">31</td><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td></tr>
+</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block"></div><div id="sidebar_recentposts" class="sidebar-block">
+<div class="catListEssay">
+<h3 class="catListTitle">最新随笔</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/maybe2030/p/6336896.html">1. [Machine Learning] 深度学习中消失的梯度</a></li><li><a href="http://www.cnblogs.com/maybe2030/p/5678387.html">2. [Machine Learning] logistic函数和softmax函数</a></li><li><a href="http://www.cnblogs.com/maybe2030/p/5597716.html">3. [Machine Learning &amp; Algorithm] 神经网络基础</a></li><li><a href="http://www.cnblogs.com/maybe2030/p/5515042.html">4. [Machine Learning] Active Learning</a></li><li><a href="http://www.cnblogs.com/maybe2030/p/5514841.html">5. [Machine Learning &amp; Algorithm]CAML机器学习系列2：深入浅出ML之Entropy-Based家族</a></li><li><a href="http://www.cnblogs.com/maybe2030/p/5494931.html">6. [Machine Learning &amp; Algorithm]CAML机器学习系列1：深入浅出ML之Regression家族</a></li><li><a href="http://www.cnblogs.com/maybe2030/p/5469877.html">7. [Data Structure] LCSs——最长公共子序列和最长公共子串</a></li><li><a href="http://www.cnblogs.com/maybe2030/p/5427148.html">8. [Algorithm &amp; NLP] 文本深度表示模型——word2vec&amp;doc2vec词向量模型</a></li><li><a href="http://www.cnblogs.com/maybe2030/p/5375175.html">9. [Algorithm] 机器学习算法常用指标总结</a></li><li><a href="http://www.cnblogs.com/maybe2030/p/5325530.html">10. [Linux] Linux常用文本操作命令整理</a></li>
+</ul>
+</div>
+</div><div id="sidebar_categories">
+<div id="sidebar_postcategory" class="catListPostCategory sidebar-block">
+<h3 class="catListTitle">随笔分类</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_0_Link_0" href="http://www.cnblogs.com/maybe2030/category/709560.html">Algorithm(23)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_1" href="http://www.cnblogs.com/maybe2030/category/764596.html">Bash(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_2" href="http://www.cnblogs.com/maybe2030/category/697575.html">C/C++(6)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_3" href="http://www.cnblogs.com/maybe2030/category/755924.html">Computational Advertising(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_4" href="http://www.cnblogs.com/maybe2030/category/709561.html">Data Structure(6)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_5" href="http://www.cnblogs.com/maybe2030/category/705175.html">Database(3)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_6" href="http://www.cnblogs.com/maybe2030/category/714382.html">Evolutionary Algorithm(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_7" href="http://www.cnblogs.com/maybe2030/category/703274.html">Hadoop(4)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_8" href="http://www.cnblogs.com/maybe2030/category/699187.html">Linux(6)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_9" href="http://www.cnblogs.com/maybe2030/category/697574.html">Machine Learning(15)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_10" href="http://www.cnblogs.com/maybe2030/category/726727.html">Math(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_11" href="http://www.cnblogs.com/maybe2030/category/698646.html">Network(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_12" href="http://www.cnblogs.com/maybe2030/category/731172.html">Operate System</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_13" href="http://www.cnblogs.com/maybe2030/category/697576.html">Python(11)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_14" href="http://www.cnblogs.com/maybe2030/category/710022.html">Recommendation System(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_15" href="http://www.cnblogs.com/maybe2030/category/730622.html">Search Engine(3)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_16" href="http://www.cnblogs.com/maybe2030/category/714381.html">Social Network Analysis(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_17" href="http://www.cnblogs.com/maybe2030/category/705322.html">Web Development(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_18" href="http://www.cnblogs.com/maybe2030/category/703364.html">生活杂谈(1)</a> </li>
+
+</ul>
+
+</div>
+
+<div id="sidebar_postarchive" class="catListPostArchive sidebar-block">
+<h3 class="catListTitle">随笔档案</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_1_Link_0" href="http://www.cnblogs.com/maybe2030/archive/2017/01.html">2017年1月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_1" href="http://www.cnblogs.com/maybe2030/archive/2016/07.html">2016年7月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_2" href="http://www.cnblogs.com/maybe2030/archive/2016/06.html">2016年6月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_3" href="http://www.cnblogs.com/maybe2030/archive/2016/05.html">2016年5月 (4)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_4" href="http://www.cnblogs.com/maybe2030/archive/2016/04.html">2016年4月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_5" href="http://www.cnblogs.com/maybe2030/archive/2016/03.html">2016年3月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_6" href="http://www.cnblogs.com/maybe2030/archive/2016/02.html">2016年2月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_7" href="http://www.cnblogs.com/maybe2030/archive/2016/01.html">2016年1月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_8" href="http://www.cnblogs.com/maybe2030/archive/2015/12.html">2015年12月 (5)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_9" href="http://www.cnblogs.com/maybe2030/archive/2015/11.html">2015年11月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_10" href="http://www.cnblogs.com/maybe2030/archive/2015/10.html">2015年10月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_11" href="http://www.cnblogs.com/maybe2030/archive/2015/09.html">2015年9月 (5)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_12" href="http://www.cnblogs.com/maybe2030/archive/2015/08.html">2015年8月 (8)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_13" href="http://www.cnblogs.com/maybe2030/archive/2015/07.html">2015年7月 (8)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_14" href="http://www.cnblogs.com/maybe2030/archive/2015/06.html">2015年6月 (19)</a> </li>
+
+</ul>
+
+</div>
+
+<div id="sidebar_links698679" class="catList sidebar-block">
+<h3 class="catListTitle">My Team</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_2_Link_0" href="http://web.xidian.edu.cn/mggong/" rel="nofollow">OMEGA team</a> </li>
+
+</ul>
+
+</div>
+
+<div id="sidebar_links697577" class="catList sidebar-block">
+<h3 class="catListTitle">常用链接</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_3_Link_0" href="http://www.autonlab.org/tutorials/" rel="nofollow">[Andrew Moore] Statistical Data Mining Tutorials</a> </li>
+
+<li><a id="CatList_LinkList_3_Link_1" href="http://www.tutorialspoint.com/codingground.htm" rel="nofollow">[Online Terminals] tutorialspoint</a> </li>
+
+<li><a id="CatList_LinkList_3_Link_2" href="http://www.acmerblog.com/" rel="nofollow">ACM之家</a> </li>
+
+<li><a id="CatList_LinkList_3_Link_3" href="http://ml.memect.com/weekly/2015-03-01/index.html#3813390969803116" rel="nofollow">机器学习周报</a> </li>
+
+<li><a id="CatList_LinkList_3_Link_4" href="http://www.oschina.net/" rel="nofollow">开源中国</a> </li>
+
+<li><a id="CatList_LinkList_3_Link_5" href="http://database.51cto.com/art/201407/444810.htm" rel="nofollow">漫谈机器学习算法</a> </li>
+
+<li><a id="CatList_LinkList_3_Link_6" href="http://vbird.dic.ksu.edu.tw/linux_basic/linux_basic.php" rel="nofollow">鸟哥的Linux私房菜</a> </li>
+
+<li><a id="CatList_LinkList_3_Link_7" href="http://cos.name/" rel="nofollow">统计之都</a> </li>
+
+<li><a id="CatList_LinkList_3_Link_8" href="http://www.tuicool.com/" rel="nofollow">推酷</a> </li>
+
+<li><a id="CatList_LinkList_3_Link_9" href="http://52opencourse.com/" rel="nofollow">我爱公开课</a> </li>
+
+<li><a id="CatList_LinkList_3_Link_10" href="http://www.52ml.net/" rel="nofollow">我爱机器学习</a> </li>
+
+<li><a id="CatList_LinkList_3_Link_11" href="http://www.52nlp.cn/" rel="nofollow">我爱自然语言处理</a> </li>
+
+</ul>
+
+</div>
+
+<div id="sidebar_links702884" class="catList sidebar-block">
+<h3 class="catListTitle">推荐博友</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_4_Link_0" href="http://www.52caml.com/home/" rel="nofollow">CAML</a> </li>
+<li class="c_b_p_link_desc">计算广告与机器学习－技术共享平台</li>
+<li><a id="CatList_LinkList_4_Link_1" href="http://semocean.com/" rel="nofollow">Dustinsea</a> </li>
+<li class="c_b_p_link_desc">百度关键词搜索推荐系统maker</li>
+<li><a id="CatList_LinkList_4_Link_2" href="http://www.jianshu.com/users/2bd9b48f6ea8/latest_articles" rel="nofollow">JasonDing</a> </li>
+<li class="c_b_p_link_desc">机器学习、算法、Spark</li>
+<li><a id="CatList_LinkList_4_Link_3" href="http://blog.csdn.net/v_july_v/article/details/6543438" rel="nofollow">July的博客</a> </li>
+<li class="c_b_p_link_desc">结构之法，算法之道。</li>
+<li><a id="CatList_LinkList_4_Link_4" href="http://tech.uc.cn/" rel="nofollow">uc技术博客</a> </li>
+<li class="c_b_p_link_desc">UC企业技术博客</li>
+<li><a id="CatList_LinkList_4_Link_5" href="http://www.cnblogs.com/vamei/" rel="nofollow">Vamei</a> </li>
+<li class="c_b_p_link_desc">文艺地讲解编程、数学和设计</li>
+<li><a id="CatList_LinkList_4_Link_6" href="http://ahalei.blog.51cto.com/" rel="nofollow">阿哈磊</a> </li>
+<li class="c_b_p_link_desc">图文并茂的阿哈磊算法讲解，简单易懂</li>
+<li><a id="CatList_LinkList_4_Link_7" href="http://dongxicheng.org/" rel="nofollow">董的博客</a> </li>
+<li class="c_b_p_link_desc">关注大规模数据处理</li>
+<li><a id="CatList_LinkList_4_Link_8" href="http://www.cnblogs.com/yangecnu/category/548373.html">寒江独钓</a> </li>
+<li class="c_b_p_link_desc">详细的数据结构和算法讲解</li>
+<li><a id="CatList_LinkList_4_Link_9" href="http://www.flickering.cn/category/ads/">火光摇曳</a> </li>
+<li class="c_b_p_link_desc">机器学习、分布式计算、计算广告学</li>
+<li><a id="CatList_LinkList_4_Link_10" href="http://cuiqingcai.com/tag/%E7%88%AC%E8%99%AB" rel="nofollow">静觅</a> </li>
+<li class="c_b_p_link_desc">python爬虫系列教程</li>
+<li><a id="CatList_LinkList_4_Link_11" href="http://www.cnblogs.com/liyunhua/" rel="nofollow">静逸</a> </li>
+<li class="c_b_p_link_desc">专注于wed前端</li>
+<li><a id="CatList_LinkList_4_Link_12" href="http://coolshell.cn/" rel="nofollow">酷壳</a> </li>
+<li class="c_b_p_link_desc">程序员必看，涉及面很广，也很有深度</li>
+<li><a id="CatList_LinkList_4_Link_13" href="http://blog.niubua.com/" rel="nofollow">牛吧大数据</a> </li>
+<li class="c_b_p_link_desc">大数据、机器学习、R语言</li>
+<li><a id="CatList_LinkList_4_Link_14" href="http://www.ruanyifeng.com/blog/" rel="nofollow">阮一峰的网络日志</a> </li>
+<li class="c_b_p_link_desc">算法，数学，文学，科技，创业... ...</li>
+<li><a id="CatList_LinkList_4_Link_15" href="http://www.cnblogs.com/shishanyuan/category/709023.html">石山园</a> </li>
+<li class="c_b_p_link_desc">Hadoop入门进阶课程系列</li>
+<li><a id="CatList_LinkList_4_Link_16" href="http://rdc.taobao.org/" rel="nofollow">淘宝技术部</a> </li>
+<li class="c_b_p_link_desc">淘宝技术介绍</li>
+<li><a id="CatList_LinkList_4_Link_17" href="http://www.wangluqing.com/2014/05/17/hadoop-research-articles-sum/" rel="nofollow">王路情</a> </li>
+<li class="c_b_p_link_desc">Hadoop研究和R实战</li>
+<li><a id="CatList_LinkList_4_Link_18" href="http://www.cnblogs.com/TankXiao/" rel="nofollow">小坦克</a> </li>
+<li class="c_b_p_link_desc">网络协议介绍</li>
+</ul>
+
+</div>
+
+</div><div id="sidebar_scorerank" class="sidebar-block">
+<div class="catListBlogRank">
+<h3 class="catListTitle">积分与排名</h3>
+<ul>
+	<li class="liScore">
+		积分 -	100744
+	</li>
+	<li class="liRank">
+		排名 -	2286
+	</li>
+</ul>
+</div>
+
+
+</div></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright ©2017 Poll的笔记
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+<!--PageEndHtml Block Begin-->
+<script language="javascript" type="text/javascript">
+//生成目录索引列表
+function GenerateContentList()
+{
+    var jquery_h3_list = $('#cnblogs_post_body h3');//如果你的章节标题不是h3,只需要将这里的h3换掉即可
+    if(jquery_h3_list.length>0)
+    {
+        var content = '<a name="_labelTop"></a>';
+        content    += '<div id="navCategory">';
+        content    += '<p style="font-size:18px"><b>阅读目录</b></p>';
+        content    += '<ul>';
+        for(var i =0;i<jquery_h3_list.length;i++)
+        {
+            var go_to_top = '<div style="text-align: right"><a href="#_labelTop">回到顶部</a><a name="_label' + i + '"></a></div>';
+            $(jquery_h3_list[i]).before(go_to_top);
+            var li_content = '<li><a href="#_label' + i + '">' + $(jquery_h3_list[i]).text() + '</a></li>';
+            content += li_content;
+        }
+        content    += '</ul>';
+        content    += '</div>';
+        if($('#cnblogs_post_body').length != 0 )
+        {
+            $($('#cnblogs_post_body')[0]).prepend(content);
+        }
+    }    
+}
+GenerateContentList();
+</script>
+<!--PageEndHtml Block End-->
+
+
+<div class="bdshare-slide-button-box bdshare-slide-style-r6" style="top: 100px; width: 0px; z-index: 99999; right: 0px;" data-bd-bind="1485357436403"><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#" onclick="return false;" class="bdshare-slide-button" style="left: -24px;"></a><div class="bdshare-slide-list-box" style="width: 0px; display: none;"><div class="bdshare-slide-top">分享到</div><div class="bdshare-slide-list"><ul class="bdshare-slide-list-ul" style="width: 226px;"></ul></div><div class="bdshare-slide-bottom" style="width: 226px;"><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#" onclick="return false;" class="slide-more" data-cmd="more">更多...</a></div></div></div><div id="bdimgshare_1485357436442" class="sr-bdimgshare sr-bdimgshare-list sr-bdimgshare-16 sr-bdimgshare-black" style="height: 36px; line-height: 26px; font-size: 12px; position: absolute; top: 8650.27px; left: 869.75px; width: 785px; display: none;" data-bd-bind="1485357436441"><div class="bdimgshare-bg"></div><div class="bdimgshare-content bdsharebuttonbox bdshare-button-style0-16"><label class="bdimgshare-lbl">分享到：</label><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#" onclick="return false;" class="bds_qzone" data-cmd="qzone" hidefocus=""></a><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#" onclick="return false;" class="bds_tsina" data-cmd="tsina" hidefocus=""></a><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#" onclick="return false;" class="bds_tqq" data-cmd="tqq" hidefocus=""></a><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#" onclick="return false;" class="bds_renren" data-cmd="renren" hidefocus=""></a><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#" onclick="return false;" class="bds_weixin" data-cmd="weixin" hidefocus=""></a><a href="http://www.cnblogs.com/maybe2030/p/4732377.html#" onclick="return false;" class="bds_more" data-cmd="more" hidefocus=""></a></div></div></body></html>

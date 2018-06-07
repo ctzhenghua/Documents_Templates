@@ -16,10 +16,7 @@
  \usepackage{tabularx} 	%表格排版格式控制
  \usepackage{array}	%表格排版格式控制
  \usepackage{hyperref} %超链接 \url{URL}
- % \setCJKmainfont{方正兰亭黑简体}  %中文字体设置
- % \setCJKsansfont{华康少女字体} %设置中文字体
- % \setCJKmonofont{华康少女字体} %设置中文字体
-
+\usepackage{dirtree}
  \CTEXsetup[format+={\flushleft}]{section}
 
  %%%% 段落首行缩进两个字 %%%%
@@ -102,26 +99,114 @@
 	
 	
 \chapter{背景知识}
-	\section{光照模型}
-		\subsection{简单光照模型}
+	\section{绪论}
+		计算机图形学是利用计算机研究图形的表示、生成、处理、显示的学科。
 		
-		\subsection{局部光照模型}
+		\subsection{应用与意义}
+			\begin{itemize}
+				\item 电影 ：科幻大片的特效
+				\item 游戏 ：图形地理、人物控制
+				\item 计算机仿真
+				\item CAD/CAM ：设计、制造
+	 			\item 建筑
+				\item 可视化（科学）：化学结构、生物
+			\end{itemize}	
+	
+		\subsection{研究内容}
+			\begin{itemize}
+				\item 图形硬件、图形标准、图形交互技术
+				\item 光栅图形生成算法
+				\item 曲线曲面造型、实体造型
+				\item 真实感图形绘制、科学计算可视化、计算机动画、自然景物仿真
+				\item 虚拟现实
+			\end{itemize}
+			
+	\section{涉及概念}
+		\paragraph{图形与图象}
+			\subparagraph{图像}
+				计算机内以位图（Bitmap）形式存在的灰度信息。
 		
-		\subsection{整体光照模型}
+			\subparagraph{图形}
+				含有几何属性、更强调场景的几何表示，是由场景的几何模型和景物的物理属性共同组成的。
+				
+				图形主要分为两种：
+				\begin{itemize}[itemindent = 1em]
+					\item 基于线条信息表示
+					\item 明暗图（\textbf{Shading}）
+				\end{itemize}
 		
+		\paragraph{图形学与CAD}
+		\paragraph{图形学与模式识别}
+		\paragraph{图形学与视觉}
+
+	\section{历史}
+		\begin{itemize}
+			\item 细分曲面
+			\item 光栅化图形：区域填充、裁剪、消隐等基本图形概念（70年代）
+			\begin{enumerate}
+				\item 光反射模型 70年（真实感图形学）
+				\item 漫反射模型+插值 71年（明暗处理）
+				\item 简单光照模型 75年（Phong 模型）
+				\item 光投射模型 80年，并给出光线跟踪算法范例（Whitted 模型）
+				\item 辐射度方法 84年
+			\end{enumerate}
+
+		\end{itemize}
 		
-	\section{绘制方法}
-		\subsection{光线追踪}
+	\section{杂志与会议}
+		\paragraph{会议}
+		\begin{itemize}
+			\item Siggraph 
+			\item Eurograph
+			\item Pacific Graphics
+			\item Computer Graphics International.
+		\end{itemize}
 		
-		\subsection{辐射度}
-		
-		
-	\section{加速算法}
-		\subsection{包围盒树、自适应八叉树等}
-		
-		\subsection{阴影算法、纹理合成}
+		\paragraph{杂志}
+			\begin{itemize}
+				\item ACM Transaction on Graphics
+				\item IEEE Computer Graphics and Application
+				\item IEEE Visualization and Computer Graphics
+			\end{itemize}
 
 
+
+
+\chapter{真实感绘制及重要概念}
+	目的是模拟真实物体的物理属性，包括物体的形状，光学性质，表面的纹理和粗燥程度，以及物体间的相对位置，遮挡关系等。
+	
+	\dirtree{%
+		.1 图形学理论.
+		.2 \textbf{光照模型}.
+		.3 简单光照模型.
+		.3 局部光照模型.
+		.3 整体光照模型.
+		.2 \textbf{绘制方法}.
+		.3 光线追踪.
+		.3 辐射度.
+		.2 \textbf{加速算法}.
+		.3 包围盒树、自适应八叉树等.
+		.3 阴影算法、纹理合成.
+	}
+
+	\section{具体案例}
+		\begin{itemize}
+			\item 基于预计算的全局光照实时绘制
+			\item 表面细节绘制与体纹理
+			\item 头发的交互绘制与编辑
+		\end{itemize}
+	
+	\section{色彩视觉}
+	
+	\section{图形和像素}
+	
+	\section{三角网格模型}
+	
+	\section{光照模型与明暗处理}
+		
+		
+		
+		
 \chapter{光照}
 	\section{色彩空间}
 		 RGB 3通道 

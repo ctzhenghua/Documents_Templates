@@ -1,0 +1,4073 @@
+ \documentclass[UTF8,a4paper,12pt]{ctexbook} 
+ 
+ \usepackage{graphicx}%学习插入图
+ \usepackage{verbatim}%学习注释多行
+ \usepackage{booktabs}%表格
+ \usepackage{geometry}%图片
+ \usepackage{amsmath}
+ \usepackage{amssymb}
+ \usepackage{listings}%代码
+ \usepackage{xcolor}  %颜色
+ \usepackage{enumitem}%列表格式
+ \usepackage{tcolorbox}
+ \usepackage{algorithm}  %format of the algorithm
+ \usepackage{algorithmic}%format of the algorithm
+ \usepackage{multirow}   %multirow for format of table
+ \usepackage{tabularx} 	%表格排版格式控制
+ \usepackage{array}	%表格排版格式控制
+ \usepackage{hyperref}
+ \CTEXsetup[format+={\flushleft}]{section}
+ 
+ \newcommand{\EQ}[1]{$\textbf{EQ:}#1\ $}
+ \newcommand{\ALGORITHM}[1]{$\textbf{Algorithm:}#1\ $}
+ \newcommand{\Figure}[1]{$\textbf{Figure }#1\ $}
+ 
+ \renewcommand{\figurename}{Fig}
+ \geometry{left=1.6cm,right=1.8cm,top=2cm,bottom=1.7cm} %设置文章宽度
+ 
+ \pagestyle{plain} 		  %设置页面布局
+ \author{\kaishu 郑华}
+ \title{\heiti 算法解题笔记}
+  %代码效果定义
+  \definecolor{mygreen}{rgb}{0,0.6,0}
+  \definecolor{mygray}{rgb}{0.5,0.5,0.5}
+  \definecolor{mymauve}{rgb}{0.58,0,0.82}
+  \lstset{ %
+  	backgroundcolor=\color{white},   % choose the background color
+  	basicstyle=\footnotesize\ttfamily,        % size of fonts used for the code
+  	%stringstyle=\color{codepurple},
+  	%basicstyle=\footnotesize,
+  	%breakatwhitespace=false,         
+  	%breaklines=true,                 
+  	%captionpos=b,                    
+  	%keepspaces=true,                 
+  	%numbers=left,                    
+  	%numbersep=5pt,                  
+  	%showspaces=false,                
+  	%showstringspaces=false,
+  	%showtabs=false,        
+  	columns=fullflexible,
+  	breaklines=true,                 % automatic line breaking only at whitespace
+  	captionpos=b,                    % sets the caption-position to bottom
+  	tabsize=4,
+  	commentstyle=\color{mygreen},    % comment style
+  	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  	keywordstyle=\color{blue},       % keyword style
+  	stringstyle=\color{mymauve}\ttfamily,     % string literal style
+  	frame=single,					%tb top and bottom; L left double line
+  	xleftmargin=.06\textwidth, 
+  	%xrightmargin=.1\textwidth,
+  	rulesepcolor=\color{red!20!green!20!blue!20},
+  	% identifierstyle=\color{red},
+  	language=c++,
+  }
+ 
+ \begin{document}          %正文排版开始
+ 	\maketitle
+ 	\tableofcontents
+ 	
+\chapter{算法基础}
+	\section{时间复杂度}
+		\begin{table}[h]
+			\centering
+			\begin{tabular}{|p{2cm}<{\centering}|p{2cm}<{\centering}|p{2cm}<{\centering}|p{2cm}<{\centering}|p{2cm}<{\centering}|p{2cm}<{\centering}|p{2cm}<{\centering}|}	
+				\hline
+				n & $log_2^n$ & n$\times log_2^n$ & $n^2$ & $n^3$ & $2^n$ & $n!$ \\
+				
+				\hline
+				4 & 2 		  & 8 				  & 16 	  & 64 	  & 16 	  &24 \\
+				
+				\hline
+				8 & 3 		  & 24 				  & 64 	  & 512	  & 256 	  &80320 \\
+				
+				\hline
+				10 & 3.32 	  & 33.2			 & 100 	  & 1000	  & 1024 	  &3628800 \\
+				
+				\hline
+				16 & 4 		  & 64 				  & 256	  & 4096 	  & 65536	  &$2.1*10^{13}$ \\
+				
+				\hline
+				32 & 5 		  & 160 			 & 1024   & 32768 	  & 4.3$\times 10^9$ 	  &$2.6*10^{35}$\\
+				
+				\hline
+				128 & 7 	  & 896 			& 16384   & 2097152 	  & 3.4$\times 10^{38}$ 	  &$\infty$ \\
+				
+				\hline
+				1024 & 10 	  & 10240 			& 1048576 & 1.07$\times 10^9$ 	  & $\infty$ 	  &$\infty$ \\
+				
+				\hline
+				10000 & 13.29 & 132877 			& $10^8$  & $10^{12}$	  & $\infty$ 	  &$\infty$ \\
+				\hline
+			\end{tabular}
+			\caption{各个函数随n的增长函数值的变化}
+		\end{table} 
+	
+	\section{解题提醒}
+		\subsection{等价意思..简化题目}
+		
+		\subsection{有无最优子结构} 即是否可以用数学公式简化模型。
+		
+		\subsection{想通可行再实践}
+			
+	\section{分治思想}
+		\subsection{基本概念}
+			在计算机科学中，分治法是一种很重要的算法。字面上的解释是“分而治之”，就是把一个复杂的问题分成两个或更多的相同或相似的子问题，再把子问题分成更小的子问题……直到最后子问题可以简单的直接求解，原问题的解即子问题的解的合并。这个技巧是很多高效算法的基础，如排序算法(快速排序，归并排序)，傅立叶变换(快速傅立叶变换)……
+		
+			任何一个可以用计算机求解的问题所需的计算时间都与其规模有关。问题的规模越小，越容易直接求解，解题所需的计算时间也越少。例如，对于n个元素的排序问题，当n=1时，不需任何计算。n=2时，只要作一次比较即可排好序。n=3时只要作3次比较即可，…。而当n较大时，问题就不那么容易处理了。要想直接解决一个规模较大的问题，有时是相当困难的。
+		
+		\subsection{基本思想及策略}
+			分治法的设计思想是：将一个难以直接解决的大问题，分割成一些规模较小的相同问题，以便各个击破，分而治之。
+			
+			分治策略是：对于一个规模为n的问题，若该问题可以容易地解决（比如说规模n较小）则直接解决，否则将其分解为k个规模较小的子问题，这些子问题互相独立且与原问题形式相同，递归地解这些子问题，然后将各子问题的解合并得到原问题的解。这种算法设计策略叫做分治法。
+			
+			如果原问题可分割成k个子问题，1<k≤n，且这些子问题都可解并可利用这些子问题的解求出原问题的解，那么这种分治法就是可行的。由分治法产生的子问题往往是原问题的较小模式，这就为使用递归技术提供了方便。在这种情况下，反复应用分治手段，可以使子问题与原问题类型一致而其规模却不断缩小，最终使子问题缩小到很容易直接求出其解。这自然导致递归过程的产生。分治与递归像一对孪生兄弟，经常同时应用在算法设计之中，并由此产生许多高效算法。
+		
+		\subsection{分治法适用的情况}
+			分治法所能解决的问题一般具有以下几个特征：
+			\begin{itemize}
+				\item 该问题的规模缩小到一定的程度就可以容易地解决:绝大多数问题都可以满足的，因为问题的计算复杂性一般是随着问题规模的增加而增加；
+				\item 该问题可以分解为若干个规模较小的相同问题，即该问题具有最优子结构性质:应用分治法的前提它也是大多数问题可以满足的，此特征反映了递归思想的应用；
+				\item 利用该问题分解出的子问题的解可以合并为该问题的解:是关键，能否利用分治法完全取决于问题是否具有第三条特征，如果具备了第一条和第二条特征，而不具备第三条特征，则可以考虑用贪心法或动态规划法。
+				\item 该问题所分解出的各个子问题是相互独立的，即子问题之间不包含公共的子子问题:涉及到分治法的效率，如果各子问题是不独立的则分治法要做许多不必要的工作，重复地解公共的子问题，此时虽然可用分治法，但一般用动态规划法较好
+			\end{itemize}
+		\subsection{基本步骤}
+			分治法在每一层递归上都有三个步骤：
+			
+			\textbf{step1 分解}：将原问题分解为若干个规模较小，相互独立，与原问题形式相同的子问题；
+			
+			\textbf{step2 解决}：若子问题规模较小而容易被解决则直接解，否则递归地解各个子问题
+			
+			\textbf{step3 合并}：将各个子问题的解合并为原问题的解。
+			
+		\subsection{可使用分治法求解的一些经典问题}
+			\begin{itemize}
+				\item 二分搜索
+				\item 大整数乘法
+				\item Strassen矩阵乘法
+				\item 棋盘覆盖
+				\item 合并排序
+				\item 快速排序
+				\item 线性时间选择
+				\item 最接近点对问题
+				\item 循环赛日程表
+				\item 汉诺塔
+			\end{itemize}
+		\subsection{依据分治法设计程序时的思维过程}
+			1、一定是先找到最小问题规模时的求解方法
+			
+			2、然后考虑随着问题规模增大时的求解方法
+			
+			3、找到求解的递归函数式后（各种规模或因子），设计递归程序即可。
+	\section{动态规划思想}
+		\url{http://mp.weixin.qq.com/s/3h9iqU4rdH3EIy5m6AzXsg}
+		
+		\subsection{基本概念}
+			动态规划过程是：每次决策依赖于当前状态，又随即引起状态的转移。一个决策序列就是在变化的状态中产生出来的，所以，这种多阶段最优化决策解决问题的过程就称为动态规划。
+			
+		\subsection{基本思想和策略}
+			基本思想与分治法类似，也是将待求解的问题分解为若干个子问题（阶段），按顺序求解子阶段，前一子问题的解，为后一子问题的求解提供了有用的信息。在求解任一子问题时，列出各种可能的局部解，通过决策保留那些有可能达到最优的局部解，丢弃其他局部解。依次解决各子问题，最后一个子问题就是初始问题的解。
+			
+			由于动态规划解决的问题多数有重叠子问题这个特点，为减少重复计算，对每一个子问题只解一次，将其不同阶段的不同状态保存在一个二维数组中。
+			
+			与分治法最大的差别是：适合于用动态规划法求解的问题，经分解后得到的子问题往往不是互相独立的（即下一个子阶段的求解是建立在上一个子阶段的解的基础上，进行进一步的求解）。
+		\subsection{适用的情况}
+			能采用动态规划求解的问题的一般要具有3个性质：
+			
+			\textbf{(1) 最优化原理}：如果问题的最优解所包含的子问题的解也是最优的，就称该问题具有最优子结构，即满足最优化原理。
+			
+			\textbf{(2) 无后效性}：即\textbf{某阶段状态一旦确定，就不受这个状态以后决策的影响}。也就是说，某状态以后的过程不会影响以前的状态，只与当前状态有关。
+			
+			\textbf{(3) 有重叠子问题}：即子问题之间是不独立的，一个子问题在下一阶段决策中可能被多次使用到。（该性质并不是动态规划适用的必要条件，但是如果没有这条性质，动态规划算法同其他算法相比就不具备优势）
+			
+		\subsection{例题说明}
+			\subsubsection{上楼梯}
+				有一座高度是10级台阶的楼梯，从下往上走，每跨一步只能向上1级或者2级台阶。要求用程序来求出一共有多少种走法。
+				
+				比如，每次走1级台阶，一共走10步，这是其中一种走法。我们可以简写成 1,1,1,1,1,1,1,1,1,1。
+				
+				再比如，每次走2级台阶，一共走5步，这是另一种走法。我们可以简写成 2,2,2,2,2。
+				
+				当然，除此之外，还有很多很多种走法。
+			
+			\paragraph{穷举法}
+				二叉树
+			\paragraph{动态规划法}
+				\subparagraph{分析}
+					\textbf{设}走到$m$层需要$x$种走法，\textbf{这个套路大家肯定非常熟悉，中学数学最喜欢设各种东西}。好，现在要开始求解$x$了，\textbf{首先}我们自然会想到先\textbf{找找}看这个$x$\textbf{跟什么有关系}，看\textbf{能不能跟谁联立一个方程啥的不就好整了么}？
+					
+					\textbf{问题本身会提供有用信息，这是中学数学的套路}，我们看到题目说每一次只能跨一步或两步，\textbf{也就是说}要想到达$m$层，我们只能从$m-1$层跨一步上去或者从$m-2$层跨两步上去。\textbf{假设}到达$m-1$层有$x1$种\textbf{走法}，到达$m-2$层有$x2$种走法，那么：
+					
+					$$x = x1 + x2$$
+					
+					这块有个思维陷阱，就是很容易想到 从$m-2$ 层到$m$层有两种方法， 所以 $x = x1 + 2*x2$, 这样思考是对的，是包含了一步步上的和2步上的，但是忽略了$x1$ 包含了第一种情况，故$x2$ 仅剩下2步到达$m$ 的情况了。
+					
+					\textbf{要点}从上式中可以看出所求到达$m$层的走法$x$是依附于到达$m-1$层的走法$x1$和到达$m-2$层的走法$x2$。看到没有，\textbf{一个问题的解依附于其子问题的解}(\textit{动态规划的精髓所在})。也就是说只要我们知道了$m-1$层的走法$x1$和$m-2$层的走法$x2$就能知道到达$m$层的走法$x$了。
+			
+					\textbf{既然}我们知道$m$层的走法能从$m - 1$层和$m-2$层的走法求得，\textbf{那同样}的道理，$m-1$层的走法不也可以从$(m-1) - 1$和$(m-1)-2$层的走法求得, 换种简单的描述方法，用$F(m)$表示 到达$m$层的方法数， 那么就有
+					
+					$$F(m) = F(m-1) + F(m-2)$$
+					$$F(m-1) = F(m-1-1) + F(m-1-2)$$
+					
+					当只有$1$个台阶 和 $2$ 个台阶时，显然可以看出分别有$1$种与$2$种走法
+					
+					$$F(1) = 1$$
+					$$F(2) = 2$$
+					
+				\subparagraph{理论对应}
+					动态规划包括3个重要的概念
+						\begin{itemize}
+							\item \textbf{最优子结构}：我们分析到的$x = x1 + x2$就是最优子结构，\textbf{将主问题的解依附于相似的子问题的假设解上}。
+							
+							\item \textbf{状态转移公式}：$F(m) = F(m-1) + F(m-2)$\textbf{一个问题的解依附于其子问题的解}
+							
+							\item \textbf{边界}：当只有1级和2级台阶时，我们\textbf{可以直接得到结果，无需继续简化}，这时我们称$F(1)$与$F(2)$ 为问题的边界
+						\end{itemize}
+						
+				\subparagraph{求解技巧}
+						存储已经计算过的结果，避免重复计算。
+		
+		\subsection{题目}
+			入门\url{http://www.cnblogs.com/zedosu/p/6556000.html}
+			
+			进阶\url{http://www.cnblogs.com/zedosu/p/6556392.html}
+				
+	\section{贪心算法思想}
+		\subsection{基本概念}
+			所谓贪心算法是指，在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，他所做出的仅是在某种意义上的局部最优解。
+			
+			贪心算法没有固定的算法框架，算法设计的关键是贪心策略的选择。必须注意的是，贪心算法不是对所有问题都能得到整体最优解，选择的贪心策略必须具备无后效性，即某个状态以后的过程不会影响以前的状态，只与当前状态有关。
+			
+			所以对所采用的贪心策略一定要仔细分析其是否满足无后效性。
+		\subsection{基本思想和策略}
+			1、建立数学模型来描述问题。
+			
+			2、把求解的问题\textbf{分成若干个子问题}。
+			
+			3、对每一子问题求解，得到子问题的\textbf{局部最优解}。
+			
+			4、把子问题的解\textbf{局部最优解}\textit{合成}原来解\textbf{问题的一个解}。
+		\subsection{适用的情况}
+			贪心策略适用的前提是：局部最优策略能导致产生全局最优解。
+			
+			实际上，贪心算法适用的情况很少。一般，对一个问题分析是否适用于贪心算法，可以先选择该问题下的几个实际数据进行分析，就可做出判断。
+		\subsection{求解的基本步骤}
+			从问题的某一初始解出发；
+			\begin{lstlisting}[frame=L]
+	while(能朝给定总目标前进一步) 	     
+	{     
+		利用可行的决策，求出可行解的一个解元素；    
+	} 
+			\end{lstlisting}
+			
+			由所有解元素组合成问题的一个可行解；
+		\subsection{算法实现的说明}
+			背包问题
+		
+		\subsection{与动态规划的区别}
+			\url{http://blog.csdn.net/jarvischu/article/details/6056387}	
+			
+	\section{参考}
+		算法过来人+面试题：\url{http://blog.csdn.net/qingyuanluofeng/article/details/47612589}	
+
+\chapter{剑指}
+	\section{基础知识}
+		\subsection{C++}
+			\subparagraph{面试题1：赋值运算符 }核心考点：
+				\begin{enumerate}[itemindent = 1em]
+					\item 返回为引用，否则无法连续赋值
+					\item 参数声明为常引用
+					\item 忘记分配新内存之前释放原有内存会内存泄露
+					\item 判断参数与当前实例是否相同
+				\end{enumerate}
+				\begin{lstlisting}
+	class CMyString1  
+	{  
+	public:  
+		CMyString1(char* pData = NULL);  
+		CMyString1(const CMyString1& str);  
+		~CMyString1(void);  
+		
+		//通过创建临时对象，再让临时对象与原有对象交换，临时对象指向原来的内存，出括号后释放  
+		CMyString1& operator = (const CMyString1& str1)  
+		{  
+			if(this != &str1)  
+			{  
+				CMyString strTemp(str1);//在构造函数中用new分配内存，若有异常，状态有效  
+				char* tmpP = strTemp.m_pData;  
+				strTemp.m_pData = m_pData;  
+				m_pData = tmpP;  
+			}  
+			return *this;  
+		}  
+	private:  
+		char* m_pData;  
+	};  
+				\end{lstlisting}
+				
+			\subparagraph{面试题2 实现Singleton模式}核心考点：
+			\begin{enumerate}[itemindent = 1em]
+				\item \verb|singleton| 模型实现
+				\item 线程安全如何保证- doubleCheck
+				\item \verb|private|  构造
+				\item \verb|static|  成员
+			\end{enumerate}
+			
+			\begin{lstlisting}
+	template<typename T>
+	class Singleton
+	{
+	public:
+		static T& getInstance()
+		{
+			if(!value_)
+			{
+				MutexGuard guard(mutex_);
+				if (!value_)
+				{
+					value_ = new T();
+				}
+			}
+			return *value_;
+		}
+		
+	private:
+		Singleton();
+		~Singleton();
+		
+		static T*     value_;
+		static Mutex  mutex_;
+	};
+	
+	template<typename T>
+	T* Singleton<T>::value_ = NULL;
+	
+	template<typename T>
+	Mutex Singleton<T>::mutex_;			
+			\end{lstlisting}
+		\subparagraph{面试题48 不能被继承的类}
+		
+		
+		\subsection{数据结构}
+			\subsubsection{线性表}
+				\subparagraph{面试题5 从尾到头打印链表}
+				
+				\subparagraph{面试题7 用两个栈实现队列}\verb|->|
+					\begin{lstlisting}
+	void EnQueue(Stack *s1, Stack *s2, int k)
+	{
+		Push(s1, k);
+	}
+	
+	int DeQueue(Stack *s1, Stack*s2)
+	{
+		if(IsStackEmpty(s2) == 1)
+		{
+			while(IsStackEmpty(s1) == 0)
+			{
+				Push(s2, Pop(s1));
+			}
+		}
+		if(IsStackEmpty(s2) == 1)
+		{
+			printf("Empty!\n");
+		}
+		return Pop(s2);
+	}
+					\end{lstlisting}
+				\subparagraph{面试题8 旋转数组的最小数字}
+					
+			\subsubsection{树}
+				\subparagraph{面试题6 二叉树中前序确定后续}
+					参考\url{http://www.cnblogs.com/edisonchou/p/4741099.html}
+					
+			\subsubsection{堆}
+			
+			\subsubsection{红黑树}
+			
+			\subsubsection{B树}
+			
+			\subsubsection{hash table}
+			
+		\subsection{解题分析}
+			\subparagraph{面试题10 二进制中1的个数}
+			
+			
+			\subparagraph{查找数组中第k大的数字}
+		
+	\section{高质量代码}
+		\url{http://blog.csdn.net/oMengLiShuiXiang1234/article/details/51785436}
+		\subsection{代码的质量}
+			下面是几个面试官对代码质量的要求
+			\begin{itemize}
+				\item \textbf{代码的容错能力}，对一些\textbf{特别的输入}需要\textbf{考虑异常状况}，考虑\textbf{资源的回收问题}。
+				
+				\item 一些基本的知识点，如double 类型的数据比较的问题。\verb|if( d1==d2 )| 
+				上述比较有问题，\textit{由于精度原因不能用等号判断两个小数是否相等}。
+				
+				\item \textbf{不能忽略边界的情况}
+				
+				\item 变量、函数\textbf{命名的问题}，而且解决一个具体的问题，需要有个\textbf{合适的数据结构}。
+				
+				\item 从程序的\textbf{正确性和鲁棒性}两方面检验代码的质量。 关注对\textbf{输入参数的检查}、\textbf{处理错误和异常的方式}、\textbf{命名方式}等			
+			\end{itemize}
+		\subsection{代码的规范性}
+			面试官是根据应聘者写出的代码来决定是否录用他的。如果应聘者代码写的不够规范，影响面试官阅读代码的兴致，那面试官就会默默地减去几分。
+			\begin{itemize}
+				\item 规范的\textbf{代码书写清晰}
+			
+				写代码前形成清晰的思路并能把思路用编程语言清楚地书写出来。
+			
+				\item 规范的\textbf{代码布局清晰}
+			
+				当循环、判断较多，逻辑较复杂时，\textit{缩进的层次}可能会比较多。
+			
+				\item 规范的代码\textbf{命名合理}
+			\end{itemize}
+			
+			建议：在写代码的时候，用完整的英文单词组合命名变量和函数。	
+			
+		\subsection{代码的完整性}
+			在面试的过程中，面试官会\textbf{非常关注}应聘者\textbf{考虑问题是否周全}。面试官通过\textbf{检查代码是否完整}来考查应聘者的思维是否全面。通常面试官会检查应聘者的代码是否完成了基本功能、\textbf{输入边界值}是否能得到正确的输出、\textbf{是否对各种不合规范的非法输入做出了合理的错误处理}。
+			
+			\subparagraph{面试题11 数值的整数次方 }
+				
+			\subparagraph{面试题12 打印1到最大的n位数 }
+				
+			\subparagraph{面试题13 在O(1)时间删除链表节点}
+				
+			\subparagraph{面试题14 调整数组顺序使奇数位于偶数掐面} 
+				
+		\subsection{代码的鲁棒性}
+			鲁棒性（Robust），有时也翻译成健壮性。所谓鲁棒性是指程序能够判断输入是否合乎规范要求，并对不合要求的输入予以合理的处理。
+			
+			容错性是鲁棒性的一个重要体现。不鲁棒性的软件在发生异常事件的时候，比如用户输入错误的用户名、试图打开的文件不存在或者网络不能连接，就会出现不可预见的诡异行为，或者干脆整个软件崩溃。这样的软件对于用户而言，不亚于一场灾难。
+			
+			由于鲁棒性对软件开发非常重要，面试官在招聘的时候对应聘者写出的代码是否具有鲁棒性也非常关注。提高代码的鲁棒性的有效途径是进行防御性变成。防御性编程是一种编程习惯，是指遇见在什么地方可能会出现问题，并为这些可能出现的问题制定处理方式。比如试图打开文件时发现文件不存在，我们可以提示用户检查文件名和路径；当服务器连接不上时，我们可以试图连接备用服务器等。这样异常发生时，软件的行为也尽在我们的掌握之中，而不至于出现不可预见的事情。
+			
+			在面试时，最简单也是最使用的防御性编程就是在函数入口添加代码以验证用户输入是否符合要求。通常面试要求写一两个函数，我们需要格外关注这些函数的输入参数。如果输入的是一个指针，那指针时空指针怎么办？如果输入的是一个字符串，那么字符串的内容为空怎么办？如果能把这些问题都提前考虑到，并做相应的处理，那么面试官就会觉得我们有防御性编程的习惯，能够写出鲁棒性的软件。
+			
+			当然并不是所有与鲁棒性相关的问题都只是检查输入的参数这么简单。我们看到问题的时候，要多问几个“如果不...那么...”这样的问题。比如面试题15“链表中倒数第K个结点”，这里隐含一个条件就是链表中结点的个数大于k。我们要问如果链表中的结点的数目不是大于k个，那么，代码会出现什么问题？主要的思考方式能够帮助我们发现潜在的问题并提前解决问题。这比让面试官发现问题之后我们再去慌忙分析代码查找问题的根源要好得多。
+			
+			\subparagraph{面试题15 链表中倒数第k个结点}
+				
+			\subparagraph{面试题16 反转链表}
+				
+			\subparagraph{面试题17 合并两个排序的链表}
+			
+			\subparagraph{面试题18 树的子结构}
+		
+		\subsection{小结}
+			\begin{itemize}
+				\item 规范性：书写清晰、布局清晰、命名合理 
+				\item 完整性：\textbf{完成基本功能}、\textbf{考虑边界条件}、\textbf{做好错误处理} 
+				\item 鲁棒性：采取\textbf{防御式编程}、\textbf{处理无效的输入}
+			\end{itemize}		
+		
+	\section{解题思路}
+		\subsection{画图让抽象形象化}
+			\subparagraph{面试题19 二叉树的镜像}
+			
+			\subparagraph{面试题20 顺时针打印矩阵}
+			
+		\subsection{举例让抽象具体化}
+			\subparagraph{面试题21 包含min函数的栈}
+			
+			\subparagraph{面试题22 栈的压入、弹出序列}
+			
+			\subparagraph{面试题23 从上往下打印二叉树}
+			
+			\subparagraph{面试题24 二叉搜索树的后序遍历序列}
+			
+			\subparagraph{面试题25 二叉树中和为某一值的路径}
+			
+		\subsection{分解让复杂问题简化}
+			\subparagraph{面试题26 复杂链表的复制}
+			
+			\subparagraph{面试题27 二叉搜索树与双向链表}
+			
+			\subparagraph{面试题28 字符串的排列 }
+
+	\section{优化时间和空间效率}
+		\subsection{时间效率}
+			\subparagraph{面试题29 数组中出现次数超过一半的数字}
+			
+			\subparagraph{面试题30 最小的k个数}
+			
+			\subparagraph{面试题31 连续子数组的最大和}
+			
+			\subparagraph{面试题32 从1到n整数中1出现的次数}
+			
+			\subparagraph{面试题33 把数组排成最小的数}
+				\begin{itemize}[itemindent = 2em ]
+					\item 整体可以看成一个排好序的数
+					\item 排序规则
+				\end{itemize}
+				
+				\subparagraph{实现}\verb|->|
+				\begin{lstlisting}
+	#include <iostream>  
+	#include <string>  
+	#include <sstream>  
+	#include <algorithm>  
+	using namespace std;  
+	
+	bool compare(const string& str1, const string &str2)  
+	{  
+		string s1=str1+str2;  
+		string s2=str2+str1;  
+		return s1<s2;  
+	}  
+	
+	void ComArrayMin(int *pArray, int num)  
+	{  
+		int i;  
+		string *pStrArray=new string[num];  
+		
+		for(i=0; i<num; i++)  
+		{  
+			stringstream stream;  
+			stream<<pArray[i];  
+			stream>>pStrArray[i];       
+		}  
+		
+		sort(pStrArray, pStrArray+num, compare);  
+		
+		for(i=0; i<num; i++)  
+		cout<<pStrArray[i];  
+		
+		cout<<endl;  
+		
+		delete[] pStrArray;  
+		
+	}  
+	
+	void main()  
+	{  
+		int Num;  
+		cin>>Num;  
+		int *pArray=new int[Num];  
+		
+		for(int i=0; i<Num; i++)  
+		cin>>pArray[i];  
+		
+		ComArrayMin(pArray, Num);  
+		
+	}  
+				\end{lstlisting}
+		\subsection{时间效率与空间效率的平衡}
+			\subparagraph{面试题34 丑数}
+				\begin{itemize}[itemindent = 2em]
+					\item 是否能想到只构造丑数 
+					\item 构造过程的双指针操作，选择当前最小的数，然后移动..
+				\end{itemize}
+			
+			\subparagraph{实现}\verb|->|
+				\begin{lstlisting}
+	int FindUgly(int n) //  
+	{     
+		int* ugly = new int[n];     
+		ugly[0] = 1;     
+		int index2 = 0;     
+		int index3 = 0;     
+		int index5 = 0;     
+		int index = 1;     
+		while (index < n)     
+		{     
+			int val = Min(ugly[index2]*2, ugly[index3]*3, ugly[index5]*5); //竞争产生下一个丑数     
+			if (val == ugly[index2]*2) //将产生这个丑数的index*向后挪一位；    
+				++index2;     
+			if (val == ugly[index3]*3)   //这里不能用elseif，因为可能有两个最小值，这时都要挪动；  
+				++index3;     
+			if (val == ugly[index5]*5)     
+				++index5;     
+			ugly[index++] = val;     
+		}     
+		/* 
+		for (int i = 0; i < n; ++i)    
+		cout << ugly[i] << endl;    
+		//*/  
+		int result = ugly[n-1];     
+		delete[] ugly;     
+		return result;     
+	}     			
+				\end{lstlisting}
+			\subparagraph{面试题35 第一个只出现一次的字符}
+			
+				\begin{itemize}[itemindent = 2em]
+					\item 出现次数
+					\item 查找第一次出现为1次的
+				\end{itemize}
+				\begin{lstlisting}
+	#include <unordered_map>
+	class Solution {
+		public:
+		int FirstNotRepeatingChar(string str) {
+			unordered_map<char, int> all;
+			for (int i = 0; i < (int)str.length(); ++i)
+			{
+				if (all.find(str[i]) != all.end())
+				++all[str[i]];
+				else all.insert(make_pair(str[i], 1));
+			}
+			
+			for (int i = 0; i < (int)str.length(); ++i)
+			{
+				if (all[str[i]] == 1)
+				return i;
+			}
+			return -1;
+		}
+	};			
+				\end{lstlisting}
+			\subparagraph{面试题36 数组中的逆序对}
+				
+				\url{http://blog.csdn.net/imzoer/article/details/8050224}
+			
+			\subparagraph{面试题37 两个链表的第一个公共结点}
+	
+	\section{能力体现篇}
+		\subsection{知识迁移能力}
+			\subparagraph{面试题38 数字在排序数组中出现的次数}
+			
+			\subparagraph{面试题39 二叉树的深度}
+			
+			\subparagraph{面试题40 数组中只出现一次的数字}
+			
+			\subparagraph{面试题41 和为s的多个数字}
+			
+			\url{https://www.nowcoder.com/practice/c451a3fd84b64cb19485dad758a55ebe?tpId=13&tqId=11194&tPage=3&rp=3&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking}
+				\begin{enumerate}[itemindent = 2em]
+					\item 数组连续问题是否能想到 \textbf{双指针解决方法}
+				\end{enumerate}
+			
+				\begin{lstlisting}
+	vector<vector<int> > FindContinuousSequence(int sum) {
+		int low = 1, high = 1;
+		int _sum = 0;
+		vector<vector<int> >all;
+		for(int i = 1; i <= sum; ++i)
+		{
+			if(_sum == sum)
+			{
+				vector<int> temp;
+				for(int  j = low; j < high; ++j)
+				{
+					temp.push_back(j);
+				}
+				all.push_back(temp);
+				temp.clear();
+				_sum += high++;
+			}
+			else if(_sum>sum)
+			{
+				_sum -= low;
+				++low;
+			}
+			else
+			{
+				_sum += high;
+				++high;
+			}
+		}
+		return all;
+	}
+				\end{lstlisting}
+			\subparagraph{面试题42 反转单词顺序}
+				\begin{enumerate}[itemindent = 2em]
+					\item string 类的应用
+				\end{enumerate}
+				
+				
+				\begin{lstlisting}
+	class Solution {
+		public:
+		string ReverseSentence(string str) {
+			string temp;
+			int low;
+			int high = str.length();
+			for (low = str.length(); low >= 0; --low)
+			{
+				if (str[low] == ' ')
+				{
+					if (low + 1 < str.length())
+					{
+						temp += string(&str[low+1], &str[high]);
+						temp += ' ';
+						high = low;
+					}
+				}
+				else if (low == 0)
+				{
+					temp += string(&str[low], &str[high]);
+				}
+			}
+			temp += '\0';
+			return temp;
+		}
+	};
+				\end{lstlisting}
+		\subsection{抽象建模能力}
+			\subparagraph{面试题43 n个骰子的点数}
+			
+			\subparagraph{面试题44 扑克牌的顺子}
+			
+			\subparagraph{面试题45 圆圈中最后剩下的数字}
+		
+		\subsection{思维发散能力}
+			\subparagraph{面试题46 求1+2+...+n}
+			
+			\subparagraph{面试题47 不用加减乘除做加法}
+			
+			\subparagraph{面试题49 把字符串转换成整数}
+			
+			\subparagraph{面试题50 树中两个节点的最低公共祖先}
+			
+	\section{英文新增篇}
+		\subsection{数组}
+			\subparagraph{面试题51 数组中重复的数-O(n)}
+				\begin{enumerate}[itemindent = 2em]
+					\item 
+					\item 
+				\end{enumerate}
+			\subparagraph{构建乘积数组}
+		
+		\subsection{字符串}
+			\subparagraph{面试题52 正则表达式匹配}
+				\url{https://www.nowcoder.com/practice/45327ae22b7b413ea21df13ee7d6429c?tpId=13&tqId=11205&tPage=3&rp=3&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking}
+				\begin{enumerate}[itemindent = 2em]
+					\item 是否能考虑到用递归解决问题：简化问题的能力。
+					\item 是否能把问题考虑全面
+				\end{enumerate}
+				
+			
+			\subparagraph{表示数值的字符串}
+			
+				
+		\subsection{链表}
+			\subparagraph{面试题53 链表中环的入口节点}
+				\begin{enumerate}[itemindent = 2em]
+					\item 是否存在环
+					\item 环的节点个数
+					\item pFast 先移动环的个数，然后pSlow 从头节点开始
+				\end{enumerate}
+			
+		\subsection{树}
+			\subparagraph{二叉树的下一个节点}
+			\subparagraph{对称二叉树}
+			\subparagraph{把二叉树打印成多行}
+			\subparagraph{按之字形打印二叉树}
+			\subparagraph{序列化二叉树}
+			\subparagraph{二叉搜索树的第K个节点}
+			\subparagraph{数据流中的中位数}
+			
+		\subsection{回溯法}
+			\subparagraph{滑动窗口的最大值}
+			\subparagraph{矩阵中的路径}
+			\subparagraph{机器人的运动范围}
+			
+			
+\chapter{编程之美}
+	\url{http://blog.csdn.net/qingyuanluofeng/article/category/2544589}
+	\section{数字中的技巧}
+		\subsection{求二进制数中1的个数 }
+			对于一个字节的无符号整型变量，求其二进制表示中1的个数，要求算法的执行效率尽可能高。
+			
+			
+		\subsection{不要被阶乘吓到}
+		
+		\subsection{寻找超过占比1/2的ID }
+			本质:寻找出现超过一半次数的人 
+			
+			\begin{itemize}
+				\item 转化为更小的问题-Delete Copied
+				\item 如何避免排序超找重复
+			\end{itemize}
+			
+			\begin{lstlisting}
+	#include<iostream>
+	#include<vector>
+	using namespace std;
+	
+	int find1(vector<int>&id)
+	{
+		int a;
+		int ta=0;
+		
+		int len = id.size();
+		
+		for (int i = 0; i < len; i++){
+			if (ta == 0){
+				a = id[i];
+				ta = 1;
+			}
+			else{
+				if (a == id[i])
+					ta++;
+				else
+					ta--;
+			}
+		}
+		
+		return a;
+	}
+			\end{lstlisting}
+		\subsection{1的数目 }
+			给定一个十进制正整数N，写下从1开始，到N的所有整数然后数一下其中出现的所有1的个数 
+			例如: 
+			
+			N=2,写下1,2这样只出现了1个1 
+			
+			N=12,写下1,2,3,4,5，6,7，8,9,10,11,12,这样1的个数是5 
+			
+			问题是: 写一个函数f(N),返回1到N之间出现的1的个数，比如f(12) = 5
+			
+			\subparagraph{核心} 规律总结
+			
+			\begin{lstlisting}
+	long long count1_divide(int n)  
+	{  
+		long long lCount = 0;  
+		long long lHigh,lLow,lCur;  
+		lHigh = lLow = lCur = 0;  
+		long long lFactor = 1;  
+		while(n / lFactor)  
+		{  
+			lLow = n - (n/lFactor)*lFactor;//参见123 - (123/10)*10  
+			lCur = (n / lFactor) % 10;//参见(123/10)%10  
+			lHigh = n / (lFactor * 10);//参见123 / (10*10)  
+			switch(lCur)  
+			{  
+				case 0: lCount += lHigh * lFactor;//如果当前位为0，那么当前位出现1的次数 = 高位*位数  
+					break;  
+				case 1: lCount += lHigh * lFactor + lLow + 1;//如果当前位为1，那么当前位出现1的次数 = 高位 * 位数 + 低位 + 1  
+					break;  
+				default: lCount += (lHigh + 1) * lFactor;	//如果当前位>=2，那么当前为出现1的次数 = (高位+1)*位数  
+			}  
+			lFactor *= 10;  
+		}  
+		return lCount;  
+	}  
+			\end{lstlisting}
+		\subsection{寻找最大的k个数 }
+		
+		\subsection{精确表达浮点数 }
+			在计算机中，使用float或double来存储小数不能得到精确值。希望得到精确值，最好用分数形式来表示小数。有限小数或者无限循环小数可以转化为分数 
+			
+			例如: 
+			\begin{lstlisting}[frame=L]
+	0.9 = 9/10 
+	0.333(3) = 1/3(括号中的数字表示是循环节) 
+	//一个小数可以用好几种分数形式来表示。如: 
+	0.333(3) = 1/3 = 3/9 
+	
+	//给定一个有限小数或者无限循环小数，你能否用分母最小的分数形式来返回这个小数呢?如果输入为循环小数，循环节用括号标记出来。下面是一些可能的输入数据， 
+	如0.3,0.30,0.3(000),0.3333(3333)、...... 			
+			\end{lstlisting}
+			
+		\subsection{最大公约数问题}
+		
+		\subsection{找到符合条件的整数 }
+		
+		\subsection{斐波那契数列 }
+		
+		\subsection{寻找数组中的最大最小值}
+		
+		\subsection{寻找最近点对}
+		
+		\subsection{找到符合条件的两个数}
+		
+		\subsection{子数组的最大乘积 }
+			给定一个长度为N的整数数组，只允许用乘法，不能用除法，计算任意(N-1)个数的组合中乘积最大的一组，并写出算法的时间复杂度 
+			
+		\subsection{子数组之和的最大值}
+		
+		\subsection{子数组之和的最大值(二维) }
+		
+		\subsection{求数组中最长递增子序列 }
+			写一个时间复杂度尽可能低的程序，求一个一维数组(N个元素)中最长递增子序列的长度。 
+			
+			例如，在序列1,-1,2,-3,4,-5,6,-7中，最长递增子序列的长度为4(如1，2,4,6) 
+			
+		\subsection{数组循环移位}
+		
+		\subsection{数组分割}
+		
+		\subsection{区间重合判断}
+			给定一个源区间[x,y]（y>=x）和N个无序的目标区间[x1,y1],[x2,y2],[x3,y3],...,[xn,yn]，判断源区间[x,y]是不是在目标区间内(也即[x,y]是否属于任意[xi,yi]) 
+			
+			例如：给定源区间[1,6]和一组无序的目标区间[2,3][1,2][3,9]，即可认为区间[1,6]在区间[2,3][1,2][3,9]内(因为目标区间实际上是[1,9]) 
+			
+		\subsection{程序理解和时间分析 }
+		
+		\subsection{只考加法的面试题 }
+	
+	\section{字符串及链表的探索}
+		\subsection{字符串移位包含的问题}
+		
+		\subsection{电话号码对应英语单词}
+		
+		\subsection{计算字符串的相似度}
+		
+		\subsection{从无头单链表中删除节点}
+		
+		\subsection{最短摘要的生成}
+		
+		\subsection{判断两个链表是否交叉}
+		
+		\subsection{队列中取最大值操作问题}
+		
+		\subsection{求二叉树中结点的最大距离}
+		
+		\subsection{重建二叉树}
+				输入某二叉树的前序遍历和中序遍历，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含有重复的数字。
+				
+				例如，前序遍历序列：1，2，3，7，3，5，6，8，中序遍历序列：4，7，2，1，5，3，8，6
+			\subsubsection{分析}
+				在二叉树的前序遍历序列中，第一个数字总是树的根结点的值。但在中序遍历序列中，根结点的值在序列的中间，左子树的结点的值位于根结点的值的左边，而右子树的结点的值位于根结点的值的右边。因此我们需要扫描中序遍历序列，才能找到根结点的值。
+				
+				前序遍历序列的第一个数字1就是根结点的值。扫描中序遍历序列，就能确定根结点的值的位置。根据中序遍历特点，在根结点的值1前面的3个数字都是左子树结点的值，位于1后面的数字都是右子树结点的值。
+	
+				在二叉树的前序遍历和中序遍历的序列中确定根结点的值、左子树结点的值和右子树结点的值的步骤如下图所示：
+				
+				\begin{figure}[h]
+					\centering
+					\includegraphics[scale = 0.7]{preOrderTree.jpg}
+				\end{figure}
+				
+				分别找到了左、右子树的前序遍历序列和中序遍历序列，我们就可以用同样的方法分别去构建左右子树。换句话说，这是一个递归的过程。
+			
+			\subparagraph{思路总结}：先根据前序遍历序列的第一个数字创建根结点，接下来在中序遍历序列中找到根结点的位置，这样就能确定左、右子树结点的数量。在前序遍历和中序遍历的序列中划分了左、右子树结点的值之后，就可以递归地去分别构建它的左右子树。
+			
+			\subparagraph{要点}
+				\begin{itemize}[itemindent = 1em]
+					\item 边界条件 \verb|preOrder 与 inOrder| 是否为空
+					\item 终止条件 \verb|leftLength > 0 与 rightLength > 0|时才重构子树
+					\item 分解子树
+				\end{itemize}
+			\begin{lstlisting}
+	public static Node<int> Construct(int[] preOrder, int[] inOrder, int length)
+	{
+		// 空指针判断
+		if (preOrder == null || inOrder == null || length <= 0)
+		{
+			return null;
+		}
+		
+		return ConstructCore(preOrder, 0, preOrder.Length - 1, inOrder, 0, inOrder.Length - 1);
+	}
+	
+	public static Node<int> ConstructCore(int[] preOrder, int startPreOrder, int endPreOrder, int[] inOrder, int startInOrder, int endInOrder)
+	{
+		// 前序遍历序列的第一个数字是根结点的值
+		int rootValue = preOrder[startPreOrder];
+		Node<int> root = new Node<int>();
+		root.data = rootValue;
+		root.lchild = root.rchild = null;
+		
+		if (startPreOrder == endPreOrder)
+		{
+			if (startInOrder == endInOrder && 
+			preOrder[startPreOrder] == inOrder[startInOrder])
+			{
+				return root;
+			}
+			else
+			{
+				throw new Exception("Invalid input!");
+			}
+		}
+		
+		// 在中序遍历中找到根结点的值
+		int rootInOrder = startInOrder;
+		while (rootInOrder <= endInOrder && inOrder[rootInOrder] != rootValue)
+		{
+			rootInOrder++;
+		}
+		
+		// 输入的两个序列不匹配的情况
+		if (rootInOrder == endInOrder && inOrder[rootInOrder] != rootValue)
+		{
+			throw new Exception("Invalid input!");
+		}
+		
+		int leftLength = rootInOrder - startInOrder;
+		int leftPreOrderEnd = startPreOrder + leftLength;
+		if (leftLength > 0)
+		{
+				// 构建左子树
+				root.lchild = ConstructCore(preOrder, startPreOrder + 1, leftPreOrderEnd, inOrder, startInOrder, rootInOrder - 1);
+		}
+		if (leftLength < endPreOrder - startPreOrder)
+		{
+				// 构建右子树
+				root.rchild = ConstructCore(preOrder, leftPreOrderEnd + 1, endPreOrder, inOrder, rootInOrder + 1, endInOrder);
+		}
+		
+		return root;
+	}
+			\end{lstlisting}
+		
+		\subsection{分层遍历二叉树}
+			\begin{itemize}
+				\item 递归
+				\item 如何体现层次化
+			\end{itemize}
+			
+			\begin{lstlisting}
+	void printLevelNode_index(Node* pRoot)  
+	{  
+		int iCur = 0,iLast = 1;//初始化游标起始位置和当前层结束位置的下一个位置  
+		vector<Node*> vecNode;  
+		vecNode.push_back(pRoot);  
+		while(iCur < vecNode.size())//这里应该是层结束位置等于数组大小的时候结束循环  
+		{  
+			iLast = vecNode.size();//牛逼，直接用当前层结束位置的下一位置 等于 向量大小 来解决了每次的更新层结束位置的问题  
+			while(iCur < iLast)  
+			{  
+				Node* pNode = vecNode[iCur];  
+				printf("%d ",pNode->_iVal);//应该先打印出当前节点值  
+				if(pNode->_pLeft)  
+				{  
+					vecNode.push_back(pNode->_pLeft);  
+				}  
+				if(pNode->_pRight)  
+				{  
+					vecNode.push_back(pNode->_pRight);  
+				}  
+				iCur++;  
+			}  
+			printf("\n");  
+		}  
+	}  
+			\end{lstlisting}
+			
+		\subsection{二分查找}
+			\subsubsection{核心}
+				\begin{itemize}
+					\item  防止溢出 \verb| mid =  minIndex + (maxIndex - minIndex)/2 |
+					\item  结束条件 \verb| while( left <= right )|
+				\end{itemize}
+	
+	\section{数学游戏}
+		\subsection{金刚坐飞机问题}
+		
+		\subsection{瓷砖覆盖地板}
+		
+		\subsection{买票找零}
+		
+		\subsection{点是否在三角形内}
+		
+		\subsection{磁带文件存放优化}
+		
+		\subsection{桶中取黑白球}
+		
+		\subsection{蚂蚁爬杆}
+		
+		\subsection{三角形测试用例}
+		
+		\subsection{数独知多少}
+		
+		\subsection{数字哑谜和回文}
+		
+		\subsection{扫雷游戏的概率}
+	
+	
+\chapter{Array- 80}
+	\section{Two Sum} 
+	\subsection{问题}
+		Given an array of integers, return \textbf{indices} of the two numbers such that they add up to a specific target.	
+		You may assume that each input would have exactly one solution.	
+		
+		\subparagraph{Example}
+		Given nums = [2, 7, 11, 15], target = 9,
+		
+		Because nums[0] + nums[1] = 2 + 7 = 9,
+		
+		return [0, 1].
+	\subsection{解答}
+	\subsection{Normal-两层循环}
+	\subsection{Good-HashTable:HashMap}
+	\begin{itemize}
+		\item \textbf{Time complexity} : O(n). We traverse the list containing n elements only once. Each look up in the table costs only O(1) time.
+		
+		\item \textbf{Space complexity} :O(n).The extra space required depends on the number of items stored in the hash table, which stores at most n elements.
+	\end{itemize}
+	\begin{lstlisting}
+	//\\\\\\\\\\\\\\\\\\\\\\\\\\Two-pass Hash Table\\\\\\\\\\\\\\\\\\\\\\\\\\\
+	#include <unordered_map>
+	class Solution {
+	public:
+		vector<int> twoSum(vector<int>& nums, int target) {
+		vector<int> result;
+		unordered_multimap<int, int> intergers;
+		for(int i = 0; i < nums.size(); ++i)
+		{
+			// map 的插入值操作
+			intergers.insert(pair<int,int>(nums[i],i));
+		}
+		
+		for(unordered_multimap<int, int>::const_iterator d = intergers.begin(); d != intergers.end(); ++d)
+		{
+			unordered_multimap<int, int>::const_iterator find_it = intergers.find(target - d->first);
+			if(find_it != intergers.end() && find_it -> second != d -> second)
+			{
+				result.push_back(d->second);
+				result.push_back(find_it -> second);
+				break;
+			}
+		}
+		// sort 函数使用
+		sort(result.begin(),result.end());
+		return result;
+		}		
+	};
+	
+	//\\\\\\\\\\\\\\\\\\\\\\\\\\One-Pass HashTable\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+	Java:
+	public int[] twoSum(int[] nums, int target) {
+		Map<Integer, Integer> map = new HashMap<>();
+		for (int i = 0; i < nums.length; i++) {
+			int complement = target - nums[i];
+			if (map.containsKey(complement)) {
+				return new int[] { map.get(complement), i };
+			}
+			map.put(nums[i], i);
+		}
+		throw new IllegalArgumentException("No two sum solution");
+	}
+	\end{lstlisting}
+\section{Median of Two Sorted Arrays}
+		There are two sorted arrays nums1 and nums2 of size m and n respectively.
+		
+		Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).
+	\subparagraph{Examples}
+		nums1 = [1, 3]
+		nums2 = [2]
+		
+		The median is 2.0
+		
+		nums1 = [1, 2]
+		nums2 = [3, 4]
+		
+		The median is (2 + 3)/2 = 2.5
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{Word Ladder II}
+		Given two words (beginWord and endWord), and a dictionary's word list, find all shortest transformation sequence(s) from beginWord to endWord, such that:
+		
+		1-Only one letter can be changed at a time
+		
+		2-Each transformed word must exist in the word list. Note that beginWord is not a transformed word.
+		
+		Note:
+		
+		Return an empty list if there is no such transformation sequence.\\
+		All words have the same length.\\
+		All words contain only lowercase alphabetic characters.\\
+		You may assume no duplicates in the word list.\\
+		You may assume beginWord and endWord are non-empty and are not the same.
+	\subparagraph{Examples}
+		Given:
+		
+		beginWord = "hit"
+		
+		endWord = "cog"
+		
+		wordList = ["hot","dot","dog","lot","log","cog"]
+		
+		Return
+		
+		[
+		
+	\	["hit","hot","dot","dog","cog"],
+		
+	\	["hit","hot","lot","log","cog"]
+		
+		]
+	\subsection{分析}
+	
+	\subsection{解答}
+		\url{http://www.cnblogs.com/ShaneZhang/p/3748494.html}
+	
+\section{4Sum}
+	Given an array S of n integers, are there elements a, b, c, and d in S such that a + b + c + d = target? Find all unique quadruplets in the array which gives the sum of target.
+	
+	Note: The solution set must not contain duplicate quadruplets.
+	\subparagraph{Examples}
+		given array S = [1, 0, -1, 0, -2, 2], and target = 0.
+		
+		A solution set is:
+		
+		[
+		
+		[-1,  0, 0, 1],
+		
+		[-2, -1, 1, 2],
+		
+		[-2,  0, 0, 2]
+		
+		]
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{Rotate Array}
+		Rotate an array of n elements to the right by k steps.
+		
+		Note:
+		Try to come up as many solutions as you can, there are at least 3 different ways to solve this problem.
+	\subparagraph{Examples}
+		with n = 7 and k = 3, the array [1,2,3,4,5,6,7] is rotated to [5,6,7,1,2,3,4].
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+	
+\section{Maximum Product Subarray}
+		Find the contiguous subarray within an array (containing at least one number) which has the largest product.
+		
+	\subparagraph{Examples}
+			Given the array [2,3,-2,4],
+			
+			the contiguous subarray [2,3] has the largest product = 6.
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{Spiral Matrix}
+		Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.
+	\subparagraph{Examples}
+		Given the following matrix:
+		
+		[
+		
+		[ 1, 2, 3 ],
+		
+		[ 4, 5, 6 ],
+		
+		[ 7, 8, 9 ]
+		
+		]
+		
+		You should return [1,2,3,6,9,8,7,4,5].
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{First Missing Positive}
+		Given an unsorted integer array, find the first missing positive integer.
+	\subparagraph{Examples}
+		Given [1,2,0] return 3,
+		
+		and [3,4,-1,1] return 2.
+		
+		Your algorithm should run in O(n) time and uses constant space.
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{Word Search}
+		Given a 2D board and a word, find if the word exists in the grid.
+		
+		The word can be constructed from letters of sequentially adjacent cell, where "adjacent" cells are those horizontally or vertically neighboring. The same letter cell may not be used more than once.
+	\subparagraph{Examples}
+		Given board =
+		
+		[
+		
+		['A','B','C','E'],
+		
+		['S','F','C','S'],
+		
+		['A','D','E','E']
+		
+		]
+		
+		word = "ABCCED", -> returns true,
+		
+		word = "SEE", -> returns true,
+		
+		word = "ABCB", -> returns false.
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{Largest Rectangle in Histogram}
+		Given n non-negative integers representing the histogram's bar height where the width of each bar is 1, find the area of largest rectangle in the histogram.
+			
+	\subparagraph{Examples}
+		\begin{figure}[h]
+			\centering
+			\includegraphics[scale = 0.7]{LargestH_1.png}
+			\caption{Above is a histogram where width of each bar is 1, given height = [2,1,5,6,2,3]}
+		\end{figure}
+		\begin{figure}[h]
+			\centering
+			\includegraphics[scale = 0.7]{LargestH_2.png}
+			\caption{The largest rectangle is shown in the shaded area, which has area = 10 unit.}
+		\end{figure}
+		
+		Given heights = [2,1,5,6,2,3],
+		
+		return 10.
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{Jump Game II}
+		Given an array of non-negative integers, you are initially positioned at the first index of the array.
+		
+		Each element in the array represents your maximum jump length at that position.
+		
+		Your goal is to reach the last index in the minimum number of jumps.
+	\subparagraph{Examples}
+		Given array A = [2,3,1,1,4]
+		
+		The minimum number of jumps to reach the last index is 2. (Jump 1 step from index 0 to 1, then 3 steps to the last index.)
+		
+		Note:
+		You can assume that you can always reach the last index.
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{Maximal Rectangle}
+		Given a 2D binary matrix filled with 0's and 1's, find the largest rectangle containing only 1's and return its area.
+	\subparagraph{Examples}
+		given the following matrix:
+		
+		1 0 1 0 0
+		
+		1 0 1 1 1
+		
+		1 1 1 1 1
+		
+		1 0 0 1 0
+		
+		Return 6.
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\chapter{Hash Table- 52}
+\section{Hash}
+	Hash表也称散列表，也有直接译作哈希表，Hash表是一种特殊的数据结构，它同数组、链表以及二叉排序树等相比较有很明显的区别，它能够快速定位到想要查找的记录，而不是与表中存在的记录的关键字进行比较来进行查找。
+	
+	Hash表采用一个\textbf{映射函数} f : \verb|key —> address| 将关键字映射到该记录在表中的存储位置，从而在想要查找该记录时，可以直接根据关键字和映射关系计算出该记录在表中的存储位置，通常情况下，这种映射关系称作为\verb|Hash函数|，而通过Hash函数和关键字计算出来的存储位置(注意这里的存储位置只是表中的存储位置，并不是实际的物理地址)称作为\verb|Hash地址|。
+	
+
+	\subsection{hash函数的设计}
+		\begin{enumerate}
+			\item \textbf{直接定址法}
+			
+				取关键字或者关键字的某个线性函数为Hash地址，即\verb|address(key)=a*key+b;|如知道学生的学号从2000开始，最大为4000，则可以将\verb|address(key)=key-2000|作为Hash地址
+			\item \textbf{平方取中法}
+			
+				对关键字进行平方运算，然后取结果的中间几位作为Hash地址。假如有以下关键字序列\verb|{421，423，436}|，平方之后的结果为\verb|{177241，178929，190096}|，那么可以取\verb|{72，89，00}|作为Hash地址
+			\item \textbf{折叠法}
+			
+				将关键字拆分成几部分，然后将这几部分组合在一起，以特定的方式进行转化形成Hash地址。假如知道图书的\verb|ISBN号为8903-241-23|，可以将\verb|address(key)=89+03+24+12+3|作为Hash地址。
+			\item \textbf{除留取余法}
+				
+				如果知道Hash表的最大长度为\verb|m|，可以取不大于m的最大质数p，然后对关键字进行取余运算，\verb|address(key)=key%p|。
+				
+				在这里p的选取非常关键，p选择的好的话，\textit{能够最大程度地减少冲突}，\textbf{p一般取不大于m的最大质数}。
+		\end{enumerate}
+	\subsection{hash表大小的确定}
+		Hash表大小的确定也非常关键，\textit{如果Hash表的空间远远大于最后实际存储的记录个数，则造成了很大的空间浪费}，\textit{如果选取小了的话，则容易造成冲突}。
+		
+		\verb|->固定空间： |在实际情况中，一般需要根据最终记录\textbf{存储个数}和\textbf{关键字的分布特点}来确定Hash表的大小。
+		
+		\verb|->ReHash： |还有一种情况时可能\textbf{事先不知道最终需要存储的记录个数，则需要动态维护Hash表的容量}，此时可能需要\textbf{重新计算}Hash地址.
+		
+	\subsection{冲突的解决}
+		\begin{enumerate}
+			\item \textbf{开放定址法}
+			
+				当一个关键字和另一个关键字发生冲突时，使用某种\textbf{探测技术在Hash表中形成一个探测序列}，\textit{然后沿着这个探测序列依次查找下去}，当碰到一个空的单元时，则插入其中。
+				
+				比较常用的探测方法有线性探测法，比如有一组关键字\verb|{12，13，25，23，38，34，6，84，91}|，Hash表长为14，Hash函数为\verb|address(key)=key%11|，当插入\verb|12，13，25|时可以直接插入，而当插入\verb|23|时，地址1被占用了，因此沿着地址1依次往下探测(探测步长可以根据情况而定)，直到探测到地址4，发现为空，则将23插入其中
+			\item \textbf{链地址法}
+			
+				采用数组和链表相结合的办法，将Hash地址相同的记录存储在一张线性表中，而每张表的表头的序号即为计算得到的Hash地址
+		\end{enumerate}
+	\url{http://www.cnblogs.com/dolphin0520/archive/2012/09/28/2700000.html}
+\section{Longest Substring Without Repeating Characters}
+	\subsubsection{问题}
+	Given a string, find the length of the longest substring without repeating characters.
+	
+	\subparagraph{Examples}		
+	Given "abcabcbb", the answer is "abc", which the length is 3.
+	
+	Given "bbbbb", the answer is "b", with the length of 1.
+	
+	Given "pwwkew", the answer is "wke", with the length of 3. Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
+	
+	\subsubsection{分析}
+	如果发现重复：第一个指针 指向以查找的序列的最后一个该字符， 另一个指向当前的，求取最长的中间长度。
+	\subsubsection{解答}
+	\begin{lstlisting}
+	class Solution {
+	public:
+	int lengthOfLongestSubstring(string s) 
+	{
+		int maxLen = 0,repeatCharacter_First_index = -1;
+		unordered_multimap<char,int> subString;
+		for (int i = 0; i < s.length(); ++i)
+		{
+			unordered_multimap<char,int>::const_iterator it = subString.find(s[i]);
+			if (it != subString.end())
+			{
+				int max_second = it->second;
+				auto range = subString.equal_range(s[i]);
+				for_each(range.first,range.second,[&max_second](unordered_multimap<char, int>::value_type& x){max_second = max(max_second, x.second); });
+				repeatCharacter_First_index = max(repeatCharacter_First_index, max_second);	// [...First_max]...Second_not insert
+			}
+			subString.insert(pair<char, int>(s[i], i));
+			maxLen = max(maxLen, i - repeatCharacter_First_index );
+		}
+		return maxLen;
+	}
+	};
+	\end{lstlisting}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+\chapter{Linked List- 27}
+	\url{http://blog.csdn.net/luckyxiaoqiang/article/details/7393134/}
+\section{将单链表反转}
+	
+	\subsection{解答}
+	
+	
+\section{查找单链表中的倒数第K个结点（k > 0）}
+		双指针
+	\subsection{解答}
+	
+	
+\section{查找单链表的中间结点}
+		双指针
+	\subsection{解答}
+	
+	
+\section{从尾到头打印单链表}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{已知两个单链表pHead1 和pHead2 各自有序，把它们合并成一个链表依然有序}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{判断一个单链表中是否有环}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{判断两个单链表是否相交}
+	
+	\subsection{分析}
+		\url{http://blog.csdn.net/jiqiren007/article/details/6572685}
+		
+		方法1.将第一个链表的尾部指向第二个链表，如果相交则必产生环，且环的头结点为第二个链表的头结点，没有相交则不存在环。 
+		
+		方法2.如果两个链表相交，则相交后的节点都一样，所以结尾节点也将一样，我们以此遍历第一个第二个链表，取出其尾部地址，判断是否相等即可。
+	\subsection{解答}
+	
+	
+\section{求两个单链表相交的第一个节点}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{已知一个单链表中存在环，求进入环中的第一个节点}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+
+\section{给出一单链表头指针pHead和一节点指针pToBeDeleted，O(1)时间复杂度删除节点pToBeDeleted}
+	\subsection{分析}
+		对于删除节点，我们普通的思路就是让该节点的前一个节点指向该节点的下一个节点，这种情况需要遍历找到该节点的前一个节点，\textbf{时间复杂度为O(n)}。对于链表，\textbf{链表中的每个节点结构都是一样的，所以我们可以把该节点的下一个节点的数据复制到该节点，然后删除下一个节点即可}。要注意最后一个节点的情况，这个时候只能用常见的方法来操作，先找到前一个节点，但总体的平均时间复杂度还是O(1)。
+	\subsection{解答}
+
+\chapter{Math- 58}
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+\chapter{Two Pointers- 33}
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+
+\section{}	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+\chapter{String- 55}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+\section{Divide and Conquer- 12}
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+\chapter{Binary Search- 38}
+
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+\chapter{Dynamic Programming- 66}
+	\url{http://blog.csdn.net/eagle_or_snail/article/details/50987044}
+	
+	\url{http://m.blog.csdn.net/cqkxboy168/article/details/40465389}
+	
+\section{Range Sum Query - Immutable}
+		Given an integer array nums, find the sum of the elements between indices i and j \verb|(i ≤ j)|, inclusive.
+		
+		\url{https://leetcode.com/problems/range-sum-query-immutable/description/}
+	\subparagraph{Examples}\verb|->|
+		\begin{lstlisting}
+	Given nums = [-2, 0, 3, -5, 2, -1]
+	
+	sumRange(0, 2) -> 1
+	sumRange(2, 5) -> -1
+	sumRange(0, 5) -> -3		
+		\end{lstlisting}
+		
+	\subsection{分析}
+		\subparagraph{1- for循环} 谁都可以想出来的方法。
+		\subparagraph{2- 真正的考验} 这道题的难点就在于\textbf{是否能想到来用建立累计直方图的思想来建立一个累计和的数组dp}
+		
+			\begin{enumerate}[itemindent = 2em]
+				\item 使用一个数组dp[i],记录0到第i个数的和
+				\item 求i到j之间的和时，输出dp[j]-dp[i]+num[i]即可
+			\end{enumerate}
+		
+	\subsection{解答}
+		\begin{lstlisting}
+	class NumArray {  
+	public:  
+		vector<int> dp;  
+		vector<int> num;  
+		NumArray(vector<int> nums) {  
+			int n=nums.size();  
+			dp=vector<int>(n,0);  
+			num=nums;  
+			for(int i=0;i<n;i++)  
+			{  
+				if(i>0)  
+					dp[i]=dp[i-1]+nums[i];  
+				else  
+					dp[0]=nums[0];  
+			}  
+		}  
+		
+		int sumRange(int i, int j) {  
+			return dp[j]-dp[i]+num[i];  
+		}  
+	}; 
+		\end{lstlisting}
+\section{Maximum Subarray}
+	Find the contiguous subarray within an array (containing at least one number) which has the largest sum.
+	
+	\url{https://leetcode.com/problems/maximum-subarray/description/}
+	\subparagraph{Examples}\verb|->|
+		\begin{lstlisting}
+	For example, given the array [-2,1,-3,4,-1,2,1,-5,4],
+	the contiguous subarray [4,-1,2,1] has the largest sum = 6.
+		\end{lstlisting}
+		
+	\subsection{分析}
+		子数组的和大于0则递加，否则令子数组的开始为当前位置，并令当前和为当前值，整个过程中的最大值既是 maxSum;
+		
+		\begin{enumerate}
+			\item \textbf{寻找最优子结构}：如果和要递增，则前面的数不能小于0，求最大则保存过程中的最大值即可
+			\item \textbf{确定边界值}
+		\end{enumerate}
+	\subsection{解答}
+		\begin{lstlisting}
+	class Solution {
+	public:
+		int maxSubArray(vector<int>& nums) {
+			int sum = 0;
+			int lagest = nums[0];
+			for(auto d:nums)
+			{
+				if(sum > 0)
+				{
+					sum += d;
+					if(sum > lagest) lagest = sum;
+				}
+				else
+				{
+					sum = d;
+					if(sum > lagest) lagest = sum;
+				}
+			}
+			return lagest;
+		}
+	};	
+		
+	// DP 公式法
+	class Solution {
+	public:
+		int maxSubArray(int A[], int n) {
+			int ans=A[0],i,j,sum=0;
+			for(i=0;i<n;i++){
+				sum+=A[i];
+				ans=max(sum,ans);
+				sum=max(sum,0);
+			}
+			return ans;
+		}
+	};
+		\end{lstlisting}
+\section{Triangle}
+	Given a triangle, find the minimum path sum from top to bottom. Each step you may move to adjacent numbers on the row below.
+	
+	\url{https://leetcode.com/problems/triangle/description/}
+	\subparagraph{Examples}\verb|->|
+		\begin{lstlisting}
+	For example, given the following triangle
+	[
+		[2],
+	   [3,4],
+	  [6,5,7],
+	 [4,1,8,3]
+	]
+	The minimum path sum from top to bottom is 11 (i.e., 2 + 3 + 5 + 1 = 11).
+		\end{lstlisting}
+		
+	\subsection{分析}
+		如何确定是否用动态规划：\textbf{各小部分是否有关联，如果有关联，即存在父问题的解依赖于子问题的解},和问题肯定依赖与上或下一个数。
+		
+		\begin{enumerate}
+			\item \textbf{寻找最优子结构}：一般是从最后一步反推，这个的规律就是从后推的，从前推问题规模越来越大，从后推问题规模越来越小。
+			\item \textbf{确定边界值}
+		\end{enumerate}
+	
+	\subsection{解答}
+		\begin{lstlisting}
+	class Solution {
+	public:
+	int minimumTotal(vector<vector<int>>& triangle) {
+			for(int i = triangle.size()-2; i >= 0; --i)
+			{
+				for(int j = 0; j < i+1; ++j)
+					triangle[i][j] += std::min(triangle[i+1][j], triangle[i+1][j+1]);
+			}
+			return triangle[0][0];
+		}
+	};
+		\end{lstlisting}
+\section{2 Keys Keyboard}
+	Initially on a notepad only one character 'A' is present. You can perform two operations on this notepad for each step:
+	
+		Copy All: You can copy all the characters present on the notepad (partial copy is not allowed).
+	
+		Paste: You can paste the characters which are copied last time.
+
+		Given a number n. You have to get exactly n 'A' on the notepad by performing the minimum number of steps permitted. Output the minimum number of steps to get n 'A'.
+	\subparagraph{Examples}\verb|->|
+		\begin{lstlisting}
+	Input: 3
+	Output: 3
+	Explanation:
+	Intitally, we have one character 'A'.
+	In step 1, we use Copy All operation.
+	In step 2, we use Paste operation to get 'AA'.
+	In step 3, we use Paste operation to get 'AAA'.		
+		\end{lstlisting}
+	\subsection{分析}
+	 当然，从正面走的话，规模越来越大，从后推则简化了问题。这个问题当然想到的是分治思路，类似与pow的分治。
+	 
+		\begin{enumerate}
+			\item \textbf{寻找最优子结构}：刚开始能想到的是奇数和偶数，当测试到25时，就会发现因子不止2、3、5。这个过程就是思维发散的假设过程。
+				\begin{itemize}
+					\item \verb|if n % 2 == 0, then f(n) = f(n/2) + 2|
+					\item \verb|if n % 3 == 0, then f(n) = f(n/3) + 3|
+					\item \verb|if n % 5 == 0, then f(n) = f(n/5) + 5|...
+				\end{itemize}
+			\item \textbf{确定边界值}
+		\end{enumerate}
+	\subsection{解答}
+	
+		\begin{lstlisting}
+	class Solution {
+		public:
+		int step  = 0;
+		int minSteps(int n) {
+			if(n == 1) return  0; //return Copy
+			if(n % 2== 0)
+			{
+				step += 2;
+				minSteps(n/=2);
+			}
+			else
+			{
+				bool test = false;
+				for(int j = 3; j < n/2; j+=2)
+				{
+					if(n%j == 0)
+					{
+						step += j;
+						test = true;
+						minSteps(n/=j);
+						break;
+					}
+				}
+				if(!test) step += n;
+			}
+			
+			return step;
+		}
+	};
+	
+	// 简化代码
+	class Solution {
+		public:
+		int minSteps(int n) {
+			if (n == 1) return 0;
+			for (int i = 2; i < n; i++)
+				if (n % i == 0) return i + minSteps(n / i);
+			return n;
+		}
+	};
+		\end{lstlisting}
+\section{Palindromic Substrings}
+	Given a string, your task is to count how many palindromic substrings in this string.
+	
+	The substrings with different start indexes or end indexes are counted as different substrings even they consist of same characters.
+	
+	\url{https://leetcode.com/problems/palindromic-substrings/description/}
+	\subparagraph{Examples}
+		\begin{lstlisting}
+	Input: "abc"
+	Output: 3
+	Explanation: Three palindromic strings: "a", "b", "c".
+	
+	Input: "aaa"
+	Output: 6
+	Explanation: Six palindromic strings: "a", "a", "a", "aa", "aa", "aaa".
+		\end{lstlisting}
+	\subsection{分析}
+		这个题使用dp 思想时不能局限在一维dp数组上，使用二维可能问题就迎刃而解。
+			$$\verb|dp[i][j]=1| 
+			\begin{cases}
+			i=j\\
+			\verb|s[i]==s[j]| & j-i<2\verb|(start+1 >= end-1)|\\
+			\verb|s[i]==s[j]| & \verb|dp[i+1][j-1]==1|
+			\end{cases}$$ 
+		
+		\begin{enumerate}
+			\item \textbf{寻找最优子结构}：\textbf{定义}d[i][j]：若从i到j的字符串为回文，则为真（1），否则为假（0），\textbf{那么d[i][j]为真的前提是}：头尾两个字符串相同并且去掉头尾以后的字串也是回文（即d[i+1][j-1]为真），这里面要注意特殊情况，即：去掉头尾以后为空串，所以如果\verb|j-i<3|，并且头尾相等，也是回文的。
+			
+			\item \textbf{确定边界值}
+		\end{enumerate}
+	\subsection{解答}
+		\begin{lstlisting}
+	class Solution {
+		public:
+		int countSubstrings(string s) {
+			int n = s.size(), count = 0;
+			vector<vector<int>> dp(n, vector<int> (n));
+			for ( int end = 0; end < n; ++end ) {
+				dp[end][end] = 1;
+				++count;
+				for ( int start = 0; start < end; ++start ) {
+					if ( s[start] == s[end] && (start+1 >= end-1 || dp[start+1][end-1])) {
+						dp[start][end] = 1;
+						++count;
+					}
+				}
+			}
+			return count;
+		}
+	};
+		\end{lstlisting}
+\section{Longest Increasing Subsequence}
+	Given an unsorted array of integers, find the length of longest increasing subsequence.
+	
+	\url{https://leetcode.com/problems/longest-increasing-subsequence/description/}
+	\subparagraph{Examples}\verb|->|
+		\begin{lstlisting}
+	Given [10, 9, 2, 5, 3, 7, 101, 18],
+	The longest increasing subsequence is [2, 3, 7, 101], therefore the length is 4. Note that there may be more than one LIS combination, it is only necessary for you to return the length.
+	
+	Your algorithm should run in O(n2) complexity.
+		\end{lstlisting}
+	\subsection{分析}
+		首先，如果想让递增序列增加，那么首先这个值必须大于前面的某一个，但是大于哪个就是决策的关键。如何选择会让当前结果最大是本题的关键。
+		\begin{enumerate}
+			\item \textbf{寻找最优子结构}：\verb|dp[当前] = max{自身, dp[之前某一个]+1}| ，\textbf{前提是}data[当前] > data[之前某一个]
+			\item \textbf{确定边界值}
+		\end{enumerate}
+	\subsection{解答}
+		\begin{lstlisting}
+	 int lengthOfLIS(vector<int>& nums) {
+	 	const int size = nums.size();
+	 	if (size == 0) { return 0; } 
+	 	vector<int> dp(size, 1);
+	 	int res = 1;
+	 	for (int i = 1; i < size; ++i) {
+	 		for (int j = 0; j < i; ++j) {
+	 			if (nums[j] < nums[i]) {
+	 				dp[i] = max(dp[i], dp[j]+1);
+	 			}
+	 		}
+	 		res = max (res, dp[i]);
+	 	}
+	 	return res;
+	 }
+		\end{lstlisting}
+
+	
+\section{0-1背包}
+	有N件物品和一个容量为V的背包。第i件物品的费用是c[i]，价值是w[i]。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且\textbf{价值总和最大}。
+	
+	这个问题的特点是：\textbf{每种物品只有一件，可以选择放或者不放}。因为这里的物品一般指花瓶、玉器什么的，要么拿、要么不拿，只有0和1两种状态，所以也叫0-1背包。0-1背包虽然简单，却很重要，是“万法之源”，是其他几类问题的基础。 
+
+	\url{http://blog.csdn.net/wumuzi520/article/details/7014559}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+		\textbf{初学者}有时会认为，0-1背包可以这样求解：\textbf{计算每个物品的Vi/Wi}，\textit{然后依据Vi/Wi的值，对所有的物品从大到小进行排序}。其实这种贪心方法是错误的。如下表，有三件物品，背包的最大负重量是50，求可以取得的最大价值。
+		
+			\begin{figure}[h]
+				\centering
+				%\includegraphics[scale = 0.8]{0-1.png}
+				\caption{0-1贪心错误示例}
+			\end{figure}
+			
+		一般会想到的是放与不放的二叉树$O(2^n)$ 方法。其实，0-1背包是DP的一个经典实例，可以用动态规划求解。
+		
+		\subparagraph{DP求解过程}\verb|->|
+			
+			\textbf{最优子结构}：
+			对于\textbf{前i件物品}，背包\textbf{剩余容量为j}时，所\textbf{取得的最大价值}（此时称为状态3）\textbf{只依赖于两个状态}。	
+			\begin{enumerate}[itemindent = 2em]
+				\item 前\verb|i-1|件物品，背包剩余容量为\verb|j|。在该状态下，只要\textbf{不选第i个物品}，就可以转换到状态3
+				\item 前\verb|i-1|件物品，背包剩余容量为\verb|j-w[i]|。在该状态下，\textbf{选第i个物品}，也可以转换到状态3。
+			\end{enumerate}
+			
+			因为，这里\textbf{要求最大价值}，所以只要\textbf{从状态1和状态2中选择最大价值较大的一个即可}。
+		
+			\textbf{递归定义最优解的值}：
+			用\verb|c(i,j)|\textit{表示前i件物品，背包剩余容量为j时}，所\textbf{取得的最大价值}。
+			
+			$$\verb|c[i , w]|=
+			\begin{cases}
+				0 & i=0 \verb|或| w=0\\
+			\verb|c[i-1, w]| & w_i > w\\
+			\verb|max{c[i-1, w-w_i]+v_i, c[i-1,w]}| & i>0 \verb|且| w_i<=w
+			\end{cases}$$	
+		
+	\subsection{解答}
+		\url{http://blog.csdn.net/yeepom/article/details/8712224}
+		\begin{lstlisting}
+	#include <iostream>  
+	using namespace std;  
+	
+	/*** 
+	c[i][w]表示背包容量为w时，i个物品导致的最优解的总价值，大小为(n+1)*(w+1) 
+	v[i]表示第i个物品的价值，大小为n 
+	w[i]表示第i个物品的重量，大小为n 
+	***/  
+	
+	void DP(int n, int W, int c[][18], int *v, int *wei)  
+	{  
+		memset(*c, 0, (W+1)*sizeof(int));  
+		for (int i = 1; i <= n; i++)  
+		{  
+			c[i][0] = 0;  
+			for (int w = 1; w <= W; w++)  
+			{  
+				if (wei[i-1] > w)    //此处比较是关键  
+				{  
+					c[i][w] = c[i-1][w];  
+				}  
+				else  
+				{  
+					int temp = c[i-1][w-wei[i-1]] + v[i-1]; //注意wei和v数组中的第i个应该为wei[i-1]和v[i-1]  
+					if (c[i-1][w] > temp)  
+					{  
+						c[i][w] = c[i-1][w];  
+					}  
+					else   
+					c[i][w] = temp;  
+				}  
+			}  
+		}  
+	}  
+	
+	int main()  
+	{  
+		int n = 5;  
+		int W = 17;  
+		int w[] = {3, 4, 7, 8, 9};  
+		int v[] = {4, 5, 10, 11, 13};  
+		int c[6][18] = {0};  
+		DP(n, W, c, v, w);  
+		cout<<c[5][17]<<endl;  
+	}  
+		\end{lstlisting}
+	
+\section{完全背包}
+	\url{http://blog.csdn.net/wumuzi520/article/details/7014830}
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{石子合并}
+	有N堆石子，现要将石子有序的合并成一堆，规定如下：每次只能\textbf{移动相邻的2堆}石子合并，合并花费为新合成的一堆石子的数量。求将这N堆石子合并成一堆的总花费最小（或最大）。
+	
+	\subsection{分析}
+		  设\verb|dp[i][j]|表示第i到第j堆石子合并的最优值，\verb|sum[i][j]|表示第i到第j堆石子的总数量
+		  
+		  $$
+		  \verb|d[i][j]|=
+		  \begin{cases}
+		  				0 & i=j\\
+		  			\verb|min(dp[i][k], dp[k+1][j]) + sum[i][j]| & i \not= j\\
+		  \end{cases}
+		  $$	
+	  
+	  \subsection{实现}
+	  		\begin{lstlisting}
+	     #include <iostream>     
+	     using namespace std;  
+	     #define M 101  
+	     #define INF 1000000000  
+	     int n,f[M][M],sum[M][M],stone[M];  
+	     int main()  
+	     {  
+	         int i,j,k,t;  
+	         cin>>n;  
+	         for(i=1;i<=n;i++)  
+	             scanf("%d",&stone[i]);  
+	       
+	         for(i=1;i<=n;i++)  
+	         {  
+	             f[i][i]=0;  
+	             sum[i][i]=stone[i];  
+	             for(j=i+1;j<=n;j++)  
+	                 sum[i][j]=sum[i][j-1]+stone[j];  
+	         }  
+	       
+	         for(int len=2;len<=n;len++)//归并的石子长度  
+	         {  
+	             for(i=1;i<=n-len+1;i++)//i为起点，j为终点  
+	             {  
+	                 j=i+len-1;  
+	                 f[i][j]=INF;  
+	                 for(k=i;k<=j-1;k++)  
+	                 {  
+	                     if(f[i][j]>f[i][k]+f[k+1][j]+sum[i][j])  
+	                         f[i][j]=f[i][k]+f[k+1][j]+sum[i][j];  
+	                 }  
+	             }  
+	         }  
+	         printf("%d/n",f[1][n]);    
+	         return 0;  
+	     }  
+	  		\end{lstlisting}
+\section{Maximum Length of Pair Chain}
+	You are given n pairs of numbers. In every pair, the first number is always smaller than the second number.
+	
+	Now, we define \verb|a pair (c, d)| can follow another\verb| pair (a, b)| if and \verb|only if b < c.| Chain of pairs can be formed in this fashion.
+	
+	Given a set of pairs, find the length longest chain which can be formed. You needn't use up all the given pairs. You can select pairs in any order.
+	
+	\url{https://leetcode.com/problems/maximum-length-of-pair-chain/description/}
+	\subparagraph{Examples}\verb|->|
+		\begin{lstlisting}
+	Input: [[1,2], [2,3], [3,4]]
+	Output: 2
+	Explanation: The longest chain is [1,2] -> [3,4]
+		\end{lstlisting}
+	\subsection{分析}
+		
+		\begin{enumerate}[itemindent = 2em]
+			\item \textbf{寻找最优子结构}：\verb|dp[当前] = max{自身, dp[之前某一个]+1}| ，\textbf{前提是}data[当前] > data[之前某一个], 区间排序
+			\item \textbf{确定边界值}
+		\end{enumerate}
+		
+	\subsection{解答}
+		\begin{lstlisting}
+	class Solution {
+		public:
+		int findLongestChain(vector<vector<int>>& pairs) {
+			vector<int> dp(pairs.size(), 1);
+			sort(pairs.begin(), pairs.end(), cmp);
+			for (int i = 1; i < pairs.size(); ++i)
+			{
+				for (int j = 0; j < i; ++j)
+				{
+					if (pairs[i][0] > pairs[j][1])
+					{
+						dp[i] = std::max(dp[i], dp[j] + 1);
+					}
+				}
+			}
+			
+			int big = 0;
+			for (int i = 0; i < dp.size(); ++i)
+			{
+				if (dp[i] > big)
+				big = dp[i];
+			}
+			return big;
+		}
+		
+		private:
+		static bool cmp(vector<int>& a, vector<int>&b) {
+			return a[1] < b[1] || a[1] == b[1] && a[0] < b[0];
+		}
+	};
+		\end{lstlisting}
+\section{合唱团-2016网易编程}
+	\url{http://blog.csdn.net/hui1140621618/article/details/65437387}
+	
+	有 n 个学生站成一排，每个学生有一个能力值，牛牛想从这 n 个学生中按照顺序选取 k 名学生，要求相邻两个学生的位置编号的差不超过 d，使得这 k 个学生的能力值的乘积最大，你能返回最大的乘积吗？
+	
+	每个输入包含 1 个测试用例。每个测试数据的第一行包含一个整数 n (1 <= n <= 50)，表示学生的个数，接下来的一行，包含 n 个整数，按顺序表示每个学生的能力值 ai（-50 <= ai <= 50）。接下来的一行包含两个整数，k 和 d (1 <= k <= 10, 1 <= d <= 50)。
+	
+	\subparagraph{Examples}
+		\begin{lstlisting}
+	// 输入
+	3
+	7 4 7
+	2 50
+	// 输出
+	49
+		\end{lstlisting}
+	\subsection{分析}
+		\url{http://blog.csdn.net/lengxiao1993/article/details/52305420}
+		
+		采用动态规划。设Maxval[i][j]表示以第i个人为最后一个人，一共选取了j+1个人时的最大乘积。
+		
+		同理，Minval[i][j]表示同样状态下的最小乘积（由于数据中存在负数，负数乘上某个极大的负数反而会变成正的极大值，因而需要同时记录最小值）。
+		
+		Maxval[i][j]很显然与Maxval[i][j-1]相关，可以理解为Maxval[i][j]由两部分组成，一部分是自身作为待选值，另一部分是Maxval[i][j-1]乘上一个人后得到的值，然后取它们的极大值，由此可以得到状态转移方程如下：
+		
+			$Maxval[i][j] = max(Maxval[i][j], Maxval[i][j-1]*a[i], Minval[i][j-1]*a[i])$
+			
+			$Minval[i][j] = max(Minval[i][j], Maxval[i][j-1]*a[i], Minval[i][j-1]*a[i])$
+			
+	\subsection{解答}
+		\begin{lstlisting}
+	public class Choir {  
+		
+		public static void main(String[] args){  
+			
+			Scanner s = new Scanner(System.in);  
+			while(s.hasNextInt()){  
+				int n = s.nextInt(); //学生人数  
+				int[] ability = new int[n];  
+				for(int i = 0; i < n; i++){  
+					ability[i] = s.nextInt();  
+				}  
+				int k = s.nextInt();  
+				int d = s.nextInt();  
+				
+				//maxProduct[i][j]表示以第i个人为结尾，合唱团的人数为j+1时，合唱团最大的能力乘积  
+				long[][] maxProduct = new long[n][k];   
+				//minProduct[i][j]表示以第i个人为结尾，合唱团的人数为j+1时，合唱团最小的能力乘积  
+				long[][] minProduct = new long[n][k];  
+				
+				//合唱团中只有一个人  
+				for(int i = 0; i < n; i++){  
+					maxProduct[i][0] = ability[i];  
+					minProduct[i][0] = ability[i];  
+				}  
+				
+				long max = Long.MIN_VALUE;  
+				for(int i = 0; i < n; i++){  
+					for(int j = 1; j < k; j++){  
+						for(int p = i-1; p >= Math.max(i-d,0); p--){  
+							maxProduct[i][j] = Math.max(maxProduct[i][j],  
+							maxProduct[p][j-1]*ability[i]);  
+							maxProduct[i][j] = Math.max(maxProduct[i][j],  
+							minProduct[p][j-1]*ability[i]);  
+							minProduct[i][j] = Math.min(minProduct[i][j],  
+							minProduct[p][j-1]*ability[i]);  
+							minProduct[i][j] = Math.min(minProduct[i][j],  
+							maxProduct[p][j-1]*ability[i]);  
+						}  
+					}  
+					max = Math.max(max, maxProduct[i][k-1]);  
+				}  
+
+				System.out.println(max);  	
+			}  
+		}  
+	
+	}// end of class  
+		\end{lstlisting}
+		
+\section{Palindrome Partitioning}
+	
+\section{Palindrome Partitioning II}
+	Given a string s, partition s such that every substring of the partition is a palindrome.
+	Return the minimum cuts needed for a palindrome partitioning of s.
+	
+	\subparagraph{Examples}\verb|->|
+		\begin{lstlisting}
+	For example, given s = "aab",
+	Return 1 since the palindrome partitioning ["aa","b"] could be produced using 1 cut.
+		\end{lstlisting}
+		
+	\subsection{分析}
+		\url{http://blog.csdn.net/yutianzuijin/article/details/16850031}
+		
+	\subsection{解答}
+	
+\section{Maximal Rectangle}
+	Given a 2D binary matrix filled with 0’s and 1’s, find the largest rectangle containing all ones and return
+	its area.
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{Interleaving String}
+	Given s1, s2, s3, find whether s3 is formed by the interleaving of s1 and s2.
+	
+	\subparagraph{Examples}\verb|->|
+		\begin{lstlisting}
+	Given:
+	s1 = "aabcc",
+	s2 = "dbbca",
+	When s3 = "aadbbcbcac", return true.
+	When s3 = "aadbbbaccc", return false.
+		\end{lstlisting}
+		
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{Scramble String(混杂字符串)}
+	Given a string s1, we may represent it as a binary tree by partitioning it to two non-empty substrings recursively.
+	Below is one possible representation of s1 = "great"
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{Minimum Path Sum}
+		Given a m n grid filled with non-negative numbers, find a path from top left to bottom right which
+		minimizes the sum of all numbers along its path.
+		Note: You can only move either down or right at any point in time
+		
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{Edit Distance}
+	Given two words word1 and word2, find the minimum number of steps required to convert word1 to
+	word2. (each operation is counted as 1 step.)
+	You have the following 3 operations permitted on a word:
+	
+	• Insert a character
+	
+	• Delete a character
+	
+	• Replace a character
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{Decode Ways}
+	A message containing letters from A-Z is being encoded to numbers using the following mapping:
+	'A' -> 1
+	
+	'B' -> 2
+	
+	...
+	
+	'Z' -> 26
+	
+	Given an encoded message containing digits, determine the total number of ways to decode it.
+	For example, Given encoded message "12", it could be decoded as "AB" (1 2) or "L" (12).
+	The number of ways decoding "12" is 2
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+
+\section{Distinct Subsequences}
+
+\section{Word Break}
+
+
+\chapter{Backtracking- 34}
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\chapter{Stack- 25}
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+\chapter{Heap- 15}
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+\chapter{Greedy- 19}
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+\chapter{Sort- 16}
+\section{冒泡}
+	冒泡排序的基本思想是，对\textbf{相邻的元素}进行\textbf{两两比较}，顺序相反则进行交换，这样，\textbf{每一趟}会\textbf{将最小或最大的元素“浮”到顶端}，最终达到完全有序
+	
+		\begin{figure}[h]
+			\centering
+			\includegraphics[scale = 0.7]{Pop.png}
+		\end{figure}
+	
+	\subsection{解答}
+	\url{https://github.com/ctzhenghua/C-NetworkPractice-Code/blob/master/DataStructure/Sort/PopSort.cc}
+		
+\section{选择排序}
+	
+	选择排序的思想非常直接，不是要排序么？那好，我就从所有序列中\textbf{先找到最小的}，\textbf{然后放到第一个位置}。\textbf{之后再看剩余元素中最小的，放到第二个位置}……以此类推，就可以完成整个的排序工作了。可以很清楚的发现，选择排序是固定位置，找元素。相比于插入排序的固定元素找位置，是两种思维方式。不过条条大路通罗马，两者的目的是一样的。
+	
+	\subsection{解答}
+	\url{https://github.com/ctzhenghua/C-NetworkPractice-Code/blob/master/DataStructure/Sort/SelectSort.cc}
+		
+\section{快速排序}
+
+	快速排序是\textbf{找出一个元素}（理论上可以随便找一个）\textbf{作为基准(pivot)},然后对数组进行分区操作,\textbf{使基准左边元素的值都不大于基准值,基准右边的元素值 都不小于基准值}，如此作为基准的元素调整到排序后的正确位置。递归快速排序，将其他n-1个元素也调整到排序后的正确位置。最后每个元素都是在排序后的正 确位置，排序完成。所以快速排序算法的核心算法是分区操作，即如何调整基准的位置以及调整返回基准的最终位置以便分治递归。
+	
+	\subsection{解答}
+		\url{https://github.com/ctzhenghua/C-NetworkPractice-Code/blob/master/DataStructure/Sort/QuickSort.cc}
+\section{插入排序}
+	
+	插入即表示将一个新的数据插入到一个有序数组中，并继续保持有序。例如有一个长度为N的无序数组，进行N-1次的插入即能完成排序；第一次，数组第1个数认为是有序的数组，将数组第二个元素插入仅有1个有序的数组中；第二次，数组前两个元素组成有序的数组，将数组第三个元素插入由两个元素构成的有序数组中......第N-1次，数组前N-1个元素组成有序的数组，将数组的第N个元素插入由N-1个元素构成的有序数组中，则完成了整个插入排序。
+	
+	\subsection{解答}
+	
+\section{归并}
+	
+	\url{http://www.cnblogs.com/jingmoxukong/p/4308823.html}
+	
+	归并排序的思想就是把前一段排序，后一段排序，然后再整体排序。
+	
+	归并排序其实要做两件事：
+	\begin{enumerate}[itemindent = 2em]
+	  \item \textbf{“分解”}——将序列每次折半划分。
+	  \item \textbf{“合并”}——将划分后的序列段两两合并后排序。
+	\end{enumerate}
+	
+	\subsection{如何合并}
+		在每次合并过程中，都是对两个有序的序列段进行合并，然后排序。	这两个有序序列段分别为 \verb|R[low, mid]| 和 \verb|R[mid+1, high]|。
+		先将他们合并到一个局部的暂存数组\verb|R2|中，带合并完成后再将\verb|R2|复制回\verb|R|中。
+	
+		为了方便描述，我们称 \verb|R[low, mid]| 第一段，\verb|R[mid+1, high]| 为第二段。
+		
+		\textbf{每次从两个段中取出一个记录进行关键字的比较，将较小者放入R2中。最后将各段中余下的部分直接复制到R2中。}
+		经过这样的过程，R2已经是一个有序的序列，再将其复制回R中，一次合并排序就完成了。
+		
+		\subparagraph{实现}\verb|->|
+			\begin{lstlisting}
+	void mergearray(int a[], int first, int mid, int last, int temp[])  
+	{  
+		int i = first, j = mid + 1;  
+		int m = mid,   n = last;  
+		int k = 0;  
+		
+		while (i <= m && j <= n)  
+		{  
+			if (a[i] <= a[j])  
+				temp[k++] = a[i++];  
+			else  
+				temp[k++] = a[j++];  
+		}  
+		
+		while (i <= m)  
+			temp[k++] = a[i++];  
+		
+		while (j <= n)  
+			temp[k++] = a[j++];  
+		
+		for (i = 0; i < k; i++)  
+			a[first + i] = temp[i];  
+	}  
+			\end{lstlisting}
+		
+	\subsection{如何分解}
+		在某趟归并中，折半分解。
+	
+		\subparagraph{实现}\verb|->|
+		\begin{lstlisting}
+	void mergesort(int a[], int first, int last, int temp[])  
+	{  
+		if (first < last)  
+		{  
+			int mid = (first + last) / 2;  
+			mergesort(a, first, mid, temp);    //左边有序  
+			mergesort(a, mid + 1, last, temp); //右边有序  
+			mergearray(a, first, mid, last, temp); //再将二个有序数列合并  
+		}  
+	}  
+		\end{lstlisting}
+\section{堆}
+	\url{http://www.cnblogs.com/mengdd/archive/2012/11/30/2796845.html}
+	
+		\begin{itemize}
+			\item  数组最后 总是不需要再调整的
+			\item  调整好后，根与当前剩下未确定的最后一个进行位置交换
+		\end{itemize}
+	
+		\begin{figure}[h]
+			\centering
+			\includegraphics*[scale = 0.7]{Heap.png}
+		\end{figure}
+	\subsection{解答}
+	
+	\url{http://blog.csdn.net/xiaoxiaoxuewen/article/details/7570621/}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+\chapter{Bit Manipulation- 26}
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}	
+\chapter{Tree- 48}
+	\url{http://blog.csdn.net/luckyxiaoqiang/article/details/7518888}
+\section{Binary Tree Maximum Path Sum}
+		Given a binary tree, find the maximum path sum.
+		
+		For this problem, a path is defined as any sequence of nodes from some starting node to any node in the tree along the parent-child connections. The path must contain at least one node and does not need to go through the root.
+	\subparagraph{Examples}
+		Given the below binary tree,
+		
+		\begin{figure}[h]
+			\centering
+			\includegraphics[scale = 1]{Tree_1.png}
+		\end{figure}
+		
+		Return 6.	
+	\subsection{分析}
+	
+	\subsection{解答}
+		\begin{lstlisting}
+	/**
+	* Definition for a binary tree node.
+	* struct TreeNode {
+	*     int val;
+	*     TreeNode *left;
+	*     TreeNode *right;
+	*     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+	* };
+	*/
+	class Solution {
+	public:
+	int maxPathSum(TreeNode* root) {
+	
+	}
+	};
+		\end{lstlisting}
+\section{Validate Binary Search Tree}
+		Given a binary tree, determine if it is a valid binary search tree (BST).
+		
+		Assume a BST is defined as follows:
+		
+		1-The left subtree of a node contains only nodes with keys less than the node's key.
+		
+		2-The right subtree of a node contains only nodes with keys greater than the node's key.
+		
+		3-Both the left and right subtrees must also be binary search trees.
+	\subparagraph{Examples}
+		Given the below binary tree,
+		
+		\begin{figure}[h]
+			\centering
+			\includegraphics[scale = 1]{Tree_2.png}
+		\end{figure}
+		
+		Binary tree [2,1,3], return true.
+		
+		\begin{figure}[h]
+			\centering
+			\includegraphics[scale = 1]{Tree_3.png}
+		\end{figure}
+		
+		Binary tree [1,2,3], return false.
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{求二叉树中的节点个数}
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{求二叉树的深度}
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{前序遍历，中序遍历，后序遍历}
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{分层遍历二叉树（按层次从上往下，从左往右）}
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{将二叉查找树变为有序的双向链表}
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{求二叉树第K层的节点个数}
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{求二叉树中叶子节点的个数}
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{判断两棵二叉树是否结构相同}
+	\subsection{分析}
+	
+	\subsection{解答}
+\section{判断二叉树是不是平衡二叉树}
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{求二叉树的镜像}
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{求二叉树中两个节点的最低公共祖先节点}
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{求二叉树中节点的最大距离}
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{由前序遍历序列和中序遍历序列重建二叉树}
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{判断二叉树是不是完全二叉树}
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\chapter{Depth-first Search- 41}
+\section{部分和问题}
+	给定整数$a_1, a_2,...,a_n$,判断是否可以从中选出若干数，使他们的和恰好为$k$
+	\subparagraph{Examples}
+		\begin{lstlisting}[frame = ,xleftmargin=.02\textwidth]
+// Test Case 1
+	输入
+	n = 4
+	a = {1, 2, 4, 7}
+	k = 13
+	
+	输出
+	Yes{13 = 2 + 4 + 7}
+// Test Case 2
+	输入
+	n = 4
+	a = {1, 2, 4, 7}
+	k = 15
+	
+	输出
+	No
+		\end{lstlisting}
+	\subsection{分析}
+	
+	当$n < 20$时，运算次数为100 0000 次，可以接受
+	\subsection{解答}
+		\begin{lstlisting}
+	int a[MAX_N];
+	int n, k;
+	
+	bool dfs(int i, sum)
+	{
+		if(i == n) return sum == k;
+		if(dfs(i+1, sum)) return true;
+		if(dfs(i+1, sum+a[i])) return true;
+		return false;
+	}
+		\end{lstlisting}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+\chapter{Breadth-first Search- 21}
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+\chapter{Union Find- 6}	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+\chapter{Graph- 10}
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+\chapter{Design- 27}
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+\chapter{Topological Sort[拓扑排序]- 5}
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+\chapter{Trie[前缀-字典树]- 7}
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\chapter{Bianry Indexed Tree- 4}
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\chapter{Segment Tree- 4}
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+\chapter{Binary Search Tree- 4}
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+	
+\section{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+
+\chapter{Other Aspects}
+\section{Recursion[递归]- 2}	
+	\subsection{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+\section{Brainteaser[谜题]- 2}
+	\subsection{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+\section{Memoization[以避免递归重复计算，如Fibonacci(斐波那契)问题]- 1}
+	\subsection{}
+	
+	\subparagraph{Examples}
+	
+	\subsection{分析}
+	
+	\subsection{解答}
+
+\section{Queue- 3}
+	\subsection{}
+	
+		\subparagraph{Examples}
+		
+		\subsubsection{分析}
+	
+		\subsubsection{解答}
+	
+	\subsection{}
+	
+		\subparagraph{Examples}
+	
+		\subsubsection{分析}
+	
+		\subsubsection{解答}
+
+\section{Reservoir Sampling[随机抽样]- 2}
+	\subsection{}
+	
+		\subparagraph{Examples}
+	
+		\subsubsection{分析}
+	
+		\subsubsection{解答}
+		
+\section{Minimax[极小化极大算法]- 3}
+	\subsection{}
+	
+		\subparagraph{Examples}
+		
+		\subsubsection{分析}
+		
+		\subsubsection{解答}
+	\subsection{}
+		
+		\subparagraph{Examples}
+		
+		\subsubsection{分析}
+		
+		\subsubsection{解答}
+
+\section{Other Interview}
+\subsection{迷宫字符串} 
+	\subsubsection{问题}
+	已知：一个二维的字母矩阵和一个由字母组装的单词。输出：该单词是否可以从二维字母矩阵中拼接出来，拼接规则为从矩阵的某一行的某个字母开始，持续向临近的字母扩展（向上、向下、向左或向右），直至拼接出该单词。若最终可以拼接出，则输出true；若最终不可以拼接出，则输出false
+	
+	\subparagraph{Example}
+		Given 字母矩阵为
+		
+			A B C D E
+			
+			E F G H U
+			
+			A B S D F
+		
+		输入：ABCGH  输出 true
+		
+		输入：FGHDSB  输出 true
+		
+		输入：EFGU  输出 false
+	\subsubsection{解答}
+		\subsubsection{队列方法}
+\begin{lstlisting}
+	#include <iostream>
+	#include <list>
+	using namespace std;
+	
+	struct Roud{
+		int i;	 //rows
+		int j;   //columns
+		int now; //testCase[now];
+		list<char> roud;
+	};
+	
+	// queue
+	list<Roud> all;
+	list<char> result;
+	
+	// arrayCharacters
+	char array[3][5] = { { 'A', 'B', 'C', 'D', 'E' }, { 'E', 'F', 'G', 'H', 'U' }, { 'A', 'B', 'S', 'D', 'F' } };
+	
+	void createReslut(char * testCase)
+	{
+		for (int i = 0; i < strlen(testCase); ++i)
+		{
+			result.push_back(testCase[i]);
+		}
+	}
+	void solve(char * testCase)
+	{
+		// Checking The First Elements
+		int  i = 0;
+		for (int _i = 0; _i < 3; ++_i)
+		{
+			for (int j = 0; j < 5; ++j)
+			{
+				if (array[_i][j] == testCase[0])
+				{
+					Roud temp;
+					temp.roud.push_back(testCase[0]);
+					temp.i = _i;
+					temp.j = j;
+					temp.now = 0;
+					all.push_back(temp);
+					
+					if (i == 0)
+						++i;
+				}
+			}
+		}
+	
+		// Queue Checking Roud
+		while (testCase[i] != '\0' && all.size() > 0)
+		{
+			Roud temp = all.front();
+			Roud tempN;
+			if (result == temp.roud)
+				break;
+			
+			i = temp.now;
+			++i;
+			// Checking 4 direction
+				// Up
+				if ((temp.i - 1 >= 0) && (testCase[i] == array[temp.i - 1][temp.j]))
+				{
+					tempN.i = temp.i - 1;
+					tempN.j = temp.j;
+					tempN.now = temp.now + 1;
+					tempN.roud = temp.roud;
+					tempN.roud.push_back(testCase[i]);
+					all.push_back(tempN);
+				}
+				// Down
+				if ((temp.i +1  <= 2) && (testCase[i] == array[temp.i + 1][temp.j]))
+				{
+					tempN.i = temp.i + 1;
+					tempN.j = temp.j;
+					tempN.now = temp.now + 1;
+					tempN.roud = temp.roud;
+					tempN.roud.push_back(testCase[i]);
+					all.push_back(tempN);
+				}
+				// Left
+				if ((temp.j -1 >= 0) && (testCase[i] == array[temp.i][temp.j-1]))
+				{
+					tempN.i = temp.i;
+					tempN.j = temp.j-1;
+					tempN.now = temp.now + 1;
+					tempN.roud = temp.roud;
+					tempN.roud.push_back(testCase[i]);
+					all.push_back(tempN);
+				}
+				// Right
+				if ((temp.j+1 <= 4) && (testCase[i] == array[temp.i][temp.j+1]))
+				{
+					tempN.i = temp.i;
+					tempN.j = temp.j + 1;
+					tempN.now = temp.now + 1;
+					tempN.roud = temp.roud;
+					tempN.roud.push_back(testCase[i]);
+					all.push_back(tempN);
+				}
+				all.pop_front();
+		}
+			
+		if (all.size()>0)
+			cout << "true" << endl;
+		else
+			cout << "false" << endl;
+	}
+	
+	int main()
+	{
+		char test[256];
+		cin >> test;
+		
+		createReslut(test);
+		solve(test);
+		
+		system("PAUSE");
+		return 0;
+	}
+\end{lstlisting}
+
+
+ \end{document} 
+ 
+ 
+ 

@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)https://www.zybuluo.com/smilence/note/534236 -->
+<html class="theme theme-white"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    
+    <meta name="description" content="Cmd Markdown 编辑阅读器，支持实时同步预览，区分写作和阅读模式，支持在线存储，分享文稿网址。">
+    <meta name="author" content="Jiawei Zhang">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <title>第七部分：递归 动态规划 - 作业部落 Cmd Markdown 编辑阅读器</title>
+
+
+    <link href="https://www.zybuluo.com/static/img/favicon.png" type="image/x-icon" rel="icon">
+
+    <link href="./第七部分：递归 动态规划 - 作业部落 Cmd Markdown 编辑阅读器_files/1bc053c8.base.lib.min.css" rel="stylesheet" media="screen">
+
+
+    
+    <!-- id="prettify-style" will be used to get the link element below and change href to change prettify code, so it can't be in beginmin/endmin block. -->
+    <link id="prettify-style" href="./第七部分：递归 动态规划 - 作业部落 Cmd Markdown 编辑阅读器_files/prettify-cmd.css" type="text/css" rel="stylesheet">
+    <!--
+    <link id="mermaid-style" href="https://www.zybuluo.com/static/editor/libs/mermaid/mermaid.forest.css" type="text/css" rel="stylesheet">
+    -->
+    <link href="./第七部分：递归 动态规划 - 作业部落 Cmd Markdown 编辑阅读器_files/45c7d56d.layout.min.css" rel="stylesheet" media="screen">
+
+
+    
+
+    <script async="" src="./第七部分：递归 动态规划 - 作业部落 Cmd Markdown 编辑阅读器_files/analytics.js.下载"></script><script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-44461741-1', 'zybuluo.com');
+      ga('send', 'pageview');
+    </script>
+<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Hover_Arrow {position: absolute; width: 15px; height: 11px; cursor: pointer}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; color: #666666}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_Menu_Close {position: absolute; width: 31px; height: 31px; top: -15px; left: -15px}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MathJax_SVG_Display {text-align: center; margin: 1em 0em; position: relative; display: block; width: 100%}
+#MathJax_SVG_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; padding: 3px 4px; z-index: 401; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none}
+.MathJax_SVG {display: inline; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; border: 0; padding: 0; margin: 0}
+.MathJax_SVG * {transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none}
+.mjx-svg-href {fill: blue; stroke: blue}
+.MathJax_SVG_Processing {visibility: hidden; position: absolute; top: 0; left: 0; width: 0; height: 0; overflow: hidden; display: block}
+.MathJax_SVG_Processed {display: none!important}
+.MathJax_SVG_ExBox {display: block; overflow: hidden; width: 1px; height: 60ex}
+.MathJax_SVG .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+
+<body class="theme  theme-white pace-done"><div style="visibility: hidden; overflow: hidden; position: absolute; top: 0px; height: 1px; width: auto; padding: 0px; border: 0px; margin: 0px; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal;"><div id="MathJax_SVG_Hidden"></div><svg><defs id="MathJax_SVG_glyphs"><path id="MJMATHI-6E" stroke-width="1" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path><path id="MJMATHI-4F" stroke-width="1" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"></path><path id="MJMAIN-28" stroke-width="1" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path id="MJMAIN-29" stroke-width="1" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path><path id="MJMATHI-66" stroke-width="1" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"></path><path id="MJMAIN-3D" stroke-width="1" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path><path id="MJMATHI-47" stroke-width="1" d="M50 252Q50 367 117 473T286 641T490 704Q580 704 633 653Q642 643 648 636T656 626L657 623Q660 623 684 649Q691 655 699 663T715 679T725 690L740 705H746Q760 705 760 698Q760 694 728 561Q692 422 692 421Q690 416 687 415T669 413H653Q647 419 647 422Q647 423 648 429T650 449T651 481Q651 552 619 605T510 659Q492 659 471 656T418 643T357 615T294 567T236 496T189 394T158 260Q156 242 156 221Q156 173 170 136T206 79T256 45T308 28T353 24Q407 24 452 47T514 106Q517 114 529 161T541 214Q541 222 528 224T468 227H431Q425 233 425 235T427 254Q431 267 437 273H454Q494 271 594 271Q634 271 659 271T695 272T707 272Q721 272 721 263Q721 261 719 249Q714 230 709 228Q706 227 694 227Q674 227 653 224Q646 221 643 215T629 164Q620 131 614 108Q589 6 586 3Q584 1 581 1Q571 1 553 21T530 52Q530 53 528 52T522 47Q448 -22 322 -22Q201 -22 126 55T50 252Z"></path><path id="MJMAIN-2C" stroke-width="1" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path><path id="MJMAIN-2212" stroke-width="1" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path><path id="MJMAIN-31" stroke-width="1" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path id="MJMAIN-32" stroke-width="1" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path><path id="MJMAIN-2E" stroke-width="1" d="M78 60Q78 84 95 102T138 120Q162 120 180 104T199 61Q199 36 182 18T139 0T96 17T78 60Z"></path><path id="MJMATHI-69" stroke-width="1" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path><path id="MJMATHI-6A" stroke-width="1" d="M297 596Q297 627 318 644T361 661Q378 661 389 651T403 623Q403 595 384 576T340 557Q322 557 310 567T297 596ZM288 376Q288 405 262 405Q240 405 220 393T185 362T161 325T144 293L137 279Q135 278 121 278H107Q101 284 101 286T105 299Q126 348 164 391T252 441Q253 441 260 441T272 442Q296 441 316 432Q341 418 354 401T367 348V332L318 133Q267 -67 264 -75Q246 -125 194 -164T75 -204Q25 -204 7 -183T-12 -137Q-12 -110 7 -91T53 -71Q70 -71 82 -81T95 -112Q95 -148 63 -167Q69 -168 77 -168Q111 -168 139 -140T182 -74L193 -32Q204 11 219 72T251 197T278 308T289 365Q289 372 288 376Z"></path><path id="MJMAIN-5B" stroke-width="1" d="M118 -250V750H255V710H158V-210H255V-250H118Z"></path><path id="MJMAIN-5D" stroke-width="1" d="M22 710V750H159V-250H22V-210H119V710H22Z"></path><path id="MJMAIN-30" stroke-width="1" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"></path><path id="MJMATHI-78" stroke-width="1" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path><path id="MJMATHI-79" stroke-width="1" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path><path id="MJMATHI-6C" stroke-width="1" d="M117 59Q117 26 142 26Q179 26 205 131Q211 151 215 152Q217 153 225 153H229Q238 153 241 153T246 151T248 144Q247 138 245 128T234 90T214 43T183 6T137 -11Q101 -11 70 11T38 85Q38 97 39 102L104 360Q167 615 167 623Q167 626 166 628T162 632T157 634T149 635T141 636T132 637T122 637Q112 637 109 637T101 638T95 641T94 647Q94 649 96 661Q101 680 107 682T179 688Q194 689 213 690T243 693T254 694Q266 694 266 686Q266 675 193 386T118 83Q118 81 118 75T117 65V59Z"></path><path id="MJMATHI-6F" stroke-width="1" d="M201 -11Q126 -11 80 38T34 156Q34 221 64 279T146 380Q222 441 301 441Q333 441 341 440Q354 437 367 433T402 417T438 387T464 338T476 268Q476 161 390 75T201 -11ZM121 120Q121 70 147 48T206 26Q250 26 289 58T351 142Q360 163 374 216T388 308Q388 352 370 375Q346 405 306 405Q243 405 195 347Q158 303 140 230T121 120Z"></path><path id="MJMATHI-67" stroke-width="1" d="M311 43Q296 30 267 15T206 0Q143 0 105 45T66 160Q66 265 143 353T314 442Q361 442 401 394L404 398Q406 401 409 404T418 412T431 419T447 422Q461 422 470 413T480 394Q480 379 423 152T363 -80Q345 -134 286 -169T151 -205Q10 -205 10 -137Q10 -111 28 -91T74 -71Q89 -71 102 -80T116 -111Q116 -121 114 -130T107 -144T99 -154T92 -162L90 -164H91Q101 -167 151 -167Q189 -167 211 -155Q234 -144 254 -122T282 -75Q288 -56 298 -13Q311 35 311 43ZM384 328L380 339Q377 350 375 354T369 368T359 382T346 393T328 402T306 405Q262 405 221 352Q191 313 171 233T151 117Q151 38 213 38Q269 38 323 108L331 118L384 328Z"></path></defs></svg></div><div id="MathJax_Message" style="display: none;"></div><div class="pace  pace-inactive"><div class="pace-progress" data-progress-text="100%" data-progress="99" style="width: 100%;">
+  <div class="pace-progress-inner"></div>
+</div>
+<div class="pace-activity"></div></div>
+
+    <div id="global-prompt-alert" class="hide alert alert-warning">
+        <span id="global-prompt-message"></span>
+        <a id="close-global-prompt-alert" href="https://www.zybuluo.com/smilence/note/534236">[关闭]</a>
+    </div>
+
+    <!-- zybuluo's body -->
+    
+
+
+
+
+
+
+
+<!-- mdeditor's body -->
+
+
+
+
+
+
+<div id="editor-reader-full" class="editor-reader-full-shown" style="position: static; padding-right: 75px;">
+    <div id="reader-full-topInfo" class="reader-full-topInfo-shown">
+        <span>
+            <code>@smilence</code>
+        </span>
+        <code><span class="article-updated-date">2016-12-29 16:07</span></code>
+        <code><span>字数 </span><span class="article-characters">13751</span></code>
+        <code><span>阅读 </span><span class="article-read">210</span></code>
+    </div>
+    <div id="wmd-preview" class="wmd-preview wmd-preview-full-reader" data-medium-element="true"><div class="md-section-divider"></div><div class="md-section-divider"></div><h1 data-anchor-id="urbw" id="第七部分递归-动态规划">第七部分：递归 动态规划</h1><p data-anchor-id="eq6b"><code>算法面试指南</code></p><hr><div class="md-section-divider"></div><h3 data-anchor-id="xcm8" id="71-知识解析">7.1 知识解析</h3><p data-anchor-id="uuvg"><strong>1.Build approach from subproblems to the final destination。</strong> <br>
+这类问题的keyword： <em>compute the nth, visit the first n,  return all paths, etc</em> <br>
+凡是解决此类问题，无非只有两种方法，<strong>Bottom-Up</strong> 与 <strong>Top-Down</strong>， 实现方式上前者对应iteration, 后者对应recursion。  </p><p data-anchor-id="d9vf">本文将<strong>问题节点空间"两端收敛"</strong>的问题，归结为收敛结构，通常这类问题的path也为“有限”个，例如: <code>n!</code>, <code>fibnacci(n)</code>；将<strong>节点空间"发散"</strong>的问题，归结为发散结构，例如: 二叉树的遍历。 抽象地说，能够在多项式时间内解决的问题，是收敛问题（P类问题），不能在多项式时间内解决的问题（如阶乘级或指数级），是发散问题。<em>（关于P问题的描述：<a href="http://www.matrix67.com/blog/archives/105" target="_blank">http://www.matrix67.com/blog/archives/105</a> ）</em>  </p><p data-anchor-id="z2eu"><strong>特别地，聚合问题(Aggregate)，即关于特解（包括判定性问题） 或最优解或总和的问题，具有很强的收敛性质。</strong></p><p data-anchor-id="6t1t"><strong>2.递推关系是实现递归形式问题的关键</strong> <br>
+递推关系 = 递推式 + 初始条件； <br>
+对divide and conquer来说，就等效于由递推公式到通项公式的数学问题，其证明即为数学归纳法。</p><p data-anchor-id="zpjx"><strong>3.Recursion的空间与时间成本</strong> <br>
+对系统来说，一般利用底层<code>stack</code>实现递归。每次操作可视为<code>stack</code>里的一个object。 <br>
+递归的 <em>time cost</em> 随 <span class="MathJax_Preview"></span><span class="MathJax_SVG" id="MathJax-Element-1-Frame" role="textbox" aria-readonly="true" style="font-size: 100%; display: inline-block;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 -464.0516853480245 600.5 496.10337069604896" style="width: 1.39ex; height: 1.158ex; vertical-align: -0.116ex; margin: 1px 0px;"><g stroke="black" fill="black" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-6E"></use></g></svg></span><script type="math/tex" id="MathJax-Element-1">n</script> 成指数增长，其中 <span class="MathJax_Preview"></span><span class="MathJax_SVG" id="MathJax-Element-2-Frame" role="textbox" aria-readonly="true" style="font-size: 100%; display: inline-block;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 -464.0516853480245 600.5 496.10337069604896" style="width: 1.39ex; height: 1.158ex; vertical-align: -0.116ex; margin: 1px 0px;"><g stroke="black" fill="black" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-6E"></use></g></svg></span><script type="math/tex" id="MathJax-Element-2">n</script> 为递归的深度（单路径递归调用的次数）; space cost为 <span class="MathJax_Preview"></span><span class="MathJax_SVG" id="MathJax-Element-3-Frame" role="textbox" aria-readonly="true" style="font-size: 100%; display: inline-block;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 -771.0516853480245 2143 1042.103370696049" style="width: 4.981ex; height: 2.432ex; vertical-align: -0.695ex; margin: 1px 0px;"><g stroke="black" fill="black" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-4F"></use><use href="#MJMAIN-28" x="763" y="0"></use><use href="#MJMATHI-6E" x="1153" y="0"></use><use href="#MJMAIN-29" x="1753" y="0"></use></g></svg></span><script type="math/tex" id="MathJax-Element-3">O(n)</script>。</p><p data-anchor-id="wq2x"><strong>4.用<code>stack</code>解决递归形式问题</strong></p><p data-anchor-id="01tp">在使用D&amp;C策略时，如果每个subproblem，处理的是单个同样类型的<code>object</code>，则可以将该<code>object</code>按照Top-down的方向入栈，然后循环<code>pop()</code>来访问。<strong>如果subproblem的size不同，则可将他们声明为同种类型的<code>object</code>，按照Top-Down的方向入栈；最后<code>pop()</code>访问时，再将复合的subproblem拆解，<code>push</code>入栈；如此循环直至<code>stack</code>清空。</strong></p><blockquote data-anchor-id="75qm" class="white-blockquote">
+  <p><em>e.g Solve the Hanoi Tower problem without recursion</em></p>
+</blockquote><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="9uzk" style=""><ol class="linenums"><li class="L0"><code class="language-C++"></code></li><li class="L1"><code class="language-C++"><span class="kwd">enum</span><span class="pln"> </span><span class="typ">Tower</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="typ">Zero</span><span class="pun">,</span><span class="typ">Left</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Mid</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Right</span><span class="pun">};</span></code></li><li class="L2"><code class="language-C++"></code></li><li class="L3"><code class="language-C++"><span class="kwd">class</span><span class="pln"> </span><span class="typ">HanoiObj</span><span class="pun">{</span></code></li><li class="L4"><code class="language-C++"><span class="kwd">public</span><span class="pun">:</span></code></li><li class="L5"><code class="language-C++"></code></li><li class="L6"><code class="language-C++"><span class="pln">   </span><span class="typ">Tower</span><span class="pln"> src</span><span class="pun">,</span><span class="pln">tmp</span><span class="pun">,</span><span class="pln">dest</span><span class="pun">;</span></code></li><li class="L7"><code class="language-C++"><span class="pln">   </span><span class="kwd">int</span><span class="pln"> num</span><span class="pun">,</span><span class="pln">index</span><span class="pun">;</span></code></li><li class="L8"><code class="language-C++"><span class="pln">   </span><span class="typ">HanoiObj</span><span class="pun">(</span><span class="typ">Tower</span><span class="pln"> s</span><span class="pun">,</span><span class="typ">Tower</span><span class="pln"> t</span><span class="pun">,</span><span class="typ">Tower</span><span class="pln"> d</span><span class="pun">,</span><span class="kwd">int</span><span class="pln"> n</span><span class="pun">):</span><span class="pln">src</span><span class="pun">(</span><span class="pln">s</span><span class="pun">),</span><span class="pln">tmp</span><span class="pun">(</span><span class="pln">t</span><span class="pun">),</span><span class="pln">dest</span><span class="pun">(</span><span class="pln">d</span><span class="pun">),</span><span class="pln">num</span><span class="pun">(</span><span class="pln">n</span><span class="pun">){</span></code></li><li class="L9"><code class="language-C++"><span class="pln">       </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">n </span><span class="pun">==</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span><span class="pln"> index </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span></code></li><li class="L0"><code class="language-C++"><span class="pln">   </span><span class="pun">}</span></code></li><li class="L1"><code class="language-C++"><span class="pln">   </span><span class="typ">HanoiObj</span><span class="pun">(</span><span class="typ">Tower</span><span class="pln"> s</span><span class="pun">,</span><span class="typ">Tower</span><span class="pln"> d</span><span class="pun">,</span><span class="kwd">int</span><span class="pln"> i</span><span class="pun">):</span><span class="pln">src</span><span class="pun">(</span><span class="pln">s</span><span class="pun">),</span><span class="pln">dest</span><span class="pun">(</span><span class="pln">d</span><span class="pun">),</span><span class="pln">index</span><span class="pun">(</span><span class="pln">i</span><span class="pun">){</span></code></li><li class="L2"><code class="language-C++"><span class="pln">       num </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span><span class="pln"> tmp </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Zero</span><span class="pun">;</span></code></li><li class="L3"><code class="language-C++"><span class="pln">   </span><span class="pun">}</span></code></li><li class="L4"><code class="language-C++"><span class="pun">};</span></code></li><li class="L5"><code class="language-C++"></code></li><li class="L6"><code class="language-C++"><span class="kwd">void</span><span class="pln"> move</span><span class="pun">(</span><span class="pln"> </span><span class="typ">Tower</span><span class="pln"> src</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Tower</span><span class="pln"> dest</span><span class="pun">,</span><span class="kwd">int</span><span class="pln"> index</span><span class="pun">){</span></code></li><li class="L7"><code class="language-C++"><span class="pln">   cout </span><span class="pun">&lt;&lt;</span><span class="pln"> </span><span class="str">"Move Disk #"</span><span class="pln"> </span><span class="pun">&lt;&lt;</span><span class="pln"> index </span><span class="pun">&lt;&lt;</span><span class="str">" from Tower "</span><span class="pln"> </span><span class="pun">&lt;&lt;</span><span class="pln"> src </span><span class="pun">&lt;&lt;</span><span class="pln"> </span><span class="str">" to Tower "</span><span class="pln"> </span><span class="pun">&lt;&lt;</span><span class="pln"> dest </span><span class="pun">&lt;&lt;</span><span class="pln"> endl</span><span class="pun">;</span></code></li><li class="L8"><code class="language-C++"><span class="pun">}</span></code></li><li class="L9"><code class="language-C++"></code></li><li class="L0"><code class="language-C++"><span class="kwd">void</span><span class="pln"> TOH</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> N</span><span class="pun">,</span><span class="pln"> stack</span><span class="pun">&lt;</span><span class="typ">HanoiObj</span><span class="pun">*&gt;&amp;</span><span class="typ">Hstack</span><span class="pun">){</span></code></li><li class="L1"><code class="language-C++"></code></li><li class="L2"><code class="language-C++"><span class="pln">   </span><span class="typ">Tower</span><span class="pln"> s</span><span class="pun">,</span><span class="pln">t</span><span class="pun">,</span><span class="pln">d</span><span class="pun">;</span></code></li><li class="L3"><code class="language-C++"><span class="pln">   </span><span class="kwd">int</span><span class="pln"> n</span><span class="pun">;</span></code></li><li class="L4"><code class="language-C++"><span class="pln">   </span><span class="typ">Hstack</span><span class="pun">.</span><span class="pln">push</span><span class="pun">(</span><span class="kwd">new</span><span class="pln"> </span><span class="typ">HanoiObj</span><span class="pun">(</span><span class="typ">Left</span><span class="pun">,</span><span class="typ">Mid</span><span class="pun">,</span><span class="typ">Right</span><span class="pun">,</span><span class="pln">N</span><span class="pun">));</span></code></li><li class="L5"><code class="language-C++"></code></li><li class="L6"><code class="language-C++"><span class="pln">   </span><span class="kwd">while</span><span class="pun">(</span><span class="pln"> </span><span class="pun">!</span><span class="typ">Hstack</span><span class="pun">.</span><span class="pln">empty</span><span class="pun">()){</span></code></li><li class="L7"><code class="language-C++"></code></li><li class="L8"><code class="language-C++"><span class="pln">       </span><span class="typ">HanoiObj</span><span class="pln"> </span><span class="pun">*</span><span class="pln">tmpObj </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Hstack</span><span class="pun">.</span><span class="pln">top</span><span class="pun">();</span></code></li><li class="L9"><code class="language-C++"><span class="pln">       </span><span class="typ">Hstack</span><span class="pun">.</span><span class="pln">pop</span><span class="pun">();</span></code></li><li class="L0"><code class="language-C++"></code></li><li class="L1"><code class="language-C++"><span class="pln">       s </span><span class="pun">=</span><span class="pln"> tmpObj</span><span class="pun">-&gt;</span><span class="pln">src</span><span class="pun">;</span></code></li><li class="L2"><code class="language-C++"><span class="pln">       t </span><span class="pun">=</span><span class="pln"> tmpObj</span><span class="pun">-&gt;</span><span class="pln">tmp</span><span class="pun">;</span></code></li><li class="L3"><code class="language-C++"><span class="pln">       d </span><span class="pun">=</span><span class="pln"> tmpObj</span><span class="pun">-&gt;</span><span class="pln">dest</span><span class="pun">;</span></code></li><li class="L4"><code class="language-C++"><span class="pln">       n </span><span class="pun">=</span><span class="pln"> tmpObj</span><span class="pun">-&gt;</span><span class="pln">num</span><span class="pun">;</span></code></li><li class="L5"><code class="language-C++"></code></li><li class="L6"><code class="language-C++"><span class="pln">       </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">n </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span><span class="pln"> </span><span class="kwd">continue</span><span class="pun">;</span></code></li><li class="L7"><code class="language-C++"></code></li><li class="L8"><code class="language-C++"><span class="pln">       </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">n </span><span class="pun">==</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L9"><code class="language-C++"><span class="pln">           move</span><span class="pun">(</span><span class="pln">s</span><span class="pun">,</span><span class="pln">d</span><span class="pun">,</span><span class="pln">tmpObj</span><span class="pun">-&gt;</span><span class="pln">index</span><span class="pun">);</span></code></li><li class="L0"><code class="language-C++"><span class="pln">       </span><span class="kwd">else</span><span class="pun">{</span></code></li><li class="L1"><code class="language-C++"></code></li><li class="L2"><code class="language-C++"><span class="pln">           </span><span class="typ">Hstack</span><span class="pun">.</span><span class="pln">push</span><span class="pun">(</span><span class="kwd">new</span><span class="pln"> </span><span class="typ">HanoiObj</span><span class="pun">(</span><span class="pln">t</span><span class="pun">,</span><span class="pln">s</span><span class="pun">,</span><span class="pln">d</span><span class="pun">,</span><span class="pln">n</span><span class="pun">-</span><span class="lit">1</span><span class="pun">));</span></code></li><li class="L3"><code class="language-C++"><span class="pln">           </span><span class="typ">Hstack</span><span class="pun">.</span><span class="pln">push</span><span class="pun">(</span><span class="kwd">new</span><span class="pln"> </span><span class="typ">HanoiObj</span><span class="pun">(</span><span class="pln">s</span><span class="pun">,</span><span class="pln">d</span><span class="pun">,</span><span class="pln">n</span><span class="pun">));</span></code></li><li class="L4"><code class="language-C++"><span class="pln">           </span><span class="typ">Hstack</span><span class="pun">.</span><span class="pln">push</span><span class="pun">(</span><span class="kwd">new</span><span class="pln"> </span><span class="typ">HanoiObj</span><span class="pun">(</span><span class="pln">s</span><span class="pun">,</span><span class="pln">d</span><span class="pun">,</span><span class="pln">t</span><span class="pun">,</span><span class="pln">n</span><span class="pun">-</span><span class="lit">1</span><span class="pun">));</span></code></li><li class="L5"><code class="language-C++"><span class="pln">       </span><span class="pun">}</span></code></li><li class="L6"><code class="language-C++"><span class="pln">       </span><span class="kwd">delete</span><span class="pln"> tmpObj</span><span class="pun">;</span><span class="com">//</span></code></li><li class="L7"><code class="language-C++"><span class="pln">   </span><span class="pun">}</span></code></li><li class="L8"><code class="language-C++"><span class="pun">}</span></code></li></ol></pre><p data-anchor-id="ppaj"><strong>5.算法策略</strong> <br>
+<strong>Divide and conquer :</strong> 将问题分成几个部分，每一部分问题互相不重叠，假定每个部分都可以得到解决进行递归调用，合并每一部分的结果。例如Merge Sort,Quick Sort。  </p><p data-anchor-id="o7zf"><strong>Dynamic Programming</strong>：尽可能不重复计算每个subproblem，将计算结果存储下来，以确定后驱问题的结果。与贪心算法的区别是，在计算后驱问题时，可能会综合考虑多个前驱问题的解。   </p><p data-anchor-id="15ng"><strong>Greedy Algorithm</strong> :   只做出当下最优的判断，从全局来说并不能保证总是最优。如Dijkstra算法。</p><p data-anchor-id="ks5l"><strong>Backtracking</strong>：  一种暴力（穷举）的深度优先搜索法，直至检索到节点空间的尽头。Tree或Graph的DFS，是backtracking的special case。  <br>
+<em><a href="http://stackoverflow.com/questions/6162465/divide-and-conquer-dynamic-programming-and-greedy-algorithms" target="_blank">http://stackoverflow.com/questions/6162465/divide-and-conquer-dynamic-programming-and-greedy-algorithms</a></em></p><p data-anchor-id="9f1m"><strong>Backtracking办法的典型模板：</strong>  </p><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="smuj" style=""><ol class="linenums"><li class="L0"><code class="language-C++"><span class="kwd">void</span><span class="pln"> backtracking</span><span class="pun">(</span><span class="pln"> P point</span><span class="pun">,</span><span class="pln"> vector</span><span class="pun">&lt;</span><span class="pln">P</span><span class="pun">&gt;</span><span class="pln"> </span><span class="pun">&amp;</span><span class="pln">path</span><span class="pun">,</span><span class="pln"> vector</span><span class="pun">&lt;</span><span class="pln">vector</span><span class="pun">&lt;</span><span class="pln">P</span><span class="pun">&gt;</span><span class="pln"> </span><span class="pun">&gt;&amp;</span><span class="pln">paths </span><span class="pun">）{</span></code></li><li class="L1"><code class="language-C++"><span class="pln">        </span><span class="kwd">if</span><span class="pun">（!</span><span class="pln">point </span><span class="pun">)</span><span class="pln">  </span><span class="com">// invalid point</span></code></li><li class="L2"><code class="language-C++"><span class="pln">            </span><span class="kwd">return</span><span class="pun">;</span></code></li><li class="L3"><code class="language-C++"></code></li><li class="L4"><code class="language-C++"><span class="pln">        path</span><span class="pun">.</span><span class="pln">push_back</span><span class="pun">(</span><span class="pln">point</span><span class="pun">);</span></code></li><li class="L5"><code class="language-C++"></code></li><li class="L6"><code class="language-C++"><span class="pln">        </span><span class="kwd">bool</span><span class="pln"> success </span><span class="pun">=</span><span class="pln">  </span><span class="pun">;</span><span class="pln">  </span><span class="com">// condition for success</span></code></li><li class="L7"><code class="language-C++"><span class="pln">        </span><span class="kwd">if</span><span class="pun">(</span><span class="pln"> success </span><span class="pun">)</span><span class="pln">  </span></code></li><li class="L8"><code class="language-C++"><span class="pln">            paths</span><span class="pun">.</span><span class="pln">push_back</span><span class="pun">(</span><span class="pln"> vector</span><span class="pun">&lt;</span><span class="pln">P</span><span class="pun">&gt;(</span><span class="pln">path</span><span class="pun">.</span><span class="kwd">begin</span><span class="pun">(),</span><span class="pln">path</span><span class="pun">.</span><span class="kwd">end</span><span class="pun">())</span><span class="pln"> </span><span class="pun">);</span><span class="pln"> </span><span class="com">// don't return here</span></code></li><li class="L9"><code class="language-C++"></code></li><li class="L0"><code class="language-C++"><span class="pln">        </span><span class="kwd">for</span><span class="pun">(</span><span class="pln"> P </span><span class="kwd">next</span><span class="pun">:</span><span class="pln"> all directions </span><span class="pun">)</span></code></li><li class="L1"><code class="language-C++"><span class="pln">            backtracking</span><span class="pun">(</span><span class="pln"> </span><span class="kwd">next</span><span class="pun">,</span><span class="pln"> path</span><span class="pun">,</span><span class="pln"> paths </span><span class="pun">);</span></code></li><li class="L2"><code class="language-C++"><span class="pln">        path</span><span class="pun">.</span><span class="pln">pop_back</span><span class="pun">();</span></code></li><li class="L3"><code class="language-C++"><span class="pln">        </span><span class="kwd">return</span><span class="pun">;</span></code></li><li class="L4"><code class="language-C++"><span class="pun">}</span></code></li></ol></pre><div class="md-section-divider"></div><h3 data-anchor-id="671g" id="72-由下往上地解决收敛结构问题1">7.2 由下往上地解决收敛结构问题(1)</h3><p data-anchor-id="ptqz">具有强收敛性的问题（例如关于特解或最优解或数量总和的问题，所有的判定性问题），问题对应的N维有限空间中的节点可以用整数坐标表示， <strong>且当前节点的解只依赖于前驱节点</strong>（无论顺序还是倒序），那么往往可以用dynamic programming解决。解决的关键是建立subproblem的解之间的<strong>递推关系</strong>，也就是<strong>当前节点由前驱节点决定</strong>, 然后将当前节点的解<strong>（或往往是，以当前节点为末节点的解，抑或是以当前两个节点为头尾的序列的解）</strong>用<code>array</code>记录下来（如果当前节点只由之前紧接的若干个节点决定，那么也可以只用若干个变量）。</p><p data-anchor-id="j492"><span class="MathJax_Preview"></span><span class="MathJax_SVG" id="MathJax-Element-4-Frame" role="textbox" aria-readonly="true" style="font-size: 100%; display: inline-block;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 -771.0516853480245 17683.11111111111 1042.103370696049" style="width: 41.12ex; height: 2.432ex; vertical-align: -0.695ex; margin: 1px 0px;"><g stroke="black" fill="black" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-66"></use><use href="#MJMAIN-28" x="550" y="0"></use><use href="#MJMATHI-6E" x="940" y="0"></use><use href="#MJMAIN-29" x="1540" y="0"></use><use href="#MJMAIN-3D" x="2207" y="0"></use><use href="#MJMATHI-47" x="3264" y="0"></use><use href="#MJMAIN-28" x="4050" y="0"></use><use href="#MJMATHI-6E" x="4440" y="0"></use><use href="#MJMAIN-2C" x="5040" y="0"></use><use href="#MJMATHI-66" x="5485" y="0"></use><use href="#MJMAIN-28" x="6036" y="0"></use><use href="#MJMATHI-6E" x="6425" y="0"></use><use href="#MJMAIN-2212" x="7248" y="0"></use><use href="#MJMAIN-31" x="8249" y="0"></use><use href="#MJMAIN-29" x="8749" y="0"></use><use href="#MJMAIN-2C" x="9139" y="0"></use><use href="#MJMATHI-66" x="9584" y="0"></use><use href="#MJMAIN-28" x="10134" y="0"></use><use href="#MJMATHI-6E" x="10524" y="0"></use><use href="#MJMAIN-2212" x="11347" y="0"></use><use href="#MJMAIN-32" x="12347" y="0"></use><use href="#MJMAIN-29" x="12848" y="0"></use><use href="#MJMAIN-2C" x="13237" y="0"></use><use href="#MJMAIN-2E" x="13682" y="0"></use><use href="#MJMAIN-2E" x="14128" y="0"></use><use href="#MJMAIN-2E" x="14573" y="0"></use><use href="#MJMAIN-2C" x="15018" y="0"></use><use href="#MJMATHI-66" x="15463" y="0"></use><use href="#MJMAIN-28" x="16014" y="0"></use><use href="#MJMAIN-31" x="16403" y="0"></use><use href="#MJMAIN-29" x="16904" y="0"></use><use href="#MJMAIN-29" x="17293" y="0"></use></g></svg></span><script type="math/tex" id="MathJax-Element-4">f(n) = G(n, f(n-1) , f(n-2) , ... , f(1)  )  </script> 或</p><p data-anchor-id="wymd"><span class="MathJax_Preview"></span><span class="MathJax_SVG" id="MathJax-Element-5-Frame" role="textbox" aria-readonly="true" style="font-size: 100%; display: inline-block;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 -771.0516853480245 20592.333333333336 1042.103370696049" style="width: 47.838ex; height: 2.432ex; vertical-align: -0.695ex; margin: 1px 0px;"><g stroke="black" fill="black" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-66"></use><use href="#MJMAIN-28" x="550" y="0"></use><use href="#MJMATHI-69" x="940" y="0"></use><use href="#MJMAIN-2C" x="1285" y="0"></use><use href="#MJMATHI-6A" x="1730" y="0"></use><use href="#MJMAIN-29" x="2143" y="0"></use><use href="#MJMAIN-3D" x="2810" y="0"></use><use href="#MJMATHI-47" x="3866" y="0"></use><use href="#MJMAIN-5B" x="4653" y="0"></use><use href="#MJMATHI-66" x="4931" y="0"></use><use href="#MJMAIN-28" x="5482" y="0"></use><use href="#MJMATHI-69" x="5871" y="0"></use><use href="#MJMAIN-2212" x="6439" y="0"></use><use href="#MJMAIN-31" x="7440" y="0"></use><use href="#MJMAIN-2C" x="7940" y="0"></use><use href="#MJMATHI-6A" x="8385" y="0"></use><use href="#MJMAIN-2212" x="9020" y="0"></use><use href="#MJMAIN-31" x="10021" y="0"></use><use href="#MJMAIN-29" x="10521" y="0"></use><use href="#MJMAIN-2C" x="10911" y="0"></use><use href="#MJMATHI-66" x="11356" y="0"></use><use href="#MJMAIN-28" x="11906" y="0"></use><use href="#MJMATHI-69" x="12296" y="0"></use><use href="#MJMAIN-2C" x="12641" y="0"></use><use href="#MJMATHI-6A" x="13087" y="0"></use><use href="#MJMAIN-2212" x="13721" y="0"></use><use href="#MJMAIN-31" x="14722" y="0"></use><use href="#MJMAIN-29" x="15223" y="0"></use><use href="#MJMAIN-2C" x="15612" y="0"></use><use href="#MJMATHI-66" x="16057" y="0"></use><use href="#MJMAIN-28" x="16608" y="0"></use><use href="#MJMATHI-69" x="16997" y="0"></use><use href="#MJMAIN-2212" x="17565" y="0"></use><use href="#MJMAIN-31" x="18566" y="0"></use><use href="#MJMAIN-2C" x="19066" y="0"></use><use href="#MJMATHI-6A" x="19511" y="0"></use><use href="#MJMAIN-29" x="19924" y="0"></use><use href="#MJMAIN-5D" x="20313" y="0"></use></g></svg></span><script type="math/tex" id="MathJax-Element-5">f(i,j) = G[ f(i-1,j -1), f(i,j-1), f(i-1,j) ]</script></p><p data-anchor-id="1uzs">处理时以问题的一端为循环开端，以另一端为循环终止条件( 两端均为收敛），记录部分或全部解（DP Table。如<code>int cache[n]</code> )，DP Table的下标即为递推关系中的函数参数。</p><p data-anchor-id="w4wt"><em>如果除到达终点外还需记录具体的path，则可记录前驱节点<code>prev[n]</code> 或 <code>vector&lt;vector&lt;int&gt; &gt; prev</code>，然后用backtracking处理成path。只不过，这时候backtracking经过DP的剪枝，只剩下正确的路径。因此这时候判断非法节点和胜利条件通常是等价的。</em>  </p><blockquote data-anchor-id="yf2m" class="white-blockquote">
+  <p><em>e.g.1 Climbing takes n steps to reach to the top. Each time you can either climb 1 or 2 or 3 steps. In how many distinct ways can you climb to the top? ( CtCI 9.1 ,Leetcode: Climbing Stairs）</em> </p>
+</blockquote><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="j45w" style=""><ol class="linenums"><li class="L0"><code class="language-C++"><span class="kwd">int</span><span class="pln"> climbStairs</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> n</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L1"><code class="language-C++"><span class="pln">    </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">n </span><span class="pun">&lt;=</span><span class="pln"> </span><span class="lit">1</span><span class="pln"> </span><span class="pun">)</span><span class="pln"> </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span></code></li><li class="L2"><code class="language-C++"><span class="pln">    </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">n </span><span class="pun">==</span><span class="pln"> </span><span class="lit">2</span><span class="pun">)</span><span class="pln">  </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">2</span><span class="pun">;</span></code></li><li class="L3"><code class="language-C++"></code></li><li class="L4"><code class="language-C++"><span class="pln">    </span><span class="kwd">int</span><span class="pln"> p </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> q </span><span class="pun">=</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> curr</span><span class="pun">;</span></code></li><li class="L5"><code class="language-C++"></code></li><li class="L6"><code class="language-C++"><span class="pln">    </span><span class="kwd">for</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">3</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;=</span><span class="pln"> n</span><span class="pun">;</span><span class="pln"> </span><span class="pun">++</span><span class="pln">i </span><span class="pun">){</span></code></li><li class="L7"><code class="language-C++"><span class="pln">        curr </span><span class="pun">=</span><span class="pln"> p </span><span class="pun">+</span><span class="pln"> q</span><span class="pun">;</span></code></li><li class="L8"><code class="language-C++"><span class="pln">        p </span><span class="pun">=</span><span class="pln"> q</span><span class="pun">;</span></code></li><li class="L9"><code class="language-C++"><span class="pln">        q </span><span class="pun">=</span><span class="pln"> curr</span><span class="pun">;</span></code></li><li class="L0"><code class="language-C++"><span class="pln">    </span><span class="pun">}</span></code></li><li class="L1"><code class="language-C++"></code></li><li class="L2"><code class="language-C++"><span class="pln">    </span><span class="kwd">return</span><span class="pln"> curr</span><span class="pun">;</span></code></li><li class="L3"><code class="language-C++"><span class="pun">}</span></code></li></ol></pre><blockquote data-anchor-id="m67l" class="white-blockquote">
+  <p><em>e.g.2 Compute the Nth prime ( Ebay interview )</em> <br>
+  <em>e.g.3 Given a string s and a dictionary of words dict, determine if s can be segmented into a space-separated sequence of one or more dictionary words.  ( Leetcode: Word Break )</em> <br>
+  <em>e.g.4 Given a string s, partition s such that every substring of the partition is a palindrome.Return the minimum cuts needed for a palindrome partitioning of s.  (Leetcode:Palindrome Partitioning II)</em></p>
+</blockquote><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="deyl" style=""><ol class="linenums"><li class="L0"><code class="language-C++"><span class="kwd">int</span><span class="pln"> minCut</span><span class="pun">(</span><span class="kwd">string</span><span class="pln"> s</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L1"><code class="language-C++"><span class="pln">    </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">s</span><span class="pun">.</span><span class="pln">empty</span><span class="pun">())</span><span class="pln">   </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span></code></li><li class="L2"><code class="language-C++"></code></li><li class="L3"><code class="language-C++"><span class="pln">    vector</span><span class="pun">&lt;</span><span class="pln">vector</span><span class="str">&lt;bool&gt;</span><span class="pln"> </span><span class="pun">&gt;</span><span class="pln"> palin</span><span class="pun">(</span></code></li><li class="L4"><code class="language-C++"><span class="pln">        s</span><span class="pun">.</span><span class="pln">size</span><span class="pun">(),</span></code></li><li class="L5"><code class="language-C++"><span class="pln">        vector</span><span class="str">&lt;bool&gt;</span><span class="pun">(</span><span class="pln">s</span><span class="pun">.</span><span class="pln">size</span><span class="pun">(),</span><span class="kwd">false</span><span class="pun">),</span></code></li><li class="L6"><code class="language-C++"><span class="pln">    </span><span class="pun">);</span></code></li><li class="L7"><code class="language-C++"></code></li><li class="L8"><code class="language-C++"><span class="pln">    vector</span><span class="str">&lt;int&gt;</span><span class="pln"> minCut</span><span class="pun">(</span><span class="pln">s</span><span class="pun">.</span><span class="pln">size</span><span class="pun">()+</span><span class="lit">1</span><span class="pun">,</span><span class="lit">0</span><span class="pun">);</span></code></li><li class="L9"><code class="language-C++"></code></li><li class="L0"><code class="language-C++"><span class="pln">    </span><span class="kwd">for</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;=</span><span class="pln"> s</span><span class="pun">.</span><span class="pln">size</span><span class="pun">();</span><span class="pln"> i</span><span class="pun">++)</span></code></li><li class="L1"><code class="language-C++"><span class="pln">        minCut</span><span class="pun">[</span><span class="pln">i</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> s</span><span class="pun">.</span><span class="pln">size</span><span class="pun">()</span><span class="pln"> </span><span class="pun">-</span><span class="pln"> i </span><span class="pun">-</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span></code></li><li class="L2"><code class="language-C++"></code></li><li class="L3"><code class="language-C++"><span class="pln">    </span><span class="kwd">for</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> s</span><span class="pun">.</span><span class="pln">size</span><span class="pun">()</span><span class="pln"> </span><span class="pun">-</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&gt;=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">--){</span></code></li><li class="L4"><code class="language-C++"><span class="pln">        </span><span class="kwd">for</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> j </span><span class="pun">=</span><span class="pln"> i</span><span class="pun">;</span><span class="pln"> j </span><span class="pun">&lt;</span><span class="pln"> s</span><span class="pun">.</span><span class="pln">size</span><span class="pun">();++</span><span class="pln">j</span><span class="pun">){</span></code></li><li class="L5"><code class="language-C++"></code></li><li class="L6"><code class="language-C++"><span class="pln">            </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">s</span><span class="pun">[</span><span class="pln">i</span><span class="pun">]</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> s</span><span class="pun">[</span><span class="pln">j</span><span class="pun">]</span><span class="pln"> </span><span class="pun">&amp;&amp;</span><span class="pln"> </span><span class="pun">(</span><span class="pln"> j </span><span class="pun">-</span><span class="pln"> i </span><span class="pun">&lt;=</span><span class="pln"> </span><span class="lit">1</span><span class="pln"> </span><span class="pun">||</span><span class="pln"> palin</span><span class="pun">[</span><span class="pln">i</span><span class="pun">+</span><span class="lit">1</span><span class="pun">][</span><span class="pln">j</span><span class="pun">-</span><span class="lit">1</span><span class="pun">]</span><span class="pln"> </span><span class="pun">)</span><span class="pln"> </span><span class="pun">){</span></code></li><li class="L7"><code class="language-C++"><span class="pln">                palin</span><span class="pun">[</span><span class="pln">i</span><span class="pun">][</span><span class="pln">j</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span></code></li><li class="L8"><code class="language-C++"><span class="pln">                minCut</span><span class="pun">[</span><span class="pln">i</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> min</span><span class="pun">(</span><span class="pln"> minCut</span><span class="pun">[</span><span class="pln">j</span><span class="pun">+</span><span class="lit">1</span><span class="pun">]+</span><span class="lit">1</span><span class="pun">,</span><span class="pln">minCut</span><span class="pun">[</span><span class="pln">i</span><span class="pun">]);</span></code></li><li class="L9"><code class="language-C++"><span class="pln">            </span><span class="pun">}</span></code></li><li class="L0"><code class="language-C++"><span class="pln">        </span><span class="pun">}</span></code></li><li class="L1"><code class="language-C++"><span class="pln">    </span><span class="pun">}</span></code></li><li class="L2"><code class="language-C++"></code></li><li class="L3"><code class="language-C++"><span class="pln">    </span><span class="kwd">return</span><span class="pln"> minCut</span><span class="pun">[</span><span class="lit">0</span><span class="pun">];</span></code></li><li class="L4"><code class="language-C++"><span class="pun">}</span></code></li></ol></pre><p data-anchor-id="d709">特别地，具有简单“聚合”性质的问题，如最值或求和问题，往往可以进一步优化DP Table的空间。更确切地说，是那些只在乎紧邻的前一个最优解，而不在乎前几个最优解的问题（这样的话，就可以接受每次替换掉那个最优解，在这个维度上只用O(1)的空间）最简单的例子就是求一个数组内数的最值/求和。</p><blockquote data-anchor-id="tf6t" class="white-blockquote">
+  <p><em>e.g.1 How many paths are there for the robot to go from <span class="MathJax_Preview"></span><span class="MathJax_SVG" id="MathJax-Element-6-Frame" role="textbox" aria-readonly="true" style="font-size: 100%; display: inline-block;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 -771.0516853480245 2225.166666666667 1042.103370696049" style="width: 5.212ex; height: 2.432ex; vertical-align: -0.695ex; margin: 1px 0px;"><g stroke="black" fill="black" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMAIN-28"></use><use href="#MJMAIN-30" x="389" y="0"></use><use href="#MJMAIN-2C" x="890" y="0"></use><use href="#MJMAIN-30" x="1335" y="0"></use><use href="#MJMAIN-29" x="1835" y="0"></use></g></svg></span><script type="math/tex" id="MathJax-Element-6">(0,0)</script> to <span class="MathJax_Preview"></span><span class="MathJax_SVG" id="MathJax-Element-7-Frame" role="textbox" aria-readonly="true" style="font-size: 100%; display: inline-block;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 -771.0516853480245 2294.166666666667 1042.103370696049" style="width: 5.328ex; height: 2.432ex; vertical-align: -0.695ex; margin: 1px 0px;"><g stroke="black" fill="black" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMAIN-28"></use><use href="#MJMATHI-78" x="389" y="0"></use><use href="#MJMAIN-2C" x="962" y="0"></use><use href="#MJMATHI-79" x="1407" y="0"></use><use href="#MJMAIN-29" x="1904" y="0"></use></g></svg></span><script type="math/tex" id="MathJax-Element-7">(x,y)</script> ( CtCI 9.2, Leetcode: Unique Path)</em>  </p>
+</blockquote><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="apkz" style=""><ol class="linenums"><li class="L0"><code class="language-C++"><span class="kwd">int</span><span class="pln"> uniquePaths</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> m</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> n</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L1"><code class="language-C++"></code></li><li class="L2"><code class="language-C++"><span class="pln">    </span><span class="kwd">int</span><span class="pln"> </span><span class="pun">*</span><span class="pln">ways </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="kwd">int</span><span class="pun">[</span><span class="pln">n</span><span class="pun">];</span></code></li><li class="L3"><code class="language-C++"></code></li><li class="L4"><code class="language-C++"><span class="pln">    </span><span class="kwd">for</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> j </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> j </span><span class="pun">&lt;</span><span class="pln"> n</span><span class="pun">;</span><span class="pln"> j</span><span class="pun">++</span><span class="pln"> </span><span class="pun">)</span></code></li><li class="L5"><code class="language-C++"><span class="pln">        ways</span><span class="pun">[</span><span class="pln">j</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span></code></li><li class="L6"><code class="language-C++"></code></li><li class="L7"><code class="language-C++"><span class="pln">    ways</span><span class="pun">[</span><span class="pln">n</span><span class="pun">-</span><span class="lit">1</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span></code></li><li class="L8"><code class="language-C++"></code></li><li class="L9"><code class="language-C++"><span class="pln">    </span><span class="kwd">for</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> m </span><span class="pun">-</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&gt;=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> </span><span class="pun">--</span><span class="pln">i</span><span class="pun">)</span></code></li><li class="L0"><code class="language-C++"><span class="pln">        </span><span class="kwd">for</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> j </span><span class="pun">=</span><span class="pln"> n </span><span class="pun">-</span><span class="pln"> </span><span class="lit">2</span><span class="pun">;</span><span class="pln"> j </span><span class="pun">&gt;=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> </span><span class="pun">--</span><span class="pln">j </span><span class="pun">)</span></code></li><li class="L1"><code class="language-C++"><span class="pln">            ways</span><span class="pun">[</span><span class="pln">j</span><span class="pun">]</span><span class="pln"> </span><span class="pun">+=</span><span class="pln"> ways</span><span class="pun">[</span><span class="pln">j</span><span class="pun">+</span><span class="lit">1</span><span class="pun">];</span></code></li><li class="L2"><code class="language-C++"></code></li><li class="L3"><code class="language-C++"><span class="pln">    </span><span class="kwd">return</span><span class="pln"> ways</span><span class="pun">[</span><span class="lit">0</span><span class="pun">];</span></code></li><li class="L4"><code class="language-C++"><span class="pun">}</span></code></li></ol></pre><blockquote data-anchor-id="rung" class="white-blockquote">
+  <p><em>e.g.2 Given a value N, if we want to make change for N cents, and we have infinite supply of each of S = { S1, S2, .. , Sm} valued coins, how many ways can we make the change? (GeeksforGeeks: <a href="http://www.geeksforgeeks.org/dynamic-programming-set-7-coin-change/" target="_blank">http://www.geeksforgeeks.org/dynamic-programming-set-7-coin-change/</a> )</em></p>
+</blockquote><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="jqhx" style=""><ol class="linenums"><li class="L0"><code class="language-C"><span class="kwd">int</span><span class="pln"> count</span><span class="pun">(</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> S</span><span class="pun">[],</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> m</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> n </span><span class="pun">)</span></code></li><li class="L1"><code class="language-C"><span class="pun">{</span></code></li><li class="L2"><code class="language-C"><span class="pln">    </span><span class="com">// If n is 0 then there is 1 solution (do not include any coin)</span></code></li><li class="L3"><code class="language-C"><span class="pln">    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">n </span><span class="pun">==</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L4"><code class="language-C"><span class="pln">        </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span></code></li><li class="L5"><code class="language-C"></code></li><li class="L6"><code class="language-C"><span class="pln">    </span><span class="com">// If n is less than 0 then no solution exists</span></code></li><li class="L7"><code class="language-C"><span class="pln">    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">n </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L8"><code class="language-C"><span class="pln">        </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span></code></li><li class="L9"><code class="language-C"></code></li><li class="L0"><code class="language-C"><span class="pln">    </span><span class="com">// If there are no coins and n is greater than 0, then no solution exist</span></code></li><li class="L1"><code class="language-C"><span class="pln">    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">m </span><span class="pun">&lt;=</span><span class="lit">0</span><span class="pln"> </span><span class="pun">&amp;&amp;</span><span class="pln"> n </span><span class="pun">&gt;=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L2"><code class="language-C"><span class="pln">        </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span></code></li><li class="L3"><code class="language-C"></code></li><li class="L4"><code class="language-C"><span class="pln">    </span><span class="com">// count is sum of solutions (i) including S[m-1] (ii) excluding S[m-1]</span></code></li><li class="L5"><code class="language-C"><span class="pln">    </span><span class="kwd">return</span><span class="pln"> count</span><span class="pun">(</span><span class="pln"> S</span><span class="pun">,</span><span class="pln"> m </span><span class="pun">-</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> n </span><span class="pun">)</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> count</span><span class="pun">(</span><span class="pln"> S</span><span class="pun">,</span><span class="pln"> m</span><span class="pun">,</span><span class="pln"> n</span><span class="pun">-</span><span class="pln">S</span><span class="pun">[</span><span class="pln">m</span><span class="pun">-</span><span class="lit">1</span><span class="pun">]</span><span class="pln"> </span><span class="pun">);</span></code></li><li class="L6"><code class="language-C"><span class="pun">}</span></code></li></ol></pre><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="dusq" style=""><ol class="linenums"><li class="L0"><code class="language-C"><span class="kwd">int</span><span class="pln"> count</span><span class="pun">(</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> S</span><span class="pun">[],</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> m</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> n </span><span class="pun">)</span></code></li><li class="L1"><code class="language-C"><span class="pun">{</span></code></li><li class="L2"><code class="language-C"><span class="pln">    </span><span class="kwd">int</span><span class="pln"> i</span><span class="pun">,</span><span class="pln"> j</span><span class="pun">,</span><span class="pln"> x</span><span class="pun">,</span><span class="pln"> y</span><span class="pun">;</span></code></li><li class="L3"><code class="language-C"></code></li><li class="L4"><code class="language-C"><span class="pln">    </span><span class="com">// We need n+1 rows as the table is consturcted in bottom up manner using </span></code></li><li class="L5"><code class="language-C"><span class="pln">    </span><span class="com">// the base case 0 value case (n = 0)</span></code></li><li class="L6"><code class="language-C"><span class="pln">    </span><span class="kwd">int</span><span class="pln"> table</span><span class="pun">[</span><span class="pln">n</span><span class="pun">+</span><span class="lit">1</span><span class="pun">][</span><span class="pln">m</span><span class="pun">];</span></code></li><li class="L7"><code class="language-C"></code></li><li class="L8"><code class="language-C"><span class="pln">    </span><span class="com">// Fill the enteries for 0 value case (n = 0)</span></code></li><li class="L9"><code class="language-C"><span class="pln">    </span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="pln">i</span><span class="pun">=</span><span class="lit">0</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">&lt;</span><span class="pln">m</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">++)</span></code></li><li class="L0"><code class="language-C"><span class="pln">        table</span><span class="pun">[</span><span class="lit">0</span><span class="pun">][</span><span class="pln">i</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span></code></li><li class="L1"><code class="language-C"></code></li><li class="L2"><code class="language-C"><span class="pln">    </span><span class="com">// Fill rest of the table enteries in bottom up manner  </span></code></li><li class="L3"><code class="language-C"><span class="pln">    </span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="pln">i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;</span><span class="pln"> n</span><span class="pun">+</span><span class="lit">1</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">++)</span></code></li><li class="L4"><code class="language-C"><span class="pln">    </span><span class="pun">{</span></code></li><li class="L5"><code class="language-C"><span class="pln">        </span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="pln">j </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> j </span><span class="pun">&lt;</span><span class="pln"> m</span><span class="pun">;</span><span class="pln"> j</span><span class="pun">++)</span></code></li><li class="L6"><code class="language-C"><span class="pln">        </span><span class="pun">{</span></code></li><li class="L7"><code class="language-C"><span class="pln">            </span><span class="com">// Count of solutions including S[j]</span></code></li><li class="L8"><code class="language-C"><span class="pln">            x </span><span class="pun">=</span><span class="pln"> </span><span class="pun">(</span><span class="pln">i</span><span class="pun">-</span><span class="pln">S</span><span class="pun">[</span><span class="pln">j</span><span class="pun">]</span><span class="pln"> </span><span class="pun">&gt;=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)?</span><span class="pln"> table</span><span class="pun">[</span><span class="pln">i </span><span class="pun">-</span><span class="pln"> S</span><span class="pun">[</span><span class="pln">j</span><span class="pun">]][</span><span class="pln">j</span><span class="pun">]:</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span></code></li><li class="L9"><code class="language-C"></code></li><li class="L0"><code class="language-C"><span class="pln">            </span><span class="com">// Count of solutions excluding S[j]</span></code></li><li class="L1"><code class="language-C"><span class="pln">            y </span><span class="pun">=</span><span class="pln"> </span><span class="pun">(</span><span class="pln">j </span><span class="pun">&gt;=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)?</span><span class="pln"> table</span><span class="pun">[</span><span class="pln">i</span><span class="pun">][</span><span class="pln">j</span><span class="pun">-</span><span class="lit">1</span><span class="pun">]:</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span></code></li><li class="L2"><code class="language-C"></code></li><li class="L3"><code class="language-C"><span class="pln">            </span><span class="com">// total count</span></code></li><li class="L4"><code class="language-C"><span class="pln">            table</span><span class="pun">[</span><span class="pln">i</span><span class="pun">][</span><span class="pln">j</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> x </span><span class="pun">+</span><span class="pln"> y</span><span class="pun">;</span></code></li><li class="L5"><code class="language-C"><span class="pln">        </span><span class="pun">}</span></code></li><li class="L6"><code class="language-C"><span class="pln">    </span><span class="pun">}</span></code></li><li class="L7"><code class="language-C"><span class="pln">    </span><span class="kwd">return</span><span class="pln"> table</span><span class="pun">[</span><span class="pln">n</span><span class="pun">][</span><span class="pln">m</span><span class="pun">-</span><span class="lit">1</span><span class="pun">];</span></code></li><li class="L8"><code class="language-C"><span class="pun">}</span></code></li></ol></pre><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="aqh5" style=""><ol class="linenums"><li class="L0"><code class="language-C"><span class="kwd">int</span><span class="pln"> count</span><span class="pun">(</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> S</span><span class="pun">[],</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> m</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> n </span><span class="pun">)</span></code></li><li class="L1"><code class="language-C"><span class="pun">{</span></code></li><li class="L2"><code class="language-C"><span class="pln">    </span><span class="com">// table[i] will be storing the number of solutions for</span></code></li><li class="L3"><code class="language-C"><span class="pln">    </span><span class="com">// value i. We need n+1 rows as the table is consturcted</span></code></li><li class="L4"><code class="language-C"><span class="pln">    </span><span class="com">// in bottom up manner using the base case (n = 0)</span></code></li><li class="L5"><code class="language-C"><span class="pln">    </span><span class="kwd">int</span><span class="pln"> table</span><span class="pun">[</span><span class="pln">n</span><span class="pun">+</span><span class="lit">1</span><span class="pun">];</span></code></li><li class="L6"><code class="language-C"></code></li><li class="L7"><code class="language-C"><span class="pln">    </span><span class="com">// Initialize all table values as 0</span></code></li><li class="L8"><code class="language-C"><span class="pln">    memset</span><span class="pun">(</span><span class="pln">table</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">sizeof</span><span class="pun">(</span><span class="pln">table</span><span class="pun">));</span></code></li><li class="L9"><code class="language-C"></code></li><li class="L0"><code class="language-C"><span class="pln">    </span><span class="com">// Base case (If given value is 0)</span></code></li><li class="L1"><code class="language-C"><span class="pln">    table</span><span class="pun">[</span><span class="lit">0</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span></code></li><li class="L2"><code class="language-C"></code></li><li class="L3"><code class="language-C"><span class="pln">    </span><span class="com">// Pick all coins one by one and update the table[] values</span></code></li><li class="L4"><code class="language-C"><span class="pln">    </span><span class="com">// after the index greater than or equal to the value of the</span></code></li><li class="L5"><code class="language-C"><span class="pln">    </span><span class="com">// picked coin</span></code></li><li class="L6"><code class="language-C"><span class="pln">    </span><span class="kwd">for</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> i</span><span class="pun">=</span><span class="lit">0</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">&lt;</span><span class="pln">m</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">++)</span></code></li><li class="L7"><code class="language-C"><span class="pln">        </span><span class="kwd">for</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> j</span><span class="pun">=</span><span class="pln">S</span><span class="pun">[</span><span class="pln">i</span><span class="pun">];</span><span class="pln"> j</span><span class="pun">&lt;=</span><span class="pln">n</span><span class="pun">;</span><span class="pln"> j</span><span class="pun">++)</span></code></li><li class="L8"><code class="language-C"><span class="pln">            table</span><span class="pun">[</span><span class="pln">j</span><span class="pun">]</span><span class="pln"> </span><span class="pun">+=</span><span class="pln"> table</span><span class="pun">[</span><span class="pln">j</span><span class="pun">-</span><span class="pln">S</span><span class="pun">[</span><span class="pln">i</span><span class="pun">]];</span></code></li><li class="L9"><code class="language-C"></code></li><li class="L0"><code class="language-C"><span class="pln">    </span><span class="kwd">return</span><span class="pln"> table</span><span class="pun">[</span><span class="pln">n</span><span class="pun">];</span></code></li><li class="L1"><code class="language-C"><span class="pun">}</span></code></li></ol></pre><blockquote data-anchor-id="dhxg" class="white-blockquote">
+  <p><em>e.g.3 Please implement a function which gets the minimal number of coins, whose value is v1, v2, …, vn, to make change for an amount of money with value t. Any coin with value vi may duplicate for any times to make change. (<a href="http://codercareer.blogspot.com/2011/12/no-26-minimal-number-of-coins-for.html" target="_blank">http://codercareer.blogspot.com/2011/12/no-26-minimal-number-of-coins-for.html</a>)</em></p>
+</blockquote><div class="md-section-divider"></div><h3 data-anchor-id="dxhl" id="73-由下往上地解决收敛结构问题2">7.3 由下往上地解决收敛结构问题(2)</h3><p data-anchor-id="3b3t">对于<strong>“最长子序列”</strong>问题（即求解有限空间内，满足一定条件的最长顺序节点序列），<strong>用DP Table来记录以当前节点为末节点的序列（而不是以当前节点或之前节点为末节点的序列）的解</strong>，并根据递推关系，由问题空间的起点到达问题空间的终点。注意，对于"回文"序列，中间节点可以等效为序列的末节点。</p><blockquote data-anchor-id="u945" class="white-blockquote">
+  <p><em>e.g.1 The longest Increasing Subsequence (LIS) problem is to find the length of the longest subsequence of a given sequence such that all elements of the subsequence are sorted in increasing order. For example, length of LIS for { 10, 22, 9, 33, 21, 50, 41, 60, 80 } is 6 and LIS is {10, 22, 33, 50, 60, 80}. (<a href="http://www.geeksforgeeks.org/dynamic-programming-set-3-longest-increasing-subsequence/" target="_blank">http://www.geeksforgeeks.org/dynamic-programming-set-3-longest-increasing-subsequence/</a>)</em>  </p>
+</blockquote><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="upw4" style=""><ol class="linenums"><li class="L0"><code class="language-C++"><span class="com">/* lis() returns the length of the longest increasing</span></code></li><li class="L1"><code class="language-C++"><span class="com">  subsequence in arr[] of size n */</span></code></li><li class="L2"><code class="language-C++"><span class="kwd">int</span><span class="pln"> lis</span><span class="pun">(</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> arr</span><span class="pun">[],</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> n </span><span class="pun">)</span></code></li><li class="L3"><code class="language-C++"><span class="pun">{</span></code></li><li class="L4"><code class="language-C++"><span class="pln">    </span><span class="kwd">int</span><span class="pln"> </span><span class="pun">*</span><span class="pln">lis</span><span class="pun">,</span><span class="pln"> i</span><span class="pun">,</span><span class="pln"> j</span><span class="pun">,</span><span class="pln"> max </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span></code></li><li class="L5"><code class="language-C++"><span class="pln">    lis </span><span class="pun">=</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">int</span><span class="pun">*)</span><span class="pln"> malloc </span><span class="pun">(</span><span class="pln"> </span><span class="kwd">sizeof</span><span class="pun">(</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> </span><span class="pun">)</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> n </span><span class="pun">);</span></code></li><li class="L6"><code class="language-C++"></code></li><li class="L7"><code class="language-C++"><span class="pln">    </span><span class="com">/* Initialize LIS values for all indexes */</span></code></li><li class="L8"><code class="language-C++"><span class="pln">    </span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="pln">i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;</span><span class="pln"> n</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">++</span><span class="pln"> </span><span class="pun">)</span></code></li><li class="L9"><code class="language-C++"><span class="pln">        lis</span><span class="pun">[</span><span class="pln">i</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span></code></li><li class="L0"><code class="language-C++"></code></li><li class="L1"><code class="language-C++"><span class="pln">    </span><span class="com">/* Compute optimized LIS values in bottom up manner */</span></code></li><li class="L2"><code class="language-C++"><span class="pln">    </span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="pln">i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;</span><span class="pln"> n</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">++</span><span class="pln"> </span><span class="pun">)</span></code></li><li class="L3"><code class="language-C++"><span class="pln">        </span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="pln">j </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> j </span><span class="pun">&lt;</span><span class="pln"> i</span><span class="pun">;</span><span class="pln"> j</span><span class="pun">++</span><span class="pln"> </span><span class="pun">)</span></code></li><li class="L4"><code class="language-C++"><span class="pln">            </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln"> arr</span><span class="pun">[</span><span class="pln">i</span><span class="pun">]</span><span class="pln"> </span><span class="pun">&gt;</span><span class="pln"> arr</span><span class="pun">[</span><span class="pln">j</span><span class="pun">]</span><span class="pln"> </span><span class="pun">&amp;&amp;</span><span class="pln"> lis</span><span class="pun">[</span><span class="pln">i</span><span class="pun">]</span><span class="pln"> </span><span class="pun">&lt;</span><span class="pln"> lis</span><span class="pun">[</span><span class="pln">j</span><span class="pun">]</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L5"><code class="language-C++"><span class="pln">                lis</span><span class="pun">[</span><span class="pln">i</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> lis</span><span class="pun">[</span><span class="pln">j</span><span class="pun">]</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span></code></li><li class="L6"><code class="language-C++"></code></li><li class="L7"><code class="language-C++"><span class="pln">    </span><span class="com">/* Pick maximum of all LIS values */</span></code></li><li class="L8"><code class="language-C++"><span class="pln">    </span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="pln">i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;</span><span class="pln"> n</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">++</span><span class="pln"> </span><span class="pun">)</span></code></li><li class="L9"><code class="language-C++"><span class="pln">        </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">max </span><span class="pun">&lt;</span><span class="pln"> lis</span><span class="pun">[</span><span class="pln">i</span><span class="pun">])</span></code></li><li class="L0"><code class="language-C++"><span class="pln">            max </span><span class="pun">=</span><span class="pln"> lis</span><span class="pun">[</span><span class="pln">i</span><span class="pun">];</span></code></li><li class="L1"><code class="language-C++"></code></li><li class="L2"><code class="language-C++"><span class="pln">    </span><span class="com">/* Free memory to avoid memory leak */</span></code></li><li class="L3"><code class="language-C++"><span class="pln">    free</span><span class="pun">(</span><span class="pln">lis</span><span class="pun">);</span></code></li><li class="L4"><code class="language-C++"></code></li><li class="L5"><code class="language-C++"><span class="pln">    </span><span class="kwd">return</span><span class="pln"> max</span><span class="pun">;</span></code></li><li class="L6"><code class="language-C++"><span class="pun">}</span></code></li></ol></pre><blockquote data-anchor-id="2kvm" class="white-blockquote">
+  <p><em>e.g.2 Given the heights of each person in the circus, compute the largest possible number of people in tower. ( CtCI 11.7)</em> <br>
+  <em>e.g.3 Find the contiguous subarray within an array (containing at least one number) which has the largest sum. ( Leetcode: Maximum Subarray, CtCI 17.8 )</em>  </p>
+</blockquote><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="h4t0" style=""><ol class="linenums"><li class="L0"><code class="language-C++"><span class="kwd">int</span><span class="pln"> maxSubArray</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> A</span><span class="pun">[],</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> n</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L1"><code class="language-C++"><span class="pln">    </span><span class="kwd">if</span><span class="pun">(!</span><span class="pln">n</span><span class="pun">)</span><span class="pln">  </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span></code></li><li class="L2"><code class="language-C++"></code></li><li class="L3"><code class="language-C++"><span class="pln">    </span><span class="kwd">int</span><span class="pln"> max_sum </span><span class="pun">=</span><span class="pln"> A</span><span class="pun">[</span><span class="lit">0</span><span class="pun">],</span><span class="pln"> sum </span><span class="pun">=</span><span class="pln"> A</span><span class="pun">[</span><span class="lit">0</span><span class="pun">];</span></code></li><li class="L4"><code class="language-C++"></code></li><li class="L5"><code class="language-C++"><span class="pln">    </span><span class="kwd">for</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;</span><span class="pln"> n</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">++){</span></code></li><li class="L6"><code class="language-C++"><span class="pln">        sum </span><span class="pun">=</span><span class="pln"> max</span><span class="pun">(</span><span class="pln">sum </span><span class="pun">+</span><span class="pln"> A</span><span class="pun">[</span><span class="pln">i</span><span class="pun">],</span><span class="pln"> A</span><span class="pun">[</span><span class="pln">i</span><span class="pun">]);</span></code></li><li class="L7"><code class="language-C++"><span class="pln">        </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">sum </span><span class="pun">&gt;</span><span class="pln"> max_sum</span><span class="pun">)</span></code></li><li class="L8"><code class="language-C++"><span class="pln">            max_sum </span><span class="pun">=</span><span class="pln"> sum</span><span class="pun">;</span></code></li><li class="L9"><code class="language-C++"><span class="pln">        </span><span class="kwd">return</span><span class="pln"> max_sum</span><span class="pun">;</span></code></li><li class="L0"><code class="language-C++"><span class="pln">    </span><span class="pun">}</span></code></li><li class="L1"><code class="language-C++"><span class="pun">}</span></code></li></ol></pre><blockquote data-anchor-id="32ob" class="white-blockquote">
+  <p><em>e.g.4 There are N gas stations along a circular route, where the amount of gas at station i is gas[i].You have a car with an unlimited gas tank and it costs cost[i] of gas to travel from station i to its next station (i+1). You begin the journey with an empty tank at one of the gas stations. Return the starting gas station's index if you can travel around the circuit once, otherwise return -1. (Leetcode: Gas Station)</em>  </p>
+  
+  <p><em>e.g.5 Longest Common Subsequence: LCS for input Sequences “ABCDGH” and “AEDFHR” is “ADH” of length 3. ( <a href="http://www.geeksforgeeks.org/dynamic-programming-set-4-longest-common-subsequence/" target="_blank">http://www.geeksforgeeks.org/dynamic-programming-set-4-longest-common-subsequence/</a>)</em>  </p>
+</blockquote><p data-anchor-id="248n"><strong>特别地，如果当前节点的解既依赖于前驱子问题，又依赖于后驱子问题，，则可考虑先顺序遍历，记录DP Table，再倒序遍历，合并DP Table的解。</strong></p><blockquote data-anchor-id="ox7x" class="white-blockquote">
+  <p><em>e.g.1 Say you have an array for which the ith element is the price of a given stock on day i.Design an algorithm to find the maximum profit. You may complete at most two transactions.(Leetcode: Best Time to Buy and Sell Stock III)</em> <br>
+  <em>e.g.2 Replace each element with the product of all elements other than that element.(Ebay Interview)</em> <br>
+  <em>e.g.3 Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it is able to trap after raining.( Leetcode: Trapping Rain Water)</em></p>
+</blockquote><div class="md-section-divider"></div><h3 data-anchor-id="4lju" id="74-由上往下地解决收敛结构问题">7.4 由上往下地解决收敛结构问题</h3><p data-anchor-id="xqog"><strong>对于弱收敛性问题（例如“满足特定条件的所有解"）</strong>，如果胜利条件只取决于当前节点与后驱节点，而与前驱节点无关，<strong>并且subproblem有overlap</strong>，那么可以用递推公式为参照，利用memoization technique来进行递归, <strong>即记录当前计算的局部解, 并在有可能时进行读取</strong>（以当前的函数参数为<code>key</code>，函数的返回值为<code>value</code>）。Memoization是Top-Down形式的Dynamic Programming，并且受到的制约更少，自然也可以用来解决强收敛性问题（但空间上可能效率不及Bottom-Up形式的DP）。   </p><blockquote data-anchor-id="8tl8" class="white-blockquote">
+  <p><em>e.g.1 Build the tallest stack of boxes, if each box is larger than the box above it in any dimension</em>  </p>
+</blockquote><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="57l6" style=""><ol class="linenums"><li class="L0"><code class="language-C++"><span class="pln">vector</span><span class="pun">&lt;</span><span class="typ">Box</span><span class="pun">&gt;</span><span class="pln"> createStackDP</span><span class="pun">(</span><span class="pln"> </span><span class="typ">Box</span><span class="pln"> boxes</span><span class="pun">[],</span><span class="kwd">const</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> num</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Box</span><span class="pln"> bottom</span><span class="pun">,</span><span class="pln"> map</span><span class="pun">&lt;</span><span class="pln"> </span><span class="typ">Box</span><span class="pun">,</span><span class="pln"> vector</span><span class="pun">&lt;</span><span class="typ">Box</span><span class="pun">&gt;</span><span class="pln"> </span><span class="pun">&gt;&amp;</span><span class="pln"> stackCache</span><span class="pun">){</span></code></li><li class="L1"><code class="language-C++"></code></li><li class="L2"><code class="language-C++"><span class="pln">    vector</span><span class="pun">&lt;</span><span class="typ">Box</span><span class="pun">&gt;</span><span class="pln"> max_stack</span><span class="pun">;</span></code></li><li class="L3"><code class="language-C++"><span class="pln">    </span><span class="kwd">int</span><span class="pln"> max_height </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span></code></li><li class="L4"><code class="language-C++"><span class="pln">    vector</span><span class="pun">&lt;</span><span class="typ">Box</span><span class="pun">&gt;</span><span class="pln"> new_stack</span><span class="pun">;</span></code></li><li class="L5"><code class="language-C++"></code></li><li class="L6"><code class="language-C++"><span class="pln">    </span><span class="kwd">if</span><span class="pun">(</span><span class="pln"> stackCache</span><span class="pun">.</span><span class="pln">count</span><span class="pun">(</span><span class="pln"> bottom </span><span class="pun">)</span><span class="pln"> </span><span class="pun">&gt;</span><span class="pln"> </span><span class="lit">0</span><span class="pln"> </span><span class="pun">)</span></code></li><li class="L7"><code class="language-C++"><span class="pln">        </span><span class="kwd">return</span><span class="pln"> stackCache</span><span class="pun">[</span><span class="pln"> bottom </span><span class="pun">];</span></code></li><li class="L8"><code class="language-C++"></code></li><li class="L9"><code class="language-C++"><span class="pln">    </span><span class="kwd">else</span><span class="pun">{</span></code></li><li class="L0"><code class="language-C++"></code></li><li class="L1"><code class="language-C++"><span class="pln">        </span><span class="kwd">for</span><span class="pun">(</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;</span><span class="pln"> num</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">++</span><span class="pln"> </span><span class="pun">){</span></code></li><li class="L2"><code class="language-C++"></code></li><li class="L3"><code class="language-C++"><span class="pln">            </span><span class="kwd">if</span><span class="pun">(</span><span class="pln"> </span><span class="typ">Box</span><span class="pun">[</span><span class="pln">i</span><span class="pun">].</span><span class="pln">canBeAbove</span><span class="pun">(</span><span class="pln"> bottom </span><span class="pun">)</span><span class="pln"> </span><span class="pun">){</span></code></li><li class="L4"><code class="language-C++"><span class="pln">                new_stack </span><span class="pun">=</span><span class="pln"> createStackDP</span><span class="pun">(</span><span class="pln"> boxes</span><span class="pun">,</span><span class="pln"> num</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Box</span><span class="pun">[</span><span class="pln">i</span><span class="pun">],</span><span class="pln"> stackCache </span><span class="pun">);</span></code></li><li class="L5"><code class="language-C++"><span class="pln">            </span><span class="pun">}</span></code></li><li class="L6"><code class="language-C++"></code></li><li class="L7"><code class="language-C++"><span class="pln">            </span><span class="kwd">if</span><span class="pun">(</span><span class="pln"> new_stack</span><span class="pun">.</span><span class="pln">size</span><span class="pun">()</span><span class="pln"> </span><span class="pun">&gt;</span><span class="pln"> max_height </span><span class="pun">){</span></code></li><li class="L8"><code class="language-C++"><span class="pln">                max_height </span><span class="pun">=</span><span class="pln"> new_stack</span><span class="pun">.</span><span class="pln">size</span><span class="pun">();</span></code></li><li class="L9"><code class="language-C++"><span class="pln">                max_stack </span><span class="pun">=</span><span class="pln"> new_stack</span><span class="pun">;</span></code></li><li class="L0"><code class="language-C++"><span class="pln">            </span><span class="pun">}</span></code></li><li class="L1"><code class="language-C++"><span class="pln">        </span><span class="pun">}</span></code></li><li class="L2"><code class="language-C++"></code></li><li class="L3"><code class="language-C++"></code></li><li class="L4"><code class="language-C++"><span class="pln">    </span><span class="pun">}</span></code></li><li class="L5"><code class="language-C++"></code></li><li class="L6"><code class="language-C++"><span class="pln">    max_stack</span><span class="pun">.</span><span class="pln">insert</span><span class="pun">(</span><span class="pln"> max_stack</span><span class="pun">.</span><span class="kwd">begin</span><span class="pun">(),</span><span class="pln"> bottom </span><span class="pun">);</span></code></li><li class="L7"><code class="language-C++"></code></li><li class="L8"><code class="language-C++"><span class="pln">    stackCache</span><span class="pun">[</span><span class="pln"> bottom </span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> max_stack</span><span class="pun">;</span></code></li><li class="L9"><code class="language-C++"></code></li><li class="L0"><code class="language-C++"><span class="pln">    </span><span class="kwd">return</span><span class="pln"> max_stack</span><span class="pun">;</span></code></li><li class="L1"><code class="language-C++"><span class="pun">}</span></code></li></ol></pre><blockquote data-anchor-id="uswl" class="white-blockquote">
+  <p><em>e.g.2 Given a string s and a dictionary of words dict, add spaces in s to construct a sentence where each word is a valid dictionary word.</em>  </p>
+</blockquote><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="18e4" style=""><ol class="linenums"><li class="L0"><code class="language-C++"><span class="kwd">class</span><span class="pln"> </span><span class="typ">Solution</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L1"><code class="language-C++"><span class="kwd">public</span><span class="pun">:</span></code></li><li class="L2"><code class="language-C++"></code></li><li class="L3"><code class="language-C++"><span class="pln">    vector</span><span class="str">&lt;string&gt;</span><span class="pln"> wordBreak</span><span class="pun">(</span><span class="kwd">string</span><span class="pln"> s</span><span class="pun">,</span><span class="pln">unordered_set</span><span class="str">&lt;string&gt;</span><span class="pln"> </span><span class="pun">&amp;</span><span class="pln">dict</span><span class="pun">,</span><span class="pln">unordered_map</span><span class="pun">&lt;</span><span class="kwd">string</span><span class="pun">,</span><span class="pln">vector</span><span class="str">&lt;string&gt;</span><span class="pln"> </span><span class="pun">&gt;&amp;</span><span class="pln"> cache</span><span class="pun">){</span></code></li><li class="L4"><code class="language-C++"><span class="pln">        </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">cache</span><span class="pun">.</span><span class="pln">count</span><span class="pun">(</span><span class="pln">s</span><span class="pun">))</span></code></li><li class="L5"><code class="language-C++"><span class="pln">            </span><span class="kwd">return</span><span class="pln"> cache</span><span class="pun">[</span><span class="pln">s</span><span class="pun">];</span></code></li><li class="L6"><code class="language-C++"></code></li><li class="L7"><code class="language-C++"><span class="pln">        vector</span><span class="str">&lt;string&gt;</span><span class="pln"> vs</span><span class="pun">;</span></code></li><li class="L8"><code class="language-C++"><span class="pln">        </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">s</span><span class="pun">.</span><span class="pln">empty</span><span class="pun">()){</span></code></li><li class="L9"><code class="language-C++"><span class="pln">            vs</span><span class="pun">.</span><span class="pln">push_back</span><span class="pun">(</span><span class="kwd">string</span><span class="pun">());</span></code></li><li class="L0"><code class="language-C++"><span class="pln">            </span><span class="kwd">return</span><span class="pln"> vs</span><span class="pun">;</span></code></li><li class="L1"><code class="language-C++"><span class="pln">        </span><span class="pun">}</span></code></li><li class="L2"><code class="language-C++"></code></li><li class="L3"><code class="language-C++"><span class="pln">        </span><span class="kwd">for</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> len </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span><span class="pln"> len </span><span class="pun">&lt;=</span><span class="pln"> s</span><span class="pun">.</span><span class="pln">size</span><span class="pun">();</span><span class="pln"> </span><span class="pun">++</span><span class="pln">len </span><span class="pun">){</span></code></li><li class="L4"><code class="language-C++"><span class="pln">            </span><span class="kwd">string</span><span class="pln"> prefix </span><span class="pun">=</span><span class="pln"> s</span><span class="pun">.</span><span class="pln">substr</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln">len</span><span class="pun">);</span></code></li><li class="L5"><code class="language-C++"><span class="pln">            </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">dict</span><span class="pun">.</span><span class="pln">count</span><span class="pun">(</span><span class="pln">prefix</span><span class="pun">)</span><span class="pln"> </span><span class="pun">&gt;</span><span class="pln"> </span><span class="lit">0</span><span class="pun">){</span></code></li><li class="L6"><code class="language-C++"><span class="pln">                </span><span class="kwd">string</span><span class="pln"> suffix </span><span class="pun">=</span><span class="pln"> s</span><span class="pun">.</span><span class="pln">substr</span><span class="pun">(</span><span class="pln">len</span><span class="pun">);</span></code></li><li class="L7"><code class="language-C++"><span class="pln">                vector</span><span class="str">&lt;string&gt;</span><span class="pln"> segments </span><span class="pun">=</span><span class="pln"> wordBreak</span><span class="pun">(</span><span class="pln">suffix</span><span class="pun">,</span><span class="pln">dict</span><span class="pun">,</span><span class="pln">cache</span><span class="pun">);</span></code></li><li class="L8"><code class="language-C++"><span class="pln">                </span><span class="kwd">for</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;</span><span class="pln"> segments</span><span class="pun">.</span><span class="pln">size</span><span class="pun">();</span><span class="pln"> </span><span class="pun">++</span><span class="pln">i</span><span class="pun">){</span></code></li><li class="L9"><code class="language-C++"><span class="pln">                    </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">segments</span><span class="pun">[</span><span class="pln">i</span><span class="pun">].</span><span class="pln">empty</span><span class="pun">())</span><span class="pln"> vs</span><span class="pun">.</span><span class="pln">push_back</span><span class="pun">(</span><span class="pln">prefix</span><span class="pun">);</span></code></li><li class="L0"><code class="language-C++"><span class="pln">                    </span><span class="kwd">else</span><span class="pln"> vs</span><span class="pun">.</span><span class="pln">push_back</span><span class="pun">(</span><span class="pln">prefix </span><span class="pun">+</span><span class="pln"> </span><span class="str">" "</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> segments</span><span class="pun">[</span><span class="pln">i</span><span class="pun">]);</span></code></li><li class="L1"><code class="language-C++"><span class="pln">                </span><span class="pun">}</span></code></li><li class="L2"><code class="language-C++"><span class="pln">            </span><span class="pun">}</span></code></li><li class="L3"><code class="language-C++"><span class="pln">        </span><span class="pun">}</span></code></li><li class="L4"><code class="language-C++"></code></li><li class="L5"><code class="language-C++"><span class="pln">        cache</span><span class="pun">[</span><span class="pln">s</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> vs</span><span class="pun">;</span></code></li><li class="L6"><code class="language-C++"></code></li><li class="L7"><code class="language-C++"><span class="pln">        </span><span class="kwd">return</span><span class="pln"> vs</span><span class="pun">;</span></code></li><li class="L8"><code class="language-C++"><span class="pln">    </span><span class="pun">}</span></code></li><li class="L9"><code class="language-C++"></code></li><li class="L0"><code class="language-C++"><span class="pln">    vector</span><span class="str">&lt;string&gt;</span><span class="pln"> wordBreak</span><span class="pun">(</span><span class="kwd">string</span><span class="pln"> s</span><span class="pun">,</span><span class="pln"> unordered_set</span><span class="str">&lt;string&gt;</span><span class="pln"> </span><span class="pun">&amp;</span><span class="pln">dict</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L1"><code class="language-C++"><span class="pln">        </span><span class="com">// IMPORTANT: Please reset any member data you declared, as</span></code></li><li class="L2"><code class="language-C++"><span class="pln">        </span><span class="com">// the same Solution instance will be reused for each test case.</span></code></li><li class="L3"><code class="language-C++"></code></li><li class="L4"><code class="language-C++"><span class="pln">        </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">s</span><span class="pun">.</span><span class="pln">empty</span><span class="pun">())</span><span class="pln"> </span><span class="kwd">return</span><span class="pln"> vector</span><span class="str">&lt;string&gt;</span><span class="pun">();</span></code></li><li class="L5"><code class="language-C++"><span class="pln">        unordered_map</span><span class="pun">&lt;</span><span class="kwd">string</span><span class="pun">,</span><span class="pln">vector</span><span class="str">&lt;string&gt;</span><span class="pln"> </span><span class="pun">&gt;</span><span class="pln"> cache</span><span class="pun">;</span></code></li><li class="L6"><code class="language-C++"><span class="pln">        </span><span class="kwd">return</span><span class="pln"> wordBreak</span><span class="pun">(</span><span class="pln">s</span><span class="pun">,</span><span class="pln">dict</span><span class="pun">,</span><span class="pln">cache</span><span class="pun">);</span></code></li><li class="L7"><code class="language-C++"><span class="pln">    </span><span class="pun">}</span></code></li><li class="L8"><code class="language-C++"><span class="pun">};</span></code></li></ol></pre><div class="md-section-divider"></div><h3 data-anchor-id="z2o4" id="75-用回溯解决发散结构问题">7.5 用回溯解决发散结构问题</h3><p data-anchor-id="fb4u"><strong>对于发散性问题（例如“所有组合"，"全部解"），可以选取其问题空间"收敛"的一端作为起点，沿着节点发散的方向（或者说，当前决策的多种选择）递归，直到a.当前节点"不合法" 或 b.当前节点发散方向搜索完毕才会<code>return</code></strong>。所谓"剪枝"(pruning)，就是指只选择尽可能少的、可能到达"胜利条件"的方向，  例如将幂指数级的复杂度降低到阶乘级。注意如果经过剪枝之后，所有搜索只会沿着"正确"的方向行进，那么当前节点"不合法"往往也就意味着胜利条件。</p><p data-anchor-id="bavz">如果需要记录决策的路径，可以用<code>vector&lt;int&gt; &amp;path</code>沿着搜索的方向记录，在满足胜利情形时记录当前<code>path</code>。注意在return前，删除<code>path</code>中的当前节点。如果搜索的方向有出现环路的可能，那么可以使用<code>bool []</code>或<code>unordered_map</code>来记录该节点是否已被使用，只要注意在访问时以及return前维护即可。</p><p data-anchor-id="70ac"><strong>Backtracking办法的典型模板：</strong>  </p><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="iapq" style=""><ol class="linenums"><li class="L0"><code class="language-C++"><span class="kwd">void</span><span class="pln"> backtracking</span><span class="pun">(</span><span class="pln"> P point</span><span class="pun">,</span><span class="pln"> vector</span><span class="pun">&lt;</span><span class="pln">P</span><span class="pun">&gt;</span><span class="pln"> </span><span class="pun">&amp;</span><span class="pln">path</span><span class="pun">,</span><span class="pln"> vector</span><span class="pun">&lt;</span><span class="pln">vector</span><span class="pun">&lt;</span><span class="pln">P</span><span class="pun">&gt;</span><span class="pln"> </span><span class="pun">&gt;&amp;</span><span class="pln">paths </span><span class="pun">）{</span></code></li><li class="L1"><code class="language-C++"><span class="pln">        </span><span class="kwd">if</span><span class="pun">（!</span><span class="pln">point </span><span class="pun">)</span><span class="pln">  </span><span class="com">// invalid point</span></code></li><li class="L2"><code class="language-C++"><span class="pln">            </span><span class="kwd">return</span><span class="pun">;</span></code></li><li class="L3"><code class="language-C++"></code></li><li class="L4"><code class="language-C++"><span class="pln">        path</span><span class="pun">.</span><span class="pln">push_back</span><span class="pun">(</span><span class="pln">point</span><span class="pun">);</span></code></li><li class="L5"><code class="language-C++"></code></li><li class="L6"><code class="language-C++"><span class="pln">        </span><span class="kwd">bool</span><span class="pln"> success </span><span class="pun">=</span><span class="pln">  </span><span class="pun">;</span><span class="pln">  </span><span class="com">// condition for success</span></code></li><li class="L7"><code class="language-C++"><span class="pln">        </span><span class="kwd">if</span><span class="pun">(</span><span class="pln"> success </span><span class="pun">)</span><span class="pln">  </span></code></li><li class="L8"><code class="language-C++"><span class="pln">            paths</span><span class="pun">.</span><span class="pln">push_back</span><span class="pun">(</span><span class="pln"> vector</span><span class="pun">&lt;</span><span class="pln">P</span><span class="pun">&gt;(</span><span class="pln">path</span><span class="pun">.</span><span class="kwd">begin</span><span class="pun">(),</span><span class="pln">path</span><span class="pun">.</span><span class="kwd">end</span><span class="pun">())</span><span class="pln"> </span><span class="pun">);</span><span class="pln"> </span><span class="com">// don't return here</span></code></li><li class="L9"><code class="language-C++"></code></li><li class="L0"><code class="language-C++"><span class="pln">        </span><span class="kwd">for</span><span class="pun">(</span><span class="pln"> P </span><span class="kwd">next</span><span class="pun">:</span><span class="pln"> all directions </span><span class="pun">)</span></code></li><li class="L1"><code class="language-C++"><span class="pln">            backtracking</span><span class="pun">(</span><span class="pln"> </span><span class="kwd">next</span><span class="pun">,</span><span class="pln"> path</span><span class="pun">,</span><span class="pln"> paths </span><span class="pun">);</span></code></li><li class="L2"><code class="language-C++"><span class="pln">        path</span><span class="pun">.</span><span class="pln">pop_back</span><span class="pun">();</span></code></li><li class="L3"><code class="language-C++"><span class="pln">        </span><span class="kwd">return</span><span class="pun">;</span></code></li><li class="L4"><code class="language-C++"><span class="pun">}</span></code></li></ol></pre><blockquote data-anchor-id="21z9" class="white-blockquote">
+  <p><em>e.g.1 Given n pairs of parentheses, generate all combinations of  parentheses.</em>  </p>
+</blockquote><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="jgu2" style=""><ol class="linenums"><li class="L0"><code class="language-C++"><span class="kwd">class</span><span class="pln"> </span><span class="typ">Solution</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L1"><code class="language-C++"><span class="kwd">public</span><span class="pun">:</span></code></li><li class="L2"><code class="language-C++"></code></li><li class="L3"><code class="language-C++"><span class="pln">    </span><span class="kwd">void</span><span class="pln"> gP</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> leftRem</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> rightRem</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">string</span><span class="pln"> </span><span class="pun">&amp;</span><span class="pln">path</span><span class="pun">,</span><span class="pln"> vector</span><span class="str">&lt;string&gt;</span><span class="pln"> </span><span class="pun">&amp;</span><span class="pln">paths </span><span class="pun">){</span></code></li><li class="L4"><code class="language-C++"></code></li><li class="L5"><code class="language-C++"><span class="pln">        </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">leftRem </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">0</span><span class="pln"> </span><span class="pun">||</span><span class="pln"> rightRem </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L6"><code class="language-C++"><span class="pln">            </span><span class="kwd">return</span><span class="pun">;</span></code></li><li class="L7"><code class="language-C++"></code></li><li class="L8"><code class="language-C++"><span class="pln">        </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">leftRem </span><span class="pun">&gt;</span><span class="pln"> </span><span class="lit">0</span><span class="pun">){</span></code></li><li class="L9"><code class="language-C++"><span class="pln">            path</span><span class="pun">.</span><span class="pln">push_back</span><span class="pun">(</span><span class="str">'('</span><span class="pun">);</span></code></li><li class="L0"><code class="language-C++"><span class="pln">            gP</span><span class="pun">(</span><span class="pln">leftRem</span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln">rightRem</span><span class="pun">,</span><span class="pln">path</span><span class="pun">,</span><span class="pln">paths</span><span class="pun">);</span></code></li><li class="L1"><code class="language-C++"><span class="pln">            path</span><span class="pun">.</span><span class="pln">pop_back</span><span class="pun">();</span></code></li><li class="L2"><code class="language-C++"><span class="pln">        </span><span class="pun">}</span></code></li><li class="L3"><code class="language-C++"></code></li><li class="L4"><code class="language-C++"><span class="pln">        </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">leftRem </span><span class="pun">&lt;</span><span class="pln"> rightRem</span><span class="pun">){</span></code></li><li class="L5"><code class="language-C++"><span class="pln">            path</span><span class="pun">.</span><span class="pln">push_back</span><span class="pun">(</span><span class="str">')'</span><span class="pun">);</span></code></li><li class="L6"><code class="language-C++"><span class="pln">            </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">rightRem </span><span class="pun">==</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L7"><code class="language-C++"><span class="pln">                paths</span><span class="pun">.</span><span class="pln">push_back</span><span class="pun">(</span><span class="pln">path</span><span class="pun">);</span></code></li><li class="L8"><code class="language-C++"><span class="pln">            gP</span><span class="pun">(</span><span class="pln">leftRem</span><span class="pun">,</span><span class="pln"> rightRem</span><span class="pun">-</span><span class="lit">1</span><span class="pun">,</span><span class="pln">path</span><span class="pun">,</span><span class="pln">paths</span><span class="pun">);</span></code></li><li class="L9"><code class="language-C++"></code></li><li class="L0"><code class="language-C++"><span class="pln">            path</span><span class="pun">.</span><span class="pln">pop_back</span><span class="pun">();</span></code></li><li class="L1"><code class="language-C++"><span class="pln">        </span><span class="pun">}</span></code></li><li class="L2"><code class="language-C++"><span class="pln">    </span><span class="pun">}</span></code></li><li class="L3"><code class="language-C++"></code></li><li class="L4"><code class="language-C++"></code></li><li class="L5"><code class="language-C++"><span class="pln">    vector</span><span class="str">&lt;string&gt;</span><span class="pln"> generateParenthesis</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> n</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L6"><code class="language-C++"><span class="pln">        vector</span><span class="str">&lt;string&gt;</span><span class="pln"> res</span><span class="pun">;</span></code></li><li class="L7"><code class="language-C++"><span class="pln">        </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">n </span><span class="pun">==</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span><span class="pln">  </span><span class="kwd">return</span><span class="pln"> res</span><span class="pun">;</span></code></li><li class="L8"><code class="language-C++"><span class="pln">        </span><span class="kwd">string</span><span class="pln"> path</span><span class="pun">;</span></code></li><li class="L9"><code class="language-C++"><span class="pln">        gP</span><span class="pun">(</span><span class="pln">n</span><span class="pun">,</span><span class="pln">n</span><span class="pun">,</span><span class="pln">path</span><span class="pun">,</span><span class="pln">res</span><span class="pun">);</span></code></li><li class="L0"><code class="language-C++"><span class="pln">        </span><span class="kwd">return</span><span class="pln"> res</span><span class="pun">;</span></code></li><li class="L1"><code class="language-C++"><span class="pln">    </span><span class="pun">}</span></code></li><li class="L2"><code class="language-C++"><span class="pun">};</span></code></li></ol></pre><blockquote data-anchor-id="v00t" class="white-blockquote">
+  <p><em>e.g.2 Implement the "paint fill" function that fill in the surrounding area until the color changes.</em>  </p>
+</blockquote><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="jhkv" style=""><ol class="linenums"><li class="L0"><code class="language-C++"><span class="kwd">enum</span><span class="pln"> </span><span class="typ">Color</span><span class="pun">{</span></code></li><li class="L1"><code class="language-C++"><span class="pln">    white</span><span class="pun">,</span><span class="pln">yellow</span><span class="pun">,</span><span class="pln">green</span><span class="pun">,</span><span class="pln">blue</span><span class="pun">,</span><span class="pln">black</span></code></li><li class="L2"><code class="language-C++"><span class="pun">};</span></code></li><li class="L3"><code class="language-C++"></code></li><li class="L4"><code class="language-C++"><span class="kwd">void</span><span class="pln"> paintFill</span><span class="pun">(</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> </span><span class="pun">**</span><span class="pln">screen</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> m</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> n</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> x</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> y</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Color</span><span class="pln"> ncolor</span><span class="pun">){</span></code></li><li class="L5"><code class="language-C++"></code></li><li class="L6"><code class="language-C++"><span class="pln">    </span><span class="kwd">if</span><span class="pun">(</span><span class="pln"> x </span><span class="pun">&gt;=</span><span class="pln"> n </span><span class="pun">||</span><span class="pln"> x </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">0</span><span class="pln"> </span><span class="pun">||</span><span class="pln"> y </span><span class="pun">&gt;=</span><span class="pln"> m </span><span class="pun">||</span><span class="pln"> y </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">0</span><span class="pln"> </span><span class="pun">)</span></code></li><li class="L7"><code class="language-C++"><span class="pln">        </span><span class="kwd">return</span><span class="pun">;</span></code></li><li class="L8"><code class="language-C++"><span class="pln">    </span><span class="kwd">if</span><span class="pun">(</span><span class="pln"> screen</span><span class="pun">[</span><span class="pln">y</span><span class="pun">][</span><span class="pln">x</span><span class="pun">]</span><span class="pln"> </span><span class="pun">!=</span><span class="pln"> ncolor</span><span class="pun">){</span></code></li><li class="L9"><code class="language-C++"></code></li><li class="L0"><code class="language-C++"><span class="pln">        screen</span><span class="pun">[</span><span class="pln">y</span><span class="pun">][</span><span class="pln">x</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> ncolor</span><span class="pun">;</span></code></li><li class="L1"><code class="language-C++"><span class="pln">        paintFill</span><span class="pun">(</span><span class="pln"> screen</span><span class="pun">,</span><span class="pln"> m</span><span class="pun">,</span><span class="pln"> n</span><span class="pun">,</span><span class="pln"> x </span><span class="pun">+</span><span class="lit">1</span><span class="pun">,</span><span class="pln">y</span><span class="pun">,</span><span class="pln"> ncolor</span><span class="pun">);</span></code></li><li class="L2"><code class="language-C++"><span class="pln">        paintFill</span><span class="pun">(</span><span class="pln"> screen</span><span class="pun">,</span><span class="pln"> m</span><span class="pun">,</span><span class="pln"> n</span><span class="pun">,</span><span class="pln"> x </span><span class="pun">,</span><span class="pln">y </span><span class="pun">+</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> ncolor</span><span class="pun">);</span></code></li><li class="L3"><code class="language-C++"><span class="pln">        paintFill</span><span class="pun">(</span><span class="pln"> screen</span><span class="pun">,</span><span class="pln"> m</span><span class="pun">,</span><span class="pln"> n</span><span class="pun">,</span><span class="pln"> x </span><span class="pun">-</span><span class="lit">1</span><span class="pln"> </span><span class="pun">,</span><span class="pln">y </span><span class="pun">,</span><span class="pln"> ncolor</span><span class="pun">);</span></code></li><li class="L4"><code class="language-C++"><span class="pln">        paintFill</span><span class="pun">(</span><span class="pln"> screen</span><span class="pun">,</span><span class="pln"> m</span><span class="pun">,</span><span class="pln"> n</span><span class="pun">,</span><span class="pln"> x </span><span class="pun">,</span><span class="pln">y </span><span class="pun">-</span><span class="lit">1</span><span class="pln"> </span><span class="pun">,</span><span class="pln"> ncolor</span><span class="pun">);</span></code></li><li class="L5"><code class="language-C++"></code></li><li class="L6"><code class="language-C++"><span class="pln">    </span><span class="pun">}</span></code></li><li class="L7"><code class="language-C++"><span class="pun">}</span></code></li></ol></pre><blockquote data-anchor-id="fjho" class="white-blockquote">
+  <p><em>e.g.3 Placing n queens on an n×n chessboard such that no two queens attack each other.</em> </p>
+</blockquote><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="yp4t" style=""><ol class="linenums"><li class="L0"><code class="language-C++"><span class="kwd">bool</span><span class="pln"> checkValid</span><span class="pun">(</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> row1</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> col1</span><span class="pun">,</span><span class="kwd">int</span><span class="pln"> </span><span class="pun">*</span><span class="pln">rowCol </span><span class="pun">){</span></code></li><li class="L1"><code class="language-C++"><span class="pln">    </span><span class="kwd">for</span><span class="pun">(</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> row2 </span><span class="pun">=</span><span class="pln"> row1 </span><span class="pun">-</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span><span class="pln"> row2 </span><span class="pun">&gt;=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> row2</span><span class="pun">--){</span></code></li><li class="L2"><code class="language-C++"><span class="pln">        </span><span class="kwd">if</span><span class="pun">(</span><span class="pln"> rowCol</span><span class="pun">[</span><span class="pln">row2</span><span class="pun">]</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> col1 </span><span class="pun">)</span></code></li><li class="L3"><code class="language-C++"><span class="pln">            </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span></code></li><li class="L4"><code class="language-C++"><span class="pln">        </span><span class="kwd">if</span><span class="pun">(</span><span class="pln"> abs</span><span class="pun">(</span><span class="pln">row1 </span><span class="pun">-</span><span class="pln"> row2</span><span class="pun">)</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> abs</span><span class="pun">(</span><span class="pln"> rowCol</span><span class="pun">[</span><span class="pln">row2</span><span class="pun">]</span><span class="pln"> </span><span class="pun">-</span><span class="pln"> col1 </span><span class="pun">)</span><span class="pln"> </span><span class="pun">)</span></code></li><li class="L5"><code class="language-C++"><span class="pln">            </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span></code></li><li class="L6"><code class="language-C++"><span class="pln">    </span><span class="pun">}</span></code></li><li class="L7"><code class="language-C++"><span class="pln">    </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span></code></li><li class="L8"><code class="language-C++"><span class="pun">}</span></code></li><li class="L9"><code class="language-C++"></code></li><li class="L0"><code class="language-C++"><span class="kwd">void</span><span class="pln"> placeQ</span><span class="pun">(</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> row</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> rowCol</span><span class="pun">[],</span><span class="pln"> vector</span><span class="pun">&lt;</span><span class="kwd">int</span><span class="pun">*&gt;&amp;</span><span class="pln"> res </span><span class="pun">){</span></code></li><li class="L1"><code class="language-C++"><span class="pln">    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">row </span><span class="pun">==</span><span class="pln"> GRID_SIZE</span><span class="pun">){</span></code></li><li class="L2"><code class="language-C++"><span class="pln">        </span><span class="kwd">int</span><span class="pln"> </span><span class="pun">*</span><span class="pln">p </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="kwd">int</span><span class="pun">[</span><span class="pln">GRID_SIZE</span><span class="pun">];</span></code></li><li class="L3"><code class="language-C++"></code></li><li class="L4"><code class="language-C++"><span class="pln">        </span><span class="kwd">for</span><span class="pun">(</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> i </span><span class="pun">=</span><span class="lit">0</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;</span><span class="pln"> GRID_SIZE</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">++)</span></code></li><li class="L5"><code class="language-C++"><span class="pln">            p</span><span class="pun">[</span><span class="pln">i</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> rowCol</span><span class="pun">[</span><span class="pln">i</span><span class="pun">];</span></code></li><li class="L6"><code class="language-C++"></code></li><li class="L7"><code class="language-C++"><span class="pln">        res</span><span class="pun">.</span><span class="pln">push_back</span><span class="pun">(</span><span class="pln">p</span><span class="pun">);</span></code></li><li class="L8"><code class="language-C++"><span class="pln">        </span><span class="kwd">return</span><span class="pun">;</span></code></li><li class="L9"><code class="language-C++"><span class="pln">    </span><span class="pun">}</span></code></li><li class="L0"><code class="language-C++"></code></li><li class="L1"><code class="language-C++"><span class="pln">    </span><span class="kwd">int</span><span class="pln"> col </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span></code></li><li class="L2"><code class="language-C++"><span class="pln">    </span><span class="kwd">for</span><span class="pun">(</span><span class="pln">col </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> col </span><span class="pun">&lt;</span><span class="pln"> GRID_SIZE</span><span class="pun">;</span><span class="pln"> col</span><span class="pun">++){</span></code></li><li class="L3"><code class="language-C++"><span class="pln">        </span><span class="kwd">if</span><span class="pun">(</span><span class="pln"> checkValid</span><span class="pun">(</span><span class="pln">row</span><span class="pun">,</span><span class="pln">col</span><span class="pun">,</span><span class="pln">rowCol</span><span class="pun">)</span><span class="pln"> </span><span class="pun">){</span></code></li><li class="L4"><code class="language-C++"><span class="pln">            rowCol</span><span class="pun">[</span><span class="pln">row</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> col</span><span class="pun">;</span></code></li><li class="L5"><code class="language-C++"><span class="pln">            placeQ</span><span class="pun">(</span><span class="pln"> row</span><span class="pun">+</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> rowCol</span><span class="pun">,</span><span class="pln">res</span><span class="pun">);</span></code></li><li class="L6"><code class="language-C++"><span class="pln">        </span><span class="pun">}</span><span class="pln">           </span></code></li><li class="L7"><code class="language-C++"><span class="pln">    </span><span class="pun">}</span><span class="pln">   </span></code></li><li class="L8"><code class="language-C++"><span class="pun">}</span><span class="pln"> </span></code></li></ol></pre><blockquote data-anchor-id="ja27" class="white-blockquote">
+  <p><em>e.g.4 Solve a boggle game, with a dictionary given as <code>unordered_set</code>.</em></p>
+</blockquote><div class="md-section-divider"></div><h3 data-anchor-id="yh21" id="76-用divide-and-conquer-解决独立子问题">7.6 用Divide and Conquer 解决独立子问题</h3><p data-anchor-id="hz09">如果能将问题分成若干个部分解决，且互相孤立，则可以优先选择使用D&amp;C策略。特别地，如果期望将问题的复杂度由<span class="MathJax_Preview"></span><span class="MathJax_SVG" id="MathJax-Element-8-Frame" role="textbox" aria-readonly="true" style="font-size: 100%; display: inline-block;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 -771.0516853480245 2143 1042.103370696049" style="width: 4.981ex; height: 2.432ex; vertical-align: -0.695ex; margin: 1px 0px;"><g stroke="black" fill="black" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-4F"></use><use href="#MJMAIN-28" x="763" y="0"></use><use href="#MJMATHI-6E" x="1153" y="0"></use><use href="#MJMAIN-29" x="1753" y="0"></use></g></svg></span><script type="math/tex" id="MathJax-Element-8">O(n)</script>进一步降低（<span class="MathJax_Preview"></span><span class="MathJax_SVG" id="MathJax-Element-9-Frame" role="textbox" aria-readonly="true" style="font-size: 100%; display: inline-block;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 -771.0516853480245 3407.5 1042.103370696049" style="width: 7.876ex; height: 2.432ex; vertical-align: -0.695ex; margin: 1px 0px;"><g stroke="black" fill="black" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-4F"></use><use href="#MJMAIN-28" x="763" y="0"></use><use href="#MJMATHI-6C" x="1153" y="0"></use><use href="#MJMATHI-6F" x="1451" y="0"></use><use href="#MJMATHI-67" x="1937" y="0"></use><use href="#MJMATHI-6E" x="2417" y="0"></use><use href="#MJMAIN-29" x="3018" y="0"></use></g></svg></span><script type="math/tex" id="MathJax-Element-9">O(logn)</script>），一般总是可以联想到使用D&amp;C策略，将问题分割而治。  </p><blockquote data-anchor-id="a0gc" class="white-blockquote">
+  <p><em>e.g. 1 Implement pow(x, n).</em>  </p>
+</blockquote><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="2scf" style=""><ol class="linenums"><li class="L0"><code class="language-C++"><span class="kwd">double</span><span class="pln"> pow</span><span class="pun">(</span><span class="kwd">double</span><span class="pln"> x</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> n</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L1"><code class="language-C++"><span class="pln">    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">n </span><span class="pun">==</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span><span class="pln"> </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">1.0</span><span class="pun">;</span></code></li><li class="L2"><code class="language-C++"></code></li><li class="L3"><code class="language-C++"><span class="pln">    </span><span class="kwd">if</span><span class="pun">(</span><span class="pln"> abs</span><span class="pun">(</span><span class="pln">x</span><span class="pun">)</span><span class="pln"> </span><span class="pun">&lt;</span><span class="pln"> numeric_limits</span><span class="str">&lt;double&gt;</span><span class="pun">::</span><span class="pln">epsilon</span><span class="pun">()</span><span class="pln"> </span><span class="pun">)</span></code></li><li class="L4"><code class="language-C++"><span class="pln">        </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">0.0</span><span class="pun">;</span></code></li><li class="L5"><code class="language-C++"></code></li><li class="L6"><code class="language-C++"><span class="pln">    </span><span class="kwd">double</span><span class="pln"> half </span><span class="pun">=</span><span class="pln"> pow</span><span class="pun">(</span><span class="pln">x</span><span class="pun">,</span><span class="pln">n</span><span class="pun">/</span><span class="lit">2</span><span class="pun">);</span></code></li><li class="L7"><code class="language-C++"></code></li><li class="L8"><code class="language-C++"><span class="pln">    </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">n</span><span class="pun">%</span><span class="lit">2</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L9"><code class="language-C++"><span class="pln">        </span><span class="kwd">return</span><span class="pln"> half</span><span class="pun">*</span><span class="pln">half</span><span class="pun">;</span></code></li><li class="L0"><code class="language-C++"><span class="pln">    </span><span class="kwd">else</span><span class="pln"> </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">n </span><span class="pun">&gt;</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L1"><code class="language-C++"><span class="pln">        </span><span class="kwd">return</span><span class="pln"> half</span><span class="pun">*</span><span class="pln">half</span><span class="pun">*</span><span class="pln">x</span><span class="pun">;</span></code></li><li class="L2"><code class="language-C++"><span class="pln">    </span><span class="kwd">else</span></code></li><li class="L3"><code class="language-C++"><span class="pln">        </span><span class="kwd">return</span><span class="pln"> half</span><span class="pun">*</span><span class="pln">half</span><span class="pun">/</span><span class="pln">x</span><span class="pun">;</span></code></li><li class="L4"><code class="language-C++"><span class="pun">}</span></code></li></ol></pre><blockquote data-anchor-id="k5ju" class="white-blockquote">
+  <p><em>e.g.2 Divide two integers without using multiplication, division and mod operator.</em>  </p>
+</blockquote><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="bxxk" style=""><ol class="linenums"><li class="L0"><code class="language-C++"><span class="kwd">class</span><span class="pln"> </span><span class="typ">Solution</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L1"><code class="language-C++"><span class="kwd">public</span><span class="pun">:</span></code></li><li class="L2"><code class="language-C++"><span class="pln">    </span><span class="kwd">int</span><span class="pln"> divide</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> dividend</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> divisor</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L3"><code class="language-C++"><span class="pln">        </span><span class="com">// IMPORTANT: Please reset any member data you declared, as</span></code></li><li class="L4"><code class="language-C++"><span class="pln">        </span><span class="com">// the same Solution instance will be reused for each test case.</span></code></li><li class="L5"><code class="language-C++"></code></li><li class="L6"><code class="language-C++"><span class="pln">        </span><span class="kwd">int</span><span class="pln"> sign </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span></code></li><li class="L7"><code class="language-C++"></code></li><li class="L8"><code class="language-C++"><span class="pln">        </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">divisor </span><span class="pun">==</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span><span class="pln"> </span><span class="kwd">throw</span><span class="pln"> overflow_error</span><span class="pun">(</span><span class="str">"Divide by zero exception"</span><span class="pun">);</span></code></li><li class="L9"><code class="language-C++"></code></li><li class="L0"><code class="language-C++"><span class="pln">        </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">dividend </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span><span class="pln"> sign </span><span class="pun">=</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">;</span></code></li><li class="L1"><code class="language-C++"><span class="pln">        </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">divisor </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">0</span><span class="pln"> </span><span class="pun">)</span><span class="pln"> sign </span><span class="pun">=</span><span class="pln"> </span><span class="pun">-</span><span class="pln">sign</span><span class="pun">;</span></code></li><li class="L2"><code class="language-C++"></code></li><li class="L3"><code class="language-C++"><span class="pln">        </span><span class="kwd">long</span><span class="pln"> </span><span class="kwd">long</span><span class="pln"> y </span><span class="pun">=</span><span class="pln"> abs</span><span class="pun">((</span><span class="kwd">long</span><span class="pln"> </span><span class="kwd">long</span><span class="pun">)</span><span class="pln">dividend</span><span class="pun">);</span></code></li><li class="L4"><code class="language-C++"><span class="pln">        </span><span class="kwd">long</span><span class="pln"> </span><span class="kwd">long</span><span class="pln"> x </span><span class="pun">=</span><span class="pln"> abs</span><span class="pun">((</span><span class="kwd">long</span><span class="pln"> </span><span class="kwd">long</span><span class="pun">)</span><span class="pln">divisor</span><span class="pun">);</span></code></li><li class="L5"><code class="language-C++"></code></li><li class="L6"><code class="language-C++"><span class="pln">        </span><span class="kwd">int</span><span class="pln"> power </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span></code></li><li class="L7"><code class="language-C++"></code></li><li class="L8"><code class="language-C++"><span class="pln">        </span><span class="kwd">while</span><span class="pun">(</span><span class="pln"> </span><span class="pun">(</span><span class="pln">x</span><span class="pun">&lt;&lt;</span><span class="pln">power</span><span class="pun">)</span><span class="pln"> </span><span class="pun">&lt;=</span><span class="pln"> y </span><span class="pun">)</span></code></li><li class="L9"><code class="language-C++"><span class="pln">            power</span><span class="pun">++;</span></code></li><li class="L0"><code class="language-C++"></code></li><li class="L1"><code class="language-C++"><span class="pln">        </span><span class="kwd">long</span><span class="pln"> </span><span class="kwd">long</span><span class="pln"> res </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span></code></li><li class="L2"><code class="language-C++"></code></li><li class="L3"><code class="language-C++"><span class="pln">        </span><span class="kwd">while</span><span class="pun">(</span><span class="pln"> y </span><span class="pun">&gt;=</span><span class="pln"> x </span><span class="pun">){</span><span class="pln">                    </span><span class="com">//divide the problem into dealing with every bit</span></code></li><li class="L4"><code class="language-C++"><span class="pln">            </span><span class="kwd">if</span><span class="pun">(</span><span class="pln"> y </span><span class="pun">&gt;=</span><span class="pln"> x</span><span class="pun">&lt;&lt;</span><span class="pln">power </span><span class="pun">){</span></code></li><li class="L5"><code class="language-C++"><span class="pln">                y </span><span class="pun">-=</span><span class="pln"> x</span><span class="pun">&lt;&lt;</span><span class="pln">power</span><span class="pun">;</span></code></li><li class="L6"><code class="language-C++"><span class="pln">                res </span><span class="pun">|=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">&lt;&lt;</span><span class="pln">power</span><span class="pun">;</span></code></li><li class="L7"><code class="language-C++"><span class="pln">            </span><span class="pun">}</span></code></li><li class="L8"><code class="language-C++"><span class="pln">            power</span><span class="pun">--;</span></code></li><li class="L9"><code class="language-C++"><span class="pln">        </span><span class="pun">}</span></code></li><li class="L0"><code class="language-C++"></code></li><li class="L1"><code class="language-C++"><span class="pln">        </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">sign </span><span class="pun">==</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span><span class="pln"> </span><span class="kwd">return</span><span class="pln"> </span><span class="pun">-</span><span class="pln">res</span><span class="pun">;</span></code></li><li class="L2"><code class="language-C++"><span class="pln">        </span><span class="kwd">else</span><span class="pln">    </span><span class="kwd">return</span><span class="pln"> res</span><span class="pun">;</span></code></li><li class="L3"><code class="language-C++"><span class="pln">    </span><span class="pun">}</span></code></li><li class="L4"><code class="language-C++"><span class="pun">};</span></code></li></ol></pre><blockquote data-anchor-id="3lk5" class="white-blockquote">
+  <p><em>e.g. 3 Evaluate an infix notation( without parentheses ). ( Ebay interview question ).</em>  </p>
+</blockquote><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="xa84" style=""><ol class="linenums"><li class="L0"><code class="language-C++"><span class="kwd">double</span><span class="pln"> readNum</span><span class="pun">(</span><span class="pln"> </span><span class="kwd">char</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> </span><span class="pun">&amp;</span><span class="pln">str</span><span class="pun">){</span></code></li><li class="L1"><code class="language-C++"><span class="pln">    </span><span class="kwd">double</span><span class="pln"> num</span><span class="pun">;</span></code></li><li class="L2"><code class="language-C++"><span class="pln">    sscanf</span><span class="pun">(</span><span class="pln"> str</span><span class="pun">,</span><span class="pln"> </span><span class="str">"%lf"</span><span class="pun">,</span><span class="pln"> </span><span class="pun">&amp;</span><span class="pln">num </span><span class="pun">);</span></code></li><li class="L3"><code class="language-C++"><span class="pln">    str</span><span class="pun">++;</span></code></li><li class="L4"><code class="language-C++"><span class="pln">    </span><span class="kwd">while</span><span class="pun">(</span><span class="pln"> isdigit</span><span class="pun">(*</span><span class="pln">str</span><span class="pun">)</span><span class="pln"> </span><span class="pun">||</span><span class="pln"> </span><span class="pun">*</span><span class="pln">str </span><span class="pun">==</span><span class="pln"> </span><span class="str">'.'</span><span class="pln"> </span><span class="pun">)</span></code></li><li class="L5"><code class="language-C++"><span class="pln">        str</span><span class="pun">++;</span></code></li><li class="L6"><code class="language-C++"><span class="pln">    </span><span class="kwd">return</span><span class="pln"> num</span><span class="pun">;</span></code></li><li class="L7"><code class="language-C++"><span class="pun">}</span></code></li><li class="L8"><code class="language-C++"></code></li><li class="L9"><code class="language-C++"><span class="kwd">double</span><span class="pln"> evaluate</span><span class="pun">(</span><span class="pln"> </span><span class="kwd">char</span><span class="pln"> </span><span class="pun">*</span><span class="pln">str</span><span class="pun">){</span></code></li><li class="L0"><code class="language-C++"></code></li><li class="L1"><code class="language-C++"><span class="pln">    </span><span class="kwd">if</span><span class="pun">(</span><span class="pln"> </span><span class="pun">*</span><span class="pln">str </span><span class="pun">==</span><span class="pln"> </span><span class="str">'\0'</span><span class="pln"> </span><span class="pun">)</span></code></li><li class="L2"><code class="language-C++"><span class="pln">        </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">0.0</span><span class="pun">;</span></code></li><li class="L3"><code class="language-C++"></code></li><li class="L4"><code class="language-C++"><span class="pln">    </span><span class="kwd">double</span><span class="pln"> res </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1.0</span><span class="pun">;</span></code></li><li class="L5"><code class="language-C++"><span class="pln">    </span><span class="kwd">char</span><span class="pln"> op </span><span class="pun">=</span><span class="pln"> </span><span class="str">'*'</span><span class="pun">;</span></code></li><li class="L6"><code class="language-C++"></code></li><li class="L7"><code class="language-C++"><span class="pln">    </span><span class="kwd">while</span><span class="pun">(</span><span class="pln"> op </span><span class="pun">==</span><span class="pln"> </span><span class="str">'*'</span><span class="pln"> </span><span class="pun">||</span><span class="pln"> op </span><span class="pun">==</span><span class="pln"> </span><span class="str">'/'</span><span class="pln"> </span><span class="pun">){</span></code></li><li class="L8"><code class="language-C++"><span class="pln">        </span><span class="kwd">if</span><span class="pun">(</span><span class="pln"> op </span><span class="pun">==</span><span class="pln"> </span><span class="str">'*'</span><span class="pln"> </span><span class="pun">)</span></code></li><li class="L9"><code class="language-C++"><span class="pln">            res </span><span class="pun">*=</span><span class="pln"> readNum</span><span class="pun">(</span><span class="pln">str</span><span class="pun">);</span></code></li><li class="L0"><code class="language-C++"><span class="pln">        </span><span class="kwd">else</span></code></li><li class="L1"><code class="language-C++"><span class="pln">            res </span><span class="pun">/=</span><span class="pln"> readNum</span><span class="pun">(</span><span class="pln">str</span><span class="pun">);</span></code></li><li class="L2"><code class="language-C++"><span class="pln">        op </span><span class="pun">=</span><span class="pln"> </span><span class="pun">*</span><span class="pln">str</span><span class="pun">++;</span></code></li><li class="L3"><code class="language-C++"><span class="pln">    </span><span class="pun">}</span></code></li><li class="L4"><code class="language-C++"></code></li><li class="L5"><code class="language-C++"><span class="pln">    </span><span class="kwd">return</span><span class="pln"> res </span><span class="pun">+</span><span class="pln"> evaluate</span><span class="pun">(</span><span class="pln"> </span><span class="pun">--</span><span class="pln">str</span><span class="pun">);</span></code></li><li class="L6"><code class="language-C++"><span class="pun">}</span></code></li></ol></pre></div>
+    <div class="remark-icons"><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="urbw">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="eq6b">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="xcm8">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="uuvg">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top:445px;left:1349px;" data-anchor-id="d9vf">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="z2eu">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 624px; left: 1349px; display: none;" data-anchor-id="6t1t">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="zpjx">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="wq2x">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 877px; left: 1349px; display: none;" data-anchor-id="01tp">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 984px; left: 1349px; display: none;" data-anchor-id="75qm">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 1049px; left: 1349px; display: none;" data-anchor-id="9uzk">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="ppaj">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="o7zf">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="15ng">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 2290px; left: 1349px; display: none;" data-anchor-id="ks5l">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="9f1m">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 2465px; left: 1349px; display: none;" data-anchor-id="smuj">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="671g">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 2864px; left: 1349px; display: none;" data-anchor-id="ptqz">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="j492">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="wymd">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="1uzs">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="w4wt">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="yf2m">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 3384px; left: 1349px; display: none;" data-anchor-id="j45w">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="m67l">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 3868px; left: 1349px; display: none;" data-anchor-id="deyl">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="d709">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="tf6t">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="apkz">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="rung">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 5027px; left: 1349px; display: none;" data-anchor-id="jqhx">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="dusq">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="aqh5">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 6504px; left: 1349px; display: none;" data-anchor-id="dhxg">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="dxhl">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="3b3t">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 6780px; left: 1349px; display: none;" data-anchor-id="u945">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 6920px; left: 1349px; display: none;" data-anchor-id="upw4">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="2kvm">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 7639px; left: 1349px; display: none;" data-anchor-id="h4t0">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="32ob">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="248n">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 8197px; left: 1349px; display: none;" data-anchor-id="ox7x">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="4lju">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 8447px; left: 1349px; display: none;" data-anchor-id="xqog">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="8tl8">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 8669px; left: 1349px; display: none;" data-anchor-id="57l6">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="uswl">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 9458px; left: 1349px; display: none;" data-anchor-id="18e4">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="z2o4">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="fb4u">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="bavz">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="70ac">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 10639px; left: 1349px; display: none;" data-anchor-id="iapq">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="21z9">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="jgu2">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="v00t">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="jhkv">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="fjho">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="yp4t">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="ja27">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="yh21">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="hz09">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="a0gc">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="2scf">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="k5ju">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 13559px; left: 1349px; display: none;" data-anchor-id="bxxk">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 14298px; left: 1349px; display: none;" data-anchor-id="3lk5">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 14363px; left: 1349px; display: block;" data-anchor-id="xa84">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div></div>
+</div>
+
+<!--in page preview buttons. -->
+<div class="in-page-preview-buttons in-page-preview-buttons-full-reader">
+    <ul>
+        <li class="in-page-button dropdown" id="preview-toc-button" title="内容目录 Ctrl+Alt+O">
+            <span class="dropdown-toggle icon-list" data-toggle="dropdown" style="color: rgba(102, 128, 153, 0.45098);"></span>
+            <div id="toc-list" class="dropdown-menu theme pull-right theme-white"> <!-- Add theme means this element will be changed when apply theme color. -->
+                <h3>内容目录</h3>
+                <hr>
+                <div class="table-of-contents"><div class="toc">
+<ul>
+<li><a href="https://www.zybuluo.com/smilence/note/534236#第七部分递归-动态规划">第七部分：递归 动态规划</a><ul>
+<li><ul>
+<li><a href="https://www.zybuluo.com/smilence/note/534236#71-知识解析">7.1 知识解析</a></li>
+<li><a href="https://www.zybuluo.com/smilence/note/534236#72-由下往上地解决收敛结构问题1">7.2 由下往上地解决收敛结构问题(1)</a></li>
+<li><a href="https://www.zybuluo.com/smilence/note/534236#73-由下往上地解决收敛结构问题2">7.3 由下往上地解决收敛结构问题(2)</a></li>
+<li><a href="https://www.zybuluo.com/smilence/note/534236#74-由上往下地解决收敛结构问题">7.4 由上往下地解决收敛结构问题</a></li>
+<li><a href="https://www.zybuluo.com/smilence/note/534236#75-用回溯解决发散结构问题">7.5 用回溯解决发散结构问题</a></li>
+<li><a href="https://www.zybuluo.com/smilence/note/534236#76-用divide-and-conquer-解决独立子问题">7.6 用Divide and Conquer 解决独立子问题</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div id="reader-full-toolbar" class="reader-full-toolbar-shown" style="padding-top: 0;">
+    <ul id="reader-full-toolbar-home" class="preview-button-row">
+        <li class="preview-button-full-reader" id="preview-editor-button" title="撰写文本 Ctrl+Alt+M">
+            <span class="icon-pencil" style="color: rgb(187, 187, 187);"></span>
+        </li>
+    </ul>
+    <ul id="preview-button-row" class="preview-button-row">
+        <li class="preview-button-full-reader dropdown" id="preview-list-button" title="文本列表 Ctrl+Alt+F">
+            <span class="dropdown-toggle icon-reorder" data-toggle="dropdown" style="color: rgb(187, 187, 187);"></span>
+            <ul id="file-list" class="dropdown-menu theme-black pull-right" role="menu" style="max-height: 783px;">
+                    <li>
+                    <ul class="tag-list">
+                        <li class="tag-item item" tag-name="NewChapter">
+                            <span class="pull-left"><i class="icon-tag"></i><span class="tag-name">NewChapter</span></span>
+                            <span class="tag-count pull-right">1</span>
+                            <div class="clearfix"></div>
+                        </li>
+                            
+    <li class="file-item item" file-created-date="2017-01-14 22:04:41">
+        <a tabindex="-1" href="https://www.zybuluo.com/smilence/note/632467" title="【已发布】 2017-01-14 22:04">
+        <i class="icon-share-sign"></i>
+        <span id="632467">JAVA for N00bs</span>
+        </a>
+    </li>
+
+                    </ul>
+                    </li>
+                    <li>
+                    <ul class="tag-list">
+                        <li class="tag-item item" tag-name="youtube课程讲义">
+                            <span class="pull-left"><i class="icon-tag"></i><span class="tag-name">youtube课程讲义</span></span>
+                            <span class="tag-count pull-right">2</span>
+                            <div class="clearfix"></div>
+                        </li>
+                            
+    <li class="file-item item" file-created-date="2016-05-05 07:48:59">
+        <a tabindex="-1" href="https://www.zybuluo.com/smilence/note/366890" title="【已发布】 2016-05-05 08:02">
+        <i class="icon-share-sign"></i>
+        <span id="366890">码农求职套路谈 第三讲 script</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2016-04-10 09:53:27">
+        <a tabindex="-1" href="https://www.zybuluo.com/smilence/note/339824" title="【已发布】 2016-04-10 09:57">
+        <i class="icon-share-sign"></i>
+        <span id="339824">码农求职套路谈 第二讲 script</span>
+        </a>
+    </li>
+
+                    </ul>
+                    </li>
+                    <li>
+                    <ul class="tag-list">
+                        <li class="tag-item item" tag-name="算法面试指南">
+                            <span class="pull-left"><i class="icon-tag"></i><span class="tag-name">算法面试指南</span></span>
+                            <span class="tag-count pull-right">6</span>
+                            <div class="clearfix"></div>
+                        </li>
+                            
+    <li class="file-item item" file-created-date="2016-12-30 14:27:50">
+        <a tabindex="-1" href="https://www.zybuluo.com/smilence/note/617599" title="【已发布】 2017-01-17 11:31">
+        <i class="icon-share-sign"></i>
+        <span id="617599">第八部分：搜索与排序</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2016-10-17 06:33:55">
+        <a tabindex="-1" href="https://www.zybuluo.com/smilence/note/534236" title="【已发布】 2016-12-29 16:07">
+        <i class="icon-share-sign"></i>
+        <span id="534236" class="whiter-on-black">第七部分：递归 动态规划</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2016-09-30 12:55:28">
+        <a tabindex="-1" href="https://www.zybuluo.com/smilence/note/518669" title="【已发布】 2016-10-17 06:50">
+        <i class="icon-share-sign"></i>
+        <span id="518669">第六部分：树和图</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2016-09-12 07:01:45">
+        <a tabindex="-1" href="https://www.zybuluo.com/smilence/note/498870" title="【已发布】 2016-09-12 07:26">
+        <i class="icon-share-sign"></i>
+        <span id="498870">第五部分：链表</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2016-09-03 03:51:37">
+        <a tabindex="-1" href="https://www.zybuluo.com/smilence/note/489970" title="【已发布】 2016-09-03 04:02">
+        <i class="icon-share-sign"></i>
+        <span id="489970">第四部分：数组和字符串</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2016-08-26 06:04:39">
+        <a tabindex="-1" href="https://www.zybuluo.com/smilence/note/480562" title="【已发布】 2016-08-26 06:11">
+        <i class="icon-share-sign"></i>
+        <span id="480562">第三部分：用“模式识别”来解决面试技术问题的方法学</span>
+        </a>
+    </li>
+
+                    </ul>
+                    </li>
+                    <li>
+                    <ul class="tag-list">
+                        <li class="tag-item item" tag-name="未分类">
+                            <span class="pull-left"><i class="icon-tag"></i><span class="tag-name">未分类</span></span>
+                            <span class="tag-count pull-right">13</span>
+                            <div class="clearfix"></div>
+                        </li>
+                            
+    <li class="file-item item" file-created-date="2014-04-05 04:20:51">
+        <a tabindex="-1" href="https://www.zybuluo.com/smilence/note/540" title="【已发布】 2014-04-05 04:20">
+        <i class="icon-share-sign"></i>
+        <span id="540">Chapter 11 Threads and Locks</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2013-11-30 13:43:38">
+        <a tabindex="-1" href="https://www.zybuluo.com/smilence/note/168" title="【已发布】 2016-12-29 16:03">
+        <i class="icon-share-sign"></i>
+        <span id="168">Chapter 7 Recursion and Dynamic Programming</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2013-11-25 03:23:17">
+        <a tabindex="-1" href="https://www.zybuluo.com/smilence/note/76" title="【已发布】 2015-10-10 05:16">
+        <i class="icon-share-sign"></i>
+        <span id="76">Coding 笔记 by Smilence</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2013-11-24 13:34:46">
+        <a tabindex="-1" href="https://www.zybuluo.com/smilence/note/125" title="【已发布】 2016-04-10 09:56">
+        <i class="icon-share-sign"></i>
+        <span id="125">Chapter 1 Array and Strings</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2013-11-24 10:30:20">
+        <a tabindex="-1" href="https://www.zybuluo.com/smilence/note/182" title="【已发布】 2013-11-24 10:30">
+        <i class="icon-share-sign"></i>
+        <span id="182">Chapter 8 Sorting and Searching</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2013-11-10 16:56:44">
+        <a tabindex="-1" href="https://www.zybuluo.com/smilence/note/131" title="【已发布】 2016-10-08 08:00">
+        <i class="icon-share-sign"></i>
+        <span id="131">Chapter 4 Trees and Graphs</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2013-11-09 03:25:49">
+        <a tabindex="-1" href="https://www.zybuluo.com/smilence/note/132" title="【已发布】 2013-11-09 03:25">
+        <i class="icon-share-sign"></i>
+        <span id="132">Appendix：C &amp; C++ Topics</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2013-10-29 16:11:36">
+        <a tabindex="-1" href="https://www.zybuluo.com/smilence/note/130" title="【已发布】 2013-10-29 16:11">
+        <i class="icon-share-sign"></i>
+        <span id="130">Chapter 3 Stacks and Queues</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2013-10-27 15:19:14">
+        <a tabindex="-1" href="https://www.zybuluo.com/smilence/note/128" title="【已发布】 2016-05-05 07:14">
+        <i class="icon-share-sign"></i>
+        <span id="128">Chapter 2 Linked Lists</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2013-10-25 07:42:13">
+        <a tabindex="-1" href="https://www.zybuluo.com/smilence/note/159" title="【已发布】 2013-10-25 07:42">
+        <i class="icon-share-sign"></i>
+        <span id="159">Chapter 6 Object Oriented Design</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2013-10-25 06:58:51">
+        <a tabindex="-1" href="https://www.zybuluo.com/smilence/note/350" title="【已发布】 2013-10-25 06:58">
+        <i class="icon-share-sign"></i>
+        <span id="350">Chapter 9 Testing</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2013-10-22 11:01:02">
+        <a tabindex="-1" href="https://www.zybuluo.com/smilence/note/156" title="【已发布】 2013-10-22 11:01">
+        <i class="icon-share-sign"></i>
+        <span id="156">Chapter 5 Bit Manipulation</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2013-10-21 11:50:14">
+        <a tabindex="-1" href="https://www.zybuluo.com/smilence/note/359" title="【已发布】 2013-10-21 11:50">
+        <i class="icon-share-sign"></i>
+        <span id="359">Apple Interview Questions for SDE position</span>
+        </a>
+    </li>
+
+                    </ul>
+                    </li>
+            </ul>
+            <ul id="file-list-topbar" class="dropdown-menu theme-black pull-right" role="menu">
+                <li id="search-file-bar">
+                    <i class="icon-search icon-large"></i>
+                    <input type="text" id="search-file-textbox" placeholder="搜索 smilence 的文稿标题， * 显示全部">
+                    <i class="icon-level-down icon-rotate-90 icon-large"></i>
+                </li>
+                <li id="tag-file-bar">
+                    以下【标签】将用于标记这篇文稿：
+                </li>
+            </ul>
+        </li>
+        <li class="preview-button-full-reader" id="preview-theme-button" title="主题切换 Ctrl+Alt+Y">
+            <span class="icon-adjust" style="color: rgb(187, 187, 187);"></span>
+        </li>
+        <li class="preview-button-full-reader" id="preview-fullscreen-button" title="全屏模式 F11">
+            <span class="icon-fullscreen" style="color: rgb(187, 187, 187);"></span>
+        </li>
+        <li class="preview-button-full-reader wmd-spacer"></li>
+        <li class="preview-button-full-reader dropdown" id="preview-about-button" title="关于本站">
+            <span class="dropdown-toggle icon-info-sign" data-toggle="dropdown" data-hover="dropdown" data-delay="100" data-close-others="true" style="color: rgb(187, 187, 187);"></span>
+            <ul id="about-menu" class="dropdown-menu theme-black pull-right" role="menu">
+                <li title="下载全平台客户端"><a tabindex="-1" href="https://www.zybuluo.com/cmd" target="_blank"><i class="icon-laptop"></i>下载客户端</a></li>
+                <li title="@ghosert"><a tabindex="-1" href="http://www.weibo.com/ghosert" target="_blank"><i class="icon-weibo"></i>关注开发者</a></li>
+                <li title=""><a tabindex="-1" href="https://github.com/ghosert/cmd-editor/issues" target="_blank"><i class="icon-github-alt"></i>报告问题，建议</a></li>
+                <li title="support@zybuluo.com"><a tabindex="-1" href="mailto:support@zybuluo.com" target="_blank"><i class="icon-envelope"></i>联系我们</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<ul id="reader-full-toolbar-tail" class="reader-full-toolbar-tail-shown">
+    <li class="preview-button-full-reader" id="preview-hidden-button" title="隐藏工具栏 Ctrl+Alt+I">
+        <span class="icon-chevron-sign-right" style="color: rgb(187, 187, 187);"></span>
+    </li>
+</ul>
+
+
+
+
+
+
+<!-- side remark, hidden when loading. -->
+<div class="remark-list side-remark-hidden">
+    <div class="remark-items">
+    </div>
+    <div class="leave-remark unselectable"><span class="icon-plus-sign-alt"></span><span>添加新批注</span></div>
+    <div class="new-remark">
+    <div class="remark-head"><a><img src="./第七部分：递归 动态规划 - 作业部落 Cmd Markdown 编辑阅读器_files/default-head.jpg" style="width: 32px; height: 32px;"></a></div>
+    <div class="remark-author unselectable"><strong></strong></div>
+    <div class="remark-editor" contenteditable="true" spellcheck="false"></div>
+    <!-- this will be filled up by js.
+    <div class="inline-error">402/400</div> for new remark
+    <div class="inline-error">202/200</div> for new reply
+    -->
+    <div class="remark-footer unselectable">
+        <button class="remark-save btn-link">保存</button>
+        <button class="remark-cancel btn-link">取消</button>
+    </div>
+
+        <!-- clone the template $('.new-remark-reply').html() to here.-->
+        <div class="remark-notice">在作者公开此批注前，只有你和作者可见。</div>
+    </div>
+</div>
+
+<!-- template for new remark/reply -->
+<div class="new-remark-reply side-remark-hidden">
+    <div class="remark-head"><a><img src="./第七部分：递归 动态规划 - 作业部落 Cmd Markdown 编辑阅读器_files/default-head.jpg"></a></div>
+    <div class="remark-author unselectable"></div>
+    <div class="remark-editor" contenteditable="true" spellcheck="false"></div>
+    <!-- this will be filled up by js.
+    <div class="inline-error">402/400</div> for new remark
+    <div class="inline-error">202/200</div> for new reply
+    -->
+    <div class="remark-footer unselectable">
+        <button class="remark-save btn-link">保存</button>
+        <button class="remark-cancel btn-link">取消</button>
+    </div>
+</div>
+
+<!-- template for .remark-item/.remark-reply -->
+<div class="remark-item-reply side-remark-hidden">
+    <div class="remark-head"><a><img src="./第七部分：递归 动态规划 - 作业部落 Cmd Markdown 编辑阅读器_files/default-head.jpg"></a></div>
+    <div class="remark-author unselectable"></div>
+    <div class="remark-delete-link unselectable"><span class="icon-remove"></span></div> <!--This is mainly for deleting remark-reply, shown when author/remark hovering on remark-reply.-->
+    <div class="remark-editor" contenteditable="true" spellcheck="false"></div>
+    <!-- this will be filled up by js.
+    <div class="inline-error">402/400</div> for new remark
+    <div class="inline-error">202/200</div> for new reply
+    -->
+    <div class="remark-footer unselectable">
+        <button class="remark-edit btn-link">修改</button>
+        <button class="remark-save btn-link">保存</button>
+        <button class="remark-cancel btn-link">取消</button>
+        <button class="remark-delete btn-link">删除</button>
+    </div>
+</div>
+
+<!-- template for remark-item-->
+<div class="remark-item side-remark-hidden" data-rand-id="" data-version-id="">
+    <div class="remark-published-link unselectable"><span class="icon-link icon-rotate-90"></span></div>
+    <ul class="remark-options theme unselectable theme-white">
+        <li class="remark-private"><span class="icon-eye-close"></span><span>私有</span></li>
+        <li class="remark-public"><span class="icon-group"></span><span>公开</span></li>
+        <li class="remark-delete"><span class="icon-remove"></span><span>删除</span></li>
+    </ul>
+
+    <!-- clone the template $('.remark-item-reply').html() to here.-->
+
+    <button class="remark-reply-view-more btn-link">查看更早的 5 条回复</button>
+    <div class="remark-replies">
+        <!--
+        <div class="remark-reply">
+            clone the template $('.remark-item-reply').html() to here.
+        </div>
+        -->
+    </div>
+
+    <div class="leave-reply unselectable"><span>回复批注</span></div>
+    <div class="new-reply">
+        <!-- clone the template $('.new-remark-reply').html() to here.-->
+    </div>
+</div>
+
+<!-- jiawzhang NOTICE: .remark-icons will be put to mdeditor.mako and user_note.mako, where next to .wmd-preview -->
+<!-- <div class="remark-icons"></div> -->
+
+<!-- template for remark-icon -->
+<div class="remark-icon unselectable side-remark-hidden remark-icon-empty" style="display: none;">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div>
+
+
+<!-- canvas, hidden always, this is used to convert svg to canvas and then convert canvas to png. -->
+<canvas id="svg-canvas-image" class="editor-reader-hidden-always"></canvas>
+
+<!-- This is the image panel to hold enlarged image/svg. -->
+<div id="large-image-panel">
+    <img id="large-image">
+</div>
+
+
+    
+
+
+    <!-- Hidden Popup Modal -->
+    <div id="notification-popup-window" class="modal hide fade theme theme-white" tabindex="-1" role="dialog" aria-labelledby="notification-title" aria-hidden="true">
+        <div class="modal-header theme theme-white">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="notification-title">通知</h3>
+        </div>
+        <div class="modal-body theme theme-white">
+            <p></p>
+        </div>
+        <div class="modal-footer theme theme-white">
+            <button id="notification-cancel" class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+            <button id="notification-confirm" class="btn btn-primary">确认</button>
+        </div>
+    </div>
+
+    <!-- zybuluo's foot -->
+
+    <script src="./第七部分：递归 动态规划 - 作业部落 Cmd Markdown 编辑阅读器_files/288313bb.base.lib.min.js.下载"></script>
+
+    <script>
+        Namespace('com.zybuluo.base');
+        com.zybuluo.base.initData = {
+            globalPromptUrl: "https://www.zybuluo.com/global/prompt",
+        };
+    </script>
+
+    
+    <!--mathjax-->
+    <!--blacker: 1 below means font weight.-->
+    <script type="text/x-mathjax-config;executed=true">
+        MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ["\\(","\\)"]], processEscapes: true }, TeX: { equationNumbers: { autoNumber: "AMS" } }, messageStyle: "none", SVG: { blacker: 1 }});
+    </script>
+    <script src="./第七部分：递归 动态规划 - 作业部落 Cmd Markdown 编辑阅读器_files/mathJax.js.下载"></script>
+    <!--mathjax source code is here: https://github.com/mathjax/MathJax.-->
+    <script src="./第七部分：递归 动态规划 - 作业部落 Cmd Markdown 编辑阅读器_files/mathJax.js(1).下载"></script>
+
+    <script>
+        Namespace('com.zybuluo.mdeditor.layout');
+        com.zybuluo.mdeditor.layout.initData = {
+            // '' means not logged in, otherwise the logged in username, for mdeditor.mako, this value will be reset in render.js otherwise, for user_note.mako, it's rendered by server side.
+            loggedInUsername: '',
+            isPageOwner: 'False' === 'True' ? true : false,
+            loginComeFromUrl: 'https://www.zybuluo.com/login?return_to=https%3A%2F%2Fwww.zybuluo.com%2Fsmilence%2Fnote%2F534236',
+            noteRemarksUrl: "https://www.zybuluo.com/note/534236/remarks", 
+            newNoteRemarkUrl: "https://www.zybuluo.com/note/534236/remark/new", 
+            updateNoteRemarkUrl: "https://www.zybuluo.com/note/534236/remark/update", 
+            deleteNoteRemarkUrl: "https://www.zybuluo.com/note/534236/remark/delete", 
+            publishNoteRemarkUrl: "https://www.zybuluo.com/note/534236/remark/publish", 
+            newNoteRemarkReplyUrl: "https://www.zybuluo.com/note/534236/remark_reply/new", 
+            updateNoteRemarkReplyUrl: "https://www.zybuluo.com/note/534236/remark_reply/update", 
+            deleteNoteRemarkReplyUrl: "https://www.zybuluo.com/note/534236/remark_reply/delete", 
+        };
+
+        // BEGIN: pace.js configuration
+        window.paceOptions = {
+            // disable others, enable for ajax call only,
+            ajax: true,
+            document: false,
+            elements: false,
+            eventLag: false,
+        };
+        // jiawzhang NOTICE: to make sure pace.js is working for any ajax call especially the jquery ajax, add 'Pace.restart()' into jquery ajax call like '$.post'
+        // Originally, pace 0.5.6 doesn't support jquery ajax, see details in: https://github.com/HubSpot/pace/issues/29
+        // END: pace.js configuration
+
+    </script>
+
+    <script src="./第七部分：递归 动态规划 - 作业部落 Cmd Markdown 编辑阅读器_files/7a70106e.layout.lib.min.js.下载"></script>
+
+    <script src="./第七部分：递归 动态规划 - 作业部落 Cmd Markdown 编辑阅读器_files/dc648f35.layout.min.js.下载"></script><div id="medium-editor-toolbar-1" class="medium-editor-toolbar"><ul id="medium-editor-toolbar-actions" class="medium-editor-toolbar-actions clearfix"><li><button data-action="remark" class=" medium-editor-button-first"><i class="icon-comment"></i></button></li><li><button data-action="highlight" class=" medium-editor-button-last"><i class="icon-pencil"></i></button></li></ul></div>
+
+
+
+    
+
+    <!-- https://www.zybuluo.com/static/assets/mdeditor/user_note.lib.min.js -->
+    <!-- -->
+
+    <script>
+        Namespace('com.zybuluo.mdeditor.user_note');
+        com.zybuluo.mdeditor.user_note.initData = {
+            isLoggedIn: 'False',
+            mdeditorUrl: "https://www.zybuluo.com/mdeditor",
+            passwordPassed: 'True' === 'True' ? true : false,
+        };
+    </script>
+
+    <script src="./第七部分：递归 动态规划 - 作业部落 Cmd Markdown 编辑阅读器_files/6cd3112e.user_note.min.js.下载"></script>
+
+
+
+
+
+    
+</body></html>

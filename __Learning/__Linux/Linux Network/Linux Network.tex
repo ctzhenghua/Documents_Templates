@@ -2726,6 +2726,16 @@
 	};
 			\end{lstlisting} 
 		\subsection{具体细节}参考\verb|c++_project| \verb|->| muduo
+		
+	\section{libevent }跨平台库
+		向事件容器中添加事件与其处理回调函数， 然后用事件处理对事件进行处理。
+		
+		\paragraph{事件容器}event\_base* base = event\_base\_new()
+		
+		\paragraph{事件}listener、signal、bufferEvent(socket文件读写)等
+		
+		\paragraph{处理事件}event\_dispatch(事件容器)
+	
 \chapter{Redis with Memcache} 
 	\section{NoSQL} Not Only Sql
 		在大多数web 应用都将数据保存到关系型数据库中，www服务器从中读取数据并在浏览器中显示。

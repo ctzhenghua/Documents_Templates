@@ -1,0 +1,192 @@
+\documentclass[UTF8,a4paper,12pt]{ctexbook} 
+
+\usepackage{graphicx}%学习插入图
+\usepackage{verbatim}%学习注释多行
+\usepackage{booktabs}%表格
+\usepackage{geometry}%图片
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}%代码
+\usepackage{xcolor}  %颜色
+\usepackage{enumitem}%列表格式
+\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setitemize[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setdescription{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\usepackage{tcolorbox}
+\usepackage{algorithm}  %format of the algorithm
+\usepackage{algorithmic}%format of the algorithm
+\usepackage{multirow}   %multirow for format of table
+\usepackage{tabularx} 	%表格排版格式控制
+\usepackage{array}	%表格排版格式控制
+\usepackage{hyperref} %超链接 \url{URL}
+\usepackage{tikz}
+\usepackage{dirtree}
+
+
+\usetikzlibrary{intersections,
+	positioning,
+	petri,
+	backgrounds,
+	fit,
+	decorations.pathmorphing,
+	arrows,
+	arrows.meta,
+	bending,
+	calc,
+	intersections,
+	through,
+	backgrounds,
+	shapes.geometric,
+	quotes,
+	matrix,
+	trees,
+	shapes.symbols,
+	graphs,
+	math,
+	patterns,
+	external}
+\CTEXsetup[format+={\flushleft}]{section}
+
+%%%% 设置图片目录
+\setmainfont{Times New Roman}
+\graphicspath{{figure/}}
+
+%%%% 段落首行缩进两个字 %%%%
+\makeatletter
+\let\@afterindentfalse\@afterindenttrue
+\@afterindenttrue
+\makeatother
+\setlength{\parindent}{2em}  %中文缩进两个汉字位
+
+%%%% 下面的命令重定义页面边距，使其符合中文刊物习惯 %%%%
+\addtolength{\topmargin}{-54pt}
+\setlength{\oddsidemargin}{0.63cm}  % 3.17cm - 1 inch
+\setlength{\evensidemargin}{\oddsidemargin}
+\setlength{\textwidth}{14.66cm}
+\setlength{\textheight}{24.00cm}    % 24.62
+
+%%%% 下面的命令设置行间距与段落间距 %%%%
+\linespread{1.4}
+\setlength{\parskip}{0.5\baselineskip}
+\geometry{left=1.6cm,right=1.8cm,top=2cm,bottom=1.7cm} %设置文章宽度
+\pagestyle{plain} 		  %设置页面布局
+
+%代码效果定义
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\lstset{ %
+	backgroundcolor=\color{white},   % choose the background color
+	basicstyle=\footnotesize\ttfamily,      % size of fonts used for the code
+	%stringstyle=\color{codepurple},
+	%basicstyle=\footnotesize,
+	%breakatwhitespace=false,         
+	%breaklines=true,                 
+	%captionpos=b,                    
+	%keepspaces=true,                 
+	%numbers=left,                    
+	%numbersep=5pt,                  
+	%showspaces=false,                
+	%showstringspaces=false,
+	%showtabs=false,        
+	columns=fullflexible,
+	breaklines=true,                 % automatic line breaking only at whitespace
+	captionpos=b,                    % sets the caption-position to bottom
+	tabsize=4,
+	commentstyle=\color{mygreen},    % comment style
+	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+	keywordstyle=\color{blue},       % keyword style
+	stringstyle=\color{mymauve}\ttfamily,     % string literal style
+	frame=single,
+	rulesepcolor=\color{red!20!green!20!blue!20},
+	% identifierstyle=\color{red},
+	language=c++,
+}
+ \author{\kaishu 郑华}
+ \title{\heiti 操作系统笔记}
+ 
+\begin{document}          %正文排版开始
+ 	\maketitle
+	\tableofcontents
+	
+\chapter{系统启动与中断}
+	\section{启动}
+
+	\section{中断}
+
+	\section{异常}
+
+	\section{系统调用}
+
+\chapter{物理内存管理}
+	\section{页分配}
+		
+	\section{段分配}
+
+\chapter{虚拟内存管理}
+	\section{简介}
+		
+	\section{缺页中断}
+		\paragraph{请求调页}
+		
+		\paragraph{内存置换}
+		
+		
+\chapter{进程管理}
+	\section{简介}
+
+	\section{进程状态变化}
+		\paragraph{就绪状态}
+				
+		\paragraph{阻塞状态}
+		
+		\paragraph{运行状态}
+		
+		\paragraph{结束状态}
+		
+	\section{进程调度算法}
+		\paragraph{先来先服务}
+		
+		\paragraph{段作业优先}
+		
+		\paragraph{时间片轮转}
+		
+		\paragraph{优先级轮转}
+		
+		\paragraph{多级反馈队列}
+		
+		\paragraph{响应比优先}
+		
+	\section{进程通信}
+		\paragraph{共享内存}
+		
+		\paragraph{消息传递}
+		
+		\paragraph{管道通信}
+	
+	\section{同步互斥模型}
+
+	\section{死锁}
+		\paragraph{原因}
+			\begin{itemize}
+				\item 环形等待
+				\item 不可剥夺
+			\end{itemize}
+			
+		\paragraph{解决}
+			\subparagraph{预防}
+	
+			\subparagraph{避免} 确定一定的访问顺序来避免死锁（银行家算法）
+
+\chapter{内核线程管理}
+
+\chapter{用户线程管理}
+
+\chapter{CPU调度}
+
+\chapter{同步与互斥}
+
+\chapter{文件系统}
+			    
+\end{document} 
+ 		    

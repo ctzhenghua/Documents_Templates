@@ -1,0 +1,138 @@
+\documentclass[UTF8,a4paper,8pt]{ctexart} 
+
+ \usepackage{graphicx}%学习插入图
+ \usepackage{verbatim}%学习注释多行
+ \usepackage{booktabs}%表格
+ \usepackage{geometry}%图片
+ \usepackage{amsmath} 
+ \usepackage{amssymb}
+ \usepackage{listings}%代码
+ \usepackage{xcolor}  %颜色
+ \usepackage{enumitem}%列表格式
+ \CTEXsetup[format+={\flushleft}]{section}
+
+
+\geometry{left=1.6cm,right=1.8cm,top=2cm,bottom=1.7cm} %设置文章宽度
+
+\pagestyle{plain} 		  %设置页面布局
+\author{郑华}
+\title{Algorithm}
+ %代码效果定义
+ \definecolor{codegreen}{rgb}{0,0.6,0}
+ \definecolor{codegray}{rgb}{0.5,0.5,0.5}
+ \definecolor{codepurple}{rgb}{0.58,0,0.82}
+ \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+ 
+ \lstdefinestyle{mystyle}{
+ 	backgroundcolor=\color{backcolour},   
+ 	commentstyle=\color{codegreen},
+ 	keywordstyle=\color{magenta},
+ 	numberstyle=\tiny\color{codegray},
+ 	stringstyle=\color{codepurple},
+ 	basicstyle=\footnotesize,
+ 	breakatwhitespace=false,         
+ 	breaklines=true,                 
+ 	captionpos=b,                    
+ 	keepspaces=true,                 
+ 	%numbers=left,                    
+ 	%numbersep=5pt,                  
+ 	showspaces=false,                
+ 	showstringspaces=false,
+ 	showtabs=false,                  
+ 	tabsize=2
+ }
+\lstset{style=mystyle, escapeinside=``}
+
+\begin{document}          %正文排版开始
+ 	\maketitle
+
+\newpage 
+\section{Delaunay 三角网与Voronoi 图}
+     
+     \subsection{Voronoi图}
+     1- 由一组两邻点直线的垂直平分线组成的连续多边形组成
+     
+     2-N个在平面上有区别的点，按照最邻近原则划分平面
+     
+     3-每个点与它的最近邻区域相关联
+     
+     4-Delaunay三角形是由与相邻Voronoi多边形共享一条边的相关点连接而成的三角形
+     
+     5-Delaunay三角形的外接圆圆心是与三角形相关的Voronoi多边形的一个顶点
+     
+	 \subsection{Delaunay三角网}
+	 1- Delaunay三角网是唯一的
+	 
+	 2- 三角网的外边界构成了点集P的凸多边形“外壳”
+	 
+	 3- 没有任何点在三角形的外接圆内部
+	 
+	 4-如果将三角网中的每个三角形的最小角进行升序排列，则Delaunay三角网的排列得到的数值最大
+	 
+	 \paragraph{Meanwhile}Delaunay三角形网的特征又可以表达为以下特性：
+	 
+	 1- 在Delaunay三角形网中任一三角形的外接圆范围内不会有其它点存在并与其通视，即空圆特性
+	 
+	 2- 在构网时，总是选择最邻近的点形成三角形并且不与约束线段相交
+	 
+	 3- 形成的三角形网总是具有最优的形状特征，任意两个相邻三角形形成的凸四边形的对角线如果可以互换的话，那么两个三角形6个内角中最小的角度不会变大
+	 
+	 4- 不论从区域何处开始构网，最终都将得到一致的结果，即构网具有唯一性。
+	 
+	 \subsection{伪代码}http://www.tuicool.com/articles/EvUVRfV
+	 
+	 input: 顶点列表(vertices)                       //vertices为外部生成的随机或乱序顶点列表
+	 
+	 output:已确定的三角形列表(triangles)
+	 
+		 初始化顶点列表
+		 
+		 创建索引列表(indices = new Array(vertices.length))    //indices数组中的值为0,1,2,3,......,vertices.length-1
+	 
+		 基于vertices中的顶点x坐标对indices进行sort           //sort后的indices值顺序为顶点坐标x从小到大排序（也可对y坐标，本例中针对x坐标）
+		 
+		 确定超级三角形
+		 
+		 将超级三角形保存至未确定三角形列表（temp triangles）
+		 
+		 将超级三角形push到triangles列表
+		 
+		 遍历基于indices顺序的vertices中每一个点            //基于indices后，则顶点则是由x从小到大出现
+				 
+			 初始化边缓存数组（edge buffer）
+			 
+			 遍历temp triangles中的每一个三角形
+			 
+				 计算该三角形的圆心和半径
+				 
+				 如果该点在外接圆的右侧
+				 
+					 则该三角形为Delaunay三角形，保存到triangles
+					 
+					 并在temp里去除掉
+					 
+					 跳过
+					 
+				 如果该点在外接圆外（即也不是外接圆右侧）
+				 
+					 则该三角形为不确定                      //后面会在问题中讨论
+					 
+					 跳过
+				 如果该点在外接圆内
+					 则该三角形不为Delaunay三角形
+					 
+					 将三边保存至edge buffer
+					 
+					 在temp中去除掉该三角形
+					 
+			 对edge buffer进行去重
+			 
+			 将edge buffer中的边与当前的点进行组合成若干三角形并保存至temp triangles中
+	 
+		 将triangles与temp triangles进行合并
+		 
+		 除去与超级三角形有关的三角形
+		 
+	 end
+\end{document} 
+ 		    

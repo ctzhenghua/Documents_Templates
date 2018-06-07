@@ -7,6 +7,7 @@
  \usepackage{amssymb}
  \usepackage{listings}%代码
  \usepackage{color}
+ \usepackage{float}
  \usepackage{xcolor}
  \usepackage{enumitem}%列表格式
  \usepackage{hyperref}
@@ -101,7 +102,7 @@
 			\subsubsection{简介}	
 				\verb|move|是将对象的状态或者所有权从一个对象转移到另一个对象，只是转移，没有内存的搬迁或者内存拷贝,如图所示是深拷贝和\verb|move|的区别
 				
-				\begin{figure}[h]
+				\begin{figure}[H]
 					\centering
 					\includegraphics[angle=0,width=8cm,height=7cm]{moveANDcopy.jpg}%就在前面括号中写图片名
 					\caption{UML图}
@@ -1296,7 +1297,7 @@ inline FuncX(...){}
 			\end{lstlisting}
 			
 			则其结构如下：
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 12cm]{struct.png}
 				\caption{Struct 结构图}
@@ -1340,7 +1341,7 @@ inline FuncX(...){}
 	        \end{lstlisting}
 	        
 	        则其结构如下：
-	        \begin{figure}[h]
+	        \begin{figure}[H]
 	        	\centering
 	        	\includegraphics[width = 12cm]{union.png}
 	        	\caption{Union test 结构图}
@@ -1354,7 +1355,7 @@ inline FuncX(...){}
 	        
 	        它的\textbf{所有成员相对于基地址的偏移量都为0}。
 	        
-	        \begin{figure}[h]
+	        \begin{figure}[H]
 	        	\centering
 	        	\includegraphics[width = 12cm]{union2.png}
 	        	\caption{Union Date 结构图}
@@ -1579,7 +1580,7 @@ inline FuncX(...){}
 		       
 		       1- 浅拷贝：两个对象之间成员变量简单的赋值。
 		       
-		       \begin{figure}[h]
+		       \begin{figure}[H]
 		       	   \centering
 		       	   \includegraphics[width=8cm,clip]{weakCopy.png}
 		       \end{figure}
@@ -1701,12 +1702,43 @@ inline FuncX(...){}
 
 \chapter{this}
 	\section{概念}
+		this 是 C++ 中的一个关键字，也是一个 \textbf{const 指针}，它\textit{指向当前对象}，通过它可以访问当前对象的所有成员。
+		
+		所谓当前对象，是指正在使用的对象。例如对于\verb|stu.show();|，\verb|stu 就是当前对象，this 就指向 stu|。
+		
+		\begin{lstlisting}
+	void Student::printThis(){
+		cout<<this<<endl;
+	}
+	Student *pstu1 = new Student;
+	pstu1 -> printThis();
+	cout<<pstu1<<endl;
 	
-	\section{易混问题}
+	Student *pstu2 = new Student;
+	pstu2 -> printThis();
+	cout<<pstu2<<endl;
+	
+	运行结果：
+	0x7b17d8
+	0x7b17d8
+	0x7b17f0
+	0x7b17f0
+		\end{lstlisting}
+		
+	
+	\section{注意问题}
 		\url{https://www.cnblogs.com/lijia0511/p/4936843.html}
+		\begin{itemize}[itemindent = 1em]
+			\item \verb|this| 是 const 指针，它的值是不能被修改的，一切企图修改该指针的操作，如赋值、递增、递减等都是不允许的。
+			\item \verb|this| \textbf{只能在成员函数内部使用}，用在其他地方没有意义，也是非法的。
+			\item \textit{只有当对象被创建后 this 才有意义}，因此\textbf{不能在 static 成员函数、全局函数中使用}。
+			\item this指针\textbf{本质是一个函数参数}，只是编译器隐藏起形式的，语法层面上的参数。实际上，\textbf{成员函数默认的第一个参数为}\verb|T* const this|
+			\item \textit{this在成员函数的开始前构造，在成员的结束后消除。}这个\textbf{生命周期同任何函数的参数是一样的}，没有任何区别。当调用一个类的成员函数时，编译器将类的指针作为函数的this参数传递进去。
+			\item \textit{this指针并不占用对象的空间}。所有成员\textbf{函数的参数，不管是不是隐含的，都不会占用对象的空间，只会占用参数传递时的栈空间}，或者直接占用一个寄存器。
+		\end{itemize}
 		       
 \chapter{继承}
-\section{潜规则}
+	\section{潜规则}
 	       \begin{enumerate}[fullwidth,itemindent=2em,label=(\arabic*)]
 	       	\item   不指明继承方式关键字\verb|public|时，编译器会默认继承方式为\verb|private|或\verb|protected|
 	       	\item   基类的所有私有成员仅在基类中可见，而在派生类中是不可见的。基类的私有成员可以由派生类继承，但是派生类不可见
@@ -1779,24 +1811,24 @@ inline FuncX(...){}
 		       \end{lstlisting}
 	       \end{enumerate}
      
-\section{构造函数调用顺序}
+	\section{构造函数调用顺序}
 	       \begin{enumerate}[fullwidth,itemindent=2em,label=(\arabic*)]
 	       	 \item 当创建一个派生类时，基类的构造函数被自动调用，用来对派生类对象中的基类部分初始化，并完成其他一些相关事务，但是必须在派生类的构造函数处明确优先调用\textbf{，:super(),you}
 	       	 \item 在类的层次结构中，构造函数按基类到派生类的次序执行，析构函数则按派生类到基类的次序执行
 	       \end{enumerate}
  
-\section{继承方式}
-	\subsection{继承后对父类资源的访问权限}
-		各种继承后，派生类\textbf{对父类资源的访问权限}变为如图所示：
-		\begin{figure}[h]
-			\centering 
-			\includegraphics[scale = 0.8]{derive.png}
-		\end{figure}   
-		   
-	\subsection{继承约束}
-		\subsubsection{禁止继承-final}
-			将类定义为 \verb|final | 意味着该类将不再允许被继承.
-			\begin{lstlisting}
+	\section{继承方式}
+		\subsection{继承后对父类资源的访问权限}
+			各种继承后，派生类\textbf{对父类资源的访问权限}变为如图所示：
+			\begin{figure}[H]
+				\centering 
+				\includegraphics[scale = 0.8]{derive.png}
+			\end{figure}   
+			   
+		\subsection{继承约束}
+			\subsubsection{禁止继承-final}
+				将类定义为 \verb|final | 意味着该类将不再允许被继承.
+				\begin{lstlisting}
 	class Super final
 	{
 		// Omitted for brevity
@@ -1807,14 +1839,14 @@ inline FuncX(...){}
 	{
 		// Omitted for brevity
 	};
-			\end{lstlisting}
+				\end{lstlisting}
 			
-	\subsection{重写 父类方法}
-			\textbf{Only} methods that \textbf{are declared as} \verb|virtual| in the base class \textbf{can be} overridden properly by derived classes.
+		\subsection{重写 父类方法}
+				\textbf{Only} methods that \textbf{are declared as} \verb|virtual| in the base class \textbf{can be} overridden properly by derived classes.
+				
+				If you wish to \textbf{provide a new definition} for \verb|someMethod()| in the \verb|Sub class|, you must first \textbf{add it} \textit{to} the class \textbf{definition} for \verb|Sub|,as follows:
 			
-			If you wish to \textbf{provide a new definition} for \verb|someMethod()| in the \verb|Sub class|, you must first \textbf{add it} \textit{to} the class \textbf{definition} for \verb|Sub|,as follows:
-		
-			\begin{lstlisting}
+				\begin{lstlisting}
 	class Sub : public Super
 	{
 	public:
@@ -1827,23 +1859,23 @@ inline FuncX(...){}
 	{
 		cout << "This is Sub's version of someMethod()." << endl;
 	}
-			\end{lstlisting}
-		
-		\textbf{Once} \verb|a method| or \verb|destructor| is \textbf{marked} as \verb|virtual|, it will be \verb|virtual| for all derived classes even if the \verb|virtual| keyword is removed from derived classes
-		
-			\begin{lstlisting}
+				\end{lstlisting}
+			
+			\textbf{Once} \verb|a method| or \verb|destructor| is \textbf{marked} as \verb|virtual|, it will be \verb|virtual| for all derived classes even if the \verb|virtual| keyword is removed from derived classes
+			
+				\begin{lstlisting}
 	class Sub : public Super
 	{
 	public:
 		Sub();
 		void someMethod() override; // Overrides Super's someMethod()
 	};
-			\end{lstlisting}
-			
-	\subsection{切片} 
-			当用 \textbf{基类指针 或 引用} 子类对象，此时\textbf{可以调用} \textit{基类存在的函数或成员}，但是\textbf{不能调用}子类 \textbf{独有的}函数与数据成员, 但当调用 \textbf{赋值操作符} 进行构造对象，那么此时对象调用的函数 \textbf{将是基类原版本}，而非子类重写的版本
-			
-			\begin{lstlisting}
+				\end{lstlisting}
+				
+		\subsection{切片} 
+				当用 \textbf{基类指针 或 引用} 子类对象，此时\textbf{可以调用} \textit{基类存在的函数或成员}，但是\textbf{不能调用}子类 \textbf{独有的}函数与数据成员, 但当调用 \textbf{赋值操作符} 进行构造对象，那么此时对象调用的函数 \textbf{将是基类原版本}，而非子类重写的版本
+				
+				\begin{lstlisting}
 	Super mySuper;
 	mySuper.someMethod(); // Calls Super's version of someMethod().
 	
@@ -1862,16 +1894,16 @@ inline FuncX(...){}
 	Sub mySub;
 	Super assignedObject = mySub; // Assigns a Sub to a Super.
 	assignedObject.someMethod(); // Calls Super's version of someMethod()
-			\end{lstlisting}
-			
-			\begin{lstlisting}[frame = lTbr]
-    Derived classes retain their overridden methods when referred to by base class pointers or references. They lose their uniqueness when cast to a base class object. The loss of overridden methods and derived class data is called slicing.
-			\end{lstlisting}
-			
-			\subparagraph{Casting Up and Down}
-				When upcasting, \textbf{use a pointer or reference} to the base class \textbf{to avoid slicing}.
+				\end{lstlisting}
 				
-			\begin{lstlisting}
+				\begin{lstlisting}[frame = lTbr]
+    Derived classes retain their overridden methods when referred to by base class pointers or references. They lose their uniqueness when cast to a base class object. The loss of overridden methods and derived class data is called slicing.
+				\end{lstlisting}
+				
+				\subparagraph{Casting Up and Down}
+					When upcasting, \textbf{use a pointer or reference} to the base class \textbf{to avoid slicing}.
+					
+				\begin{lstlisting}
 	Super mySuper = mySub; // SLICE!
 	Super& mySuper = mySub; // No slice!
 	
@@ -1883,10 +1915,10 @@ inline FuncX(...){}
 			// Proceed to access Sub methods on mySub.
 		}
 	}
-			\end{lstlisting}
-			
-	\subsection{使用 父类方法}	
-		\begin{lstlisting}
+				\end{lstlisting}
+				
+		\subsection{使用 父类方法}	
+			\begin{lstlisting}
 	class B: public A {
 	public:
 	void func3(string prefix) {
@@ -1894,15 +1926,15 @@ inline FuncX(...){}
 			A::func3(prefix + "  ");
 		}
 	};
-		\end{lstlisting}
-				
-\section{支持多继承}一个派生类可以拥有多个基类
+			\end{lstlisting}
+					
+	\section{支持多继承}一个派生类可以拥有多个基类
 	        \begin{enumerate}[fullwidth,itemindent=2em,label=(\arabic*)]
 	          \item 多继承中，多个基类每个基类都要加上访问修饰符，缺省则默认为私有的
 	        \end{enumerate}
         
-\section{虚基类}使用虚基类能够在多重派生的过程中，\textbf{使共有的基类部分在派生类中只有一个拷贝}，这样就能解决二义性的错误。
-		        \begin{figure}[h]
+	\section{虚基类}使用虚基类能够在多重派生的过程中，\textbf{使共有的基类部分在派生类中只有一个拷贝}，这样就能解决二义性的错误。
+		        \begin{figure}[H]
 		        	\begin{center}
 		        		\begin{minipage}[H]{0.5\textwidth}
 			        			\centering
@@ -2016,26 +2048,26 @@ inline FuncX(...){}
 	         
 	      \end{enumerate}
         
-\section{C++接口的实现方式}
-	接口即\textbf{只包含}\textit{纯虚函数}的抽象类
-	
-	\subsection{纯虚函数}
-		纯虚函数是在基类中声明的虚函数，它在基类中没有定义，但要求任何派生类都要定义自己的实现方法。在基类中实现纯虚函数的方法是在函数原型后加\verb|“=0”|
-		$$\verb| virtual 返回值类型成员函数名（参数表）=0；|$$
+	\section{C++接口的实现方式}
+		接口即\textbf{只包含}\textit{纯虚函数}的抽象类
 		
-	\subsection{抽象类}
-		\textbf{包含}\verb|纯虚函数|的类称为抽象类。由于抽象类\textbf{包含了}没有定义的纯虚函数，所以\textbf{不能定义抽象类的对象}
-      
-	    重要的是抽象类\textbf{可以包括}抽象方法，这是\textbf{普通类所不能的}，\textit{但同时也能}\textbf{包括普通的方法}。
-	    
-	    抽象方法只能声明于抽象类中，且不包含任何实现，\textbf{派生类必须覆盖它们}
-	    
-	 \subsection{C++ 接口与抽象类的区别}
-		 \url{http://blog.csdn.net/hackbuteer1/article/details/7558946}
+		\subsection{纯虚函数}
+			纯虚函数是在基类中声明的虚函数，它在基类中没有定义，但要求任何派生类都要定义自己的实现方法。在基类中实现纯虚函数的方法是在函数原型后加\verb|“=0”|
+			$$\verb| virtual 返回值类型成员函数名（参数表）=0；|$$
+			
+		\subsection{抽象类}
+			\textbf{包含}\verb|纯虚函数|的类称为抽象类。由于抽象类\textbf{包含了}没有定义的纯虚函数，所以\textbf{不能定义抽象类的对象}
+	      
+		    重要的是抽象类\textbf{可以包括}抽象方法，这是\textbf{普通类所不能的}，\textit{但同时也能}\textbf{包括普通的方法}。
+		    
+		    抽象方法只能声明于抽象类中，且不包含任何实现，\textbf{派生类必须覆盖它们}
+		    
+		 \subsection{C++ 接口与抽象类的区别}
+			 \url{http://blog.csdn.net/hackbuteer1/article/details/7558946}
 		 
 		 
 \chapter{virtual  关键字}
-\section{多态}实际上是一个函数指针，在运行期间把该函数指针指向子类的相同函数
+	\section{多态}实际上是一个函数指针，在运行期间把该函数指针指向子类的相同函数
 		
 		\subparagraph{编译器绑定-非多态}一个函数的名称和其入口地址是紧密相连的，入口地址是该函数在内存中的起始地址
 		
@@ -2064,22 +2096,22 @@ inline FuncX(...){}
 		
 		\textbf{深入c++ 内存模型}：\url{http://blog.csdn.net/qingyuanluofeng/article/details/48015901}
 
-\section{虚函数表}
+	\section{虚函数表}
 		\url{http://www.cnblogs.com/hushpa/p/5707475.html#undefined}
 		
 		\subparagraph{vtbl}
-		每一个class 产生出一堆 指向\verb|virtual functions| 的指针，放在表格之中。这个表格被称为 \verb|virtual table(vtbl)|.
+			每一个class 产生出一堆 指向\verb|virtual functions| 的指针，放在表格之中。这个表格被称为 \verb|virtual table(vtbl)|.
 		\subparagraph{vptr}
-		每个\verb|class object| 被安插一个指针，指向相关的\verb|virtual table|. 通常这个指针被称为 \verb|vptr|. \verb|vptr| 的设置 和 重置 都由每一个 class 的 constructor、deconstructor 和 copy assignment 运算符自动完成. 每个class 所关联的 \verb|type_info object|(用以 支持\verb|runtime type identification, RTTI|) 也经由 \verb|virtual table| 被指出来，通常该指针放在表格的 第一个\verb|slot|.
-					
-		虚函数（\verb|Virtual Function|）是通过一张虚函数表（\verb|Virtual Table|）来实现的。简称为\verb|V-Table|。在这个表中，主是要一个类的虚函数的地址表，这张表解决了继承、覆盖的问题，保证其容真实反应实际的函数。这样，在有虚函数的类的实例中这个表被分配在了这个实例的内存中，所以，当我们用父类的指针来操作一个子类的时候，这张虚函数表就显得由为重要了，它就像一个地图一样，指明了实际所应该调用的函数。	
-		
-		
-        C++的编译器应该是保证虚函数表的指针存在于对象实例中最前面的位置,这意味着\textbf{我们通过对象实例的地址得到这张虚函数表，然后就可以遍历其中函数指针，并调用相应的函数}。
-        
-        
-        \textbf{同属于一个类}的\textit{对象}\textbf{共享虚函数表}， 但是有各自的\verb|_vptr|
-        \begin{lstlisting}
+			每个\verb|class object| 被安插一个指针，指向相关的\verb|virtual table|. 通常这个指针被称为 \verb|vptr|. \verb|vptr| 的设置 和 重置 都由每一个 class 的 constructor、deconstructor 和 copy assignment 运算符自动完成. 每个class 所关联的 \verb|type_info object|(用以 支持\verb|runtime type identification, RTTI|) 也经由 \verb|virtual table| 被指出来，通常该指针放在表格的 第一个\verb|slot|.
+						
+			虚函数（\verb|Virtual Function|）是通过一张虚函数表（\verb|Virtual Table|）来实现的。简称为\verb|V-Table|。在这个表中，主是要一个类的虚函数的地址表，这张表解决了继承、覆盖的问题，保证其容真实反应实际的函数。这样，在有虚函数的类的实例中这个表被分配在了这个实例的内存中，所以，当我们用父类的指针来操作一个子类的时候，这张虚函数表就显得由为重要了，它就像一个地图一样，指明了实际所应该调用的函数。	
+			
+			
+	        C++的编译器应该是保证虚函数表的指针存在于对象实例中最前面的位置,这意味着\textbf{我们通过对象实例的地址得到这张虚函数表，然后就可以遍历其中函数指针，并调用相应的函数}。
+	        
+	        
+	        \textbf{同属于一个类}的\textit{对象}\textbf{共享虚函数表}， 但是有各自的\verb|_vptr|
+        	\begin{lstlisting}
 	class Base {
 	public:
 		virtual void f() {cout<<"base::f"<<endl;}
@@ -2119,54 +2151,54 @@ inline FuncX(...){}
 	base::f
 	derive::g
 	base::h
-        \end{lstlisting}
-        
-       \textbf{new一个对象时}， 只为类中成员变量分配空间， 对象之间共享成员函数。
-        
-       运行下上面的代码发现\verb|sizeof(Base) == 8|, 说明编译器在类中自动添加了一个8字节的成员变量， 这个变量就是\verb|_vptr|, 指向虚函数表的指针。
+	        \end{lstlisting}
+	        
+	       \textbf{new一个对象时}， 只为类中成员变量分配空间， 对象之间共享成员函数。
+	        
+	       运行下上面的代码发现\verb|sizeof(Base) == 8|, 说明编译器在类中自动添加了一个8字节的成员变量， 这个变量就是\verb|_vptr|, 指向虚函数表的指针。
+	       
+	       \begin{enumerate}
+		       	\item \verb|d|对象的首地址就是\verb|vptr|指针的地址-\verb|pvptr|
+		       	\item 取\verb|pvptr|的值就是\verb|vptr|-虚函数表的地址
+		       	\item 取\verb|pvptr|的值 等价于 \verb|*d|
+		       	\item 取\verb|vptr中[0][1][2]|的值就是这三个函数的地址,通过函数地址就直接可以运行三个虚函数了。
+		       	\item 函数表中\verb|Base::g()|函数指针被\verb|Derive|中的\verb|Derive::g()|函数指针覆盖， 所以执行的时候是调用的\verb|Derive::g()|
+	       \end{enumerate}
+	       
+	       \begin{figure}[H]
+		       	\centering
+		       	\includegraphics[scale=0.8]{process.png}
+		       	\caption{进程虚拟内存图-对象结构}
+      	    \end{figure}
        
-       \begin{enumerate}
-	       	\item \verb|d|对象的首地址就是\verb|vptr|指针的地址-\verb|pvptr|
-	       	\item 取\verb|pvptr|的值就是\verb|vptr|-虚函数表的地址
-	       	\item 取\verb|pvptr|的值 等价于 \verb|*d|
-	       	\item 取\verb|vptr中[0][1][2]|的值就是这三个函数的地址,通过函数地址就直接可以运行三个虚函数了。
-	       	\item 函数表中\verb|Base::g()|函数指针被\verb|Derive|中的\verb|Derive::g()|函数指针覆盖， 所以执行的时候是调用的\verb|Derive::g()|
-       \end{enumerate}
-       
-       \begin{figure}[h]
-       	\centering
-       	\includegraphics[scale=0.8]{process.png}
-       	\caption{进程虚拟内存图-对象结构}
-       \end{figure}
-       
-      \subsection{一般继承（无虚函数覆盖）}
-	      对于实例：\verb|Derive d;| 的虚函数表如图\ref{vir-no}：
-	      
-		      \begin{figure}[h]
-		      	\centering
-		      	\includegraphics[scale=0.8]{vt-base.jpg}
-		      	\caption{一般继承（无虚函数覆盖）\label{vir-no}}
-		      \end{figure}
-		     
-		     \begin{itemize}
-		     	\item 虚函数按照其声明顺序放于表中
-		     	\item 父类的虚函数在子类的虚函数前面
-		     \end{itemize}
-      \subsection{一般继承（有虚函数覆盖）}
-        为了看到被继承过后的效果，在这个类的设计中，我只覆盖了父类的一个函数：\verb|f()|。那么，对于派生类的实例，其虚函数表会是下面图\ref{vir-yes}的一个样子：
-        
-	         \begin{figure}[h]
-	         	\centering
-	         	\includegraphics[scale=0.8]{vt-base2.jpg}
-	         	\caption{一般继承（有虚函数覆盖）\label{vir-yes}}
-	         \end{figure}
-	         
-	         \begin{itemize}
-	         	\item 覆盖的f()函数被放到了虚表中原来父类虚函数的位置
-	         	\item 没有被覆盖的函数依旧
-	         \end{itemize}
-	         
-	         这样，我们就可以看到对于下面这样的程序\verb|  Base *b = new Derive();| \verb|b->f();|由\verb|b|所指的内存中的虚函数表的\verb|f()|的位置已经被\verb|Derive::f()|函数地址所取代，于是在实际调用发生时，是\verb|Derive::f()|被调用了。这就实现了\textbf{多态}。
+	      \subsection{一般继承（无虚函数覆盖）}
+		      对于实例：\verb|Derive d;| 的虚函数表如图\ref{vir-no}：
+		      
+			      \begin{figure}[H]
+			      	\centering
+			      	\includegraphics[scale=0.8]{vt-base.jpg}
+			      	\caption{一般继承（无虚函数覆盖）\label{vir-no}}
+			      \end{figure}
+			     
+			     \begin{itemize}
+			     	\item 虚函数按照其声明顺序放于表中
+			     	\item 父类的虚函数在子类的虚函数前面
+			     \end{itemize}
+	      \subsection{一般继承（有虚函数覆盖）}
+	        为了看到被继承过后的效果，在这个类的设计中，我只覆盖了父类的一个函数：\verb|f()|。那么，对于派生类的实例，其虚函数表会是下面图\ref{vir-yes}的一个样子：
+	        
+		         \begin{figure}[H]
+		         	\centering
+		         	\includegraphics[scale=0.8]{vt-base2.jpg}
+		         	\caption{一般继承（有虚函数覆盖）\label{vir-yes}}
+		         \end{figure}
+		         
+		         \begin{itemize}
+		         	\item 覆盖的f()函数被放到了虚表中原来父类虚函数的位置
+		         	\item 没有被覆盖的函数依旧
+		         \end{itemize}
+		         
+		         这样，我们就可以看到对于下面这样的程序\verb|  Base *b = new Derive();| \verb|b->f();|由\verb|b|所指的内存中的虚函数表的\verb|f()|的位置已经被\verb|Derive::f()|函数地址所取代，于是在实际调用发生时，是\verb|Derive::f()|被调用了。这就实现了\textbf{多态}。
 
 	
 \chapter{C++ 内存结构}
@@ -2237,7 +2269,7 @@ inline FuncX(...){}
 		void CommonFunction();
 	};			
 			\end{lstlisting}
-			\begin{figure}[ht]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[scale = 0.8]{figure/single.png}
 				\caption{单一对象}
@@ -2267,7 +2299,7 @@ inline FuncX(...){}
 	};			
 		\end{lstlisting}
 	
-	\begin{figure}[ht]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[scale = 0.8]{figure/singleVirtual.png}
 		\caption{单对象，包含虚函数}
@@ -2285,7 +2317,7 @@ inline FuncX(...){}
 	};
 			\end{lstlisting}
 			
-			\begin{figure}[ht]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[scale = 0.8]{figure/singleDerived.png}
 				\caption{单继承}
@@ -2303,7 +2335,7 @@ inline FuncX(...){}
 	};	      	
 		    \end{lstlisting}
 		      
-		    \begin{figure}[ht]
+		    \begin{figure}[H]
 		      \centering
 		      \includegraphics[scale = 0.8]{figure/singleDerivedVirutal.png}
 		      \includegraphics[scale = 0.8]{vtable1.png}
@@ -2338,7 +2370,7 @@ inline FuncX(...){}
 	};
 			\end{lstlisting}
 		
-		\begin{figure}[ht]
+		\begin{figure}[H]
 			\centering
 			\includegraphics[scale = 0.8]{figure/virtualDerivedVirutal.png}
 			\caption{虚单继承，包含虚函数}
@@ -2427,7 +2459,7 @@ inline FuncX(...){}
 	}		
 			\end{lstlisting}
 			
-			\begin{figure}[ht]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[scale = 0.8]{figure/DerivedDerivedVirutal.png}
 				\includegraphics[scale = 0.8]{vtable2.png}
@@ -2481,7 +2513,7 @@ inline FuncX(...){}
 			
 				\verb|DerivedClass1|就已经有变化了，原来是先排虚表指针与\verb|Base|成员变量，\verb|vfptr|位于0地址偏移处；但现在有两个虚表指针了，一个是\verb|vbptr|，另一个是\verb|vfptr|。\verb|vbptr|是这个\verb|DerivedClass1|对应的虚表指针，它指向\verb|DerivedClass1|的虚表\verb|vbtable|，另一个\verb|vfptr|是虚基类表对应的虚指针，它指向\verb|vftable|。
 				
-				\begin{figure}[ht]
+				\begin{figure}[H]
 					\centering
 					\includegraphics[scale = 0.8]{Derived.png}
 					\caption{虚多继承-D}
@@ -2491,7 +2523,7 @@ inline FuncX(...){}
 				
 				这里面有三个虚指针了，但\verb|base|却只有一份。第一张虚表是内含\verb|DerivedClass1|的，第二张虚表是内含\verb|DerivedClass2|的，最后一张表是虚基表。
 				
-				\begin{figure}[ht]
+				\begin{figure}[H]
 					\centering
 					\includegraphics[scale = 0.8]{virtualDerivedDerivedVirutal.png}
 					\caption{虚多继承-DD}
@@ -2575,8 +2607,130 @@ inline FuncX(...){}
 			\item \textbf{不做常量合并}、常量传播等优化
 			\item \textbf{对volatile变量的读写不会被优化掉}。如果你对一个变量赋值但后面没用到，编译器常常可以省略那个赋值操作，然而对Memory Mapped IO的处理是不能这样优化的。
 		\end{enumerate}
-			  
-		\url{http://www.cnblogs.com/yc_sunniwell/archive/2010/06/24/1764231.html}     
+	
+	\section{示例}
+		\verb|volatile| 关键字是一种类型修饰符，\textbf{用它声明的类型变量表示可以被某些编译器未知的因素更改}，\textit{比如：操作系统、硬件或者其它线程等。遇到这个关键字声明的变量}，\textbf{编译器对访问该变量的代码就不再进行优化，从而可以提供对特殊地址的稳定访问}。
+		
+		\paragraph{声明时语法}：
+			\verb|int volatile vInt; | 
+		
+		\paragraph{volatile变量 调用过程}
+			\textbf{当}要求\textbf{使用} \verb|volatile| \textbf{声明的变量的值的时候}，\textbf{系统总是重新从它所在的内存读取数据}，\textit{即使它前面的指令刚刚从该处读取过数据}。\textbf{而且读取的数据立刻被保存}。例如：
+		
+			\begin{lstlisting}
+	int volatile i = 10;
+	int 		 a = i;
+	...
+	// 其他代码，并未明确的告诉编译器，对i 进行过操作。
+	int 		 b = i;
+			\end{lstlisting}
+		
+			\verb|volatile| \textit{指出 i 是随时可能发生变化的，每次使用它的时候必须从 i的地址中读取}，因而\textbf{编译器生成的汇编代码}\textbf{会重新从i的地址读取数据放在 b 中}。
+			
+			\textbf{而优化做法是}，由于编译器发现两次从 i读数据的代码之间的代码没有对 i 进行过操作，它会自动把上次读的数据放在 b 中。而不是重新从 i 里面读。这样以来，如果 i是一个寄存器变量或者表示一个端口数据就容易出错，所以说 volatile 可以保证对特殊地址的稳定访问。
+			
+			注意，在 VC6 中，\textbf{一般调试模式没有进行代码优化}，所以这个关键字的作用看不出来。下面通过插入汇编代码，测试有无 volatile 关键字，对程序最终代码的影响：
+			\begin{lstlisting}
+	int   i = 10;
+	int   a = i;
+	cout << "i = " << a <<endl;
+	...
+	// 其他代码，并未明确的告诉编译器，对i 进行过操作。
+	// 下面的汇编语句的作用就是改变内存中i 的值，但是又不让编译器知道
+	__asm{
+		mov dword ptr [ebp-4], 20h
+	}
+	
+	int   b = i;
+	cout << "i = " << b <<endl;
+	
+	
+	// 在DEBUG 模式下输出为
+	i = 10
+	i = 32
+
+	// 在RELEASE 模式下输出为
+	i = 10
+	i = 10
+			\end{lstlisting}
+		
+			输出的结果明显表明，Release 模式下，编译器对代码进行了优化，第二次没有输出正确的 i 值。下面，我们把 i 的声明加上 volatile 关键字\verb|int volatile i = 10; |,此时则不论DEBUG 模式 还是RELEASE 模式都是没有优化的结果
+				\begin{lstlisting}
+		int volatile  i = 10;
+		int a = i;
+		cout << "i = " << a <<endl;
+		...
+		// 其他代码，并未明确的告诉编译器，对i 进行过操作。
+		// 下面的汇编语句的作用就是改变内存中i 的值，但是又不让编译器知道
+		__asm{
+			mov dword ptr [ebp-4], 20h
+		}
+		
+		int b = i;
+		cout << "i = " << b <<endl;
+		
+		
+		// 在DEBUG 模式下输出为
+		i = 10
+		i = 32
+	
+		// 在RELEASE 模式下输出为
+		i = 10
+		i = 32
+				\end{lstlisting}
+			
+			这说明这个 volatile 关键字发挥了它的作用。其实不只是“内嵌汇编操纵栈”这种方式属于编译无法识别的变量改变，另外更多的可能是多线程并发访问共享变量时，一个线程改变了变量的值，怎样让改变后的值对其它线程 visible。一般说来，volatile用在如下的几个地方： 
+				\begin{enumerate}
+					\item 中断服务程序中修改的供其它程序检测的变量需要加\verb|volatile|
+					\item 多任务环境下各任务间共享的标志应该加\verb|volatile| 
+					\item 存储器映射的硬件寄存器通常也要加\verb|volatile|说明，因为每次对它的读写都可能由不同意义
+				\end{enumerate}
+	\section{volatile 指针}
+	
+	
+	\section{多线程下的 volatile}
+		有些变量是用volatile关键字声明的。当两个线程都要用到某一个变量且该变量的值会被改变时，应该用volatile声明，该关键字的作用是防止优化编译器把变量从内存装入CPU寄存器中。如果变量被装入寄存器，那么两个线程有可能一个使用内存中的变量，一个使用寄存器中的变量，这会造成程序的错误执行。volatile的意思是让编译器每次操作该变量时一定要从内存中真正取出，而不是使用已经存在寄存器中的值，如下： 
+		
+		  \verb|volatile  BOOL  bStop  =  FALSE;  |
+		  
+		  \subparagraph{在一个线程中}：
+		  		\begin{lstlisting}
+while(  !bStop  )  
+{
+	... 
+}  
+
+bStop  =  FALSE;  
+return; 	
+	  		\end{lstlisting}  
+   
+		  
+		  \subparagraph{在另外一个线程中} 要终止上面的线程循环：  
+		  		\begin{lstlisting}
+bStop  =  TRUE;  
+while(  bStop  ); 
+		  		\end{lstlisting}
+		  		
+		   等待上面的线程终止，如果\verb|bStop|不使用\verb|volatile|申明，那么这个循环将是一个死循环，因为\verb|bStop|已经读取到了寄存器中，寄存器中\verb|bStop|的值永远不会变成\verb|FALSE|，加上\verb|volatile|，程序在执行时，每次均从内存中读出\verb|bStop|的值，就不会死循环了。
+		   
+		   这个关键字是用来设定某个对象的存储位置在内存中，而不是寄存器中。因为一般的对象编译器可能会将其的拷贝放在寄存器中用以加快指令的执行速度，例如下段代码中：  
+		   		\begin{lstlisting}
+...  
+int  nMyCounter  =  0;  
+for(;  nMyCounter<100;nMyCounter++)  
+{  
+	...  
+}  
+...  
+		   		\end{lstlisting}
+		  
+		   在此段代码中，\verb|nMyCounter|的\textbf{拷贝可能存放到某个寄存器中}（循环中，对\verb|nMyCounter|的测试及操作总是对此寄存器中的值进行），但是另外又有段代码执行了这样的操作：\verb|nMyCounter  -=  1;|
+		   这个操作中，对\verb|nMyCounter|的改变是对内存中的\verb|nMyCounter|进行操作，于是出现了这样一个现象：\verb|nMyCounter|的改变不同步。
+			
+	\section{参考}	  
+		基本：\url{http://www.cnblogs.com/yc_sunniwell/archive/2010/06/24/1764231.html}  
+		
+		详细：\url{https://www.cnblogs.com/yc_sunniwell/archive/2010/07/14/1777432.html}   
 \chapter{explicit 关键字}
 
 	\section{作用}
@@ -3466,7 +3620,7 @@ inline FuncX(...){}
 				
 		\subsection{变量问题}
 			\subsubsection{变量(包括成员)命名}
-				\begin{figure}[h]
+				\begin{figure}[H]
 					\centering
 					\includegraphics[scale = 0.6]{Naming.png}
 				\end{figure}

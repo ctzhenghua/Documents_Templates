@@ -33,7 +33,7 @@
 
 \pagestyle{plain} 		  %设置页面布局
 \author{\kaishu 郑华}
-\title{ \textbf{C++ Advanced 学习笔记\textbf{}}}
+\title{ \textbf{C++ Advanced 学习笔记}}
 %代码效果
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
@@ -79,7 +79,11 @@
 		\subsection{内存分配方式}
 			\paragraph{虚拟内存布局}
 				\begin{itemize}
+					\item \textbf{PCB} 保存进程id、文件描述符等。
+				
 					\item \textbf{栈}，在执行函数时，函数内局部变量的存储单元都可以在栈上创建，函数执行结束时这些存储单元自动被释放。栈内存分配运算内置于处理器的指令集中，效率很高，但是分配的内存容量有限。
+					
+					\item \textbf{内存映射区} 父子进程共享。
 					
 					\item \textbf{堆}，就是那些由\verb|new分配|的内存块，他们的释放编译器不去管，由我们的应用程序去控制，一般一个\verb|new|就要对应一个\verb|delete|。\textit{如果程序员没有释放掉，那么在程序结束后，操作系统会自动回收。}
 					
@@ -243,12 +247,16 @@
 			在构造函数中分配资源，在析构函数中释放资源。
 		\subsection{智能指针}
 			见C++\_Basic\_C11
+			
+			\paragraph{循环引用问题}\verb|->|
+			
+				引用计数\verb|shared_ptr|
 		
-		
+				循环引用解决办法\verb|weak_ptr|
 	
 	\section{内存分配}
 		\subsection{内存空间分配示例}
-			\begin{figure}[htb]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[scale = 0.5]{MemProcess.png}
 				\caption{Mem Process}
@@ -270,6 +278,7 @@
 				\end{tabular}
 			\end{table}	
 			
+			\newpage
 			\paragraph{new}\verb|->|
 				\begin{lstlisting}
 	Complex* pc = new Complex(1,2);
@@ -313,6 +322,7 @@
 	new(p) Complex(1,2);				
 				\end{lstlisting}
 				
+			\newpage
 			\paragraph{array new, array delete}\verb|->|
 				\begin{lstlisting}
 	Complex* pca = new Complex[3];// 唤起3次 constructor, 无法从参数获取初值
@@ -320,7 +330,7 @@
 	delete[] pca; //唤起3次deconstructor, 如果没有写中括号，那么会以为为普通指针，只调用一次析构。
 				\end{lstlisting}
 				
-				\begin{figure}[htb]
+				\begin{figure}[H]
 					\centering
 					\includegraphics[scale = 0.5]{arrayNew.png}
 					\includegraphics[scale = 0.5]{opArrayNew.png}
@@ -328,7 +338,9 @@
 					\caption{Array New Mem}
 				\end{figure}
 				
-			\verb|cookie -> 负责记录申请数组的长度，即调用delete 的次数|				
+			\verb|cookie -> 负责记录申请数组的长度，即调用delete 的次数|		
+			
+			\newpage		
 			\paragraph{delete}\verb|->|
 				\begin{lstlisting}
 	Complex* pc = new Complex(1,2);
@@ -340,7 +352,7 @@
 		 pc->~Complex(); // 先析构
 		 operator delete(pc); // 然后释放内存
 				\end{lstlisting}
-				
+	
 			\paragraph{operator delete(void *)}\verb|->|
 				\begin{lstlisting}
 	void _cdecl operator delete(void*p) _THROW0()
@@ -366,6 +378,452 @@
 					\item \textbf{deConstruct :}\verb|p->~Foo();|
 					\item \textbf{operator delete :}\verb|operator delete(p);|
 				\end{enumerate}
+			
+			\newpage	
+			\paragraph{allocator}
+				将内存管理的细节隔离实现，简化不同类的编写效率与安全性。
+				
+				\begin{lstlisting}
+	class allocator
+	{
+	private:
+		struct obj{
+			struct obj* next; //embedded pointer
+		}
+	
+	public:
+		void *allocate(size_t);
+		void deallocate(void*, size_t);
+	
+	private:
+		obj* freeStore = nullptr;
+		const int CHUNK = 5;
+	};			
+	
+	void allocator::deallocate(void* p, size_t)
+	{
+		//将*p 收回插回freeList 前端
+		((obj*)p) ->next = freeStore;
+		freeStore =(obj*)p;
+	}					
+	
+	
+	// 什么类型的类都是如下使用allocator 的，因此会产生宏简化过程。
+	class Foo{
+	public:
+		long L;
+		string str;
+		static allocator myAlloc;
+		
+	public:
+		Foo(long l):L(l){}
+		static void* operator new(size_t size)
+		{
+			return myAlloc.allocate(size);
+		}
+		
+		static void operator delete(void* pdead, size_t size)
+		{
+			return myAlloc.deallocate(pdead,size);
+		}
+	
+	};
+	allocate Foo::myAlloc;
+				\end{lstlisting}
+			
+			\newpage
+			\paragraph{marco for static allocator}
+				简化上述allcator 注入的代码量与程序员的工作量。
+					
+				\begin{lstlisting}
+	// Declare pool alloc
+	#define DECLARE_POOL_ALLOC()\
+	public:\
+		void* operator new(size_t size){return myAlloc.allocate(size);}\
+		void operator delete(void* p){return myAlloc.deallocate(p);}\
+	protected:\
+		static allocator myAlloc;
+	
+	// Implement pool alloc
+	#define IMPLEMENT_POOL_ALLOC(class_name)\
+	allocator class_name::myAlloc;
+	
+	
+	// class Foo 实现
+	class Foo{
+		DECLARE_POOL_ALLOC()
+	public:
+		long L;
+		string str;
+	public:
+		Foo(long l):L(l){}
+	};
+	IMPLEMENT_POOL_ALLOC(Foo)
+	
+	class Goo{
+	DECLARE_POOL_ALLOC()
+	public:
+		complex<double> c;
+		string str;
+	public:
+			Foo(complex<double>& x):c(x){}
+	};
+	IMPLEMENT_POOL_ALLOC(Goo)
+				\end{lstlisting}
+				
+			\paragraph{new Handler}
+				当内存分配失败的情况下使用newHandler 进行处理，以释放空间满足分配或者终止程序。
+			
+		\subsection{malloc 申请空间布局结构}
+			 
+			在使用malloc 分配的内存中存在着大量的空余空间，如cookie 信息等，基本结构如图\ref{mem}所示。
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale = 0.5]{Malloc.png}
+				\caption{Malloc 结构图}
+				\label{mem}
+			\end{figure}
+	
+		\subsection{embedded pointers}
+			当客户端获得小区块，获得的即是char*(指向某个 union obj). 此时虽然客户端没有如LString 之类的信息可知区块大小，但由于这区块是给object 所用，相等于object 大小，object Constructor 自然不会过分。如图\ref{emb}所示。
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale = 0.3]{embeddedP.png}
+				\caption{嵌入指针}
+				\label{emb}
+			\end{figure}
+			
+			\begin{lstlisting}
+	class Airplane{
+	private:
+		// Data member 结构声明
+		struct AirplaneRep{
+			unsigned long miles;
+			char type;
+		};
+		
+	private:
+		union{
+			AirplaneRep rep;  // 此指针针对使用中的 objects
+			Airplane* next;   //此指针针对内存池 freelist 上的object 
+		}
+	};
+			\end{lstlisting}
+	
+	
+	\section{STL 内存分配}
+		\paragraph{STL freelist 何时释放}
+			在看完源码后，知道了如何利用内存池进行管理内存，但是如果内存紧张，怎么知道freelist 何时释放呢？析构？引用计数？
+			
+		\paragraph{STL pool allocator用法示例}
+			STL(GNUC 4.9)库中带有的内存池分配，但是标准的分配依旧是只调用new expression。
+			
+			\begin{lstlisting}
+	#include <extend\pool_allocator.h>
+	
+	template<typename Alloc>
+	void cookie_test(Alloc alloc, size_t n)
+	{
+		typename Alloc::value_type *p1, *p2, *p3;
+		p1 = alloc.allocate(n);
+		p2 = alloc.allocate(n);
+		p3 = alloc.allocate(n);
+		
+		cout<<"p1 = " << p1 << '\t' <<"p2 = " << p2 <<'\t'<<endl;
+		
+		alloc.deallocate(p1, sizeof(typename Alloc::value_type));
+		alloc.deallocate(p2, sizeof(typename Alloc::value_type));
+		alloc.deallocate(p3, sizeof(typename Alloc::value_type));
+	}
+	
+	
+	// Test 主体
+	int main()
+	{
+		// 使用标准内存池分配
+		cout << sizeof(__gnu_cxx::__pool_alloc<int>) <<endl;
+		vector<int, __gnu_cxx::__pool_alloc<int>> vecPool;
+		cookie_test(__gnu_cxx::__pool_alloc<double>(), 1);
+		
+		// 使用默认分配器分配
+		cout << sizeof(std::allocator<int>) <<endl;
+		vector<int, std::allocator<int>> vecPool;
+		cookie_test(std::allocator<double>(), 1);		
+	}
+			\end{lstlisting}
+		
+		
+		\paragraph{原理概述}
+			std::alloc \verb|->16 大小的链表| 负责分配(0-8-16-...-128bytes) 大小的内存管理池。超过128后，使用malloc 进行内存管理。
+			
+			战备
+			
+			如果x-size 的链表为空，且战备池已经占用，则申请20*(x-size)*2 的内存池，否则使用x-size 的对应指针指向该战备池，并在战备池中按照x-size 进行切割分配管理，*2的意图就是留相同的一份池用于战备，有则在内存池中分配。 
+	
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.4]{STD_arc.png}
+				\caption{STD alloctor 架构图}
+			\end{figure}
+			
+		
+			在可用空间为0时，\textbf{最多分配20个对象空间 }*2 +RoundUp。
+		
+			在剩余的战备空间不足一个对象时，就是\textbf{堆碎片的处理}。
+		
+		\paragraph{堆碎片处理}
+			剩余的碎片插入最接近的链表中。
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.37]{headFragment.png}
+				\caption{堆碎片处理流程}
+			\end{figure}
+		
+		
+		\paragraph{内存不足解决}
+			依次往右借战备池满足当下需求
+				
+
+	\section{STL 源码结构}
+		SGI的内存配置器分成两层：第一层直接调用malloc，第二层是自己做了一个内存池来分配。下面说下第二层配置器的思路：
+		
+		\verb|std::alloc|在\textbf{设计时}考虑到了以下几个方面：
+			\begin{itemize}
+				\item 向系统堆申请空间。
+				\item 考虑多线程状态。
+				\item 考虑内存不足时的措施。
+				\item 考虑过多“小型区块”可能造成的内存碎片问题。
+			\end{itemize}
+		
+		\textbf{二级配置器内存申请过程}：
+			\begin{itemize}
+				\item 首先判断是否小于128bytes。
+				\item 若小于则把申请长度填充至8的倍数。
+				\item 利用\verb|free_list+FREELIST_INDEX(n)|获取所需内存块在\verb|free-lists|链表中的位置。
+				\item 若申请失败则调用\verb|refill给free-list|扩容。
+				\item 若申请成功则将\verb|free-list|的头节点保存之后指向下一个节点，返回保存的地址。
+			\end{itemize}
+			
+		第二层配置器首先设置了一个\verb|free_list[16]|的数组，数组中是指针，分别指向一块内存，指针类型定义如下：
+		
+		\begin{lstlisting}
+	union obj {
+	　　union obj *free_list_link;
+	　　char client_data[1];
+	};
+		\end{lstlisting}
+		
+		总之，\verb|free_list|每个下标链接的内存大小为：8B、16B、24B、32B、40B、...、128B。共16个。
+		
+		现在假如要分配一块32B的内存，但\verb|free_list|[3]所指向的指针为NULL，即空闲链表\verb|free_list|中没有32B的内存，这时候就需要通过下面的\verb|_S_chunk_alloc|来分配内存给\verb|free_list|了。默认每次分配是分配20个大小为32B的内存。
+		
+		即\verb|_S_chunk_alloc|第二个参数传入值为20，但系统不一定能分配20个，所以用的是引用。\verb|_S_chunk_malloc|主要\textbf{分三种情况来处理}：
+			\begin{itemize}
+				\item 现有内存池容量满足你的需求：32B * 20个，直接返回给你这么大一块内存；
+				\item 现有内存池容量不能满足这么多个，即20个，但可以满足1个，那先给你\verb|free_list|对应项分配一个32B再说；
+				\item 现有内存池容量连一个都满足不了，那只能利用malloc从堆中分配内存。
+			\end{itemize}
+		
+		从堆中分配内存时，首先把当前内存池中剩余的一些零碎内存赋给\verb|free_list|中；
+		
+		然后从堆中malloc内存，修改内存池的\verb|_S_start_free、_S_end_free|指针。(这两个指针分别指向内存池的起始地址和结束地址)。
+		
+		再然后递归调用\verb|_S_chunk_malloc|函数。
+		　　
+		\paragraph{class allocator}\verb|class __default_alloc_template|
+
+		\paragraph{allocate()}\verb|~|
+			\begin{lstlisting}[frame = lines]
+	static void* allocate(size_t __n)  
+	{  
+	    void* __ret = 0;  
+	        
+	    if (__n > (size_t) _MAX_BYTES)   
+	        // 如果请求大于128字节，由一级内存配置器分配内存  
+	    	__ret = __mem_interface::allocate(__n);  
+	    else   
+	    // 当内存请求小于等于128字节时  
+	    {  
+	           _Obj* volatile* __my_free_list = _S_free_list   
+	             + _S_freelist_index(__n);  
+	      //定位监管的freelist  
+	  
+	          _Obj* __restrict__ __result = *__my_free_list;  
+	          if (__result == 0)  
+	          //如果freelist是空的，则通过调用s_refill分配freelist  
+	        __ret = _S_refill(_S_round_up(__n));  
+	      else   
+	          //如果freelist有空闲内存块，则返回一个空闲块给客户  
+	          //同时监管freelist的头指针后移一个空闲块  
+	          {  
+	              *__my_free_list = __result -> _M_free_list_link;  
+	              __ret = __result;  
+	          }  
+	      }  
+	      return __ret;  
+	};  
+			\end{lstlisting}
+
+		\paragraph{refill()}
+			函数原型：\fbox{void* \_\_default\_alloc\_template::refill(size\_t n)}
+			
+			若free-list中没有可用区块时，则会调用refill为free-list填充新的空间。新的空间来自内存池，由chunk\_alloc()申请。默认是取得20个新区块，但是如果内存池空间不足，则获得的区块数可能小于20。如果chunk\_alloc()返回一个区块，则直接返回，将该区块分配给调用者使用。free-list不增加。若返回区块数大于1，则从第二个区块开始扩展free-list链表，每个链表占n的长度。将第一个区块返回。
+			
+			\begin{lstlisting}[frame = lines]
+	 // Returns an object of size __n, and optionally adds to "size  
+	 // __n"'s free list.  We assume that __n is properly aligned.  We  
+	 // hold the allocation lock.  
+	   
+	template<bool __threads, int __inst>  
+	   void*  
+	   __default_alloc_template<__threads, __inst>::_S_refill(size_t __n)  
+	  {  
+	     int __nobjs = 20;   
+	     //默认20个，实际client需求的20倍  
+	     char* __chunk = _S_chunk_alloc(__n, __nobjs);  
+	     //请求memory pool分配内存块，实际需求的20倍  
+	     _Obj* volatile* __my_free_list;  
+	     _Obj* __result;  
+	     _Obj* __current_obj;  
+	     _Obj* __next_obj;  
+	     int __i;  
+	       
+	    if (1 == __nobjs) return(__chunk);  
+	     
+	    __my_free_list = _S_free_list + _S_freelist_index(__n);  
+	       
+	    __result = (_Obj*)__chunk;   
+	    //将返回给客户20块内存区块的第一块地址  
+	   *__my_free_list = __next_obj = (_Obj*)(__chunk + __n);  
+	    //修改监管freelist的首地址为第一个空闲内存块的地址  
+	  
+	   for (__i = 1; ; __i++) {  
+	       __current_obj = __next_obj;  
+	       __next_obj = (_Obj*)((char*)__next_obj + __n);  
+	       if (__nobjs - 1 == __i) {  
+	         __current_obj -> _M_free_list_link = 0;  
+	         break;  
+	       } else {  
+	         __current_obj -> _M_free_list_link = __next_obj;  
+	       }  
+	   }  
+	  
+	   //上述for循环，是将freelist中的各结点串接起来。  
+	  
+	    return(__result);  
+	}  
+			\end{lstlisting}
+					
+		\paragraph{chunk\_alloc()}
+			函数原型:\fbox{char*  \_\_default\_alloc\_template::chunk\_alloc(size\_t size,int\& nobjs)}
+			
+			其中nobjs是引用传参，是传入传出参数。表示的是chunk申请到的区块数，默认是20。
+			
+			函数先判断内存池中剩余的空间是否满足申请20个内存区块，若满足则直接返回。若不满足，则尽量申请多的区块，并利用nobjs的返回值标明申请的区块数量。若内存池剩余的空间不够申请1个内存区块，则先将这剩余的区块分配给适当的free-list，然后再从系统堆中申请需求量的两倍加上附加量的内存空间，递归调用自己返回正确的nobjs值，由于nobjs最大为20，剩余的未加入free-list的内存放入内存池中。若从堆中申请失败，则遍历整个free-lists，看能否找到一个满足长度要求的内存区块。如果还是找不到，则调用一级配置器，也就是malloc（），利用它的异常机制来处理，若未定义处理函数，则抛出bad\_alloc异常。
+			
+			\begin{lstlisting}[frame = lines]
+	template <bool __threads, int __inst>
+	char*
+	__default_alloc_template<__threads, __inst>::_S_chunk_alloc(size_t __size,
+	                                                            int& __nobjs)
+	{
+	    char* __result;
+	    size_t __total_bytes = __size * __nobjs;
+	    size_t __bytes_left = _S_end_free - _S_start_free; // 内存池剩余空间
+	 
+	    if (__bytes_left >= __total_bytes) { // 内存池剩余空间完全满足需求
+	        __result = _S_start_free;
+	        _S_start_free += __total_bytes;
+	        return(__result);
+	    } else if (__bytes_left >= __size) { // 内存池剩余空间不能完全满足需求，但足够供应一个(含)以上的区块
+	        __nobjs = (int)(__bytes_left/__size);
+	        __total_bytes = __size * __nobjs;
+	        __result = _S_start_free;
+	        _S_start_free += __total_bytes;
+	        return(__result);
+	    } else { // 内存池剩余空间连一个区块的大小都无法提供
+	        size_t __bytes_to_get =
+	      2 * __total_bytes + _S_round_up(_S_heap_size >> 4);
+	        // Try to make use of the left-over piece.
+	        // 把内存池当前剩下的一些小残余零头利用一下。
+	        if (__bytes_left > 0) {
+	            _Obj* __STL_VOLATILE* __my_free_list =
+	                        _S_free_list + _S_freelist_index(__bytes_left); // 这里对吗？假如__bytes_left = 15，则_S_freelist_index(15) = 1，
+	                                                                        // 即16B的位置，而实际上只剩下了15B？
+	 
+	            ((_Obj*)_S_start_free) -> _M_free_list_link = *__my_free_list;
+	            *__my_free_list = (_Obj*)_S_start_free;
+	        }
+	        _S_start_free = (char*)malloc(__bytes_to_get);
+	        if (0 == _S_start_free) {
+	            size_t __i;
+	            _Obj* __STL_VOLATILE* __my_free_list;
+	        _Obj* __p;
+	            // Try to make do with what we have.  That can't
+	            // hurt.  We do not try smaller requests, since that tends
+	            // to result in disaster on multi-process machines.
+	            for (__i = __size;
+	                 __i <= (size_t) _MAX_BYTES;
+	                 __i += (size_t) _ALIGN) {
+	                __my_free_list = _S_free_list + _S_freelist_index(__i);
+	                __p = *__my_free_list;
+	                if (0 != __p) {
+	                    *__my_free_list = __p -> _M_free_list_link;
+	                    _S_start_free = (char*)__p;
+	                    _S_end_free = _S_start_free + __i; // 这里确定每一块内存大小都是__i吗？
+	                    return(_S_chunk_alloc(__size, __nobjs));
+	                    // Any leftover piece will eventually make it to the
+	                    // right free list.
+	                }
+	            }
+	        _S_end_free = 0;    // In case of exception.
+	            _S_start_free = (char*)malloc_alloc::allocate(__bytes_to_get);
+	            // This should either throw an
+	            // exception or remedy the situation.  Thus we assume it
+	            // succeeded.
+	        }
+	        _S_heap_size += __bytes_to_get;
+	        _S_end_free = _S_start_free + __bytes_to_get;
+	        return(_S_chunk_alloc(__size, __nobjs));
+	    }
+	}
+			\end{lstlisting}
+			
+			  可以看到\verb|chunk_alloc|函数的\textbf{输入}有两个：
+			  	\begin{enumerate}
+			  		\item \verb|int&__nobjs|，待分配的元素个数；
+			  		\item \verb|size_t __size|，每个元素的大小。
+			  	\end{enumerate}
+			  
+			\verb|chunk_alloc|函数的程序流程图（为了方便观察，画的并不是标准的程序流程图）如下：
+				\begin{figure}[H]
+					\centering
+					\includegraphics[scale=0.5]{chunk.png}
+					\caption{chunkAlloc 流程}
+				\end{figure}
+				
+		\paragraph{deallocate()}
+			若回收长度大于128bytes则直接调用一级配置器，也就是::operator delete。否则就在free-lists上寻找对应大小的区块，调整该free-list，回收区块。
+				
+			\begin{lstlisting}[frame = lines]
+	static void   
+	    deallocate(void* __p, size_t __n)  
+	    {  
+	      if (__n > (size_t) _MAX_BYTES)  
+	    __mem_interface::deallocate(__p, __n);  
+	      else   
+	      {  
+	      _Obj* volatile*  __my_free_list  
+	        = _S_free_list + _S_freelist_index(__n);  
+	      _Obj* __q = (_Obj*)__p;  
+	        
+	      __q -> _M_free_list_link = *__my_free_list;  
+	      *__my_free_list = __q;  
+	     }  
+	    }  
+			\end{lstlisting}
+					
 	\section{内存泄漏}
 		\subsection{如何对付内存泄漏？}
 			当你的代码中到处充满了new 操作、delete操作和指针运算的话，你将会在某个地方搞晕了头，导致内存泄漏，指针引用错误，以及诸如此类的问题。
@@ -427,7 +885,7 @@
 				从用户使用程序的角度来看，内存泄漏本身不会产生什么危害，作为一般的用户，根本感觉不到内存泄漏的存在。真正有危害的是\textbf{内存泄漏的堆积}，这会最终消耗尽系统所有的内存。从这个角度来说，一次性内存泄漏并没有什么危害，因为它不会堆积，\textbf{而隐式内存泄漏危害性则非常大，因为较之于常发性和偶发性内存泄漏它更难被检测到。}
 				
 			\end{itemize}
-		\subsection{浅谈C/C++内存泄漏及其检测工具}
+		\subsection{C/C++内存泄漏及其检测工具}
 			
 			
 			
@@ -538,7 +996,7 @@
 	0000000000000000 D g_a
 	0000000000000004 C g_b
 	0000000000000000 b g_c
-					    U g_x
+					 U g_x
 	0000000000000014 T main
 	0000000000000004 b s_a.1597
 	0000000000000000 T sum
@@ -3468,7 +3926,7 @@ The countdown lasted for 10 seconds.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%CHAPTER_TEMPLATE%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
 
 \chapter{多进程}
-
+	参考：\verb|linux System Coding/ 系统通信一章|
 
 
 	 
@@ -3836,7 +4294,9 @@ The countdown lasted for 10 seconds.
 
 
 \section{模版特化}
-	\subsection{Full Specialization}
+	\paragraph{特化}将类型抽取出来固定，那么前面就不再具有泛化类型，\verb|template<被抽取走>  class specialLize<用特化的类型放到此处>|，可以理解为模版针对不同参数的重载。
+	
+	\subsection{全特化 Full Specialization}
 		\verb|template<>|
 		\begin{lstlisting}
 // 函数特化
@@ -3854,12 +4314,15 @@ The countdown lasted for 10 seconds.
 	
 // 类特化
 	template<class T, class Allocator = allocator<T> > class vector{};
-	
+	// 全特化	
 	template<> class vector<bool, allocator<bool> >{};	
 		\end{lstlisting}
-	\subsection{Partial Specialization}
+	\subsection{偏特化 Partial Specialization}
 		改变多模版参数的一个为固定值，或同类型的指针类型，然后特化函数
-
+		\begin{lstlisting}
+	// 偏特化  第一个参数特化，第二参数不特化
+	template<class Alloc> class vector<bool, Alloc> {};
+		\end{lstlisting}
 \section{模版友元}
 	\begin{lstlisting}
 	// Necessary forward Declarations;
