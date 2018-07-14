@@ -22,7 +22,6 @@
 \usepackage{array}	%表格排版格式控制
 \usepackage{hyperref}
 \usepackage{dirtree}
-\setmainfont{Times New Roman}
 \graphicspath{{figure/}}
 \CTEXsetup[format+={\flushleft}]{section}
 %%%% 下面的命令添加新字体 %%%%%
@@ -249,12 +248,13 @@
 						\item \verb|swap| swap分区（交换分区，内存的两倍，不超过2G）
 					\end{itemize}
 					
-				\subparagraph{推荐分区}\verb|/boot| (启动分区，200MB)
+				\subparagraph{推荐分区}\verb|/boot| (启动分区，200MB)，这个也是必须的一般，当没有这个分区时，可能装机成功，但是再次开机时候就会启动不起来。
 				
 				
 				
 			\subsection{GUID}
 	\section{裸机装机必备软件及技巧}
+	
 		\subparagraph{vim}必备，要么你修改配置文档都是个问题。
 			通过wifi 先将基本的vim 搞定。
 			
@@ -299,6 +299,7 @@
 
 		\subparagraph{输入法}
 			\begin{enumerate}[itemindent = 2em]
+				\item 添加中文语言支持
 				\item \verb|sudo apt-get update|
 				\item \verb|sudo apt-get install fcitx-googlepinyin|
 				\item 注销或重启
@@ -307,9 +308,24 @@
 			\end{enumerate}	
 					
 		\subparagraph{文本工具Texlive与Texstudio}
-		
+			\begin{itemize}[itemindent = 1em]
+				\item LATEX
+					\begin{enumerate}[itemindent = 1em]
+						\item \verb|sudo apt-get install texlive-full|
+						\item \verb|sudo apt-get install texstudio|
+					\end{enumerate}
+				\item WPS: 官网下载deb 包，dpkg -i
+					
+			\end{itemize}
+			
 		\subparagraph{git}	
-		
+			\begin{enumerate}[itemindent = 1em]
+				\item 安装：\verb|sudo apt-get install git|
+				\item 配置SSH:\verb|ssh-keygen| 将\verb|/home/userName/.ssh/xx_pub| 拷贝至github
+				\item 配置git 信息：\verb|git config --global user.name "xx"|
+			\end{enumerate}
+			
+			
 		\subparagraph{网易云音乐}有音乐工作才有动力
 			\begin{enumerate}[itemindent = 2em]
 				\item 官网下载deb
@@ -318,10 +334,30 @@
 				\item 再次运行安装命令
 			\end{enumerate} 
 		
+		\subparagraph{微信}
+			\begin{itemize}[itemindent = 1em]
+				\item 参考\url{https://www.cnblogs.com/dunitian/p/9124806.html}
+				\item 解压\verb|tar -zxvf linux-64.tag.gz|
+				\item ln -s /xx/../elec..-wechat   /usr/bin/wechat 
+			\end{itemize}
+			
+		\subparagraph{倍速视频播放器VLC}
+			\begin{itemize}[itemindent = 1em]
+				\item 加速\verb|]|
+				\item 减速\verb|[|
+				\item 原速\verb|=|
+			\end{itemize}
+		
+		\subparagraph{邮件工具 thunderbird Mail}
+		
+		
+		\subparagraph{清理工具 bleachBit}
+			\verb|sudo apt-get install bleachbit|
+			
 		\subparagraph{vim 插件安装}
 			\url{http://blog.csdn.net/lhf_tiger/article/details/7216500}
 			
-			\begin{enumerate}
+			\begin{enumerate}[itemindent = 1em]
 				\item \verb|Ctags|:
 					\verb|sudo apt-get install ctags|
 					
@@ -342,6 +378,9 @@
 						\item 然后执行相应的命令 \verb@:cs find c|d|e|f|g|i|s|t name@
 					\end{itemize}
 			\end{enumerate}
+			
+	\section{查看windows 文件乱码解决方法}	
+		将gbk 格式的文件转换为 UTF-8 ：\verb|iconv -f gbk -t utf8 file1 -o file2|
 		
  \chapter{命令相关}
 	 命令格式：$$\verb|命令  [-选项]  [参数]|$$
