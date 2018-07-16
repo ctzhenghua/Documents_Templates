@@ -1,0 +1,137 @@
+\documentclass[UTF8,a4paper,12pt]{ctexart} 
+
+\usepackage{graphicx}%学习插入图
+\usepackage{verbatim}%学习注释多行
+\usepackage{booktabs}%表格
+\usepackage{geometry}%图片
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}%代码
+\usepackage{xcolor}  %颜色
+\usepackage{enumitem}%列表格式
+\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setitemize[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setdescription{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\usepackage{tcolorbox}
+\usepackage{algorithm}  %format of the algorithm
+\usepackage{algorithmic}%format of the algorithm
+\usepackage{multirow}   %multirow for format of table
+\usepackage{tabularx} 	%表格排版格式控制
+\usepackage{array}	%表格排版格式控制
+\usepackage{hyperref} %超链接 \url{URL}
+\usepackage{tikz}
+\usepackage{dirtree}
+
+
+\usetikzlibrary{intersections,
+	positioning,
+	petri,
+	backgrounds,
+	fit,
+	decorations.pathmorphing,
+	arrows,
+	arrows.meta,
+	bending,
+	calc,
+	intersections,
+	through,
+	backgrounds,
+	shapes.geometric,
+	quotes,
+	matrix,
+	trees,
+	shapes.symbols,
+	graphs,
+	math,
+	patterns,
+	external}
+\CTEXsetup[format+={\flushleft}]{section}
+
+%%%% 设置图片目录
+\graphicspath{{figure/}}
+
+%%%% 段落首行缩进两个字 %%%%
+\makeatletter
+\let\@afterindentfalse\@afterindenttrue
+\@afterindenttrue
+\makeatother
+\setlength{\parindent}{2em}  %中文缩进两个汉字位
+
+%%%% 下面的命令重定义页面边距，使其符合中文刊物习惯 %%%%
+\addtolength{\topmargin}{-54pt}
+\setlength{\oddsidemargin}{0.63cm}  % 3.17cm - 1 inch
+\setlength{\evensidemargin}{\oddsidemargin}
+\setlength{\textwidth}{14.66cm}
+\setlength{\textheight}{24.00cm}    % 24.62
+
+%%%% 下面的命令设置行间距与段落间距 %%%%
+\linespread{1.4}
+\setlength{\parskip}{0.5\baselineskip}
+\geometry{left=1.6cm,right=1.8cm,top=2cm,bottom=1.7cm} %设置文章宽度
+\pagestyle{plain} 		  %设置页面布局
+
+%代码效果定义
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\lstset{ %
+	backgroundcolor=\color{white},   % choose the background color
+	basicstyle=\footnotesize\ttfamily,      % size of fonts used for the code
+	%stringstyle=\color{codepurple},
+	%basicstyle=\footnotesize,
+	%breakatwhitespace=false,         
+	%breaklines=true,                 
+	%captionpos=b,                    
+	%keepspaces=true,                 
+	%numbers=left,                    
+	%numbersep=5pt,                  
+	%showspaces=false,                
+	%showstringspaces=false,
+	%showtabs=false,        
+	columns=fullflexible,
+	breaklines=true,                 % automatic line breaking only at whitespace
+	captionpos=b,                    % sets the caption-position to bottom
+	tabsize=4,
+	commentstyle=\color{mygreen},    % comment style
+	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+	keywordstyle=\color{blue},       % keyword style
+	stringstyle=\color{mymauve}\ttfamily,     % string literal style
+	frame=single,
+	rulesepcolor=\color{red!20!green!20!blue!20},
+	% identifierstyle=\color{red},
+	language=c++,
+}
+ \author{\kaishu 郑华}
+ \title{\heiti 流程}
+ 
+\begin{document}          %正文排版开始
+ 	\maketitle
+ 	
+\section{送三方到学校}  
+	\begin{enumerate}
+		\item 打印解约函(pdf) 1份
+		\item 取快递（新三方）
+		\item 将\textbf{1份解约函} 与 \textbf{1份三方} 交到 \textbf{南校就业指导中心105室刘老师}（女中年）（共两件东西）
+		\item 询问新报道证的下发时间。
+	\end{enumerate}
+	
+\section{取报道证}
+	\begin{enumerate}
+		\item 将快递中\textbf{剩余的其他文件}（三方、履历表）与 \textbf{报道证} 发往 （到时候再联系）（共2件东西）
+	\end{enumerate}
+	
+\section{寄档案}
+	\begin{enumerate}
+		\item 到南校 \textbf{档案馆} 确认报道证存放在档案中
+		\item 取出档案 发往以下地址（共1件东西-档案）
+			\begin{itemize}
+				\item 接受地址：广州市越秀区环市东路505号
+				\item 接受单位：中国南海石油联合服务总公司\verb| |转\verb| |外服公司
+				\item 联系人：李新光
+				\item 联系电话：020-83713265
+				\item 邮编：510075
+			\end{itemize}
+	\end{enumerate}	
+	    
+\end{document} 
+ 		    
