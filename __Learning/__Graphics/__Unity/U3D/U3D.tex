@@ -108,6 +108,8 @@
  	\maketitle
 
 \chapter{基础}
+	\url{https://unity3d.com/cn/learn/tutorials}
+	
 	\section{Scene 场景- 世界变换}	
 	
 	\section{Console 调试信息 - Crtl+Shift+C}
@@ -120,6 +122,35 @@
 			\item 将\verb|asset |中的脚本拖拽到 \verb|hiearch |视图中的\verb|MainCamera |中
 			\item 如果脚本是作用于场景中的某个物体，\textbf{则将该脚本拖拽到该物体上}
 		\end{enumerate}
+	
+	\section{序列化-  [SerializedField]}
+		\textit{通常情况下}，GameObject上挂的MonoBehaviour脚本中的\textbf{私有变量}\textit{不会显示在Inspector面板上}，即不会被序列化。
+		
+		\textbf{但如果指定了SerializedFiled特性}，就可以被序列化了。
+		
+		\begin{lstlisting}
+	public class Test : MonoBehaviour 
+	{
+		public string Name;
+		[SerializeField]
+		private int Hp; 
+	}
+		\end{lstlisting}
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.8]{SerilizedFiled.jpg}
+			\caption{序列化操作 -在Inspector上显示}
+		\end{figure}
+	
+	\section{常用技巧}
+		\begin{itemize}
+			\item \verb|ctrl + d| 复制
+			\item \verb|shift + 鼠标 | 等比例缩放 
+			\item \verb|shift + alt + 鼠标 | 原地等比例缩放
+			\item \verb|在Unity 编辑器中输入汉字 | 需要借助其他文本拷贝粘贴
+			\item \verb|q、w、e、r、t |在操作UI时尽量使用 T，以避免z轴发生的变化 
+		\end{itemize}
 	
 \chapter{事件}
 	\section{必然事件}
@@ -211,7 +242,60 @@
 
 	\section{注意}
 		在变化的过程中需要乘以 Time.deltaTime ,否则会出现大幅不连贯的画面。
+
+\chapter{键盘鼠标控制}
+	\section{普通按键 -keyDown(KeyCode xx)}
+		\paragraph{方式一}
 		
+			\begin{itemize}
+				\item 定义按键码：\verb|KeyCode keycode;|
+				\item 判断键是否被按下：\verb|if(Input.GetKeyDown(keycode)){}|
+				\item 在\verb|Inspirit -> Keycode |指定关联按键
+			\end{itemize}
+	
+		\paragraph{方式二}
+			\begin{itemize}
+				\item 在\verb|Update| 中更新添加如下代码
+				\item \verb|if(Input.GetKeyDown(KeyCode.UpArrow))| 
+				\item \verb|KeyCode.xx |包括了键盘所有的按键，常用的AWSD 如下 
+					\begin{itemize}
+						\item \verb|if (Input.GetKeyDown(KeyCode.S)) |
+						\item \verb|if (Input.GetKeyDown(KeyCode.W)) |
+					\end{itemize}
+			\end{itemize}
+		
+	\section{根据输入设备 -getAxis()}
+		参数分为两类： 
+		\paragraph{一、触屏类}
+		 	\begin{enumerate}
+			 	\item \verb|Mouse X| 鼠标沿屏幕X移动时触发 
+			 	\verb|Mouse Y| 鼠标沿屏幕Y移动时触发 
+			 	\verb|Mouse ScrollWheel |鼠标滚轮滚动是触发 
+		 	\end{enumerate}
+			
+			\begin{lstlisting}
+	float mouseX = Input.GetAxis("Mouse X");
+	float mouseY = Input.GetAxis("Mouse Y");
+	
+	transform.Rotate(Vector3.Up * mouseX * rotateSpeed); // 根据具体需求进行操作
+			\end{lstlisting}
+		
+		\paragraph{二、键盘类}
+		 	\begin{enumerate}
+		 		\item Vertical 键盘按上或下键时触发 
+		 		\item Horizontal 键盘按左或右键时触发
+		 	\end{enumerate}
+		 	
+		 	\begin{lstlisting}
+	float horizontal = Input.GetAxis("Horizontal");
+	float vertical = Input.GetAxis("Vertical");
+	
+	Vector3 desPos = (transform.forward * vertical  + transform.right * horizontal) * Time.deltaTime * moveSpeed;
+	
+	_rigidBody.position += desPos;
+		 	\end{lstlisting}
+		\textbf{返回值}是一个数，正负代表方向
+			
 \chapter{时间}
  	\section{Time 类}
  		该类是 U3D 在游戏中获取时间信息的接口类。常用变量如下：
@@ -275,18 +359,103 @@
 		\end{itemize}
 	
 \chapter{UGUI}
-	\section{GUI 控件- 图片、文本、按钮}
+	在脚本中使用时记得加上\verb|using UnityEngine.UI |
+	
+	\section{场景跳转- SceneManager}
 		
+	\section{锚点- 自适应屏幕}
+		\begin{itemize}
+			\item 定义摄像机观察原点
+			\item 其他物体与 锚点(Anchor) 距离保持一致，因此随着屏幕的变化，其他UI组件与屏幕锚点的距离始终保持一致
+			\item 每个物体都可以定义自己的锚点
+		\end{itemize}
 	
-	\section{GUI 控件- 文本输入}
+		\paragraph{锚点类型}
+			\begin{itemize}
+				\item 位置类型\verb| 左上角、中心等|
+				\item 拉伸类型\verb| 纵向拉伸适配、横向、整体|
+			\end{itemize}
+		
+	\section{按钮}
+		\subsection{原始Button}
+			
+		\subsection{Image等 -添加button 组件}
+			\begin{itemize}
+				\item \verb|create -> UI -> Image|
+				\item \verb|Inspirit -> Add Component -> button|
+			\end{itemize}	
+		
+		\subsection{添加事件处理脚本}
+			\begin{itemize}
+				\item 书写脚本并添加到Button gameObject 上
+				\item 如果是Button 组件的话直接在button 组件上添加，如果是Image 则添加button 组件后再添加
+				\item  添加脚本对象到\verb|onClick() |部分：\verb|+ -> gameObject 拖进来  -> 选择脚本中的具体函数|
+			\end{itemize}
+		
+	\section{文本- Text}
+		\subsection{添加文字阴影 -shadow 组件}
+			\verb|addComponent -> shadow|
+			
+		\subsection{添加文子边框 -outline 组件}
+			\verb|addComponent -> outline|
+			
+	\section{图片- ImageView}
+		
+	\section{选中标记- Toggle}
+		\paragraph{Toggle 基本}
+		
+		\paragraph{Toggle Group}
+			\subparagraph{选项栏设定}
+				将panel  拖入 toggle 中的\verb|value changed|部分
+				
+			\subparagraph{预设}
+				确定默认打开哪个panel，然后将其\verb|IsOn| 勾选，其余取消勾选	
+				
+	\section{滚动区域、滚动条}
 	
 	
-	\section{GUI 控件- 其他工具条}
+	\section{其他工具条}
+	
+	\section{布局- Layout}
+		\begin{itemize}
+			\item 具体页面下创建空物体 \verb| GameObject|
+			\item 其次在\verb|GameObject 下|添加组件 \verb|-> grid layout group|
+			\item 最后在这个\verb|GameObject |下创建出各种Image 组件，然后这些组件将会以\verb|grid layout| 的布局进行自动调整
+		\end{itemize}
+	
+		\subsection{grid layout group}
+			\begin{itemize}
+				\item  调整\verb|cell size| 进行调整子物件的大小
+				\item  \verb|cell size| 的改变只影响子组件的第一层，既最下面一层
+			\end{itemize}
+		
+		\subsection{horizontal layout group}
+		
+		\subsection{vertical layout group}
 		
 		
 \chapter{着色器渲染}
+
 		    
-\chapter{资源打包}
+\chapter{跨平台发布apk}
+	\section{流程}
+		\begin{itemize}
+			\item 安装 JavaSDK、Android Studio 并在SDK manager 里添加对应的API包
+			\item 在unity 中的\verb|edit |选项下的\verb|preferences|, 并选中\verb|External Tools| 选项，配置\verb|JDK |和\verb|Android SDK| 安装位置。
+			\item 在unity 中的\verb|File -> Build Settings|中，添加需要添加的场景，并选择对应的平台（Android， IOS）等
+			\item 在unity 中的\verb|Build Settings |中的\verb|Player Settings |设置以下几个重要内容。
+				\begin{enumerate}
+					\item \verb|Company Name |
+					\item \verb|Product Name |
+					\item \verb|Default Icon |:192$\times$192
+					\item \verb|Default Orientation |
+					\item \verb|Other Settings -> Identification |:修改为\verb|com.netease(Or Other).TestName(Or Other)|
+				\end{enumerate}
+		\end{itemize}	
+	
+	\section{Apk 安装常见错误}
+		\url{http://mumu.163.com/2017/03/30/25905_680657.html}
+			
 
 		    
 \end{document} 

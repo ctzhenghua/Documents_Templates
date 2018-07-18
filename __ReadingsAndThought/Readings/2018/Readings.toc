@@ -23,95 +23,108 @@
 \contentsline {subparagraph}{理解}{6}{section*.22}
 \contentsline {paragraph}{追求与自我完善}{6}{section*.23}
 \contentsline {subparagraph}{原文}{6}{section*.24}
-\contentsline {subparagraph}{理解}{6}{section*.25}
+\contentsline {subparagraph}{理解}{7}{section*.25}
 \contentsline {section}{\numberline {1.2}处事之道}{7}{section.1.2}
 \contentsline {paragraph}{过犹不及}{7}{section*.26}
 \contentsline {subparagraph}{理解}{7}{section*.27}
 \contentsline {paragraph}{言寡尤，行寡悔}{7}{section*.28}
 \contentsline {subparagraph}{原文}{7}{section*.29}
 \contentsline {subparagraph}{理解}{7}{section*.30}
-\contentsline {paragraph}{在此刻隐忍中消除远处的忧愁}{7}{section*.31}
-\contentsline {paragraph}{为与不为}{7}{section*.32}
-\contentsline {subparagraph}{原文}{7}{section*.33}
-\contentsline {subparagraph}{理解}{7}{section*.34}
+\contentsline {paragraph}{在此刻隐忍中消除远处的忧愁}{8}{section*.31}
+\contentsline {paragraph}{为与不为}{8}{section*.32}
+\contentsline {subparagraph}{原文}{8}{section*.33}
+\contentsline {subparagraph}{理解}{8}{section*.34}
+\contentsline {paragraph}{文化、形式的重要}{8}{section*.35}
+\contentsline {subparagraph}{原文}{8}{section*.36}
+\contentsline {subparagraph}{理解}{8}{section*.37}
+\contentsline {paragraph}{君臣之道}{8}{section*.38}
+\contentsline {subparagraph}{原文}{8}{section*.39}
+\contentsline {paragraph}{三思有度}{8}{section*.40}
+\contentsline {subparagraph}{原文}{8}{section*.41}
+\contentsline {subparagraph}{翻译}{8}{section*.42}
+\contentsline {subparagraph}{理解}{8}{section*.43}
+\contentsline {paragraph}{真正的直率、不为虚名}{8}{section*.44}
+\contentsline {subparagraph}{原文}{8}{section*.45}
+\contentsline {subparagraph}{理解}{8}{section*.46}
 \contentsline {chapter}{\numberline {第二章\hspace {0.3em}}中庸}{9}{chapter.2}
 \contentsline {section}{\numberline {2.1}中、庸、慎其独}{9}{section.2.1}
-\contentsline {paragraph}{原文}{9}{section*.35}
-\contentsline {paragraph}{理解}{9}{section*.36}
-\contentsline {subparagraph}{率性谓之道}{9}{section*.37}
-\contentsline {subparagraph}{君子慎其独}{9}{section*.38}
+\contentsline {paragraph}{原文}{9}{section*.47}
+\contentsline {paragraph}{理解}{9}{section*.48}
+\contentsline {subparagraph}{率性谓之道}{9}{section*.49}
+\contentsline {subparagraph}{君子慎其独}{9}{section*.50}
 \contentsline {section}{\numberline {2.2}君子中庸}{9}{section.2.2}
-\contentsline {paragraph}{原文}{9}{section*.39}
-\contentsline {paragraph}{理解}{9}{section*.40}
-\contentsline {subparagraph}{译文}{9}{section*.41}
-\contentsline {subparagraph}{君子中庸}{9}{section*.42}
-\contentsline {subparagraph}{小人反中庸}{9}{section*.43}
+\contentsline {paragraph}{原文}{9}{section*.51}
+\contentsline {paragraph}{理解}{9}{section*.52}
+\contentsline {subparagraph}{译文}{9}{section*.53}
+\contentsline {subparagraph}{君子中庸}{9}{section*.54}
+\contentsline {subparagraph}{小人反中庸}{9}{section*.55}
 \contentsline {section}{\numberline {2.3}鲜能知味}{10}{section.2.3}
-\contentsline {paragraph}{原文}{10}{section*.44}
-\contentsline {paragraph}{理解}{10}{section*.45}
-\contentsline {subparagraph}{知者过、愚者不及}{10}{section*.46}
-\contentsline {subparagraph}{人莫不饮食也，鲜能知味也}{10}{section*.47}
+\contentsline {paragraph}{原文}{10}{section*.56}
+\contentsline {paragraph}{理解}{10}{section*.57}
+\contentsline {subparagraph}{知者过、愚者不及}{10}{section*.58}
+\contentsline {subparagraph}{人莫不饮食也，鲜能知味也}{10}{section*.59}
 \contentsline {section}{\numberline {2.4}自作聪明，不知避祸}{10}{section.2.4}
-\contentsline {paragraph}{原文}{10}{section*.48}
-\contentsline {paragraph}{理解}{10}{section*.49}
-\contentsline {subparagraph}{自作聪明}{10}{section*.50}
-\contentsline {subparagraph}{去留无意，宠辱不惊}{10}{section*.51}
+\contentsline {paragraph}{原文}{10}{section*.60}
+\contentsline {paragraph}{理解}{10}{section*.61}
+\contentsline {subparagraph}{自作聪明}{10}{section*.62}
+\contentsline {subparagraph}{去留无意，宠辱不惊}{10}{section*.63}
 \contentsline {chapter}{\numberline {第三章\hspace {0.3em}}资治通鉴故事}{11}{chapter.3}
 \contentsline {section}{\numberline {3.1}七国争雄}{11}{section.3.1}
 \contentsline {subsection}{\numberline {3.1.1}赵魏韩三分晋}{11}{subsection.3.1.1}
-\contentsline {subparagraph}{总结}{11}{section*.52}
-\contentsline {subparagraph}{故事}{11}{section*.53}
+\contentsline {subparagraph}{总结}{11}{section*.64}
+\contentsline {subparagraph}{故事}{11}{section*.65}
 \contentsline {subsection}{\numberline {3.1.2}魏文侯}{12}{subsection.3.1.2}
-\contentsline {subparagraph}{总结}{12}{section*.54}
-\contentsline {subparagraph}{故事}{12}{section*.55}
+\contentsline {subparagraph}{总结}{12}{section*.66}
+\contentsline {subparagraph}{故事}{12}{section*.67}
 \contentsline {subsection}{\numberline {3.1.3}魏国选相}{12}{subsection.3.1.3}
-\contentsline {subparagraph}{总结}{12}{section*.56}
-\contentsline {subparagraph}{故事}{12}{section*.57}
+\contentsline {subparagraph}{总结}{12}{section*.68}
+\contentsline {subparagraph}{故事}{12}{section*.69}
 \contentsline {subsection}{\numberline {3.1.4}豫让刺杀赵襄子}{13}{subsection.3.1.4}
-\contentsline {subparagraph}{总结}{13}{section*.58}
-\contentsline {subparagraph}{故事}{13}{section*.59}
+\contentsline {subparagraph}{总结}{13}{section*.70}
+\contentsline {subparagraph}{故事}{13}{section*.71}
 \contentsline {subsection}{\numberline {3.1.5}聂政}{13}{subsection.3.1.5}
-\contentsline {subparagraph}{总结}{13}{section*.60}
-\contentsline {subparagraph}{故事}{13}{section*.61}
+\contentsline {subparagraph}{总结}{13}{section*.72}
+\contentsline {subparagraph}{故事}{13}{section*.73}
 \contentsline {subsection}{\numberline {3.1.6}名将吴起}{13}{subsection.3.1.6}
-\contentsline {subparagraph}{总结}{13}{section*.62}
-\contentsline {subparagraph}{故事}{13}{section*.63}
+\contentsline {subparagraph}{总结}{13}{section*.74}
+\contentsline {subparagraph}{故事}{13}{section*.75}
 \contentsline {subsection}{\numberline {3.1.7}商鞅}{14}{subsection.3.1.7}
-\contentsline {subparagraph}{总结}{14}{section*.64}
-\contentsline {subparagraph}{故事}{14}{section*.65}
+\contentsline {subparagraph}{总结}{14}{section*.76}
+\contentsline {subparagraph}{故事}{14}{section*.77}
 \contentsline {subsection}{\numberline {3.1.8}孙膑VS庞涓}{14}{subsection.3.1.8}
-\contentsline {subparagraph}{总结}{14}{section*.66}
-\contentsline {subparagraph}{故事}{14}{section*.67}
+\contentsline {subparagraph}{总结}{14}{section*.78}
+\contentsline {subparagraph}{故事}{14}{section*.79}
 \contentsline {subsection}{\numberline {3.1.9}楚昭王}{14}{subsection.3.1.9}
-\contentsline {subparagraph}{总结}{14}{section*.68}
-\contentsline {subparagraph}{故事}{15}{section*.69}
+\contentsline {subparagraph}{总结}{14}{section*.80}
+\contentsline {subparagraph}{故事}{15}{section*.81}
 \contentsline {subsection}{\numberline {3.1.10}燕昭王求贤}{15}{subsection.3.1.10}
-\contentsline {subparagraph}{总结}{15}{section*.70}
-\contentsline {subparagraph}{故事}{15}{section*.71}
+\contentsline {subparagraph}{总结}{15}{section*.82}
+\contentsline {subparagraph}{故事}{15}{section*.83}
 \contentsline {subsection}{\numberline {3.1.11}赵武陵王胡服骑射}{15}{subsection.3.1.11}
-\contentsline {subparagraph}{总结}{15}{section*.72}
-\contentsline {subparagraph}{故事}{15}{section*.73}
+\contentsline {subparagraph}{总结}{15}{section*.84}
+\contentsline {subparagraph}{故事}{15}{section*.85}
 \contentsline {subsection}{\numberline {3.1.12}乐毅伐齐}{15}{subsection.3.1.12}
-\contentsline {subparagraph}{总结}{15}{section*.74}
-\contentsline {subparagraph}{故事}{15}{section*.75}
+\contentsline {subparagraph}{总结}{15}{section*.86}
+\contentsline {subparagraph}{故事}{15}{section*.87}
 \contentsline {subsection}{\numberline {3.1.13}将相和}{15}{subsection.3.1.13}
-\contentsline {subparagraph}{总结}{15}{section*.76}
-\contentsline {subparagraph}{故事}{15}{section*.77}
+\contentsline {subparagraph}{总结}{15}{section*.88}
+\contentsline {subparagraph}{故事}{15}{section*.89}
 \contentsline {subsection}{\numberline {3.1.14}范雎（ju）睚眦必报}{16}{subsection.3.1.14}
-\contentsline {subparagraph}{原文}{16}{section*.78}
+\contentsline {subparagraph}{原文}{16}{section*.90}
 \contentsline {section}{\numberline {3.2}楚汉}{16}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}刘邦用人}{16}{subsection.3.2.1}
-\contentsline {subparagraph}{总结}{16}{section*.79}
-\contentsline {subparagraph}{故事}{16}{section*.80}
+\contentsline {subparagraph}{总结}{16}{section*.91}
+\contentsline {subparagraph}{故事}{16}{section*.92}
 \contentsline {subsection}{\numberline {3.2.2}项羽失败的启示}{17}{subsection.3.2.2}
-\contentsline {subparagraph}{总结}{17}{section*.81}
-\contentsline {subparagraph}{故事}{17}{section*.82}
+\contentsline {subparagraph}{总结}{17}{section*.93}
+\contentsline {subparagraph}{故事}{17}{section*.94}
 \contentsline {subsection}{\numberline {3.2.3}立太子}{17}{subsection.3.2.3}
-\contentsline {subparagraph}{故事}{17}{section*.83}
-\contentsline {subparagraph}{总结}{17}{section*.84}
+\contentsline {subparagraph}{故事}{17}{section*.95}
+\contentsline {subparagraph}{总结}{17}{section*.96}
 \contentsline {subsection}{\numberline {3.2.4}汉文帝}{17}{subsection.3.2.4}
-\contentsline {subparagraph}{总结}{17}{section*.85}
-\contentsline {subparagraph}{故事}{17}{section*.86}
+\contentsline {subparagraph}{总结}{17}{section*.97}
+\contentsline {subparagraph}{故事}{17}{section*.98}
+\contentsline {subsection}{\numberline {3.2.5}周亚夫}{18}{subsection.3.2.5}
 \contentsline {section}{\numberline {3.3}三国}{18}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}魏}{18}{subsection.3.3.1}
 \contentsline {subsection}{\numberline {3.3.2}蜀}{18}{subsection.3.3.2}
@@ -124,3 +137,4 @@
 \contentsline {subsection}{\numberline {3.4.5}陈}{18}{subsection.3.4.5}
 \contentsline {section}{\numberline {3.5}随}{18}{section.3.5}
 \contentsline {section}{\numberline {3.6}唐}{18}{section.3.6}
+\contentsline {subsection}{\numberline {3.6.1}李世羁ji}{18}{subsection.3.6.1}
