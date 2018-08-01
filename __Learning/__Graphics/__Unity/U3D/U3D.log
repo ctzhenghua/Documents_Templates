@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/W32TeX) (preloaded format=xelatex 2018.7.13)  18 JUL 2018 14:40
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/W32TeX) (preloaded format=xelatex 2018.7.13)  24 JUL 2018 19:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1951,36 +1951,36 @@ Package: xeCJK-listings 2015/05/15 v3.3.2 xeCJK patch file for listings
 ) (./U3D.aux)
 \openout1 = `U3D.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 107.
-LaTeX Font Info:    ... okay on input line 107.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 107.
-LaTeX Font Info:    ... okay on input line 107.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 107.
-LaTeX Font Info:    ... okay on input line 107.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 107.
-LaTeX Font Info:    ... okay on input line 107.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 107.
-LaTeX Font Info:    ... okay on input line 107.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 107.
-LaTeX Font Info:    ... okay on input line 107.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 107.
-LaTeX Font Info:    ... okay on input line 107.
-LaTeX Font Info:    Checking defaults for EU1/lmr/m/n on input line 107.
-LaTeX Font Info:    ... okay on input line 107.
-LaTeX Font Info:    Checking defaults for T3/cmr/m/n on input line 107.
-LaTeX Font Info:    Try loading font information for T3+cmr on input line 107.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for EU1/lmr/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for T3/cmr/m/n on input line 108.
+LaTeX Font Info:    Try loading font information for T3+cmr on input line 108.
 
 (c:/texlive/2015/texmf-dist/tex/latex/tipa/t3cmr.fd
 File: t3cmr.fd 2001/12/31 TIPA font definitions
 )
-LaTeX Font Info:    ... okay on input line 107.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 107.
-LaTeX Font Info:    ... okay on input line 107.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 107.
-LaTeX Font Info:    ... okay on input line 107.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
 
 ABD: EverySelectfont initializing macros
-LaTeX Info: Redefining \selectfont on input line 107.
+LaTeX Info: Redefining \selectfont on input line 108.
 .................................................
 . fontspec info: "setup-math"
 . 
@@ -1988,57 +1988,57 @@ LaTeX Info: Redefining \selectfont on input line 107.
 .................................................
 \symlegacymaths=\mathgroup6
 LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
-(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 107.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 107.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 107.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 107.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 107.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 107.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 107.
-LaTeX Font Info:    Redeclaring math accent \check on input line 107.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 107.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 107.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 107.
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 107.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 107.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 107.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 107.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 107.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 107.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 107.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 107.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 107.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 107.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 107.
-LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 107.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 107.
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 108.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 108.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 108.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 108.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 108.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 108.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 108.
+LaTeX Font Info:    Redeclaring math accent \check on input line 108.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 108.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 108.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 108.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 108.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 108.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 108.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 108.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 108.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 108.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 108.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 108.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 108.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 108.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 108.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 108.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 108.
 LaTeX Font Info:    Encoding `OT1' has changed to `EU1' for symbol font
-(Font)              `operators' in the math version `normal' on input line 107.
+(Font)              `operators' in the math version `normal' on input line 108.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> EU1/lmr/m/n on input line 107.
+(Font)                  OT1/cmr/m/n --> EU1/lmr/m/n on input line 108.
 LaTeX Font Info:    Encoding `OT1' has changed to `EU1' for symbol font
-(Font)              `operators' in the math version `bold' on input line 107.
+(Font)              `operators' in the math version `bold' on input line 108.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> EU1/lmr/m/n on input line 107.
+(Font)                  OT1/cmr/bx/n --> EU1/lmr/m/n on input line 108.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  EU1/lmr/m/n --> EU1/lmr/m/n on input line 107.
+(Font)                  EU1/lmr/m/n --> EU1/lmr/m/n on input line 108.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> EU1/lmr/m/it on input line 107.
+(Font)                  OT1/cmr/m/it --> EU1/lmr/m/it on input line 108.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> EU1/lmr/bx/n on input line 107.
+(Font)                  OT1/cmr/bx/n --> EU1/lmr/bx/n on input line 108.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> EU1/lmss/m/n on input line 107.
+(Font)                  OT1/cmss/m/n --> EU1/lmss/m/n on input line 108.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> EU1/lmtt/m/n on input line 107.
+(Font)                  OT1/cmtt/m/n --> EU1/lmtt/m/n on input line 108.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  EU1/lmr/m/n --> EU1/lmr/bx/n on input line 107.
+(Font)                  EU1/lmr/m/n --> EU1/lmr/bx/n on input line 108.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> EU1/lmr/bx/it on input line 107.
+(Font)                  OT1/cmr/bx/it --> EU1/lmr/bx/it on input line 108.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> EU1/lmss/bx/n on input line 107.
+(Font)                  OT1/cmss/bx/n --> EU1/lmss/bx/n on input line 108.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> EU1/lmtt/bx/n on input line 107.
+(Font)                  OT1/cmtt/m/n --> EU1/lmtt/bx/n on input line 108.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
@@ -2077,7 +2077,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 \c@lstlisting=\count214
 ABD: EveryShipout initializing macros
 \AtBeginShipoutBox=\box83
-Package hyperref Info: Link coloring ON on input line 107.
+Package hyperref Info: Link coloring ON on input line 108.
 
 (c:/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -2087,9 +2087,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count215
 )
-LaTeX Info: Redefining \ref on input line 107.
-LaTeX Info: Redefining \pageref on input line 107.
-LaTeX Info: Redefining \nameref on input line 107.
+LaTeX Info: Redefining \ref on input line 108.
+LaTeX Info: Redefining \pageref on input line 108.
+LaTeX Info: Redefining \nameref on input line 108.
 
 (./U3D.out) (./U3D.out)
 \@outlinefile=\write6
@@ -2135,11 +2135,11 @@ LaTeX Info: Redefining \nameref on input line 107.
 . and font adjustment code:
 . 
 .................................................
-LaTeX Font Info:    Try loading font information for U+msa on input line 109.
+LaTeX Font Info:    Try loading font information for U+msa on input line 110.
  (c:/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 109.
+LaTeX Font Info:    Try loading font information for U+msb on input line 110.
 (c:/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
@@ -2188,6 +2188,23 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 ] [2
 
+] (./U3D.toc
+Underfull \vbox (badness 1655) has occurred while \output is active []
+
+ [3]
+Underfull \vbox (badness 3396) has occurred while \output is active []
+
+ [4]
+[5]
+Underfull \vbox (badness 3396) has occurred while \output is active []
+
+ [6])
+\tf@toc=\write7
+\openout7 = `U3D.toc'.
+
+
+[7] [8
+
 ]
 第一章
 \g__fontspec_family_FangSong_int=\count218
@@ -2206,7 +2223,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 . 
 . Could not resolve font FangSong/I (it probably doesn't exist).
 .................................................
-LaTeX Font Info:    Try loading font information for EU1+lmtt on input line 118
+LaTeX Font Info:    Try loading font information for EU1+lmtt on input line 113
 .
 (c:/texlive/2015/texmf-dist/tex/latex/euenc/eu1lmtt.fd
 File: eu1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -2237,91 +2254,154 @@ File: eu1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 .................................................
 File: figure/SerilizedFiled.jpg Graphic file (type QTm)
 
-<use  "figure/SerilizedFiled.jpg" >
-Underfull \vbox (badness 3354) has occurred while \output is active []
+<use  "figure/SerilizedFiled.jpg" > [9]
+File: figure/scriptLifeCircle.jpg Graphic file (type QTm)
+ <use  "figure/scriptLifeCircle.jpg" >
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [3]
-[4]
+ [10]
+Overfull \vbox (8.0519pt too high) has occurred while \output is active []
+
+
+[11]
+File: figure/LifeCicle.png Graphic file (type QTm)
+ <use  "figure/LifeCicle.png" >
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [12
+
+]
+[13] [14]
+Overfull \hbox (2.69698pt too wide) in paragraph at lines 251--252
+[][]\EU1/lmtt/m/n/12 yield \EU1/SimSun(0)/m/n/12 关 键 词 \EU1/SimSun(0)/bx/n/12 用
+ 来 声 明 序 列 中 的 下 一 个 值 或 者 是 一 个 无 意 义 的 值\EU1/SimSun(0)/m/n/12 ，|  如 果 使 用[]\E
+U1/lmtt/m/n/12 yield return x\EU1/lmr/m/n/12 (x
+ []
+
+[15] [16]
 第二章
-[5
+[17
 
-] [6]
+] [18]
 第三章
 
-Overfull \hbox (14.21971pt too wide) in paragraph at lines 196--197
+Overfull \hbox (14.21971pt too wide) in paragraph at lines 333--334
  []\EU1/SimSun(0)/bx/n/12 销 毁[] []\EU1/lmtt/m/n/12 Destroy(GameObject xx)- \EU1
 /FangSong(0)/m/n/12 立即销毁 \EU1/SimSun(0)/m/n/12 或 []\EU1/lmtt/m/n/12 Destroy(Gam
 eObject xx, Time time)- \EU1/FangSong(0)/m/n/12 几秒后销毁 
  []
 
 
-Overfull \hbox (200.98923pt too wide) in paragraph at lines 199--200
+Overfull \hbox (200.98923pt too wide) in paragraph at lines 336--337
  []\EU1/SimSun(0)/bx/n/12 可 见 否[] \EU1/SimSun(0)/m/n/12 通 过 设 置 该 参 数 调 整 该 实 体
  是 否 可 以 在 游 戏 中 显 示，|  具 体 设 置 方 法 为[]\EU1/lmtt/m/n/12 gameObject.SetActive(tr
 ue) \EU1/FangSong(0)/m/n/12 为可以显示，| \EU1/lmtt/m/n/12 false \EU1/FangSong(0)/m/n
 /12 则隐藏 
  []
 
-
-Underfull \vbox (badness 1762) has occurred while \output is active []
-
- [7
+[19
 
 ]
-[8]
-第四章
-[9
+File: figure/Prefab-1.png Graphic file (type QTm)
+ <use  "figure/Prefab-1.png" >
+File: figure/Prefab-2.png Graphic file (type QTm)
+ <use  "figure/Prefab-2.png" >
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-] [10
+ [20]
+File: figure/Prefab-3.png Graphic file (type QTm)
+
+<use  "figure/Prefab-3.png" >
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [21]
+[22] [23] [24
+
+]
+第四章
+[25] [26] [27] [28
 
 ]
 第五章
 
-Overfull \hbox (8.60123pt too wide) in paragraph at lines 269--272
+Overfull \hbox (8.60123pt too wide) in paragraph at lines 516--519
 [][]\EU1/lmtt/m/n/12 Mouse X \EU1/SimSun(0)/m/n/12 鼠 标 沿 屏 幕 \EU1/lmr/m/n/12 X 
 \EU1/SimSun(0)/m/n/12 移 动 时 触 发 []\EU1/lmtt/m/n/12 Mouse Y \EU1/SimSun(0)/m/n/1
 2 鼠 标 沿 屏 幕 \EU1/lmr/m/n/12 Y \EU1/SimSun(0)/m/n/12 移 动 时 触 发 []\EU1/lmtt/m/n/1
 2 Mouse ScrollWheel \EU1/SimSun(0)/m/n/12 鼠
  []
 
-[11] [12]
+[29] [30]
 第六章
-[13
+[31
 
-] [14
+] [32
 
 ]
 第七章
-[15] [16
+[33] [34
 
 ]
 第八章
-[17] [18
+[35] [36
 
 ]
 第九章
-[19] [20
+[37] [38
 
 ]
 第十章
-[21] [22
+[39] [40
 
 ]
 第十一章
-[23]
-Underfull \vbox (badness 1590) has occurred while \output is active []
+[41]
+File: figure/Canva-1.png Graphic file (type QTm)
+ <use  "figure/Canva-1.png" >
+File: figure/Canvas.png Graphic file (type QTm)
+ <use  "figure/Canvas.png" > [42]
+File: figure/Canvas-2.png Graphic file (type QTm)
 
- [24]
-[25] [26
+<use  "figure/Canvas-2.png" >
+File: figure/Canvas-3.png Graphic file (type QTm)
+ <use  "figure/Canvas-3.png" >
+Underfull \vbox (badness 5954) has occurred while \output is active []
 
-]
+ [43]
+File: figure/Anchor.png Graphic file (type QTm)
+
+<use  "figure/Anchor.png" > [44]
+File: figure/anchorFirst.png Graphic file (type QTm)
+ <use  "figure/anchorFirst.png" >
+File: figure/anchorChange.png Graphic file (type QTm)
+
+<use  "figure/anchorChange.png" > [45]
+File: figure/Anchors-3.png Graphic file (type QTm)
+ <use  "figure/Anchors-3.png" >
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [46]
+File: figure/Anchors-1.png Graphic file (type QTm)
+
+<use  "figure/Anchors-1.png" >
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [47]
+File: figure/Anchors-2.png Graphic file (type QTm)
+
+<use  "figure/Anchors-2.png" > [48]
+File: figure/RectTransform-rect.png Graphic file (type QTm)
+ <use  "figure/RectTransform-rect.png" >
+[49] [50] [51] [52]
 第十二章
-[27] [28
+[53
+
+] [54
 
 ]
 第十三章
 
-Overfull \hbox (23.97632pt too wide) in paragraph at lines 432--433
+Overfull \hbox (23.97632pt too wide) in paragraph at lines 920--921
 []\EU1/SimSun(0)/m/n/12 在 \EU1/lmr/m/n/12 unity \EU1/SimSun(0)/m/n/12 中 的[]\EU1
 /lmtt/m/n/12 edit \EU1/SimSun(0)/m/n/12 选 项 下 的[]\EU1/lmtt/m/n/12 preferences\E
 U1/lmr/m/n/12 , \EU1/SimSun(0)/m/n/12 并 选 中[]\EU1/lmtt/m/n/12 External Tools \E
@@ -2330,26 +2410,30 @@ EU1/lmtt/m/n/12 Android SDK
  []
 
 
-Overfull \hbox (35.10811pt too wide) in paragraph at lines 440--441
+Overfull \hbox (35.10811pt too wide) in paragraph at lines 928--929
 [][]\EU1/lmtt/m/n/12 Other Settings -> Identification \EU1/lmr/m/n/12 : \EU1/Si
 mSun(0)/m/n/12 修 改 为[]\EU1/lmtt/m/n/12 com.netease(Or Other).TestName(Or Other)
  
  []
 
-[29]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 449.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 449.
+[55] [56
+
+]
+第十四章
+[57]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 942.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 942.
  (./U3D.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 449.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 449.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 942.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 942.
  ) 
 Here is how much of TeX's memory you used:
- 44356 strings out of 493706
- 922575 string characters out of 6148913
- 964214 words of memory out of 5000000
- 47056 multiletter control sequences out of 15000+600000
- 11638 words of font info for 81 fonts, out of 8000000 for 9000
+ 44668 strings out of 493706
+ 932143 string characters out of 6148913
+ 1008236 words of memory out of 5000000
+ 47347 multiletter control sequences out of 15000+600000
+ 11646 words of font info for 82 fonts, out of 8000000 for 9000
  1328 hyphenation exceptions out of 8191
- 63i,12n,75p,10411b,1117s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 63i,12n,75p,10411b,1769s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on U3D.pdf (29 pages).
+Output written on U3D.pdf (57 pages).

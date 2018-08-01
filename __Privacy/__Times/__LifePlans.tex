@@ -16,6 +16,7 @@
 \usepackage{tabularx} 	%表格排版格式控制
 \usepackage{array}	%表格排版格式控制
 \usepackage{hyperref}
+\usepackage{dirtree}
 
 \CTEXsetup[format+={\flushleft}]{section}
 
@@ -353,6 +354,9 @@
 			\item 让他们在平凡的世界里活的有趣
 			\item 争吵难免，但一定得处理好、及时沟通，男女思维有别..注意方式
 		\end{enumerate}
+	
+\setlength{\DTbaselineskip}{20pt}
+\DTsetlength{1em}{3em}{0.1em}{1pt}{4pt}
 
 \chapter{职业}   
 	\section{Linux 网络 服务器主程}
@@ -364,16 +368,39 @@
 			\item 服务器架构
 			\item 代码设计知识
 		\end{itemize}
-		
+	
+	\clearpage	
 	\section{游戏引擎 主程}
-		\begin{itemize}
-			\item 算法
-			\item OpenGL 
-			\item DirectX
-			\item 图形学知识
-			\item 多线程编程
-			\item 代码设计知识
-		\end{itemize}
+		\dirtree{%
+			.1 \textbf{游戏职业技术路线规划}.
+			.2 \textbf{图形学} .
+				.3 Mesh .
+				.3 光照 .
+				.3 物理 .
+				.3 渲染 .
+			.2 \textbf{底层API} .
+				.3 OpenGL .
+				.3 DirectX .
+			.2 \textbf{游戏引擎} .
+				.3 Unity .
+				.3 Unreal .
+				.3 NeoX .
+			.2 \textbf{计算机基础} .
+				.3 数据结构 .
+				.3 算法导论 .
+				.3 操作系统 -Linux.
+				.3 编程语言 .
+					.4 C++ .
+						.5 Mem管理 .
+						.5 STL源码 .
+						.5 auto、share\_ptr等的实现原理 .
+					.4 Python . 
+				.3 设计模式 .
+				.3 多线程编程 .
+		}
+	
+	
+
 		
 \chapter{事业}   
     \section{饭店}

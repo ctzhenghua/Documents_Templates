@@ -96,7 +96,8 @@
 	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
 	keywordstyle=\color{blue},       % keyword style
 	stringstyle=\color{mymauve}\ttfamily,     % string literal style
-	frame=single,
+	frame=L,
+	xleftmargin = .079\textwidth,
 	rulesepcolor=\color{red!20!green!20!blue!20},
 	% identifierstyle=\color{red},
 	language=c++,
@@ -106,16 +107,12 @@
  
 \begin{document}          %正文排版开始
  	\maketitle
+ 	\tableofcontents
 
 \chapter{基础}
-	\url{https://unity3d.com/cn/learn/tutorials}
-	
-	\section{Scene 场景- 世界变换}	
-	
-	\section{Console 调试信息 - Crtl+Shift+C}
+	入门参考：\url{https://unity3d.com/cn/learn/tutorials}
 	
 	\section{如何将脚本与具体对象绑定}
-	
 		\begin{enumerate}
 			\item 右键\verb|asset|文件夹，创建C\#脚本
 			\item 编写脚本
@@ -152,6 +149,143 @@
 			\item \verb|q、w、e、r、t |在操作UI时尽量使用 T，以避免z轴发生的变化 
 		\end{itemize}
 	
+	\section{MonoBehaviour 生命周期、渲染管线}
+		
+		\subsection{脚本渲染流程}
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.44]{scriptLifeCircle.jpg}
+				\caption{脚本生命周期核心方法}
+			\end{figure}
+			
+			\clearpage
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.78]{LifeCicle.png}
+				\caption{简要核心方法}
+			\end{figure}
+		
+		update：当其\textbf{所在的物体}属于未激活的话（\verb|active为false|），\textit{该物体上所有脚本中包含的协程代码都是不会被执行的}。
+		\subsection{核心方法}
+			\begin{enumerate}
+				\item \verb|Reset |:
+				\item \verb|Awake |:
+				\item \verb|OnEnable |:
+				\item \verb|Start |:
+				\item \verb|FixedUpdate |:
+				\item \verb|yield WaitForFixedUpdate |:
+				\item \verb|OnTriggerXXX |:
+				\item \verb|Update |:
+				\item \verb|LateUpdate |:
+				\item \verb|OnWillRenderObject |:
+				\item \verb|OnGUI |:
+				\item \verb|yield WaitForEndOfFrame |:
+				\item \verb|OnDisable |:
+				\item \verb|OnDestroy |:
+			\end{enumerate}
+		
+	\section{Unity 委托}
+		
+		\paragraph{定义}\verb|public delegate void MyDelegate(int num);|
+		
+			\textbf{委托}就是\verb|C#|封装的\textbf{C++的函数指针}。
+			
+			定义一个委托MyDelegate，如同定义一个类一样，此时的委托没有经过实例化是无法使用的，而他的实例化必须接收一个返回值和参数都与他等同的函数，此处的委托MyDelegate只能接收返回值为void，参数为一个int的函数
+			
+		\paragraph{实例化委托}：\verb|MyDelegate _MyDelegate=new MyDelegate(TestMod);|
+			
+			以\verb|TestMod|函数实例化一个\verb|MyDelegate|类型的委托\verb|_MyDelegate|，此处\verb|TestMod|函数的定义就应如下：
+				
+			\verb|public void TestMod(int _num);|
+				
+			之后调用\verb|_MyDelegate(100)|时就完全等同于调用\verb|TestMod(100)|
+		
+		
+		
+	\section{Unity 协程}
+		\subsection{开启方式}
+			协程：协同程序，在主程序运行的同时，开启另外一段逻辑处理，来协同当前程序的执行。
+			
+			\paragraph{StartCoroutine(string MethodName)}
+				\begin{itemize}
+					\item 参数是方法名					
+					\item 形参方法可以有返回值
+				\end{itemize}
+			
+			\paragraph{StartCoroutine(IEnumerator method)}
+				\begin{itemize}
+					\item 参数是方法名(\verb|TestMethod()|),方法中\textbf{可以包含多个参数}
+					\item \verb|IEnumrator| 类型的方法不能含有\verb|ref或者out| 类型的参数，\textbf{但可以含有被传递的引用}
+					\item \textbf{必须有有返回值}，且返回值类型为\verb|IEnumrator|,返回值使用（\textit{yield retuen +表达式或者值}，或者 \textit{yield break}）语句	
+			\end{itemize}
+		
+		\subsection{终止方式}
+			\paragraph{StopCoroutine(string MethodName)}
+				只能终止指定的协程
+			
+			\paragraph{StopAllCoroutine()}
+				终止所有协程
+				
+		\subsection{yield 方式}
+			\paragraph{yield return}
+				挂起，\textbf{程序遇到}\verb|yield|\textbf{关键字时会被挂起}，暂停执行，\textbf{等待条件满足时从当前位置继续执行}
+				
+				\begin{itemize}
+					\item \verb|yield return 0| or \verb|yield return null|:程序在下一帧中从当前位置继续执行
+					\item \verb|yield return 1,2,3,......|: 程序等待1，2，3...帧之后从当前位置继续执行
+					\item \verb|yield return new WaitForSeconds(n)|:程序等待n秒后从当前位置继续执行
+					\item \verb|yield new WaitForEndOfFrame()|:在所有的渲染以及GUI程序执行完成后从当前位置继续执行
+					\item \verb|yield new WaitForFixedUpdate()|:所有脚本中的FixedUpdate()函数都被执行后从当前位置继续执行
+					\item \verb|yield return WWW()|:等待一个网络请求完成后从当前位置继续执行
+					\item \verb|yield return StartCoroutine()|:等待一个协程执行完成后从当前位置继续执行
+				\end{itemize}
+			
+			\paragraph{yield break}
+				如果使用\verb|yield break|语句，将会导致\textbf{如果协程的执行条件不被满足}，\textit{不会从当前的位置继续执行程序，而是直接从当前位置跳出函数体，回到函数的根部}
+				
+				\color{blue}相当于：\textbf{return; + 暂停}\color{black}
+				
+		\subsection{执行原理}
+			协程函数的返回值是\verb|IEnumerator|,它是一个迭代器，\textbf{可以把它当成执行一个序列的某个节点的指针}，它提供了两个重要的接口，分别是\verb|Current|(返回当前指向的元素)和\verb|MoveNext()|(将指针向后移动一个单位，\textit{如果移动成功，则返回true})
+			
+			\verb|yield|关键词\textbf{用来声明序列中的下一个值或者是一个无意义的值}，如果使用\verb|yield return x|(x是指一个具体的对象或者数值)的话，那么\verb|MoveNext|返回为\verb|true|并且\verb|Current|被赋值为\verb|x|,如果使用\verb|yield break|使得\verb|MoveNext()|返回为\verb|false|
+			
+			如果\verb|MoveNext|函数返回为\verb|true|\textbf{意味着协程的执行条件被满足，则能够从当前的位置继续往下执行}。否则不能从当前位置继续往下执行。	
+
+	\paragraph{委托+协程}
+		\url{https://blog.csdn.net/qq992817263/article/details/51514449}
+		
+		\begin{itemize}
+			\item 实现延时
+			\item 实现给定函数传参
+			\item 实现特定功能
+		\end{itemize}
+	
+		\begin{lstlisting}
+	// 延时执行
+
+	// <param name="action">执行的委托</param>
+	// <param name="obj">委托的参数</param>
+	// <param name="delaySeconds">延时等待的秒数</param>
+	public IEnumerator DelayToInvokeDo(Action<GameObject> action, GameObject obj,float delaySeconds)
+	{
+		yield return new WaitForSeconds(delaySeconds); // delaySeconds 后执行
+		action(obj); // 特定功能
+	}
+	// 使用例子
+	StartCoroutine(
+		DelayToInvokeDo(
+			delegate(GameObject task) {
+				task.SetActive(true);
+				task.transform.position = Vector3.zero;
+				task.transform.rotation = Quaternion.Euler(Vector3.zero);
+				task.doSomethings();
+			},
+			/*传参*/GameObject.Find("task1"),
+			1.5f)/*End 匿名委托*/
+		);/*End 协程初始*/
+		\end{lstlisting}
+		
 \chapter{事件}
 	\section{必然事件}
 		继承自\verb|MonoBehaviour 类|后，自动会\textbf{按序}\textit{提供以下方法}:
@@ -184,6 +318,7 @@
 		
 
 \chapter{实体-人物、物体、组件}
+		
 	\section{实体类} \verb|GameObject 类|,游戏基础对象，用于填充世界。
 		\paragraph{复制}
 			\verb|Instantiate(GameObject)| 或 \verb|Instantiate(GameObject, position, rotation)|
@@ -200,7 +335,75 @@
 		\paragraph{可见否}
 			通过设置该参数调整该实体是否可以在游戏中显示，具体设置方法为\verb|gameObject.SetActive(true) 为可以显示，false 则隐藏|
 
+	\section{Prefabs -预设体}
+		prefabs基础：\url{https://www.cnblogs.com/yuyaonorthroad/p/6107320.html}
 		
+		动态加载Prefabs：\url{https://blog.csdn.net/linshuhe1/article/details/51355198}
+		
+		在进行一些功能开发的时候，我们常常将一些\textbf{能够复用的对象}制作成.\textbf{prefab的预设物体}，然后将预设体存放到Resources目录之下，使用时再动态加载到场景中并进行实例化。例如：子弹、特效甚至音频等，都能制作成预设体。
+		
+		\subparagraph{概念} 组件的集合体, 预制物体可以实例化成游戏对象.
+		\subparagraph{作用} 可以重复的创建具有相同结构的游戏对象。	
+		
+		\subsection{预设动态加载到场景}
+			\paragraph{预设体资源加载}\verb|->|
+			
+				假设预设体的位置为下图所示
+				\begin{figure}[H]
+					\centering
+					\includegraphics[scale=0.6]{Prefab-1.png}
+					\caption{Prefab 资源位置}
+				\end{figure}
+			
+				\begin{lstlisting}[xleftmargin = .079\textwidth, frame = L]
+	//加载预设体资源
+	GameObject hp_bar = (GameObject)Resources.Load("Prefabs/HP_Bar");				
+				\end{lstlisting}
+				
+			通过上述操作，实现从资源目录下\textbf{载入}\verb|HP_Bar.prefab|\textbf{预设体}，\textbf{用}一个\verb|GameObject|\textbf{对象来存放}，此时该预设物体并未真正载入到场景中，因为还未进行实例化操作。
+			
+			\paragraph{预设体实例化}\verb|->|
+			
+				实例化使用的是\verb|MonoBehaviour.Instantiate|函数来完成的，\textbf{其实质就是从预设体资源中克隆出一个对象}，它\textit{具有与预设体完全相同的属性}，并且被加载到当前场景中
+				
+				完成以上代码之后，在当前场景中会出现一个实例化之后的对象，并且其父节点默认为当场的场景最外层，如下图所示。
+					\begin{figure}[H]
+						\centering
+						\includegraphics[scale=0.8]{Prefab-2.png}
+						\caption{Prefab 实例后位置}
+					\end{figure}
+				
+			\paragraph{实例化对象属性设置}\verb|->|
+				
+				完成上述步骤之后，我们已经可以在场景中看到实例化之后的对象，但是通常情况下我们\textbf{希望}我们的\textbf{对象之间层次感分明}，而且这样也方便我们进行对象统一管理，而不是在Hierarchy中看到一大堆并排散乱对象，所以我们\textbf{需要为对象设置名称以及父节点等属性}。
+			
+				\verb|-->Notice：|常见错误：对\textbf{未初始化}的\verb|hp_bar|进行属性设置，\textbf{设置之后的属性在实例化之后无法生效}。这是\textit{因为我们最后在场景中}\textbf{显示的其实并非实例化前的资源对象}，\textbf{而是一个克隆对象}，\color{blue}\textit{所以假如希望设置的属性在最后显示出来的对象中生效，我们需要对实例化之后的对象进行设置}。\color{black}
+			
+			  正确的设置代码如下，可以看到\textbf{实例化对象}已成功挂在到\textbf{父节点Canvas}上，在层次视图效果如下图所示：
+			  	\begin{lstlisting}[xleftmargin = .079\textwidth, frame = L]
+	GameObject hp_bar = (GameObject)Resources.Load("Prefabs/HP_Bar");
+	
+	//搜索画布的方法！
+	GameObject mUICanvas = GameObject.Find("Canvas");
+	hp_bar = Instantiate(hp_bar);
+	hp_bar.transform.parent = mUICanvas.transform;
+			  	\end{lstlisting}
+			  	
+			  	\begin{figure}[H]
+			  		\centering
+			  		\includegraphics[scale=0.8]{Prefab-3.png}
+			  		\caption{Prefab对象 设置父子关系}
+			  	\end{figure}
+		  	
+		  		\subparagraph{简化写法}上述实例步骤与属性设置代码可以简化为
+		  			\begin{lstlisting}[xleftmargin = .079\textwidth, frame = L]
+	GameObject hp_bar = (GameObject)Instantiate(Resources.Load("Prefabs/HP_Bar"));
+	GameObject mUICanvas = GameObject.Find("Canvas");
+	hp_bar.transform.parent = mUICanvas.transform;	  				
+		  			\end{lstlisting}
+		  	
+		  	\paragraph{预制体添加脚本}
+		  		在预制体上不能直接添加脚本，首先需要将其拖入场景，然后再对其操作，这个时候可以添加脚本，添加组件等，在完成这些操作后，在Inspector 选项中选中 Apply,然后删除其在场景中的刚才拖过来的，即可。		
 	\section{获取实体上的组件}
 		\paragraph{调用方式}\verb|GameObject.GetComponent<Type>().xx = xx;|
 			
@@ -225,24 +428,66 @@
 		
 \chapter{世界变换}
 	\section{Transform 类}
-		\paragraph{位置}
-			transform.position = new Vector3(1, 0, 0);
-		
-		\paragraph{角度}
-			transform.eulerAngles = new Vector3(x, y, z);
-		
-		\paragraph{旋转}	
-			transform.Rotate(x, y, z);
-			 
-		\paragraph{缩放}
-			transform.localScale(x, y, z); // 基准为1、1、1， 数为缩放因子。
+		\url{https://blog.csdn.net/yangmeng13930719363/article/details/51460841}
+		\subsection{位置}
+				transform.position = new Vector3(1, 0, 0);
+		\subsection{旋转}	
+				transform.Rotate(x, y, z);
+				
+				transform.eulerAngles = new Vector3(x, y, z);	
+		\subsection{缩放}
+				transform.localScale(x, y, z); // 基准为1、1、1， 数为缩放因子。	
+		\subsection{平移}
+				transform.Translate(x, y, z); 
+		\subsection{Transform.localPosition}
+			\verb|position|是世界坐标中的位置，可以理解为绝对坐标 
 			
-		\paragraph{平移}
-			transform.Translate(x, y, z); 
-
-	\section{注意}
-		在变化的过程中需要乘以 Time.deltaTime ,否则会出现大幅不连贯的画面。
-
+			\verb|localPosition|是\textbf{相对于父对象的位置}，是相对坐标，既父级窗体为原点坐标
+		\subsection{注意}
+			在变化的过程中需要乘以 Time.deltaTime ,否则会出现大幅不连贯的画面。
+	
+	\section{摄像机 -Camera}
+		\subsection{Clear Flags}
+			清除标记。决定屏幕的哪部分将被清除。一般用户使用对台摄像机来描绘不同游戏对象的情况，有3中模式选择：
+			\begin{itemize}
+				\item \verb|Skybox|：天空盒。默认模式。在屏幕中的空白部分将显示当前摄像机的天空盒。如果当前摄像机没有设置天空盒，会默认用Background色。
+				\item \verb|Solid Color|：纯色。选择该模式屏幕上的空白部分将显示当前摄像机的background色。
+				\item \verb|Depth only|：仅深度。该模式用于游戏对象不希望被裁剪的情况。
+				\item \verb|Dont Clear|：不清除。该模式不清除任何颜色或深度缓存。其结果是，每一帧渲染的结果叠加在下一帧之上。一般与自定义的shader配合使用。
+			\end{itemize}
+		\subsection{Culling Mask -剔除遮罩} 
+			剔除遮罩，选择所要显示的\verb|layer|
+		
+		\subsection{Projection -透视模式}
+			\paragraph{透视}
+				摄像机模式
+				
+			\paragraph{正交}
+				前后显示一样，不存在远小近大的样子。
+				
+		\subsection{Clipping Planes -裁剪模式}
+			剪裁平面。摄像机开始渲染与停止渲染之间的距离。
+			
+		\subsection{Viewport Rect}
+			标准视图矩形。用四个数值来控制摄像机的视图将绘制在屏幕的位置和大小，使用的是屏幕坐标系，数值在0~1之间。坐标系原点在左下角。
+			
+		\subsection{Depth -控制渲染顺序}
+			深度。\textbf{用于控制摄像机的渲染顺序}，\textbf{较大}值的摄像机将\textbf{被}渲染\textit{在}\textbf{较小}值的摄像机\textbf{之上}。
+			
+		\subsection{Rendering Path -渲染路径}
+			渲染路径。\textbf{用于指定摄像机的渲染方法}。
+			
+			\verb|Use Player Settings|：使用\verb|Project Settings-->Player|中的设置。
+			\verb|Vertex Lit|：\textbf{顶点光照}。摄像机将对所有的游戏对象座位顶点光照对象来渲染。
+			\verb|Forward|：\textbf{快速渲染}。摄像机将所有游戏对象将按每种材质一个通道的方式来渲染。
+			\verb|Deferred Lighting|：\textbf{延迟光照}。摄像机先对所有游戏对象进行一次无光照渲染，用屏幕空间大小的Buffer保存几何体的深度、法线已经高光强度，生成的Buffer将用于计算光照，同时生成一张新的光照信息Buffer。最后所有的游戏对象会被再次渲染，渲染时叠加光照信息Buffer的内容。
+			
+		\subsection{Target Texture -目标纹理}
+			用于将摄像机视图输出并渲染到屏幕。一般用于制作导航图或者画中画等效果。
+			
+		\subsection{HDR -高动态光照渲染}
+			高动态光照渲染。用于启用摄像机的高动态范围渲染功能。
+			
 \chapter{键盘鼠标控制}
 	\section{普通按键 -keyDown(KeyCode xx)}
 		\paragraph{方式一}
@@ -307,7 +552,7 @@
  				\toprule
  					变量名 & 意义\\
  				\midrule
- 					time & 游戏从开始到现在的运行时间， 单位为秒\\
+ 					time & 单位为秒 \\
  					\verb|deltaTime|     & 从上一帧到当前帧消耗的时间 \\
  					fixedTime     & 最近FixedUpdate 的时间，从游戏开始计算 \\
  					\verb|fixedDeltaTime|     & 物理引擎和FixedUpdate 的更新时间间隔 \\
@@ -334,16 +579,19 @@
 			\item \verb|Material |：拖入材质球。
 		\end{itemize}
 
-\chapter{烘培}
-	\section{简介}
-		只有静态场景才能完成烘培（Bake）操作，其目的是在游戏编译阶段完成光照和阴影计算，然后以贴图的形式保存在资源中，以这种手段避免在游戏运行中计算光照而带来的CPU和GPU损耗。
+\chapter{光照}
+	\section{光照}
 		
-		\begin{itemize}
-			\item \textbf{如果不烘培}：游戏运行时，这些阴影和反光是由CPU和GPU计算出来的。
-			\item \textbf{如果烘焙}：游戏运行时，直接加载在编译阶段完成的光照和阴影贴图，这样就不用再进行计算，节约资源。
-		\end{itemize}
-	
-	\section{流程}
+	\section{烘培}
+		\paragraph{简介}
+			只有静态场景才能完成烘培（Bake）操作，其目的是在游戏编译阶段完成光照和阴影计算，然后以贴图的形式保存在资源中，以这种手段避免在游戏运行中计算光照而带来的CPU和GPU损耗。
+			
+			\begin{itemize}
+				\item \textbf{如果不烘培}：游戏运行时，这些阴影和反光是由CPU和GPU计算出来的。
+				\item \textbf{如果烘焙}：游戏运行时，直接加载在编译阶段完成的光照和阴影贴图，这样就不用再进行计算，节约资源。
+			\end{itemize}
+		
+		\paragraph{流程}
 	
 	
 \chapter{寻路}
@@ -361,21 +609,249 @@
 \chapter{UGUI}
 	在脚本中使用时记得加上\verb|using UnityEngine.UI |
 	
-	\section{场景跳转- SceneManager}
-		
-	\section{锚点- 自适应屏幕}
-		\begin{itemize}
-			\item 定义摄像机观察原点
-			\item 其他物体与 锚点(Anchor) 距离保持一致，因此随着屏幕的变化，其他UI组件与屏幕锚点的距离始终保持一致
-			\item 每个物体都可以定义自己的锚点
-		\end{itemize}
+	\url{https://blog.csdn.net/wangmeiqiang/article/category/6364468}
 	
-		\paragraph{锚点类型}
-			\begin{itemize}
-				\item 位置类型\verb| 左上角、中心等|
-				\item 拉伸类型\verb| 纵向拉伸适配、横向、整体|
-			\end{itemize}
+	\section{Canvas}
+		Canvas画布\textbf{是承载所有UI元素的区域}。\verb|Canvas|实际上\textbf{是一个游戏对象}上\textbf{绑定了Canvas组件}。
 		
+		\textbf{所有的UI元素}都\textbf{必须是Canvas的子对象}。如果场景中没有画布，那么我们创建任何一个UI元素，都会自动创建画布，并且将新元素置于其下。
+		
+		在Canvas的\verb|Render Mode|中有三个选择：
+			\begin{enumerate}[itemindent = 1em]
+				\item Screen Space - Overlay 屏幕最上层，主要是2D效果。
+				\item Screen Space - Camera 绑定摄像机，可以实现3D效果。
+				\item World Space 世界空间，让UI变成场景中的一个物体。
+			\end{enumerate}
+	
+		\subsection{Screen Space-Overlay -覆盖模式}
+			Screen Space-Overlay（屏幕控件-覆盖模式）的\textbf{画布会填满整个屏幕空间}，并将画布下面的所有的UI元素置于屏幕的最上层，或者说\textbf{画布的画面永远“覆盖”其他普通的3D画面}，\textit{如果屏幕尺寸被改变，画布将自动改变尺寸来匹配屏幕}
+			
+			Screen Space-Overlay模式的画布有Pixel Perfect和Sort Layer两个参数：
+			\begin{enumerate}[itemindent = 1em]
+				\item \verb|Pixel Perfect|：只有\verb|RenderMode|为Screen类型时才有的选项。使UI元素像素对应，效果就是\textbf{边缘清晰不模糊}。
+				\item \verb|Sort Layer|: \verb|Sort Layer|是UGUI专用的设置，用来指示\textbf{画布的深度}。
+			\end{enumerate}
+		
+		\subsection{Screen Space-Camera -摄像机模式}
+			与Screen Space-Overlay模式类似，画布也是\textbf{填满整个屏幕空间}，如果屏幕尺寸改变，\textbf{画布也会自动改变尺寸来匹配屏幕}。
+			
+			不同的是，在该模式下，\textbf{画布会被放置到摄影机前方}。在这种渲染模式下，\textbf{画布看起来 绘制在一个与摄影机固定距离的平面上}。\textit{所有的UI元素都由该摄影机渲染，因此摄影机的设置会影响到UI画面}。在此模式下，UI元素是由\verb|perspective|也就是视角设定的，视角广度由\verb|Filed of View|设置。
+			
+			\textbf{这种模式可以用来实现在UI上显示3D模型的需求}，比如很多MMO游戏中的查看人物装备的界面，可能屏幕的左侧有一个运动的3D人物，左侧是一些UI元素。通过设置Screen Space-Camera模式就可以实现上述的需求，效果如下图所示：
+				\begin{figure}[H]
+					\centering
+					\includegraphics[scale=0.3]{Canva-1.png}
+					\includegraphics[scale=0.3]{Canvas.png}
+					\caption{摄像机模式-画布}
+				\end{figure}
+			
+			它比Screen Space-Overlay模式的画布多了下面几个参数：
+				\begin{enumerate}[itemindent = 1em]
+					\item \verb|Render Camera|:渲染摄像机
+					\item \verb|Plane Distance|:\textbf{画布距离摄像机的距离}
+					\item \verb|Sorting Layer|: Sorting Layer是UGUI专用的设置，\textbf{用来指示画布的深度}。可以通过点击该栏的选项，在下拉菜单中点击“Add Sorting Layer”按钮进入标签和层的设置界面，或者点击导航菜单->edit->Project Settings->Tags and Layers进入该页面。
+					\item \verb|Order in Layer|:\textbf{在相同的Sort Layer下的画布显示先后顺序。}数字越高，显示的优先级也就越高。
+				\end{enumerate}
+			
+		\subsection{World Space -世界空间模式}
+			World Space即世界空间模式。在此模式下，\textbf{画布被视为与场景中其他普通游戏对象性质相同的类似于一张面片（Plane）的游戏物体}。
+			
+			画布的尺寸可以\textbf{通过RectTransform设置}，所有的UI元素可能位于普通3D物体的前面或者后面显示。\textbf{当UI为场景的一部分时，可以使用这个模式}。
+			
+				\begin{figure}[H]
+					\centering
+					\includegraphics[scale=0.3]{Canvas-2.png}
+					\includegraphics[scale=0.3]{Canvas-3.png}
+					\caption{世界空间 模式- 画布}
+				\end{figure}
+			
+		
+		\subsection{使用总结}
+			\begin{table}[H]
+				\centering
+				\caption{渲染模式使用场景说明}
+				\begin{tabular}{p{4cm}<{\centering}|c|c|c|p{3cm}<{\centering}}
+					\toprule
+						渲染模式 & 画布匹配屏幕？& 摄像机？ & 像素对应 & 适应\\
+					\midrule
+						覆盖-overlay模式 & 是	& 不需要	& 可选 & 2D \\
+						摄像机-camera模式 & 是	& 需要	 & 可选 & 2D+3D\\
+						世界空间-world模式 & 否	& 需要	 & 不可选 & 3D\\
+					\bottomrule
+				\end{tabular}
+			\end{table}
+		
+		\subsection{Canvas Scalar}
+			\url{https://blog.csdn.net/qq168213001/article/details/49744899}
+		
+		\subsection{Layer}
+		
+		
+	\section{RectTransform}
+		\url{https://blog.csdn.net/jk823394954/article/details/53861539}
+	
+		\url{https://blog.csdn.net/rickshaozhiheng/article/details/51569073}
+		
+		\url{https://blog.csdn.net/serenahaven/article/details/78826851}
+		
+		核心看：\url{https://blog.csdn.net/Happy_zailing/article/details/78835482}
+		
+		\url{http://lib.csdn.net/article/unity3d/36875}
+		
+		RectTransform继承自Transform， 又增加锚点、中心轴点等信息，\textbf{主要提供一个矩形的位置、尺寸、锚点和中心信息以及操作这些属性的方法}，\textit{同时提供多种基于父级RectTransform的缩放形式}。
+		
+		\subsection{Pivot(中心)}
+			Pivot用来指示一个\verb|RectTransform|（或者说是矩形）的中(重)心点。	
+	
+		\subsection{锚点- 自适应屏幕}
+			\url{http://www.bubuko.com/infodetail-2384845.html}
+			
+			
+			锚点（四个）由\verb|两个Vector2|的向量确定，这两个向量确定两个点，归一化坐标分别是\verb|Min|和\verb|Max|，\textbf{再由这两个点确定一个矩形}，\textbf{这个矩形的四个顶点就是锚点}。
+			
+			在\verb|Hierarchy|下新建一个Image，查看其\verb|Inspector|。
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=1.2]{Anchor.png}
+				\caption{Anchor 属性}
+			\end{figure}
+			
+			在Min的x、y值分别小于Max的x、y值时，
+			\verb|Min |确定矩形\textbf{左下角}的归一化坐标，\verb|Max |确定矩形\verb|右上角|的归一化坐标。
+			
+			刚创建的Image，其\verb|Anchor的默认值 |为\verb|Min（0.5，0.5)|和\verb|Max（0.5，0.5）|。也就是说，\verb|Min和Max|重合了，四个锚点合并成一点。锚点在Scene中的表示如下：
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.7]{anchorFirst.png}
+				\caption{锚点初始位置}
+			\end{figure}
+		
+			将Min和Max的值分别改为\verb|（0.4，0.4）|和\verb|（0.5，0.5）|。可以看见四个锚点已经分开了。
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.5]{anchorChange.png}
+				\caption{min Max位置、确定矩形}
+			\end{figure}
+			
+			
+			\subparagraph{需要注意} 在不同的Anchor设置下，控制该RectTransform的变量是不同的。
+			
+			比如设置成全部居中（默认）时，属性里包含熟悉的用来描述位置的\verb|PosX、PosY和PosZ|，以及用来描述尺寸的\verb|Width和Height|；
+			
+			切换成全部拉伸时，属性就变成了\verb|Left、Top、Right、Bottom|和\verb|PosZ|，\textbf{前四个属性}用来描述该RectTransform\textbf{分别离父级各边的距离}，PosZ用来描述该RectTransform在世界空间的Z坐标
+			
+			\paragraph{锚点类型}
+				\begin{itemize}
+					\item 位置类型\verb| 左上角、中心等|
+					\item 拉伸类型\verb| 纵向拉伸适配、横向、整体|
+				\end{itemize}
+		
+				\subparagraph{锚点在一块的时候}
+					\begin{itemize}[itemindent = 2em]
+						\item Anchor 是打在父级窗体上的
+						\item Anchor 的位置在父级窗体上的标记方式是按照百分比记录的，单位（百分比）
+						\item Anchor 的\verb|Min(RectTransform.anchorMin)  Max(RectTransform.anchorMax)|的信息保持一致
+						\item 子物件的 坐标系 为纵向Y,横向X, 并且以\verb|Anchor| 为原点， 自身坐标用中心轴点\verb|Pivot| 表示						
+						\item 子物件的 Pivot 与 Anchor  位置始终保持不变，单位（像素）
+					\end{itemize}
+				
+				\subparagraph{锚点单向（横或者纵）分开的时候}
+					\begin{itemize}[itemindent = 2em]
+						\item 分开的部分(拉伸方向)与父级窗体保持一致变化，单位（百分比）
+						\item 与相对方向则绝对保持，单位（像素）
+					\end{itemize}
+				
+				\subparagraph{锚点双向分开的时候}
+					\begin{itemize}[itemindent = 2em]
+						\item 双向 都与 父级窗体 保持一致的变化，单位（百分比）
+						\item 上-top、下-bottom、左、右边距绝对保持，单位（像素）
+					\end{itemize}
+		
+			\paragraph{anchorMax、anchorMin}
+				\verb|anchorMin.x|表示锚点在\verb|x|轴的起始点位置，\verb|anchorMax.x|表示锚点在x轴的终点位置，取值\verb|0~1|，表示\textbf{百分比值}，该值乘以父窗口的\verb|width|值就是实际锚点相对于父窗口x轴的位置。y轴与x轴同理。
+		
+					\begin{figure}[H]
+						\centering
+						\includegraphics[scale=0.8]{Anchors-3.png}
+						\caption{Anchor.Min 与 Anchor.Max}
+					\end{figure}
+		
+				这个值确定了锚点相对于父窗口的位置，是\textbf{真正决定锚点位置的值}
+				
+			\paragraph{offsetMax 和 offsetMin 属性}
+				\subparagraph{锚点 分开时}
+					在锚点分开的状态下： 锚点其实是四个钉子，分为左上，左下，右下及右上四个，每个空间在UI模型中都是一个矩形，也有左上，左下，右下及右上四个顶点，那么锚点的每个钉子可以关联一个点，即左上————左上；左下————左下；右下————右下；右上————右上。这样进行绑定。
+					
+					\verb|offsetMax |是RectTransform\textbf{右上角相对于右上Anchor的距离}；
+			
+					\verb|offsetMin |是RectTransform\textbf{左下角相对于左下Anchor的距离}。
+			
+					\verb|offset |可以认为是以像素为单位。
+					
+					\begin{figure}[H]
+						\centering
+						\includegraphics[scale=0.7]{Anchors-1.png}
+						\caption{锚点在一起时  Offset 求取向量示例}
+						\label{锚点分开时 Offset 求取向量示例}
+					\end{figure}
+			
+				\subparagraph{锚点 在一处时}
+					锚点offset 计算如下：
+					
+					\begin{figure}[H]
+						\centering
+						\includegraphics[scale=0.7]{Anchors-2.png}
+						\caption{锚点分开时  Offset 求取向量示例}
+					\end{figure}
+			
+				\subparagraph{求取}
+					首先计算锚点的每个钉子到其对应的顶点矢量值，分别记作\verb|v0|，\verb|v1|，\verb|v2|，\verb|v3|， 入上图。
+					
+					然后比较四个向量的\verb|x|值，将\verb|x|的最大值赋给\verb|offsetMax.x|，将\verb|x|的最小值赋给\verb|offsetMin.x|；\verb|y|的值同理。
+			
+			\paragraph{anchoredPosition}
+				\subparagraph{锚点 在一处时}
+					anchorPosition 就是 \textbf{从锚点}到本物体的\textbf{轴心}（Pivot）的\textbf{向量值}.
+				
+				\subparagraph{锚点 分开时}
+						
+		\subsection{sizeDelta}
+		
+			\verb|sizeDelta|是\verb|offsetMax-offsetMin|的结果。在\textit{锚点全部重合的情况下}，它的值就是面板上的\verb|（Width，Height）|。
+			
+			\textit{在锚点完全不重合}的情况下，它是相对于父矩形的尺寸。
+			
+			一个常见的错误是，当RectTransform的锚点\textbf{并非全部重合时}，使用sizeDelta作为这个RectTransform的尺寸。此时拿到的结果一般来说并非预期的结果。
+			
+		\subsection{RectTransform.rect}	
+			RectTransform.rect 的各值如图所示。
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.8]{RectTransform-rect.png}
+				\caption{RectTransform rect 属性}
+			\end{figure}	
+		
+		\subsection{示例}
+			\begin{lstlisting}
+	GameObject webText = new GameObject("webText");
+	webText.AddComponent<UnityEngine.UI.Text>();
+	webText.GetComponent<UnityEngine.UI.Text>().text = "";
+	webText.GetComponent<RectTransform>().anchorMin = new Vector2(0, 0);
+	webText.GetComponent<RectTransform>().anchorMax = new Vector2(1, 1);
+	webText.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 0);
+	webText.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+	webText.transform.localPosition = new Vector3(0,0,0);
+	webText.transform.SetParent(webObj.transform, false);
+			\end{lstlisting}
+			
+		\subsection{FramDebug}
+			查看渲染的先后顺序
+			
+			\verb|windows->FrameDebug |	
 	\section{按钮}
 		\subsection{原始Button}
 			
@@ -455,8 +931,13 @@
 	
 	\section{Apk 安装常见错误}
 		\url{http://mumu.163.com/2017/03/30/25905_680657.html}
-			
 
+
+\chapter{调试技巧}
+	\section{以父类为基点}
+		在Inspector 中查看是否存在父类脚本\verb|[SerializedField]| 的变量，这样方便对空间进行查找，并且添加新的\textbf{控制}			
+	
+	
 		    
 \end{document} 
  		    

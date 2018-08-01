@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/W32TeX) (preloaded format=xelatex 2018.7.13)  18 JUL 2018 21:25
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/W32TeX) (preloaded format=xelatex 2018.7.13)  1 AUG 2018 21:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1948,15 +1948,19 @@ File: eu1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 .................................................
  [2] [3] [4] [5]
 [6] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] [17] [18] [19] [20] [21]
-[22] [23] [24] [25] [26] [27] [28] [29] [30] [31] [32] [33] [34] [35] [36]
-[37] [38] [39] [40] [41] [42] [43] [44] (./Dairy.aux) ) 
+[22] [23] [24] [25] [26] [27] [28] [29] [30] [31] [32] [33] [34] [35]
+LaTeX Font Info:    Font shape `EU1/lmtt/bx/n' in size <10> not available
+(Font)              Font shape `EU1/lmtt/b/n' tried instead on input line 2173.
+
+ [36]
+[37] [38] [39] [40] [41] [42] [43] [44] [45] [46] [47] (./Dairy.aux) ) 
 Here is how much of TeX's memory you used:
- 36793 strings out of 493706
- 798849 string characters out of 6148913
+ 36810 strings out of 493706
+ 799504 string characters out of 6148913
  791295 words of memory out of 5000000
- 39585 multiletter control sequences out of 15000+600000
- 10274 words of font info for 64 fonts, out of 8000000 for 9000
+ 39598 multiletter control sequences out of 15000+600000
+ 10290 words of font info for 66 fonts, out of 8000000 for 9000
  1328 hyphenation exceptions out of 8191
  63i,9n,75p,10413b,547s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Dairy.pdf (44 pages).
+Output written on Dairy.pdf (47 pages).
